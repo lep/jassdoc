@@ -1,4 +1,4 @@
-﻿// Boolean Expr API ( for compositing trigger conditions and unit filter funcs...)
+// Boolean Expr API ( for compositing trigger conditions and unit filter funcs...)
 
 /**
 This function is used as and operator, but for boolexpr types.

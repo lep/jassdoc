@@ -1,4 +1,4 @@
-﻿// Item API
+// Item API
 
 native CreateItem takes integer itemid, real x, real y returns item
 

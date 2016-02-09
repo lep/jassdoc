@@ -1,4 +1,4 @@
-﻿// Widget API
+// Widget API
 
 native GetWidgetLife takes widget whichWidget returns real
 

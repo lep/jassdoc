@@ -1,4 +1,4 @@
-﻿// Timer Dialog API
+// Timer Dialog API
 
 native CreateTimerDialog                takes timer t returns timerdialog
 

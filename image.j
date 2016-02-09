@@ -1,4 +1,4 @@
-﻿// Image API
+// Image API
 
 // <http://www.wc3c.net/showthread.php?t=107737>
 

@@ -26,20 +26,18 @@ native GetHandleId takes handle h returns integer
 
 native SubString takes string source, integer start, integer end returns string
 
-/**
-Returns the length of the string in *bytes*.
-So for example: `StringLength("€") == 3`
-*/
 native StringLength takes string s returns integer
 
+/**
+Returns the length of the string in *bytes*.
+*/
 native StringCase takes string source, boolean upper returns string
 
 /**
 Case and slash insensitive hash function.
 `StringHash("\\") == StringHash("/")`
 `StringHash("AB") == StringHash("ab")`
-See <http://www.hiveworkshop.com/forums/w-277/b-213272/> for the
-source-code of StringHash.
+@note See <http://www.hiveworkshop.com/forums/w-277/b-213272/> for the source-code of StringHash.
 */
 native StringHash takes string s returns integer
 
@@ -50,10 +48,10 @@ The result can differ between players with different languages.
 Possible sources are the .fdf files and the war3map.wts file.
 Returns source if no entry was found.
 
-@bug Cannot assign it to a constant variable,
-e.g.: constaing string foo = GetLocalizedString("bar")
-as it will crash the game.
+@bug Cannot assign it to a constant variable as it will crash the game.
+`constaing string foo = GetLocalizedString("bar")`
 */
 native GetLocalizedString takes string source returns string
 
 native GetLocalizedHotkey takes string source returns integer
+

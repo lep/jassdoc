@@ -1,4 +1,4 @@
-﻿// Game API
+// Game API
 
 native VersionGet takes nothing returns version
 

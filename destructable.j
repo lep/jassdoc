@@ -1,4 +1,4 @@
-﻿// Destructable Object API
+// Destructable Object API
 
 // Facing arguments are specified in degrees
 

@@ -1,4 +1,4 @@
-﻿// Trigger Unit Based Event API
+// Trigger Unit Based Event API
 
 /**
 Returns handle to unit which triggered the most recent event when called from

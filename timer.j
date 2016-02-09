@@ -1,4 +1,4 @@
-﻿// Timer API
+// Timer API
 
 native CreateTimer          takes nothing returns timer
 

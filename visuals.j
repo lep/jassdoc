@@ -1,4 +1,4 @@
-﻿// Visual API
+// Visual API
 
 /**
 @bug Does nothing

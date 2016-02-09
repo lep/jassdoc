@@ -1,4 +1,4 @@
-﻿// Blight API
+// Blight API
 
 native SetBlight                takes player whichPlayer, real x, real y, real radius, boolean addBlight returns nothing
 

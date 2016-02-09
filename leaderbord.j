@@ -1,4 +1,4 @@
-﻿// Leaderboard API
+// Leaderboard API
 
 
 

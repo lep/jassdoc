@@ -1,4 +1,4 @@
-﻿// Region and Location API
+// Region and Location API
 
 native Rect                     takes real minx, real miny, real maxx, real maxy returns rect
 

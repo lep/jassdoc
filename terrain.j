@@ -1,4 +1,4 @@
-﻿// Terrain API
+// Terrain API
 
 native GetTerrainCliffLevel         takes real x, real y returns integer
 

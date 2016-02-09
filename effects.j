@@ -1,4 +1,4 @@
-﻿// Effects API
+// Effects API
 
 /**
 Adds the weather effect with id effectID to the rect where.
@@ -58,13 +58,13 @@ native DestroyEffect takes effect whichEffect returns nothing
 
 /**
 @note No one knows what abilityString is supposed to be.
-@bug Does noething.
+@bug Does nothing.
 */
 native AddSpellEffect takes string abilityString, effecttype t, real x, real y returns effect
 
 /**
 @note No one knows what abilityString is supposed to be.
-@bug Does noething.
+@bug Does nothing.
 */
 native AddSpellEffectLoc takes string abilityString, effecttype t,location where returns effect
 
@@ -140,7 +140,7 @@ native SetLightningColor takes lightning whichBolt, real r, real g, real b, real
 
 /**
 @note No one knows what abilityString is supposed to be.
-@bug Does noething.
+@bug Does nothing.
 */
 native GetAbilityEffect takes string abilityString, effecttype t, integer index returns string
 
@@ -148,7 +148,7 @@ native GetAbilityEffectById takes integer abilityId, effecttype t, integer index
 
 /**
 @note No one knows what abilityString is supposed to be.
-@bug Does noething.
+@bug Does nothing.
 */
 native GetAbilitySound takes string abilityString, soundtype t returns string
 

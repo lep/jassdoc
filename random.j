@@ -1,4 +1,4 @@
-﻿// Randomization API
+// Randomization API
 
 native GetRandomInt takes integer lowBound, integer highBound returns integer
 

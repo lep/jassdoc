@@ -1,4 +1,4 @@
-﻿
+
 native  InitHashtable    takes nothing returns hashtable
 
 

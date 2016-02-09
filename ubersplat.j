@@ -1,4 +1,4 @@
-﻿// Ubersplat API
+// Ubersplat API
 
 native CreateUbersplat              takes real x, real y, string name, integer red, integer green, integer blue, integer alpha, boolean forcePaused, boolean noBirthTime returns ubersplat
 

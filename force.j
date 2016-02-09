@@ -1,4 +1,4 @@
-﻿// Force API
+// Force API
 
 native CreateForce              takes nothing returns force
 

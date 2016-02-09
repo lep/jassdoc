@@ -1,4 +1,4 @@
-﻿// Map Setup API
+// Map Setup API
 
 //
 

@@ -1,4 +1,4 @@
-﻿// Camera API
+// Camera API
 
 native SetCameraPosition            takes real x, real y returns nothing
 

@@ -1,4 +1,4 @@
-﻿// Dialog API
+// Dialog API
 
 native DialogCreate                 takes nothing returns dialog
 

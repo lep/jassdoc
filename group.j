@@ -1,4 +1,4 @@
-﻿// Group API
+// Group API
 
 native CreateGroup                          takes nothing returns group
 

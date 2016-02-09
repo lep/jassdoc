@@ -1,4 +1,4 @@
-﻿// Sound API
+// Sound API
 
 native NewSoundEnvironment          takes string environmentName returns nothing
 

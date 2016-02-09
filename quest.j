@@ -1,4 +1,4 @@
-﻿// Quest API
+// Quest API
 
 native CreateQuest          takes nothing returns quest
 

@@ -1,4 +1,4 @@
-﻿native Cheat            takes string cheatStr returns nothing
+native Cheat            takes string cheatStr returns nothing
 
 native IsNoVictoryCheat takes nothing returns boolean
 

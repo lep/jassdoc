@@ -1,4 +1,4 @@
-﻿// Campaign API
+// Campaign API
 
 native  SetTutorialCleared      takes boolean cleared returns nothing
 

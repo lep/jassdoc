@@ -1,4 +1,4 @@
-﻿// Trigger Player Based Event API
+// Trigger Player Based Event API
 
 native TriggerRegisterPlayerEvent takes trigger whichTrigger, player whichPlayer, playerevent whichPlayerEvent returns event
 

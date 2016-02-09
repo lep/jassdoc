@@ -1,0 +1,7 @@
+.cabal-sandbox
+cabal.sandbox.config
+*.sw*
+*.o
+*.hi
+*.txt
+awkinplace

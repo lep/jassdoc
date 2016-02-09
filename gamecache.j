@@ -1,4 +1,4 @@
-﻿// Creates a new or reads in an existing game cache file stored
+// Creates a new or reads in an existing game cache file stored
 
 // in the current campaign profile dir
 

@@ -1,4 +1,4 @@
-﻿
+
 // Fog of War API
 
 native SetFogStateRect takes player forWhichPlayer, fogstate whichState, rect where, boolean useSharedVision returns nothing

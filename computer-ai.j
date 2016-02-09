@@ -1,4 +1,4 @@
-﻿// Computer AI interface
+// Computer AI interface
 
 //
 

@@ -1,4 +1,4 @@
-﻿// Trigger Game Event API
+// Trigger Game Event API
 
 native TriggerRegisterVariableEvent takes trigger whichTrigger, string varName, limitop opcode, real limitval returns event
 

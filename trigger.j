@@ -1,4 +1,4 @@
-﻿// Native trigger interface
+// Native trigger interface
 
 
 native CreateTrigger    takes nothing returns trigger
