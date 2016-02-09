@@ -115,7 +115,7 @@ native AddLightning takes string codeName, boolean checkVisibility, real x1, rea
 
 /**
 Adds the lightning of type codeName between two points with coordinates (x1;y1;z1)
-and (x2;y2:z2). The checkVisibility parameter allows to toggle lightning's
+and (x2;y2;z2). The checkVisibility parameter allows to toggle lightning's
 visibility in fog of war and black mask: true will force it to show in the fog
 of war and black mask when false is the reverse operation.
 */

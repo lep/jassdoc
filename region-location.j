@@ -67,8 +67,6 @@ native GetLocationY             takes location whichLocation returns real
 /**
 @note This function is asynchronous. The values it returns are not guaranteed synchronous between each player.
 If you attempt to use it in a synchronous manner, it may cause a desync.
-
-@synchron No
 */
 native GetLocationZ             takes location whichLocation returns real
 

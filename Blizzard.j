@@ -9220,7 +9220,9 @@ endfunction
 
 //===========================================================================
 
-/// @bug Not an even distribution. See <http://www.hiveworkshop.com/forums/l-715/g-275344>.
+/**
+@bug Not an even distribution. See <http://www.hiveworkshop.com/forums/l-715/g-275344>.
+*/
 function GetRandomSubGroupEnum takes nothing returns nothing
 
     if (bj_randomSubGroupWant > 0) then

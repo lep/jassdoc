@@ -3,7 +3,7 @@ HSFLAGS := --make
 
 .PHONY: mkdocs all
 
-all: mkdocs
+all: jass.db
 
 Jass/Tokenizer.hs: Jass/jass.x
 	alex $< -o $@
