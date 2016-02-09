@@ -1,11 +1,23 @@
 // String Utility API
 
+/**
+@pure
+*/
 native I2R  takes integer i returns real
 
+/**
+@pure
+*/
 native R2I  takes real r returns integer
 
+/**
+@pure
+*/
 native I2S  takes integer i returns string
 
+/**
+@pure
+*/
 native R2S  takes real r returns string
 
 /**
@@ -15,17 +27,31 @@ Formats the real r into a string with supplied precision and width.
              is too small the string will be filled with spaces.
              Use 0 for no padding.
 @param precision The amount of decimal places.
+
+@pure
 */
 native R2SW takes real r, integer width, integer precision returns string
 
+/**
+@pure
+*/
 native S2I  takes string s returns integer
 
+/**
+@pure
+*/
 native S2R  takes string s returns real
 
 native GetHandleId takes handle h returns integer
 
+/**
+@pure
+*/
 native SubString takes string source, integer start, integer end returns string
 
+/**
+@pure
+*/
 native StringLength takes string s returns integer
 
 /**
@@ -38,6 +64,7 @@ Case and slash insensitive hash function.
 `StringHash("\\") == StringHash("/")`
 `StringHash("AB") == StringHash("ab")`
 @note See <http://www.hiveworkshop.com/forums/w-277/b-213272/> for the source-code of StringHash.
+@pure
 */
 native StringHash takes string s returns integer
 

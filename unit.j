@@ -330,6 +330,7 @@ constant native IsUnitType takes unit whichUnit, unittype whichUnitType returns 
 
 /**
 @note Useless. Use operator== instead.
+@pure
 */
 constant native IsUnit takes unit whichUnit, unit whichSpecifiedUnit returns boolean
 

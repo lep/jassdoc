@@ -193,108 +193,239 @@ type ubersplat          extends     handle
 type hashtable          extends     agent
 
 
-
+/**
+@pure
+*/
 constant native ConvertRace                 takes integer i returns race
 
+/**
+@pure
+*/
 constant native ConvertAllianceType         takes integer i returns alliancetype
 
+/**
+@pure
+*/
 constant native ConvertRacePref             takes integer i returns racepreference
 
+/**
+@pure
+*/
 constant native ConvertIGameState           takes integer i returns igamestate
 
+/**
+@pure
+*/
 constant native ConvertFGameState           takes integer i returns fgamestate
 
+/**
+@pure
+*/
 constant native ConvertPlayerState          takes integer i returns playerstate
 
+/**
+@pure
+*/
 constant native ConvertPlayerScore          takes integer i returns playerscore
 
+/**
+@pure
+*/
 constant native ConvertPlayerGameResult     takes integer i returns playergameresult
 
+/**
+@pure
+*/
 constant native ConvertUnitState            takes integer i returns unitstate
 
+/**
+@pure
+*/
 constant native ConvertAIDifficulty         takes integer i returns aidifficulty
 
+/**
+@pure
+*/
 constant native ConvertGameEvent            takes integer i returns gameevent
 
+/**
+@pure
+*/
 constant native ConvertPlayerEvent          takes integer i returns playerevent
 
+/**
+@pure
+*/
 constant native ConvertPlayerUnitEvent      takes integer i returns playerunitevent
 
+/**
+@pure
+*/
 constant native ConvertWidgetEvent          takes integer i returns widgetevent
 
+/**
+@pure
+*/
 constant native ConvertDialogEvent          takes integer i returns dialogevent
 
+/**
+@pure
+*/
 constant native ConvertUnitEvent            takes integer i returns unitevent
 
+/**
+@pure
+*/
 constant native ConvertLimitOp              takes integer i returns limitop
 
+/**
+@pure
+*/
 constant native ConvertUnitType             takes integer i returns unittype
 
+/**
+@pure
+*/
 constant native ConvertGameSpeed            takes integer i returns gamespeed
 
+/**
+@pure
+*/
 constant native ConvertPlacement            takes integer i returns placement
 
+/**
+@pure
+*/
 constant native ConvertStartLocPrio         takes integer i returns startlocprio
 
+/**
+@pure
+*/
 constant native ConvertGameDifficulty       takes integer i returns gamedifficulty
 
+/**
+@pure
+*/
 constant native ConvertGameType             takes integer i returns gametype
 
+/**
+@pure
+*/
 constant native ConvertMapFlag              takes integer i returns mapflag
 
+/**
+@pure
+*/
 constant native ConvertMapVisibility        takes integer i returns mapvisibility
 
+/**
+@pure
+*/
 constant native ConvertMapSetting           takes integer i returns mapsetting
 
+/**
+@pure
+*/
 constant native ConvertMapDensity           takes integer i returns mapdensity
 
+/**
+@pure
+*/
 constant native ConvertMapControl           takes integer i returns mapcontrol
 
+/**
+@pure
+*/
 constant native ConvertPlayerColor          takes integer i returns playercolor
 
+/**
+@pure
+*/
 constant native ConvertPlayerSlotState      takes integer i returns playerslotstate
 
+/**
+@pure
+*/
 constant native ConvertVolumeGroup          takes integer i returns volumegroup
 
+/**
+@pure
+*/
 constant native ConvertCameraField          takes integer i returns camerafield
 
+/**
+@pure
+*/
 constant native ConvertBlendMode            takes integer i returns blendmode
 
+/**
+@pure
+*/
 constant native ConvertRarityControl        takes integer i returns raritycontrol
 
+/**
+@pure
+*/
 constant native ConvertTexMapFlags          takes integer i returns texmapflags
 
 /**
 @note Can be used for extended typecasting.
 <http://www.hiveworkshop.com/forums/j-280/t-232039/>
+@pure
 */
 constant native ConvertFogState             takes integer i returns fogstate
 
+/**
+@pure
+*/
 constant native ConvertEffectType           takes integer i returns effecttype
 
+/**
+@pure
+*/
 constant native ConvertVersion              takes integer i returns version
 
+/**
+@pure
+*/
 constant native ConvertItemType             takes integer i returns itemtype
 
 /**
 @note Blizzard only defined attack-types 0 to 6 but there is a hidden one:
 ConvertAttackType(7).
 <http://www.hiveworkshop.com/forums/t-269/h-227993/>
+@pure
 */
 constant native ConvertAttackType           takes integer i returns attacktype
 
+/**
+@pure
+*/
 constant native ConvertDamageType           takes integer i returns damagetype
 
+/**
+@pure
+*/
 constant native ConvertWeaponType           takes integer i returns weapontype
 
+/**
+@pure
+*/
 constant native ConvertSoundType            takes integer i returns soundtype
 
+/**
+@pure
+*/
 constant native ConvertPathingType          takes integer i returns pathingtype
 
-
-
+/**
+@pure
+*/
 constant native OrderId                     takes string  orderIdString     returns integer
 
+/**
+@pure
+*/
 constant native OrderId2String              takes integer orderId           returns string
 
 constant native UnitId                      takes string  unitIdString      returns integer
@@ -307,18 +438,22 @@ constant native UnitId2String               takes integer unitId            retu
 
 /**
 @bug Not working correctly
+@pure
 */
 constant native AbilityId                   takes string  abilityIdString   returns integer
 
 /**
 @bug Not working correctly
+@pure
 */
 constant native AbilityId2String            takes integer abilityId         returns string
 
 
 
-// Looks up the "name" field for any object (unit, item, ability)
-
+/**
+Looks up the "name" field for any object (unit, item, ability)
+@pure
+*/
 constant native GetObjectName               takes integer objectId          returns string
 
 

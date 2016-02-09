@@ -141,15 +141,23 @@ native SetLightningColor takes lightning whichBolt, real r, real g, real b, real
 /**
 @note No one knows what abilityString is supposed to be.
 @bug Does nothing.
+@pure
 */
 native GetAbilityEffect takes string abilityString, effecttype t, integer index returns string
 
+/**
+@pure
+*/
 native GetAbilityEffectById takes integer abilityId, effecttype t, integer index returns string
 
 /**
 @note No one knows what abilityString is supposed to be.
 @bug Does nothing.
+@pure
 */
 native GetAbilitySound takes string abilityString, soundtype t returns string
 
+/**
+@pure
+*/
 native GetAbilitySoundById takes integer abilityId, soundtype t returns string
