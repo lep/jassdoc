@@ -1,7 +1,5 @@
 // Computer AI interface
 
-//
-
 native StartMeleeAI         takes player num, string script                 returns nothing
 
 native StartCampaignAI      takes player num, string script                 returns nothing

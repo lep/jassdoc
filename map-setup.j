@@ -25,7 +25,22 @@ native SetTeams takes integer teamcount returns nothing
 native SetPlayers takes integer playercount returns nothing
 
 
+/**
+Defines a player's start location at the specified coordinates. The start
+location determines where the camera is initially positioned. For melee maps,
+it will also determine where the player's first town hall structure will be placed.
 
+@note It is only recommended to use this in the "config" function in the war3map.j.
+Using it elsewhere will affect the returned values of `GetStartLocationX` and
+`GetStartLocationY`, but will have no effect on the camera's initial position and
+the melee starting positions.
+
+@param whichStartLoc The ID of the player for the starting location. See GetPlayerStartLocation.
+
+@param x The x-coordinate of the start location.
+
+@param y The y-coordinate of the start location.
+*/
 native DefineStartLocation takes integer whichStartLoc, real x, real y returns nothing
 
 native DefineStartLocationLoc takes integer whichStartLoc, location whichLocation returns nothing

@@ -1,7 +1,5 @@
 // Unit API
 
-// Facing arguments are specified in degrees
-
 /**
 @param face Unit facing in degrees
 */
@@ -23,6 +21,15 @@ native CreateUnitAtLoc takes player id, integer unitid, location whichLocation, 
 native CreateUnitAtLocByName takes player id, string unitname, location whichLocation, real face returns unit
 
 /**
+Creates the corpse of a specific unit for a player at the coordinates ( x , y ).
+The unit will die upon spawning and play their decay animation, therefore they
+will not necessarily be a corpse immediately after this function call. If the
+unit corresponding to the rawcode cannot have a corpse, then the returned value is null.
+
+@param whichPlayer The owner of the corpse.
+@param unitid The rawcode of the unit for the corpse.
+@param x The x-coordinate of the corpse.
+@param y The y-coordinate of the corpse.
 @param face Unit facing in degrees
 */
 native CreateCorpse takes player whichPlayer, integer unitid, real x, real y, real face returns unit
@@ -57,6 +64,23 @@ native SetUnitFlyHeight takes unit whichUnit, real newHeight, real rate returns 
 
 native SetUnitTurnSpeed takes unit whichUnit, real newTurnSpeed returns nothing
 
+/**
+Sets a unit's propulsion window to the specified angle (in radians).
+
+The propulsion window determines at which facing angle difference to the target
+command's location (move, attack, patrol, smart) a unit will begin to move if
+movement is required to fulfill the command, or if it will turn without movement.
+A propulsion window of 0 makes the unit unable to move at all.
+A propulsion window of 180 will force it to start moving as soon as the command
+is given (if movement is required).
+
+<http://www.hiveworkshop.com/forums/2391397-post20.html>
+
+
+@param whichUnit The function will modify this unit's propulsion window.
+@param newPropWindowAngle The propulsion window angle to assign. Should be in radians.
+
+*/
 native SetUnitPropWindow takes unit whichUnit, real newPropWindowAngle returns nothing
 
 native SetUnitAcquireRange takes unit whichUnit, real newAcquireRange returns nothing
@@ -69,6 +93,11 @@ native GetUnitAcquireRange takes unit whichUnit returns real
 
 native GetUnitTurnSpeed takes unit whichUnit returns real
 
+/**
+Returns a unit's propulsion window angle in radians.
+
+@param whichUnit The function will return this unit's propulsion window angle.
+*/
 native GetUnitPropWindow takes unit whichUnit returns real
 
 native GetUnitFlyHeight takes unit whichUnit returns real
@@ -79,6 +108,11 @@ native GetUnitDefaultAcquireRange takes unit whichUnit returns real
 
 native GetUnitDefaultTurnSpeed takes unit whichUnit returns real
 
+/**
+Returns a unit's default propulsion window angle in degrees.
+
+@param whichUnit The function will return this unit's default propulsion window angle.
+*/
 native GetUnitDefaultPropWindow takes unit whichUnit returns real
 
 native GetUnitDefaultFlyHeight takes unit whichUnit returns real
@@ -92,6 +126,9 @@ native SetUnitColor takes unit whichUnit, playercolor whichColor returns nothing
 
 /**
 @bug Only takes scaleX int account and uses scaleX for all three dimensions.
+@param scaleX This is actually the scale for *all* dimensions
+@param scaleY This parameter is not taken into account
+@param scaleZ This parameter is not taken into account
 */
 native SetUnitScale takes unit whichUnit, real scaleX, real scaleY, real scaleZ returns nothing
 
@@ -115,8 +152,48 @@ native AddUnitAnimationProperties takes unit whichUnit, string animProperties, b
 
 
 
+/**
+Locks a unit's bone to face the target until ResetUnitLookAt is called.
+
+The offset coordinates ( X, Y, Z ) are taken from the target's origin.
+The bones will lock to the lookAtTarget, offset by those coordinates. You can't
+have both the head and the chest locked to the target at the same time.
+
+
+
+@param whichUnit The unit that will have its bone locked to face the target.
+
+@param whichBone The bone to lock onto the target. The engine only supports
+locking the head and the chest. To lock the head, you can put in any input
+except a null string. To lock the chest, the string must start with "bone_chest".
+All leading spaces are ignored, it is case insensitive, and anything after the
+first non-leading space will be ignored.
+
+@param lookAtTarget The bone will be locked to face this unit.
+
+@param offsetX The x-offset from lookAtTarget's origin point.
+
+@param offsetY The y-offset from lookAtTarget's origin point.
+
+@param offsetZ The z-offset from lookAtTarget's origin point (this already factors in the terrain Z).
+
+@note The parameter `whichBone` can only move the head bones and the chest bones.
+All other input will default to the head bone. However, the function only looks
+for the helper named "Bone_Head" (or "Bone_Chest") in the MDL, so you can just
+rename a helper so that it will move that set of bones instead.
+
+@note SetUnitLookAt is affected by animation speed and blend time.
+
+@note [How to instantly set a unit's facing](http://www.wc3c.net/showthread.php?t=105830)
+*/
 native SetUnitLookAt takes unit whichUnit, string whichBone, unit lookAtTarget, real offsetX, real offsetY, real offsetZ returns nothing
 
+/**
+Unlocks the bone oriented by `SetUnitLookAt`, allowing it to move in accordance
+to the unit's regular animations.
+
+@param whichUnit The unit that will have its bone unlocked.
+*/
 native ResetUnitLookAt takes unit whichUnit returns nothing
 
 
@@ -160,7 +237,11 @@ native UnitModifySkillPoints takes unit whichHero, integer skillPointDelta retur
 
 
 /**
-This function adds xpToAdd experience to the given hero (whichHero).
+Adds the input value of experience to the hero unit specified.
+
+If the experience added exceeds the amount required for the hero to gain a level,
+then it will force the unit to gain a level and the remaining experience will
+spill over for the next level.
 
 @bug Adding negative value to experience will decrease it
 by the stated value, but won't lower the level even if the experience value
@@ -171,6 +252,13 @@ the stated level.
 be negative, instead of it it'll be equal
 to 4294967296+(supposed_negative_experience_value) which actually proves 
 that WarCraft III uses unsigned int type for storing experience points.
+
+@param whichHero The hero unit to add experience to.
+
+@param xpToAdd The amount of experience to add to the hero unit.
+
+@param showEyeCandy If the boolean input is true, then the hero-level-gain
+effect will be shown if the hero gains a level from the added experience.
 */
 native AddHeroXP takes unit whichHero, integer xpToAdd, boolean showEyeCandy returns nothing
 
@@ -190,8 +278,27 @@ native SelectHeroSkill takes unit whichHero, integer abilcode returns nothing
 
 native GetUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
+/**
+Decreases the level of a unit's ability by 1. The level will not go below 1.
+Returns the new ability level.
+
+@param whichUnit The unit with the ability.
+@param abilcode The four digit rawcode representation of the ability.
+*/
 native DecUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
+/**
+Increases the level of a unit's ability by 1.
+Returns the new ability level.
+
+@param whichUnit The unit with the ability.
+@param abilcode The four digit rawcode representation of the ability.
+
+@note `IncUnitAbilityLevel` can increase an abilities level to maxlevel+1.
+On maxlevel+1 all ability fields are 0.
+See <http://www.wc3c.net/showthread.php?p=1029039#post1029039>
+and <http://www.hiveworkshop.com/forums/lab-715/silenceex-everything-you-dont-know-about-silence-274351/>.
+*/
 native IncUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
 native SetUnitAbilityLevel takes unit whichUnit, integer abilcode, integer level returns integer
@@ -372,6 +479,9 @@ native UnitAddAbility takes unit whichUnit, integer abilityId returns boolean
 
 native UnitRemoveAbility takes unit whichUnit, integer abilityId returns boolean
 
+/**
+This native is used to keep abilities when morphing units
+*/
 native UnitMakeAbilityPermanent takes unit whichUnit, boolean permanent, integer abilityId returns boolean
 
 native UnitRemoveBuffs takes unit whichUnit, boolean removePositive, boolean removeNegative returns nothing
@@ -478,6 +588,10 @@ Adds the amount more gold to the whichUnit gold mine.
 will display negative resource amount, but if some peasant or peon will try to
 gather resources from such a mine, he will bring back 0 gold and the mine will
 be auto-destroyed.
+
+@param whichUnit The unit who receives the added resource amount.
+
+@param amount The amount of resources to add to the unit.
 */
 native AddResourceAmount takes unit whichUnit, integer amount returns nothing
 
@@ -502,6 +616,21 @@ of stockMax to all shops in game.
 
 @note Some issues with default Blizzard initialization and that function were met.
 See <http://www.hiveworkshop.com/forums/l-715/a-251815/> for details.
+
+@note Adding an item which already is in stock for a building will replace it
+and refresh the interval and stock count.
+
+
+
+@param itemId The item to add to the stock.
+
+@param currentStock Determines the amount of that item in stock upon being added
+to the buildings.
+
+@param stockMax The item will grow in stock count up to the value of stockMax.
+The rate at which the item grows in stock is determined by its stock replenish
+interval, which can be modified in the object editor.
+
 */
 native AddItemToAllStock takes integer itemId, integer currentStock, integer stockMax returns nothing
 

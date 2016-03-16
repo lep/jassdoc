@@ -7,7 +7,9 @@
 native  ReloadGameCachesFromDisk takes nothing returns boolean
 
 
-
+/**
+@note You cannot create more than 255 gamecaches
+*/
 native  InitGameCache    takes string campaignFile returns gamecache
 
 native  SaveGameCache    takes gamecache whichCache returns boolean

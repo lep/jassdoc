@@ -1,4 +1,7 @@
 
+/**
+@note You cannot create more than 255 hashtables
+*/
 native  InitHashtable    takes nothing returns hashtable
 
 

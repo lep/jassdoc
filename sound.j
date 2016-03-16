@@ -3,7 +3,32 @@
 native NewSoundEnvironment          takes string environmentName returns nothing
 
 
+/**
+Creates a sound handle.
 
+
+
+@param fileName The path to the file.
+
+@param looping Looping sounds will restart once the sound duration has finished.
+
+@param is3D 3D Sounds can be played on particular areas of the map. They are at their loudest when the camera is close to the sound's coordinates.
+
+@param fadeInRate How quickly the sound fades in. The higher the number, the faster the sound fades in. Maximum number is 127.
+
+@param fadeOutRate How quickly the sound fades out. The higher the number, the faster the sound fades out. Maximum number is 127.
+
+@param eaxSetting EAX is an acronym for environmental audio extensions. In the sound editor, this corresponds to the "Effect" setting. The known settings available in Warcraft III are:
+````
+"CombatSoundsEAX" // combat
+"KotoDrumsEAX" // drums
+"SpellsEAX" // spells
+"MissilesEAX" // missiles
+"HeroAcksEAX" // hero acknowledgements
+"DoodadsEAX" // doodads
+"DefaultEAXON" // default
+````
+*/
 native CreateSound                  takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string eaxSetting returns sound
 
 native CreateSoundFilenameWithLabel takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string SLKEntryName returns sound
@@ -58,6 +83,10 @@ native SetSoundVelocity             takes sound soundHandle, real x, real y, rea
 /**
 Attaches the sound soundHandle to unit whichUnit. Attaching sound to unit means that more far player stays from the unit to which the sound is attached, less loud the sound plays (the volume of the attached sound decreases with increasing distance).
 @note This call is only valid if the sound was created with 3d enabled
+
+@param soundHandle The 3D sound to play.
+@param whichUnit The unit to attach the sound to.
+
 */
 native AttachSoundToUnit            takes sound soundHandle, unit whichUnit returns nothing
 
@@ -75,10 +104,19 @@ native KillSoundWhenDone            takes sound soundHandle returns nothing
 
 native SetMapMusic                  takes string musicName, boolean random, integer index returns nothing
 
+/**
+Clears the map music applied via `SetMapMusic`.
+*/
 native ClearMapMusic                takes nothing returns nothing
 
 
+/**
+Sets the file as the current music for the map, and plays it.
 
+@note Music is on its own channel and can be toggled on and off within the Warcraft III game menu.
+@bug This native may cause a short lag spike as soon as the music starts. To circumvent this lag, stop the current music without fadeout before calling this function (`call StopMusic(false)`). 
+@param musicName The path to the music file.
+*/
 native PlayMusic                    takes string musicName returns nothing
 
 native PlayMusicEx                  takes string musicName, integer frommsecs, integer fadeinmsecs returns nothing

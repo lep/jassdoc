@@ -18,6 +18,9 @@ So, it's same as (not operand) in code terms.
 */
 native Not              takes boolexpr operand returns boolexpr
 
+/**
+@note Do not destroy conditionfuncs created with Condition
+*/
 native Condition        takes code func returns conditionfunc
 
 /**
@@ -25,6 +28,9 @@ native Condition        takes code func returns conditionfunc
 */
 native DestroyCondition takes conditionfunc c returns nothing
 
+/**
+@note Do not destroy filterfuncs created with Filter
+*/
 native Filter           takes code func returns filterfunc
 
 /**

@@ -58,6 +58,17 @@ constant native SetPlayerTechMaxAllowed takes player whichPlayer, integer techid
 
 constant native GetPlayerTechMaxAllowed takes player whichPlayer, integer techid returns integer
 
+/**
+In upgrades that have multiple levels, it will research the upgrade by the
+number of levels specified. (it adds the number of levels to the current
+research level, see `SetPlayerTechResearched` to set the research level)
+
+@param whichPlayer The player who the upgrade will be researched for.
+
+@param techid The four digit rawcode ID of the upgrade.
+
+@param levels The number of levels to add to the current research level of the upgrade.
+*/
 constant native AddPlayerTechResearched takes player whichPlayer, integer techid, integer levels returns nothing
 
 constant native SetPlayerTechResearched takes player whichPlayer, integer techid, integer setToLevel returns nothing
@@ -70,6 +81,17 @@ constant native GetPlayerTechCount takes player whichPlayer, integer techid, boo
 
 native SetPlayerUnitsOwner takes player whichPlayer, integer newOwner returns nothing
 
+/**
+Reveals a player's remaining buildings to a force. The black mask over the buildings will be removed as if the territory had been discovered
+
+@note his function will not check whether the player has a town hall before revealing.
+
+@param whichPlayer The player to reveal.
+
+@param toWhichPlayers The players who will see whichPlayer's buildings.
+
+@param flag If true, the buildings will be revealed. If false, the buildings will not be revealed. Note that if you set it to false, it will not hide the buildings with a black mask.
+*/
 native CripplePlayer takes player whichPlayer, force toWhichPlayers, boolean flag returns nothing
 
 
