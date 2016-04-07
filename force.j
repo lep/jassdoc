@@ -1,5 +1,8 @@
 // Force API
 
+/**
+Creates an empty force object. Forces act as objects which can point to groups of players. To add a player to a force, see `ForceAddPlayer`. 
+*/
 native CreateForce              takes nothing returns force
 
 native DestroyForce             takes force whichForce returns nothing

@@ -4,6 +4,16 @@
 
 native CreateDestructable takes integer objectid, real x, real y, real face, real scale, integer variation returns destructable
 
+/**
+Creates a destructable at the coordinates ( x , y ).
+
+@param objectid The rawcode of the destructable to be created.
+@param x The x-coordinate of the destructable.
+@param y The y-coordinate of the destructable.
+@param face The facing of the destructable.
+@param scale The X-Y-Z scaling value of the destructable.
+@param variation The integer representing the variation of the destructable to be created.
+*/
 native CreateDestructableZ takes integer objectid, real x, real y, real z, real face, real scale, integer variation returns destructable
 
 /**

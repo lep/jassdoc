@@ -109,5 +109,8 @@ native RemovePlayer takes player whichPlayer, playergameresult gameResult return
 /**
 Used to store hero level data for the scorescreen, before units are moved
 to neutral passive in melee games.
+
+@param whichPlayer
+The player to store hero data for.
 */
 native CachePlayerHeroData takes player whichPlayer returns nothing

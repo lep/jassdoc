@@ -1,3 +1,13 @@
+
+/**
+Applies the specified cheat, but only if the game is single player. There are a few cheats that can be toggled on or off. If the cheat is enabled, entering the cheat again will disable it. If the cheat is disabled, entering the cheat will enable it again.
+Upon entering, the text "Cheat Enabled!" will be displayed.
+
+@param cheatStr
+The cheat to enter. 
+
+@note For a list of all cheats see <http://classic.battle.net/war3/cheatcodes.shtml>.
+*/
 native Cheat            takes string cheatStr returns nothing
 
 native IsNoVictoryCheat takes nothing returns boolean

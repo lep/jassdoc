@@ -4,6 +4,10 @@
 
 // Create a leaderboard object
 
+/**
+Creates a leaderboard handle.
+Leaderboards initially have 0 rows, 0 columns, and no label.
+*/
 native CreateLeaderboard                takes nothing returns leaderboard
 
 native DestroyLeaderboard               takes leaderboard lb returns nothing

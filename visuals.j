@@ -19,6 +19,11 @@ native DisplayTimedTextToPlayer     takes player toPlayer, real x, real y, real 
 
 native DisplayTimedTextFromPlayer   takes player toPlayer, real x, real y, real duration, string message returns nothing
 
+/**
+Clears all messages displayed via triggers. All messages will still show up in the message log, however.
+
+@note This does not remove player chat messages. 
+*/
 native ClearTextMessages            takes nothing returns nothing
 
 native SetDayNightModels            takes string terrainDNCFile, string unitDNCFile returns nothing
