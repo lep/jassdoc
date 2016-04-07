@@ -5,3 +5,8 @@ cabal.sandbox.config
 *.hi
 *.txt
 awkinplace
+*.db
+*.zip
+Jass/Tokenizer.hs
+mkdocs
+*.sql

@@ -1,7 +1,9 @@
+VERSION := $(shell git rev-parse --short HEAD)
+
 HSC := cabal exec -- ghc
 HSFLAGS := --make
 
-.PHONY: mkdocs all
+.PHONY: mkdocs all clean release
 
 all: jass.db
 
@@ -16,3 +18,12 @@ mkdocs: Jass/Tokenizer.hs
 
 jass.db: db.sql
 	sqlite3 $@ < $<
+
+jass.zip: jass.db
+	zip -q $@ $<
+
+release: jass-$(VERSION).zip
+
+clean:
+	rm -f *.o *.hi
+	rm -f jass-*.zip
