@@ -1,5 +1,17 @@
 // Item API
 
+/**
+Creates an item object at the specified coordinates ( x , y ).
+
+@param itemid
+The rawcode of the item.
+
+@param x
+The x-coordinate of the item
+
+@param y
+The y-coordinate of the item
+*/
 native CreateItem takes integer itemid, real x, real y returns item
 
 native RemoveItem takes item whichItem returns nothing

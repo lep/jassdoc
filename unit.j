@@ -318,7 +318,11 @@ native IsUnitPaused takes unit whichHero returns boolean
 native SetUnitPathing takes unit whichUnit, boolean flag returns nothing
 
 
+/**
+Clears all widget selections for all players.
 
+@note Use `ClearSelectionForPlayer` to clear selection for only one player.
+*/
 native ClearSelection takes nothing returns nothing
 
 native SelectUnit takes unit whichUnit, boolean flag returns nothing
