@@ -120,8 +120,31 @@ The camera setup.
 */
 native CameraSetupGetDestPositionY          takes camerasetup whichSetup returns real
 
+/**
+Applies the camerasetup, altering the current camera's fields to match those of the camera setup.
+
+@param whichSetup
+The camerasetup to apply.
+
+@param doPan
+If set to true, it will move the current camera's target coordinates to the camera setup's target coordinates. If false, the camera will not move coordinates, but will still apply the other fields.
+
+@param panTimed
+If set to true, then it will change the camera's properties over the times specified in CameraSetupSetField.
+
+*/
 native CameraSetupApply                     takes camerasetup whichSetup, boolean doPan, boolean panTimed returns nothing
 
+/**
+Applies the camerasetup with a custom z-offset, altering the current camera's fields to match those of the camera setup. The z-offset input will override the z-offset specified by the camerasetup through `CameraSetupSetField`.
+
+@param whichSetup The camerasetup to apply.
+
+@param zDestOffset
+The camera's z-offset will gradually change to this value over the specified duration.
+
+@bug If a player pauses the game after the camerasetup has been applied, the z-offset of the game camera will change to the z-offset of the camerasetup for that player. 
+*/
 native CameraSetupApplyWithZ                takes camerasetup whichSetup, real zDestOffset returns nothing
 
 /**
@@ -153,7 +176,16 @@ The duration it will take to apply all the camera fields. It will ignore the tim
 native CameraSetupApplyForceDurationWithZ   takes camerasetup whichSetup, real zDestOffset, real forceDuration returns nothing
 
 
+/**
+Causes the camera's target to sway. (the camera's target, not the camera's perspective) The higher the magnitude, the higher the range of swaying. The higher the velocity, the more rapidly the swaying occurs.
 
+@param mag
+The magnitude of the swaying.
+
+@param velocity
+The speed of the swaying.
+
+*/
 native CameraSetTargetNoise             takes real mag, real velocity returns nothing
 
 /**
@@ -168,7 +200,19 @@ The speed of the swaying.
 native CameraSetSourceNoise             takes real mag, real velocity returns nothing
 
 
+/**
+Causes the camera's target to sway, just like CameraSetTargetNoise. (the camera's target, not the camera's perspective) The higher the magnitude, the higher the range of swaying. The higher the velocity, the more rapidly the swaying occurs.
 
+@param mag
+The magnitude of the swaying.
+
+@param velocity
+The speed of the swaying.
+
+@param vertOnly
+Stands for "vertical only". If set to true, then the swaying will only modify target distance and z-offset.
+
+*/
 native CameraSetTargetNoiseEx           takes real mag, real velocity, boolean vertOnly returns nothing
 
 /**

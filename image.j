@@ -5,15 +5,38 @@
 /**
 Creates the image.
 
-@param file: The path to the image. The image itself should have its border alpha-ed out completely. If an invalid path is specified CreateImage returns image(-1).
+@param file
+The path to the image. The image itself should have its border alpha-ed out completely. If an invalid path is specified CreateImage returns image(-1).
 
-@param sizeX, sizeY, sizeZ: The dimensions of the image. You can stretch images using these.
+@param sizeX
+The x-dimensions of the image.
 
-@param posX, posY, posZ: Where to create the image. This is the bottom left corner of the image.
+@param sizeY
+The y-dimensions of the image.
 
-@param originX, originY, originZ: Moves the origin (bottom left corner) of the image from posX/Y/Z in negative X/Y/Z-direction.
+@param sizeZ
+The z-dimensions of the image.
 
-@param imageType: Working values range from 1 to 4 (4 and 1 included). Using 0 causes CreateImage to return image(-1). Every other value will simply cause WC3 to not display the image.
+@param posX
+The x-cooridnate of where to create the image. This is the bottom left corner of the image.
+
+@param posY
+The y-cooridnate of where to create the image. This is the bottom left corner of the image.
+
+@param posZ
+The z-cooridnate of where to create the image.
+
+@param originX
+Moves the origin (bottom left corner) of the image from posX in negative X-direction.
+
+@param originY
+Moves the origin (bottom left corner) of the image from posY in negative Y-direction.
+
+@param originZ
+Moves the origin (bottom left corner) of the image from posZ in negative Z-direction.
+
+@param imageType
+Working values range from 1 to 4 (4 and 1 included). Using 0 causes CreateImage to return image(-1). Every other value will simply cause WC3 to not display the image.
 imageTypes also influence the order in which images are drawn above one another:
 imageType 1 (labeled by Blizzard with "Selection") is drawn above all other imageTypes.
 imageType 2 (labeled by Blizzard with "Indicator") is drawn above imageType 4, but below 1 and 3.
@@ -26,9 +49,9 @@ This returns a new image, the first ID given being 0 and then counting upwards (
 native CreateImage                  takes string file, real sizeX, real sizeY, real sizeZ, real posX, real posY, real posZ, real originX, real originY, real originZ, integer imageType returns image
 
 /**
-Obviously the destructor for images.
+The destructor for images.
 
-@param whichImage: Which image to destroy.
+@param whichImage Which image to destroy.
 
 This function destroys the image specified and recycles the handle ID of that image instantly (no ref counting for images).
 

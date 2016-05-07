@@ -30,12 +30,12 @@ Defines a player's start location at the specified coordinates. The start
 location determines where the camera is initially positioned. For melee maps,
 it will also determine where the player's first town hall structure will be placed.
 
-@note It is only recommended to use this in the "config" function in the war3map.j.
+@note It is only recommended to use this in the `config` function in the war3map.j.
 Using it elsewhere will affect the returned values of `GetStartLocationX` and
 `GetStartLocationY`, but will have no effect on the camera's initial position and
 the melee starting positions.
 
-@param whichStartLoc The ID of the player for the starting location. See GetPlayerStartLocation.
+@param whichStartLoc The ID of the player for the starting location. See `GetPlayerStartLocation`.
 
 @param x The x-coordinate of the start location.
 
@@ -43,6 +43,20 @@ the melee starting positions.
 */
 native DefineStartLocation takes integer whichStartLoc, real x, real y returns nothing
 
+/**
+Defines a player's start location at the specified coordinates. The start
+location determines where the camera is initially positioned. For melee maps,
+it will also determine where the player's first town hall structure will be placed.
+
+@note It is only recommended to use this in the `config` function in the war3map.j.
+Using it elsewhere will affect the returned values of `GetStartLocationX` and
+`GetStartLocationY`, but will have no effect on the camera's initial position and
+the melee starting positions.
+
+@param whichStartLoc The ID of the player for the starting location. See `GetPlayerStartLocation`.
+
+@param whichLocation The location of the start location.
+*/
 native DefineStartLocationLoc takes integer whichStartLoc, location whichLocation returns nothing
 
 native SetStartLocPrioCount takes integer whichStartLoc, integer prioSlotCount returns nothing
@@ -139,6 +153,11 @@ native SetPlayerOnScoreScreen takes player whichPlayer, boolean flag returns not
 
 native GetPlayerTeam takes player whichPlayer returns integer
 
+/**
+Returns an integer representation of a player's start location. If the player has a start location on the map (regardless of whether that player slot is filled), it will return the player's ID (e.g. Player 1 (red) will return 0, Player 2 (blue) will return 1, and so forth). If the player does not have a start location on the map, it will return -1.
+
+@param whichPlayer The player of which to return the starting location.
+*/
 native GetPlayerStartLocation takes player whichPlayer returns integer
 
 native GetPlayerColor takes player whichPlayer returns playercolor

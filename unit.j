@@ -111,7 +111,8 @@ native GetUnitDefaultTurnSpeed takes unit whichUnit returns real
 /**
 Returns a unit's default propulsion window angle in degrees.
 
-@param whichUnit The function will return this unit's default propulsion window angle.
+@param whichUnit
+The unit of which to return the default prop window
 */
 native GetUnitDefaultPropWindow takes unit whichUnit returns real
 

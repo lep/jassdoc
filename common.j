@@ -194,179 +194,373 @@ type hashtable          extends     agent
 
 
 /**
+Returns the race that corresponds to the given integer.
+@param i The integer representation of the race
 @pure
 */
 constant native ConvertRace                 takes integer i returns race
 
+
+
 /**
+Returns the alliancetype that corresponds to the given integer.
+@param i The integer representation of the alliancetype
 @pure
 */
 constant native ConvertAllianceType         takes integer i returns alliancetype
 
+
+
 /**
+Returns the racepreference that corresponds to the given integer.
+@param i The integer representation of the racepreference
 @pure
 */
 constant native ConvertRacePref             takes integer i returns racepreference
 
+
+
 /**
+Returns the igamestate that corresponds to the given integer.
+@param i The integer representation of the igamestate
 @pure
 */
 constant native ConvertIGameState           takes integer i returns igamestate
 
+
+
 /**
+Returns the fgamestate that corresponds to the given integer.
+@param i The integer representation of the fgamestate
 @pure
 */
 constant native ConvertFGameState           takes integer i returns fgamestate
 
+
+
 /**
+Returns the playerstate that corresponds to the given integer.
+@param i The integer representation of the playerstate
 @pure
 */
 constant native ConvertPlayerState          takes integer i returns playerstate
 
+
+
 /**
+Returns the playerscore that corresponds to the given integer.
+@param i The integer representation of the playerscore
 @pure
 */
 constant native ConvertPlayerScore          takes integer i returns playerscore
 
+
+
 /**
+Returns the playergameresult that corresponds to the given integer.
+@param i The integer representation of the playergameresult
 @pure
 */
 constant native ConvertPlayerGameResult     takes integer i returns playergameresult
 
+
+
 /**
+Returns the unitstate that corresponds to the given integer.
+@param i The integer representation of the unitstate
 @pure
 */
 constant native ConvertUnitState            takes integer i returns unitstate
 
+
+
 /**
+Returns the aidifficulty that corresponds to the given integer.
+@param i The integer representation of the aidifficulty
 @pure
 */
 constant native ConvertAIDifficulty         takes integer i returns aidifficulty
 
+
+
 /**
+Returns the gameevent that corresponds to the given integer.
+@param i The integer representation of the gameevent
 @pure
 */
 constant native ConvertGameEvent            takes integer i returns gameevent
 
+
+
 /**
+Returns the playerevent that corresponds to the given integer.
+@param i The integer representation of the playerevent
 @pure
 */
 constant native ConvertPlayerEvent          takes integer i returns playerevent
 
+
+
 /**
+Returns the playerunitevent that corresponds to the given integer.
+@param i The integer representation of the playerunitevent
 @pure
 */
 constant native ConvertPlayerUnitEvent      takes integer i returns playerunitevent
 
+
+
 /**
+Returns the widgetevent that corresponds to the given integer.
+@param i The integer representation of the widgetevent
 @pure
 */
 constant native ConvertWidgetEvent          takes integer i returns widgetevent
 
+
+
 /**
+Returns the dialogevent that corresponds to the given integer.
+@param i The integer representation of the dialogevent
 @pure
 */
 constant native ConvertDialogEvent          takes integer i returns dialogevent
 
+
+
 /**
+Returns the unitevent that corresponds to the given integer.
+@param i The integer representation of the unitevent
 @pure
 */
 constant native ConvertUnitEvent            takes integer i returns unitevent
 
+
+
 /**
+Returns the limitop that corresponds to the given integer.
+@param i The integer representation of the limitop
 @pure
 */
 constant native ConvertLimitOp              takes integer i returns limitop
 
+
+
 /**
+Returns the unittype that corresponds to the given integer.
+@param i The integer representation of the unittype
 @pure
 */
 constant native ConvertUnitType             takes integer i returns unittype
 
+
+
 /**
+Returns the gamespeed that corresponds to the given integer.
+@param i The integer representation of the gamespeed
 @pure
 */
 constant native ConvertGameSpeed            takes integer i returns gamespeed
 
+
+
 /**
+Returns the placement that corresponds to the given integer.
+@param i The integer representation of the placement
 @pure
 */
 constant native ConvertPlacement            takes integer i returns placement
 
+
+
 /**
+Returns the startlocprio that corresponds to the given integer.
+@param i The integer representation of the startlocprio
 @pure
 */
 constant native ConvertStartLocPrio         takes integer i returns startlocprio
 
+
+
 /**
+Returns the gamedifficulty that corresponds to the given integer.
+@param i The integer representation of the gamedifficulty
 @pure
 */
 constant native ConvertGameDifficulty       takes integer i returns gamedifficulty
 
+
+
 /**
+Returns the gametype that corresponds to the given integer.
+@param i The integer representation of the gametype
 @pure
 */
 constant native ConvertGameType             takes integer i returns gametype
 
+
+
 /**
+Returns the mapflag that corresponds to the given integer.
+@param i The integer representation of the mapflag
 @pure
 */
 constant native ConvertMapFlag              takes integer i returns mapflag
 
+
+
 /**
+Returns the mapvisibility that corresponds to the given integer.
+@param i The integer representation of the mapvisibility
 @pure
 */
 constant native ConvertMapVisibility        takes integer i returns mapvisibility
 
+
+
 /**
+Returns the mapsetting that corresponds to the given integer.
+@param i The integer representation of the mapsetting
 @pure
 */
 constant native ConvertMapSetting           takes integer i returns mapsetting
 
+
+
 /**
+Returns the mapdensity that corresponds to the given integer.
+@param i The integer representation of the mapdensity
 @pure
 */
 constant native ConvertMapDensity           takes integer i returns mapdensity
 
+
+
 /**
+Returns the mapcontrol that corresponds to the given integer.
+@param i The integer representation of the mapcontrol
 @pure
 */
 constant native ConvertMapControl           takes integer i returns mapcontrol
 
+
+
 /**
+Returns the playercolor that corresponds to the given integer.
+@param i The integer representation of the playercolor
 @pure
 */
 constant native ConvertPlayerColor          takes integer i returns playercolor
 
+
+
 /**
+Returns the playerslotstate that corresponds to the given integer.
+@param i The integer representation of the playerslotstate
 @pure
 */
 constant native ConvertPlayerSlotState      takes integer i returns playerslotstate
 
-/**
-@pure
-*/
-constant native ConvertVolumeGroup          takes integer i returns volumegroup
+
 
 /**
+Returns the camerafield that corresponds to the given integer.
+@param i The integer representation of the camerafield
 @pure
 */
 constant native ConvertCameraField          takes integer i returns camerafield
 
+
+
 /**
+Returns the blendmode that corresponds to the given integer.
+@param i The integer representation of the blendmode
 @pure
 */
 constant native ConvertBlendMode            takes integer i returns blendmode
 
+
+
 /**
+Returns the raritycontrol that corresponds to the given integer.
+@param i The integer representation of the raritycontrol
 @pure
 */
 constant native ConvertRarityControl        takes integer i returns raritycontrol
 
+
+
 /**
+Returns the texmapflags that corresponds to the given integer.
+@param i The integer representation of the texmapflags
 @pure
 */
 constant native ConvertTexMapFlags          takes integer i returns texmapflags
+
+
+
+
+
+/**
+Returns the effecttype that corresponds to the given integer.
+@param i The integer representation of the effecttype
+@pure
+*/
+constant native ConvertEffectType           takes integer i returns effecttype
+
+
+
+/**
+Returns the version that corresponds to the given integer.
+@param i The integer representation of the version
+@pure
+*/
+constant native ConvertVersion              takes integer i returns version
+
+
+
+/**
+Returns the itemtype that corresponds to the given integer.
+@param i The integer representation of the itemtype
+@pure
+*/
+constant native ConvertItemType             takes integer i returns itemtype
+
+
+
+
+/**
+Returns the damagetype that corresponds to the given integer.
+@param i The integer representation of the damagetype
+@pure
+*/
+constant native ConvertDamageType           takes integer i returns damagetype
+
+
+/**
+Returns the weapontype that corresponds to the given integer.
+@param i The integer representation of the weapontype
+@pure
+*/
+constant native ConvertWeaponType           takes integer i returns weapontype
+
+
+
+/**
+Returns the soundtype that corresponds to the given integer.
+@param i The integer representation of the soundtype
+@pure
+*/
+constant native ConvertSoundType            takes integer i returns soundtype
+
+
+/**
+Returns the pathingtype that corresponds to the given integer.
+@param i The integer representation of the pathingtype
+@pure
+*/
+constant native ConvertPathingType          takes integer i returns pathingtype
+
 
 /**
 @note Can be used for extended typecasting.
@@ -375,20 +569,6 @@ constant native ConvertTexMapFlags          takes integer i returns texmapflags
 */
 constant native ConvertFogState             takes integer i returns fogstate
 
-/**
-@pure
-*/
-constant native ConvertEffectType           takes integer i returns effecttype
-
-/**
-@pure
-*/
-constant native ConvertVersion              takes integer i returns version
-
-/**
-@pure
-*/
-constant native ConvertItemType             takes integer i returns itemtype
 
 /**
 @note Blizzard only defined attack-types 0 to 6 but there is a hidden one:
@@ -397,26 +577,6 @@ ConvertAttackType(7).
 @pure
 */
 constant native ConvertAttackType           takes integer i returns attacktype
-
-/**
-@pure
-*/
-constant native ConvertDamageType           takes integer i returns damagetype
-
-/**
-@pure
-*/
-constant native ConvertWeaponType           takes integer i returns weapontype
-
-/**
-@pure
-*/
-constant native ConvertSoundType            takes integer i returns soundtype
-
-/**
-@pure
-*/
-constant native ConvertPathingType          takes integer i returns pathingtype
 
 /**
 @pure
