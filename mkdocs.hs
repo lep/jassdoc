@@ -135,5 +135,7 @@ main = do
     forM_ args $ \file -> do
         hPutStrLn stderr file
         Right (Programm toplevel) <- parse programm <$> L8.readFile file
+        L8.putStrLn "BEGIN TRANSACTION;"
         mapM_ L8.putStrLn . filter (not . emptyLine) $ map handleToplevel toplevel
+        L8.putStrLn "END TRANSACTION;"
 

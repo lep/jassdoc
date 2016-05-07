@@ -11,7 +11,7 @@ Jass/Tokenizer.hs: Jass/jass.x
 	alex $< -o $@
 
 db.sql: mkdocs *.j 
-	./mkdocs $? > $@
+	./mkdocs $(filter %.j,$?) > $@
 
 mkdocs: Jass/Tokenizer.hs Jass/Parser.hs Jass/Types.hs Jass/Ast.hs mkdocs.hs
 	$(HSC) $(HSFLAGS) mkdocs
@@ -27,3 +27,6 @@ release: jass-$(VERSION).zip
 clean:
 	rm -f *.o *.hi
 	rm -f jass-*.zip
+	rm -f mkdocs
+	rm -f db.sql
+
