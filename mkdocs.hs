@@ -95,7 +95,7 @@ parseDocstring = first (L8.unlines . reverse)
     addToAnn text (descr, []) = (text:descr, [])
     addToAnn text (descr, Nothing:xs) = (text:descr, Nothing:xs)
     addToAnn text (descr, Just (ann, text'):xs) =
-        (descr, Just (ann, L8.unlines [text', text]):xs)
+        (descr, Just (ann, (text' <> "\n" <> text)):xs)
 
 
     getAnn line =
