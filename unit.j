@@ -166,7 +166,7 @@ have both the head and the chest locked to the target at the same time.
 
 @param whichBone The bone to lock onto the target. The engine only supports
 locking the head and the chest. To lock the head, you can put in any input
-except a null string. To lock the chest, the string must start with "bone_chest".
+except a null string. To lock the chest, the string must start with `"bone_chest"`.
 All leading spaces are ignored, it is case insensitive, and anything after the
 first non-leading space will be ignored.
 
@@ -180,7 +180,7 @@ first non-leading space will be ignored.
 
 @note The parameter `whichBone` can only move the head bones and the chest bones.
 All other input will default to the head bone. However, the function only looks
-for the helper named "Bone_Head" (or "Bone_Chest") in the MDL, so you can just
+for the helper named `"Bone_Head"` (or `"Bone_Chest"`) in the MDL, so you can just
 rename a helper so that it will move that set of bones instead.
 
 @note SetUnitLookAt is affected by animation speed and blend time.
@@ -251,7 +251,7 @@ the stated level.
 
 @bug If the value will become lower than zero, the experience won't
 be negative, instead of it it'll be equal
-to 4294967296+(supposed_negative_experience_value) which actually proves 
+to `4294967296+(supposed_negative_experience_value)` which actually proves
 that WarCraft III uses unsigned int type for storing experience points.
 
 @param whichHero The hero unit to add experience to.
@@ -277,6 +277,9 @@ native IsSuspendedXP takes unit whichHero returns boolean
 
 native SelectHeroSkill takes unit whichHero, integer abilcode returns nothing
 
+/**
+Returns the level of the ability for the unit.
+*/
 native GetUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
 /**
@@ -344,8 +347,15 @@ native UnitAddItemById takes unit whichUnit, integer itemId returns item
 
 native UnitAddItemToSlotById takes unit whichUnit, integer itemId, integer itemSlot returns boolean
 
+/**
+The item is removed from the Hero and placed on the ground at the Hero's feed.
+*/
 native UnitRemoveItem takes unit whichUnit, item whichItem returns nothing
 
+/**
+If an item exists in the given slot, it is removed from the Hero and placed on
+the ground at the Hero's feed
+*/
 native UnitRemoveItemFromSlot takes unit whichUnit, integer itemSlot returns item
 
 native UnitHasItem takes unit whichUnit, item whichItem returns boolean

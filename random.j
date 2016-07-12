@@ -1,5 +1,21 @@
 // Randomization API
 
+/**
+Returns a random integer in the range [lowBound, highBound].
+
+@note If lowBound > highBound then it just swaps the values.
+
+@bug If you call `GetRandomInt(INT_MIN, INT_MAX)` or `GetRandomInt(INT_MAX, INT_MIN)`
+it will always return the same value, namely `INT_MIN` or `INT_MAX`.
+
+@note See <http://hiveworkshop.com/threads/random.286109#post-3073222> for an overview of the algorithm used.
+
+@param lowBound
+The inclusive lower bound of the random number returned
+
+@param highBound
+The inclusive higher bound of the random number returned
+*/
 native GetRandomInt takes integer lowBound, integer highBound returns integer
 
 native GetRandomReal takes real lowBound, real highBound returns real
