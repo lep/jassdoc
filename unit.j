@@ -126,7 +126,7 @@ native SetUnitColor takes unit whichUnit, playercolor whichColor returns nothing
 
 
 /**
-@bug Only takes scaleX int account and uses scaleX for all three dimensions.
+@bug Only takes scaleX into account and uses scaleX for all three dimensions.
 @param scaleX This is actually the scale for *all* dimensions
 @param scaleY This parameter is not taken into account
 @param scaleZ This parameter is not taken into account

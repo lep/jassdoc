@@ -50,13 +50,11 @@ native GetHandleId takes handle h returns integer
 native SubString takes string source, integer start, integer end returns string
 
 /**
+Returns the length of the string in *bytes*.
 @pure
 */
 native StringLength takes string s returns integer
 
-/**
-Returns the length of the string in *bytes*.
-*/
 native StringCase takes string source, boolean upper returns string
 
 /**
