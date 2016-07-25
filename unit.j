@@ -69,10 +69,11 @@ Sets a unit's propulsion window to the specified angle (in radians).
 
 The propulsion window determines at which facing angle difference to the target
 command's location (move, attack, patrol, smart) a unit will begin to move if
-movement is required to fulfill the command, or if it will turn without movement.
+movement is required to fulfil the command, or if it will turn without movement.
 A propulsion window of 0 makes the unit unable to move at all.
 A propulsion window of 180 will force it to start moving as soon as the command
-is given (if movement is required).
+is given (if movement is required). In practice, this means that setting a
+unit's prop window to 0 will prevent it from attacking.
 
 <http://www.hiveworkshop.com/forums/2391397-post20.html>
 
@@ -113,6 +114,11 @@ Returns a unit's default propulsion window angle in degrees.
 
 @param whichUnit
 The unit of which to return the default prop window
+
+@note This native is the odd case in the asymmetric prop window API, since the
+other prop window natives use radians. Therefore, to reset a unit's prop window
+you need the explicit conversion, i.e.
+`SetUnitPropWindow(u, GetUnitDefaultPropWindow(u) * bj_DEGTORAD)`
 */
 native GetUnitDefaultPropWindow takes unit whichUnit returns real
 
