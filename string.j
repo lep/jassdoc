@@ -74,7 +74,7 @@ Possible sources are the .fdf files and the war3map.wts file.
 Returns source if no entry was found.
 
 @bug Cannot assign it to a constant variable as it will crash the game.
-`constaing string foo = GetLocalizedString("bar")`
+`constant string foo = GetLocalizedString("bar")`
 */
 native GetLocalizedString takes string source returns string
 

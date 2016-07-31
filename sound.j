@@ -31,6 +31,30 @@ Creates a sound handle.
 */
 native CreateSound                  takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string eaxSetting returns sound
 
+/**
+Creates a sound but applies default settings to the sound, which are found under the label from the following SLK-files:
+
+    * UI\SoundInfo\AbilitySounds.slk
+    * UI\SoundInfo\AmbienceSounds.slk
+    * UI\SoundInfo\AnimSounds.slk
+    * UI\SoundInfo\DialogSounds.slk
+    * UI\SoundInfo\UISounds.slk
+    * UI\SoundInfo\UnitAckSounds.slk
+    * UI\SoundInfo\UnitCombatSounds.slk
+
+@param fileName The path to the file.
+
+@param looping Looping sounds will restart once the sound duration has finished.
+
+@param is3D 3D Sounds can be played on particular areas of the map. They are at their loudest when the camera is close to the sound's coordinates.
+
+@param fadeInRate How quickly the sound fades in. The higher the number, the faster the sound fades in. Maximum number is 127.
+
+@param fadeOutRate How quickly the sound fades out. The higher the number, the faster the sound fades out. Maximum number is 127.
+used, e.g. values like volume, pitch, pitch variance, priority, channel, min distance, max distance, distance cutoff or eax.
+
+@param SLKEntryName the label out of one of the SLK-files, whose settings should be
+*/
 native CreateSoundFilenameWithLabel takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string SLKEntryName returns sound
 
 native CreateSoundFromLabel         takes string soundLabel, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate returns sound
@@ -39,14 +63,40 @@ native CreateMIDISound              takes string soundLabel, integer fadeInRate,
 
 
 
+/**
+Applies default settings to the sound, which are found under the label from the following SLK-files:
+
+    * UI\SoundInfo\AbilitySounds.slk
+    * UI\SoundInfo\AmbienceSounds.slk
+    * UI\SoundInfo\AnimSounds.slk
+    * UI\SoundInfo\DialogSounds.slk
+    * UI\SoundInfo\UISounds.slk
+    * UI\SoundInfo\UnitAckSounds.slk
+    * UI\SoundInfo\UnitCombatSounds.slk
+
+@param soundHandle The sound to configure.
+@param soundLabel the label out of one of the SLK-files, whose settings should be
+used, e.g. values like volume, pitch, pitch variance, priority, channel, min distance, max distance, distance cutoff or eax.
+*/
 native SetSoundParamsFromLabel      takes sound soundHandle, string soundLabel returns nothing
 
 native SetSoundDistanceCutoff       takes sound soundHandle, real cutoff returns nothing
 
 native SetSoundChannel              takes sound soundHandle, integer channel returns nothing
 
+/**
+Sets the sounds volume
+
+@param soundHandle which sound
+
+@param volume Volume, between 0 and 127.
+*/
 native SetSoundVolume               takes sound soundHandle, integer volume returns nothing
 
+/**
+Tones the pitch of the sound, default value is 1. Increasing it you get the chipmunk
+version and the sound becomes shorter, when decremented the sound becomes low-pitched and longer
+*/
 native SetSoundPitch                takes sound soundHandle, real pitch returns nothing
 
 /**
@@ -91,17 +141,32 @@ Attaches the sound soundHandle to unit whichUnit. Attaching sound to unit means 
 native AttachSoundToUnit            takes sound soundHandle, unit whichUnit returns nothing
 
 
-
+/**
+Starts the sound.
+*/
 native StartSound                   takes sound soundHandle returns nothing
 
+/**
+Stops the sound.
+
+@param soundHandle The sound to stop
+@param killWhenDone The sound gets destroyed if true.
+@param fadeOut turns down the volume with `fadeOutRate` as stated in constructor.
+*/
 native StopSound                    takes sound soundHandle, boolean killWhenDone, boolean fadeOut returns nothing
 
+/**
+Destroys the handle when the sound has finished playing.
+*/
 native KillSoundWhenDone            takes sound soundHandle returns nothing
 
 
 
 // Music Interface. Note that if music is disabled, these calls do nothing
 
+/**
+@note If music is disabled, these calls do nothing
+*/
 native SetMapMusic                  takes string musicName, boolean random, integer index returns nothing
 
 /**
@@ -116,25 +181,66 @@ Sets the file as the current music for the map, and plays it.
 @note Music is on its own channel and can be toggled on and off within the Warcraft III game menu.
 @bug This native may cause a short lag spike as soon as the music starts. To circumvent this lag, stop the current music without fadeout before calling this function (`call StopMusic(false)`). 
 @param musicName The path to the music file.
+@note Should work with mp3s, midis and wavs.
 */
 native PlayMusic                    takes string musicName returns nothing
 
+/**
+Sets the file as the current music for the map, and plays it.
+
+@note Music is on its own channel and can be toggled on and off within the Warcraft III game menu.
+@bug This native may cause a short lag spike as soon as the music starts. To circumvent this lag, stop the current music without fadeout before calling this function (`call StopMusic(false)`). 
+@param musicName The path to the music file.
+@param frommsecs At what offset the music starts. In milliseconds.
+@param fadeinmsecs How long the music is faded in. In milliseconds.
+@note Should work with mp3s, midis and wavs.
+*/
 native PlayMusicEx                  takes string musicName, integer frommsecs, integer fadeinmsecs returns nothing
 
+/**
+Stops the current music.
+*/
 native StopMusic                    takes boolean fadeOut returns nothing
 
+/**
+Resumes music.
+*/
 native ResumeMusic                  takes nothing returns nothing
 
 
+/**
+The thematic music does not play repeatedly, but interrupts the PlayMusic-music.
 
+@note Only one thematic music at a time, cancels the previous one
+@note Probably meant for boss fights and similar where the sound should go in foreground
+
+@param musicFileName The path to the music file.
+*/
 native PlayThematicMusic            takes string musicFileName returns nothing
 
+/**
+The thematic music does not play repeatedly, but interrupts the PlayMusic-music.
+
+@note Only one thematic music at a time, cancels the previous one
+@note Probably meant for boss fights and similar where the sound should go in foreground
+
+@param musicFileName The path to the music file.
+@param frommsecs At what offset the music starts. In milliseconds.
+*/
 native PlayThematicMusicEx          takes string musicFileName, integer frommsecs returns nothing
 
+/**
+Stops thematic music.
+*/
 native EndThematicMusic             takes nothing returns nothing
 
 
 
+/**
+Sets the music volume.
+
+@param volume Volume between 0 and 127.
+*/
 native SetMusicVolume               takes integer volume returns nothing
 
 native SetMusicPlayPosition         takes integer millisecs returns nothing
@@ -147,8 +253,14 @@ native SetThematicMusicPlayPosition takes integer millisecs returns nothing
 
 native SetSoundDuration             takes sound soundHandle, integer duration returns nothing
 
+/**
+Returns sound length in milliseconds
+*/
 native GetSoundDuration             takes sound soundHandle returns integer
 
+/**
+Returns length of the sound file under the path in milliseconds
+*/
 native GetSoundFileDuration         takes string musicFileName returns integer
 
 
