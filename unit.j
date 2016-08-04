@@ -46,10 +46,24 @@ native ShowUnit takes unit whichUnit, boolean show returns nothing
 
 native SetUnitState takes unit whichUnit, unitstate whichUnitState, real newVal returns nothing
 
+/**
+@note If the unit has movementspeed of zero the unit will be moved but the model
+of the unit will not move.
+@note This does not cancel orders of the unit. `SetUnitPosition` does cancel orders.
+*/
 native SetUnitX takes unit whichUnit, real newX returns nothing
 
+/**
+@note If the unit has movementspeed of zero the unit will be moved but the model
+of the unit will not move.
+@note This does not cancel orders of the unit. `SetUnitPosition` does cancel orders.
+*/
 native SetUnitY takes unit whichUnit, real newY returns nothing
 
+/**
+@note This cancels the orders of the unit. If you want to move a unit without
+canceling its orders use `SetUnitX`/`SetUnitY`.
+*/
 native SetUnitPosition takes unit whichUnit, real newX, real newY returns nothing
 
 native SetUnitPositionLoc takes unit whichUnit, location whichLocation returns nothing
