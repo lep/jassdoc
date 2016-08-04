@@ -78,30 +78,38 @@ e '\'' = "''"
 e x    = [x]
 
 
-type Accumulator = ([L8.ByteString], [Maybe (L8.ByteString, L8.ByteString)])
-parseDocstring = first (L8.unlines . reverse)
-               . second (reverse . catMaybes)
+trimWhitespace =
+      L8.reverse
+    . L8.dropWhile (\x -> x=='\r' || x == '\n') -- drop back newline
+    . L8.reverse
+    . L8.dropWhile (\x -> x=='\r' || x == '\n') -- drop front newline
+
+type Accumulator = ([L8.ByteString], [(L8.ByteString, [L8.ByteString])])
+
+
+myUnlines = L8.intercalate "\n"
+
+
+parseDocstring = first (trimWhitespace . myUnlines . reverse)
+               . second (map (second $ myUnlines . reverse ) )
                . flip go mempty
                . L8.lines
   where
     go :: [L8.ByteString] -> Accumulator -> Accumulator
     go [] acc = acc
-    go (x:xs) (descr, anns)
-        | emptyLine x = go xs (descr, Nothing:anns)
-        | Just ann <- getAnn x = go xs (descr, Just ann:anns)
-    go (x:xs) acc = go xs $ addToAnn x acc
+    go (x:xs) (descr, annotations)
+        | Just ann <- getAnn x = go xs (descr, ann:annotations)
+        | null annotations = go xs (x:descr, annotations)
+        | otherwise =
+            let (anTag, anLines):as = annotations
+            in go xs (descr, (anTag, x:anLines):as)
 
-    addToAnn :: L8.ByteString -> Accumulator -> Accumulator
-    addToAnn text (descr, []) = (text:descr, [])
-    addToAnn text (descr, Nothing:xs) = (text:descr, Nothing:xs)
-    addToAnn text (descr, Just (ann, text'):xs) =
-        (descr, Just (ann, (text' <> "\n" <> text)):xs)
 
 
     getAnn line =
         let words = map L8.unpack $ L8.words line
         in case words of
-            ('@':ann):text -> Just (L8.pack ann, L8.pack $ unwords text)
+            ('@':ann):text -> Just (L8.pack ann, [trimWhitespace . L8.pack $ unwords text])
             _ -> Nothing
 
 

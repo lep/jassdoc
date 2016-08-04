@@ -3,7 +3,7 @@
 // <http://www.wc3c.net/showthread.php?t=107737>
 
 /**
-Creates the image.
+This returns a new image, the first ID given being 0 and then counting upwards (0, 1, 2, 3, ...).
 
 @param file
 The path to the image. The image itself should have its border alpha-ed out completely. If an invalid path is specified CreateImage returns image(-1).
@@ -43,17 +43,13 @@ imageType 2 (labeled by Blizzard with "Indicator") is drawn above imageType 4, b
 imageType 3 (labeled by Blizzard with "Occlusion Mask") is drawn above imageType 4 and 2 and below imageType 1.
 imageType 4 (labeled by Blizzard with "Ubersplat") is drawn below every other type. Images of this type are additionally affected by time of day and the fog of war (only for tinting).
 Multiple images with the same type are drawn in their order of creation, meaning that the image created first is drawn below the image created after.
-
-This returns a new image, the first ID given being 0 and then counting upwards (0, 1, 2, 3, ...).
 */
 native CreateImage                  takes string file, real sizeX, real sizeY, real sizeZ, real posX, real posY, real posZ, real originX, real originY, real originZ, integer imageType returns image
 
 /**
-The destructor for images.
+This function destroys the image specified and recycles the handle ID of that image instantly (no ref counting for images).
 
 @param whichImage Which image to destroy.
-
-This function destroys the image specified and recycles the handle ID of that image instantly (no ref counting for images).
 
 @bug May crash the game if an invalid image is used (null, before the first image is created).
 */
