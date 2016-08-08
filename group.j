@@ -12,6 +12,9 @@ native GroupClear                           takes group whichGroup returns nothi
 
 native GroupEnumUnitsOfType                 takes group whichGroup, string unitname, boolexpr filter returns nothing
 
+/**
+@note In contrast to other Enum-functions this function enumarates units with locust.
+*/
 native GroupEnumUnitsOfPlayer               takes group whichGroup, player whichPlayer, boolexpr filter returns nothing
 
 /**

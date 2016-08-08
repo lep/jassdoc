@@ -57,7 +57,6 @@ constant native GetTriggerExecCount     takes trigger whichTrigger returns integ
 
 native ExecuteFunc          takes string funcName returns nothing
 
-
 native TriggerAddCondition    takes trigger whichTrigger, boolexpr condition returns triggercondition
 
 native TriggerRemoveCondition takes trigger whichTrigger, triggercondition whichCondition returns nothing
@@ -76,6 +75,25 @@ native TriggerSleepAction   takes real timeout returns nothing
 
 native TriggerWaitForSound  takes sound s, real offset returns nothing
 
+/**
+Evaluates all functions that were added to the trigger via `TriggerAddCondition`.
+All return-values from all added condition-functions are `and`ed together as the final return-value.
+Returns the boolean value of the return value from the condition-function.
+So if 0/0.0/null would be returned in the condition-function, `TriggerEvaluate`
+would return false. Note that `""` would return `true`.
+
+@note If a condition-function crashes the thread or does not return any value
+`TriggerEvaluate` will return false.
+
+@note If you want to return false for a condition-function that returns
+string (for whatever reason) return `null` instead of `""`
+
+@note *All* functions added via `TriggerAddAction` are run.
+There is no short-circuting. If you want short-circuting use `And` or `Or`.
+
+@note All functions added via `TriggerAddAction` are run in the order they
+were added.
+*/
 native TriggerEvaluate      takes trigger whichTrigger returns boolean
 
 native TriggerExecute       takes trigger whichTrigger returns nothing
