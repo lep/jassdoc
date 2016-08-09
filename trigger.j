@@ -88,10 +88,10 @@ would return false. Note that `""` would return `true`.
 @note If you want to return false for a condition-function that returns
 string (for whatever reason) return `null` instead of `""`
 
-@note *All* functions added via `TriggerAddAction` are run.
+@note *All* functions added via `TriggerAddCondition` are run.
 There is no short-circuting. If you want short-circuting use `And` or `Or`.
 
-@note All functions added via `TriggerAddAction` are run in the order they
+@note All functions added via `TriggerAddCondition` are run in the order they
 were added.
 */
 native TriggerEvaluate      takes trigger whichTrigger returns boolean
