@@ -3,6 +3,10 @@
 
 native CreateTrigger    takes nothing returns trigger
 
+/**
+@bug Do not destroy the current running Trigger (when waits are involved) as
+it can cause handle stack corruption as documented [here](http://www.wc3c.net/showthread.php?t=110519).
+*/
 native DestroyTrigger   takes trigger whichTrigger returns nothing
 
 native ResetTrigger     takes trigger whichTrigger returns nothing

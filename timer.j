@@ -16,4 +16,8 @@ native PauseTimer           takes timer whichTimer returns nothing
 
 native ResumeTimer          takes timer whichTimer returns nothing
 
+/**
+@bug Might crash the game if called when there is no expired timer.
+<http://www.wc3c.net/showthread.php?t=84131>
+*/
 native GetExpiredTimer      takes nothing returns timer

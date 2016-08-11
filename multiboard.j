@@ -7,7 +7,11 @@ native CreateMultiboard                 takes nothing returns multiboard
 native DestroyMultiboard                takes multiboard lb returns nothing
 
 
-
+/**
+@bug `MultiboardDisplay(mb,false)`, where mb is an arbitrary non-null multiboard
+will close any open multiboard, regardless of whether it's `mb` or not.
+<http://www.wc3c.net/showthread.php?p=971681#post971681>
+*/
 native MultiboardDisplay                takes multiboard lb, boolean show returns nothing
 
 native IsMultiboardDisplayed            takes multiboard lb returns boolean
