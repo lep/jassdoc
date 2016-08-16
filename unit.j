@@ -665,7 +665,6 @@ to the buildings.
 @param stockMax The item will grow in stock count up to the value of stockMax.
 The rate at which the item grows in stock is determined by its stock replenish
 interval, which can be modified in the object editor.
-
 */
 native AddItemToAllStock takes integer itemId, integer currentStock, integer stockMax returns nothing
 

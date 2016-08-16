@@ -254,12 +254,18 @@ native SetThematicMusicPlayPosition takes integer millisecs returns nothing
 native SetSoundDuration             takes sound soundHandle, integer duration returns nothing
 
 /**
-Returns sound length in milliseconds
+Returns sound length in milliseconds.
+
+@note Beweare that this might return different values for different players
+if you use native wc3-sounds as these can have different length in different languages.
 */
 native GetSoundDuration             takes sound soundHandle returns integer
 
 /**
-Returns length of the sound file under the path in milliseconds
+Returns length of the sound file under the path in milliseconds.
+
+@note Beweare that this might return different values for different players
+if you use native wc3-sounds as these can have different length in different languages.
 */
 native GetSoundFileDuration         takes string musicFileName returns integer
 
