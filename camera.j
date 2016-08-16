@@ -37,14 +37,16 @@ native SetCameraOrientController    takes unit whichUnit, real xoffset, real yof
 /**
 Creates a new camerasetup object with the following default values.
 
-Target Coordinates: ( 0.00 , 0.00 )
-Z-Offset: 0.00
-Rotation: 90.00
-Angle of Attack: 304.00
-Distance: 1650.00
-Roll: 0.00
-Field of View: 70.00
-Far Clipping: 5000.00 
+|                   |               |
+|-------------------|---------------|
+|Target Coordinates |( 0.00 , 0.00 )|
+|Z-Offset           | 0.00          |
+|Rotation           | 90.00         |
+|Angle of Attack    | 304.00        |
+|Distance           | 1650.00       |
+|Roll               | 0.00          |
+|Field of View      | 70.00         |
+|Far Clipping       | 5000.00       |
 
 */
 native CreateCameraSetup                    takes nothing returns camerasetup
@@ -62,12 +64,14 @@ The field of the camerasetup.
 The value to assign to the field.
 
 @param duration
-The duration over which the field will be set. If the duration is greater than 0, the changes will be made gradually once the camera setup is applied.
+The duration over which the field will be set. If the duration is greater
+than 0, the changes will be made gradually once the camera setup is applied.
 */
 native CameraSetupSetField                  takes camerasetup whichSetup, camerafield whichField, real value, real duration returns nothing
 
 /**
-Returns the value of the specified field for a camerasetup. The angle of attack, field of view, roll, and rotation are all returned in degrees, unlike GetCameraField.
+Returns the value of the specified field for a camerasetup. The angle of attack,
+field of view, roll, and rotation are all returned in degrees, unlike `GetCameraField`.
 
 @param whichSetup
 The camera setup.
@@ -80,7 +84,8 @@ The field of the camerasetup.
 native CameraSetupGetField                  takes camerasetup whichSetup, camerafield whichField returns real
 
 /**
-Sets the target coordinates for a camerasetup over a duration. The coordinate change will only be applied when `CameraSetupApply` (or some other variant) is ran.
+Sets the target coordinates for a camerasetup over a duration. The coordinate
+change will only be applied when `CameraSetupApply` (or some other variant) is ran.
 
 @param whichSetup
 The camera setup.
@@ -127,7 +132,9 @@ Applies the camerasetup, altering the current camera's fields to match those of 
 The camerasetup to apply.
 
 @param doPan
-If set to true, it will move the current camera's target coordinates to the camera setup's target coordinates. If false, the camera will not move coordinates, but will still apply the other fields.
+If set to true, it will move the current camera's target coordinates to the
+camera setup's target coordinates. If false, the camera will not move
+coordinates, but will still apply the other fields.
 
 @param panTimed
 If set to true, then it will change the camera's properties over the times specified in CameraSetupSetField.
@@ -136,33 +143,42 @@ If set to true, then it will change the camera's properties over the times speci
 native CameraSetupApply                     takes camerasetup whichSetup, boolean doPan, boolean panTimed returns nothing
 
 /**
-Applies the camerasetup with a custom z-offset, altering the current camera's fields to match those of the camera setup. The z-offset input will override the z-offset specified by the camerasetup through `CameraSetupSetField`.
+Applies the camerasetup with a custom z-offset, altering the current camera's
+fields to match those of the camera setup. The z-offset input will override
+the z-offset specified by the camerasetup through `CameraSetupSetField`.
 
 @param whichSetup The camerasetup to apply.
 
 @param zDestOffset
 The camera's z-offset will gradually change to this value over the specified duration.
 
-@bug If a player pauses the game after the camerasetup has been applied, the z-offset of the game camera will change to the z-offset of the camerasetup for that player. 
+@bug If a player pauses the game after the camerasetup has been applied, the
+z-offset of the game camera will change to the z-offset of the camerasetup for that player. 
 */
 native CameraSetupApplyWithZ                takes camerasetup whichSetup, real zDestOffset returns nothing
 
 /**
-Applies the camerasetup over a certain duration, altering the current camera's fields to match those of the camera setup.
+Applies the camerasetup over a certain duration, altering the current
+camera's fields to match those of the camera setup.
 
 @param whichSetup
 The camerasetup to apply.
 
 @param doPan
-If set to true, it will move the current camera's target coordinates to the camera setup's target coordinates. If false, the camera will not move coordinates, but will still apply the other fields.
+If set to true, it will move the current camera's target coordinates to the
+camera setup's target coordinates. If false, the camera will not move
+coordinates, but will still apply the other fields.
 
 @param forceDuration
-The duration it will take to apply all the camera fields. It will ignore the times set by CameraSetupSetField.
+The duration it will take to apply all the camera fields.
+It will ignore the times set by CameraSetupSetField.
 */
 native CameraSetupApplyForceDuration        takes camerasetup whichSetup, boolean doPan, real forceDuration returns nothing
 
 /**
-Applies the camerasetup over a certain duration with a custom z-offset value, altering the current camera's fields to match those of the camera setup. The z-offset input will override the z-offset specified by `CameraSetupSetField`.
+Applies the camerasetup over a certain duration with a custom z-offset value,
+altering the current camera's fields to match those of the camera setup.
+The z-offset input will override the z-offset specified by `CameraSetupSetField`.
 
 @param whichSetup
 The camerasetup to apply.
@@ -171,13 +187,16 @@ The camerasetup to apply.
 The camera's z-offset will gradually change to this value over the specified duration.
 
 @param forceDuration
-The duration it will take to apply all the camera fields. It will ignore the times set by CameraSetupSetField.
+The duration it will take to apply all the camera fields.
+It will ignore the times set by CameraSetupSetField.
 */
 native CameraSetupApplyForceDurationWithZ   takes camerasetup whichSetup, real zDestOffset, real forceDuration returns nothing
 
 
 /**
-Causes the camera's target to sway. (the camera's target, not the camera's perspective) The higher the magnitude, the higher the range of swaying. The higher the velocity, the more rapidly the swaying occurs.
+Causes the camera's target to sway(the camera's target, not the camera's perspective).
+The higher the magnitude, the higher the range of swaying.
+The higher the velocity, the more rapidly the swaying occurs.
 
 @param mag
 The magnitude of the swaying.
@@ -189,7 +208,10 @@ The speed of the swaying.
 native CameraSetTargetNoise             takes real mag, real velocity returns nothing
 
 /**
-Causes the camera's source to sway. (the camera's perspective, not the camera's target) The higher the magnitude, the higher the range of swaying. The higher the velocity, the more rapidly the swaying occurs. This will not affect the camera's target coordinates.
+Causes the camera's source to sway (the camera's perspective, not the camera's target).
+The higher the magnitude, the higher the range of swaying.
+The higher the velocity, the more rapidly the swaying occurs.
+This will not affect the camera's target coordinates.
 
 @param mag
 The magnitude of the swaying.
@@ -202,6 +224,12 @@ native CameraSetSourceNoise             takes real mag, real velocity returns no
 
 /**
 Causes the camera's target to sway, just like CameraSetTargetNoise. (the camera's target, not the camera's perspective) The higher the magnitude, the higher the range of swaying. The higher the velocity, the more rapidly the swaying occurs.
+
+Causes the camera's source to sway (the camera's perspective, not the camera's target).
+The higher the magnitude, the higher the range of swaying.
+The higher the velocity, the more rapidly the swaying occurs.
+This will not affect the camera's target coordinates.
+
 
 @param mag
 The magnitude of the swaying.
@@ -276,65 +304,91 @@ native GetCameraMargin                  takes integer whichMargin returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraBoundMinX          takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraBoundMinY          takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraBoundMaxX          takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraBoundMaxY          takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraField              takes camerafield whichField returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraTargetPositionX    takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraTargetPositionY    takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraTargetPositionZ    takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraTargetPositionLoc  takes nothing returns location
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraEyePositionX       takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraEyePositionY       takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraEyePositionZ       takes nothing returns real
 
 /**
 Return-value for the local players camera only.
+
+@async
 */
 constant native GetCameraEyePositionLoc     takes nothing returns location

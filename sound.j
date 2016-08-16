@@ -6,19 +6,22 @@ native NewSoundEnvironment          takes string environmentName returns nothing
 /**
 Creates a sound handle.
 
-
-
 @param fileName The path to the file.
 
 @param looping Looping sounds will restart once the sound duration has finished.
 
-@param is3D 3D Sounds can be played on particular areas of the map. They are at their loudest when the camera is close to the sound's coordinates.
+@param is3D 3D Sounds can be played on particular areas of the map. They are at
+their loudest when the camera is close to the sound's coordinates.
 
-@param fadeInRate How quickly the sound fades in. The higher the number, the faster the sound fades in. Maximum number is 127.
+@param fadeInRate How quickly the sound fades in. The higher the number, the
+faster the sound fades in. Maximum number is 127.
 
-@param fadeOutRate How quickly the sound fades out. The higher the number, the faster the sound fades out. Maximum number is 127.
+@param fadeOutRate How quickly the sound fades out. The higher the number, the
+faster the sound fades out. Maximum number is 127.
 
-@param eaxSetting EAX is an acronym for environmental audio extensions. In the sound editor, this corresponds to the "Effect" setting. The known settings available in Warcraft III are:
+@param eaxSetting EAX is an acronym for environmental audio extensions. In the
+sound editor, this corresponds to the "Effect" setting.
+The known settings available in Warcraft III are:
 ````
 "CombatSoundsEAX" // combat
 "KotoDrumsEAX" // drums
@@ -32,7 +35,8 @@ Creates a sound handle.
 native CreateSound                  takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string eaxSetting returns sound
 
 /**
-Creates a sound but applies default settings to the sound, which are found under the label from the following SLK-files:
+Creates a sound but applies default settings to the sound, which are found
+under the label from the following SLK-files:
 
     * UI\SoundInfo\AbilitySounds.slk
     * UI\SoundInfo\AmbienceSounds.slk
@@ -46,12 +50,15 @@ Creates a sound but applies default settings to the sound, which are found under
 
 @param looping Looping sounds will restart once the sound duration has finished.
 
-@param is3D 3D Sounds can be played on particular areas of the map. They are at their loudest when the camera is close to the sound's coordinates.
+@param is3D 3D Sounds can be played on particular areas of the map. They are at
+their loudest when the camera is close to the sound's coordinates.
 
-@param fadeInRate How quickly the sound fades in. The higher the number, the faster the sound fades in. Maximum number is 127.
+@param fadeInRate How quickly the sound fades in. The higher the number,
+the faster the sound fades in. Maximum number is 127.
 
-@param fadeOutRate How quickly the sound fades out. The higher the number, the faster the sound fades out. Maximum number is 127.
-used, e.g. values like volume, pitch, pitch variance, priority, channel, min distance, max distance, distance cutoff or eax.
+@param fadeOutRate How quickly the sound fades out. The higher the number,
+the faster the sound fades out. Maximum number is 127. used, e.g. values like
+volume, pitch, pitch variance, priority, channel, min distance, max distance, distance cutoff or eax.
 
 @param SLKEntryName the label out of one of the SLK-files, whose settings should be
 */
@@ -64,7 +71,7 @@ native CreateMIDISound              takes string soundLabel, integer fadeInRate,
 
 
 /**
-Applies default settings to the sound, which are found under the label from the following SLK-files:
+Applies default settings to the sound, which are foundunder the label from the following SLK-files:
 
     * UI\SoundInfo\AbilitySounds.slk
     * UI\SoundInfo\AmbienceSounds.slk
@@ -131,12 +138,14 @@ native SetSoundPosition             takes sound soundHandle, real x, real y, rea
 native SetSoundVelocity             takes sound soundHandle, real x, real y, real z returns nothing
 
 /**
-Attaches the sound soundHandle to unit whichUnit. Attaching sound to unit means that more far player stays from the unit to which the sound is attached, less loud the sound plays (the volume of the attached sound decreases with increasing distance).
+Attaches the sound soundHandle to unit whichUnit. Attaching sound to unit means
+that more far player stays from the unit to which the sound is attached, less
+loud the sound plays (the volume of the attached sound decreases with increasing distance).
+
 @note This call is only valid if the sound was created with 3d enabled
 
 @param soundHandle The 3D sound to play.
 @param whichUnit The unit to attach the sound to.
-
 */
 native AttachSoundToUnit            takes sound soundHandle, unit whichUnit returns nothing
 
@@ -258,6 +267,9 @@ Returns sound length in milliseconds.
 
 @note Beweare that this might return different values for different players
 if you use native wc3-sounds as these can have different length in different languages.
+This can cause desyncs if you use the duration for non-local stuff.
+
+@async
 */
 native GetSoundDuration             takes sound soundHandle returns integer
 
@@ -266,6 +278,9 @@ Returns length of the sound file under the path in milliseconds.
 
 @note Beweare that this might return different values for different players
 if you use native wc3-sounds as these can have different length in different languages.
+This can cause desyncs if you use the duration for non-local stuff.
+
+@async
 */
 native GetSoundFileDuration         takes string musicFileName returns integer
 

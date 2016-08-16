@@ -98,6 +98,9 @@ native GetDestructableOccluderHeight takes destructable d returns real
 
 native SetDestructableOccluderHeight takes destructable d, real height returns nothing
 
+/**
+@async
+*/
 native GetDestructableName takes destructable d returns string
 
 constant native GetTriggerDestructable takes nothing returns destructable

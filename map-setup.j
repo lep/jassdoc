@@ -154,7 +154,11 @@ native SetPlayerOnScoreScreen takes player whichPlayer, boolean flag returns not
 native GetPlayerTeam takes player whichPlayer returns integer
 
 /**
-Returns an integer representation of a player's start location. If the player has a start location on the map (regardless of whether that player slot is filled), it will return the player's ID (e.g. Player 1 (red) will return 0, Player 2 (blue) will return 1, and so forth). If the player does not have a start location on the map, it will return -1.
+Returns an integer representation of a player's start location. If the playe
+has a start location on the map (regardless of whether that player slot is filled),
+it will return the player's ID (e.g. Player 1 (red) will return 0, Player 2 (blue)
+will return 1, and so forth). If the player does not have a start location
+on the map, it will return -1.
 
 @param whichPlayer The player of which to return the starting location.
 */

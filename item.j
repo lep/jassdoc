@@ -64,6 +64,9 @@ native GetItemType takes item whichItem returns itemtype
 
 native SetItemDropID takes item whichItem, integer unitId returns nothing
 
+/**
+@async
+*/
 constant native GetItemName takes item whichItem returns string
 
 native GetItemCharges takes item whichItem returns integer

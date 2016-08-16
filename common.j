@@ -613,6 +613,7 @@ constant native AbilityId2String            takes integer abilityId         retu
 /**
 Looks up the "name" field for any object (unit, item, ability)
 @pure
+@async
 */
 constant native GetObjectName               takes integer objectId          returns string
 

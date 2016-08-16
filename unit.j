@@ -422,6 +422,9 @@ constant native GetUnitTypeId takes unit whichUnit returns integer
 
 constant native GetUnitRace takes unit whichUnit returns race
 
+/**
+@async
+*/
 constant native GetUnitName takes unit whichUnit returns string
 
 constant native GetUnitFoodUsed takes unit whichUnit returns integer

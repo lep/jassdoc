@@ -85,8 +85,13 @@ Returns source if no entry was found.
 
 @bug Cannot assign it to a constant variable as it will crash the game.
 `constant string foo = GetLocalizedString("bar")`
+
+@async
 */
 native GetLocalizedString takes string source returns string
 
+/**
+@async
+*/
 native GetLocalizedHotkey takes string source returns integer
 

@@ -37,7 +37,9 @@ native PlaceRandomUnit          takes unitpool whichPool, player forWhichPlayer,
 /**
 Creates an empty itempool handle.
 
-Item pools are initially empty, but can have item-types added to them via `ItemPoolAddItemType`. Item pools only serve for random item placing, via `PlaceRandomItem`.
+Item pools are initially empty, but can have item-types added
+to them via `ItemPoolAddItemType`. Item pools only serve for random item
+placing, via `PlaceRandomItem`.
 */
 native CreateItemPool           takes nothing returns itempool
 
@@ -79,7 +81,10 @@ native PlaceRandomItem          takes itempool whichItemPool, real x, real y ret
 // Choose any random unit/item. (NP means Neutral Passive)
 
 /**
-Returns the rawcode ID of a random unit of the specified level. The unit chosen will come from the set of units that include or are assigned to the base tileset of the map. Passing a level of -1 is equivalent to picking a creep of any level. If there are no units of the specified level, the returned value is 0.
+Returns the rawcode ID of a random unit of the specified level. The unit chosen
+will come from the set of units that include or are assigned to the base tileset
+of the map. Passing a level of -1 is equivalent to picking a creep of any level.
+If there are no units of the specified level, the returned value is 0.
 
 @param level
 The level of the units to choose from.
@@ -87,14 +92,17 @@ The level of the units to choose from.
 native ChooseRandomCreep        takes integer level returns integer
 
 /**
-Returns the rawcode ID of a random neutral passive building, such as the buildings "Goblin Merchant" or "Tavern".
+Returns the rawcode ID of a random neutral passive building,
+such as the buildings "Goblin Merchant" or "Tavern".
 
 @note The building returned is not necessarily on the map already.
 */
 native ChooseRandomNPBuilding   takes nothing returns integer
 
 /**
-Returns the rawcode ID of a random item of the specified level. Passing a level of -1 will return an item of any level. If there are no items of the specified level, the id returned will be 0.
+Returns the rawcode ID of a random item of the specified level. Passing a level
+of -1 will return an item of any level. If there are no items of the specified
+level, the id returned will be 0.
 
 @param level
 The level of the items to choose from. Passing a level of -1 is equivalent to any level.
@@ -104,7 +112,9 @@ The level of the items to choose from. Passing a level of -1 is equivalent to an
 native ChooseRandomItem         takes integer level returns integer
 
 /**
-Returns the rawcode ID of a random item of the specified level and item type. Passing a level of -1 will return an item of any level. If there are no items of the specified level, the id returned will be 0.
+Returns the rawcode ID of a random item of the specified level and item type.
+Passing a level of -1 will return an item of any level. If there are no items
+of the specified level, the id returned will be 0.
 
 @param whichType
 The classification of items to choose from.
