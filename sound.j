@@ -6,6 +6,16 @@ native NewSoundEnvironment          takes string environmentName returns nothing
 /**
 Creates a sound handle.
 
+@note You can only play the same sound handle once.
+
+@note You can only play the same sound filepath four times.
+
+@note Sounds of the same filepath (on different sound handles) must have a delay
+of at least 0.1 seconds inbetween them to be played.
+You can overcome this by starting one earlier and then using `SetSoundPosition`.
+
+@note You can only play 16 sounds in general.
+
 @param fileName The path to the file.
 
 @param looping Looping sounds will restart once the sound duration has finished.
@@ -46,6 +56,16 @@ under the label from the following SLK-files:
     * UI\SoundInfo\UnitAckSounds.slk
     * UI\SoundInfo\UnitCombatSounds.slk
 
+@note You can only play the same sound handle once.
+
+@note You can only play the same sound filepath four times.
+
+@note Sounds of the same filepath (on different sound handles) must have a delay
+of at least 0.1 seconds inbetween them to be played.
+You can overcome this by starting one earlier and then using `SetSoundPosition`.
+
+@note You can only play 16 sounds in general.
+
 @param fileName The path to the file.
 
 @param looping Looping sounds will restart once the sound duration has finished.
@@ -71,7 +91,7 @@ native CreateMIDISound              takes string soundLabel, integer fadeInRate,
 
 
 /**
-Applies default settings to the sound, which are foundunder the label from the following SLK-files:
+Applies default settings to the sound, which are found under the label from the following SLK-files:
 
     * UI\SoundInfo\AbilitySounds.slk
     * UI\SoundInfo\AmbienceSounds.slk
@@ -102,7 +122,11 @@ native SetSoundVolume               takes sound soundHandle, integer volume retu
 
 /**
 Tones the pitch of the sound, default value is 1. Increasing it you get the chipmunk
-version and the sound becomes shorter, when decremented the sound becomes low-pitched and longer
+version and the sound becomes shorter, when decremented the sound becomes low-pitched and longer.
+
+@bug This native has very weird behaviour.
+See [this](http://www.hiveworkshop.com/threads/setsoundpitch-weirdness.215743/#post-2145419) for an explenation
+and [this](http://www.hiveworkshop.com/threads/snippet-rapidsound.258991/#post-2611724) for a non-bugged implementation.
 */
 native SetSoundPitch                takes sound soundHandle, real pitch returns nothing
 
@@ -152,6 +176,14 @@ native AttachSoundToUnit            takes sound soundHandle, unit whichUnit retu
 
 /**
 Starts the sound.
+
+@note You can only play the same sound handle once.
+
+@note You can only play 16 sounds in general.
+
+@note Sounds of the same filepath (on different sound handles) must have a delay
+of at least 0.1 seconds inbetween them to be played.
+You can overcome this by starting one earlier and then using `SetSoundPosition`.
 */
 native StartSound                   takes sound soundHandle returns nothing
 
@@ -291,7 +323,9 @@ native VolumeGroupSetVolume         takes volumegroup vgroup, real scale returns
 native VolumeGroupReset             takes nothing returns nothing
 
 
-
+/**
+@note If you just started the sound this still returns false.
+*/
 native GetSoundIsPlaying            takes sound soundHandle returns boolean
 
 native GetSoundIsLoading            takes sound soundHandle returns boolean
