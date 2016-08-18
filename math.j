@@ -86,7 +86,9 @@ native Atan2 takes real y, real x returns real
 
 
 /**
-Returns 0 if x <= 0
+Returns the square root of x.
+If x is less than or equal to zero this returns 0.0
+
 @pure
 */
 native SquareRoot takes real x returns real
@@ -94,9 +96,9 @@ native SquareRoot takes real x returns real
 
 
 /**
-Computes x to the y power.
-y == 0.0 => 1
-x ==0.0 and y < 0 => 0
+Computes x to the y'th power.
+If y is zero this returns 1.0 and if both x is zero and y is less than zero this returns 0.0
+
 @pure
 */
 native Pow takes real x, real power returns real

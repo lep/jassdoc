@@ -44,7 +44,7 @@ the melee starting positions.
 native DefineStartLocation takes integer whichStartLoc, real x, real y returns nothing
 
 /**
-Defines a player's start location at the specified coordinates. The start
+Defines a player's start location at the specified location. The start
 location determines where the camera is initially positioned. For melee maps,
 it will also determine where the player's first town hall structure will be placed.
 
@@ -127,7 +127,7 @@ native SetPlayerStartLocation takes player whichPlayer, integer startLocIndex re
 Forces player to have the specified start loc and marks the start loc as occupied
 which removes it from consideration for subsequently placed players
 ( i.e. you can use this to put people in a fixed loc and then
- use random placement for any unplaced players etc. ).
+use random placement for any unplaced players etc. ).
 */
 native ForcePlayerStartLocation takes player whichPlayer, integer startLocIndex returns nothing 
 

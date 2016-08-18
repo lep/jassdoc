@@ -1,7 +1,11 @@
 // Unit API
 
 /**
-@param face Unit facing in degrees
+@param id The owner of the unit.
+@param unitid The rawcode of the unit for the unit.
+@param x The x-coordinate of the unit.
+@param y The y-coordinate of the unit.
+@param face Unit facing in degrees.
 */
 native CreateUnit takes player id, integer unitid, real x, real y, real face returns unit
 
@@ -11,7 +15,10 @@ native CreateUnit takes player id, integer unitid, real x, real y, real face ret
 native CreateUnitByName takes player whichPlayer, string unitname, real x, real y, real face returns unit
 
 /**
-@param face Unit facing in degrees
+@param id The owner of the unit.
+@param unitid The rawcode of the unit for the unit.
+@param whichLocation The position of the unit.
+@param face Unit facing in degrees.
 */
 native CreateUnitAtLoc takes player id, integer unitid, location whichLocation, real face returns unit
 
@@ -30,7 +37,7 @@ unit corresponding to the rawcode cannot have a corpse, then the returned value 
 @param unitid The rawcode of the unit for the corpse.
 @param x The x-coordinate of the corpse.
 @param y The y-coordinate of the corpse.
-@param face Unit facing in degrees
+@param face Unit facing in degrees.
 */
 native CreateCorpse takes player whichPlayer, integer unitid, real x, real y, real face returns unit
 
@@ -408,6 +415,9 @@ constant native GetUnitY takes unit whichUnit returns real
 
 constant native GetUnitLoc takes unit whichUnit returns location
 
+/**
+Returns the units facing in degrees.
+*/
 constant native GetUnitFacing takes unit whichUnit returns real
 
 constant native GetUnitMoveSpeed takes unit whichUnit returns real
