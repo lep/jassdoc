@@ -32,15 +32,17 @@ faster the sound fades out. Maximum number is 127.
 @param eaxSetting EAX is an acronym for environmental audio extensions. In the
 sound editor, this corresponds to the "Effect" setting.
 The known settings available in Warcraft III are:
-````
-"CombatSoundsEAX" // combat
-"KotoDrumsEAX" // drums
-"SpellsEAX" // spells
-"MissilesEAX" // missiles
-"HeroAcksEAX" // hero acknowledgements
-"DoodadsEAX" // doodads
-"DefaultEAXON" // default
-````
+
+|                  |                        |
+|------------------|------------------------|
+|"CombatSoundsEAX" | combat                 |
+|"KotoDrumsEAX"    | drums                  |
+|"SpellsEAX"       | spells                 |
+|"MissilesEAX"     | missiles               |
+|"HeroAcksEAX"     | hero acknowledgements  |
+|"DoodadsEAX"      | doodads                |
+|"DefaultEAXON"    | default                |
+
 */
 native CreateSound                  takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string eaxSetting returns sound
 

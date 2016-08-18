@@ -5,6 +5,8 @@ import Control.Arrow
 import Control.Monad
 
 import qualified Data.ByteString.Lazy.Char8 as L8
+
+import Data.Char (isSpace)
 import Data.Maybe (catMaybes, mapMaybe)
 import Data.Monoid
 
@@ -49,8 +51,8 @@ split pred xs = foldr ins mempty xs
 
 
 extractParam xs =
-    let name:descr = L8.words xs
-    in (name, L8.unwords descr)
+    let (name, descr) = L8.break isSpace xs
+    in (name, L8.dropWhile isSpace descr)
 
 isParam = ("param" == ) . fst
 
@@ -79,10 +81,10 @@ e x    = [x]
 
 
 trimWhitespace =
-      L8.reverse
+    {-  L8.reverse
     . L8.dropWhile (\x -> x=='\r' || x == '\n') -- drop back newline
     . L8.reverse
-    . L8.dropWhile (\x -> x=='\r' || x == '\n') -- drop front newline
+    . -} L8.dropWhile (\x -> x=='\r' || x == '\n') -- drop front newline
 
 type Accumulator = ([L8.ByteString], [(L8.ByteString, [L8.ByteString])])
 
