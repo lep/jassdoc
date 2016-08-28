@@ -2,7 +2,7 @@
 
 /**
 @param id The owner of the unit.
-@param unitid The rawcode of the unit for the unit.
+@param unitid The rawcode of the unit.
 @param x The x-coordinate of the unit.
 @param y The y-coordinate of the unit.
 @param face Unit facing in degrees.
@@ -16,7 +16,7 @@ native CreateUnitByName takes player whichPlayer, string unitname, real x, real 
 
 /**
 @param id The owner of the unit.
-@param unitid The rawcode of the unit for the unit.
+@param unitid The rawcode of the unit.
 @param whichLocation The position of the unit.
 @param face Unit facing in degrees.
 */
