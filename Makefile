@@ -1,7 +1,7 @@
 VERSION := $(shell git rev-parse --short HEAD)
 
 HSC := cabal exec -- ghc
-HSFLAGS := --make
+HSFLAGS := --make -O2
 
 .PHONY: all clean release
 

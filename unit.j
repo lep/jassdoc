@@ -342,6 +342,14 @@ native SetUnitExploded takes unit whichUnit, boolean exploded returns nothing
 
 native SetUnitInvulnerable takes unit whichUnit, boolean flag returns nothing
 
+/**
+Pauses a unit. A paused unit has the following properties:
+
+  * Buffs/effects are suspended
+  * Orders are stored when paused and fired on unpause
+  * The paused unit does not accept powerups. `UnitAddItem` returns true but
+    the item is not picked up
+*/
 native PauseUnit takes unit whichUnit, boolean flag returns nothing
 
 native IsUnitPaused takes unit whichHero returns boolean
