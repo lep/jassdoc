@@ -25,7 +25,9 @@ native TriggerRegisterTimerExpireEvent takes trigger whichTrigger, timer t retur
 native TriggerRegisterGameStateEvent takes trigger whichTrigger, gamestate whichState, limitop opcode, real limitval returns event
 
 
-
+// http://www.wc3c.net/showthread.php?p=1122625
+// https://github.com/nvs/gem/commit/4f40b178327699ce7052f8db786f57028317d208
+// cannot reproduce in single player?
 native TriggerRegisterDialogEvent       takes trigger whichTrigger, dialog whichDialog returns event
 
 native TriggerRegisterDialogButtonEvent takes trigger whichTrigger, button whichButton returns event

@@ -17,6 +17,18 @@ native DisplayTextToPlayer          takes player toPlayer, real x, real y, strin
 
 native DisplayTimedTextToPlayer     takes player toPlayer, real x, real y, real duration, string message returns nothing
 
+/**
+Displays the message to *all* players but the first "%s" in the message will
+be replaced by `GetPlayerName(toPlayer)`.
+
+@bug Only the first "%s" will be replaced correctly. Following "%s" will be
+printed as garbage.
+
+@bug Using formatters like "%i" will also print garbage and following "%s" wont
+work either.
+
+@note A better name for the parameter `toPlayer` would be `fromPlayer`.
+*/
 native DisplayTimedTextFromPlayer   takes player toPlayer, real x, real y, real duration, string message returns nothing
 
 /**
@@ -84,6 +96,13 @@ native ForceUICancel                takes nothing returns nothing
 
 native DisplayLoadDialog            takes nothing returns nothing
 
+/**
+Sets the "alternative icon". You can display this icon for any unit via
+`UnitSetUsesAltIcon`.
+
+@note Only one icon can be the "alternative icon" but you can give each
+player a different icon via `GetLocalPlayer`.
+*/
 native SetAltMinimapIcon            takes string iconPath returns nothing
 
 native DisableRestartMission        takes boolean flag returns nothing
