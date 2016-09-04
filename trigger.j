@@ -24,9 +24,14 @@ native TriggerWaitOnSleeps   takes trigger whichTrigger, boolean flag returns no
 native IsTriggerWaitOnSleeps takes trigger whichTrigger returns boolean
 
 
-
+/**
+This returns the current unit in calls to the `GroupEnumUnits-`natives.
+*/
 constant native GetFilterUnit       takes nothing returns unit
 
+/**
+This returns the current unit in calls to the `ForGroup` native
+*/
 constant native GetEnumUnit         takes nothing returns unit
 
 

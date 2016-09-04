@@ -8,6 +8,9 @@ native DestroyMultiboard                takes multiboard lb returns nothing
 
 
 /**
+@note Multiboars can not be shown at map-init. Use a wait or a zero-timer to
+display as soon as possible.
+
 @bug `MultiboardDisplay(mb,false)`, where mb is an arbitrary non-null multiboard
 will close any open multiboard, regardless of whether it's `mb` or not.
 <http://www.wc3c.net/showthread.php?p=971681#post971681>

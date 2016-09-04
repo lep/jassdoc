@@ -489,6 +489,14 @@ constant native IsUnitSelected takes unit whichUnit, player whichPlayer returns 
 
 constant native IsUnitRace takes unit whichUnit, race whichRace returns boolean
 
+/**
+@note This native returns a boolean, which when typecasted to integer might
+be greater than 1. It's probably implemented via a bitset.
+
+@note In past patches this native bugged when used in conditionfuncs.
+The fix back then was to compare with true (`==true`).
+I cannot reproduce the faulty behaviour in patch 1.27 so this is only a note.
+*/
 constant native IsUnitType takes unit whichUnit, unittype whichUnitType returns boolean
 
 /**
