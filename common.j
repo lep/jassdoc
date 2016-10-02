@@ -580,11 +580,13 @@ constant native ConvertAttackType           takes integer i returns attacktype
 
 /**
 @pure
+@bug Do not use this in a global initialisation as it returns 0 there.
 */
 constant native OrderId                     takes string  orderIdString     returns integer
 
 /**
 @pure
+@bug Do not use this in a global initialisation as it returns null there.
 */
 constant native OrderId2String              takes integer orderId           returns string
 
@@ -592,6 +594,7 @@ constant native UnitId                      takes string  unitIdString      retu
 
 /**
 @bug Always returns null after the game is loaded/if the game is a replay.
+@bug Do not use this in a global initialisation as it returns null there.
 */
 constant native UnitId2String               takes integer unitId            returns string
 
@@ -614,6 +617,7 @@ constant native AbilityId2String            takes integer abilityId         retu
 Looks up the "name" field for any object (unit, item, ability)
 @pure
 @async
+@bug Do not use this in a global initialisation as it crashes the game there.
 */
 constant native GetObjectName               takes integer objectId          returns string
 
