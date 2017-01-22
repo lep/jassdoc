@@ -63,8 +63,8 @@ Adds a blinking circle around widget with the color (red,green,blue,alpha).
 The circle blinks twice. This function is commonly used for cinematic modes
 and is seen in `TransmissionFromUnitWithNameBJ`.
 
-@note The size of the indicator depends on a unit's selection size. To modify
-this, you must edit the object editor field of the unit listed as "Art - Selection Size".
+@note The size of the indicator depends on a widget's selection size. To modify
+this, you must edit the object editor field of the widget listed as "Art - Selection Size".
 
 @param whichWidget The widget the indicator will be applied to.
 @param red An integer from 0-255 determining the amount of red color in the indicator.
