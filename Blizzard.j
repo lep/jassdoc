@@ -9375,6 +9375,16 @@ endfunction
 
 //
 
+
+/**
+Sets the unit's color to the color defined by (red,green,blue,alpha).
+
+@param whichUnit The unit which will be colored.
+@param red An integer from 0-100 determining the amount of red color.
+@param green An integer from 0-100 determining the amount of green color.
+@param blue An integer from 0-100 determining the amount of blue color.
+@param alpha An integer from 0-100 determining the transparency. A value of 100 is complete transparency while a value of 0 is complete opacity.
+*/
 function SetUnitVertexColorBJ takes unit whichUnit, real red, real green, real blue, real transparency returns nothing
 
     call SetUnitVertexColor(whichUnit, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0-transparency))
@@ -9385,6 +9395,20 @@ endfunction
 
 //===========================================================================
 
+/**
+Adds a blinking circle around the unit with the color (red,green,blue,alpha).
+The circle blinks twice. This function is commonly used for cinematic modes
+and is seen in `TransmissionFromUnitWithNameBJ`.
+
+@note The size of the indicator depends on a unit's selection size. To modify
+this, you must edit the object editor field of the unit listed as "Art - Selection Size".
+
+@param whichUnit The unit the indicator will be applied to.
+@param red An integer from 0-100 determining the amount of red color in the indicator.
+@param green An integer from 0-100 determining the amount of green color in the indicator.
+@param blue An integer from 0-100 determining the amount of blue color in the indicator.
+@param alpha An integer from 0-100 determining the transparency of the indicator. A value of 100 is complete transparency while a value of 0 is complete opacity.
+*/
 function UnitAddIndicatorBJ takes unit whichUnit, real red, real green, real blue, real transparency returns nothing
 
     call AddIndicator(whichUnit, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0-transparency))
@@ -9395,6 +9419,20 @@ endfunction
 
 //===========================================================================
 
+/**
+Adds a blinking circle around the destructable with the color (red,green,blue,alpha).
+The circle blinks twice. This function is commonly used for cinematic modes
+and is seen in `TransmissionFromUnitWithNameBJ`.
+
+@note The size of the indicator depends on a destructable's selection size. To modify
+this, you must edit the object editor field of the destructable listed as "Art - Selection Size".
+
+@param whichUnit The destructable the indicator will be applied to.
+@param red An integer from 0-100 determining the amount of red color in the indicator.
+@param green An integer from 0-100 determining the amount of green color in the indicator.
+@param blue An integer from 0-100 determining the amount of blue color in the indicator.
+@param alpha An integer from 0-100 determining the transparency of the indicator. A value of 100 is complete transparency while a value of 0 is complete opacity.
+*/
 function DestructableAddIndicatorBJ takes destructable whichDestructable, real red, real green, real blue, real transparency returns nothing
 
     call AddIndicator(whichDestructable, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0-transparency))
@@ -9405,6 +9443,20 @@ endfunction
 
 //===========================================================================
 
+/**
+Adds a blinking circle around the item with the color (red,green,blue,alpha).
+The circle blinks twice. This function is commonly used for cinematic modes
+and is seen in `TransmissionFromUnitWithNameBJ`.
+
+@note The size of the indicator depends on a item's selection size. To modify
+this, you must edit the object editor field of the item listed as "Art - Selection Size".
+
+@param whichUnit The item the indicator will be applied to.
+@param red An integer from 0-100 determining the amount of red color in the indicator.
+@param green An integer from 0-100 determining the amount of green color in the indicator.
+@param blue An integer from 0-100 determining the amount of blue color in the indicator.
+@param alpha An integer from 0-100 determining the transparency of the indicator. A value of 100 is complete transparency while a value of 0 is complete opacity.
+*/
 function ItemAddIndicatorBJ takes item whichItem, real red, real green, real blue, real transparency returns nothing
 
     call AddIndicator(whichItem, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0-transparency))

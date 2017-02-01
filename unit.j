@@ -164,6 +164,16 @@ native SetUnitTimeScale takes unit whichUnit, real timeScale returns nothing
 
 native SetUnitBlendTime takes unit whichUnit, real blendTime returns nothing
 
+
+/**
+Sets the unit's color to the color defined by (red,green,blue,alpha).
+
+@param whichUnit The unit the indicator will be applied to.
+@param red An integer from 0-255 determining the amount of red color.
+@param green An integer from 0-255 determining the amount of green color.
+@param blue An integer from 0-255 determining the amount of blue color.
+@param alpha An integer from 0-255 determining the transparency. A value of 0 is complete transparency while a value of 255 is complete opacity.
+*/
 native SetUnitVertexColor takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
 
 
