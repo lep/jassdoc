@@ -23,8 +23,16 @@ handleToplevel :: Ast (Maybe L8.ByteString) Toplevel -> L8.ByteString
 handleToplevel toplevel =
   case toplevel of
     Typedef doc name _ -> L8.unlines [ delete name, handle doc name]
-    Native doc _ name _ _ -> L8.unlines [ delete name, handle doc name]
-    Function doc _ name _ _ _ -> L8.unlines [ delete name, handle doc name]
+    Native doc _ name params _ ->
+      L8.unlines [ delete name
+                 , handle doc name
+                 , paramOrdering name params
+                 ]
+    Function doc _ name params _ _ ->
+      L8.unlines [ delete name
+                 , handle doc name
+                 , paramOrdering name params
+                 ]
     _ -> ""
 
   where
@@ -32,6 +40,7 @@ handleToplevel toplevel =
           L8.unwords [ "delete from comments where fnname = ", t name, ";" ]
         , L8.unwords [ "delete from parameters where fnname = ", t name, ";" ]
         , L8.unwords [ "delete from annotations where fnname = ", t name, ";" ]
+        , L8.unwords [ "delete from params_extra where fnname = ", t name, ";" ]
         ]
 
     handle (Just doc) name =
@@ -42,6 +51,24 @@ handleToplevel toplevel =
                       , L8.unlines $ map (uncurry $ insertAnn name) annotations
                       ]
     handle _ _ = ""
+
+    paramOrdering name params = L8.unlines $ zipWith (oneParam name) params [1..]
+    oneParam name (typ, param) idx = L8.unlines [
+       L8.unwords [ "insert into params_extra values ("
+                  , t name, ","
+                  , t param, ","
+                  , t "param_order", ","
+                  , L8.pack $ show idx
+                  , ");"
+                  ]
+     , L8.unwords [ "insert into params_extra values ("
+                  , t name, ","
+                  , t param, ","
+                  , t "param_type", ","
+                  , t typ
+                  , ");"
+                  ]
+     ]
 
 split pred xs = foldr ins mempty xs
   where
@@ -73,6 +100,7 @@ insertAnn name ann value = L8.unwords
     , L8.intercalate "," [t name, t ann, t value ]
     , ");"
     ]
+
 
 t x = "'" <> escape x <> "'"
 escape = L8.pack . concatMap e . L8.unpack
@@ -122,21 +150,28 @@ emptyLine = L8.null . L8.filter (not . isVerticalSpace)
 
 
 schema = L8.unlines
-         [ " create table if not exists comments (    "
-         , "      fnname text primary key,            "
-         , "      comment text                        "
-         , " );                                       "
-         , " create table if not exists parameters (  "
-         , "      fnname text,                        "
-         , "      param text,                         "
-         , "      value text,                         "
-         , "      primary key (fnname, param)         "
-         , " );                                       "
-         , " create table if not exists annotations ( "
-         , "      fnname text,                        "
-         , "      anname text,                        "
-         , "      value text                          "
-         , " );                                       "
+         [ " create table if not exists comments (        "
+         , "      fnname text primary key,                "
+         , "      comment text                            "
+         , " );                                           "
+         , " create table if not exists parameters (      "
+         , "      fnname text,                            "
+         , "      param text,                             "
+         , "      value text,                             "
+         , "      primary key (fnname, param)             "
+         , " );                                           "
+         , " create table if not exists annotations (     "
+         , "      fnname text,                            "
+         , "      anname text,                            "
+         , "      value text                              "
+         , " );                                           "
+         , " create table if not exists params_extra (    "
+         , "      fnname text,                            "
+         , "      param text,                             "
+         , "      anname text,                            "
+         , "      value,                                  "
+         , "      primary key (fnname, param, anname)     "
+         , " );                                           "
          ]
 
 main = do
