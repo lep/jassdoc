@@ -22,6 +22,8 @@ native Not              takes boolexpr operand returns boolexpr
 @note Do not destroy conditionfuncs created with `Condition` because this function
 does not create a new handle (`Condition(function foo) == Condition(function foo)`).
 In the best case it does nothing but in the worst case it affects some internals.
+
+@pure
 */
 native Condition        takes code func returns conditionfunc
 
@@ -34,6 +36,8 @@ native DestroyCondition takes conditionfunc c returns nothing
 @note Do not destroy filterfuncs created with `Filter` because this function
 does not create a new handle (`Filter(function foo) == Filter(function foo)`).
 In the best case it does nothing but in the worst case it affects some internals.
+
+@pure
 */
 native Filter           takes code func returns filterfunc
 
