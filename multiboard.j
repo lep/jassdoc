@@ -2,6 +2,9 @@
 
 // Create a multiboard object
 
+/**
+@bug Do not use this in a global initialisation as it crashes the game there.
+*/
 native CreateMultiboard                 takes nothing returns multiboard
 
 native DestroyMultiboard                takes multiboard lb returns nothing

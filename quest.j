@@ -1,5 +1,8 @@
 // Quest API
 
+/**
+@bug Do not use this in a global initialisation as it crashes the game there.
+*/
 native CreateQuest          takes nothing returns quest
 
 native DestroyQuest         takes quest whichQuest returns nothing
