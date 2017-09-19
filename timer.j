@@ -8,6 +8,10 @@ native TimerStart           takes timer whichTimer, real timeout, boolean period
 
 native TimerGetElapsed      takes timer whichTimer returns real
 
+/**
+@bug This might not return the correct value if the timer was paused and
+restarted at one point. See <http://www.wc3c.net/showthread.php?t=95756>.
+*/
 native TimerGetRemaining    takes timer whichTimer returns real
 
 native TimerGetTimeout      takes timer whichTimer returns real
