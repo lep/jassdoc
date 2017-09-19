@@ -268,8 +268,22 @@ native SetHeroXP takes unit whichHero, integer newXpVal, boolean showEyeCandy re
 
 
 
+/**
+Returns the units available skill points.
+*/
 native GetHeroSkillPoints takes unit whichHero returns integer
 
+/**
+Adds the amount to the units available skill points. Calling with a negative
+number reduces the skill points by that amount.
+Returns false if the amount of available skill points is already zero and
+if it's called with any non-positive number.
+Returns true in any other case.
+
+@bug If `skillPointDelta` is positive but greather than 10 only 10 points will
+be added but negative `skillPointDelta` works as expected with
+values smaller than -10.
+*/
 native UnitModifySkillPoints takes unit whichHero, integer skillPointDelta returns boolean
 
 
