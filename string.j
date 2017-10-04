@@ -33,11 +33,36 @@ Formats the real r into a string with supplied precision and width.
 native R2SW takes real r, integer width, integer precision returns string
 
 /**
+Converts a string of digits to the represented number.
+Returns `0` in case of an error.
+
+@param s The string to be converted
+
+@note This function only works for decimal strings. Hexadecimal or octal strings
+are not supported.
+
+@note If the input string starts with some valid input but ends in invalid input
+this will return the conversion of the valid part: `S2I("123asd") == 123`.
+
 @pure
+
 */
 native S2I  takes string s returns integer
 
+
+
 /**
+Converts a string of digits to the represented number.
+Returns `0` in case of an error.
+
+@param s The string to be converted
+
+@note This function only works for decimal strings. Hexadecimal or octal strings
+are not supported.
+
+@note If the input string starts with some valid input but ends in invalid input
+this will return the conversion of the valid part: `S2R(".123asd") == 0.123`.
+
 @pure
 */
 native S2R  takes string s returns real
