@@ -443,7 +443,11 @@ native TriggerRegisterPlayerStateEvent takes trigger whichTrigger, player whichP
 constant native GetEventPlayerState takes nothing returns playerstate
 
 
-
+/**
+Registers a chat event.
+The callback event will not have the "EVENT_PLAYER_CHAT" eventid, instead ConvertPlayerEvent(96) which has no attached global in common.j
+@event ConvertPlayerEvent(96)
+*/
 native TriggerRegisterPlayerChatEvent takes trigger whichTrigger, player whichPlayer, string chatMessageToDetect, boolean exactMatchOnly returns event
 
 
@@ -451,7 +455,7 @@ native TriggerRegisterPlayerChatEvent takes trigger whichTrigger, player whichPl
 Returns the actual string they typed in ( same as what you registered for
  if you required exact match )
 
-@event EVENT_PLAYER_CHAT
+@event ConvertPlayerEvent(96)
 */
 constant native GetEventPlayerChatString takes nothing returns string
 
@@ -459,7 +463,7 @@ constant native GetEventPlayerChatString takes nothing returns string
 /**
 Returns the string that you registered for
 
-@event EVENT_PLAYER_CHAT
+@event ConvertPlayerEvent(96)
 */
 constant native GetEventPlayerChatStringMatched takes nothing returns string
 
