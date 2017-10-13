@@ -445,7 +445,21 @@ constant native GetEventPlayerState takes nothing returns playerstate
 
 /**
 Registers a chat event.
-The callback event will not have the "EVENT_PLAYER_CHAT" eventid, instead ConvertPlayerEvent(96) which has no attached global in common.j
+
+@param whichTrigger The trigger to which register the event.
+
+@param whichPlayer The player on which chat-messages to react to.
+Pass `""` to react to any message.
+
+@param chatMessageToDetect The message to react to.
+
+@param exactMatchOnly `true` if only the exact string in `chatMessageToDetect`
+should fire the trigger. `false` will trigger if the `chatMessageToDetect` appears
+anywhere in the entered string.
+
+@note The callback event will not have the `EVENT_PLAYER_CHAT` eventid,
+instead `ConvertPlayerEvent(96)` which has no attached global in common.j
+
 @event ConvertPlayerEvent(96)
 */
 native TriggerRegisterPlayerChatEvent takes trigger whichTrigger, player whichPlayer, string chatMessageToDetect, boolean exactMatchOnly returns event
