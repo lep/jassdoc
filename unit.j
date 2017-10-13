@@ -280,7 +280,7 @@ Returns false if the amount of available skill points is already zero and
 if it's called with any non-positive number.
 Returns true in any other case.
 
-@bug If `skillPointDelta` is positive but greather than 10 only 10 points will
+@bug If `skillPointDelta` is positive but greater than 10 only 10 points will
 be added but negative `skillPointDelta` works as expected with
 values smaller than -10.
 */

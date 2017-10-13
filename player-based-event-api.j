@@ -470,6 +470,8 @@ Returns the actual string they typed in ( same as what you registered for
  if you required exact match )
 
 @event ConvertPlayerEvent(96)
+
+@bug This function only returns `""` when called in response to `EVENT_PLAYER_CHAT`.
 */
 constant native GetEventPlayerChatString takes nothing returns string
 
@@ -478,6 +480,8 @@ constant native GetEventPlayerChatString takes nothing returns string
 Returns the string that you registered for
 
 @event ConvertPlayerEvent(96)
+
+@bug This function only returns `""` when called in response to `EVENT_PLAYER_CHAT`.
 */
 constant native GetEventPlayerChatStringMatched takes nothing returns string
 
