@@ -35,6 +35,8 @@ Creates the special effect in point with coordinates (x;y) with Z = 0 using the
 model file with a path modelName.
 
 @note To create an effect with a z-position not zero see <http://www.hiveworkshop.com/forums/1561722-post10.html>.
+
+@note To create an effect only visible to one player see <https://www.hiveworkshop.com/threads/gs.300430/#post-3209073>
 */
 native AddSpecialEffect takes string modelName, real x, real y returns effect
 
@@ -43,6 +45,8 @@ Creates the special effect in the stated location where with Z = 0 using the
 model file with a path modelName.
 
 @note To create an effect with a z-position not zero see <http://www.hiveworkshop.com/forums/1561722-post10.html>.
+
+@note To create an effect only visible to one player see <https://www.hiveworkshop.com/threads/gs.300430/#post-3209073>
 */
 native AddSpecialEffectLoc takes string modelName, location where returns effect
 
@@ -68,6 +72,8 @@ If the attachment point does not exist, it will attach the effect to the model's
 it is attached to. You can add or remove these by going to the object editor and
 modifying "Art - Required Animation Names - Attachments" for a particular unit
 you are attaching effects to. 
+
+@note To create an effect only visible to one player see <https://www.hiveworkshop.com/threads/gs.300430/#post-3209073>
 
 */
 native AddSpecialEffectTarget takes string modelName, widget targetWidget, string attachPointName returns effect
