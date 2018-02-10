@@ -441,10 +441,25 @@ native UnitUseItemTarget takes unit whichUnit, item whichItem, widget target ret
 
 
 
+/**
+@bug If the unit is loaded into a zeppelin this will not return the position
+of the zeppelin but the last position of the unit before it was loaded into
+the zeppelin.
+*/
 constant native GetUnitX takes unit whichUnit returns real
 
+/**
+@bug If the unit is loaded into a zeppelin this will not return the position
+of the zeppelin but the last position of the unit before it was loaded into
+the zeppelin.
+*/
 constant native GetUnitY takes unit whichUnit returns real
 
+/**
+@bug If the unit is loaded into a zeppelin this will not return the position
+of the zeppelin but the last position of the unit before it was loaded into
+the zeppelin.
+*/
 constant native GetUnitLoc takes unit whichUnit returns location
 
 /**
