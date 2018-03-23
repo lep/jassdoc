@@ -280,9 +280,9 @@ Returns false if the amount of available skill points is already zero and
 if it's called with any non-positive number.
 Returns true in any other case.
 
-@bug If `skillPointDelta` is positive but greater than 10 only 10 points will
-be added but negative `skillPointDelta` works as expected with
-values smaller than -10.
+@note If `skillPointDelta` is greater than the amount of skillpoints the hero
+actually can spend (like 9 for three 3-level abilities) only that amount will
+be added. Negative `skillPointDelta` works as expected.
 */
 native UnitModifySkillPoints takes unit whichHero, integer skillPointDelta returns boolean
 
