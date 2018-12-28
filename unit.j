@@ -778,4 +778,9 @@ native SetUnitTypeSlots takes unit whichUnit, integer slots returns nothing
 
 native GetUnitUserData takes unit whichUnit returns integer
 
+/**
+Sets a single custom integer for a unit.
+
+@note This value is not used by any standard mechanisms in Warcraft III nor in the blizzard.j, so it is free to be harnessed. Besides GetHandleId, this is an excellent possibility to assign a unique integer id to a unit, which can serve as an index in other data structures.
+*/
 native SetUnitUserData takes unit whichUnit, integer data returns nothing
