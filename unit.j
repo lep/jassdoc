@@ -324,7 +324,7 @@ constant native GetUnitLevel takes unit whichUnit returns integer
 Returns the hero's "Proper Name", which is the name displayed above the level bar.
 
 @note Will return 'null' on non-hero units.
-**/
+*/
 native GetHeroProperName takes unit whichHero returns string
 
 native SuspendHeroXP takes unit whichHero, boolean flag returns nothing
@@ -372,7 +372,9 @@ native SetUnitExploded takes unit whichUnit, boolean exploded returns nothing
 /**
 Renders a unit invulnerable/lifts that specific invulnerability.
 
-@note The native seems to employ the 'Avul' ability, which is defined in the default AbilityData.slk. If there is no 'Avul' defined, this will crash the game.
+@note The native seems to employ the `'Avul'` ability, which is defined in the
+default AbilityData.slk.
+If there is no `'Avul'` defined, this will crash the game.
 */
 native SetUnitInvulnerable takes unit whichUnit, boolean flag returns nothing
 
@@ -786,6 +788,9 @@ native GetUnitUserData takes unit whichUnit returns integer
 /**
 Sets a single custom integer for a unit.
 
-@note This value is not used by any standard mechanisms in Warcraft III nor in the blizzard.j, so it is free to be harnessed. Besides GetHandleId, this is an excellent possibility to assign a unique integer id to a unit, which can serve as an index in other data structures.
+@note This value is not used by any standard mechanisms in Warcraft III nor
+in the blizzard.j, so it is free to be harnessed.
+Besides `GetHandleId`, this is an excellent possibility to assign a unique
+integer id to a unit, which can serve as an index in other data structures.
 */
 native SetUnitUserData takes unit whichUnit, integer data returns nothing
