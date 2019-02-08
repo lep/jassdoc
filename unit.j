@@ -794,3 +794,48 @@ Besides `GetHandleId`, this is an excellent possibility to assign a unique
 integer id to a unit, which can serve as an index in other data structures.
 */
 native SetUnitUserData takes unit whichUnit, integer data returns nothing
+
+
+native BlzGetUnitMaxHP                             takes unit whichUnit returns integer
+native BlzSetUnitMaxHP                             takes unit whichUnit, integer hp returns nothing
+native BlzGetUnitMaxMana                           takes unit whichUnit returns integer
+native BlzSetUnitMaxMana                           takes unit whichUnit, integer mana returns nothing
+
+native BlzSetUnitName                              takes unit whichUnit, string name returns nothing
+native BlzSetHeroProperName                        takes unit whichUnit, string heroProperName returns nothing
+native BlzGetUnitBaseDamage                        takes unit whichUnit, integer weaponIndex returns integer
+native BlzSetUnitBaseDamage                        takes unit whichUnit, integer baseDamage, integer weaponIndex returns nothing
+native BlzGetUnitDiceNumber                        takes unit whichUnit, integer weaponIndex returns integer
+native BlzSetUnitDiceNumber                        takes unit whichUnit, integer diceNumber, integer weaponIndex returns nothing
+native BlzGetUnitDiceSides                         takes unit whichUnit, integer weaponIndex returns integer
+native BlzSetUnitDiceSides                         takes unit whichUnit, integer diceSides, integer weaponIndex returns nothing
+native BlzGetUnitAttackCooldown                    takes unit whichUnit, integer weaponIndex returns real
+native BlzSetUnitAttackCooldown                    takes unit whichUnit, real cooldown, integer weaponIndex returns nothing
+
+native BlzGetUnitArmor                             takes unit whichUnit returns real
+native BlzSetUnitArmor                             takes unit whichUnit, real armorAmount returns nothing
+native BlzUnitHideAbility                          takes unit whichUnit, integer abilId, boolean flag returns nothing
+native BlzUnitDisableAbility                       takes unit whichUnit, integer abilId, boolean flag, boolean hideUI returns nothing
+native BlzUnitCancelTimedLife                      takes unit whichUnit returns nothing
+native BlzIsUnitSelectable                         takes unit whichUnit returns boolean
+native BlzIsUnitInvulnerable                       takes unit whichUnit returns boolean
+native BlzUnitInterruptAttack                      takes unit whichUnit returns nothing
+native BlzGetUnitCollisionSize                     takes unit whichUnit returns real
+
+native BlzSetUnitAbilityCooldown                   takes unit whichUnit, integer abilId, integer level, real cooldown returns nothing
+native BlzGetUnitAbilityCooldown                   takes unit whichUnit, integer abilId, integer level returns real
+native BlzGetUnitAbilityCooldownRemaining          takes unit whichUnit, integer abilId returns real
+native BlzEndUnitAbilityCooldown                   takes unit whichUnit, integer abilCode returns nothing
+native BlzGetUnitAbilityManaCost                   takes unit whichUnit, integer abilId, integer level returns integer
+native BlzSetUnitAbilityManaCost                   takes unit whichUnit, integer abilId, integer level, integer manaCost returns nothing
+
+/**
+@async
+*/
+native BlzGetLocalUnitZ                            takes unit whichUnit returns real   
+
+/**
+@note Returns the same result as `BlzGetLocalUnitZ`.
+@async
+*/
+native BlzGetUnitZ                                 takes unit whichUnit returns real

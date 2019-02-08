@@ -123,3 +123,5 @@ to neutral passive in melee games.
 The player to store hero data for.
 */
 native CachePlayerHeroData takes player whichPlayer returns nothing
+
+native BlzDecPlayerTechResearched                  takes player whichPlayer, integer techid, integer levels returns nothing

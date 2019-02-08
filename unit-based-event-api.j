@@ -31,6 +31,12 @@ constant native GetEventDamage takes nothing returns real
 */
 constant native GetEventDamageSource takes nothing returns unit
 
+
+/**
+@event EVENT_UNIT_DAMAGED
+*/
+native BlzSetEventDamage                           takes real damage returns nothing
+
 /**
 @event EVENT_UNIT_DETECTED 
 */
@@ -50,6 +56,24 @@ constant native GetEventTargetUnit takes nothing returns unit
 
 native TriggerRegisterUnitInRange takes trigger whichTrigger, unit whichUnit, real range, boolexpr filter returns event
 
+/**
+@event EVENT_PLAYER_MOUSE_MOVE
+*/
+native BlzGetTriggerPlayerMouseX                   takes nothing returns real
 
+/**
+@event EVENT_PLAYER_MOUSE_MOVE
+*/
+native BlzGetTriggerPlayerMouseY                   takes nothing returns real
 
+/**
+@event EVENT_PLAYER_MOUSE_MOVE
+*/
+native BlzGetTriggerPlayerMousePosition            takes nothing returns location
+
+/**
+@event EVENT_PLAYER_MOUSE_UP
+@event EVENT_PLAYER_MOUSE_DOWN
+*/
+native BlzGetTriggerPlayerMouseButton              takes nothing returns mousebuttontype
 

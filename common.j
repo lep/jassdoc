@@ -186,6 +186,10 @@ type lightning          extends     handle
 
 type pathingtype        extends     handle
 
+type mousebuttontype    extends     handle
+type animtype           extends     handle
+type subanimtype        extends     handle
+
 type image              extends     handle
 
 type ubersplat          extends     handle
@@ -563,6 +567,28 @@ constant native ConvertPathingType          takes integer i returns pathingtype
 
 
 /**
+Returns the mousebuttontype that corresponds to the given integer.
+@param i The integer representation of the mousebuttontype
+@pure
+*/
+constant native ConvertMouseButtonType      takes integer i returns mousebuttontype
+
+/**
+Returns the animtype that corresponds to the given integer.
+@param i The integer representation of the animtype
+@pure
+*/
+constant native ConvertAnimType             takes integer i returns animtype
+
+/**
+Returns the subanimtype that corresponds to the given integer.
+@param i The integer representation of the subanimtype
+@pure
+*/
+constant native ConvertSubAnimType          takes integer i returns subanimtype
+
+
+/**
 @note Can be used for extended typecasting.
 <http://www.hiveworkshop.com/forums/j-280/t-232039/>
 @pure
@@ -623,6 +649,16 @@ constant native GetObjectName               takes integer objectId          retu
 
 
 
+constant native GetBJMaxPlayers             takes nothing returns integer
+constant native GetBJPlayerNeutralVictim    takes nothing returns integer
+constant native GetBJPlayerNeutralExtra     takes nothing returns integer
+constant native GetBJMaxPlayerSlots         takes nothing returns integer
+constant native GetPlayerNeutralPassive     takes nothing returns integer
+constant native GetPlayerNeutralAggressive  takes nothing returns integer
+
+native BlzGetAnimName                              takes animtype whichAnim returns string
+
+
 globals
 
 
@@ -674,6 +710,19 @@ globals
     constant playercolor        PLAYER_COLOR_AQUA               = ConvertPlayerColor(10)
 
     constant playercolor        PLAYER_COLOR_BROWN              = ConvertPlayerColor(11)
+
+    constant playercolor        PLAYER_COLOR_MAROON             = ConvertPlayerColor(12)
+    constant playercolor        PLAYER_COLOR_NAVY               = ConvertPlayerColor(13)
+    constant playercolor        PLAYER_COLOR_TURQUOISE          = ConvertPlayerColor(14)
+    constant playercolor        PLAYER_COLOR_VIOLET             = ConvertPlayerColor(15)
+    constant playercolor        PLAYER_COLOR_WHEAT              = ConvertPlayerColor(16)
+    constant playercolor        PLAYER_COLOR_PEACH              = ConvertPlayerColor(17)
+    constant playercolor        PLAYER_COLOR_MINT               = ConvertPlayerColor(18)
+    constant playercolor        PLAYER_COLOR_LAVENDER           = ConvertPlayerColor(19)
+    constant playercolor        PLAYER_COLOR_COAL               = ConvertPlayerColor(20)
+    constant playercolor        PLAYER_COLOR_SNOW               = ConvertPlayerColor(21)
+    constant playercolor        PLAYER_COLOR_EMERALD            = ConvertPlayerColor(22)
+    constant playercolor        PLAYER_COLOR_PEANUT             = ConvertPlayerColor(23)
 
 
 
@@ -856,6 +905,75 @@ globals
     constant pathingtype        PATHING_TYPE_FLOATABILITY       = ConvertPathingType(6)
 
     constant pathingtype        PATHING_TYPE_AMPHIBIOUSPATHING  = ConvertPathingType(7)
+
+    constant mousebuttontype    MOUSE_BUTTON_TYPE_LEFT          = ConvertMouseButtonType(1)
+    constant mousebuttontype    MOUSE_BUTTON_TYPE_MIDDLE        = ConvertMouseButtonType(2)
+    constant mousebuttontype    MOUSE_BUTTON_TYPE_RIGHT         = ConvertMouseButtonType(3)
+
+    constant animtype           ANIM_TYPE_BIRTH                 = ConvertAnimType(0)
+    constant animtype           ANIM_TYPE_DEATH                 = ConvertAnimType(1)
+    constant animtype           ANIM_TYPE_DECAY                 = ConvertAnimType(2)
+    constant animtype           ANIM_TYPE_DISSIPATE             = ConvertAnimType(3)
+    constant animtype           ANIM_TYPE_STAND                 = ConvertAnimType(4)
+    constant animtype           ANIM_TYPE_WALK                  = ConvertAnimType(5)
+    constant animtype           ANIM_TYPE_ATTACK                = ConvertAnimType(6)
+    constant animtype           ANIM_TYPE_MORPH                 = ConvertAnimType(7)
+    constant animtype           ANIM_TYPE_SLEEP                 = ConvertAnimType(8)
+    constant animtype           ANIM_TYPE_SPELL                 = ConvertAnimType(9)
+    constant animtype           ANIM_TYPE_PORTRAIT              = ConvertAnimType(10)
+
+    constant subanimtype        SUBANIM_TYPE_ROOTED             = ConvertSubAnimType(11)
+    constant subanimtype        SUBANIM_TYPE_ALTERNATE_EX       = ConvertSubAnimType(12)
+    constant subanimtype        SUBANIM_TYPE_LOOPING            = ConvertSubAnimType(13)
+    constant subanimtype        SUBANIM_TYPE_SLAM               = ConvertSubAnimType(14)
+    constant subanimtype        SUBANIM_TYPE_THROW              = ConvertSubAnimType(15)
+    constant subanimtype        SUBANIM_TYPE_SPIKED             = ConvertSubAnimType(16)
+    constant subanimtype        SUBANIM_TYPE_FAST               = ConvertSubAnimType(17)
+    constant subanimtype        SUBANIM_TYPE_SPIN               = ConvertSubAnimType(18)
+    constant subanimtype        SUBANIM_TYPE_READY              = ConvertSubAnimType(19)
+    constant subanimtype        SUBANIM_TYPE_CHANNEL            = ConvertSubAnimType(20)
+    constant subanimtype        SUBANIM_TYPE_DEFEND             = ConvertSubAnimType(21)
+    constant subanimtype        SUBANIM_TYPE_VICTORY            = ConvertSubAnimType(22)
+    constant subanimtype        SUBANIM_TYPE_TURN               = ConvertSubAnimType(23)
+    constant subanimtype        SUBANIM_TYPE_LEFT               = ConvertSubAnimType(24)
+    constant subanimtype        SUBANIM_TYPE_RIGHT              = ConvertSubAnimType(25)
+    constant subanimtype        SUBANIM_TYPE_FIRE               = ConvertSubAnimType(26)
+    constant subanimtype        SUBANIM_TYPE_FLESH              = ConvertSubAnimType(27)
+    constant subanimtype        SUBANIM_TYPE_HIT                = ConvertSubAnimType(28)
+    constant subanimtype        SUBANIM_TYPE_WOUNDED            = ConvertSubAnimType(29)
+    constant subanimtype        SUBANIM_TYPE_LIGHT              = ConvertSubAnimType(30)
+    constant subanimtype        SUBANIM_TYPE_MODERATE           = ConvertSubAnimType(31)
+    constant subanimtype        SUBANIM_TYPE_SEVERE             = ConvertSubAnimType(32)
+    constant subanimtype        SUBANIM_TYPE_CRITICAL           = ConvertSubAnimType(33)
+    constant subanimtype        SUBANIM_TYPE_COMPLETE           = ConvertSubAnimType(34)
+    constant subanimtype        SUBANIM_TYPE_GOLD               = ConvertSubAnimType(35)
+    constant subanimtype        SUBANIM_TYPE_LUMBER             = ConvertSubAnimType(36)
+    constant subanimtype        SUBANIM_TYPE_WORK               = ConvertSubAnimType(37)
+    constant subanimtype        SUBANIM_TYPE_TALK               = ConvertSubAnimType(38)
+    constant subanimtype        SUBANIM_TYPE_FIRST              = ConvertSubAnimType(39)
+    constant subanimtype        SUBANIM_TYPE_SECOND             = ConvertSubAnimType(40)
+    constant subanimtype        SUBANIM_TYPE_THIRD              = ConvertSubAnimType(41)
+    constant subanimtype        SUBANIM_TYPE_FOURTH             = ConvertSubAnimType(42)
+    constant subanimtype        SUBANIM_TYPE_FIFTH              = ConvertSubAnimType(43)
+    constant subanimtype        SUBANIM_TYPE_ONE                = ConvertSubAnimType(44)
+    constant subanimtype        SUBANIM_TYPE_TWO                = ConvertSubAnimType(45)
+    constant subanimtype        SUBANIM_TYPE_THREE              = ConvertSubAnimType(46)
+    constant subanimtype        SUBANIM_TYPE_FOUR               = ConvertSubAnimType(47)
+    constant subanimtype        SUBANIM_TYPE_FIVE               = ConvertSubAnimType(48)
+    constant subanimtype        SUBANIM_TYPE_SMALL              = ConvertSubAnimType(49)
+    constant subanimtype        SUBANIM_TYPE_MEDIUM             = ConvertSubAnimType(50)
+    constant subanimtype        SUBANIM_TYPE_LARGE              = ConvertSubAnimType(51)
+    constant subanimtype        SUBANIM_TYPE_UPGRADE            = ConvertSubAnimType(52)
+    constant subanimtype        SUBANIM_TYPE_DRAIN              = ConvertSubAnimType(53)
+    constant subanimtype        SUBANIM_TYPE_FILL               = ConvertSubAnimType(54)
+    constant subanimtype        SUBANIM_TYPE_CHAINLIGHTNING     = ConvertSubAnimType(55)
+    constant subanimtype        SUBANIM_TYPE_EATTREE            = ConvertSubAnimType(56)
+    constant subanimtype        SUBANIM_TYPE_PUKE               = ConvertSubAnimType(57)
+    constant subanimtype        SUBANIM_TYPE_FLAIL              = ConvertSubAnimType(58)
+    constant subanimtype        SUBANIM_TYPE_OFF                = ConvertSubAnimType(59)
+    constant subanimtype        SUBANIM_TYPE_SWIM               = ConvertSubAnimType(60)
+    constant subanimtype        SUBANIM_TYPE_ENTANGLE           = ConvertSubAnimType(61)
+    constant subanimtype        SUBANIM_TYPE_BERSERK            = ConvertSubAnimType(62)
 
 
 
@@ -1583,6 +1701,10 @@ globals
 
     constant playerevent        EVENT_PLAYER_ARROW_UP_UP                = ConvertPlayerEvent(268)
 
+    constant playerevent        EVENT_PLAYER_MOUSE_DOWN                 = ConvertPlayerEvent(305)
+    constant playerevent        EVENT_PLAYER_MOUSE_UP                   = ConvertPlayerEvent(306)
+    constant playerevent        EVENT_PLAYER_MOUSE_MOVE                 = ConvertPlayerEvent(307)
+
 
 
     //===================================================
@@ -1796,6 +1918,7 @@ globals
     constant camerafield CAMERA_FIELD_ROTATION              = ConvertCameraField(5)
 
     constant camerafield CAMERA_FIELD_ZOFFSET               = ConvertCameraField(6)
+    constant camerafield CAMERA_FIELD_NEARZ                 = ConvertCameraField(7)
 
 
 

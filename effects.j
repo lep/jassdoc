@@ -187,3 +187,29 @@ native GetAbilitySound takes string abilityString, soundtype t returns string
 @pure
 */
 native GetAbilitySoundById takes integer abilityId, soundtype t returns string
+
+
+native BlzSetSpecialEffectColorByPlayer            takes effect whichEffect, player whichPlayer returns nothing
+native BlzSetSpecialEffectColor                    takes effect whichEffect, integer r, integer g, integer b returns nothing
+native BlzSetSpecialEffectAlpha                    takes effect whichEffect, integer alpha returns nothing
+native BlzSetSpecialEffectScale                    takes effect whichEffect, real scale returns nothing
+native BlzSetSpecialEffectPosition                 takes effect whichEffect, real x, real y, real z returns nothing
+native BlzSetSpecialEffectHeight                   takes effect whichEffect, real height returns nothing
+native BlzSetSpecialEffectTimeScale                takes effect whichEffect, real timeScale returns nothing
+native BlzSetSpecialEffectTime                     takes effect whichEffect, real time returns nothing
+native BlzSetSpecialEffectOrientation              takes effect whichEffect, real yaw, real pitch, real roll returns nothing
+native BlzSetSpecialEffectYaw                      takes effect whichEffect, real yaw returns nothing
+native BlzSetSpecialEffectPitch                    takes effect whichEffect, real pitch returns nothing
+native BlzSetSpecialEffectRoll                     takes effect whichEffect, real roll returns nothing
+native BlzSetSpecialEffectX                        takes effect whichEffect, real x returns nothing
+native BlzSetSpecialEffectY                        takes effect whichEffect, real y returns nothing
+native BlzSetSpecialEffectZ                        takes effect whichEffect, real z returns nothing
+native BlzSetSpecialEffectPositionLoc              takes effect whichEffect, location loc returns nothing
+native BlzGetLocalSpecialEffectX                   takes effect whichEffect returns real
+native BlzGetLocalSpecialEffectY                   takes effect whichEffect returns real
+native BlzGetLocalSpecialEffectZ                   takes effect whichEffect returns real
+native BlzSpecialEffectClearSubAnimations          takes effect whichEffect returns nothing
+native BlzSpecialEffectRemoveSubAnimation          takes effect whichEffect, subanimtype whichSubAnim returns nothing
+native BlzSpecialEffectAddSubAnimation             takes effect whichEffect, subanimtype whichSubAnim returns nothing
+native BlzPlaySpecialEffect                        takes effect whichEffect, animtype whichAnim returns nothing
+native BlzPlaySpecialEffectWithTimeScale           takes effect whichEffect, animtype whichAnim, real timeScale returns nothing

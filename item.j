@@ -76,3 +76,14 @@ native SetItemCharges takes item whichItem, integer charges returns nothing
 native GetItemUserData takes item whichItem returns integer
 
 native SetItemUserData takes item whichItem, integer data returns nothing
+
+native BlzSetItemName                              takes item whichItem, string name returns nothing
+native BlzSetItemDescription                       takes item whichItem, string description returns nothing
+native BlzGetItemDescription                       takes item whichItem returns string
+native BlzSetItemTooltip                           takes item whichItem, string tooltip returns nothing
+native BlzGetItemTooltip                           takes item whichItem returns string
+native BlzSetItemExtendedTooltip                   takes item whichItem, string extendedTooltip returns nothing
+native BlzGetItemExtendedTooltip                   takes item whichItem returns string
+native BlzSetItemIconPath                          takes item whichItem, string iconPath returns nothing
+native BlzGetItemIconPath                          takes item whichItem returns string
+

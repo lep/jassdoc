@@ -26,6 +26,9 @@ native IsMultiboardDisplayed            takes multiboard lb returns boolean
 
 native MultiboardMinimize               takes multiboard lb, boolean minimize returns nothing
 
+/**
+@async
+*/
 native IsMultiboardMinimized            takes multiboard lb returns boolean
 
 native MultiboardClear                  takes multiboard lb returns nothing
