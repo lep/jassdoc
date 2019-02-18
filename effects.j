@@ -205,8 +205,20 @@ native BlzSetSpecialEffectX                        takes effect whichEffect, rea
 native BlzSetSpecialEffectY                        takes effect whichEffect, real y returns nothing
 native BlzSetSpecialEffectZ                        takes effect whichEffect, real z returns nothing
 native BlzSetSpecialEffectPositionLoc              takes effect whichEffect, location loc returns nothing
+
+/**
+@async
+*/
 native BlzGetLocalSpecialEffectX                   takes effect whichEffect returns real
+
+/**
+@async
+*/
 native BlzGetLocalSpecialEffectY                   takes effect whichEffect returns real
+
+/**
+@async
+*/
 native BlzGetLocalSpecialEffectZ                   takes effect whichEffect returns real
 native BlzSpecialEffectClearSubAnimations          takes effect whichEffect returns nothing
 native BlzSpecialEffectRemoveSubAnimation          takes effect whichEffect, subanimtype whichSubAnim returns nothing
