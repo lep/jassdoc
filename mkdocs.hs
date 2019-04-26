@@ -1,5 +1,7 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE PatternSynonyms #-}
 
 import Control.Arrow
 import Control.Monad
@@ -18,17 +20,23 @@ import Jass.Types
 import System.Environment (getArgs)
 import System.IO
 
+import Text.Megaparsec (parse, errorBundlePretty)
 
-handleToplevel :: Ast (Maybe L8.ByteString) Toplevel -> L8.ByteString
+
+pattern N x <- (L8.pack -> x)
+pattern P x <- (fmap L8.pack -> x)
+pattern P2 x <- (fmap (L8.pack***L8.pack) -> x)
+
+handleToplevel :: Ast (Maybe String) Toplevel -> L8.ByteString
 handleToplevel toplevel =
   case toplevel of
-    Typedef doc name _ -> L8.unlines [ delete name, handle doc name]
-    Native doc _ name params _ ->
+    Typedef (P doc) (N name) _ -> L8.unlines [ delete name, handle doc name]
+    Native (P doc) _ (N name) (P2 params) _ ->
       L8.unlines [ delete name
                  , handle doc name
                  , paramOrdering name params
                  ]
-    Function doc _ name params _ _ ->
+    Function (P doc) _ (N name) (P2 params) _ _ ->
       L8.unlines [ delete name
                  , handle doc name
                  , paramOrdering name params
@@ -179,7 +187,11 @@ main = do
     L8.putStrLn schema
     forM_ args $ \file -> do
         hPutStrLn stderr file
-        Right (Programm toplevel) <- parse programm <$> L8.readFile file
+        x <- parse programm file <$> readFile file
+        let toplevel :: [Ast (Maybe String) Toplevel]
+            toplevel = case x of
+                Right (Programm y) -> y
+                Left err -> error $ errorBundlePretty err
         L8.putStrLn "BEGIN TRANSACTION;"
         mapM_ L8.putStrLn . filter (not . emptyLine) $ map handleToplevel toplevel
         L8.putStrLn "END TRANSACTION;"

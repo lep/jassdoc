@@ -1,19 +1,17 @@
 VERSION := $(shell git rev-parse --short HEAD)
 
 HSC := cabal exec -- ghc
-HSFLAGS := --make -O2
+HSFLAGS := --make
 
 .PHONY: all clean release
 
 all: jass.db
 
-Jass/Tokenizer.hs: Jass/jass.x
-	alex $< -o $@
 
 db.sql: mkdocs *.j 
 	./mkdocs $(filter %.j,$?) > $@
 
-mkdocs: Jass/Tokenizer.hs Jass/Parser.hs Jass/Types.hs Jass/Ast.hs mkdocs.hs
+mkdocs: Jass/Parser.hs Jass/Types.hs Jass/Ast.hs mkdocs.hs
 	$(HSC) $(HSFLAGS) mkdocs
 
 jass.db: db.sql

@@ -21,6 +21,5 @@ Other possible annotations could be `@nosideeffect`.
 # Build
 
 To build this project you need a somewhat recent GHC,
-the haskell library megaparsec, the lexical analyser generator alex,
-gnu make and the sqlite3 cli binary.
+the haskell library megaparsec-7, gnu make and the sqlite3 cli binary.
 

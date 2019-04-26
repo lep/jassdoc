@@ -26,6 +26,6 @@ data Programm
 data Constant = Const | Normal
     deriving (Eq, Show)
 
-type Name = ByteString
-type Type = ByteString
-type Stringtype = ByteString
+type Name = String
+type Type = String
+type Stringtype = String
