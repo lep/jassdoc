@@ -92,6 +92,8 @@ native  SaveAgentHandle					takes hashtable table, integer parentKey, integer ch
 
 native  SaveHashtableHandle				takes hashtable table, integer parentKey, integer childKey, hashtable whichHashtable returns boolean
 
+native  SaveFrameHandle					takes hashtable table, integer parentKey, integer childKey, framehandle whichFrameHandle returns boolean
+
 
 
 
@@ -179,6 +181,8 @@ native  LoadFogStateHandle			takes hashtable table, integer parentKey, integer c
 native  LoadFogModifierHandle		takes hashtable table, integer parentKey, integer childKey returns fogmodifier
 
 native  LoadHashtableHandle			takes hashtable table, integer parentKey, integer childKey returns hashtable
+
+native  LoadFrameHandle				takes hashtable table, integer parentKey, integer childKey returns framehandle
 
 
 

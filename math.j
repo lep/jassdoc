@@ -102,3 +102,26 @@ If y is zero this returns 1.0 and if both x is zero and y is less than zero this
 @pure
 */
 native Pow takes real x, real power returns real
+
+// Bit Operations
+
+/**
+@pure
+*/
+native BlzBitOr                                    takes integer x, integer y returns integer
+
+/**
+@pure
+*/
+native BlzBitAnd                                   takes integer x, integer y returns integer
+
+/**
+@pure
+*/
+native BlzBitXor                                   takes integer x, integer y returns integer 
+
+/**
+@pure
+*/
+native BlzConvertColor                             takes integer a, integer r, integer g, integer b returns integer
+

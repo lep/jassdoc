@@ -839,3 +839,28 @@ native BlzGetLocalUnitZ                            takes unit whichUnit returns 
 @async
 */
 native BlzGetUnitZ                                 takes unit whichUnit returns real
+
+
+// Unit 
+native BlzGetUnitBooleanField                      takes unit whichUnit, unitbooleanfield whichField returns boolean
+native BlzGetUnitIntegerField                      takes unit whichUnit, unitintegerfield whichField returns integer
+native BlzGetUnitRealField                         takes unit whichUnit, unitrealfield whichField returns real
+native BlzGetUnitStringField                       takes unit whichUnit, unitstringfield whichField returns string
+native BlzSetUnitBooleanField                      takes unit whichUnit, unitbooleanfield whichField, boolean value returns boolean
+native BlzSetUnitIntegerField                      takes unit whichUnit, unitintegerfield whichField, integer value returns boolean
+native BlzSetUnitRealField                         takes unit whichUnit, unitrealfield whichField, real value returns boolean
+native BlzSetUnitStringField                       takes unit whichUnit, unitstringfield whichField, string value returns boolean
+
+// Unit Weapon
+native BlzGetUnitWeaponBooleanField                takes unit whichUnit, unitweaponbooleanfield whichField, integer index returns boolean
+native BlzGetUnitWeaponIntegerField                takes unit whichUnit, unitweaponintegerfield whichField, integer index returns integer
+native BlzGetUnitWeaponRealField                   takes unit whichUnit, unitweaponrealfield whichField, integer index returns real
+native BlzGetUnitWeaponStringField                 takes unit whichUnit, unitweaponstringfield whichField, integer index returns string
+native BlzSetUnitWeaponBooleanField                takes unit whichUnit, unitweaponbooleanfield whichField, integer index, boolean value returns boolean
+native BlzSetUnitWeaponIntegerField                takes unit whichUnit, unitweaponintegerfield whichField, integer index, integer value returns boolean
+native BlzSetUnitWeaponRealField                   takes unit whichUnit, unitweaponrealfield whichField, integer index, real value returns boolean
+native BlzSetUnitWeaponStringField                 takes unit whichUnit, unitweaponstringfield whichField, integer index, string value returns boolean
+
+native BlzPauseUnitEx                              takes unit whichUnit, boolean flag returns nothing
+native BlzGetUnitAbility                           takes unit whichUnit, integer abilId returns ability
+native BlzGetUnitAbilityByIndex                    takes unit whichUnit, integer index returns ability

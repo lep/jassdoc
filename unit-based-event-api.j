@@ -38,6 +38,33 @@ constant native GetEventDamageSource takes nothing returns unit
 native BlzSetEventDamage                           takes real damage returns nothing
 
 /**
+@event EVENT_UNIT_DAMAGED
+*/
+native BlzGetEventDamageTarget 	                   takes nothing returns unit
+
+/**
+@event EVENT_UNIT_DAMAGED
+*/
+native BlzGetEventAttackType  	                   takes nothing returns attacktype
+
+/**
+@event EVENT_UNIT_DAMAGED
+*/
+native BlzGetEventDamageType                       takes nothing returns damagetype
+
+/**
+@event EVENT_UNIT_DAMAGED
+*/
+native BlzGetEventWeaponType  	                   takes nothing returns weapontype
+
+/**
+@event EVENT_UNIT_DAMAGED
+*/
+native BlzSetEventAttackType                       takes attacktype attackType returns boolean
+native BlzSetEventDamageType                       takes damagetype damageType returns boolean
+native BlzSetEventWeaponType                       takes weapontype weaponType returns boolean
+
+/**
 @event EVENT_UNIT_DETECTED 
 */
 constant native GetEventDetectingPlayer takes nothing returns player
