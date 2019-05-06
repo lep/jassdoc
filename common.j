@@ -405,6 +405,12 @@ Returns the playerslotstate that corresponds to the given integer.
 */
 constant native ConvertPlayerSlotState      takes integer i returns playerslotstate
 
+/**
+Returns the volumegroup that corresponds to the given integer.
+@param i The integer representation of the volumegroup
+@pure
+*/
+constant native ConvertVolumeGroup          takes integer i returns volumegroup
 
 
 /**
