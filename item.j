@@ -103,3 +103,17 @@ native BlzGetItemExtendedTooltip                   takes item whichItem returns 
 native BlzSetItemIconPath                          takes item whichItem, string iconPath returns nothing
 native BlzGetItemIconPath                          takes item whichItem returns string
 
+
+// Item 
+native BlzGetItemAbilityByIndex                    takes item whichItem, integer index returns ability
+native BlzGetItemAbility                           takes item whichItem, integer abilCode returns ability
+native BlzItemAddAbility                           takes item whichItem, integer abilCode returns boolean
+native BlzGetItemBooleanField                      takes item whichItem, itembooleanfield whichField returns boolean
+native BlzGetItemIntegerField                      takes item whichItem, itemintegerfield whichField returns integer
+native BlzGetItemRealField                         takes item whichItem, itemrealfield whichField returns real
+native BlzGetItemStringField                       takes item whichItem, itemstringfield whichField returns string
+native BlzSetItemBooleanField                      takes item whichItem, itembooleanfield whichField, boolean value returns boolean
+native BlzSetItemIntegerField                      takes item whichItem, itemintegerfield whichField, integer value returns boolean
+native BlzSetItemRealField                         takes item whichItem, itemrealfield whichField, real value returns boolean
+native BlzSetItemStringField                       takes item whichItem, itemstringfield whichField, string value returns boolean
+native BlzItemRemoveAbility                        takes item whichItem, integer abilCode returns boolean

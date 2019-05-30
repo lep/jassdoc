@@ -11,6 +11,8 @@ native ForceAddPlayer           takes force whichForce, player whichPlayer retur
 
 native ForceRemovePlayer        takes force whichForce, player whichPlayer returns nothing
 
+native BlzForceHasPlayer        takes force whichForce, player whichPlayer returns boolean
+
 native ForceClear               takes force whichForce returns nothing
 
 native ForceEnumPlayers         takes force whichForce, boolexpr filter returns nothing

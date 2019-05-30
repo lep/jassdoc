@@ -225,3 +225,7 @@ native BlzSpecialEffectRemoveSubAnimation          takes effect whichEffect, sub
 native BlzSpecialEffectAddSubAnimation             takes effect whichEffect, subanimtype whichSubAnim returns nothing
 native BlzPlaySpecialEffect                        takes effect whichEffect, animtype whichAnim returns nothing
 native BlzPlaySpecialEffectWithTimeScale           takes effect whichEffect, animtype whichAnim, real timeScale returns nothing
+
+native BlzGetSpecialEffectScale                    takes effect whichEffect returns real
+native BlzSetSpecialEffectMatrixScale              takes effect whichEffect, real x, real y, real z returns nothing
+native BlzResetSpecialEffectMatrix                 takes effect whichEffect returns nothing

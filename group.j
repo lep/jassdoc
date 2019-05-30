@@ -4,11 +4,15 @@ native CreateGroup                          takes nothing returns group
 
 native DestroyGroup                         takes group whichGroup returns nothing
 
-native GroupAddUnit                         takes group whichGroup, unit whichUnit returns nothing
-
-native GroupRemoveUnit                      takes group whichGroup, unit whichUnit returns nothing
+native GroupAddUnit                         takes group whichGroup, unit whichUnit returns boolean
+native GroupRemoveUnit                      takes group whichGroup, unit whichUnit returns boolean
+native BlzGroupAddGroupFast                 takes group whichGroup, group addGroup returns integer
+native BlzGroupRemoveGroupFast              takes group whichGroup, group removeGroup returns integer
 
 native GroupClear                           takes group whichGroup returns nothing
+
+native BlzGroupGetSize                      takes group whichGroup returns integer
+native BlzGroupUnitAt                       takes group whichGroup, integer index returns unit
 
 native GroupEnumUnitsOfType                 takes group whichGroup, string unitname, boolexpr filter returns nothing
 
