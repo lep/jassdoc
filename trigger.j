@@ -18,7 +18,9 @@ native DisableTrigger   takes trigger whichTrigger returns nothing
 native IsTriggerEnabled takes trigger whichTrigger returns boolean
 
 
-
+/**
+See TriggerExecuteWait
+*/
 native TriggerWaitOnSleeps   takes trigger whichTrigger, boolean flag returns nothing
 
 native IsTriggerWaitOnSleeps takes trigger whichTrigger returns boolean
@@ -105,8 +107,17 @@ were added.
 */
 native TriggerEvaluate      takes trigger whichTrigger returns boolean
 
+/**
+Calls the actions of a trigger in a new execution context. Control will return to the caller when the
+trigger has finished or has been suspended via TriggerSleepAction.
+*/
 native TriggerExecute       takes trigger whichTrigger returns nothing
 
+/**
+Does the same as TriggerExecute but if the caller has been marked with TriggerWaitOnSleeps before its
+execution, it will additionally wait for TriggerSleepActions of the callee, so this really ensures that
+the callee has finished. If there was a TriggerSleepAction, there will be a short delay before returning.
+*/
 native TriggerExecuteWait   takes trigger whichTrigger returns nothing
 
 native TriggerSyncStart     takes nothing returns nothing
