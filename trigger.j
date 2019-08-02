@@ -19,7 +19,9 @@ native IsTriggerEnabled takes trigger whichTrigger returns boolean
 
 
 /**
-See TriggerExecuteWait
+Marks the given trigger to wait/no longer wait for `TriggerSleepAction`s in sub trigger executions started via `TriggerExecuteWait`.
+Since this is an attribute of the execution rather than the trigger object, this affects but prospective runs of the given trigger,
+not those already started.
 */
 native TriggerWaitOnSleeps   takes trigger whichTrigger, boolean flag returns nothing
 
@@ -114,9 +116,9 @@ trigger has finished or has been suspended via TriggerSleepAction.
 native TriggerExecute       takes trigger whichTrigger returns nothing
 
 /**
-Does the same as TriggerExecute but if the caller has been marked with TriggerWaitOnSleeps before its
-execution, it will additionally wait for TriggerSleepActions of the callee, so this really ensures that
-the callee has finished. If there was a TriggerSleepAction, there will be a short delay before returning.
+Does the same as `TriggerExecute` but if the caller has been marked with `TriggerWaitOnSleeps` before its
+execution, it will additionally wait for `TriggerSleepAction`s of the callee, so this really ensures that
+the callee has finished. If there was a `TriggerSleepAction`, there will be a short delay before returning.
 */
 native TriggerExecuteWait   takes trigger whichTrigger returns nothing
 
