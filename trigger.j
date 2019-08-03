@@ -20,8 +20,8 @@ native IsTriggerEnabled takes trigger whichTrigger returns boolean
 
 /**
 Marks the given trigger to wait/no longer wait for `TriggerSleepAction`s in sub trigger executions started via `TriggerExecuteWait`.
-Since this is an attribute of the execution rather than the trigger object, this affects but prospective runs of the given trigger,
-not those already started.
+Since this is an attribute of the execution rather than the trigger object, this affects future runs of the given trigger, and not
+those already started.
 */
 native TriggerWaitOnSleeps   takes trigger whichTrigger, boolean flag returns nothing
 
