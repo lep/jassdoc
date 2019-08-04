@@ -60,7 +60,15 @@ native BlzGetTriggerFrameEvent                     takes nothing returns frameev
 
 native BlzEnableCursor                             takes boolean enable returns nothing
 native BlzSetMousePos                              takes integer x, integer y returns nothing
+
+/**
+@async
+*/
 native BlzIsLocalClientActive                      takes nothing returns boolean
+
+/**
+@async
+*/
 native BlzGetMouseFocusUnit                        takes nothing returns unit
 native BlzChangeMinimapTerrainTex                  takes string texFile returns boolean
 
