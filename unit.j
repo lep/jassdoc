@@ -361,6 +361,17 @@ and <http://www.hiveworkshop.com/forums/lab-715/silenceex-everything-you-dont-kn
 */
 native IncUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
+/**
+Hero and unit abilities have levels.  Use this native to change a unit's ability-level.
+
+@note negative thing ? happens if you use SetUnitAbilityLevel to a level for an ability that doesn't
+have that level.  This differs from the behavior found in `IncUnitAbilityLevel`.
+
+@note setting ability level to 0 does? not? remove it - use `UnitRemoveAbility` ?
+
+@note changing a hero ability level using this native does not consume or generate skill points.
+For that, use `SelectHeroSkill`.
+*/
 native SetUnitAbilityLevel takes unit whichUnit, integer abilcode, integer level returns integer
 
 native ReviveHero takes unit whichHero, real x, real y, boolean doEyecandy returns boolean
