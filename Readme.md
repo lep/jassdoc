@@ -3,7 +3,7 @@
 
 The Jass Doc is an encyclopedia-like source for information about Jass natives.
 The intended use is as a reference for understanding both the intended behavior
-and the bugs present for wc3 natives.
+and the bugs present for wc3 natives and blizzard.j functions.
 
 This goal of this project is not to document *every* function and native but
 to add helpful comments for unclear functions, give notes about buggy functions
