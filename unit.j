@@ -105,6 +105,19 @@ unit's prop window to 0 will prevent it from attacking.
 */
 native SetUnitPropWindow takes unit whichUnit, real newPropWindowAngle returns nothing
 
+/**
+Sets a unit's acquire range.  This is the value that a unit uses to choose targets to
+engage with.  Note that this is not the attack range.  When acquisition range is
+greater than attack range, the unit will attempt to move towards acquired targets, and
+then attack.
+
+Setting acquisition range lower than attack range in the object editor limits the
+unit's attack range to the acquisition range, but changing a unit's acquisition range
+with this native does not change its attack range, nor the value displayed in the UI.
+
+@note It is a myth that reducing acquire range with this native can limit a unit's
+attack range.
+*/
 native SetUnitAcquireRange takes unit whichUnit, real newAcquireRange returns nothing
 
 native SetUnitCreepGuard takes unit whichUnit, boolean creepGuard returns nothing
