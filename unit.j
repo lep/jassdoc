@@ -562,6 +562,11 @@ constant native IsUnitInRangeXY takes unit whichUnit, real x, real y, real dista
 
 constant native IsUnitInRangeLoc takes unit whichUnit, location whichLocation, real distance returns boolean
 
+/**
+Returns `true` if `whichUnit` is hidden by `ShowUnit`.
+
+@pure
+*/
 constant native IsUnitHidden takes unit whichUnit returns boolean
 
 constant native IsUnitIllusion takes unit whichUnit returns boolean
