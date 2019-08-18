@@ -810,10 +810,17 @@ function GetRandomLocInRect takes rect whichRect returns location
     return Location(GetRandomReal(GetRectMinX(whichRect), GetRectMaxX(whichRect)), GetRandomReal(GetRectMinY(whichRect), GetRectMaxY(whichRect)))
 endfunction
 
-//===========================================================================
-// Calculate the modulus/remainder of (dividend) divided by (divisor).
-// Examples:  18 mod 5 = 3.  15 mod 5 = 0.  -8 mod 5 = 2.
-//
+/**
+Calculate the modulus/remainder of (dividend) divided by (divisor) such that
+`(dividend / divisor) * divisor + ModuloInteger(dividend, divisor) == dividend` with `/` rounding towards negative infinity.
+Examples:  18 mod 5 = 3.  15 mod 5 = 0.  -8 mod 5 = 2.
+
+@note Use the `%`-operator as it's probably faster but also correct.
+
+@bug The above law doesn't hold. For example `ModuloInteger(-7, -3) == -4` while
+`-7 % -3 == -1`
+*/
+
 function ModuloInteger takes integer dividend, integer divisor returns integer
     local integer modulus = dividend - (dividend / divisor) * divisor
 
