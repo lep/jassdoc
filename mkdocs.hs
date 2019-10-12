@@ -31,27 +31,29 @@ handleToplevel :: FilePath -> Ast (Maybe String) Toplevel -> L8.ByteString
 handleToplevel file toplevel =
   case toplevel of
     Typedef (P doc) (N name) _ -> L8.unlines [ delete name, handle doc name, attachFile file name]
-    Native (P doc) _ (N name) (P2 params) _ ->
+    Native (P doc) _ (N name) (P2 params) r ->
       L8.unlines [ delete name
                  , handle doc name
                  , paramOrdering name params
                  , attachFile file name
+		 , returnType name r
                  ]
-    Function (P doc) _ (N name) (P2 params) _ _ ->
+    Function (P doc) _ (N name) (P2 params) r _ ->
       L8.unlines [ delete name
                  , handle doc name
                  , paramOrdering name params
                  , attachFile file name
+		 , returnType name r
                  ]
     _ -> ""
 
   where
     delete name = L8.unlines [
-          L8.unwords [ "delete from comments where fnname = ", t name, ";" ]
-        , L8.unwords [ "delete from parameters where fnname = ", t name, ";" ]
+          L8.unwords [ "delete from parameters where fnname = ", t name, ";" ]
         , L8.unwords [ "delete from annotations where fnname = ", t name, ";" ]
         , L8.unwords [ "delete from params_extra where fnname = ", t name, ";" ]
         ]
+
 
     handle (Just doc) name =
         let (descr, anns) = parseDocstring doc
@@ -61,6 +63,14 @@ handleToplevel file toplevel =
                       , L8.unlines $ map (uncurry $ insertAnn name) annotations
                       ]
     handle _ _ = ""
+
+    returnType name (L8.pack -> r) =
+	L8.unwords [ "insert into annotations values("
+		   , t name, ","
+		   , t "return-type", ","
+		   , t r
+		   , ");"
+		   ]
 
     attachFile (L8.pack -> file) name =
         L8.unwords [ "insert into annotations values("
@@ -101,9 +111,11 @@ extractParam xs =
 
 isParam = ("param" == ) . fst
 
-insertDescr name descr = L8.unwords
-    [ "insert into comments (fnname, comment) values ("
-    , L8.intercalate "," [t name, t descr]
+insertDescr name descr
+  | L8.null descr = L8.empty
+  | otherwise = L8.unwords
+    [ "insert into annotations (fnname, anname, value) values ("
+    , L8.intercalate "," [t name, t "comment", t descr]
     , ");"
     ]
 
@@ -168,11 +180,7 @@ emptyLine = L8.null . L8.filter (not . isVerticalSpace)
 
 
 schema = L8.unlines
-         [ " create table if not exists comments (        "
-         , "      fnname text primary key,                "
-         , "      comment text                            "
-         , " );                                           "
-         , " create table if not exists parameters (      "
+         [ " create table if not exists parameters (      "
          , "      fnname text,                            "
          , "      param text,                             "
          , "      value text,                             "
@@ -190,6 +198,8 @@ schema = L8.unlines
          , "      value,                                  "
          , "      primary key (fnname, param, anname)     "
          , " );                                           "
+	 , " create index if not exists annotation_index  "
+	 , " on annotations(fnname);                      "
          ]
 
 main = do

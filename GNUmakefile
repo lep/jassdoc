@@ -10,6 +10,7 @@ all: jass.db
 
 db.sql: mkdocs *.j 
 	./mkdocs $(filter %.j,$?) > $@
+	./mksrc $(filter %.j,$?) >> $@
 
 mkdocs: Jass/Parser.hs Jass/Types.hs Jass/Ast.hs mkdocs.hs
 	$(HSC) $(HSFLAGS) mkdocs

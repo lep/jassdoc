@@ -1,0 +1,96 @@
+#!/usr/local/bin/perl
+
+
+use 5.30.0;
+
+use strict;
+use warnings;
+
+
+
+
+my $src = "";
+my $state = "nothing";
+my $fn = "";
+my $start = 0;
+my $end = 0;
+
+
+sub escape {
+    my ($in) = @_;
+    $in =~ s/'/''/g;
+    return $in;
+}
+
+foreach my $file (@ARGV){
+    open(my $fh, "<", $file);
+
+    say "BEGIN TRANSACTION;";
+
+    while (my $line = <$fh>){
+	if($line =~ /^(?:constant\s+)?function\s+(\w+)/){
+	    $start = $.;
+	    $state = "function";
+	    $fn = $1;
+	    $src = $line;
+	}elsif($line =~ /^endfunction/){
+	    $end = $.;
+	    chomp $line;
+	    $state = "nothing";
+	    $src .= $line;
+
+	    $src = escape($src);
+	    $fn = escape($fn);
+	    say <<SQL;
+		insert into annotations values (
+		    '$fn',
+		    'source-code',
+		    '$src'
+		);
+
+		insert into annotations values (
+		    '$fn',
+		    'start-line',
+		    $start
+		);
+
+		insert into annotations values (
+		    '$fn',
+		    'end-line',
+		    $end
+		);
+SQL
+	}elsif( $line =~ /^(?:constant\s+)?native\s+(\w+)/ && $state eq "nothing" ){
+	    chomp $line;
+	    $src = $line;
+	    $src = escape($src);
+	    $fn = escape($1);
+	    say <<SQL;
+		insert into annotations values (
+		    '$fn',
+		    'source-code',
+		    '$src'
+		);
+
+		insert into annotations values (
+		    '$fn',
+		    'start-line',
+		    $.
+		);
+
+		insert into annotations values (
+		    '$fn',
+		    'end-line',
+		    $.
+		);
+SQL
+	}elsif ( $state eq "function"){
+	    $src .= $line;
+	}
+
+    }
+
+    say "END TRANSACTION;";
+}
+
+
