@@ -27,19 +27,21 @@ pattern N x <- (L8.pack -> x)
 pattern P x <- (fmap L8.pack -> x)
 pattern P2 x <- (fmap (L8.pack***L8.pack) -> x)
 
-handleToplevel :: Ast (Maybe String) Toplevel -> L8.ByteString
-handleToplevel toplevel =
+handleToplevel :: FilePath -> Ast (Maybe String) Toplevel -> L8.ByteString
+handleToplevel file toplevel =
   case toplevel of
-    Typedef (P doc) (N name) _ -> L8.unlines [ delete name, handle doc name]
+    Typedef (P doc) (N name) _ -> L8.unlines [ delete name, handle doc name, attachFile file name]
     Native (P doc) _ (N name) (P2 params) _ ->
       L8.unlines [ delete name
                  , handle doc name
                  , paramOrdering name params
+                 , attachFile file name
                  ]
     Function (P doc) _ (N name) (P2 params) _ _ ->
       L8.unlines [ delete name
                  , handle doc name
                  , paramOrdering name params
+                 , attachFile file name
                  ]
     _ -> ""
 
@@ -59,6 +61,14 @@ handleToplevel toplevel =
                       , L8.unlines $ map (uncurry $ insertAnn name) annotations
                       ]
     handle _ _ = ""
+
+    attachFile (L8.pack -> file) name =
+        L8.unwords [ "insert into annotations values("
+                   , t name, ","
+                   , t "source-file", ","
+                   , t file
+                   , ");"
+                   ]
 
     paramOrdering name params = L8.unlines $ zipWith (oneParam name) params [1..]
     oneParam name (typ, param) idx = L8.unlines [
@@ -193,6 +203,6 @@ main = do
                 Right (Programm y) -> y
                 Left err -> error $ errorBundlePretty err
         L8.putStrLn "BEGIN TRANSACTION;"
-        mapM_ L8.putStrLn . filter (not . emptyLine) $ map handleToplevel toplevel
+        mapM_ L8.putStrLn . filter (not . emptyLine) $ map (handleToplevel file) toplevel
         L8.putStrLn "END TRANSACTION;"
 
