@@ -865,10 +865,28 @@ native BlzSetUnitRealField                         takes unit whichUnit, unitrea
 native BlzSetUnitStringField                       takes unit whichUnit, unitstringfield whichField, string value returns boolean
 
 // Unit Weapon
+
+/**
+@bug Might crash the game when called on a unit with no attack.
+*/
 native BlzGetUnitWeaponBooleanField                takes unit whichUnit, unitweaponbooleanfield whichField, integer index returns boolean
+
+/**
+@bug Might crash the game when called on a unit with no attack.
+*/
 native BlzGetUnitWeaponIntegerField                takes unit whichUnit, unitweaponintegerfield whichField, integer index returns integer
+
+/**
+@bug Might crash the game when called on a unit with no attack.
+*/
 native BlzGetUnitWeaponRealField                   takes unit whichUnit, unitweaponrealfield whichField, integer index returns real
+
+/**
+@bug Might crash the game when called on a unit with no attack.
+*/
 native BlzGetUnitWeaponStringField                 takes unit whichUnit, unitweaponstringfield whichField, integer index returns string
+
+
 native BlzSetUnitWeaponBooleanField                takes unit whichUnit, unitweaponbooleanfield whichField, integer index, boolean value returns boolean
 native BlzSetUnitWeaponIntegerField                takes unit whichUnit, unitweaponintegerfield whichField, integer index, integer value returns boolean
 native BlzSetUnitWeaponRealField                   takes unit whichUnit, unitweaponrealfield whichField, integer index, real value returns boolean
