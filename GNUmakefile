@@ -7,8 +7,7 @@ HSFLAGS := --make
 
 all: jass.db
 
-
-db.sql: mkdocs *.j 
+db.sql: mkdocs mksrc *.j
 	./mkdocs $(filter %.j,$?) > $@
 	./mksrc $(filter %.j,$?) >> $@
 

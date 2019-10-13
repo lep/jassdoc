@@ -33,15 +33,15 @@ faster the sound fades out. Maximum number is 127.
 sound editor, this corresponds to the "Effect" setting.
 The known settings available in Warcraft III are:
 
-|                  |                        |
-|------------------|------------------------|
-|"CombatSoundsEAX" | combat                 |
-|"KotoDrumsEAX"    | drums                  |
-|"SpellsEAX"       | spells                 |
-|"MissilesEAX"     | missiles               |
-|"HeroAcksEAX"     | hero acknowledgements  |
-|"DoodadsEAX"      | doodads                |
-|"DefaultEAXON"    | default                |
+ Value            |  Setting                 
+----------------- | ----------------------
+"CombatSoundsEAX" | combat                 
+"KotoDrumsEAX"    | drums                  
+"SpellsEAX"       | spells                 
+"MissilesEAX"     | missiles               
+"HeroAcksEAX"     | hero acknowledgements  
+"DoodadsEAX"      | doodads                
+"DefaultEAXON"    | default                
 
 */
 native CreateSound                  takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string eaxSetting returns sound
@@ -165,7 +165,7 @@ native SetSoundVelocity             takes sound soundHandle, real x, real y, rea
 
 /**
 Attaches the sound soundHandle to unit whichUnit. Attaching sound to unit means
-that more far player stays from the unit to which the sound is attached, less
+that the more far away the player stays from the unit to which the sound is attached, the less
 loud the sound plays (the volume of the attached sound decreases with increasing distance).
 
 @note This call is only valid if the sound was created with 3d enabled

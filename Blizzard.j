@@ -817,7 +817,7 @@ Examples:  18 mod 5 = 3.  15 mod 5 = 0.  -8 mod 5 = 2.
 
 @note Use the `%`-operator as it's probably faster but also correct.
 
-@bug The above law doesn't hold. For example `ModuloInteger(-7, -3) == -4` while
+@bug The commented law doesn't hold. For example `ModuloInteger(-7, -3) == -4` while
 `-7 % -3 == -1`
 */
 
@@ -4664,6 +4664,9 @@ function GetRandomSubGroupEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Not an even distribution. See <http://www.hiveworkshop.com/forums/l-715/g-275344/>.
+*/
 function GetRandomSubGroup takes integer count, group sourceGroup returns group
     local group g = CreateGroup()
 
