@@ -9,11 +9,6 @@ use warnings;
 
 
 
-my $src = "";
-my $state = "nothing";
-my $fn = "";
-my $start = 0;
-my $end = 0;
 
 
 sub escape {
@@ -24,6 +19,12 @@ sub escape {
 
 foreach my $file (@ARGV){
     open(my $fh, "<", $file);
+
+    my $state = "nothing";
+    my $src = "";
+    my $fn = "";
+    my $start = 0;
+    my $end = 0;
 
     say "BEGIN TRANSACTION;";
 
