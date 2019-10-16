@@ -449,9 +449,8 @@ Registers a chat event.
 @param whichTrigger The trigger to which register the event.
 
 @param whichPlayer The player on which chat-messages to react to.
-Pass `""` to react to any message.
 
-@param chatMessageToDetect The message to react to.
+@param chatMessageToDetect The message to react to. Pass `""` to react to any message.
 
 @param exactMatchOnly `true` if only the exact string in `chatMessageToDetect`
 should fire the trigger. `false` will trigger if the `chatMessageToDetect` appears
