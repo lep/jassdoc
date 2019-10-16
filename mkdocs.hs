@@ -36,14 +36,14 @@ handleToplevel file toplevel =
                  , handle doc name
                  , paramOrdering name params
                  , attachFile file name
-		 , returnType name r
+                 , returnType name r
                  ]
     Function (P doc) _ (N name) (P2 params) r _ ->
       L8.unlines [ delete name
                  , handle doc name
                  , paramOrdering name params
                  , attachFile file name
-		 , returnType name r
+                 , returnType name r
                  ]
     _ -> ""
 
@@ -65,12 +65,12 @@ handleToplevel file toplevel =
     handle _ _ = ""
 
     returnType name (L8.pack -> r) =
-	L8.unwords [ "insert into annotations values("
-		   , t name, ","
-		   , t "return-type", ","
-		   , t r
-		   , ");"
-		   ]
+        L8.unwords [ "insert into annotations values("
+                   , t name, ","
+                   , t "return-type", ","
+                   , t r
+                   , ");"
+                   ]
 
     attachFile (L8.pack -> file) name =
         L8.unwords [ "insert into annotations values("
@@ -198,8 +198,8 @@ schema = L8.unlines
          , "      value,                                  "
          , "      primary key (fnname, param, anname)     "
          , " );                                           "
-	 , " create index if not exists annotation_index  "
-	 , " on annotations(fnname);                      "
+         , " create index if not exists annotation_index  "
+         , " on annotations(fnname);                      "
          ]
 
 main = do

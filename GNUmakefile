@@ -25,6 +25,5 @@ release: jass-$(VERSION).zip
 clean:
 	rm -f *.o *.hi
 	rm -f jass-*.zip
-	rm -f mkdocs
 	rm -f db.sql
 
