@@ -2,6 +2,11 @@
 
 /**
 Adds the weather effect with id effectID to the rect where.
+
+@param where The rect to apply the weathereffect to.
+
+@param effectID Which effect to apply.
+
 @note To understand more about weather effects nature, I advise to read
 Ammorth's article about weather effects: <http://www.wc3c.net/showthread.php?t=91176>.
 
@@ -16,12 +21,37 @@ native EnableWeatherEffect takes weathereffect whichEffect, boolean enable retur
 
 
 
+/**
+Create a crater at the given coordinates.
+
+@note Not every player might display those transformations due to graphics
+settings. Thus reading data like terrain height might lead to async values.
+
+@param x The x coordinate of the craters center
+@param y The y coordinate of the craters center
+@param radius The radius of the crater
+@param depth The depth of the crater
+@param duration The duration in milliseconds.
+@param permanent Make the deformation permanent.
+*/
 native TerrainDeformCrater takes real x, real y, real radius, real depth, integer duration, boolean permanent returns terraindeformation
 
+/**
+
+@param duration The duration in milliseconds.
+*/
 native TerrainDeformRipple takes real x, real y, real radius, real depth, integer duration, integer count, real spaceWaves, real timeWaves, real radiusStartPct, boolean limitNeg returns terraindeformation
 
+/**
+
+@param duration The duration in milliseconds.
+*/
 native TerrainDeformWave takes real x, real y, real dirX, real dirY, real distance, real speed, real radius, real depth, integer trailTime, integer count returns terraindeformation
 
+/**
+
+@param duration The duration in milliseconds.
+*/
 native TerrainDeformRandom takes real x, real y, real radius, real minDelta, real maxDelta, integer duration, integer updateInterval returns terraindeformation
 
 native TerrainDeformStop takes terraindeformation deformation, integer duration returns nothing
