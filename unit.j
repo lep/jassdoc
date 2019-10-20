@@ -655,6 +655,27 @@ native UnitSetUsesAltIcon takes unit whichUnit, boolean flag returns nothing
 */
 native UnitDamagePoint takes unit whichUnit, real delay, real radius, real x, real y, real amount, boolean attack, boolean ranged, attacktype attackType, damagetype damageType, weapontype weaponType returns boolean
 
+/**
+Deals damage to target widget from a source unit.
+
+@note For some insight about the different configurations of the different
+types see [this post](http://www.wc3c.net/showpost.php?p=1030046&postcount=19).
+
+@param whichUnit The source of the damage. To actual deal damage it should be
+not `null`.
+
+@param target The target being damaged.
+
+@param amount How much damage is being dealt.
+
+@param attack Consider the damage dealt as being an attack.
+
+@param ranged Consider the damage dealt as being from a ranged source.
+
+@param attackType
+@param damageType
+@param weaponType
+*/
 native UnitDamageTarget takes unit whichUnit, widget target, real amount, boolean attack, boolean ranged, attacktype attackType, damagetype damageType, weapontype weaponType returns boolean
 
 
