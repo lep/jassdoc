@@ -24,8 +24,14 @@ native EnableWeatherEffect takes weathereffect whichEffect, boolean enable retur
 /**
 Create a crater at the given coordinates.
 
+@note To approximate the resulting height of a point `distance` units away from the
+center point `(x, y)` you can use the following formula: `Cos(bj_PI/2 * distance / radius) * -depth`. See this [issue](https://github.com/lep/jassdoc/issues/31) for some more information.
+
 @note Not every player might display those transformations due to graphics
 settings. Thus reading data like terrain height might lead to async values.
+See the other note on a way to compute an appropiate height to use instead.
+
+@note Permanent terrain deformations are not present in saved game files.
 
 @param x The x coordinate of the craters center
 @param y The y coordinate of the craters center
@@ -39,18 +45,24 @@ native TerrainDeformCrater takes real x, real y, real radius, real depth, intege
 /**
 
 @param duration The duration in milliseconds.
+
+@note Permanent terrain deformations are not present in saved game files.
 */
 native TerrainDeformRipple takes real x, real y, real radius, real depth, integer duration, integer count, real spaceWaves, real timeWaves, real radiusStartPct, boolean limitNeg returns terraindeformation
 
 /**
 
 @param duration The duration in milliseconds.
+
+@note Permanent terrain deformations are not present in saved game files.
 */
 native TerrainDeformWave takes real x, real y, real dirX, real dirY, real distance, real speed, real radius, real depth, integer trailTime, integer count returns terraindeformation
 
 /**
 
 @param duration The duration in milliseconds.
+
+@note Permanent terrain deformations are not present in saved game files.
 */
 native TerrainDeformRandom takes real x, real y, real radius, real minDelta, real maxDelta, integer duration, integer updateInterval returns terraindeformation
 
