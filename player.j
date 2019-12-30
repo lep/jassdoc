@@ -3,6 +3,8 @@
 /**
 @bug Crashes the game if used with wrong values, that is values greather than 15
 or values lower than 0.
+
+@pure
 */
 constant native Player takes integer number returns player
 
