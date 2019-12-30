@@ -90,6 +90,9 @@ Returns the length of the string in *bytes*.
 */
 native StringLength takes string s returns integer
 
+/**
+@pure
+*/
 native StringCase takes string source, boolean upper returns string
 
 /**
