@@ -33,15 +33,15 @@ faster the sound fades out. Maximum number is 127.
 sound editor, this corresponds to the "Effect" setting.
 The known settings available in Warcraft III are:
 
- Value            |  Setting                 
------------------ | ----------------------
-"CombatSoundsEAX" | combat                 
-"KotoDrumsEAX"    | drums                  
-"SpellsEAX"       | spells                 
-"MissilesEAX"     | missiles               
-"HeroAcksEAX"     | hero acknowledgements  
-"DoodadsEAX"      | doodads                
-"DefaultEAXON"    | default                
+| Value              |  Setting               |
+|--------------------| ---------------------- |
+|`"CombatSoundsEAX"` | combat                 |
+|`"KotoDrumsEAX"`    | drums                  | 
+|`"SpellsEAX"`       | spells                 |
+|`"MissilesEAX"`     | missiles               |
+|`"HeroAcksEAX"`     | hero acknowledgements  |
+|`"DoodadsEAX"`      | doodads                |
+|`"DefaultEAXON"`    | default                |
 
 */
 native CreateSound                  takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string eaxSetting returns sound
@@ -50,13 +50,13 @@ native CreateSound                  takes string fileName, boolean looping, bool
 Creates a sound but applies default settings to the sound, which are found
 under the label from the following SLK-files:
 
-    * UI\SoundInfo\AbilitySounds.slk
-    * UI\SoundInfo\AmbienceSounds.slk
-    * UI\SoundInfo\AnimSounds.slk
-    * UI\SoundInfo\DialogSounds.slk
-    * UI\SoundInfo\UISounds.slk
-    * UI\SoundInfo\UnitAckSounds.slk
-    * UI\SoundInfo\UnitCombatSounds.slk
+* UI\SoundInfo\AbilitySounds.slk
+* UI\SoundInfo\AmbienceSounds.slk
+* UI\SoundInfo\AnimSounds.slk
+* UI\SoundInfo\DialogSounds.slk
+* UI\SoundInfo\UISounds.slk
+* UI\SoundInfo\UnitAckSounds.slk
+* UI\SoundInfo\UnitCombatSounds.slk
 
 @note You can only play the same sound handle once.
 
@@ -95,13 +95,13 @@ native CreateMIDISound              takes string soundLabel, integer fadeInRate,
 /**
 Applies default settings to the sound, which are found under the label from the following SLK-files:
 
-    * UI\SoundInfo\AbilitySounds.slk
-    * UI\SoundInfo\AmbienceSounds.slk
-    * UI\SoundInfo\AnimSounds.slk
-    * UI\SoundInfo\DialogSounds.slk
-    * UI\SoundInfo\UISounds.slk
-    * UI\SoundInfo\UnitAckSounds.slk
-    * UI\SoundInfo\UnitCombatSounds.slk
+* UI\SoundInfo\AbilitySounds.slk
+* UI\SoundInfo\AmbienceSounds.slk
+* UI\SoundInfo\AnimSounds.slk
+* UI\SoundInfo\DialogSounds.slk
+* UI\SoundInfo\UISounds.slk
+* UI\SoundInfo\UnitAckSounds.slk
+* UI\SoundInfo\UnitCombatSounds.slk
 
 @param soundHandle The sound to configure.
 @param soundLabel the label out of one of the SLK-files, whose settings should be
