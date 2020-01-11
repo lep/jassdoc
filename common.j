@@ -112,44 +112,200 @@ type animtype           extends     handle
 type subanimtype        extends     handle
 type image              extends     handle
 type ubersplat          extends     handle
+
+/**
+@patch 1.24
+*/
 type hashtable          extends     agent
+
+/**
+@patch 1.31
+*/
 type framehandle        extends     handle
+
+/**
+@patch 1.31
+*/
 type originframetype    extends     handle
+
+/**
+@patch 1.31
+*/
 type framepointtype     extends     handle
+
+/**
+@patch 1.31
+*/
 type textaligntype      extends     handle
+
+/**
+@patch 1.31
+*/
 type frameeventtype     extends     handle
+
+/**
+@patch 1.31
+*/
 type oskeytype          extends     handle
+
+/**
+@patch 1.31
+*/
 type abilityintegerfield            extends handle
+
+/**
+@patch 1.31
+*/
 type abilityrealfield               extends handle
+
+/**
+@patch 1.31
+*/
 type abilitybooleanfield            extends handle
+
+/**
+@patch 1.31
+*/
 type abilitystringfield             extends handle
+
+/**
+@patch 1.31
+*/
 type abilityintegerlevelfield       extends handle
+
+/**
+@patch 1.31
+*/
 type abilityreallevelfield          extends handle
+
+/**
+@patch 1.31
+*/
 type abilitybooleanlevelfield       extends handle
+
+/**
+@patch 1.31
+*/
 type abilitystringlevelfield        extends handle
+
+/**
+@patch 1.31
+*/
 type abilityintegerlevelarrayfield  extends handle
+
+/**
+@patch 1.31
+*/
 type abilityreallevelarrayfield     extends handle
+
+/**
+@patch 1.31
+*/
 type abilitybooleanlevelarrayfield  extends handle
+
+/**
+@patch 1.31
+*/
 type abilitystringlevelarrayfield   extends handle
+
+/**
+@patch 1.31
+*/
 type unitintegerfield               extends handle
+
+/**
+@patch 1.31
+*/
 type unitrealfield                  extends handle
+
+/**
+@patch 1.31
+*/
 type unitbooleanfield               extends handle
+
+/**
+@patch 1.31
+*/
 type unitstringfield                extends handle
+
+/**
+@patch 1.31
+*/
 type unitweaponintegerfield         extends handle
+
+/**
+@patch 1.31
+*/
 type unitweaponrealfield            extends handle
+
+/**
+@patch 1.31
+*/
 type unitweaponbooleanfield         extends handle
+
+/**
+@patch 1.31
+*/
 type unitweaponstringfield          extends handle
+
+/**
+@patch 1.31
+*/
 type itemintegerfield               extends handle
+
+/**
+@patch 1.31
+*/
 type itemrealfield                  extends handle
+
+/**
+@patch 1.31
+*/
 type itembooleanfield               extends handle
+
+/**
+@patch 1.31
+*/
 type itemstringfield                extends handle
+
+/**
+@patch 1.31
+*/
 type movetype                       extends handle
+
+/**
+@patch 1.31
+*/
 type targetflag                     extends handle
+
+/**
+@patch 1.31
+*/
 type armortype                      extends handle
+
+/**
+@patch 1.31
+*/
 type heroattribute                  extends handle
+
+/**
+@patch 1.31
+*/
 type defensetype                    extends handle
+
+/**
+@patch 1.31
+*/
 type regentype                      extends handle
+
+/**
+@patch 1.31
+*/
 type unitcategory                   extends handle
+
+/**
+@patch 1.31
+*/
 type pathingflag                    extends handle
 
 /**
@@ -571,150 +727,187 @@ constant native ConvertAttackType           takes integer i returns attacktype
 
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertOriginFrameType      takes integer i returns originframetype
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertFramePointType       takes integer i returns framepointtype
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertTextAlignType        takes integer i returns textaligntype
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertFrameEventType       takes integer i returns frameeventtype
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertOsKeyType            takes integer i returns oskeytype
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityIntegerField              takes integer i returns abilityintegerfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityRealField                 takes integer i returns abilityrealfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityBooleanField              takes integer i returns abilitybooleanfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityStringField               takes integer i returns abilitystringfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityIntegerLevelField         takes integer i returns abilityintegerlevelfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityRealLevelField            takes integer i returns abilityreallevelfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityBooleanLevelField         takes integer i returns abilitybooleanlevelfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityStringLevelField          takes integer i returns abilitystringlevelfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityIntegerLevelArrayField    takes integer i returns abilityintegerlevelarrayfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityRealLevelArrayField       takes integer i returns abilityreallevelarrayfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityBooleanLevelArrayField    takes integer i returns abilitybooleanlevelarrayfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertAbilityStringLevelArrayField     takes integer i returns abilitystringlevelarrayfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertUnitIntegerField                 takes integer i returns unitintegerfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertUnitRealField                    takes integer i returns unitrealfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertUnitBooleanField                 takes integer i returns unitbooleanfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertUnitStringField                  takes integer i returns unitstringfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertUnitWeaponIntegerField           takes integer i returns unitweaponintegerfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertUnitWeaponRealField              takes integer i returns unitweaponrealfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertUnitWeaponBooleanField           takes integer i returns unitweaponbooleanfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertUnitWeaponStringField            takes integer i returns unitweaponstringfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertItemIntegerField                 takes integer i returns itemintegerfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertItemRealField                    takes integer i returns itemrealfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertItemBooleanField                 takes integer i returns itembooleanfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertItemStringField                  takes integer i returns itemstringfield
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertMoveType                         takes integer i returns movetype
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertTargetFlag                       takes integer i returns targetflag
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertArmorType                        takes integer i returns armortype
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertHeroAttribute                    takes integer i returns heroattribute
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertDefenseType                      takes integer i returns defensetype
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertRegenType                        takes integer i returns regentype
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertUnitCategory                     takes integer i returns unitcategory
 /**
 @pure
+@patch 1.31
 */
 constant native ConvertPathingFlag                      takes integer i returns pathingflag
 
