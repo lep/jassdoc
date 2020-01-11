@@ -100,13 +100,44 @@ into the preload script.
 native Preloader        takes string filename returns nothing
 
 // Automation Test
+
+/**
+@patch 1.29
+*/
 native AutomationSetTestType                    takes string testType returns nothing
+
+/**
+@patch 1.29
+*/
 native AutomationTestStart                      takes string testName returns nothing
+
+/**
+@patch 1.30
+*/
 native AutomationTestEnd                        takes nothing returns nothing
+
+/**
+@patch 1.30
+*/
 native AutomationTestingFinished                takes nothing returns nothing
 
+/**
+@patch 1.30
+*/
 native RequestExtraIntegerData                     takes integer dataType, player whichPlayer, string param1, string param2, boolean param3, integer param4, integer param5, integer param6 returns integer
+
+/**
+@patch 1.30
+*/
 native RequestExtraBooleanData                     takes integer dataType, player whichPlayer, string param1, string param2, boolean param3, integer param4, integer param5, integer param6 returns boolean
+
+/**
+@patch 1.30
+*/
 native RequestExtraStringData                      takes integer dataType, player whichPlayer, string param1, string param2, boolean param3, integer param4, integer param5, integer param6 returns string
+
+/**
+@patch 1.30
+*/
 native RequestExtraRealData                        takes integer dataType, player whichPlayer, string param1, string param2, boolean param3, integer param4, integer param5, integer param6 returns real
 

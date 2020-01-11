@@ -262,11 +262,36 @@ native BlzGetLocalSpecialEffectY                   takes effect whichEffect retu
 @async
 */
 native BlzGetLocalSpecialEffectZ                   takes effect whichEffect returns real
+
+/**
+@patch 1.30
+*/
 native BlzSpecialEffectClearSubAnimations          takes effect whichEffect returns nothing
+
+/**
+@patch 1.30
+*/
 native BlzSpecialEffectRemoveSubAnimation          takes effect whichEffect, subanimtype whichSubAnim returns nothing
+
+/**
+@patch 1.30
+*/
 native BlzSpecialEffectAddSubAnimation             takes effect whichEffect, subanimtype whichSubAnim returns nothing
+
+/**
+@patch 1.30
+*/
 native BlzPlaySpecialEffect                        takes effect whichEffect, animtype whichAnim returns nothing
+
+/**
+@patch 1.30
+*/
 native BlzPlaySpecialEffectWithTimeScale           takes effect whichEffect, animtype whichAnim, real timeScale returns nothing
+
+/**
+@patch 1.30
+*/
+native BlzGetAnimName                              takes animtype whichAnim returns string
 
 native BlzGetSpecialEffectScale                    takes effect whichEffect returns real
 native BlzSetSpecialEffectMatrixScale              takes effect whichEffect, real x, real y, real z returns nothing

@@ -1,29 +1,125 @@
+
+/**
+@patch 1.29
+*/
 native BlzSetAbilityTooltip                        takes integer abilCode, string tooltip, integer level returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetAbilityActivatedTooltip               takes integer abilCode, string tooltip, integer level returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetAbilityExtendedTooltip                takes integer abilCode, string extendedTooltip, integer level returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetAbilityActivatedExtendedTooltip       takes integer abilCode, string extendedTooltip, integer level returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetAbilityResearchTooltip                takes integer abilCode, string researchTooltip, integer level returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetAbilityResearchExtendedTooltip        takes integer abilCode, string researchExtendedTooltip, integer level returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetAbilityTooltip                        takes integer abilCode, integer level returns string
+
+/**
+@patch 1.29
+*/
 native BlzGetAbilityActivatedTooltip               takes integer abilCode, integer level returns string
+
+/**
+@patch 1.29
+*/
 native BlzGetAbilityExtendedTooltip                takes integer abilCode, integer level returns string
+
+/**
+@patch 1.29
+*/
 native BlzGetAbilityActivatedExtendedTooltip       takes integer abilCode, integer level returns string
+
+/**
+@patch 1.29
+*/
 native BlzGetAbilityResearchTooltip                takes integer abilCode, integer level returns string
+
+/**
+@patch 1.29
+*/
 native BlzGetAbilityResearchExtendedTooltip        takes integer abilCode, integer level returns string
+
+/**
+@patch 1.29
+*/
 native BlzSetAbilityIcon                           takes integer abilCode, string iconPath returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetAbilityIcon                           takes integer abilCode returns string
+
+/**
+@patch 1.29
+*/
 native BlzSetAbilityActivatedIcon                  takes integer abilCode, string iconPath returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetAbilityActivatedIcon                  takes integer abilCode returns string
+
+/**
+@patch 1.29
+*/
 native BlzGetAbilityPosX                           takes integer abilCode returns integer
+/**
+@patch 1.29
+*/
 native BlzGetAbilityPosY                           takes integer abilCode returns integer
+/**
+@patch 1.29
+*/
 native BlzSetAbilityPosX                           takes integer abilCode, integer x returns nothing
+/**
+@patch 1.29
+*/
 native BlzSetAbilityPosY                           takes integer abilCode, integer y returns nothing
+/**
+@patch 1.29
+*/
 native BlzGetAbilityActivatedPosX                  takes integer abilCode returns integer
+/**
+@patch 1.29
+*/
 native BlzGetAbilityActivatedPosY                  takes integer abilCode returns integer
+/**
+@patch 1.29
+*/
 native BlzSetAbilityActivatedPosX                  takes integer abilCode, integer x returns nothing
+/**
+@patch 1.29
+*/
 native BlzSetAbilityActivatedPosY                  takes integer abilCode, integer y returns nothing
+/**
+@patch 1.29
+*/
 native BlzGetAbilityManaCost                       takes integer abilId, integer level returns integer
+/**
+@patch 1.29
+*/
 native BlzGetAbilityCooldown                       takes integer abilId, integer level returns real
+
 
 // Intanced Object Operations
 // Ability

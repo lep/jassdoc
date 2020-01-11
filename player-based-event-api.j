@@ -373,6 +373,8 @@ constant native GetSpellTargetLoc takes nothing returns location
 @event EVENT_PLAYER_UNIT_SPELL_EFFECT
 @event EVENT_PLAYER_UNIT_SPELL_FINISH
 @event EVENT_PLAYER_UNIT_SPELL_ENDCAST
+
+@patch 1.24b
 */
 constant native GetSpellTargetX				takes nothing returns real
 
@@ -387,6 +389,8 @@ constant native GetSpellTargetX				takes nothing returns real
 @event EVENT_PLAYER_UNIT_SPELL_EFFECT
 @event EVENT_PLAYER_UNIT_SPELL_FINISH
 @event EVENT_PLAYER_UNIT_SPELL_ENDCAST
+
+@patch 1.24b
 */
 constant native GetSpellTargetY				takes nothing returns real
 

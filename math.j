@@ -107,21 +107,25 @@ native Pow takes real x, real power returns real
 
 /**
 @pure
+@patch 1.31
 */
 native BlzBitOr                                    takes integer x, integer y returns integer
 
 /**
 @pure
+@patch 1.31
 */
 native BlzBitAnd                                   takes integer x, integer y returns integer
 
 /**
 @pure
+@patch 1.31
 */
 native BlzBitXor                                   takes integer x, integer y returns integer 
 
 /**
 @pure
+@patch 1.31
 */
 native BlzConvertColor                             takes integer a, integer r, integer g, integer b returns integer
 

@@ -77,43 +77,117 @@ native GetItemUserData takes item whichItem returns integer
 
 native SetItemUserData takes item whichItem, integer data returns nothing
 
+/**
+@patch 1.29
+*/
 native BlzSetItemName                              takes item whichItem, string name returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetItemDescription                       takes item whichItem, string description returns nothing
 
 /**
 @async
+@patch 1.29
 */
 native BlzGetItemDescription                       takes item whichItem returns string
 
+
+/**
+@patch 1.29
+*/
 native BlzSetItemTooltip                           takes item whichItem, string tooltip returns nothing
 
 /**
 @async
+@patch 1.29
 */
 native BlzGetItemTooltip                           takes item whichItem returns string
 
 
+
+/**
+@patch 1.29
+*/
 native BlzSetItemExtendedTooltip                   takes item whichItem, string extendedTooltip returns nothing
 
 /**
 @async
+@patch 1.29
 */
 native BlzGetItemExtendedTooltip                   takes item whichItem returns string
 
+
+/**
+@patch 1.29
+*/
 native BlzSetItemIconPath                          takes item whichItem, string iconPath returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetItemIconPath                          takes item whichItem returns string
 
 
 // Item 
+
+/**
+@patch 1.31
+*/
 native BlzGetItemAbilityByIndex                    takes item whichItem, integer index returns ability
+
+/**
+@patch 1.31
+*/
 native BlzGetItemAbility                           takes item whichItem, integer abilCode returns ability
+
+/**
+@patch 1.31
+*/
 native BlzItemAddAbility                           takes item whichItem, integer abilCode returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzGetItemBooleanField                      takes item whichItem, itembooleanfield whichField returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzGetItemIntegerField                      takes item whichItem, itemintegerfield whichField returns integer
+
+/**
+@patch 1.31
+*/
 native BlzGetItemRealField                         takes item whichItem, itemrealfield whichField returns real
+
+/**
+@patch 1.31
+*/
 native BlzGetItemStringField                       takes item whichItem, itemstringfield whichField returns string
+
+/**
+@patch 1.31
+*/
 native BlzSetItemBooleanField                      takes item whichItem, itembooleanfield whichField, boolean value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzSetItemIntegerField                      takes item whichItem, itemintegerfield whichField, integer value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzSetItemRealField                         takes item whichItem, itemrealfield whichField, real value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzSetItemStringField                       takes item whichItem, itemstringfield whichField, string value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzItemRemoveAbility                        takes item whichItem, integer abilCode returns boolean

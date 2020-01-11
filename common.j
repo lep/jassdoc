@@ -2,6 +2,9 @@
 // Native types. All native functions take extended handle types when
 // possible to help prevent passing bad values to native functions
 //
+/**
+@patch 1.24b
+*/
 type agent			    extends     handle  // all reference counted objects
 type event              extends     agent  // a reference to an event registration
 type player             extends     agent  // a single player reference
@@ -92,8 +95,20 @@ type weapontype         extends     handle
 type soundtype          extends     handle
 type lightning          extends     handle
 type pathingtype        extends     handle
+
+/**
+@patch 1.29
+*/
 type mousebuttontype    extends     handle
+
+/**
+@patch 1.30
+*/
 type animtype           extends     handle
+
+/**
+@patch 1.30
+*/
 type subanimtype        extends     handle
 type image              extends     handle
 type ubersplat          extends     handle
@@ -516,6 +531,7 @@ constant native ConvertPathingType          takes integer i returns pathingtype
 Returns the mousebuttontype that corresponds to the given integer.
 @param i The integer representation of the mousebuttontype
 @pure
+@patch 1.29
 */
 constant native ConvertMouseButtonType      takes integer i returns mousebuttontype
 
@@ -523,6 +539,7 @@ constant native ConvertMouseButtonType      takes integer i returns mousebuttont
 Returns the animtype that corresponds to the given integer.
 @param i The integer representation of the animtype
 @pure
+@patch 1.30
 */
 constant native ConvertAnimType             takes integer i returns animtype
 
@@ -530,6 +547,7 @@ constant native ConvertAnimType             takes integer i returns animtype
 Returns the subanimtype that corresponds to the given integer.
 @param i The integer representation of the subanimtype
 @pure
+@patch 1.30
 */
 constant native ConvertSubAnimType          takes integer i returns subanimtype
 
@@ -742,14 +760,35 @@ Looks up the "name" field for any object (unit, item, ability)
 */
 constant native GetObjectName               takes integer objectId          returns string
 
+/**
+@patch 1.29
+*/
 constant native GetBJMaxPlayers             takes nothing returns integer
-constant native GetBJPlayerNeutralVictim    takes nothing returns integer
-constant native GetBJPlayerNeutralExtra     takes nothing returns integer
-constant native GetBJMaxPlayerSlots         takes nothing returns integer
-constant native GetPlayerNeutralPassive     takes nothing returns integer
-constant native GetPlayerNeutralAggressive  takes nothing returns integer
 
-native BlzGetAnimName                              takes animtype whichAnim returns string
+/**
+@patch 1.29
+*/
+constant native GetBJPlayerNeutralVictim    takes nothing returns integer
+
+/**
+@patch 1.29
+*/
+constant native GetBJPlayerNeutralExtra     takes nothing returns integer
+
+/**
+@patch 1.29
+*/
+constant native GetBJMaxPlayerSlots         takes nothing returns integer
+
+/**
+@patch 1.29
+*/
+constant native GetPlayerNeutralPassive     takes nothing returns integer
+
+/**
+@patch 1.29
+*/
+constant native GetPlayerNeutralAggressive  takes nothing returns integer
 
 
 globals

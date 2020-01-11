@@ -829,90 +829,260 @@ integer id to a unit, which can serve as an index in other data structures.
 */
 native SetUnitUserData takes unit whichUnit, integer data returns nothing
 
-
+/**
+@patch 1.29
+*/
 native BlzGetUnitMaxHP                             takes unit whichUnit returns integer
+
+/**
+@patch 1.29
+*/
 native BlzSetUnitMaxHP                             takes unit whichUnit, integer hp returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitMaxMana                           takes unit whichUnit returns integer
+
+/**
+@patch 1.29
+*/
 native BlzSetUnitMaxMana                           takes unit whichUnit, integer mana returns nothing
 
+
+/**
+@patch 1.29
+*/
 native BlzSetUnitName                              takes unit whichUnit, string name returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetHeroProperName                        takes unit whichUnit, string heroProperName returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitBaseDamage                        takes unit whichUnit, integer weaponIndex returns integer
+
+/**
+@patch 1.29
+*/
 native BlzSetUnitBaseDamage                        takes unit whichUnit, integer baseDamage, integer weaponIndex returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitDiceNumber                        takes unit whichUnit, integer weaponIndex returns integer
+
+/**
+@patch 1.29
+*/
 native BlzSetUnitDiceNumber                        takes unit whichUnit, integer diceNumber, integer weaponIndex returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitDiceSides                         takes unit whichUnit, integer weaponIndex returns integer
+
+/**
+@patch 1.29
+*/
 native BlzSetUnitDiceSides                         takes unit whichUnit, integer diceSides, integer weaponIndex returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitAttackCooldown                    takes unit whichUnit, integer weaponIndex returns real
+
+/**
+@patch 1.29
+*/
 native BlzSetUnitAttackCooldown                    takes unit whichUnit, real cooldown, integer weaponIndex returns nothing
 
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitArmor                             takes unit whichUnit returns real
+
+/**
+@patch 1.29
+*/
 native BlzSetUnitArmor                             takes unit whichUnit, real armorAmount returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzUnitHideAbility                          takes unit whichUnit, integer abilId, boolean flag returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzUnitDisableAbility                       takes unit whichUnit, integer abilId, boolean flag, boolean hideUI returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzUnitCancelTimedLife                      takes unit whichUnit returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzIsUnitSelectable                         takes unit whichUnit returns boolean
+
+/**
+@patch 1.29
+*/
 native BlzIsUnitInvulnerable                       takes unit whichUnit returns boolean
+
+/**
+@patch 1.29
+*/
 native BlzUnitInterruptAttack                      takes unit whichUnit returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitCollisionSize                     takes unit whichUnit returns real
 
+/**
+@patch 1.29
+*/
 native BlzSetUnitAbilityCooldown                   takes unit whichUnit, integer abilId, integer level, real cooldown returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitAbilityCooldown                   takes unit whichUnit, integer abilId, integer level returns real
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitAbilityCooldownRemaining          takes unit whichUnit, integer abilId returns real
+
+/**
+@patch 1.29
+*/
 native BlzEndUnitAbilityCooldown                   takes unit whichUnit, integer abilCode returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzGetUnitAbilityManaCost                   takes unit whichUnit, integer abilId, integer level returns integer
+
+/**
+@patch 1.29
+*/
 native BlzSetUnitAbilityManaCost                   takes unit whichUnit, integer abilId, integer level, integer manaCost returns nothing
 
 /**
 @async
+@patch 1.29
 */
 native BlzGetLocalUnitZ                            takes unit whichUnit returns real   
 
 /**
 @note Returns the same result as `BlzGetLocalUnitZ`.
 @async
+@patch 1.30
 */
 native BlzGetUnitZ                                 takes unit whichUnit returns real
 
 
 // Unit 
+
+/**
+@patch 1.31
+*/
 native BlzGetUnitBooleanField                      takes unit whichUnit, unitbooleanfield whichField returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzGetUnitIntegerField                      takes unit whichUnit, unitintegerfield whichField returns integer
+
+/**
+@patch 1.31
+*/
 native BlzGetUnitRealField                         takes unit whichUnit, unitrealfield whichField returns real
+
+/**
+@patch 1.31
+*/
 native BlzGetUnitStringField                       takes unit whichUnit, unitstringfield whichField returns string
+
+/**
+@patch 1.31
+*/
 native BlzSetUnitBooleanField                      takes unit whichUnit, unitbooleanfield whichField, boolean value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzSetUnitIntegerField                      takes unit whichUnit, unitintegerfield whichField, integer value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzSetUnitRealField                         takes unit whichUnit, unitrealfield whichField, real value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzSetUnitStringField                       takes unit whichUnit, unitstringfield whichField, string value returns boolean
 
 // Unit Weapon
 
 /**
 @bug Might crash the game when called on a unit with no attack.
+@patch 1.31
 */
 native BlzGetUnitWeaponBooleanField                takes unit whichUnit, unitweaponbooleanfield whichField, integer index returns boolean
 
 /**
 @bug Might crash the game when called on a unit with no attack.
+@patch 1.31
 */
 native BlzGetUnitWeaponIntegerField                takes unit whichUnit, unitweaponintegerfield whichField, integer index returns integer
 
 /**
 @bug Might crash the game when called on a unit with no attack.
+@patch 1.31
 */
 native BlzGetUnitWeaponRealField                   takes unit whichUnit, unitweaponrealfield whichField, integer index returns real
 
 /**
 @bug Might crash the game when called on a unit with no attack.
+@patch 1.31
 */
 native BlzGetUnitWeaponStringField                 takes unit whichUnit, unitweaponstringfield whichField, integer index returns string
 
 
+
+/**
+@patch 1.31
+*/
 native BlzSetUnitWeaponBooleanField                takes unit whichUnit, unitweaponbooleanfield whichField, integer index, boolean value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzSetUnitWeaponIntegerField                takes unit whichUnit, unitweaponintegerfield whichField, integer index, integer value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzSetUnitWeaponRealField                   takes unit whichUnit, unitweaponrealfield whichField, integer index, real value returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzSetUnitWeaponStringField                 takes unit whichUnit, unitweaponstringfield whichField, integer index, string value returns boolean
 
+/**
+@patch 1.31
+*/
 native BlzPauseUnitEx                              takes unit whichUnit, boolean flag returns nothing
 native BlzGetUnitAbility                           takes unit whichUnit, integer abilId returns ability
 native BlzGetUnitAbilityByIndex                    takes unit whichUnit, integer index returns ability
