@@ -6,12 +6,27 @@ native DestroyGroup                         takes group whichGroup returns nothi
 
 native GroupAddUnit                         takes group whichGroup, unit whichUnit returns boolean
 native GroupRemoveUnit                      takes group whichGroup, unit whichUnit returns boolean
+
+/**
+@patch 1.31
+*/
 native BlzGroupAddGroupFast                 takes group whichGroup, group addGroup returns integer
+
+/**
+@patch 1.31
+*/
 native BlzGroupRemoveGroupFast              takes group whichGroup, group removeGroup returns integer
 
 native GroupClear                           takes group whichGroup returns nothing
 
+/**
+@patch 1.31
+*/
 native BlzGroupGetSize                      takes group whichGroup returns integer
+
+/**
+@patch 1.31
+*/
 native BlzGroupUnitAt                       takes group whichGroup, integer index returns unit
 
 native GroupEnumUnitsOfType                 takes group whichGroup, string unitname, boolexpr filter returns nothing

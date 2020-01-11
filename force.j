@@ -11,6 +11,9 @@ native ForceAddPlayer           takes force whichForce, player whichPlayer retur
 
 native ForceRemovePlayer        takes force whichForce, player whichPlayer returns nothing
 
+/**
+@patch 1.31
+*/
 native BlzForceHasPlayer        takes force whichForce, player whichPlayer returns boolean
 
 native ForceClear               takes force whichForce returns nothing

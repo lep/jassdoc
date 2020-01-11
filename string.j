@@ -67,6 +67,9 @@ this will return the conversion of the valid part: `S2R(".123asd") == 0.123`.
 */
 native S2R  takes string s returns real
 
+/**
+@patch 1.24b
+*/
 native GetHandleId takes handle h returns integer
 
 /**
@@ -96,8 +99,12 @@ native StringCase takes string source, boolean upper returns string
 Case and slash insensitive hash function.
 `StringHash("\\") == StringHash("/")`
 `StringHash("AB") == StringHash("ab")`
+
 @note See <http://www.hiveworkshop.com/forums/w-277/b-213272/> for the source-code of StringHash.
+
 @pure
+
+@patch 1.24b
 */
 native StringHash takes string s returns integer
 

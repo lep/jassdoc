@@ -34,34 +34,50 @@ constant native GetEventDamageSource takes nothing returns unit
 
 /**
 @event EVENT_UNIT_DAMAGED
+@patch 1.29
 */
 native BlzSetEventDamage                           takes real damage returns nothing
 
 /**
 @event EVENT_UNIT_DAMAGED
+@patch 1.31
 */
 native BlzGetEventDamageTarget 	                   takes nothing returns unit
 
 /**
 @event EVENT_UNIT_DAMAGED
+@patch 1.31
 */
 native BlzGetEventAttackType  	                   takes nothing returns attacktype
 
 /**
 @event EVENT_UNIT_DAMAGED
+@patch 1.31
 */
 native BlzGetEventDamageType                       takes nothing returns damagetype
 
 /**
 @event EVENT_UNIT_DAMAGED
+@patch 1.31
 */
 native BlzGetEventWeaponType  	                   takes nothing returns weapontype
 
 /**
 @event EVENT_UNIT_DAMAGED
+@patch 1.31
 */
 native BlzSetEventAttackType                       takes attacktype attackType returns boolean
+
+/**
+@event EVENT_UNIT_DAMAGED
+@patch 1.31
+*/
 native BlzSetEventDamageType                       takes damagetype damageType returns boolean
+
+/**
+@event EVENT_UNIT_DAMAGED
+@patch 1.31
+*/
 native BlzSetEventWeaponType                       takes weapontype weaponType returns boolean
 
 /**
@@ -85,22 +101,26 @@ native TriggerRegisterUnitInRange takes trigger whichTrigger, unit whichUnit, re
 
 /**
 @event EVENT_PLAYER_MOUSE_MOVE
+@patch 1.29
 */
 native BlzGetTriggerPlayerMouseX                   takes nothing returns real
 
 /**
 @event EVENT_PLAYER_MOUSE_MOVE
+@patch 1.29
 */
 native BlzGetTriggerPlayerMouseY                   takes nothing returns real
 
 /**
 @event EVENT_PLAYER_MOUSE_MOVE
+@patch 1.29
 */
 native BlzGetTriggerPlayerMousePosition            takes nothing returns location
 
 /**
 @event EVENT_PLAYER_MOUSE_UP
 @event EVENT_PLAYER_MOUSE_DOWN
+@patch 1.29
 */
 native BlzGetTriggerPlayerMouseButton              takes nothing returns mousebuttontype
 

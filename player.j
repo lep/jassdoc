@@ -124,4 +124,7 @@ The player to store hero data for.
 */
 native CachePlayerHeroData takes player whichPlayer returns nothing
 
+/**
+@patch 1.29
+*/
 native BlzDecPlayerTechResearched                  takes player whichPlayer, integer techid, integer levels returns nothing
