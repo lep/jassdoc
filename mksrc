@@ -60,6 +60,12 @@ foreach my $file (@ARGV){
 		    'end-line',
 		    $end
 		);
+
+		insert into annotations values (
+		    '$fn',
+		    'type',
+		    'function'
+		);
 SQL
 	}elsif( $line =~ /^(?:constant\s+)?native\s+(\w+)/ && $state eq "nothing" ){
 	    chomp $line;
@@ -83,6 +89,13 @@ SQL
 		    '$fn',
 		    'end-line',
 		    $.
+		);
+
+
+		insert into annotations values (
+		    '$fn',
+		    'type',
+		    'native'
 		);
 SQL
 	}elsif ( $state eq "function"){
@@ -123,6 +136,12 @@ SQL
 			'end-line',
 			$.
 		    );
+
+		    insert into annotations values (
+			'$name',
+			'type',
+			'global'
+		    );
 SQL
 
 	    }
@@ -148,6 +167,12 @@ SQL
 			'$type',
 			'end-line',
 			$.
+		    );
+
+		    insert into annotations values (
+			'$type',
+			'type',
+			'type'
 		    );
 SQL
 	}
