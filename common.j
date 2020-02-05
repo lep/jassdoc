@@ -59,6 +59,12 @@ type mapvisibility      extends     handle
 type mapsetting         extends     handle
 type mapdensity         extends     handle
 type mapcontrol         extends     handle
+
+/**
+@patch 1.32
+*/
+type minimapicon        extends     handle
+
 type playerslotstate    extends     handle
 type volumegroup        extends     handle
 type camerafield        extends     handle
