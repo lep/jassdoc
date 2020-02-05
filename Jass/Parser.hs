@@ -173,7 +173,7 @@ statement = returnStmt
     where
         local = Local <$> (reserved "local"*> vardecl Normal)
         returnStmt = Return <$> (reserved "return" *> optional expression <* horizontalSpace)
-        callStmt = Call <$> (reserved "call" *> identifier) <*> parens arglist <* horizontalSpace
+        callStmt = Call <$> (optional (reserved "debug") *> reserved "call" *> identifier) <*> parens arglist <* horizontalSpace
         loop = Loop <$> between startLoop endLoop (many statement)
 
         set = Set <$> (reserved "set" *> lvar)
