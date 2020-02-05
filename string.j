@@ -130,3 +130,8 @@ native GetLocalizedString takes string source returns string
 */
 native GetLocalizedHotkey takes string source returns integer
 
+/**
+@patch 1.32
+*/
+constant native ParseTags               takes string taggedString returns string
+

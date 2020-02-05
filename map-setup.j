@@ -67,6 +67,17 @@ native GetStartLocPrioSlot takes integer whichStartLoc, integer prioSlotIndex re
 
 native GetStartLocPrio takes integer whichStartLoc, integer prioSlotIndex returns startlocprio
 
+/**
+@patch 1.32
+*/
+native SetEnemyStartLocPrioCount    takes integer whichStartLoc, integer prioSlotCount returns nothing
+
+/**
+@patch 1.32
+*/
+native SetEnemyStartLocPrio         takes integer whichStartLoc, integer prioSlotIndex, integer otherStartLocIndex, startlocprio priority returns nothing
+
+
 
 
 native SetGameTypeSupported takes gametype whichGameType, boolean value returns nothing

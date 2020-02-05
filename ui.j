@@ -377,3 +377,23 @@ native BlzGetLocale                                takes nothing returns string
 native BlzDisplayChatMessage                       takes player whichPlayer, integer recipient, string message returns nothing
 
 
+
+/**
+@patch 1.32
+*/
+native CreateCommandButtonEffect                   takes integer abilityId, string order returns commandbuttoneffect
+
+/**
+@patch 1.32
+*/
+native CreateUpgradeCommandButtonEffect            takes integer whichUprgade returns commandbuttoneffect
+
+/**
+@patch 1.32
+*/
+native CreateLearnCommandButtonEffect              takes integer abilityId returns commandbuttoneffect
+
+/**
+@patch 1.32
+*/
+native DestroyCommandButtonEffect                  takes commandbuttoneffect whichEffect returns nothing

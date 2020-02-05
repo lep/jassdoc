@@ -309,6 +309,11 @@ type unitcategory                   extends handle
 type pathingflag                    extends handle
 
 /**
+@patch 1.32
+*/
+type commandbuttoneffect	    extends handle
+
+/**
 Returns the race that corresponds to the given integer.
 @param i The integer representation of the race
 @pure
@@ -1730,6 +1735,11 @@ globals
     constant originframetype        ORIGIN_FRAME_TOP_MSG                 = ConvertOriginFrameType(15)
     constant originframetype        ORIGIN_FRAME_PORTRAIT                = ConvertOriginFrameType(16)
     constant originframetype        ORIGIN_FRAME_WORLD_FRAME             = ConvertOriginFrameType(17)
+    constant originframetype        ORIGIN_FRAME_SIMPLE_UI_PARENT           = ConvertOriginFrameType(18)
+    constant originframetype        ORIGIN_FRAME_PORTRAIT_HP_TEXT           = ConvertOriginFrameType(19)
+    constant originframetype        ORIGIN_FRAME_PORTRAIT_MANA_TEXT         = ConvertOriginFrameType(20)
+    constant originframetype        ORIGIN_FRAME_UNIT_PANEL_BUFF_BAR        = ConvertOriginFrameType(21)
+    constant originframetype        ORIGIN_FRAME_UNIT_PANEL_BUFF_BAR_LABEL  = ConvertOriginFrameType(22)
 
     constant framepointtype         FRAMEPOINT_TOPLEFT                   = ConvertFramePointType(0)
     constant framepointtype         FRAMEPOINT_TOP                       = ConvertFramePointType(1)
