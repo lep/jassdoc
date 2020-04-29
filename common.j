@@ -1577,6 +1577,8 @@ globals
     constant playerunitevent    EVENT_PLAYER_UNIT_SPELL_FINISH          = ConvertPlayerUnitEvent(275)
     constant playerunitevent    EVENT_PLAYER_UNIT_SPELL_ENDCAST         = ConvertPlayerUnitEvent(276)
     constant playerunitevent    EVENT_PLAYER_UNIT_PAWN_ITEM             = ConvertPlayerUnitEvent(277)
+    constant playerunitevent    EVENT_PLAYER_UNIT_STACK_ITEM            = ConvertPlayerUnitEvent(319)
+
 
     //===================================================
     // For use with TriggerRegisterUnitEvent
@@ -1591,6 +1593,7 @@ globals
     constant unitevent          EVENT_UNIT_SPELL_FINISH                 = ConvertUnitEvent(292)
     constant unitevent          EVENT_UNIT_SPELL_ENDCAST                = ConvertUnitEvent(293)
     constant unitevent          EVENT_UNIT_PAWN_ITEM                    = ConvertUnitEvent(294)
+    constant unitevent          EVENT_UNIT_STACK_ITEM                   = ConvertUnitEvent(318)
 
     //===================================================
     // Limit Event API constants    
