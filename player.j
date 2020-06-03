@@ -55,12 +55,32 @@ constant native GetPlayerAlliance takes player sourcePlayer, player otherPlayer,
 
 constant native GetPlayerHandicap takes player whichPlayer returns real
 
+/**
+@patch 1.32
+*/
+constant native GetPlayerHandicapReviveTime takes player whichPlayer returns real
+
+/**
+@patch 1.32
+*/
+constant native GetPlayerHandicapDamage takes player whichPlayer returns real
+
 constant native GetPlayerHandicapXP takes player whichPlayer returns real
 
 constant native SetPlayerHandicap takes player whichPlayer, real handicap returns nothing
 
 constant native SetPlayerHandicapXP takes player whichPlayer, real handicap returns nothing
 
+
+/**
+@patch 1.32
+*/
+constant native SetPlayerHandicapReviveTime takes player whichPlayer, real handicap returns nothing
+
+/**
+@patch 1.32
+*/
+constant native SetPlayerHandicapDamage takes player whichPlayer, real handicap returns nothing
 
 
 constant native SetPlayerTechMaxAllowed takes player whichPlayer, integer techid, integer maximum returns nothing
@@ -130,3 +150,8 @@ native CachePlayerHeroData takes player whichPlayer returns nothing
 @patch 1.29
 */
 native BlzDecPlayerTechResearched                  takes player whichPlayer, integer techid, integer levels returns nothing
+
+/**
+@patch 1.32
+*/
+native BlzGetPlayerTownHallCount                   takes player whichPlayer returns integer

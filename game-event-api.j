@@ -133,3 +133,14 @@ constant native GetTournamentScore takes player whichPlayer returns integer
 */
 constant native GetSaveBasicFilename takes nothing returns string
 
+/**
+@patch 1.32
+@event EVENT_COMMAND_BUTTON_CLICK
+*/
+native TriggerRegisterCommandEvent takes trigger whichTrigger, integer whichAbility, string order returns event
+
+/**
+@patch 1.32
+@event EVENT_COMMAND_BUTTON_CLICK
+*/
+native TriggerRegisterUpgradeCommandEvent takes trigger whichTrigger, integer whichUpgrade returns event

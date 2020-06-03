@@ -392,3 +392,69 @@ Return-value for the local players camera only.
 @async
 */
 constant native GetCameraEyePositionLoc     takes nothing returns location
+
+
+/**
+@patch 1.32
+*/
+native BlzCameraSetupSetLabel               takes camerasetup whichSetup, string label returns nothing
+
+/**
+@patch 1.32
+*/
+native BlzCameraSetupGetLabel               takes camerasetup whichSetup returns string
+
+
+/**
+@patch 1.32
+*/
+native CameraSetFocalDistance			takes real distance returns nothing
+
+/**
+@patch 1.32
+*/
+native CameraSetDepthOfFieldScale       takes real scale returns nothing
+
+
+/**
+@patch 1.32
+*/
+native SetCinematicAudio                takes boolean cinematicAudio returns nothing
+
+/**
+@patch 1.32
+*/
+native SetSoundFacialAnimationLabel takes sound soundHandle, string animationLabel returns boolean
+
+/**
+@patch 1.32
+*/
+native SetSoundFacialAnimationGroupLabel takes sound soundHandle, string groupLabel returns boolean
+
+/**
+@patch 1.32
+*/
+native SetSoundFacialAnimationSetFilepath takes sound soundHandle, string animationSetFilepath returns boolean
+
+//Subtitle support that is attached to the soundHandle rather than as disperate data with the legacy UI
+
+/**
+@patch 1.32
+*/
+native SetDialogueSpeakerNameKey    takes sound soundHandle, string speakerName returns boolean
+
+/**
+@patch 1.32
+*/
+native GetDialogueSpeakerNameKey    takes sound soundHandle returns string
+
+/**
+@patch 1.32
+*/
+native SetDialogueTextKey           takes sound soundHandle, string dialogueText returns boolean
+
+/**
+@patch 1.32
+*/
+native GetDialogueTextKey           takes sound soundHandle returns string
+

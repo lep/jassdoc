@@ -71,3 +71,14 @@ constant native GetFloatGameState   takes fgamestate whichFloatGameState returns
 native          SetIntegerGameState takes igamestate whichIntegerGameState, integer value returns nothing
 
 constant native GetIntegerGameState takes igamestate whichIntegerGameState returns integer
+
+
+/**
+@patch 1.32
+*/
+native          SetMaxCheckpointSaves  	takes integer maxCheckpointSaves returns nothing
+
+/**
+@patch 1.32
+*/
+native          SaveGameCheckpoint  	takes string saveFileName, boolean showWindow returns nothing

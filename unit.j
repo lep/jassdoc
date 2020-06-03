@@ -1084,5 +1084,30 @@ native BlzSetUnitWeaponStringField                 takes unit whichUnit, unitwea
 @patch 1.31
 */
 native BlzPauseUnitEx                              takes unit whichUnit, boolean flag returns nothing
+
+/**
+@patch 1.31
+*/
 native BlzGetUnitAbility                           takes unit whichUnit, integer abilId returns ability
+
+/**
+@patch 1.31
+*/
 native BlzGetUnitAbilityByIndex                    takes unit whichUnit, integer index returns ability
+
+
+/**
+@patch 1.32
+*/
+native BlzStartUnitAbilityCooldown                 takes unit whichUnit, integer abilCode, real cooldown returns nothing
+
+
+/**
+@patch 1.32
+*/
+native BlzGetEventIsAttack                         takes nothing returns boolean
+
+/**
+@patch 1.32
+*/
+native BlzSetUnitFacingEx                          takes unit whichUnit, real facingAngle returns nothing

@@ -337,3 +337,8 @@ native GetSoundIsLoading            takes sound soundHandle returns boolean
 native RegisterStackedSound         takes sound soundHandle, boolean byPosition, real rectwidth, real rectheight returns nothing
 
 native UnregisterStackedSound       takes sound soundHandle, boolean byPosition, real rectwidth, real rectheight returns nothing
+
+/**
+@patch 1.32.2
+*/
+native SetThematicMusicVolume       takes integer volume returns nothing

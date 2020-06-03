@@ -231,35 +231,101 @@ native GetAbilitySound takes string abilityString, soundtype t returns string
 native GetAbilitySoundById takes integer abilityId, soundtype t returns string
 
 
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectColorByPlayer            takes effect whichEffect, player whichPlayer returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectColor                    takes effect whichEffect, integer r, integer g, integer b returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectAlpha                    takes effect whichEffect, integer alpha returns nothing
+
+/**
+@patch 1.31
+*/
 native BlzSetSpecialEffectScale                    takes effect whichEffect, real scale returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectPosition                 takes effect whichEffect, real x, real y, real z returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectHeight                   takes effect whichEffect, real height returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectTimeScale                takes effect whichEffect, real timeScale returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectTime                     takes effect whichEffect, real time returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectOrientation              takes effect whichEffect, real yaw, real pitch, real roll returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectYaw                      takes effect whichEffect, real yaw returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectPitch                    takes effect whichEffect, real pitch returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectRoll                     takes effect whichEffect, real roll returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectX                        takes effect whichEffect, real x returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectY                        takes effect whichEffect, real y returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectZ                        takes effect whichEffect, real z returns nothing
+
+/**
+@patch 1.29
+*/
 native BlzSetSpecialEffectPositionLoc              takes effect whichEffect, location loc returns nothing
 
 /**
 @async
+@patch 1.29
 */
 native BlzGetLocalSpecialEffectX                   takes effect whichEffect returns real
 
 /**
 @async
+@patch 1.29
 */
 native BlzGetLocalSpecialEffectY                   takes effect whichEffect returns real
 
 /**
 @async
+@patch 1.29
 */
 native BlzGetLocalSpecialEffectZ                   takes effect whichEffect returns real
 
@@ -293,6 +359,17 @@ native BlzPlaySpecialEffectWithTimeScale           takes effect whichEffect, ani
 */
 native BlzGetAnimName                              takes animtype whichAnim returns string
 
+/**
+@patch 1.31
+*/
 native BlzGetSpecialEffectScale                    takes effect whichEffect returns real
+
+/**
+@patch 1.31
+*/
 native BlzSetSpecialEffectMatrixScale              takes effect whichEffect, real x, real y, real z returns nothing
+
+/**
+@patch 1.31
+*/
 native BlzResetSpecialEffectMatrix                 takes effect whichEffect returns nothing

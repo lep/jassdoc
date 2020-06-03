@@ -494,3 +494,40 @@ native TriggerRegisterDeathEvent takes trigger whichTrigger, widget whichWidget 
 
 
 
+/**
+For EVENT_PLAYER_UNIT_PICKUP_ITEM, returns the item absorbing the picked up item in case it is stacking.
+Returns null if the item was a powerup and not a stacking item.
+
+@event EVENT_PLAYER_UNIT_PICKUP_ITEM
+@patch 1.32.3
+*/
+constant native BlzGetAbsorbingItem takes nothing returns item
+
+/**
+@event EVENT_PLAYER_UNIT_PICKUP_ITEM
+@patch 1.32.3
+*/
+constant native BlzGetManipulatedItemWasAbsorbed takes nothing returns boolean
+
+
+/**
+Source is the item that is losing charges.
+
+@event EVENT_PLAYER_UNIT_STACK_ITEM
+@patch 1.32.3
+*/
+constant native BlzGetStackingItemSource takes nothing returns item
+
+/**
+Target is the item getting charges.
+
+@event EVENT_PLAYER_UNIT_STACK_ITEM
+@patch 1.32.3
+*/
+constant native BlzGetStackingItemTarget takes nothing returns item
+
+/**
+@event EVENT_PLAYER_UNIT_STACK_ITEM
+@patch 1.32.3
+*/
+constant native BlzGetStackingItemTargetPreviousCharges takes nothing returns integer

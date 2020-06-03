@@ -129,3 +129,8 @@ native BlzBitXor                                   takes integer x, integer y re
 */
 native BlzConvertColor                             takes integer a, integer r, integer g, integer b returns integer
 
+/**
+@patch 1.32
+@pure
+*/
+constant native MathRound takes real r returns integer

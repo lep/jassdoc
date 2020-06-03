@@ -78,6 +78,42 @@ native PingMinimap                  takes real x, real y, real duration returns 
 
 native PingMinimapEx                takes real x, real y, real duration, integer red, integer green, integer blue, boolean extraEffects returns nothing
 
+
+/**
+@patch 1.32
+*/
+native CreateMinimapIconOnUnit      takes unit whichUnit, integer red, integer green, integer blue, string pingPath, fogstate fogVisibility returns minimapicon
+
+/**
+@patch 1.32
+*/
+native CreateMinimapIconAtLoc       takes location where, integer red, integer green, integer blue, string pingPath, fogstate fogVisibility returns minimapicon
+
+/**
+@patch 1.32
+*/
+native CreateMinimapIcon            takes real x, real y, integer red, integer green, integer blue, string pingPath, fogstate fogVisibility returns minimapicon
+
+/**
+@patch 1.32
+*/
+native SkinManagerGetLocalPath      takes string key returns string
+
+/**
+@patch 1.32
+*/
+native DestroyMinimapIcon           takes minimapicon pingId returns nothing
+
+/**
+@patch 1.32
+*/
+native SetMinimapIconVisible        takes minimapicon whichMinimapIcon, boolean visible returns nothing
+
+/**
+@patch 1.32
+*/
+native SetMinimapIconOrphanDestroy  takes minimapicon whichMinimapIcon, boolean doDestroy returns nothing
+
 native EnableOcclusion              takes boolean flag returns nothing
 
 native SetIntroShotText             takes string introText returns nothing
@@ -154,3 +190,99 @@ native EnableDragSelect             takes boolean state, boolean ui returns noth
 native EnablePreSelect              takes boolean state, boolean ui returns nothing
 
 native EnableSelect                 takes boolean state, boolean ui returns nothing
+
+//============================================================================
+//Machinima API
+//============================================================================
+
+/**
+@patch 1.32
+*/
+native BlzHideCinematicPanels                     takes boolean enable returns nothing
+
+/**
+@patch 1.32
+*/
+native SetPortraitLight             takes string portraitDNCFile returns nothing
+
+
+/**
+@patch 1.32
+*/
+native BlzShowTerrain                              takes boolean show returns nothing
+
+/**
+@patch 1.32
+*/
+native BlzShowSkyBox                               takes boolean show returns nothing
+
+/**
+@patch 1.32
+*/
+native BlzStartRecording                           takes integer fps returns nothing
+
+/**
+@patch 1.32
+*/
+native BlzEndRecording                             takes nothing returns nothing
+
+/**
+@patch 1.32
+*/
+native BlzShowUnitTeamGlow                         takes unit whichUnit, boolean show returns nothing
+
+// Skin
+
+/**
+@patch 1.32
+*/
+native BlzGetUnitSkin                                 takes unit whichUnit returns integer
+
+/**
+@patch 1.32
+*/
+native BlzGetItemSkin                                 takes item whichItem returns integer
+// native BlzGetDestructableSkin                         takes destructable whichDestructable returns integer
+
+/**
+@patch 1.32
+*/
+native BlzSetUnitSkin                                 takes unit whichUnit, integer skinId returns nothing
+
+/**
+@patch 1.32
+*/
+native BlzSetItemSkin                                 takes item whichItem, integer skinId returns nothing
+// native BlzSetDestructableSkin                         takes destructable whichDestructable, integer skinId returns nothing
+
+
+/**
+@patch 1.32
+*/
+native BlzCreateItemWithSkin                       takes integer itemid, real x, real y, integer skinId returns item
+
+/**
+@patch 1.32
+*/
+native BlzCreateUnitWithSkin                       takes player id, integer unitid, real x, real y, real face, integer skinId returns unit
+
+/**
+@patch 1.32
+*/
+native BlzCreateDestructableWithSkin               takes integer objectid, real x, real y, real face, real scale, integer variation, integer skinId returns destructable
+
+/**
+@patch 1.32
+*/
+native BlzCreateDestructableZWithSkin              takes integer objectid, real x, real y, real z, real face, real scale, integer variation, integer skinId returns destructable
+
+/**
+@patch 1.32
+*/
+native BlzCreateDeadDestructableWithSkin           takes integer objectid, real x, real y, real face, real scale, integer variation, integer skinId returns destructable
+
+/**
+@patch 1.32
+*/
+native BlzCreateDeadDestructableZWithSkin          takes integer objectid, real x, real y, real z, real face, real scale, integer variation, integer skinId returns destructable
+
