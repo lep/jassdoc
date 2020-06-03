@@ -287,6 +287,16 @@ native BlzTriggerRegisterFrameEvent                takes trigger whichTrigger, f
 native BlzGetTriggerFrame                          takes nothing returns framehandle
 
 /**
+@patch 1.32.6
+*/
+native BlzFrameGetChildrenCount                    takes framehandle frame returns integer
+
+/**
+@patch 1.32.6
+*/
+native BlzFrameGetChild                            takes framehandle frame, integer index returns framehandle
+
+/**
 @patch 1.31
 */
 native BlzGetTriggerFrameEvent                     takes nothing returns frameeventtype
