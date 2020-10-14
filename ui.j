@@ -59,10 +59,6 @@ native BlzCreateFrame                              takes string name, framehandl
 /**
 @patch 1.31
 */
-
-/**
-@patch 1.31
-*/
 native BlzCreateSimpleFrame                        takes string name, framehandle owner, integer createContext returns framehandle
 
 /**
@@ -154,10 +150,6 @@ native BlzFrameSetTextColor                        takes framehandle frame, inte
 /**
 @patch 1.31
 */
-
-/**
-@patch 1.31
-*/
 native BlzFrameSetFocus                            takes framehandle frame, boolean flag returns nothing
 
 /**
@@ -174,10 +166,6 @@ native BlzFrameSetEnable                           takes framehandle frame, bool
 @patch 1.31
 */
 native BlzFrameGetEnable                           takes framehandle frame returns boolean
-
-/**
-@patch 1.31
-*/
 
 /**
 @patch 1.31
