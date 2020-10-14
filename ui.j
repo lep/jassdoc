@@ -128,6 +128,11 @@ native BlzFrameSetText                             takes framehandle frame, stri
 native BlzFrameGetText                             takes framehandle frame returns string
 
 /**
+@patch 1.32.3
+*/
+native BlzFrameAddText                             takes framehandle frame, string text returns nothing
+
+/**
 @patch 1.31
 */
 native BlzFrameSetTextSizeLimit                    takes framehandle frame, integer size returns nothing
@@ -279,6 +284,15 @@ native BlzGetTriggerFrame                          takes nothing returns frameha
 */
 native BlzGetTriggerFrameEvent                     takes nothing returns frameeventtype
 
+/**
+@patch 1.32.3
+*/
+native BlzGetTriggerFrameValue                     takes nothing returns real
+
+/**
+@patch 1.32.3
+*/
+native BlzGetTriggerFrameText                      takes nothing returns string
 
 /**
 @patch 1.31
