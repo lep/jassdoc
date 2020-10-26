@@ -10,3 +10,5 @@ awkinplace
 Jass/Tokenizer.hs
 mkdocs
 *.sql
+dist
+dist-newstyle

@@ -1,8 +1,5 @@
 VERSION := $(shell git rev-parse --short HEAD)
 
-HSC := cabal exec -- ghc
-HSFLAGS := --make
-
 .PHONY: all clean release
 
 SRC := trackable.j quest.j random.j leaderboard.j terrain.j fog-of-war.j
@@ -16,12 +13,9 @@ SRC += item.j widget.j campaign.j ability.j string.j
 
 all: jass.db
 
-db.sql: mkdocs mksrc $(SRC)
-	./mkdocs $(filter %.j,$?) > $@
+db.sql: mksrc $(SRC)
+	cabal run --verbose=0 mkdocs -- $(filter %.j,$?) > $@
 	./mksrc $(filter %.j,$?) >> $@
-
-mkdocs: Jass/Parser.hs Jass/Types.hs Jass/Ast.hs mkdocs.hs
-	$(HSC) $(HSFLAGS) mkdocs
 
 jass.db: db.sql
 	sqlite3 $@ < $<
