@@ -40,7 +40,7 @@ while (my $line = <$fh>){
 	$state = "globals";
     }elsif( $state eq "globals" && $line =~ m/^\s*endglobals/){
 	$state = "nothing";
-    }elsif( $state eq "nothing" && $line =~m /^type\s+(\w+)\s+extends\s+.+/){
+    }elsif( $state eq "nothing" && $line =~ m/^type\s+(\w+)\s+extends\s+.+/){
 	my $type = $1;
 	check_name $type;
     }elsif ( $state eq "globals" ){
