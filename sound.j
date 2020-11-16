@@ -327,6 +327,8 @@ native VolumeGroupReset             takes nothing returns nothing
 
 /**
 @note If you just started the sound this still returns false.
+
+@async
 */
 native GetSoundIsPlaying            takes sound soundHandle returns boolean
 
