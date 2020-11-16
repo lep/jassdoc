@@ -126,6 +126,9 @@ Returns source if no entry was found.
 native GetLocalizedString takes string source returns string
 
 /**
+Returns the `integer` hotkey for a specific game action à la `"GAMEOVER_QUIT_GAME"`.
+You can look up potential values in `UI\FrameDef\GlobalStrings.fdf`.
+
 @async
 */
 native GetLocalizedHotkey takes string source returns integer
