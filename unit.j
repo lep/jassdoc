@@ -993,41 +993,49 @@ native BlzGetUnitZ                                 takes unit whichUnit returns 
 // Unit 
 
 /**
+@note Many fields don't work at all.
 @patch 1.31
 */
 native BlzGetUnitBooleanField                      takes unit whichUnit, unitbooleanfield whichField returns boolean
 
 /**
+@note Many fields don't work at all.
 @patch 1.31
 */
 native BlzGetUnitIntegerField                      takes unit whichUnit, unitintegerfield whichField returns integer
 
 /**
+@note Many fields don't work at all.
 @patch 1.31
 */
 native BlzGetUnitRealField                         takes unit whichUnit, unitrealfield whichField returns real
 
 /**
+@note Many fields don't work at all.
 @patch 1.31
 */
 native BlzGetUnitStringField                       takes unit whichUnit, unitstringfield whichField returns string
 
 /**
+@note Many fields don't work at all.
 @patch 1.31
 */
 native BlzSetUnitBooleanField                      takes unit whichUnit, unitbooleanfield whichField, boolean value returns boolean
 
 /**
+@note Many fields don't work at all.
 @patch 1.31
 */
 native BlzSetUnitIntegerField                      takes unit whichUnit, unitintegerfield whichField, integer value returns boolean
 
 /**
+@note Many fields don't work at all.
 @patch 1.31
 */
 native BlzSetUnitRealField                         takes unit whichUnit, unitrealfield whichField, real value returns boolean
 
 /**
+@note Many fields don't work at all.
 @patch 1.31
 */
 native BlzSetUnitStringField                       takes unit whichUnit, unitstringfield whichField, string value returns boolean
