@@ -207,7 +207,9 @@ main = do
     L8.putStrLn schema
     forM_ args $ \file -> do
         hPutStrLn stderr file
-        x <- parse programm file <$> readFile file
+        handle <- openFile file ReadMode
+        hSetBinaryMode handle True
+        x <- parse programm file <$> hGetContents handle -- closes handle
         let toplevel :: [Ast (Maybe String) Toplevel]
             toplevel = case x of
                 Right (Programm y) -> y
