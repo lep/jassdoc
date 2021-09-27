@@ -79,6 +79,7 @@ native SetItemUserData takes item whichItem, integer data returns nothing
 
 /**
 @patch 1.29
+@bug Doesn't work
 */
 native BlzSetItemName                              takes item whichItem, string name returns nothing
 
@@ -96,6 +97,7 @@ native BlzGetItemDescription                       takes item whichItem returns 
 
 /**
 @patch 1.29
+@bug Doesn't work
 */
 native BlzSetItemTooltip                           takes item whichItem, string tooltip returns nothing
 
