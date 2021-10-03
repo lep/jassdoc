@@ -1,15 +1,9 @@
-#!/usr/local/bin/perl
-
+#!/usr/bin/perl
 
 use 5.30.0;
 
 use strict;
 use warnings;
-
-
-
-
-
 
 sub escape {
     my ($in) = @_;
