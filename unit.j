@@ -606,7 +606,10 @@ native UnitRemoveType takes unit whichUnit, unittype whichUnitType returns boole
 native UnitAddAbility takes unit whichUnit, integer abilityId returns boolean
 
 /**
-@bug Removing non-interrupt abilities like divine shile while they're being cast (at the EVENT_PLAYER_UNIT_SPELL_EFFECT point), and while the caster is moving, will cause the caster to become unresponsive to new commands until they reach their ordered move point. 
+@bug Removing non-interrupt abilities like divine shile while they're being
+cast (at the EVENT_PLAYER_UNIT_SPELL_EFFECT point), and while the caster is
+moving, will cause the caster to become unresponsive to new commands until
+they reach their ordered move point. 
 */
 native UnitRemoveAbility takes unit whichUnit, integer abilityId returns boolean
 
