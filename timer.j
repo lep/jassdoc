@@ -13,7 +13,7 @@ native TimerStart           takes timer whichTimer, real timeout, boolean period
 
 /**
 @note If passed timer is paused or has expired,
-this function returns (`TimerGetTimeout` - `TimerGetRemaining`).
+this function returns `(TimerGetTimeout - TimerGetRemaining)`.
 @bug If passed timer was resumed by `ResumeTimer`,
 this function returns amount of time elapsed after last resuming.
 */
