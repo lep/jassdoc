@@ -5,7 +5,7 @@ native CreateTimer          takes nothing returns timer
 /**
 @bug Destroying does not pause timer,
 so if call of its callback is scheduled,
-then callback is called with `GetElapsedTimer` being null.
+then callback is called with `GetElapsedTimer` being `null`.
 */
 native DestroyTimer         takes timer whichTimer returns nothing
 
@@ -38,6 +38,7 @@ After that passed timer is stopped even if it is periodic.
 native ResumeTimer          takes timer whichTimer returns nothing
 
 /**
+@bug Returns `null` if timer is destroyed right before callback call.
 @bug Might crash the game if called when there is no expired timer.
 <http://www.wc3c.net/showthread.php?t=84131>
 */
