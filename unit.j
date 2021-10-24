@@ -254,7 +254,11 @@ native SetUnitRescuable takes unit whichUnit, player byWhichPlayer, boolean flag
 native SetUnitRescueRange takes unit whichUnit, real range returns nothing
 
 
+/**
+Sets the hero's strength property. If the new strength property is less than current value, the hero will lose HP.
 
+@note Hero cannot lose HP below 1.0, which means that removing X strength and then adding X strength back can result in healing.
+*/
 native SetHeroStr takes unit whichHero, integer newStr, boolean permanent returns nothing
 
 native SetHeroAgi takes unit whichHero, integer newAgi, boolean permanent returns nothing
