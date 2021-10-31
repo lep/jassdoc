@@ -930,6 +930,7 @@ constant native OrderId                     takes string  orderIdString     retu
 
 /**
 @pure
+@bug Always returns null after the game is loaded/if the game is a replay.
 @bug Do not use this in a global initialisation as it returns null there.
 */
 constant native OrderId2String              takes integer orderId           returns string
