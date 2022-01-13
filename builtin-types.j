@@ -10,6 +10,7 @@ type boolean extends void
 A 32-bit IEEE-754 float type.
 
 <http://www.hiveworkshop.com/forums/lab-715/real-talk-floats-warcraft-3-a-270579/>
+
 <http://www.hiveworkshop.com/forums/lab-715/100-accurate-pretty-fast-realtoindex-back-247170/>
 */
 type real extends void
