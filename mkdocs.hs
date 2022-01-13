@@ -186,11 +186,13 @@ schema = L8.unlines
          , "      value text,                             "
          , "      primary key (fnname, param)             "
          , " );                                           "
+
          , " create table if not exists annotations (     "
          , "      fnname text,                            "
          , "      anname text,                            "
          , "      value text                              "
          , " );                                           "
+
          , " create table if not exists params_extra (    "
          , "      fnname text,                            "
          , "      param text,                             "
@@ -198,8 +200,14 @@ schema = L8.unlines
          , "      value,                                  "
          , "      primary key (fnname, param, anname)     "
          , " );                                           "
+
          , " create index if not exists annotation_index  "
          , " on annotations(fnname);                      "
+
+         , " create table if not exists metadata (        "
+         , "    key text primary key,                     "
+         , "    value text                                "
+         , ");                                            "
          ]
 
 main = do

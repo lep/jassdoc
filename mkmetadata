@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "insert or replace into metadata (key, value) values ('git-commit', '$(git rev-parse HEAD)')"

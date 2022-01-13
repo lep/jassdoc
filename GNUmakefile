@@ -16,6 +16,7 @@ all: jass.db
 db.sql: mksrc $(SRC)
 	cabal run --verbose=0 mkdocs -- $(filter %.j,$?) > $@
 	./mksrc $(filter %.j,$?) >> $@
+	./mkmetadata >> $@
 
 jass.db: db.sql
 	sqlite3 $@ < $<
