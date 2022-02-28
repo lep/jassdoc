@@ -23,153 +23,157 @@ foreach my $file (@ARGV){
     say "BEGIN TRANSACTION;";
 
     while (my $line = <$fh>){
-	if($line =~ /^(?:constant\s+)?function\s+(\w+)/){
-	    $start = $.;
-	    $state = "function";
-	    $fn = $1;
-	    $src = $line;
-	}elsif($line =~ /^endfunction/){
-	    $end = $.;
-	    chomp $line;
-	    $state = "nothing";
-	    $src .= $line;
+        if($line =~ /^(?:constant\s+)?function\s+(\w+)/){
+            $start = $.;
+            $state = "function";
+            $fn = $1;
+            $src = $line;
+        }elsif($line =~ /^endfunction/){
+            $end = $.;
+            chomp $line;
+            $state = "nothing";
+            $src .= $line;
 
-	    $src = escape($src);
-	    $fn = escape($fn);
-	    say <<SQL;
-		insert into annotations values (
-		    '$fn',
-		    'source-code',
-		    '$src'
-		);
+            $src = escape($src);
+            $fn = escape($fn);
+            say <<SQL;
+                insert into annotations values (
+                    '$fn',
+                    'source-code',
+                    '$src'
+                );
 
-		insert into annotations values (
-		    '$fn',
-		    'start-line',
-		    $start
-		);
+                insert into annotations values (
+                    '$fn',
+                    'start-line',
+                    $start
+                );
 
-		insert into annotations values (
-		    '$fn',
-		    'end-line',
-		    $end
-		);
+                insert into annotations values (
+                    '$fn',
+                    'end-line',
+                    $end
+                );
 
-		insert into annotations values (
-		    '$fn',
-		    'type',
-		    'function'
-		);
+                insert into annotations values (
+                    '$fn',
+                    'type',
+                    'function'
+                );
 SQL
-	}elsif( $line =~ /^(?:constant\s+)?native\s+(\w+)/ && $state eq "nothing" ){
-	    chomp $line;
-	    $src = $line;
-	    $src = escape($src);
-	    $fn = escape($1);
-	    say <<SQL;
-		insert into annotations values (
-		    '$fn',
-		    'source-code',
-		    '$src'
-		);
+        }elsif( $line =~ /^(?:constant\s+)?native\s+(\w+)/ && $state eq "nothing" ){
+            chomp $line;
+            $src = $line;
+            $src = escape($src);
+            $fn = escape($1);
+            say <<SQL;
+                insert into annotations values (
+                    '$fn',
+                    'source-code',
+                    '$src'
+                );
 
-		insert into annotations values (
-		    '$fn',
-		    'start-line',
-		    $.
-		);
+                insert into annotations values (
+                    '$fn',
+                    'start-line',
+                    $.
+                );
 
-		insert into annotations values (
-		    '$fn',
-		    'end-line',
-		    $.
-		);
+                insert into annotations values (
+                    '$fn',
+                    'end-line',
+                    $.
+                );
 
 
-		insert into annotations values (
-		    '$fn',
-		    'type',
-		    'native'
-		);
+                insert into annotations values (
+                    '$fn',
+                    'type',
+                    'native'
+                );
 SQL
-	}elsif ( $state eq "function"){
-	    $src .= $line;
-	}elsif ( $line =~ m/^\s*globals/){
-	    $state = "globals";
-	}elsif ( $state eq "globals" ){
-	    my $name;
-	    given($line){
-		$name = $1 when /^\s*constant\s+\w+\s+(\w+)\s*=.+$/;
-		$name = $1 when /^\s*\w+\s+array\s+(\w+)/;
-		$name = $1 when /^\s*\w+\s+(\w+)/;
-	    }
-	    if($name){
-		$name = escape($name);
-		$line = escape($line);
-		say <<SQL;
-		    insert into annotations values (
-			'$name',
-			'source-code',
-			'$line'
-		    );
+        }elsif ( $state eq "function"){
+            $src .= $line;
+        }elsif ( $line =~ m/^\s*globals/){
+            $state = "globals";
+        }elsif ( $state eq "globals" ){
+            my $name;
+            given($line){
+                $name = $1 when /^\s*constant\s+\w+\s+(\w+)\s*=.+$/;
+                $name = $1 when /^\s*\w+\s+array\s+(\w+)/;
+                $name = $1 when /^\s*\w+\s+(\w+)/;
+            }
+            if($name){
+                $name = escape($name);
+                $line = escape($line);
+                say <<SQL;
+		    -- normally we delete old data in mkdocs but mkdocs
+		    -- doesnt handle globals.
+		    delete from annotations where fnname = '$name';
 
-		    insert into annotations values (
-			'$name',
-			'source-file',
-			'$file'
-		    );
+                    insert into annotations values (
+                        '$name',
+                        'source-code',
+                        '$line'
+                    );
 
-		    insert into annotations values (
-			'$name',
-			'start-line',
-			$.
-		    );
+                    insert into annotations values (
+                        '$name',
+                        'source-file',
+                        '$file'
+                    );
 
-		    insert into annotations values (
-			'$name',
-			'end-line',
-			$.
-		    );
+                    insert into annotations values (
+                        '$name',
+                        'start-line',
+                        $.
+                    );
 
-		    insert into annotations values (
-			'$name',
-			'type',
-			'global'
-		    );
+                    insert into annotations values (
+                        '$name',
+                        'end-line',
+                        $.
+                    );
+
+                    insert into annotations values (
+                        '$name',
+                        'type',
+                        'global'
+                    );
 SQL
 
-	    }
-	}elsif( $state eq "globals" && $line =~ m/^\s*endglobals/){
-	    $state = "nothing";
-	}elsif( $line =~m /^type\s+(\w+)\s+extends\s+.+/){
-	    my $type = escape($1);
-	    my $line = escape($line);
-		say <<SQL;
-		    insert into annotations values (
-			'$type',
-			'source-code',
-			'$line'
-		    );
+            }
+        }elsif( $state eq "globals" && $line =~ m/^\s*endglobals/){
+            $state = "nothing";
+        }elsif( $line =~m /^type\s+(\w+)\s+extends\s+.+/){
+            my $type = escape($1);
+            my $line = escape($line);
+            say <<SQL;
+                insert into annotations values (
+                    '$type',
+                    'source-code',
+                    '$line'
+                );
 
-		    insert into annotations values (
-			'$type',
-			'start-line',
-			$.
-		    );
+                insert into annotations values (
+                    '$type',
+                    'start-line',
+                    $.
+                );
 
-		    insert into annotations values (
-			'$type',
-			'end-line',
-			$.
-		    );
+                insert into annotations values (
+                    '$type',
+                    'end-line',
+                    $.
+                );
 
-		    insert into annotations values (
-			'$type',
-			'type',
-			'type'
-		    );
+                insert into annotations values (
+                    '$type',
+                    'type',
+                    'type'
+                );
 SQL
-	}
+        }
 
 
     }
