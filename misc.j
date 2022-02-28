@@ -25,14 +25,13 @@ Adds a string to the preload buffer.
 Should probably not be named `filename`.
 
 @note The data will be put into the file like this:
-````
+
     call Preload("<data here>")
-````
+
 So to put any executable code in the file you have to close the string and then
 put your code onto a new line, like this:
-````
+
     call Preload("\") \n call your_stuff_here()")
-````
 
 @note Also see the documentation for `Preloader` for more info on the generated files.
 */

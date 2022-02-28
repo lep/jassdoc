@@ -77,12 +77,12 @@ native GetHandleId takes handle h returns integer
 
 @note This function does bound-checking on the upper bound, e.g.
 `SubString("test", 0, 9999) == "test"` but not on the lower bound:
-````
-SubString("", -3, 0) == null
-SubString(null, -3, 0) == null
-SubString("non-empty/not-null", -3, 0) != ""
-SubString("non-empty/not-null", -3, 0) != null
-````
+
+    SubString("", -3, 0) == null
+    SubString(null, -3, 0) == null
+    SubString("non-empty/not-null", -3, 0) != ""
+    SubString("non-empty/not-null", -3, 0) != null
+
 <http://www.wc3c.net/showthread.php?p=1090749#post1090749>
 */
 native SubString takes string source, integer start, integer end returns string
@@ -128,6 +128,19 @@ native GetLocalizedString takes string source returns string
 /**
 Returns the `integer` hotkey for a specific game action à la `"GAMEOVER_QUIT_GAME"`.
 You can look up potential values in `UI\FrameDef\GlobalStrings.fdf`.
+
+@note To define own values you have to import a file named `war3mapMisc.txt`
+into your map. A sample `war3mapMisc.txt` could look like this:
+
+    [Hotkeys]
+    ,=44
+    !='!'
+    A='A'
+    B='B'
+    C='C'
+    // etc.
+
+See also <https://www.hiveworkshop.com/threads/chrord.274579/>.
 
 @async
 */

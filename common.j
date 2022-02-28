@@ -51,7 +51,22 @@ type widgetevent        extends     eventid
 type dialogevent        extends     eventid
 type unittype           extends     handle
 
+/**
+Represents a game speed option at which the map can run. There are five
+predefined settings, but only SLOWEST, SLOW, NORMAL can be set and used.
+Setting FAST or FASTEST will automatically set it to NORMAL instead.
+
+Warcraft 3 game speed setting:
+
+| Menu Name      | Game constant      | Speed | 10 seconds is |
+|----------------|--------------------|-------|---------------|
+| High (default) | `MAP_SPEED_NORMAL` | 1.0x  | 10s           |
+| Medium         | `MAP_SPEED_SLOW`   | 0.8x  | 12.5s         |
+| Slow           | `MAP_SPEED_SLOWEST`| 0.6x  | 16.667s       |
+
+*/
 type gamespeed          extends     handle
+
 type gamedifficulty     extends     handle
 type gametype           extends     handle
 type mapflag            extends     handle
