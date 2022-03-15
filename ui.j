@@ -363,7 +363,7 @@ native BlzFrameSetVertexColor                      takes framehandle frame, inte
 @param level
 bigger number gives a higher position.
 Used to reorder the children of a Frame.
-SimpleFrames have fixed internal Layers. Which only contain String/Textures. For SimpleFrames Level sets them a relative position inside the
+SimpleFrames have fixed internal Layers. Which only contain String/Textures. For SimpleFrames Level sets them higher/lower to all other SimpleFrames.
 */
 native BlzFrameSetLevel                            takes framehandle frame, integer level returns nothing
 
