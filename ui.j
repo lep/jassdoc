@@ -112,7 +112,7 @@ native BlzFrameSetPoint                            takes framehandle frame, fram
 Unbinds & places point of frame to x/y.
 Coords are for the 4:3 Screen
 
-    |0.0/0.8           0.8/0.6|
+    |0.0/0.6           0.8/0.6|
     |                         |
     |         0.4/0.3         |
     |                         |
