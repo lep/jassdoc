@@ -17,6 +17,7 @@ of this repository.
 So far I have used `@param`, `@bug`, `@note`, `@pure`, `@async` and `@event` annotations.
 Other possible annotations could be `@nosideeffect`.
 
+Do note that the parser expects the annotations after the general description.
 
 # Build
 
