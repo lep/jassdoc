@@ -41,14 +41,12 @@ The first time a Frame enters the map's script it takes a handleId.
 native BlzGetOriginFrame                           takes originframetype frameType, integer index returns framehandle
 
 /**
-@async
 @patch 1.31
 Enable/Disable autoreposing of some default frames, when the window state/size changes.
 */
 native BlzEnableUIAutoPosition                     takes boolean enable returns nothing
 
 /**
-@async
 @patch 1.31
 
 Hides/Shows most of the default match UI. Unaffected are
@@ -75,14 +73,14 @@ Create a new Frame using a Frame-BluePrint name (fdf) as child of owner.
 BluePrint needs to be loaded over TOC & fdf.
 Owner and BluePrint have to be from the Frame family.
 Can only create rootFrames.
-Created Frames are stored into the game's Frame-Storage, BlzGetFrameByName(name, createContext). Overwrites occupied slots.
+Created Frames are stored into the game's Frame-Storage, `BlzGetFrameByName(name, createContext)`. Overwrites occupied slots.
 */
 native BlzCreateFrame                              takes string name, framehandle owner, integer priority, integer createContext returns framehandle
 
 /**
 @patch 1.31
 
-Like BlzCreateFrame but for the SimpleFrame family, Frame "SIMPLExxxx".
+Like `BlzCreateFrame` but for the SimpleFrame family, Frame "SIMPLExxxx".
 */
 native BlzCreateSimpleFrame                        takes string name, framehandle owner, integer createContext returns framehandle
 
@@ -100,7 +98,6 @@ native BlzCreateFrameByType                        takes string typeName, string
 native BlzDestroyFrame                             takes framehandle frame returns nothing
 
 /**
-@async
 @patch 1.31
 
 Unbinds a point of FrameA and places it relative to a point of FrameB.
@@ -113,7 +110,6 @@ By placing multiple points of one Frame a Size is enforced.
 native BlzFrameSetPoint                            takes framehandle frame, framepointtype point, framehandle relative, framepointtype relativePoint, real x, real y returns nothing
 
 /**
-@async
 @patch 1.31
 
 unbinds & places point of frame to x/y.
@@ -133,7 +129,6 @@ SimpleFrames, Leaderboard, TimerDialog, Multiboard, ConsoleUIBackdrop
 native BlzFrameSetAbsPoint                         takes framehandle frame, framepointtype point, real x, real y returns nothing
 
 /**
-@async
 @patch 1.31
 Unbinds all points of frame.
 Useful to move frames with the next SetPoint.
@@ -141,7 +136,6 @@ Useful to move frames with the next SetPoint.
 native BlzFrameClearAllPoints                      takes framehandle frame returns nothing
 
 /**
-@async
 @patch 1.31
 @param frame 
 the frame moved/resized
@@ -149,7 +143,6 @@ the frame moved/resized
 native BlzFrameSetAllPoints                        takes framehandle frame, framehandle relative returns nothing
 
 /**
-@async
 @patch 1.31
 */
 native BlzFrameSetVisible                          takes framehandle frame, boolean visible returns nothing
@@ -178,15 +171,13 @@ SimpleFrames return an empty String.
 native BlzFrameGetName                             takes framehandle frame returns string
 
 /**
-@async
 @patch 1.31
 Ignores visibility
-Trigger FRAMEEVENT_CONTROL_CLICK
+Trigger `FRAMEEVENT_CONTROL_CLICK`
 */
 native BlzFrameClick                               takes framehandle frame returns nothing
 
 /**
-@async
 @patch 1.31
 
 Supports Warcraft 3 TextCommands
@@ -202,7 +193,6 @@ native BlzFrameSetText                             takes framehandle frame, stri
 native BlzFrameGetText                             takes framehandle frame returns string
 
 /**
-@async
 @patch 1.31
 Start a NewLine and add text (TEXTAREA).
 */
@@ -223,24 +213,21 @@ native BlzFrameGetTextSizeLimit                    takes framehandle frame retur
 
 SimpleFrames only
 @param color
--> BlzConvertColor
+-> `BlzConvertColor`
 */
 native BlzFrameSetTextColor                        takes framehandle frame, integer color returns nothing
 
 /**
-@async
 @patch 1.31
 */
 native BlzFrameSetFocus                            takes framehandle frame, boolean flag returns nothing
 
 /**
-@async
 @patch 1.31
 */
 native BlzFrameSetModel                            takes framehandle frame, string modelFile, integer cameraIndex returns nothing
 
 /**
-@async
 @patch 1.31
 Turns on/off Interactivity/Events of frame
 Can Swap Color/Texture.
@@ -256,7 +243,6 @@ native BlzFrameSetEnable                           takes framehandle frame, bool
 native BlzFrameGetEnable                           takes framehandle frame returns boolean
 
 /**
-@async
 @param alpha
 0 to 255
 @patch 1.31
@@ -271,13 +257,11 @@ native BlzFrameSetAlpha                            takes framehandle frame, inte
 native BlzFrameGetAlpha                            takes framehandle frame returns integer
 
 /**
-@async
 @patch 1.31
 */
 native BlzFrameSetSpriteAnimate                    takes framehandle frame, integer primaryProp, integer flags returns nothing
 
 /**
-@async
 @patch 1.31
 
 @param flag 
@@ -291,7 +275,6 @@ Overwrittes some fdf setup.
 native BlzFrameSetTexture                          takes framehandle frame, string texFile, integer flag, boolean blend returns nothing
 
 /**
-@async
 @patch 1.31
 Affects child-Frames, when they don't have an own Scale.
 */
@@ -310,13 +293,11 @@ Crashs the game, on hover, when done twice (same pair).
 native BlzFrameSetTooltip                          takes framehandle frame, framehandle tooltip returns nothing
 
 /**
-@async
 @patch 1.31
 */
 native BlzFrameCageMouse                           takes framehandle frame, boolean enable returns nothing
 
 /**
-@async
 @patch 1.31
 Sets the current Value when the FrameType uses that feature:
 POPUPMENU, SLIDER, SIMPLESTATUSBAR, STATUSBAR
@@ -331,30 +312,26 @@ Gets the current local Value.
 native BlzFrameGetValue                            takes framehandle frame returns real
 
 /**
-@async
 @patch 1.31
 */
 native BlzFrameSetMinMaxValue                      takes framehandle frame, real minValue, real maxValue returns nothing
 
 /**
-@async
 @patch 1.31
 SLIDER accuracy for User.
 */
 native BlzFrameSetStepSize                         takes framehandle frame, real stepSize returns nothing
 
 /**
-@async
 @patch 1.31
 */
 native BlzFrameSetSize                             takes framehandle frame, real width, real height returns nothing
 
 /**
-@async
 @patch 1.31
 SimpleFrames only
 @param color
--> BlzConvertColor
+-> `BlzConvertColor`
 */
 native BlzFrameSetVertexColor                      takes framehandle frame, integer color returns nothing
 
@@ -390,13 +367,12 @@ native BlzFrameGetHeight                           takes framehandle frame retur
 native BlzFrameGetWidth                            takes framehandle frame returns real
 
 /**
-@async
 @patch 1.31
+Only works for String (SimpleFrames)
 */
 native BlzFrameSetFont                             takes framehandle frame, string fileName, real height, integer flags returns nothing
 
 /**
-@async
 @patch 1.31
 */
 native BlzFrameSetTextAlignment                    takes framehandle frame, textaligntype vert, textaligntype horz returns nothing
@@ -408,13 +384,13 @@ native BlzFrameSetTextAlignment                    takes framehandle frame, text
 The event starts for all players when one player triggers it.
 
 The Event Getter functions. 
-BlzGetTriggerFrame      returns framehandle
-BlzGetTriggerFrameEvent returns frameeventtype
-BlzGetTriggerFrameValue returns real
-BlzGetTriggerFrameText  returns string
-GetTriggerPlayer        returns player
+`BlzGetTriggerFrame`
+`BlzGetTriggerFrameEvent`
+`BlzGetTriggerFrameValue`
+`BlzGetTriggerFrameText`
+`GetTriggerPlayer`
 
-BlzGetTriggerFrameValue & BlzGetTriggerFrameText are only set when the FrameEventEvent has use of them.
+`BlzGetTriggerFrameValue` & `BlzGetTriggerFrameText` are only set when the FrameEventEvent has use of them.
 
 */
 native BlzTriggerRegisterFrameEvent                takes trigger whichTrigger, framehandle frame, frameeventtype eventId returns event
@@ -433,9 +409,9 @@ native BlzFrameGetChildrenCount                    takes framehandle frame retur
 
 /**
 @patch 1.32.6
-valid Indexes are 0 to BlzFrameGetChildrenCount - 1.
+valid Indexes are 0 to `BlzFrameGetChildrenCount` - 1.
 Ignores String/Texture
-Breaks BlzGetOriginFrame when the same frame is first get using BlzFrameGetChild.
+Breaks `BlzGetOriginFrame` when the same frame is first get using `BlzFrameGetChild`.
 */
 native BlzFrameGetChild                            takes framehandle frame, integer index returns framehandle
 
@@ -462,9 +438,8 @@ native BlzGetTriggerFrameText                      takes nothing returns string
 native BlzEnableCursor                             takes boolean enable returns nothing
 
 /**
-@async
 @patch 1.31
-x & y are px upto the used resolution BlzGetLocalClientWidth() BlzGetLocalClientHeight()
+x & y are px upto the used resolution `BlzGetLocalClientWidth()` `BlzGetLocalClientHeight()`
 */
 native BlzSetMousePos                              takes integer x, integer y returns nothing
 
@@ -495,14 +470,13 @@ native BlzChangeMinimapTerrainTex                  takes string texFile returns 
 @patch 1.31
 Create an event that listens to messages send by player with prefix.
 
-One can create a player SyncEvent for any prefix with TriggerRegisterPlayerEvent(whichTrigger, whichPlayer, EVENT_PLAYER_SYNC_DATA).
+One can create a player SyncEvent for any prefix with `TriggerRegisterPlayerEvent(whichTrigger, whichPlayer, EVENT_PLAYER_SYNC_DATA)`.
 
-GetTriggerPlayer() is the message source.
+`GetTriggerPlayer()` is the message source.
 */
 native BlzTriggerRegisterPlayerSyncEvent           takes trigger whichTrigger, player whichPlayer, string prefix, boolean fromServer returns event
 
 /**
-@async
 @patch 1.31
 
 The player running this function sends a string message to all players.
