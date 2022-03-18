@@ -30,10 +30,10 @@ native BlzSetAbilityResearchTooltip                takes integer abilCode, strin
 native BlzSetAbilityResearchExtendedTooltip        takes integer abilCode, string researchExtendedTooltip, integer level returns nothing
 
 /**
+Supports Unit/Item/Ability/Tech Codes
+
 @async
 @patch 1.29
-
-Supports Unit/Item/Ability/Tech Codes
 */
 native BlzGetAbilityTooltip                        takes integer abilCode, integer level returns string
 
@@ -44,10 +44,10 @@ native BlzGetAbilityTooltip                        takes integer abilCode, integ
 native BlzGetAbilityActivatedTooltip               takes integer abilCode, integer level returns string
 
 /**
+Supports Unit/Item/Ability/Tech Codes
+
 @async
 @patch 1.29
-
-Supports Unit/Item/Ability/Tech Codes
 */
 native BlzGetAbilityExtendedTooltip                takes integer abilCode, integer level returns string
 
@@ -75,9 +75,9 @@ native BlzGetAbilityResearchExtendedTooltip        takes integer abilCode, integ
 native BlzSetAbilityIcon                           takes integer abilCode, string iconPath returns nothing
 
 /**
-@patch 1.29
-
 Supports Unit/Item/Ability/Tech Codes
+
+@patch 1.29
 */
 native BlzGetAbilityIcon                           takes integer abilCode returns string
 
@@ -158,8 +158,7 @@ native BlzGetAbilityStringField                    takes ability whichAbility, a
 
 /**
 @patch 1.31
-
-Should not be used (crash): Use `BlzGetAbilityIntegerLevelField`
+@bug Should not be used (crash): Use `BlzGetAbilityIntegerLevelField`
 */
 native BlzGetAbilityBooleanLevelField              takes ability whichAbility, abilitybooleanlevelfield whichField, integer level returns boolean
 
@@ -220,8 +219,7 @@ native BlzSetAbilityStringField                    takes ability whichAbility, a
 
 /**
 @patch 1.31
-
-Should not be used (crash): Use `BlzSetAbilityIntegerLevelField`
+@bug Should not be used (crash): Use `BlzSetAbilityIntegerLevelField`
 */
 native BlzSetAbilityBooleanLevelField              takes ability whichAbility, abilitybooleanlevelfield whichField, integer level, boolean value returns boolean
 
