@@ -30,31 +30,41 @@ native BlzSetAbilityResearchTooltip                takes integer abilCode, strin
 native BlzSetAbilityResearchExtendedTooltip        takes integer abilCode, string researchExtendedTooltip, integer level returns nothing
 
 /**
+Supports Unit/Item/Ability/Tech Codes
+
+@async
 @patch 1.29
 */
 native BlzGetAbilityTooltip                        takes integer abilCode, integer level returns string
 
 /**
+@async
 @patch 1.29
 */
 native BlzGetAbilityActivatedTooltip               takes integer abilCode, integer level returns string
 
 /**
+Supports Unit/Item/Ability/Tech Codes
+
+@async
 @patch 1.29
 */
 native BlzGetAbilityExtendedTooltip                takes integer abilCode, integer level returns string
 
 /**
+@async
 @patch 1.29
 */
 native BlzGetAbilityActivatedExtendedTooltip       takes integer abilCode, integer level returns string
 
 /**
+@async
 @patch 1.29
 */
 native BlzGetAbilityResearchTooltip                takes integer abilCode, integer level returns string
 
 /**
+@async
 @patch 1.29
 */
 native BlzGetAbilityResearchExtendedTooltip        takes integer abilCode, integer level returns string
@@ -65,6 +75,8 @@ native BlzGetAbilityResearchExtendedTooltip        takes integer abilCode, integ
 native BlzSetAbilityIcon                           takes integer abilCode, string iconPath returns nothing
 
 /**
+Supports Unit/Item/Ability/Tech Codes
+
 @patch 1.29
 */
 native BlzGetAbilityIcon                           takes integer abilCode returns string
@@ -146,6 +158,7 @@ native BlzGetAbilityStringField                    takes ability whichAbility, a
 
 /**
 @patch 1.31
+@bug Should not be used (crash): Use `BlzGetAbilityIntegerLevelField`
 */
 native BlzGetAbilityBooleanLevelField              takes ability whichAbility, abilitybooleanlevelfield whichField, integer level returns boolean
 
@@ -206,6 +219,7 @@ native BlzSetAbilityStringField                    takes ability whichAbility, a
 
 /**
 @patch 1.31
+@bug Should not be used (crash): Use `BlzSetAbilityIntegerLevelField`
 */
 native BlzSetAbilityBooleanLevelField              takes ability whichAbility, abilitybooleanlevelfield whichField, integer level, boolean value returns boolean
 
