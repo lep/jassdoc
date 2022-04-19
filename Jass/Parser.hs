@@ -9,6 +9,9 @@ module Jass.Parser
     , stringlit
     , reallit
     , rawcode
+
+    , docstring
+    , symbol
     
     ) where
 
@@ -104,14 +107,7 @@ horizontalSpace = void $ some $ lexeme $ optional (L.skipLineComment "//") *> eo
 docstring :: Parser String
 docstring =  do
     symbol "/**"
-    go []
-  where
-    go :: [String] -> Parser String
-    go acc = do
-        x <- symbol "*/" <|> many printChar <* eol
-        if x == "*/"
-        then return.concat$reverse acc
-        else go $(x<>"\n"):acc
+    manyTill anySingle (symbol "*/")
 
 toplevel = globals
         <|> doc'd
