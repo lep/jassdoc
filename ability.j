@@ -1,35 +1,48 @@
 
 /**
+Set the ability tooltip (basic) of an ability at runtime.
+
 @patch 1.29
 */
 native BlzSetAbilityTooltip                        takes integer abilCode, string tooltip, integer level returns nothing
 
 /**
+Set the activated ability tooltip (for abilities such as defend which have an “active” state) of an ability at runtime.
+
 @patch 1.29
 */
 native BlzSetAbilityActivatedTooltip               takes integer abilCode, string tooltip, integer level returns nothing
 
 /**
+Set the ability tooltip (extended) of an ability at runtime.
+
 @patch 1.29
 */
 native BlzSetAbilityExtendedTooltip                takes integer abilCode, string extendedTooltip, integer level returns nothing
 
 /**
+Set the activated ability tooltip (Extended state for abilities such as defend which have an “active” state) of an ability at runtime.
+
 @patch 1.29
 */
 native BlzSetAbilityActivatedExtendedTooltip       takes integer abilCode, string extendedTooltip, integer level returns nothing
 
 /**
+Set the research ability tooltip (For abilities that can be learned (all abilities have this, but only hero abilities show it on the object editor, you can still change it with these natives)) of an ability at runtime.
+
 @patch 1.29
 */
 native BlzSetAbilityResearchTooltip                takes integer abilCode, string researchTooltip, integer level returns nothing
 
 /**
+Set the research ability tooltip (Extended state for abilities that can be learned (all abilities have this, but only hero abilities show it on the object editor, you can still change it with these natives)) of an ability at runtime.
+
 @patch 1.29
 */
 native BlzSetAbilityResearchExtendedTooltip        takes integer abilCode, string researchExtendedTooltip, integer level returns nothing
 
 /**
+Get the ability tooltip of an ability.
 Supports Unit/Item/Ability/Tech Codes
 
 @async
@@ -38,12 +51,15 @@ Supports Unit/Item/Ability/Tech Codes
 native BlzGetAbilityTooltip                        takes integer abilCode, integer level returns string
 
 /**
+Get the ability activated tooltip (for abilities that have an “activated” state) of an ability.
+
 @async
 @patch 1.29
 */
 native BlzGetAbilityActivatedTooltip               takes integer abilCode, integer level returns string
 
 /**
+Get the extended ability tooltip of an ability.
 Supports Unit/Item/Ability/Tech Codes
 
 @async
@@ -52,29 +68,38 @@ Supports Unit/Item/Ability/Tech Codes
 native BlzGetAbilityExtendedTooltip                takes integer abilCode, integer level returns string
 
 /**
+Get the extended ability activated tooltip (for abilities that have an “activated” state such as defend, Avatar, etc.) of an ability.
+
 @async
 @patch 1.29
 */
 native BlzGetAbilityActivatedExtendedTooltip       takes integer abilCode, integer level returns string
 
 /**
+Get the ability research tooltip (for abilities that can be researched/learned such as defend, hero abilities, etc) of an ability.
+
 @async
 @patch 1.29
 */
 native BlzGetAbilityResearchTooltip                takes integer abilCode, integer level returns string
 
 /**
+Get the extended ability research tooltip (for abilities that can be researched/learned such as defend, hero abilities, etc) of an ability.
+
 @async
 @patch 1.29
 */
 native BlzGetAbilityResearchExtendedTooltip        takes integer abilCode, integer level returns string
 
 /**
+Change(set) an ability’s icon at runtime.
+
 @patch 1.29
 */
 native BlzSetAbilityIcon                           takes integer abilCode, string iconPath returns nothing
 
 /**
+Get an ability’s icon at runtime, returns the icon path.
 Supports Unit/Item/Ability/Tech Codes
 
 @patch 1.29
@@ -82,52 +107,90 @@ Supports Unit/Item/Ability/Tech Codes
 native BlzGetAbilityIcon                           takes integer abilCode returns string
 
 /**
+Change(set) an ability’s activated icon (this is for abilities that have an activated state such as defend, avatar, etc) at runtime.
+
 @patch 1.29
 */
 native BlzSetAbilityActivatedIcon                  takes integer abilCode, string iconPath returns nothing
 
 /**
+Get an ability’s activated icon (this is for abilities that have an activated state such as defend, avatar, etc) at runtime, returns icon path.
+
 @patch 1.29
 */
 native BlzGetAbilityActivatedIcon                  takes integer abilCode returns string
 
 /**
+Get the ability X coordinate (Cartesian System) of the ability icon in the default 4x3 grid.
+
 @patch 1.29
 */
 native BlzGetAbilityPosX                           takes integer abilCode returns integer
+
 /**
+Get the ability Y coordinate (Cartesian System) of the ability icon in the default 4x3 grid.
+
 @patch 1.29
 */
 native BlzGetAbilityPosY                           takes integer abilCode returns integer
+
 /**
+Set the ability X coordinate (Cartesian System) of the ability icon in the default 4x3 grid.
+As of the 1.31 PTR while you can specify the position of abilities such as “Build” directly in the object editor, you cannot do it with this native.
+
 @patch 1.29
 */
 native BlzSetAbilityPosX                           takes integer abilCode, integer x returns nothing
+
 /**
+Set the ability Y coordinate (Cartesian System) of the ability icon in the default 4x3 grid.
+
+@note As of the 1.31 PTR while you can specify the position of abilities such as “Build” directly in the object editor, you cannot do it with this native.
+
 @patch 1.29
 */
 native BlzSetAbilityPosY                           takes integer abilCode, integer y returns nothing
+
 /**
+Get the ability X coordinate (Cartesian System) of the activated ability icon in the default 4x3 grid.
+
 @patch 1.29
 */
 native BlzGetAbilityActivatedPosX                  takes integer abilCode returns integer
+
 /**
+Get the ability Y coordinate (Cartesian System) of the activated ability icon in the default 4x3 grid.
+
 @patch 1.29
 */
 native BlzGetAbilityActivatedPosY                  takes integer abilCode returns integer
+
 /**
+Change(Set) the ability X coordinate (Cartesian System) of the activated ability icon in the default 4x3 grid.
+
 @patch 1.29
 */
 native BlzSetAbilityActivatedPosX                  takes integer abilCode, integer x returns nothing
+
 /**
+Change(Set) the ability Y coordinate (Cartesian System) of the activated ability icon in the default 4x3 grid.
+
 @patch 1.29
 */
 native BlzSetAbilityActivatedPosY                  takes integer abilCode, integer y returns nothing
+
 /**
+Requires an ability ID and the ability level and returns the ability’s (at the level passed) mana cost. 
+
+@note Since 1.31: use Level 0 to read manacosts of Level 1.
+
 @patch 1.29
 */
 native BlzGetAbilityManaCost                       takes integer abilId, integer level returns integer
+
 /**
+Requires an ability ID and the ability level and returns the ability’s (at the level passed) cooldown. *Since 1.31: use Level 0 to read cooldown from Level 1.*
+
 @patch 1.29
 */
 native BlzGetAbilityCooldown                       takes integer abilId, integer level returns real

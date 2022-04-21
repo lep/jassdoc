@@ -8,6 +8,8 @@ native GroupAddUnit                         takes group whichGroup, unit whichUn
 native GroupRemoveUnit                      takes group whichGroup, unit whichUnit returns boolean
 
 /**
+Adds a target addGroup to the desired whichGroup immediately.
+
 @patch 1.31
 */
 native BlzGroupAddGroupFast                 takes group whichGroup, group addGroup returns integer

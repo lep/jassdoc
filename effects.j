@@ -232,46 +232,73 @@ native GetAbilitySoundById takes integer abilityId, soundtype t returns string
 
 
 /**
+Changes(Set) the color of a special effect (tinting), using the specific player’s color, it will tint the effect on every part that it can be tinted.
+
 @patch 1.29
 */
 native BlzSetSpecialEffectColorByPlayer            takes effect whichEffect, player whichPlayer returns nothing
 
 /**
+Changes(Set) the color of a special effect (tinting), using R (RED) G (GREEN) B (BLUE) values, it will tint the effect on every part that it can be tinted.
+
 @patch 1.29
 */
 native BlzSetSpecialEffectColor                    takes effect whichEffect, integer r, integer g, integer b returns nothing
 
 /**
+Changes(Set) the alpha (transparency) of a special effect, the entire model will be made transparent based on the integer value.
+*Integer Alpha goes from 0 to 100 (it equals percentage).*
+
 @patch 1.29
 */
 native BlzSetSpecialEffectAlpha                    takes effect whichEffect, integer alpha returns nothing
 
 /**
+Changes(Set) the scale of a special effect, the entire model will be scaled based on the scale value.
+
+*Even though scale is a real (allows negative and positive numbers with decimals), it should be logically deduced that it shouldn’t be a negative value, object editor forces the minimum to be 0.10 (10% of the original size), it is not yet tested if it supports up to 0.01(1% of the original size).*
+
 @patch 1.31
 */
 native BlzSetSpecialEffectScale                    takes effect whichEffect, real scale returns nothing
 
 /**
+Changes(set) the X, Y and Z (altitude) coordinate (Cartesian System) of the current location of the special effect.
+
 @patch 1.29
 */
 native BlzSetSpecialEffectPosition                 takes effect whichEffect, real x, real y, real z returns nothing
 
 /**
+Changes(set) the model height of the passed special effect.
+
 @patch 1.29
 */
 native BlzSetSpecialEffectHeight                   takes effect whichEffect, real height returns nothing
 
 /**
+Changes(set) the TimeScale (animation speed) of the passed special effect.
+
+*TimeScale is a real, which means that it can be both negative and positive numbers with decimals, if you see the animation speed at 100.0 it will go at 100% speed, if you however set it to -100.0 it will go backwards and reset towards the beginning, however it can’t start at a negative value, if you want to reset the animation, you must pass it a negative value mid animation, else it will stand still.*
+
 @patch 1.29
 */
 native BlzSetSpecialEffectTimeScale                takes effect whichEffect, real timeScale returns nothing
 
 /**
+Changes(set) the time (how long the special effect lasts) of the passed special effect.
+
+*TimeScale is a real, which means that it could be both negative and positive numbers with decimals, however it can’t be a negative value in this case.*
+
 @patch 1.29
 */
 native BlzSetSpecialEffectTime                     takes effect whichEffect, real time returns nothing
 
 /**
+Changes(set) the yaw, pitch and roll of the passed special effect.
+
+*Yaw, pitch and roll are reals, which means that they can be both negative and positive numbers with decimals.*
+
 @patch 1.29
 */
 native BlzSetSpecialEffectOrientation              takes effect whichEffect, real yaw, real pitch, real roll returns nothing
@@ -307,54 +334,93 @@ native BlzSetSpecialEffectY                        takes effect whichEffect, rea
 native BlzSetSpecialEffectZ                        takes effect whichEffect, real z returns nothing
 
 /**
+Changes(set) the current location of the special effect into the passed location.
+
 @patch 1.29
 */
 native BlzSetSpecialEffectPositionLoc              takes effect whichEffect, location loc returns nothing
 
 /**
+Get the X coordinate (Cartesian System) of the current location of the special effect.
+
 @async
 @patch 1.29
 */
 native BlzGetLocalSpecialEffectX                   takes effect whichEffect returns real
 
 /**
+Get the Y coordinate (Cartesian System) of the current location of the special effect.
+
 @async
 @patch 1.29
 */
 native BlzGetLocalSpecialEffectY                   takes effect whichEffect returns real
 
 /**
+Get the Z coordinate (altitude)(Cartesian System) of the current location of the special effect.
+
 @async
 @patch 1.29
 */
 native BlzGetLocalSpecialEffectZ                   takes effect whichEffect returns real
 
 /**
+Clears all subanimations (tags) of the special effect. It does not affect normal animations.
+
+**Example usage of subanimations:**
+    // if you play anim attack it becomes attack slam:
+    call BlzSpecialEffectAddSubAnimation(fx, SUBANIM_TYPE_SLAM)
+    call BlzPlaySpecialEffect(fx, ANIM_TYPE_SPELL)
+    call BlzSpecialEffectRemoveSubAnimation(fx, SUBANIM_TYPE_SLAM)
+
+**Examples of animations, animation names:**
+    stand | birth | death | decay | dissipate | walk | attack | morph | sleep | spell | portrait
+
+**Examples of subanimations (tags), subanimation names:**
+    first | second | third | fourth | fifth | defend | channel | slam | victory | throw | spin |
+    ready | upgrade | lumber | gold | work | talk | swim | flesh | entangle | chainlightning | rooted |
+    eattree | berserk | spiked | light | moderate | severe | critical | small | medium | large | alternateex |
+    looping | wounded | fast | turn | left | right | fire | one | two | three | four | five | fill |
+    puke | drain | flail | hit | off | complete
+
 @patch 1.30
 */
 native BlzSpecialEffectClearSubAnimations          takes effect whichEffect returns nothing
 
 /**
+Clears a specific subanimation (tag) of a specified special effect. (It does not affect normal animations)
+
 @patch 1.30
 */
 native BlzSpecialEffectRemoveSubAnimation          takes effect whichEffect, subanimtype whichSubAnim returns nothing
 
 /**
+Adds(set) a specific subanimation (tag) to a specified special effect.
+
 @patch 1.30
 */
 native BlzSpecialEffectAddSubAnimation             takes effect whichEffect, subanimtype whichSubAnim returns nothing
 
 /**
+Plays a specific subanimation (tag) on a specified special effect.
+
 @patch 1.30
 */
 native BlzPlaySpecialEffect                        takes effect whichEffect, animtype whichAnim returns nothing
 
 /**
+Plays a specific subanimation (tag) on a specified special effect at a specific timeScale (speed).
+
+1. *Overrides the currently playing animation/subanimation.*
+2. *TimeScale is a real, meaning that it can be both negative and positive numbers with decimals, there are examples in which you can use negative numbers mid animation to make it go backwards, however in this case it starts at 0 meaning that it can’t be negative.*
+
 @patch 1.30
 */
 native BlzPlaySpecialEffectWithTimeScale           takes effect whichEffect, animtype whichAnim, real timeScale returns nothing
 
 /**
+Returns the string representation of the name of the animation. `animtype` is a handle of the animation type.
+
 @patch 1.30
 */
 native BlzGetAnimName                              takes animtype whichAnim returns string

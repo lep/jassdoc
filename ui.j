@@ -1,16 +1,25 @@
 
 
 /**
+Controls selection settings globally: enables/disables selection of units, and visibility of selection circles
+
+@param enableSelection true to enable, false to disable selection
+@param enableSelectionCircle true to show, false to hide selection circles on units and doodads
+
 @patch 1.31
 */
 native BlzEnableSelections                         takes boolean enableSelection, boolean enableSelectionCircle returns nothing
 
 /**
+Returns whether unit selection is enabled (a global setting, see `BlzEnableSelections`)
+
 @patch 1.31
 */
 native BlzIsSelectionEnabled                       takes nothing returns boolean
 
 /**
+Returns whether unit selection circles are shown (a global setting, see `BlzEnableSelections`)
+
 @patch 1.31
 */
 native BlzIsSelectionCircleEnabled                 takes nothing returns boolean
@@ -21,18 +30,55 @@ native BlzIsSelectionCircleEnabled                 takes nothing returns boolean
 native BlzCameraSetupApplyForceDurationSmooth      takes camerasetup whichSetup, boolean doPan, real forcedDuration, real easeInDuration, real easeOutDuration, real smoothFactor returns nothing
 
 /**
+Enable or disable the three green arrows when right-clicking on ground.
+
 @patch 1.31
 */
 native BlzEnableTargetIndicator                    takes boolean enable returns nothing
 
 /**
+Check if the the three green arrows when right-clicking on ground is shown or not.
+
 @patch 1.31
 */
 native BlzIsTargetIndicatorEnabled                 takes nothing returns boolean
 
 
 /**
-The first time a Frame enters the map's script it takes a handleId.
+Get a `framehandle` by specifying a specific `originframetype` and index (in most cases it should be 0 (first index), however it can go above 0 when using originframetypes such as `ORIGIN_FRAME_HERO_BUTTON`)
+
+The one with indices above 0 are:
+	// The ability buttons at the right bottom corner
+    ORIGIN_FRAME_COMMAND_BUTTON <0 to 11>
+	// The clickable hero icons at the left of the screen
+    ORIGIN_FRAME_HERO_BUTTON <0 to 6>
+	// See above for the following:
+    ORIGIN_FRAME_HERO_HP_BAR <0 to 6>
+    ORIGIN_FRAME_HERO_MANA_BAR <0 to 6>
+    ORIGIN_FRAME_HERO_BUTTON_INDICATOR <0 to 6>
+	// Item inventory buttons
+    ORIGIN_FRAME_ITEM_BUTTON <0 to 5>
+	// The buttons altering the minimap
+    ORIGIN_FRAME_MINIMAP_BUTTON
+	// Indices:
+	// 0 = Menu
+	// 1 = Allies
+	// 2 = Log
+	// 3 = Quest
+    ORIGIN_FRAME_SYSTEM_BUTTON <0 to 3> 
+
+Here is a basic example that creates a custom timerdialog window:
+
+    set GameUI = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+    set UIMain = BlzCreateFrame("TimerDialog", GameUI, 0, 0)
+    call BlzFrameSetPoint(UIMain, FRAMEPOINT_CENTER, GameUI, FRAMEPOINT_CENTER, 0.25, 0.055)
+    call BlzFrameSetSize(UIMain, 0.3, 0.7)
+
+*Take a look at the .fdf files in the game’s CASC or point 1.3 (refer to this document’s table of contents for reference) it should give you some ideas.*
+
+@note The first time a Frame enters the map's script it takes a handleId.
+
+@note This is up for edition, this native is lacking a more in-depth explanation. For example a list of all of the originframetypes, and their possible indexes.
 
 @patch 1.31
 @param index to high values will return the frame from the last valid Index
@@ -40,17 +86,18 @@ The first time a Frame enters the map's script it takes a handleId.
 native BlzGetOriginFrame                           takes originframetype frameType, integer index returns framehandle
 
 /**
-Enable/Disable autoreposing of some default frames, when the window state/size changes.
+Disabling Auto Position will prevent the game using default positions for changed hidden frames as soon the reappear/their state is changed.
 
 @patch 1.31
 */
 native BlzEnableUIAutoPosition                     takes boolean enable returns nothing
 
 /**
-Hides/Shows most of the default match UI. Unaffected are
-Mouse, Command Buttons, Chat, Messages, TimerDialog, Multiboard, Leaderboard and ConsoleUIBackdrop
+Hides/Shows most of the default in-game UI.
+Unaffected: Mouse, Command Buttons, Chat, Messages, TimerDialog, Multiboard, Leaderboard and ConsoleUIBackdrop
 
-(De)Activades some autoreposing of default frames.
+
+(De)Activades some auto-repositioning of default frames (see: `BlzEnableUIAutoPosition`)
 
 @patch 1.31
 */
@@ -70,7 +117,7 @@ native BlzLoadTOCFile                              takes string TOCFile returns 
 Create a new Frame using a Frame-BluePrint name (fdf) as child of owner.
 BluePrint needs to be loaded over TOC & fdf.
 Owner and BluePrint have to be from the Frame family.
-Can only create rootFrames.
+Can only create rootFrames (not subFrames).
 Created Frames are stored into the game's Frame-Storage, `BlzGetFrameByName(name, createContext)`. Overwrites occupied slots.
 
 @patch 1.31
@@ -79,6 +126,8 @@ native BlzCreateFrame                              takes string name, framehandl
 
 /**
 Like `BlzCreateFrame` but for the SimpleFrame family, Frame "SIMPLExxxx".
+
+@note Only Frames loaded by used tocs are valid names.
 
 @patch 1.31
 */
@@ -109,7 +158,7 @@ By placing multiple points of one Frame a Size is enforced.
 native BlzFrameSetPoint                            takes framehandle frame, framepointtype point, framehandle relative, framepointtype relativePoint, real x, real y returns nothing
 
 /**
-Unbinds & places point of frame to x/y.
+Set frame absolute x,y position with framepointtype.
 Coords are for the 4:3 Screen
 
     |0.0/0.6           0.8/0.6|
@@ -119,10 +168,12 @@ Coords are for the 4:3 Screen
     |0.0/0.0           0.8/0.0|
 
 0.0/0.0 is bottomLeft (Minimap)
-0.8/0.6 is TopRight (UpkeepCost
+0.8/0.6 is TopRight (UpkeepCost)
 In widescreen format one can go further left with -x or further right with x > 0.8
 Only some Frames and their Children/Offspring can leave 4:3.
 SimpleFrames, Leaderboard, TimerDialog, Multiboard, ConsoleUIBackdrop
+
+@param point framepointtype is a point, position of which you set to move the frame relatively to it.
 
 @patch 1.31
 */
@@ -137,17 +188,30 @@ Useful to move frames with the next SetPoint.
 native BlzFrameClearAllPoints                      takes framehandle frame returns nothing
 
 /**
+Example:
+
+    BlzHideOriginFrames(true)
+    BlzFrameSetAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_WORLD_FRAME, 0), BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
+
 @patch 1.31
 @param frame the frame moved/resized
 */
 native BlzFrameSetAllPoints                        takes framehandle frame, framehandle relative returns nothing
 
 /**
+Sets visibility of a frame and its children.
+
+@param visible true is visible, false is invisible
+
 @patch 1.31
 */
 native BlzFrameSetVisible                          takes framehandle frame, boolean visible returns nothing
 
 /**
+Returns visibility status of frame.
+
+@param frame Target frame
+
 @async
 @patch 1.31
 */
@@ -155,16 +219,26 @@ native BlzFrameIsVisible                           takes framehandle frame retur
 
 
 /**
+Requires a string for the frame name that you want to retrieve (get), and an integer (which in most cases should be 0) that specifies the index of the frame that you want to get (for example for inventory slots you have 6, from 0-5).
+
 Read from the internal Frame-Storage.
 The first time a Frame enters the map's script it takes a handleId.
+
+Example: `BlzGetFrameByName("SimpleHeroLevelBar", 0)`
+
+@note Refer to fdf files for frame names
 
 @patch 1.31
 */
 native BlzGetFrameByName                           takes string name, integer createContext returns framehandle
 
 /**
+Returns the string representation of frame name.
+
 Inherited Frames lose their Name.
 SimpleFrames return an empty String.
+
+@param frame A handle to frame
 
 @patch 1.31
 */
@@ -178,16 +252,18 @@ Ignores visibility. Triggers `FRAMEEVENT_CONTROL_CLICK`
 native BlzFrameClick                               takes framehandle frame returns nothing
 
 /**
-Supports Warcraft 3 TextCommands:
+Supports Warcraft 3 formatting codes:
 
-* Color Codes (`|cffffcc00`)
-* Line seperator (`|n \n`)
+* Colors (`|cffffcc00`)
+* Multiple lines (`|n`, `\n`)
 
 @patch 1.31
 */
 native BlzFrameSetText                             takes framehandle frame, string text returns nothing
 
 /**
+Returns(Get) the text of that frame. For user input frames this text probably differs between them. For some frames the child contains the Text.
+
 @async
 @patch 1.31
 */
@@ -210,7 +286,7 @@ native BlzFrameSetTextSizeLimit                    takes framehandle frame, inte
 native BlzFrameGetTextSizeLimit                    takes framehandle frame returns integer
 
 /**
-SimpleFrames only.
+Changes text color of the frame. SimpleFrames only.
 
 @param color Four byte integer of the form 0xaarrggbb. You can also use
 `BlzConvertColor` to create such an integer.
@@ -231,9 +307,9 @@ native BlzFrameSetModel                            takes framehandle frame, stri
 
 /**
 Turns on/off Interactivity/Events of frame
-Can Swap Color/Texture.
-(false) Removes KeyboardFocus.
+A disabled frame is transparent to the mouse (can click on things behind it) and can have a different color/texture/frame than in enabled state.
 The frame's Tooltip is still shown on hover.
+(false) Removes KeyboardFocus.
 
 @patch 1.31
 */
@@ -269,7 +345,7 @@ Overwrittes some fdf setup.
 
 @patch 1.31
 
-@param flag 0 strechted, 1 tiles (BACKDROP)
+@param flag texture fill setting: 0 to stretch, 1 to tile (BACKDROP)
 @param blend use transparency
 
 */
@@ -282,32 +358,41 @@ Affects child-Frames, when they don't have an own Scale.
 native BlzFrameSetScale                            takes framehandle frame, real scale returns nothing
 
 /**
-frame needs to be able to take mouse input.
+Frame tooltip is visible when hovered with the mouse. Otherwise tooltip will be hidden.
+
 tooltip is limited to 4:3, but not it's children.
 SimpleFrame tooltips are not hidden with this call.
 frame and tooltip have to be from the same Family (Frames/SimpleFrames).
 tooltip can only serve one frame.
-Undoing this is not possible.
-Crashs the game, on hover, when done twice (same pair).
+It's not possible to undo this
+
+@bug Crashes the game, on hover, when done twice (same pair).
+@bug Frames should not be used as tooltips for simple Frames (Crash on PTR 1.31).
 
 @patch 1.31
 */
 native BlzFrameSetTooltip                          takes framehandle frame, framehandle tooltip returns nothing
 
 /**
+The mouse cursor is forced into the frame and can not leave it. New cages (true) will overwrite old ones. Some frames can not be used to imprison the mouse.
+
+@param enable Enable mouse cage
+
 @patch 1.31
 */
 native BlzFrameCageMouse                           takes framehandle frame, boolean enable returns nothing
 
 /**
-Sets the current Value when the FrameType uses that feature:
+Sets the current Frame Value. Only for FrameType that use this feature:
 POPUPMENU, SLIDER, SIMPLESTATUSBAR, STATUSBAR
+
 @patch 1.31
 */
 native BlzFrameSetValue                            takes framehandle frame, real value returns nothing
 
 /**
-Gets the current local Value.
+Gets the current Frame Value.
+
 @async
 @patch 1.31
 */
@@ -426,18 +511,32 @@ native BlzFrameGetChild                            takes framehandle frame, inte
 native BlzGetTriggerFrameEvent                     takes nothing returns frameeventtype
 
 /**
+Returns the user input value of the triggered frame. (Slider, popupmenu, scrollbar...)
+One has to use this native to sync user input, if that is needed.
+
+@note This is a hidden native in PTR 1.31 (has to be declared to be usable in Jass).
+
 @patch 1.31
 */
 native BlzGetTriggerFrameValue                     takes nothing returns real
 
 /**
+Returns the user input text of the triggered frame. (EditBox)
+One has to use this native to sync user input, if that is needed.
+
 Limited to something like ~255 bytes.
+
+@note This is a hidden native in PTR 1.31 (has to be declared to be usable in Jass).
 
 @patch 1.31
 */
 native BlzGetTriggerFrameText                      takes nothing returns string
 
 /**
+Sets cursor visibility
+
+@param enable true to show, false to hide cursor
+
 @patch 1.31
 */
 native BlzEnableCursor                             takes boolean enable returns nothing
@@ -450,7 +549,8 @@ x & y are px upto the used resolution `BlzGetLocalClientWidth()` `BlzGetLocalCli
 native BlzSetMousePos                              takes integer x, integer y returns nothing
 
 /**
-Has Warcraft 3 the focus?
+Returns true if Warcraft 3 window is in focus.
+
 @async
 @patch 1.31
 */
@@ -473,11 +573,13 @@ native BlzChangeMinimapTerrainTex                  takes string texFile returns 
 
 
 /**
-Create an event that listens to messages send by player with prefix.
+Create an event that listens to messages sent by player with prefix. (see: `BlzSendSyncData`)
 
 One can create a player SyncEvent for any prefix with `TriggerRegisterPlayerEvent(whichTrigger, whichPlayer, EVENT_PLAYER_SYNC_DATA)`.
 
 `GetTriggerPlayer()` is the message source.
+
+@param fromServer "should be false"
 
 @patch 1.31
 */
@@ -538,6 +640,8 @@ native BlzGetTriggerPlayerMetaKey                  takes nothing returns integer
 native BlzGetTriggerPlayerIsKeyDown                takes nothing returns boolean
 
 /**
+Gets the width (pixels) of the Warcraft 3 window.
+
 @async
 @patch 1.31
 */
@@ -545,6 +649,8 @@ native BlzGetLocalClientWidth                      takes nothing returns integer
 
 
 /**
+Gets the height (pixels) of the Warcraft 3 window.
+
 @async
 @patch 1.31
 */
@@ -570,6 +676,8 @@ Returns the used warcraft 3 Lcid
     //  Chinese (Traditional)   = 'zhTW' 
     //  Chinese (Simplified)    = 'zhCN' 
     //  Thai                    = 'thTH'
+	
+@note Warcraft 3 Lcids can be found in `config.ini` inside the CASC.
 
 @async
 @patch 1.31

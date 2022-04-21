@@ -147,6 +147,10 @@ The player to store hero data for.
 native CachePlayerHeroData takes player whichPlayer returns nothing
 
 /**
+Decreases (reduces) a specific player’s specific upgrade by a specific amount of levels.
+
+@note Even though this native takes an integer and integers can be both negatives and positive numbers, in this specific case this native does not allow for an increment by setting the integer to negative.
+
 @patch 1.29
 */
 native BlzDecPlayerTechResearched                  takes player whichPlayer, integer techid, integer levels returns nothing

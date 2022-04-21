@@ -843,153 +843,256 @@ integer id to a unit, which can serve as an index in other data structures.
 native SetUnitUserData takes unit whichUnit, integer data returns nothing
 
 /**
+Get the max HP (hit points) of a unit.
+
 @patch 1.29
 */
 native BlzGetUnitMaxHP                             takes unit whichUnit returns integer
 
 /**
+Change(set) the max HP (hit points) of a unit.
+
 @patch 1.29
 */
 native BlzSetUnitMaxHP                             takes unit whichUnit, integer hp returns nothing
 
 /**
+Get the max mana of a unit.
+
 @patch 1.29
 */
 native BlzGetUnitMaxMana                           takes unit whichUnit returns integer
 
 /**
+Change(set) the max mana of a unit.
+
 @patch 1.29
 */
 native BlzSetUnitMaxMana                           takes unit whichUnit, integer mana returns nothing
 
 
 /**
+Change(set) the unit name at runtime.
+
 @patch 1.29
 */
 native BlzSetUnitName                              takes unit whichUnit, string name returns nothing
 
 /**
+Change(set) the hero proper name at runtime. A "proper name" is the multiple names a hero can get at random, in this case it forces a specific proper name.
+
 @patch 1.29
 */
 native BlzSetHeroProperName                        takes unit whichUnit, string heroProperName returns nothing
 
 /**
+Get a unit’s base damage, weapon index can be either 0 and 1 (a unit can have two different attacks).
+
 @patch 1.29
 */
 native BlzGetUnitBaseDamage                        takes unit whichUnit, integer weaponIndex returns integer
 
 /**
+Change(set) a unit’s base damage, weapon index can be either 0 and 1 (a unit can have two different attacks) at runtime.
+
 @patch 1.29
 */
 native BlzSetUnitBaseDamage                        takes unit whichUnit, integer baseDamage, integer weaponIndex returns nothing
 
 /**
+Get a unit’s dice number (damage), weapon index can be either 0 and 1 (a unit can have two different attacks).
+
 @patch 1.29
 */
 native BlzGetUnitDiceNumber                        takes unit whichUnit, integer weaponIndex returns integer
 
 /**
+Change(set) a unit’s dice number (damage), weapon index can be either 0 and 1 (a unit can have two different attacks) at runtime.
+
 @patch 1.29
 */
 native BlzSetUnitDiceNumber                        takes unit whichUnit, integer diceNumber, integer weaponIndex returns nothing
 
 /**
+Get a unit’s dice sides (damage), weapon index can be either 0 and 1 (a unit can have two different attacks).
+
 @patch 1.29
 */
 native BlzGetUnitDiceSides                         takes unit whichUnit, integer weaponIndex returns integer
 
 /**
+Changes(set) unit’s dice sides (damage), weapon index can be either 0 and 1 (a unit can have two different attacks) at runtime.
+
 @patch 1.29
 */
 native BlzSetUnitDiceSides                         takes unit whichUnit, integer diceSides, integer weaponIndex returns nothing
 
 /**
+Get a unit’s Attack Cooldown, weapon index can be either 0 and 1 (a unit can have two different attacks).
+Returns base attack cooldown (from the unit editor) in seconds, without any items, agility or buff bonuses.
+
 @patch 1.29
 */
 native BlzGetUnitAttackCooldown                    takes unit whichUnit, integer weaponIndex returns real
 
 /**
+Set a unit’s base Attack Cooldown, weapon index can be either 0 and 1 (a unit can have two different attacks) at runtime.
+
 @patch 1.29
 */
 native BlzSetUnitAttackCooldown                    takes unit whichUnit, real cooldown, integer weaponIndex returns nothing
 
 
 /**
+Get the current unit armor of a specific unit (real value).
+
+*Returns TOTAL amount of armor a unit has, including bonus (green) armor from  auras, buffs, agility and items. If you need just base or bonus armor, you need to calculate base armor yourself (for heroes: -2 + agility (excluding bonuses) * 0.3). Agility bonus also counts as bonus armor, e.g. +1 agility will be displayed as + 0.3 armor with default gameplay constants.*
+
 @patch 1.29
 */
 native BlzGetUnitArmor                             takes unit whichUnit returns real
 
 /**
+Changes(set) the unit armor of a specific unit, you pass it a real value, can be negative
+
+*Changes TOTAL amount of armor a unit has. If unit has a bonus (green) armor from an aura or item, base armor will be reduced to achieve total amount of armor you specified. E.g. a unit has 1+3 armor, if you set armor to 1.00, unit’s armor will be changed to -2+3*
+
 @patch 1.29
 */
 native BlzSetUnitArmor                             takes unit whichUnit, real armorAmount returns nothing
 
 /**
+Hides or unhides an ability for a unit.
+
+@param whichUnit
+Unit to apply this to
+
+@param abilId
+Rawcode of ability
+
+@param flag
+isHidden: true to hide, false to show
+
+@bug The boolean flag doesn't work as expected, it acts more like an integer counter: https://www.hiveworkshop.com/threads/blzunithideability-and-blzunitdisableability-dont-work.312477/
+
 @patch 1.29
 */
 native BlzUnitHideAbility                          takes unit whichUnit, integer abilId, boolean flag returns nothing
 
 /**
+Enables/disables and hides/unhides an ability for a unit. A visible disabled ability is shown as deactivated, an invisible ability disappears from the grid.
+
+@param whichUnit
+Unit to apply this to
+
+@param abilId
+Rawcode of ability
+
+@param flag
+isDisabled: true to disable, false to enable ability
+
+@param hideUI
+isHidden: true to hide, false to show
+
+@bug (1.32.10 confirmed) The flags doesn't work as expected, act more like an integer counter: https://www.hiveworkshop.com/threads/blzunithideability-and-blzunitdisableability-dont-work.312477/
+
 @patch 1.29
 */
 native BlzUnitDisableAbility                       takes unit whichUnit, integer abilId, boolean flag, boolean hideUI returns nothing
 
 /**
+Makes a specific summoned unit permanent.
+
 @patch 1.29
 */
 native BlzUnitCancelTimedLife                      takes unit whichUnit returns nothing
 
 /**
+Returns true if the unit is selectable.
+
 @patch 1.29
 */
 native BlzIsUnitSelectable                         takes unit whichUnit returns boolean
 
 /**
+Returns true if unit is invulnerable.
+
 @patch 1.29
 */
 native BlzIsUnitInvulnerable                       takes unit whichUnit returns boolean
 
 /**
+Interrupts unit's current attack being casted.
+
 @patch 1.29
 */
 native BlzUnitInterruptAttack                      takes unit whichUnit returns nothing
 
 /**
+Get a real which is the collision size of the specific unit being passed. For reference, a peasant returns 16 and a MG returns 48.
+
 @patch 1.29
 */
 native BlzGetUnitCollisionSize                     takes unit whichUnit returns real
 
 /**
+Changes(set) an ability’s cooldown at runtime for a specific unit.
+
+@param whichUnit Target unit (handle)
+@param abilId Rawcode of ability
+@param level Ability level
+@param cooldown New cooldown
+
+@note Cooldown is a real, which means that it supports negative and positive numbers with decimals, in this case setting it to negative allows you to reduce an ability’s cooldown.
+@note It does not reduce the cooldown if the ability is currently on CD, it will have its new cooldown after the CD is over though.
+
 @patch 1.29
 */
 native BlzSetUnitAbilityCooldown                   takes unit whichUnit, integer abilId, integer level, real cooldown returns nothing
 
 /**
+Get a specific unit’s specific ability cooldown from a specific level.
+
+@note It does not return the remaining cooldown when you use an ability but the max cooldown of that ability of that unit at that level.
+
 @patch 1.29
 */
 native BlzGetUnitAbilityCooldown                   takes unit whichUnit, integer abilId, integer level returns real
 
 /**
+Get a specific unit’s remaining ability cooldown.
+
 @patch 1.29
 */
 native BlzGetUnitAbilityCooldownRemaining          takes unit whichUnit, integer abilId returns real
 
 /**
+Reduces the current ability cooldown of a specific ability to 0.
+
 @patch 1.29
 */
 native BlzEndUnitAbilityCooldown                   takes unit whichUnit, integer abilCode returns nothing
 
 /**
+Get a specific unit’s specific ability’s mana cost at a specific level.
+
 @patch 1.29
 */
 native BlzGetUnitAbilityManaCost                   takes unit whichUnit, integer abilId, integer level returns integer
 
 /**
+Set manacost of an ability (at ability level) for a unit.
+Works as expected, so you can dynamically calculate the mana cost.
+
 @patch 1.29
 */
 native BlzSetUnitAbilityManaCost                   takes unit whichUnit, integer abilId, integer level, integer manaCost returns nothing
 
 /**
+Get a specific unit’s Z coordinate (altitude) (Cartesian System), Z is desync prone, this version might cause desyncs, but (unconfirmed) should be faster, hence why both `BlzGetUnitZ` and `BlzGetLocalUnitZ` exist (In case that you are doing a campaign, or something single player, you might decide to use this one instead of `BlzGetUnitZ`).
+
+@note Terrain height is not synced between clients in multiplayer
+
 @async
 @patch 1.29
 */
@@ -1036,6 +1139,24 @@ native BlzGetUnitStringField                       takes unit whichUnit, unitstr
 native BlzSetUnitBooleanField                      takes unit whichUnit, unitbooleanfield whichField, boolean value returns boolean
 
 /**
+Changes a unit's stats integer field.
+
+There're quirks when changing stats, some values don't apply immediately and some don't work at all, likely due to how the game engine uses them. Example:
+
+`BlzSetUnitIntegerField(unit, UNIT_IF_HIT_POINTS_REGENERATION_TYPE)`
+
+Regeneration type values are as follows:
+* 0 - Never
+* 1 - Always
+* 2 - Only on blight
+* 4 - Only at night
+
+Changing the regeneration type at runtime WILL NOT work, even if true is returned (false positive).
+
+For vision, it appears changing them to a specific value does not immediately change it. Instead, it will change over time to approach and reach said value. However, if one wishes to decrease the vision range, and the initial vision range is greater than 1800, the vision will remain at 1800. Thus, one must change it first to 1800, then to the desired value. Otherwise, vision change works as intended. One cannot increase vision beyond 1800.
+
+Going into a fountain of life will not increase a unit's hp regeneration rate. Modifying regeneration rate is instant.
+
 @note Many fields don't work at all.
 @patch 1.31
 */
@@ -1092,6 +1213,11 @@ native BlzSetUnitWeaponBooleanField                takes unit whichUnit, unitwea
 native BlzSetUnitWeaponIntegerField                takes unit whichUnit, unitweaponintegerfield whichField, integer index, integer value returns boolean
 
 /**
+Problems:
+unitweaponfields `UNIT_WEAPON_RF_ATTACK_RANGE` and `UNIT_WEAPON_RF_ATTACK_PROJECTILE_SPEED` do not appear to change in value, even if the operation is reported successful (returns a false positive). This was tested at indices 0 - 3.
+
+The getter equivalent of the native above does not work too (returns 0)
+
 @patch 1.31
 */
 native BlzSetUnitWeaponRealField                   takes unit whichUnit, unitweaponrealfield whichField, integer index, real value returns boolean
@@ -1102,6 +1228,8 @@ native BlzSetUnitWeaponRealField                   takes unit whichUnit, unitwea
 native BlzSetUnitWeaponStringField                 takes unit whichUnit, unitweaponstringfield whichField, integer index, string value returns boolean
 
 /**
+This does not update `IsUnitPaused` and keeps the command card visible. Otherwise identical to `PauseUnit()`.
+
 @patch 1.31
 */
 native BlzPauseUnitEx                              takes unit whichUnit, boolean flag returns nothing
@@ -1112,6 +1240,10 @@ native BlzPauseUnitEx                              takes unit whichUnit, boolean
 native BlzGetUnitAbility                           takes unit whichUnit, integer abilId returns ability
 
 /**
+Returns a handle to specific unit's ability instance.
+
+@note Last added ability is at index 0, older abilities are pushed up
+
 @patch 1.31
 */
 native BlzGetUnitAbilityByIndex                    takes unit whichUnit, integer index returns ability

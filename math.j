@@ -106,18 +106,39 @@ native Pow takes real x, real power returns real
 // Bit Operations
 
 /**
+Returns the result of connecting all bits of both numbers using OR (in regards of binary numeral system). It returns a number with bits, being set in at least one of the numbers.
+
+3v1 => 3 (0011 v 0001 => 0011)
+2v5 => 7 (0010 v 0101 => 0111)
+
+
 @pure
 @patch 1.31
 */
 native BlzBitOr                                    takes integer x, integer y returns integer
 
 /**
+Returns the result of connecting all bits of both numbers using AND (in regards of binary numeral system). It tells which bits are set for both integers.
+
+3&1 => 1 (0011 & 0001 => 0001)
+2&1 => 0 (0010 & 0001 => 0000)
+11&7 => 3 (1011 & 0111 => 0011)
+13&5 => 5 (1101 & 0101 => 0101)
+12&6 => 4 (1100 & 0100 => 0100)
+
+
 @pure
 @patch 1.31
 */
 native BlzBitAnd                                   takes integer x, integer y returns integer
 
 /**
+Returns the result of connecting all bits of both numbers using XOR (Difference) (in regards of binary numeral system). Each Bit being different between x and y becomes 1; every bit being equal becomes 0.
+
+2Xor5 => 7 (0010 xor 0101 => 0111)
+6Xor8 => 14  (0110 xor 1000 => 1110)
+
+
 @pure
 @patch 1.31
 */

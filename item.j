@@ -78,17 +78,23 @@ native GetItemUserData takes item whichItem returns integer
 native SetItemUserData takes item whichItem, integer data returns nothing
 
 /**
+Change(set) the item name at runtime.
+
 @patch 1.29
 @bug Doesn't work
 */
 native BlzSetItemName                              takes item whichItem, string name returns nothing
 
 /**
+Change(set) the item description at runtime.
+
 @patch 1.29
 */
 native BlzSetItemDescription                       takes item whichItem, string description returns nothing
 
 /**
+Get the item description.
+
 @async
 @patch 1.29
 */
@@ -96,12 +102,16 @@ native BlzGetItemDescription                       takes item whichItem returns 
 
 
 /**
+Change(set) the item tooltip at runtime.
+
 @patch 1.29
 @bug Doesn't work
 */
 native BlzSetItemTooltip                           takes item whichItem, string tooltip returns nothing
 
 /**
+Get the item tooltip.
+
 @async
 @patch 1.29
 */
@@ -110,11 +120,15 @@ native BlzGetItemTooltip                           takes item whichItem returns 
 
 
 /**
+Change(set) the extended item tooltip at runtime.
+
 @patch 1.29
 */
 native BlzSetItemExtendedTooltip                   takes item whichItem, string extendedTooltip returns nothing
 
 /**
+Get the extended item tooltip.
+
 @async
 @patch 1.29
 */
@@ -122,11 +136,15 @@ native BlzGetItemExtendedTooltip                   takes item whichItem returns 
 
 
 /**
+Change(set) the item icon path at runtime.
+
 @patch 1.29
 */
 native BlzSetItemIconPath                          takes item whichItem, string iconPath returns nothing
 
 /**
+Get the item icon path.
+
 @patch 1.29
 */
 native BlzGetItemIconPath                          takes item whichItem returns string
@@ -145,6 +163,8 @@ native BlzGetItemAbilityByIndex                    takes item whichItem, integer
 native BlzGetItemAbility                           takes item whichItem, integer abilCode returns ability
 
 /**
+@note The item has to be carried by a unit for this to work.
+
 @patch 1.31
 */
 native BlzItemAddAbility                           takes item whichItem, integer abilCode returns boolean
