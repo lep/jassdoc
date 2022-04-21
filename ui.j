@@ -76,11 +76,6 @@ Here is a basic example that creates a custom timerdialog window:
 
 *Take a look at the .fdf files in the game’s CASC or point 1.3 (refer to this document’s table of contents for reference) it should give you some ideas.*
 
-Example:
-
-    BlzHideOriginFrames(true)
-    BlzFrameSetAllPoints(BlzGetOriginFrame(E, 0)ORIGIN_FRAME_WORLD_FRAM, BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
-
 @note The first time a Frame enters the map's script it takes a handleId.
 
 @note This is up for edition, this native is lacking a more in-depth explanation. For example a list of all of the originframetypes, and their possible indexes.
