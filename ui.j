@@ -48,6 +48,7 @@ native BlzIsTargetIndicatorEnabled                 takes nothing returns boolean
 Get a `framehandle` by specifying a specific `originframetype` and index (in most cases it should be 0 (first index), however it can go above 0 when using originframetypes such as `ORIGIN_FRAME_HERO_BUTTON`)
 
 The one with indices above 0 are:
+
 	// The ability buttons at the right bottom corner
     ORIGIN_FRAME_COMMAND_BUTTON <0 to 11>
 	// The clickable hero icons at the left of the screen

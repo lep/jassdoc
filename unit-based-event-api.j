@@ -36,10 +36,13 @@ constant native GetEventDamageSource takes nothing returns unit
 Set the damage amount of a damage event.
 
 In 1.31 PTR there’s currently 3 new damage events:
+
 1. `EVENT_UNIT_DAMAGED` - old classic event for a specific unit;
 2. `EVENT_PLAYER_UNIT_DAMAGED` - Same as 1, but for all units of a specific player on the map;
-   `// This seems to work fine anyway:`
-   `call TriggerRegisterAnyUnitEventBJ(gg_trg_a, EVENT_PLAYER_UNIT_DAMAGING)`
+
+        // This seems to work fine anyway:
+        call TriggerRegisterAnyUnitEventBJ(gg_trg_a, EVENT_PLAYER_UNIT_DAMAGING)
+
 3. `EVENT_UNIT_DAMAGING` - triggers before any armor, armor type and other resistances. Event for a specific unit like 1;
 4. `EVENT_PLAYER_UNIT_DAMAGING` - triggers before any armor, armor type and other resistances. Useful to modify either damage amount, attack type or damage type before any reductions done by game.
 

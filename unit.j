@@ -1146,6 +1146,7 @@ There're quirks when changing stats, some values don't apply immediately and som
 `BlzSetUnitIntegerField(unit, UNIT_IF_HIT_POINTS_REGENERATION_TYPE)`
 
 Regeneration type values are as follows:
+
 * 0 - Never
 * 1 - Always
 * 2 - Only on blight
