@@ -121,7 +121,7 @@ native AutomationTestEnd                        takes nothing returns nothing
 native AutomationTestingFinished                takes nothing returns nothing
 
 /**
-According to MindWorX (Blizzard Developer): //They do nothing of interest //Just a compatibility thing
+"They do nothing of interest, just a compatibility thing" - MindWorX (Blizzard Developer), on [The Hive Discord](https://discord.com/channels/178569180625240064/311662737015046144/572101913349193738)
 
 @patch 1.30
 */

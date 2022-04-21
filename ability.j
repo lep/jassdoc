@@ -144,7 +144,8 @@ native BlzSetAbilityPosX                           takes integer abilCode, integ
 
 /**
 Set the ability Y coordinate (Cartesian System) of the ability icon in the default 4x3 grid.
-As of the 1.31 PTR while you can specify the position of abilities such as “Build” directly in the object editor, you cannot do it with this native.
+
+@note As of the 1.31 PTR while you can specify the position of abilities such as “Build” directly in the object editor, you cannot do it with this native.
 
 @patch 1.29
 */
@@ -179,7 +180,9 @@ Change(Set) the ability Y coordinate (Cartesian System) of the activated ability
 native BlzSetAbilityActivatedPosY                  takes integer abilCode, integer y returns nothing
 
 /**
-Requires an ability ID and the ability level and returns the ability’s (at the level passed) mana cost. *Since 1.31: use Level 0 to read manacosts from Level 1.*
+Requires an ability ID and the ability level and returns the ability’s (at the level passed) mana cost. 
+
+@note Since 1.31: use Level 0 to read manacosts of Level 1.
 
 @patch 1.29
 */

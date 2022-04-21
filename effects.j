@@ -365,23 +365,23 @@ Get the Z coordinate (altitude)(Cartesian System) of the current location of the
 native BlzGetLocalSpecialEffectZ                   takes effect whichEffect returns real
 
 /**
-Clears all of the subanimations (tags) of a specified special effect. (It does not affect normal animations)
+Clears all subanimations (tags) of the special effect. It does not affect normal animations.
 
 **Example usage of subanimations:**
-// if you play anim attack it becomes attack slam:
-call BlzSpecialEffectAddSubAnimation(fx, SUBANIM_TYPE_SLAM)
-call BlzPlaySpecialEffect(fx, ANIM_TYPE_SPELL)
-call BlzSpecialEffectRemoveSubAnimation(fx, SUBANIM_TYPE_SLAM)
+    // if you play anim attack it becomes attack slam:
+    call BlzSpecialEffectAddSubAnimation(fx, SUBANIM_TYPE_SLAM)
+    call BlzPlaySpecialEffect(fx, ANIM_TYPE_SPELL)
+    call BlzSpecialEffectRemoveSubAnimation(fx, SUBANIM_TYPE_SLAM)
 
 **Examples of animations, animation names:**
-stand | birth | death | decay | dissipate | walk | attack | morph | sleep | spell | portrait
+    stand | birth | death | decay | dissipate | walk | attack | morph | sleep | spell | portrait
 
 **Examples of subanimations (tags), subanimation names:**
-first | second | third | fourth | fifth | defend | channel | slam | victory | throw | spin |
-ready | upgrade | lumber | gold | work | talk | swim | flesh | entangle | chainlightning | rooted |
-eattree | berserk | spiked | light | moderate | severe | critical | small | medium | large | alternateex |
-looping | wounded | fast | turn | left | right | fire | one | two | three | four | five | fill |
-puke | drain | flail | hit | off | complete
+    first | second | third | fourth | fifth | defend | channel | slam | victory | throw | spin |
+    ready | upgrade | lumber | gold | work | talk | swim | flesh | entangle | chainlightning | rooted |
+    eattree | berserk | spiked | light | moderate | severe | critical | small | medium | large | alternateex |
+    looping | wounded | fast | turn | left | right | fire | one | two | three | four | five | fill |
+    puke | drain | flail | hit | off | complete
 
 @patch 1.30
 */
@@ -419,7 +419,7 @@ Plays a specific subanimation (tag) on a specified special effect at a specific 
 native BlzPlaySpecialEffectWithTimeScale           takes effect whichEffect, animtype whichAnim, real timeScale returns nothing
 
 /**
-Receives an animtype (type, extends handle), and returns the string representation of the name of the animation.
+Returns the string representation of the name of the animation. `animtype` is a handle of the animation type.
 
 @patch 1.30
 */

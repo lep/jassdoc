@@ -45,29 +45,41 @@ native BlzIsTargetIndicatorEnabled                 takes nothing returns boolean
 
 
 /**
-Get a framehandle (handle) by specifying a specific `originframetype` and the specific index of it (in most cases it should be 0, as in first, however it can go above 0 when using originframetypes such as `ORIGIN_FRAME_HERO_BUTTON`)
+Get a `framehandle` by specifying a specific `originframetype` and index (in most cases it should be 0 (first index), however it can go above 0 when using originframetypes such as `ORIGIN_FRAME_HERO_BUTTON`)
 
-The one with indexes above 0 are:
-ORIGIN_FRAME_COMMAND_BUTTON [0 to 11] The ability buttons at the right bottom corner
-ORIGIN_FRAME_HERO_BUTTON [0 to 6] The clickable hero icons at the left of the screen
-ORIGIN_FRAME_HERO_HP_BAR [0 to 6] ^^
-ORIGIN_FRAME_HERO_MANA_BAR [0 to 6] ^^
-ORIGIN_FRAME_HERO_BUTTON_INDICATOR [0 to 6] ^^
-ORIGIN_FRAME_ITEM_BUTTON [0 to 5] the Item Buttons
-ORIGIN_FRAME_MINIMAP_BUTTON The buttons altering the minimap
-ORIGIN_FRAME_SYSTEM_BUTTON [0 to 3] {Menu, Allies, Log, Quest}
+The one with indices above 0 are:
+	// The ability buttons at the right bottom corner
+    ORIGIN_FRAME_COMMAND_BUTTON <0 to 11>
+	// The clickable hero icons at the left of the screen
+    ORIGIN_FRAME_HERO_BUTTON <0 to 6>
+	// See above for the following:
+    ORIGIN_FRAME_HERO_HP_BAR <0 to 6>
+    ORIGIN_FRAME_HERO_MANA_BAR <0 to 6>
+    ORIGIN_FRAME_HERO_BUTTON_INDICATOR <0 to 6>
+	// Item inventory buttons
+    ORIGIN_FRAME_ITEM_BUTTON <0 to 5>
+	// The buttons altering the minimap
+    ORIGIN_FRAME_MINIMAP_BUTTON
+	// Indices:
+	// 0 = Menu
+	// 1 = Allies
+	// 2 = Log
+	// 3 = Quest
+    ORIGIN_FRAME_SYSTEM_BUTTON <0 to 3> 
 
 Here is a basic example that creates a custom timerdialog window:
-set GameUI = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
-set UIMain = BlzCreateFrame("TimerDialog", GameUI, 0, 0)
-call BlzFrameSetPoint(UIMain, FRAMEPOINT_CENTER, GameUI, FRAMEPOINT_CENTER, 0.25, 0.055)
-call BlzFrameSetSize(UIMain, 0.3, 0.7)
+
+    set GameUI = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+    set UIMain = BlzCreateFrame("TimerDialog", GameUI, 0, 0)
+    call BlzFrameSetPoint(UIMain, FRAMEPOINT_CENTER, GameUI, FRAMEPOINT_CENTER, 0.25, 0.055)
+    call BlzFrameSetSize(UIMain, 0.3, 0.7)
 
 *Take a look at the .fdf files in the game’s CASC or point 1.3 (refer to this document’s table of contents for reference) it should give you some ideas.*
 
-Example code:
-BlzHideOriginFrames(true)
-BlzFrameSetAllPoints(BlzGetOriginFrame(E, 0)ORIGIN_FRAME_WORLD_FRAM, BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
+Example:
+
+    BlzHideOriginFrames(true)
+    BlzFrameSetAllPoints(BlzGetOriginFrame(E, 0)ORIGIN_FRAME_WORLD_FRAM, BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
 
 @note The first time a Frame enters the map's script it takes a handleId.
 
@@ -181,11 +193,10 @@ Useful to move frames with the next SetPoint.
 native BlzFrameClearAllPoints                      takes framehandle frame returns nothing
 
 /**
-TODO
-
 Example:
-BlzHideOriginFrames(true)
-BlzFrameSetAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_WORLD_FRAME, 0), BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
+
+    BlzHideOriginFrames(true)
+    BlzFrameSetAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_WORLD_FRAME, 0), BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
 
 @patch 1.31
 @param frame the frame moved/resized
@@ -218,8 +229,7 @@ Requires a string for the frame name that you want to retrieve (get), and an int
 Read from the internal Frame-Storage.
 The first time a Frame enters the map's script it takes a handleId.
 
-Example:
-BlzGetFrameByName("SimpleHeroLevelBar", 0)
+Example: `BlzGetFrameByName("SimpleHeroLevelBar", 0)`
 
 @note Refer to fdf files for frame names
 
@@ -378,7 +388,7 @@ The mouse cursor is forced into the frame and can not leave it. New cages (true)
 native BlzFrameCageMouse                           takes framehandle frame, boolean enable returns nothing
 
 /**
-Sets the current Value, only for FrameType that use this feature:
+Sets the current Frame Value. Only for FrameType that use this feature:
 POPUPMENU, SLIDER, SIMPLESTATUSBAR, STATUSBAR
 
 @patch 1.31
@@ -386,7 +396,7 @@ POPUPMENU, SLIDER, SIMPLESTATUSBAR, STATUSBAR
 native BlzFrameSetValue                            takes framehandle frame, real value returns nothing
 
 /**
-Gets the current local Value. Result can differ per player
+Gets the current Frame Value.
 
 @async
 @patch 1.31

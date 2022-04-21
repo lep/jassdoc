@@ -1139,16 +1139,19 @@ native BlzGetUnitStringField                       takes unit whichUnit, unitstr
 native BlzSetUnitBooleanField                      takes unit whichUnit, unitbooleanfield whichField, boolean value returns boolean
 
 /**
-Problems:
-`BlzSetUnitIntegerField(unit, UNIT_IF_HIT_POINTS_REGENERATION_TYPE`
+Changes a unit's stats integer field.
+
+There're quirks when changing stats, some values don't apply immediately and some don't work at all, likely due to how the game engine uses them. Example:
+
+`BlzSetUnitIntegerField(unit, UNIT_IF_HIT_POINTS_REGENERATION_TYPE)`
 
 Regeneration type values are as follows:
-0 - Never
-1 - Always
-2 - Only on blight
-4 - Only at night
+* 0 - Never
+* 1 - Always
+* 2 - Only on blight
+* 4 - Only at night
 
-Changing the regeneration type at runtime WILL NOT work, even if the operation is successful (false positive).
+Changing the regeneration type at runtime WILL NOT work, even if true is returned (false positive).
 
 For vision, it appears changing them to a specific value does not immediately change it. Instead, it will change over time to approach and reach said value. However, if one wishes to decrease the vision range, and the initial vision range is greater than 1800, the vision will remain at 1800. Thus, one must change it first to 1800, then to the desired value. Otherwise, vision change works as intended. One cannot increase vision beyond 1800.
 
@@ -1225,7 +1228,7 @@ native BlzSetUnitWeaponRealField                   takes unit whichUnit, unitwea
 native BlzSetUnitWeaponStringField                 takes unit whichUnit, unitweaponstringfield whichField, integer index, string value returns boolean
 
 /**
-This does not update `IsUnitPaused()` and keeps the command card visible. Otherwise identical to `PauseUnit()`.
+This does not update `IsUnitPaused` and keeps the command card visible. Otherwise identical to `PauseUnit()`.
 
 @patch 1.31
 */

@@ -36,12 +36,12 @@ constant native GetEventDamageSource takes nothing returns unit
 Set the damage amount of a damage event.
 
 In 1.31 PTR there’s currently 3 new damage events:
-1. EVENT_UNIT_DAMAGED - old classic event for a specific unit;
-2. EVENT_PLAYER_UNIT_DAMAGED - Same as 1, but for all units of a specific player on the map;
-   // This seems to work fine anyway lol:
-   call TriggerRegisterAnyUnitEventBJ(gg_trg_a, EVENT_PLAYER_UNIT_DAMAGING)
-3. EVENT_UNIT_DAMAGING - triggers before any armor, armor type and other resistances. Event for a specific unit like 1;
-4. EVENT_PLAYER_UNIT_DAMAGING - triggers before any armor, armor type and other resistances. Useful to modify either damage amount, attack type or damage type before any reductions done by game.
+1. `EVENT_UNIT_DAMAGED` - old classic event for a specific unit;
+2. `EVENT_PLAYER_UNIT_DAMAGED` - Same as 1, but for all units of a specific player on the map;
+   `// This seems to work fine anyway:`
+   `call TriggerRegisterAnyUnitEventBJ(gg_trg_a, EVENT_PLAYER_UNIT_DAMAGING)`
+3. `EVENT_UNIT_DAMAGING` - triggers before any armor, armor type and other resistances. Event for a specific unit like 1;
+4. `EVENT_PLAYER_UNIT_DAMAGING` - triggers before any armor, armor type and other resistances. Useful to modify either damage amount, attack type or damage type before any reductions done by game.
 
 1 and 2 - modify the damage after any reduction.
 3 and 4 - changes damage before reduction. Amount you set will be reduced later according to target’s resistance, armor etc.
@@ -51,8 +51,8 @@ Misses don’t trigger any damage events.
 Set to 0.00 to completely block the damage.
 Set to negative value to heal the target instead of damaging
 
-@note Tip: calling GetEventDamage() after you set it with this function will return the value you set.
-@note If you’ll call UnitDamageTarget from within a trigger, which reacts to a damage event or triggered by one, it will cause infinite loop and game will crash, so you should handle such scenarios with additional logic.
+@note Tip: calling `GetEventDamage` after you set it with this function will return the value you set.
+@note If you’ll call `UnitDamageTarget` from within a trigger, which reacts to a damage event or triggered by one, it will cause infinite loop and game will crash, so you should handle such scenarios with additional logic.
 
 @event EVENT_UNIT_DAMAGED
 @patch 1.29
@@ -62,7 +62,7 @@ native BlzSetEventDamage                           takes real damage returns not
 /**
 The target unit of the damage event.
 If damage is AoE, your trigger will run separately for each target without known issues.
-This returns the same result as GetTriggerUnit
+This returns the same result as `GetTriggerUnit`
 
 @event EVENT_UNIT_DAMAGED
 @patch 1.31
@@ -71,7 +71,7 @@ native BlzGetEventDamageTarget 	                   takes nothing returns unit
 
 /**
 Returns attacktype of the damage being taken.
-Spell-damage is ATTACK_TYPE_NORMAL 
+Spell-damage is `ATTACK_TYPE_NORMAL`
 
 @event EVENT_UNIT_DAMAGED
 @patch 1.31
@@ -80,7 +80,7 @@ native BlzGetEventAttackType  	                   takes nothing returns attackty
 
 /**
 Returns damagetype of the damage being taken.
-Regular attack is DAMAGE_TYPE_NORMAL. 
+Regular attack is `DAMAGE_TYPE_NORMAL`
 
 @event EVENT_UNIT_DAMAGED
 @patch 1.31
