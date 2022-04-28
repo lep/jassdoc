@@ -227,12 +227,12 @@ native BlzStartRecording                           takes integer fps returns not
 native BlzEndRecording                             takes nothing returns nothing
 
 /**
-@patch 1.32
 Toggle team glow on whichUnit.
 Will remove Hero glowing team color when set to false.
 
 @param whichUnit Target unit (handle).
 @param show Boolean to show/hide the team glow.
+@patch 1.32
 */
 native BlzShowUnitTeamGlow                         takes unit whichUnit, boolean show returns nothing
 
@@ -250,7 +250,6 @@ native BlzGetItemSkin                                 takes item whichItem retur
 // native BlzGetDestructableSkin                         takes destructable whichDestructable returns integer
 
 /**
-@patch 1.32
 Replaces a unit's model with the unit's model referenced by the skinId.
 BlzSetUnitSkin(whichUnit, 'hfoo') will replace whichUnit model with the footman one.
 Scale from the unit referenced by the skinId is applied to whichUnit.
@@ -260,6 +259,7 @@ SoundSet from the unit referenced by the skinId is applied to whichUnit.
 @param skinId The function will apply the skinId model to whichUnit.
 
 @note Upon function call, all attachment visual effect are removed from whichUnit.
+@patch 1.32
 */
 native BlzSetUnitSkin                                 takes unit whichUnit, integer skinId returns nothing
 
@@ -276,7 +276,6 @@ native BlzSetItemSkin                                 takes item whichItem, inte
 native BlzCreateItemWithSkin                       takes integer itemid, real x, real y, integer skinId returns item
 
 /**
-@patch 1.32
 Creates a unit with the model from the unit referenced by the skinId.
 BlzCreateUnitWithSkin(players[0], 'hpea', 0, 0, 270, 'hfoo') will create a peasant with a footman model.
 Scale from the unit referenced by the skinId is applied to whichUnit.
@@ -288,6 +287,7 @@ SoundSet from the unit referenced by the skinId is applied to whichUnit.
 @param y The y-coordinate of the unit.
 @param face Unit facing in degrees.
 @param skinId The function will apply the skinId model to the unit created.
+@patch 1.32
 */
 native BlzCreateUnitWithSkin                       takes player id, integer unitid, real x, real y, real face, integer skinId returns unit
 
