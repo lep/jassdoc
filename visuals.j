@@ -34,7 +34,7 @@ native DisplayTimedTextFromPlayer   takes player toPlayer, real x, real y, real 
 /**
 Clears all messages displayed via triggers. All messages will still show up in the message log, however.
 
-@note This does not remove player chat messages. 
+@note This does not remove player chat messages.
 */
 native ClearTextMessages            takes nothing returns nothing
 
@@ -227,6 +227,11 @@ native BlzStartRecording                           takes integer fps returns not
 native BlzEndRecording                             takes nothing returns nothing
 
 /**
+Toggle team glow on whichUnit.
+Will remove Hero glowing team color when set to false.
+
+@param whichUnit Target unit (handle).
+@param show Boolean to show/hide the team glow.
 @patch 1.32
 */
 native BlzShowUnitTeamGlow                         takes unit whichUnit, boolean show returns nothing
@@ -245,6 +250,15 @@ native BlzGetItemSkin                                 takes item whichItem retur
 // native BlzGetDestructableSkin                         takes destructable whichDestructable returns integer
 
 /**
+Replaces a unit's model with the unit's model referenced by the skinId.
+`BlzSetUnitSkin(whichUnit, 'hfoo')` will replace whichUnit model with the footman one.
+Scale from the unit referenced by the skinId is applied to whichUnit.
+SoundSet from the unit referenced by the skinId is applied to whichUnit.
+
+@param whichUnit The function will modify this unit's model.
+@param skinId The function will apply the skinId model to whichUnit.
+
+@note Upon function call, all attachment visual effect are removed from whichUnit.
 @patch 1.32
 */
 native BlzSetUnitSkin                                 takes unit whichUnit, integer skinId returns nothing
@@ -262,6 +276,17 @@ native BlzSetItemSkin                                 takes item whichItem, inte
 native BlzCreateItemWithSkin                       takes integer itemid, real x, real y, integer skinId returns item
 
 /**
+Creates a unit with the model from the unit referenced by the skinId.
+`BlzCreateUnitWithSkin(players[0], 'hpea', 0, 0, 270, 'hfoo')` will create a peasant with a footman model.
+Scale from the unit referenced by the skinId is applied to whichUnit.
+SoundSet from the unit referenced by the skinId is applied to whichUnit.
+
+@param id The owner of the unit.
+@param unitid The rawcode of the unit.
+@param x The x-coordinate of the unit.
+@param y The y-coordinate of the unit.
+@param face Unit facing in degrees.
+@param skinId The function will apply the skinId model to the unit created.
 @patch 1.32
 */
 native BlzCreateUnitWithSkin                       takes player id, integer unitid, real x, real y, real face, integer skinId returns unit
@@ -285,4 +310,3 @@ native BlzCreateDeadDestructableWithSkin           takes integer objectid, real 
 @patch 1.32
 */
 native BlzCreateDeadDestructableZWithSkin          takes integer objectid, real x, real y, real z, real face, real scale, integer variation, integer skinId returns destructable
-
