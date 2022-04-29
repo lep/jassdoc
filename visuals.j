@@ -251,7 +251,7 @@ native BlzGetItemSkin                                 takes item whichItem retur
 
 /**
 Replaces a unit's model with the unit's model referenced by the skinId.
-BlzSetUnitSkin(whichUnit, 'hfoo') will replace whichUnit model with the footman one.
+`BlzSetUnitSkin(whichUnit, 'hfoo')` will replace whichUnit model with the footman one.
 Scale from the unit referenced by the skinId is applied to whichUnit.
 SoundSet from the unit referenced by the skinId is applied to whichUnit.
 
@@ -277,7 +277,7 @@ native BlzCreateItemWithSkin                       takes integer itemid, real x,
 
 /**
 Creates a unit with the model from the unit referenced by the skinId.
-BlzCreateUnitWithSkin(players[0], 'hpea', 0, 0, 270, 'hfoo') will create a peasant with a footman model.
+`BlzCreateUnitWithSkin(players[0], 'hpea', 0, 0, 270, 'hfoo')` will create a peasant with a footman model.
 Scale from the unit referenced by the skinId is applied to whichUnit.
 SoundSet from the unit referenced by the skinId is applied to whichUnit.
 
