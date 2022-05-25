@@ -45,6 +45,16 @@ handleToplevel file toplevel =
                  , attachFile file name
                  , returnType name r
                  ]
+    Global (ADef (P doc) (N name) (N ty)) -> L8.unlines
+        [ delete name
+        , handle doc name
+        , attachFile file name
+        ]
+    Global (SDef (P doc) isConst (N name) (N ty) _) -> L8.unlines
+        [ delete name
+        , handle doc name
+        , attachFile file name
+        ]
     _ -> ""
 
   where

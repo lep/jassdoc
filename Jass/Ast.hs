@@ -53,8 +53,8 @@ data Ast ann a where
     AVar :: Name -> Ast ann Expr -> Ast ann LVar
     SVar :: Name -> Ast ann LVar
 
-    ADef :: Name -> Type -> Ast ann VarDef
-    SDef :: Constant -> Name -> Type -> Maybe (Ast ann Expr) -> Ast ann VarDef
+    ADef :: ann -> Name -> Type -> Ast ann VarDef
+    SDef :: ann -> Constant -> Name -> Type -> Maybe (Ast ann Expr) -> Ast ann VarDef
 
 deriving instance Show ann => Show (Ast ann a)
 deriving instance Eq ann => Eq (Ast ann a)
@@ -76,6 +76,6 @@ instance Compose (Ast a) where
         Call n args -> Call <$> pure n <*> traverse f args
         Var lvar -> Var <$> f lvar
         AVar n ix -> AVar <$> pure n <*> f ix
-        SDef c n t (Just e) -> SDef c n t . Just <$> f e
+        SDef ann c n t (Just e) -> SDef ann c n t . Just <$> f e
         x -> pure x
 

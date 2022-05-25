@@ -122,8 +122,9 @@ toplevel = globals
 
     globals = between (reserved "globals" <* horizontalSpace)
                       (reserved "endglobals" <* horizontalSpace) $ many $ do
+        doc <- optional (docstring <* horizontalSpace)
         const <- fromMaybe Normal <$> optional (reserved "constant" *> pure Jass.Types.Const)
-        vdecl <- vardecl const
+        vdecl <- vardecl doc const
         return $ Global vdecl
 
     typedef doc = do
@@ -136,7 +137,6 @@ toplevel = globals
 
 
 pSignature = do
-    
     name <- identifier
     reserved "takes"
     args <- (reserved "nothing" *> pure []) <|> ((,) <$> identifier <*> identifier) `sepBy` symbol ","
@@ -167,7 +167,7 @@ statement = returnStmt
           <|> local
           <?> "statement"
     where
-        local = Local <$> (reserved "local"*> vardecl Normal)
+        local = Local <$> (reserved "local"*> vardecl Nothing Normal)
         returnStmt = Return <$> (reserved "return" *> optional expression <* horizontalSpace)
         callStmt = Call <$> (optional (reserved "debug") *> reserved "call" *> identifier) <*> parens arglist <* horizontalSpace
         loop = Loop <$> between startLoop endLoop (many statement)
@@ -202,16 +202,16 @@ statement = returnStmt
         startLoop = reserved "loop" <* horizontalSpace
         endLoop = reserved "endloop" <* horizontalSpace
 
-vardecl constantness = do
+vardecl doc constantness = do
     typ <- identifier
     isArray <- reserved "array" *> pure True <|> pure False
     if isArray
-    then varArray typ <* horizontalSpace
-    else varNormal typ <* horizontalSpace
+    then varArray doc typ <* horizontalSpace
+    else varNormal doc typ <* horizontalSpace
 
   where
-    varArray typ = ADef <$> identifier <*> pure typ
-    varNormal typ = SDef constantness <$> identifier <*> pure typ <*> optional (symbol "=" *> expression)
+    varArray doc typ = ADef doc <$> identifier <*> pure typ
+    varNormal doc typ = SDef doc constantness <$> identifier <*> pure typ <*> optional (symbol "=" *> expression)
 
 expression = makeExprParser term table
             <?> "expression"

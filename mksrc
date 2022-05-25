@@ -107,20 +107,10 @@ SQL
                 $name = escape($name);
                 $line = escape($line);
                 say <<SQL;
-		    -- normally we delete old data in mkdocs but mkdocs
-		    -- doesnt handle globals.
-		    delete from annotations where fnname = '$name';
-
                     insert into annotations values (
                         '$name',
                         'source-code',
                         '$line'
-                    );
-
-                    insert into annotations values (
-                        '$name',
-                        'source-file',
-                        '$file'
                     );
 
                     insert into annotations values (
