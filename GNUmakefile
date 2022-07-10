@@ -10,12 +10,13 @@ SRC += builtin-types.j math.j hashtable.j group.j visuals.j
 SRC += player-based-event-api.j effects.j unit-based-event-api.j ubersplat.j
 SRC += common.j blight.j multiboard.j player.j region-location.j trigger.j
 SRC += item.j widget.j campaign.j ability.j string.j
+SRC += common.ai
 
 all: jass.db
 
 db.sql: mksrc $(SRC)
-	cabal run --verbose=0 mkdocs -- $(filter %.j,$?) > $@
-	./mksrc $(filter %.j,$?) >> $@
+	cabal run --verbose=0 mkdocs -- $(filter %.j %.ai,$?) > $@
+	./mksrc $(filter %.j %.ai,$?) >> $@
 	./mkmetadata >> $@
 
 jass.db: db.sql

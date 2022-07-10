@@ -1,0 +1,60 @@
+// This is not the full common.ai just the natives which one can use in
+// normal jass scripts according to <https://www.thehelper.net/threads/working-ai-natives.127331/>
+// To use these you have to define them explicitly.
+
+
+/**
+Returns how many `unit`s of a certain type a `player` has.
+
+@commonai
+*/
+native GetPlayerUnitTypeCount takes player p, integer unitid            returns integer
+
+/**
+Gets the building time of a unit-type.
+
+@commonai
+*/
+native GetUnitBuildTime     takes integer unitid                        returns integer
+
+/**
+Gets the gold cost of a unit-type.
+
+@commonai
+*/
+native GetUnitGoldCost      takes integer unitid                        returns integer
+
+/**
+Gets the wood cost of a unit-type.
+
+@commonai
+*/
+native GetUnitWoodCost      takes integer unitid                        returns integer
+
+/**
+Returns the last created building of a `player`.
+
+@commonai
+*/
+native GetBuilding          takes player p                              returns unit
+
+/**
+Returns `true` any units on the map have the classification of creep.
+
+@commonai
+*/
+native CreepsOnMap          takes nothing                               returns boolean
+
+/**
+Checks if a unit is alive.
+
+@commonai
+*/
+native UnitAlive            takes unit id                               returns boolean
+
+/**
+Checks if a unit is invisible.
+
+@commonai
+*/
+native UnitInvis            takes unit id                               returns boolean
