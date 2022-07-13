@@ -15,6 +15,7 @@ SRC += common.ai
 all: jass.db
 
 db.sql: mksrc $(SRC)
+	cabal build mkdocs
 	cabal run --verbose=0 mkdocs -- $(filter %.j %.ai,$?) > $@
 	./mksrc $(filter %.j %.ai,$?) >> $@
 	./mkmetadata >> $@
