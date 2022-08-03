@@ -87,7 +87,7 @@ Here is a basic example that creates a custom timerdialog window:
 native BlzGetOriginFrame                           takes originframetype frameType, integer index returns framehandle
 
 /**
-Disabling Auto Position will prevent the game using default positions for changed hidden frames as soon the reappear/their state is changed.
+Disabling Auto Position will prevent the game using default positions for changed hidden frames as soon they reappear/their state is changed.
 
 @patch 1.31
 */
