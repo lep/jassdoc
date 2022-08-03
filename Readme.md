@@ -20,7 +20,7 @@ Do note that the parser expects the annotations after the general description.
 
 # How to add documentation
 
-- You can register a Github account, go to any file and click "Edit file".
+- Register a Github account, go to any file and click "Edit file".
 	- After you save changes, Github will ask you to create a Pull Request to submit your changes to us. Until then, you'll be editing your own copy of the files (you can't break anything)
 - Send a message on [Hiveworkshop forums](https://www.hiveworkshop.com/threads/jassdoc.275521/)
 
@@ -104,6 +104,24 @@ Describes when the function was introduced to the game. Many natives (game API) 
 [Internal](https://github.com/lep/jassdoc-browser/blob/6b6799e90bad48a4ceb9a15b2bfe92c5f02a0e15/server.hs#L41): `@source-file`, `@source-code`, `@return-type`
 
 Proposed: `@nosideeffect` for functions without side-effects.
+
+## Copy-paste template
+
+Remove anything you don't want to fill out / not applicable:
+
+```
+/**
+GENERAL_DESCRIPTION
+
+@param VARIABLE_1_NAME VARIABLE_1_EXPLANATION
+
+@bug DESCRIBE_BUGGY_BEHAVIOUR_IF_ANY
+
+@note ADD_YOUR_CUSTOM_NOTE
+
+@async / @event EVENT_NAME / @patch PATCH_VERSION
+*/
+```
 
 # Build
 
