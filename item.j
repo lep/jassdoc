@@ -38,6 +38,10 @@ native SetItemInvulnerable takes item whichItem, boolean flag returns nothing
 
 native IsItemInvulnerable takes item whichItem returns boolean
 
+/**
+@note
+An item can be hidden locally, but it will desync if visibility causes a local side-effect.
+*/
 native SetItemVisible takes item whichItem, boolean show returns nothing
 
 native IsItemVisible takes item whichItem returns boolean
