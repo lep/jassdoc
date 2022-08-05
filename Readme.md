@@ -16,8 +16,6 @@ of this repository.
 
 Currently there's [Jassbot - a JASS API search engine](https://lep.duckdns.org/app/jassbot/) running that uses this as a database.
 
-Do note that the parser expects the annotations after the general description.
-
 # How to add documentation
 
 - Register a Github account, go to any file and click "Edit file".
@@ -31,6 +29,8 @@ Do not worry about 100% "quality". Many functions do not have any descriptions a
 The format roughly follows [Javadoc's approach](https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html): The documentation is written as code comments above a function.
 
 The doc generator supports *Markdown* syntax (the same that's used on Discord, Reddit, Github etc.) Here's [Reddit's simple explanation](https://old.reddit.com/wiki/markdown), though [currently this code library is used](https://python-markdown.github.io/).
+
+Do note that the parser expects the \@annotations after the general description.
 
 For example a description of `CripplePlayer`:
 
@@ -71,15 +71,15 @@ Same as above, but on the next line, with a [link](http://example.com/function-d
 
 Function's general description and explanation. This text must be at the start of the comment block.
 
-### @param <variable Name>
+### @param \<variable Name>
 
 Used to describe a function's variable. Add a short description, if the variable name doesn't properly explain its usage.
 
-### @bug <text>
+### @bug \<text>
 
 Describes buggy behaviour, when something doesn't work.
 
-### @note <text>
+### @note \<text>
 
 Adds your note that doesn't belong to a general description. You can recommend alternatives, explain something etc.
 
@@ -91,11 +91,11 @@ The function behaves like a [mathematical](https://wiki.haskell.org/Pure) `f(x) 
 
 Adds a separate note, explaining that the values returned by this function are *not* synchronized between players by the game. I.e. each player has their own value; using this to affect the game world will cause a desync.
 
-### @event <EVENT_NAME>
+### @event \<EVENT_NAME>
 
  Lists events that the function interacts with. For example, `GetEnteringUnit()` only works together with `EVENT_GAME_ENTER_REGION`.
 
-### @patch <patch vesion>
+### @patch \<patch vesion>
 
 Describes when the function was introduced to the game. Many natives (game API) were added in `1.29`.
 
