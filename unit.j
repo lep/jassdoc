@@ -351,6 +351,17 @@ effect will be shown if the hero gains a level from the added experience.
 */
 native AddHeroXP takes unit whichHero, integer xpToAdd, boolean showEyeCandy returns nothing
 
+/**
+Sets the hero to chosen level.
+
+The level can only be increased; lowering the level does nothing.
+Further, the level will not exceed the hero's maximum level set in WorldEditor.
+
+@param whichHero The target hero unit.
+@param level New level of the hero.
+@param showEyeCandy False to hide level-up effects, true to show.
+The level-up effects include: floating experience gain text, sound and a visual effect.
+*/
 native SetHeroLevel takes unit whichHero, integer level, boolean showEyeCandy returns nothing
 
 constant native GetHeroLevel takes unit whichHero returns integer
@@ -368,10 +379,25 @@ native SuspendHeroXP takes unit whichHero, boolean flag returns nothing
 
 native IsSuspendedXP takes unit whichHero returns boolean
 
+/**
+Spends a skill point of the hero to learn a skill.
+If the requirements are not met, does nothing.
+This is equivalent to clicking the red plus button in game and choosing a skill.
+
+Requirements:
+1. The hero has an unspent skill point
+2. The skill is available for learning (not level-locked etc.)
+
+@param whichHero Target hero
+@param abilcode Abilities' raw code identifier
+*/
 native SelectHeroSkill takes unit whichHero, integer abilcode returns nothing
 
 /**
 Returns the level of the ability for the unit.
+
+@param whichUnit Target unit
+@param abilcode Abilities' raw code identifier
 */
 native GetUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
@@ -398,10 +424,48 @@ and <http://www.hiveworkshop.com/forums/lab-715/silenceex-everything-you-dont-kn
 */
 native IncUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
+/**
+Sets the new level of unit's ability.
+
+@param whichUnit Target unit
+@param abilcode Abilities' raw code identifier
+@param level New ability level
+
+@note You can only set levels which are defined for the current ability.
+For example, most WC3 abilities have levels 1-3.
+Setting level <=0 will instead set it to level 1.
+Setting level >maximum will instead set it to abilities' highest level defined in WorldEditor.
+*/
 native SetUnitAbilityLevel takes unit whichUnit, integer abilcode, integer level returns integer
 
+/**
+Revives a dead hero at target coordinates, with or without special effects.
+
+Returns true if hero was dead and revived.
+Returns false otherwise (hero alive, unit isn't a hero/doesn't exist etc.)
+
+@param whichHero Target dead hero
+@param x X map coordinate
+@param y Y map coordinate
+@param doEyecandy True to revive with revival special effects, false without.
+Special effects include: sound, visual effect. 
+
+@note See: `ReviveHeroLoc`
+*/
 native ReviveHero takes unit whichHero, real x, real y, boolean doEyecandy returns boolean
 
+/**
+Revives a dead hero at target location, with or without special effects.
+
+Returns true if hero was dead and revived.
+Returns false otherwise (hero alive, unit isn't a hero/doesn't exist etc.)
+
+@param loc Location on map
+@param doEyecandy True to revive with revival special effects, false without.
+Special effects include: sound, visual effect. 
+
+@note See: `ReviveHero`
+*/
 native ReviveHeroLoc takes unit whichHero, location loc, boolean doEyecandy returns boolean
 
 native SetUnitExploded takes unit whichUnit, boolean exploded returns nothing
@@ -629,10 +693,27 @@ native UnitAddType takes unit whichUnit, unittype whichUnitType returns boolean
 native UnitRemoveType takes unit whichUnit, unittype whichUnitType returns boolean
 
 
+/**
+Adds the ability to target unit. Can be used to add an ability to any hero.
+The added ability is level 1 and without a cooldown.
 
+Returns true if the addition was successful (hero did not have this ability before)
+Returns false otherwise (hero already has this ability)
+
+@param whichUnit Target unit
+@param abilcode Abilities' raw code identifier
+*/
 native UnitAddAbility takes unit whichUnit, integer abilityId returns boolean
 
 /**
+Removes the ability from target unit.
+
+Returns true if the removal was successful (hero did have this ability before)
+Returns false otherwise (hero does not have this ability)
+
+@param whichUnit Target unit
+@param abilcode Abilities' raw code identifier
+
 @bug Removing non-interrupt abilities like divine shile while they're being
 cast (at the EVENT_PLAYER_UNIT_SPELL_EFFECT point), and while the caster is
 moving, will cause the caster to become unresponsive to new commands until
