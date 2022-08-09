@@ -760,26 +760,43 @@ native IssueNeutralTargetOrderById takes player forWhichPlayer,unit neutralStruc
 native GetUnitCurrentOrder takes unit whichUnit returns integer
 
 
+/**
+Sets the amount of available gold of a gold mine. The amount can be negative, which is practically the same as 0.
 
+@bug If the final value, after adding a negative amount, will be less than zero, then it
+will display the correct negative amount, but mining won't yield any gold.
+If peasant enters a mine with 0 gold, it's destroyed and he stops next to mine.
+If peasant enters a mine with <0 gold, it's destroyed and he runs back to the castle.
+
+@param whichUnit Change amount of this gold mine unit.
+
+@param amount The new gold amount.
+
+@note See: `AddResourceAmount`, `GetResourceAmount`
+*/
 native SetResourceAmount takes unit whichUnit, integer amount returns nothing
 
+
 /**
-Adds the amount more gold to the whichUnit gold mine.
+Adds the amount of available gold to a gold mine. The amount can be negative, which is practically the same as 0.
 
-@bug If the value after adding negative amount will be less than zero, then it
-will display negative resource amount, but if some peasant or peon will try to
-gather resources from such a mine, he will bring back 0 gold and the mine will
-be auto-destroyed.
+@param whichUnit Add gold to this gold mine unit.
 
-@param whichUnit The unit who receives the added resource amount.
+@param amount The amount of gold to add to the unit.
 
-@param amount The amount of resources to add to the unit.
+@note See `SetResourceAmount` for edge-case descriptions. Also: `SetResourceAmount`, `GetResourceAmount`
 */
 native AddResourceAmount takes unit whichUnit, integer amount returns nothing
 
+
+/**
+Returns the amount of available gold in a gold mine. The amount can be negative, which is practically the same as 0.
+
+@param whichUnit Add gold to this gold mine unit.
+
+@note See `SetResourceAmount` for edge-case descriptions. Also: `SetResourceAmount`, `AddResourceAmount`
+*/
 native GetResourceAmount takes unit whichUnit returns integer
-
-
 
 native WaygateGetDestinationX takes unit waygate returns real
 
