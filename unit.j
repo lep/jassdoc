@@ -752,7 +752,7 @@ If peasant enters a mine with <0 gold, it's destroyed and he runs back to the ca
 
 @param amount The new gold amount.
 
-@note See: AddResourceAmount, GetResourceAmount
+@note See: `AddResourceAmount`, `GetResourceAmount`
 */
 native SetResourceAmount takes unit whichUnit, integer amount returns nothing
 
@@ -764,7 +764,7 @@ Adds the amount of available gold to a gold mine. The amount can be negative, wh
 
 @param amount The amount of gold to add to the unit.
 
-@note See <SetResourceAmount> for edge-case descriptions. Also: SetResourceAmount, GetResourceAmount
+@note See `SetResourceAmount` for edge-case descriptions. Also: `SetResourceAmount`, `GetResourceAmount`
 */
 native AddResourceAmount takes unit whichUnit, integer amount returns nothing
 
@@ -774,7 +774,7 @@ Returns the amount of available gold in a gold mine. The amount can be negative,
 
 @param whichUnit Add gold to this gold mine unit.
 
-@note See <SetResourceAmount> for edge-case descriptions. Also: SetResourceAmount, AddResourceAmount
+@note See `SetResourceAmount` for edge-case descriptions. Also: `SetResourceAmount`, `AddResourceAmount`
 */
 native GetResourceAmount takes unit whichUnit returns integer
 
