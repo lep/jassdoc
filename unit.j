@@ -159,9 +159,23 @@ native GetUnitDefaultPropWindow takes unit whichUnit returns real
 native GetUnitDefaultFlyHeight takes unit whichUnit returns real
 
 
+/**
+Changes ownership of a unit.
 
+@param whichUnit Unit to modify
+@param whichPlayer The unit's new owner
+@param changeColor True to change unit's accent color, false to leave old color
+
+@note The HP bar will always have the color of its owner player, regardless of `changeColor`.
+*/
 native SetUnitOwner takes unit whichUnit, player whichPlayer, boolean changeColor returns nothing
 
+/**
+Sets a unit's player color accent.
+
+@param whichUnit Unit to modify
+@param whichColor Set to this player's color
+*/
 native SetUnitColor takes unit whichUnit, playercolor whichColor returns nothing
 
 
@@ -179,13 +193,19 @@ native SetUnitBlendTime takes unit whichUnit, real blendTime returns nothing
 
 
 /**
-Sets the unit's color to the color defined by (red,green,blue,alpha).
+Sets the unit's entire model color to the color defined by (red, green, blue, alpha).
 
-@param whichUnit The unit the indicator will be applied to.
+The vertex color changes how the model is rendered. For example, setting all r,g,b=0 will make the model entirely black; no colors will be visible (like Illidan's demon form).
+
+To imagine the final result of changing vertex colors, it is helpful to think of individual RGB layers in a color image, if you disable the Red channel, only Green & Blue channels will be shown.
+
+@param whichUnit The unit to modify.
 @param red An integer from 0-255 determining the amount of red color.
 @param green An integer from 0-255 determining the amount of green color.
 @param blue An integer from 0-255 determining the amount of blue color.
-@param alpha An integer from 0-255 determining the transparency. A value of 0 is complete transparency while a value of 255 is complete opacity.
+@param alpha An integer from 0-255 determining the opacity. A value of 255 is complete opacity (fully visible). A value of 0 is complete transparency; the model will be invisible, but you'll still see the shadow, HP bar etc.
+
+@note Not to be confused with `SetUnitColor` which changes a unit's player accent color.
 */
 native SetUnitVertexColor takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
 
