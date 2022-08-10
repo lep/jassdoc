@@ -702,6 +702,12 @@ Examples:
    - Unit on patrol, but has full HP: does nothing, unit continues running
    - Unit on patrol, but has low HP: Uses potion to restore HP, stops patrolling
 
+- Dagger of Escape 'desc':
+is not casted, because requires a position as a target.
+However, an order is issued, hence returns true.
+
+- Inferno Stone 'infs': same as with dagger above.
+
 @note See: `UnitUseItemPoint`, `UnitUseItemTarget`
 
 */
