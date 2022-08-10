@@ -385,6 +385,7 @@ If the requirements are not met, does nothing.
 This is equivalent to clicking the red plus button in game and choosing a skill.
 
 Requirements:
+
 1. The hero has an unspent skill point
 2. The skill is available for learning (not level-locked etc.)
 
@@ -412,6 +413,7 @@ native DecUnitAbilityLevel takes unit whichUnit, integer abilcode returns intege
 
 /**
 Increases the level of a unit's ability by 1.
+
 Returns the new ability level.
 
 @param whichUnit The unit with the ability.
@@ -697,8 +699,10 @@ native UnitRemoveType takes unit whichUnit, unittype whichUnitType returns boole
 Adds the ability to target unit. Can be used to add an ability to any hero.
 The added ability is level 1 and without a cooldown.
 
-Returns true if the addition was successful (hero did not have this ability before)
-Returns false otherwise (hero already has this ability)
+Returns:
+
+- true if the addition was successful (hero did not have this ability before)
+- false otherwise (hero already has this ability)
 
 @param whichUnit Target unit
 @param abilcode Abilities' raw code identifier
@@ -708,8 +712,10 @@ native UnitAddAbility takes unit whichUnit, integer abilityId returns boolean
 /**
 Removes the ability from target unit.
 
-Returns true if the removal was successful (hero did have this ability before)
-Returns false otherwise (hero does not have this ability)
+Returns:
+
+- true if the removal was successful (hero did have this ability before)
+- false otherwise (hero does not have this ability)
 
 @param whichUnit Target unit
 @param abilcode Abilities' raw code identifier
