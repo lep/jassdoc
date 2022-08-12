@@ -175,6 +175,12 @@ Sets a unit's player color accent.
 
 @param whichUnit Unit to modify
 @param whichColor Set to this player's color
+
+@bug Visual bug (tested v1.32.10): if you create two units of the same type (Normal and Colored)
+and set Colored's color to a different color, then clicking between the two units
+will not change the portrait color. The portrait will only update correctly if you
+deselect the unit. 
+
 */
 native SetUnitColor takes unit whichUnit, playercolor whichColor returns nothing
 
@@ -514,44 +520,271 @@ native GetUnitPointValueByType takes integer unitType returns integer
 //native SetUnitPointValueByType takes integer unitType, integer newPointValue returns nothing
 
 
+/**
+Puts specific item in target unit's inventory.
 
+Returns:
+
+- true if this exact item is already in unit's inventory or if it was put there successfully
+- false if unit has no inventory or space, or invalid item/unit
+
+@param whichUnit Target unit
+@param whichItem Handle to item instance
+*/
 native UnitAddItem takes unit whichUnit, item whichItem returns boolean
 
+/**
+Creates a new item of type `itemId` and puts it in unit's inventory.
+If the inventory is full, it is dropped on the ground at unit's position instead.
+
+This function works in two steps:
+
+1. Spawn the item if both `whichUnit` and `itemId` are valid and exist
+2. Attempt to put the item in unit's inventory. If inventory is full or unit is
+dead then the item is dropped on the ground at unit position.
+
+Returns:
+
+- item handle if the item was successfully placed in unit's inventory
+- null if inventory is full, unit cannot carry items, itemId/unit invalid etc.
+
+@param whichUnit Target unit
+@param itemId Item's raw code identifier
+
+@note See: `UnitAddItemToSlotById`
+*/
 native UnitAddItemById takes unit whichUnit, integer itemId returns item
 
+/**
+Creates a new item of type `itemId`
+and puts it in unit's inventory in slot specified by `itemSlot`.
+If the slot is occupied or invalid (<0 or >6, or higher than unit's max slots),
+it is dropped on the ground at unit's position instead.
+
+This function works in two steps:
+
+1. Spawn the item if both `whichUnit` and `itemId` are valid and exist
+2. Attempt to put the item in unit's inventory at specified slot.
+If the slot is occupied or unit is dead then the item is dropped on the ground
+at unit position.
+
+Returns:
+
+- true if the item was successfully placed in unit's inventory
+- false otherwise: slot occupied, unit cannot carry items, itemId/unit/itemSlot invalid etc.
+
+@param whichUnit Target unit
+@param itemId Item's raw code identifier
+@param itemSlot Slot number (zero-based, i.e. 0 to 5)
+
+@note See: `UnitAddItemById`
+*/
 native UnitAddItemToSlotById takes unit whichUnit, integer itemId, integer itemSlot returns boolean
 
 /**
-The item is removed from the Hero and placed on the ground at the Hero's feed.
+If the target unit carries the item, it is removed from the inventory and dropped at unit's position.
+
+Nothing happens if unit or item instance is invalid.
+
+@param whichUnit Target unit
+@param whichItem Handle to item instance
+
+@note See `UnitRemoveItemFromSlot` to drop an item from a specific slot.
 */
 native UnitRemoveItem takes unit whichUnit, item whichItem returns nothing
 
 /**
-If an item exists in the given slot, it is removed from the Hero and placed on
-the ground at the Hero's feed
+If an item exists in the given slot, it is removed from the inventory and dropped at unit's position.
+
+Returns the handle of dropped item when successful.
+Returns null on failure (no item, invalid slot/unit).
+
+@param whichUnit Target unit
+@param itemSlot Slot number (zero-based, i.e. 0 to 5)
+
+@note See `UnitRemoveItem` to drop an item by handle.
 */
 native UnitRemoveItemFromSlot takes unit whichUnit, integer itemSlot returns item
 
+/**
+Returns true if unit has this specific instance of item somewhere in inventory.
+Returns false otherwise (null unit, item not found in inventory, null item etc).
+
+@param whichUnit Target unit
+@param whichItem Handle to item instance
+*/
 native UnitHasItem takes unit whichUnit, item whichItem returns boolean
 
+/**
+Returns a handle to item in slot number `itemSlot` of the specified unit.
+
+Returns null otherwise:
+when there's no item in slot, no slot (less than 6 slots), invalid slot number, invalid unit.
+
+@param whichUnit Target unit
+@param itemSlot Slot number (zero-based, i.e. 0 to 5)
+*/
 native UnitItemInSlot takes unit whichUnit, integer itemSlot returns item
 
+/**
+Returns amount of inventory slots for unit (0 to `bj_MAX_INVENTORY` inclusive).
+Returns zero if unit is invalid or has no inventory.
+
+@param whichUnit Target unit
+*/
 native UnitInventorySize takes unit whichUnit returns integer
 
 
+/**
+Issues an immediate order for the unit to go to point (x,y) and drop the item there.
 
+If the unit cannot reach the point, it will run up to closest location and stop there,
+without dropping the item.
+
+Returns:
+
+- true if item was found in inventory of unit and an order was issued.
+- false if unit/item invalid, unit is paused and cannot take orders etc.
+
+@param whichUnit Target unit
+@param whichItem Handle to item instance
+@param x X map coordinate
+@param y Y map coordinate
+
+@note See: `UnitDropItemSlot`, `UnitDropItemTarget`
+*/
 native UnitDropItemPoint takes unit whichUnit, item whichItem, real x, real y returns boolean
 
+/**
+Moves an item inside unit's inventory to specified slot.
+If this slot contains an item, their positions are swapped.
+
+This is the same as if you'd right-click an item in game to move it to a different slot.
+
+Returns:
+
+- true if the move was successful, even if moving an item to its current slot (no change)
+- false if unit/item invalid, item not in inventory, invalid item slot specified
+
+@param whichUnit Target unit
+@param whichItem Handle to item instance
+@param slot Move to this slot
+*/
 native UnitDropItemSlot takes unit whichUnit, item whichItem, integer slot returns boolean
 
+/**
+Issues an immediate order for the `whichUnit` to go to `target` (usually another unit)
+and give the item to target. If the target has no inventory slots/full inventory,
+the item is dropped at target's feet.
+
+If the `whichUnit` cannot reach the target, it will run up to closest location and stop there,
+without giving the item. If the target is a running unit, `whichUnit` will follow it
+to give the item.
+
+Returns:
+
+- true if item was found in inventory of `whichUnit` and an order was issued.
+- false if `whichUnit`/item/widget invalid, `whichUnit` is paused and cannot take orders etc.
+Target widget can be a paused unit and will receive the item.
+
+@param whichUnit Target unit
+@param whichItem Handle to item instance
+@param target Target unit or widget
+
+@note See: `UnitDropItemSlot`, `UnitDropItemPoint`
+
+*/
 native UnitDropItemTarget takes unit whichUnit, item whichItem, widget target returns boolean
 
 
+/**
+Issues an immediate order for the unit to use the specified item.
 
+This is the same as left-clicking and using an item in inventory.
+Units that cannot use items will not do anything.
+
+Returns:
+
+- true if item was successfully used / an order was issued
+- false otherwise, because an order was not issued:
+unit doesn't have item, item on cooldown, invalid unit/item etc.
+
+Examples:
+
+- Potion of Healing `phea`:
+    - Unit on patrol, but has full HP: does nothing, unit continues running
+    - Unit on patrol, but has low HP: Uses potion to restore HP, stops patrolling
+
+- Dagger of Escape `desc`:
+is not casted, because requires a position as a target.
+However, an order is issued, hence returns true.
+
+- Inferno Stone `infs`: same as with dagger above.
+
+@note See: `UnitUseItemPoint`, `UnitUseItemTarget`
+
+*/
 native UnitUseItem takes unit whichUnit, item whichItem returns boolean
 
+/**
+Issues an immediate order for the unit to use item pointed at position (x,y).
+
+This is the same as left-clicking and using an item in inventory.
+Units that cannot use items will not do anything.
+
+Examples:
+
+- Potion of Healing 'phea':
+Restores HP 
+
+- Dagger of Escape 'desc':
+Casts immediately towards (x,y), even if too far, item on cooldown.
+Does not cast if position is already reached (no cooldown).
+
+- Inferno Stone 'infs':
+runs towards (x,y) and once in range, casts to spawn an Infernal.
+If already in range, casts immediately.
+
+@param whichUnit Target unit
+@param whichItem Handle to item instance
+@param x Point at X map coordinate to use the item
+@param y Point at Y map coordinate to use the item
+
+@bug Seems to always return false (tested v1.32.10).
+
+@note See: `UnitUseItem`, `UnitUseItemTarget`
+
+*/
 native UnitUseItemPoint takes unit whichUnit, item whichItem, real x, real y returns boolean
 
+/**
+Issues an immediate order for the unit to use item pointed `target` (widget or unit).
+
+This is the similar to left-clicking and using an item in inventory.
+Units that cannot use items will not do anything.
+
+Returns:
+
+- true if item was successfully used / an order was issued
+- false otherwise, because an order was not issued:
+unit doesn't have item, item on cooldown, invalid unit/item/target etc.
+
+Examples:
+
+- Dagger of Escape 'desc': does not cast.
+Explanation: when you click a dagger on a building in game, the target is not
+actually the building, but the map position you're pointing at, even though you
+see the building being highlighted on cursor hover.
+
+- Inferno Stone 'infs': does not cast, same as above.
+
+@param whichUnit Target unit
+@param whichItem Handle to item instance
+@param target Target unit or widget
+
+@note See: `UnitUseItem`, `UnitUseItemPoint`
+
+*/
 native UnitUseItemTarget takes unit whichUnit, item whichItem, widget target returns boolean
 
 
