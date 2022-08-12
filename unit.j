@@ -711,15 +711,15 @@ unit doesn't have item, item on cooldown, invalid unit/item etc.
 
 Examples:
 
-- Potion of Healing `phea`:
+- Potion of Healing `'phea'`:
     - Unit on patrol, but has full HP: does nothing, unit continues running
     - Unit on patrol, but has low HP: Uses potion to restore HP, stops patrolling
 
-- Dagger of Escape `desc`:
+- Dagger of Escape `'desc'`:
 is not casted, because requires a position as a target.
 However, an order is issued, hence returns true.
 
-- Inferno Stone `infs`: same as with dagger above.
+- Inferno Stone `'infs'`: same as with dagger above.
 
 @note See: `UnitUseItemPoint`, `UnitUseItemTarget`
 
@@ -734,14 +734,14 @@ Units that cannot use items will not do anything.
 
 Examples:
 
-- Potion of Healing 'phea':
+- Potion of Healing `'phea'`:
 Restores HP 
 
-- Dagger of Escape 'desc':
+- Dagger of Escape `'desc'`:
 Casts immediately towards (x,y), even if too far, item on cooldown.
 Does not cast if position is already reached (no cooldown).
 
-- Inferno Stone 'infs':
+- Inferno Stone `'infs'`:
 runs towards (x,y) and once in range, casts to spawn an Infernal.
 If already in range, casts immediately.
 
@@ -771,12 +771,12 @@ unit doesn't have item, item on cooldown, invalid unit/item/target etc.
 
 Examples:
 
-- Dagger of Escape 'desc': does not cast.
+- Dagger of Escape `'desc'`: does not cast.
 Explanation: when you click a dagger on a building in game, the target is not
 actually the building, but the map position you're pointing at, even though you
 see the building being highlighted on cursor hover.
 
-- Inferno Stone 'infs': does not cast, same as above.
+- Inferno Stone `'infs'`: does not cast, same as above.
 
 @param whichUnit Target unit
 @param whichItem Handle to item instance
