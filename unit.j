@@ -525,7 +525,7 @@ Puts specific item in target unit's inventory.
 
 Returns:
 
-- true if item already in unit's inventory or if it was put there successfully
+- true if this exact item is already in unit's inventory or if it was put there successfully
 - false if unit has no inventory or space, or invalid item/unit
 
 @param whichUnit Target unit
@@ -536,6 +536,12 @@ native UnitAddItem takes unit whichUnit, item whichItem returns boolean
 /**
 Creates a new item of type `itemId` and puts it in unit's inventory.
 If the inventory is full, it is dropped on the ground at unit's position instead.
+
+This function works in two steps:
+
+1. Spawn the item if both `whichUnit` and `itemId` are valid and exist
+2. Attempt to put the item in unit's inventory. If inventory is full or unit is
+dead then the item is dropped on the ground at unit position.
 
 Returns:
 
@@ -554,6 +560,13 @@ Creates a new item of type `itemId`
 and puts it in unit's inventory in slot specified by `itemSlot`.
 If the slot is occupied or invalid (<0 or >6, or higher than unit's max slots),
 it is dropped on the ground at unit's position instead.
+
+This function works in two steps:
+
+1. Spawn the item if both `whichUnit` and `itemId` are valid and exist
+2. Attempt to put the item in unit's inventory at specified slot.
+If the slot is occupied or unit is dead then the item is dropped on the ground
+at unit position.
 
 Returns:
 
@@ -625,7 +638,7 @@ native UnitInventorySize takes unit whichUnit returns integer
 /**
 Issues an immediate order for the unit to go to point (x,y) and drop the item there.
 
-If the unit cannot reach the point, he will run up to closest location and stop there,
+If the unit cannot reach the point, it will run up to closest location and stop there,
 without dropping the item.
 
 Returns:
@@ -664,7 +677,7 @@ Issues an immediate order for the `whichUnit` to go to `target` (usually another
 and give the item to target. If the target has no inventory slots/full inventory,
 the item is dropped at target's feet.
 
-If the `whichUnit` cannot reach the target, he will run up to closest location and stop there,
+If the `whichUnit` cannot reach the target, it will run up to closest location and stop there,
 without giving the item. If the target is a running unit, `whichUnit` will follow it
 to give the item.
 
@@ -698,15 +711,15 @@ unit doesn't have item, item on cooldown, invalid unit/item etc.
 
 Examples:
 
-- Potion of Healing 'phea':
-   - Unit on patrol, but has full HP: does nothing, unit continues running
-   - Unit on patrol, but has low HP: Uses potion to restore HP, stops patrolling
+- Potion of Healing `phea`:
+    - Unit on patrol, but has full HP: does nothing, unit continues running
+    - Unit on patrol, but has low HP: Uses potion to restore HP, stops patrolling
 
-- Dagger of Escape 'desc':
+- Dagger of Escape `desc`:
 is not casted, because requires a position as a target.
 However, an order is issued, hence returns true.
 
-- Inferno Stone 'infs': same as with dagger above.
+- Inferno Stone `infs`: same as with dagger above.
 
 @note See: `UnitUseItemPoint`, `UnitUseItemTarget`
 
