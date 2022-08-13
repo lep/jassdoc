@@ -92,8 +92,8 @@ native TriggerWaitForSound  takes sound s, real offset returns nothing
 Evaluates all functions that were added to the trigger via `TriggerAddCondition`.
 All return-values from all added condition-functions are `and`ed together as the final return-value.
 Returns the boolean value of the return value from the condition-function.
-So if `0`/`0.0`/`null` would be returned in the condition-function, `TriggerEvaluate`
-would return `false`. Note that `""` would return `true`.
+So if the condition-functions return `0`/`0.0`/`null`, then `TriggerEvaluate`
+will return `false`. Note that an empty string `""` would return `true`.
 
 @note If a condition-function crashes the thread or does not return any value
 `TriggerEvaluate` will return `false`.

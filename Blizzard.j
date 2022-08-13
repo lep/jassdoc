@@ -954,6 +954,22 @@ endfunction
 // trigger is not interrupted as is the case with a TriggerExecute call.
 // Since the trigger executes normally, its conditions are still evaluated.
 //
+/**
+Adds trigger to execution queue by setting it up with a zero-delay timer,
+so it is executed almost immediately. Unlike calling another trigger with
+`TriggerExecute`, this does not interrupt the currently running trigger.
+
+@param trig Target trigger to execute
+@param checkConditions
+If `true`, check if trigger conditions are met and only then queue the trigger.
+If `false`, ignores conditions and always queues the trigger.
+
+Returns:
+
+- `true`, if trigger will be executed
+- `false`, if conditions were not met
+
+*/
 function PostTriggerExecuteBJ takes trigger trig, boolean checkConditions returns boolean
     if checkConditions then
         if not (TriggerEvaluate(trig)) then

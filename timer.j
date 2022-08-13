@@ -9,6 +9,25 @@ then callback is called with `GetElapsedTimer` being `null`.
 */
 native DestroyTimer         takes timer whichTimer returns nothing
 
+/**
+TODO description
+
+@note The table below shows how often a 0 millisecond timer is executed
+in comparison with `TriggerRegisterTimerEvent`
+(aka `TriggerRegisterTimerEventPeriodic`).
+
+| Trigger or Timer \ Tick count  |   ROC 1.0 | Reforged 1.32.10 |
+|--------------------------------|----------:|-----------------:|
+| 1000ms Trigger periodic        |      1 Hz |             1 Hz |
+| 100ms Trigger periodic         |     10 Hz |            10 Hz |
+| 20ms Trigger periodic          |     50 Hz |            50 Hz |
+| 10ms Trigger periodic          |    100 Hz |           100 Hz |
+| 5ms Trigger periodic           |    200 Hz |           100 Hz |
+| 1ms Trigger periodic           |   1000 Hz |           100 Hz |
+| 0ms Trigger periodic           |  10077 Hz |           100 Hz |
+| 1ms Timer                      |   1000 Hz |          1000 Hz |
+| 0ms Timer                      |  10077 Hz |         10077 Hz |
+*/
 native TimerStart           takes timer whichTimer, real timeout, boolean periodic, code handlerFunc returns nothing
 
 /**

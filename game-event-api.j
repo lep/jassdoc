@@ -10,7 +10,28 @@ native TriggerRegisterVariableEvent takes trigger whichTrigger, string varName, 
 
 
 /**
-Creates it's own timer and triggers when it expires
+Creates its own timer and triggers when it expires.
+
+@note The table below shows how often `TriggerRegisterTimerEvent` aka 
+`TriggerRegisterTimerEventPeriodic` is executed per second with different
+timeout values set.
+This is in comparison with a 1ms and 0ms `timer`.
+
+Note how its frequency was limited to 100 times per second in v1.32.x.
+
+| Trigger or Timer \ Tick count  |   ROC 1.0 | Reforged 1.32.10 |
+|--------------------------------|----------:|-----------------:|
+| 1000ms Trigger periodic        |      1 Hz |             1 Hz |
+| 100ms Trigger periodic         |     10 Hz |            10 Hz |
+| 20ms Trigger periodic          |     50 Hz |            50 Hz |
+| 10ms Trigger periodic          |    100 Hz |           100 Hz |
+| 5ms Trigger periodic           |    200 Hz |           100 Hz |
+| 1ms Trigger periodic           |   1000 Hz |           100 Hz |
+| 0ms Trigger periodic           |  10077 Hz |           100 Hz |
+| 1ms Timer                      |   1000 Hz |          1000 Hz |
+| 0ms Timer                      |  10077 Hz |         10077 Hz |
+
+See: `TimerStart`
 */
 native TriggerRegisterTimerEvent takes trigger whichTrigger, real timeout, boolean periodic returns event
 
