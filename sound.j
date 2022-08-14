@@ -127,7 +127,7 @@ Tones the pitch of the sound, default value is 1. Increasing it you get the chip
 version and the sound becomes shorter, when decremented the sound becomes low-pitched and longer.
 
 @bug This native has very weird behaviour.
-See [this](http://www.hiveworkshop.com/threads/setsoundpitch-weirdness.215743/#post-2145419) for an explenation
+See [this](http://www.hiveworkshop.com/threads/setsoundpitch-weirdness.215743/#post-2145419) for an explanation
 and [this](http://www.hiveworkshop.com/threads/snippet-rapidsound.258991/#post-2611724) for a non-bugged implementation.
 */
 native SetSoundPitch                takes sound soundHandle, real pitch returns nothing

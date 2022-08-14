@@ -92,7 +92,7 @@ Sets a new gamespeed to run the map at.
 @param whichspeed The gamespeed constant to be set as new speed.
 The only allowed values are: `MAP_SPEED_SLOWEST`, `MAP_SPEED_SLOW` and `MAP_SPEED_NORMAL`, because `MAP_SPEED_FAST` and `MAP_SPEED_FASTEST` are automatically reverted to normal speed.
 
-@note See: `SetGameSpeed`, and for values and mechanics: `gamespeed`.
+@note See: `gamespeed` for values and mechanics.
 */
 native SetGameSpeed takes gamespeed whichspeed returns nothing
 
