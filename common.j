@@ -64,7 +64,9 @@ Warcraft 3 game speed setting:
 | Medium         | `MAP_SPEED_SLOW`   | 0.8x  | 12.5s         |
 | Slow           | `MAP_SPEED_SLOWEST`| 0.6x  | 16.667s       |
 
-Note that this setting is actually just a multiplier for a "base game speed",
+
+@note
+This setting is actually just a multiplier for a "base game speed",
 which is normally set to 1.0x (100%).
 
 You can achieve a higher "base game speed" via a .wgc file only for testing.
@@ -82,6 +84,11 @@ are shown in the table below:
 |              3x |              0.6x |           1.80x |
 |              3x |              0.8x |           2.40x |
 |              3x |              1.0x |           3.00x |
+
+Further reading:
+
+- [How to run maps with high gamespeed](https://www.hiveworkshop.com/threads/how-to-run-maps-with-high-gamespeed.37255/)
+- [WGC file format specification](https://github.com/ChiefOfGxBxL/WC3MapSpecification/pull/4)
 
 @bug (v1.27, v1.32.10 tested) Restarting the map from the F10 in-game menu
 will reset the "base game speed" back to 1x.
@@ -1305,10 +1312,27 @@ globals
     constant gamedifficulty     MAP_DIFFICULTY_HARD                 = ConvertGameDifficulty(2)
     constant gamedifficulty     MAP_DIFFICULTY_INSANE               = ConvertGameDifficulty(3)
 
+/**
+@note See `gamespeed` for explanation, values and mechanics.
+*/
     constant gamespeed          MAP_SPEED_SLOWEST                   = ConvertGameSpeed(0)
+/**
+@note See `gamespeed` for explanation, values and mechanics.
+*/
     constant gamespeed          MAP_SPEED_SLOW                      = ConvertGameSpeed(1)
+/**
+@note See `gamespeed` for explanation, values and mechanics.
+*/
     constant gamespeed          MAP_SPEED_NORMAL                    = ConvertGameSpeed(2)
+/**
+@note See `gamespeed` for explanation, values and mechanics.
+@bug Currently unused, resets to `MAP_SPEED_NORMAL`.
+*/
     constant gamespeed          MAP_SPEED_FAST                      = ConvertGameSpeed(3)
+/**
+@note See `gamespeed` for explanation, values and mechanics.
+@bug Currently unused, resets to `MAP_SPEED_NORMAL`.
+*/
     constant gamespeed          MAP_SPEED_FASTEST                   = ConvertGameSpeed(4)
 
     constant playerslotstate    PLAYER_SLOT_STATE_EMPTY             = ConvertPlayerSlotState(0)
