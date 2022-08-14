@@ -37,25 +37,25 @@ foreach my $file (@ARGV){
             $src = escape($src);
             $fn = escape($fn);
             say <<SQL;
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$fn',
                     'source-code',
                     '$src'
                 );
 
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$fn',
                     'start-line',
                     $start
                 );
 
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$fn',
                     'end-line',
                     $end
                 );
 
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$fn',
                     'type',
                     'function'
@@ -67,26 +67,26 @@ SQL
             $src = escape($src);
             $fn = escape($1);
             say <<SQL;
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$fn',
                     'source-code',
                     '$src'
                 );
 
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$fn',
                     'start-line',
                     $.
                 );
 
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$fn',
                     'end-line',
                     $.
                 );
 
 
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$fn',
                     'type',
                     'native'
@@ -107,25 +107,25 @@ SQL
                 $name = escape($name);
                 $line = escape($line);
                 say <<SQL;
-                    insert into annotations values (
+                    insert into annotations (fnname, anname, value) values (
                         '$name',
                         'source-code',
                         '$line'
                     );
 
-                    insert into annotations values (
+                    insert into annotations (fnname, anname, value) values (
                         '$name',
                         'start-line',
                         $.
                     );
 
-                    insert into annotations values (
+                    insert into annotations (fnname, anname, value) values (
                         '$name',
                         'end-line',
                         $.
                     );
 
-                    insert into annotations values (
+                    insert into annotations (fnname, anname, value) values (
                         '$name',
                         'type',
                         'global'
@@ -139,25 +139,25 @@ SQL
             my $type = escape($1);
             my $line = escape($line);
             say <<SQL;
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$type',
                     'source-code',
                     '$line'
                 );
 
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$type',
                     'start-line',
                     $.
                 );
 
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$type',
                     'end-line',
                     $.
                 );
 
-                insert into annotations values (
+                insert into annotations (fnname, anname, value) values (
                     '$type',
                     'type',
                     'type'
