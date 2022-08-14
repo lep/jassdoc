@@ -64,6 +64,28 @@ Warcraft 3 game speed setting:
 | Medium         | `MAP_SPEED_SLOW`   | 0.8x  | 12.5s         |
 | Slow           | `MAP_SPEED_SLOWEST`| 0.6x  | 16.667s       |
 
+Note that this setting is actually just a multiplier for a "base game speed",
+which is normally set to 1.0x (100%).
+
+You can achieve a higher "base game speed" via a .wgc file only for testing.
+The in-game `gamespeed` is actually a multiplier on top of that. The results
+are shown in the table below:
+
+| Base game speed | Game speed option | Effective speed |
+| --------------: | ----------------: | --------------: |
+|              1x |              0.6x |           0.60x |
+|              1x |              0.8x |           0.80x |
+|              1x |              1.0x |           1.00x |
+|              2x |              0.6x |           1.20x |
+|              2x |              0.8x |           1.60x |
+|              2x |              1.0x |           2.00x |
+|              3x |              0.6x |           1.80x |
+|              3x |              0.8x |           2.40x |
+|              3x |              1.0x |           3.00x |
+
+@bug (v1.27, v1.32.10 tested) Restarting the map from the F10 in-game menu
+will reset the "base game speed" back to 1x.
+
 */
 type gamespeed          extends     handle
 
