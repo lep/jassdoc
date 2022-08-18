@@ -133,7 +133,7 @@ and [this](http://www.hiveworkshop.com/threads/snippet-rapidsound.258991/#post-2
 native SetSoundPitch                takes sound soundHandle, real pitch returns nothing
 
 /**
-@note Must be called immediately after calling StartSound.
+@note Must be called immediately after calling `StartSound`.
 */
 native SetSoundPlayPosition         takes sound soundHandle, integer millisecs returns nothing
 
@@ -188,6 +188,11 @@ of at least 0.1 seconds inbetween them to be played.
 You can overcome this by starting one earlier and then using `SetSoundPosition`.
 */
 native StartSound                   takes sound soundHandle returns nothing
+
+/**
+@patch 1.33
+*/
+native StartSoundEx                 takes sound soundHandle, boolean fadeIn returns nothing
 
 /**
 Stops the sound.

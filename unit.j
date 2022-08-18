@@ -1606,6 +1606,11 @@ Returns a handle to specific unit's ability instance.
 */
 native BlzGetUnitAbilityByIndex                    takes unit whichUnit, integer index returns ability
 
+/**
+@patch 1.33
+*/
+native BlzGetAbilityId                             takes ability whichAbility returns integer
+
 
 /**
 @patch 1.32
