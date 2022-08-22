@@ -187,9 +187,6 @@ native GetLocationY             takes location whichLocation returns real
 
 
 /**
-@note This function is asynchronous. The values it returns are not guaranteed synchronous between each player.
-If you attempt to use it in a synchronous manner, it may cause a desync.
-
 @note Reasons for returning different values might be terrain-deformations
 caused by spells/abilities and different graphic settings.
 Other reasons could be the rendering state of destructables and visibility differences.

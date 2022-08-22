@@ -53,7 +53,7 @@ Determines whether or not the fog modifier will be applied to allied players wit
 @param afterUnits
 Will determine whether or not units in that area will be masked by the fog. If it is set to true and the fogstate is masked, it will hide all the units in the fog modifier's radius and mask the area. If set to false, it will only mask the areas that are not visible to the units.
 
-@note You must use FogModifierStart to enable the fog modifier. 
+@note You must use `FogModifierStart` to enable the fog modifier. 
 */
 native CreateFogModifierRadius takes player forWhichPlayer, fogstate whichState, real centerx, real centerY, real radius, boolean useSharedVision, boolean afterUnits returns fogmodifier
 

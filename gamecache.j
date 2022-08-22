@@ -69,26 +69,26 @@ native  FlushStoredString					takes gamecache cache, string missionKey, string k
 
 
 /**
-Returns 0 if the specified value's data is not found in the cache.
+Returns `0` if the specified value's data is not found in the cache.
 */
 native  GetStoredInteger				takes gamecache cache, string missionKey, string key returns integer
 
 /**
-Returns 0.0 if the specified value's data is not found in the cache.
+Returns `0.0` if the specified value's data is not found in the cache.
 */
 native  GetStoredReal					takes gamecache cache, string missionKey, string key returns real
 
 /**
-Returns false if the specified value's data is not found in the cache.
+Returns `false` if the specified value's data is not found in the cache.
 */
 native  GetStoredBoolean				takes gamecache cache, string missionKey, string key returns boolean
 
 /**
-Returns "" if the specified value's data is not found in the cache.
+Returns `""` if the specified value's data is not found in the cache.
 */
 native  GetStoredString					takes gamecache cache, string missionKey, string key returns string
 
 /**
-Returns null if the specified value's data is not found in the cache.
+Returns `null` if the specified value's data is not found in the cache.
 */
 native  RestoreUnit						takes gamecache cache, string missionKey, string key, player forWhichPlayer, real x, real y, real facing returns unit
