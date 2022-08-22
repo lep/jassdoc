@@ -159,3 +159,67 @@ native BlzDecPlayerTechResearched                  takes player whichPlayer, int
 @patch 1.32
 */
 native BlzGetPlayerTownHallCount                   takes player whichPlayer returns integer
+
+/**
+@patch 1.33
+*/
+native BlzQueueImmediateOrderById      takes unit whichUnit, integer order returns boolean
+
+/**
+@patch 1.33
+*/
+native BlzQueuePointOrderById          takes unit whichUnit, integer order, real x, real y returns boolean
+
+/**
+@patch 1.33
+*/
+native BlzQueueTargetOrderById         takes unit whichUnit, integer order, widget targetWidget returns boolean
+
+/**
+@patch 1.33
+*/
+native BlzQueueInstantPointOrderById   takes unit whichUnit, integer order, real x, real y, widget instantTargetWidget returns boolean
+
+/**
+@patch 1.33
+*/
+native BlzQueueInstantTargetOrderById  takes unit whichUnit, integer order, widget targetWidget, widget instantTargetWidget returns boolean
+
+/**
+@patch 1.33
+*/
+native BlzQueueBuildOrderById          takes unit whichPeon, integer unitId, real x, real y returns boolean
+
+/**
+@patch 1.33
+*/
+native BlzQueueNeutralImmediateOrderById   takes player forWhichPlayer,unit neutralStructure, integer unitId returns boolean
+
+/**
+@patch 1.33
+*/
+native BlzQueueNeutralPointOrderById       takes player forWhichPlayer,unit neutralStructure, integer unitId, real x, real y returns boolean
+
+/**
+@patch 1.33
+*/
+native BlzQueueNeutralTargetOrderById      takes player forWhichPlayer,unit neutralStructure, integer unitId, widget target returns boolean
+
+
+/**
+Returns the number of orders the unit currently has queued up.
+@patch 1.33
+*/
+native BlzGetUnitOrderCount takes unit whichUnit returns integer
+
+/**
+Clears either all orders or only queued up orders.
+@patch 1.33
+*/
+native BlzUnitClearOrders takes unit whichUnit, boolean onlyQueued returns nothing
+
+/**
+Stops the current order and optionally clears the queue.
+@patch 1.33
+*/
+native BlzUnitForceStopOrder takes unit whichUnit, boolean clearQueue returns nothing
