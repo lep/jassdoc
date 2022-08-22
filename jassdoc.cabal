@@ -9,5 +9,5 @@ extra-source-files:  Readme.md
 executable mkdocs
   main-is:             mkdocs.hs
   other-modules: Jass.Types, Jass.Parser, Jass.Ast, Data.Composeable
-  build-depends: base, bytestring, megaparsec, mtl, parser-combinators
+  build-depends: base, bytestring, megaparsec, mtl, parser-combinators, optparse-applicative
   default-language:    Haskell2010

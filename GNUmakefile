@@ -1,4 +1,4 @@
-VERSION := $(shell git rev-parse --short HEAD)
+MKDOCS ?= cabal run mkdocs --
 
 .PHONY: all clean release
 
@@ -15,21 +15,13 @@ SRC += common.ai
 all: jass.db
 
 db.sql: mksrc $(SRC)
-	cabal build mkdocs
-	cabal run --verbose=0 mkdocs -- $(filter %.j %.ai,$?) > $@
+	$(MKDOCS) $(filter %.j %.ai,$?) --output "$@"
 	./mksrc $(filter %.j %.ai,$?) >> $@
 	./mkmetadata >> $@
 
 jass.db: db.sql
 	sqlite3 $@ < $<
 
-jass-$(VERSION).zip: jass.db
-	zip -q $@ $<
-
-release: jass-$(VERSION).zip
-
 clean:
-	rm -f *.o *.hi
-	rm -f jass-*.zip
 	rm -f db.sql
 

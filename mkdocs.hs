@@ -3,6 +3,8 @@
 {-# LANGUAGE ViewPatterns #-}
 {-# LANGUAGE PatternSynonyms #-}
 
+import Data.Bifunctor (bimap)
+
 import Control.Arrow
 import Control.Monad
 
@@ -21,6 +23,8 @@ import System.Environment (getArgs)
 import System.IO
 
 import Text.Megaparsec (parse, errorBundlePretty)
+
+import Options.Applicative
 
 
 pattern N x <- (L8.pack -> x)
@@ -160,8 +164,8 @@ type Accumulator = ([L8.ByteString], [(L8.ByteString, [L8.ByteString])])
 myUnlines = L8.intercalate "\n"
 
 
-parseDocstring = first (trimWhitespace . myUnlines . reverse)
-               . second (map (second $ myUnlines . reverse ) )
+parseDocstring = bimap (trimWhitespace . myUnlines . reverse)
+                       (map (second $ myUnlines . reverse ) )
                . flip go mempty
                . L8.lines
   where
@@ -220,9 +224,23 @@ schema = L8.unlines
          , ");                                            "
          ]
 
+data Args = Args FilePath [FilePath] 
+
+argsParser :: Parser Args
+argsParser =
+    Args <$> strOption (long "output" <> metavar "FILE" <> help "Write output to FILE")
+         <*> many (argument str (metavar "INPUTS..."))
+
+opts :: ParserInfo Args
+opts = info (argsParser <**> helper) 
+    ( fullDesc
+    <> progDesc "Process jassdoc'd jass files"
+    )
+
 main = do
-    args <- getArgs
-    L8.putStrLn schema
+    Args out args <- execParser opts
+    h <- openFile out WriteMode
+    L8.hPutStrLn h schema
     forM_ args $ \file -> do
         hPutStrLn stderr file
         handle <- openFile file ReadMode
@@ -232,7 +250,8 @@ main = do
             toplevel = case x of
                 Right (Programm y) -> y
                 Left err -> error $ errorBundlePretty err
-        L8.putStrLn "BEGIN TRANSACTION;"
-        mapM_ L8.putStrLn . filter (not . emptyLine) $ map (handleToplevel file) toplevel
-        L8.putStrLn "END TRANSACTION;"
+        L8.hPutStrLn h "BEGIN TRANSACTION;"
+        mapM_ (L8.hPutStrLn h) . filter (not . emptyLine) $ map (handleToplevel file) toplevel
+        L8.hPutStrLn h "END TRANSACTION;"
+    hClose h
 
