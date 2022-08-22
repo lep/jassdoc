@@ -16,8 +16,8 @@ all: jass.db
 
 db.sql: mksrc $(SRC)
 	$(MKDOCS) $(filter %.j %.ai,$?) --output "$@"
-	./mksrc $(filter %.j %.ai,$?) >> $@
-	./mkmetadata >> $@
+	perl mksrc $(filter %.j %.ai,$?) >> $@
+	sh mkmetadata >> $@
 
 jass.db: db.sql
 	sqlite3 $@ < $<
