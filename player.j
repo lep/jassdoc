@@ -111,24 +111,25 @@ In case of a unit type or an equivalent, it would be the amount of units of that
 
 @param whichPlayer The player whose tech level to query.
 
-@param techid The id of the tech item. Either an upgrade like Iron Plating 'Rhar', a unit type like Footman 'hfoo' or one of the following special equivalent ids:
-'HERO' - any hero
-'TALT' - any altar
-'TWN1' - town hall tier 1
-'TWN2' - town hall tier 2
-'TWN3' - town hall tier 3
-'TWN4' - town hall tier 4
-'TWN5' - town hall tier 5
-'TWN6' - town hall tier 6
-'TWN7' - town hall tier 7
-'TWN8' - town hall tier 8
-'TWN9' - town hall tier 9
+@param techid The id of the tech item. Either an upgrade like Iron Plating `'Rhar'`, a unit type like Footman `'hfoo'` or one of the following special equivalent ids:
+
+- `'HERO'` - any hero
+- `'TALT'` - any altar
+- `'TWN1'` - town hall tier 1
+- `'TWN2'` - town hall tier 2
+- `'TWN3'` - town hall tier 3
+- `'TWN4'` - town hall tier 4
+- `'TWN5'` - town hall tier 5
+- `'TWN6'` - town hall tier 6
+- `'TWN7'` - town hall tier 7
+- `'TWN8'` - town hall tier 8
+- `'TWN9'` - town hall tier 9
 
 @param specificonly When this is false, it will consider some additional dependencies between the techs:
-When specificonly is false, the Human Guard Tower 'hgtw' will also be considered when querying for the Scout Tower 'hwtw' (even if the Guard Tower is preplaced, i.e. not doing the upgrade on runtime, so this checks the Teechtree - Upgrades To 'uupt' field?).
-Higher tier townhalls will be considered when querying for lower tier hownhalls, i.e. querying for Great Hall 'ogre' will also consider Stronghold 'ostr' and Fortress 'ofrt' when specificonly is false.
+When specificonly is false, the Human Guard Tower 'hgtw' will also be considered when querying for the Scout Tower `'hwtw'` (even if the Guard Tower is preplaced, i.e. not doing the upgrade on runtime, so this checks the Teechtree - Upgrades To `'uupt'` field?).
+Higher tier townhalls will be considered when querying for lower tier hownhalls, i.e. querying for Great Hall `'ogre'` will also consider Stronghold `'ostr'` and Fortress `'ofrt'` when specificonly is false.
 Ability morph does not seem to be considered when specificonly is false, tested with Berserker Upgrade of Headhunter.
-Techtree - Dependency Equivalents 'udep' seems to be considered even if specificonly is true, i.e. when you set Scout Tower as an equivalent for Farm 'hhou', querying for 'hhou' will also consider Scout Towers.
+Techtree - Dependency Equivalents `'udep'` seems to be considered even if specificonly is true, i.e. when you set Scout Tower as an equivalent for Farm `'hhou'`, querying for `'hhou'` will also consider Scout Towers.
 */
 constant native GetPlayerTechCount takes player whichPlayer, integer techid, boolean specificonly returns integer
 
