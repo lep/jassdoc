@@ -112,8 +112,6 @@ Adds an action to be called when the given trigger is fired through registered e
 
 @note More than one action can be added to the trigger. The actions run in the order they were added.
 
-@note More than one action can be added to the trigger. The actions run in the order they were added.
-
 @note The same function can be used more than once on the same trigger.
 
 @note Actions wait for their forerunner to finish. So if there are TriggerSleepActions, subsequent actions will be delayed accordingly.
