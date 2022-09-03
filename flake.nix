@@ -6,7 +6,7 @@
 
     outputs = { self, nixpkgs, flake-utils }:
 	flake-utils.lib.eachSystem (flake-utils.lib.defaultSystems ++ [flake-utils.lib.system.aarch64-darwin]) (system:
-	    let pkgs = nixpkgs.legacyPackages.${system};
+	    let pkgs = import nixpkgs { inherit system; };
 		packageName = "jassdoc";
 		mkdocs = pkgs.haskellPackages.callCabal2nix packageName self rec {
 		    # Dependency overrides go here
