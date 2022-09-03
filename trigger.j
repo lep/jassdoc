@@ -152,6 +152,23 @@ also works in `ExecuteFunc` contexts, even if the `ExecuteFunc` call is not in a
 
 @note This does not tick while the game was paused by the user, neither in singleplayer nor in multiplayer. (But the Trigger Editor of the World Editor
 denotes it as a real-time wait. Is this a bug?)
+
+@note This ticks independently from game speed, i.e., in Fast mode, it will be about the same as a game time, in Normal mode, it will be about 25% faster than
+game time and in Slow mode, it will be about 67% faster than game time, see table below.
+
+Game speed | TSA speed (%) | game speed (%)
+-------------------------------------------
+Fast       | 100%          | 100%
+Normal     | 100%          | 80%
+Slow       | 100%          | 60%
+
+Example elapsed game time after TSA with timeout = 30:
+
+Game speed | game time elapsed
+------------------------------
+Fast       | 30s
+Normal     | 24s
+Slow       | 18s
 */
 native TriggerSleepAction   takes real timeout returns nothing
 
