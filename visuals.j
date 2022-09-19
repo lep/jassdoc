@@ -126,8 +126,25 @@ native PlayModelCinematic           takes string modelName returns nothing
 
 native PlayCinematic                takes string movieName returns nothing
 
+/**
+Emulates a key press within the game. Seems to only work with latin alphabet, only for printable ASCII characters.
+
+@note See `ForceUICancel` for limitations and bugs. Most importantly, the outcome is affected by local player's hotkey layout.
+*/
 native ForceUIKey                   takes string key returns nothing
 
+/**
+Emulates an ESCAPE key press internally, used to interact with UI, e.g. close F10 menu.
+
+@bug Does not always work as expected if you use it to "Cancel" something on behalf of a player, like cancel research in the current building. Since it always sends the Escape key, it will break if hotkey layout was changed from classic to grid/custom in game settings. Explanation:
+1. OldPlayer plays with classic hotkey layout, the Cancelling abilities are bound to Escape.
+2. ModernPlayer plays with grid layout, the Cancelling abilities' hotkey depends on their position but it's usually V.
+3. ForceUICancel() is executed for both players
+4. OldPlayer executes a Cancel ability, nothing happens to ModernPlayer
+5. The game doesn't desync because it thinks OldPlayer really pressed that key, and even though ModernPlayer did "press" it too, he didn't trigger Cancel for his unit.
+
+@note Does not trigger (physical) player key events like `BlzTriggerRegisterPlayerKeyEvent`
+*/
 native ForceUICancel                takes nothing returns nothing
 
 native DisplayLoadDialog            takes nothing returns nothing

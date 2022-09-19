@@ -1,47 +1,99 @@
 // String Utility API
 
 /**
+Returns a real representation for integer i.
+If i is not an integer or i is null, raises an error.
+
 @pure
 */
 native I2R  takes integer i returns real
 
 /**
+Returns an integer representation for real r.
+The output will be rounded towards 0 if it is a real number.
+Only raises an error if r is null.
+NaN is not a possible value in Warcraft 3 (always reset to 1.0)
+
+For extermely large values the minimum/maximum representable signed integer will be returned
+(e.g. for Lua: `math.mininteger` and `math.maxinteger`)
+
 @pure
 */
 native R2I  takes real r returns integer
 
 /**
+Returns the string representation for integer i.
+Raises an error if i is null or has no integer representation.
+
 @pure
 */
 native I2S  takes integer i returns string
 
 /**
+Returns a string representation for real r with precision of 3 digits.
+The real is correctly rounded to nearest to fit within the precision. Raises an error if r is null.
+
+**Example:**
+
+`R2S(1.12) --> 1.120`
+Equivalent to: `R2SW(r, 0, 3)` and Lua: `string.format("%.3f", r)`
+
+@note See: `R2SW`
+
 @pure
 */
 native R2S  takes real r returns string
 
 /**
-Formats the real r into a string with supplied precision and width.
+Returns a string representation for real r with precision digits and width.
+The real is correctly rounded to nearest to fit within the precision.
+Raises an error if r is null.
+
+Works similar to C/C++ [printf](https://www.cplusplus.com/reference/cstdio/printf/),
+but does not support negative width (left-align with right padding).
+
+**Example (Lua):**
+
+	R2SW(31.1235, 5, 3) --> 31.124
+	R2SW(1, 5, 0) --> two spaces followed by number
+	  1.0
+
 @param r The number to be converted
 @param width The width of the string. If the width of the resulting conversion
              is too small the string will be filled with spaces.
              Use 0 for no padding.
-@param precision The amount of decimal places.
+@param precision The amount of decimal places. The minimum possible precision is 1 (automatically set).
+
+@note See: `R2S` for a simple converter with preset values
 
 @pure
 */
 native R2SW takes real r, integer width, integer precision returns string
 
 /**
-Converts a string of digits to the represented number.
-Returns `0` in case of an error.
+Returns an integer by parsing the string for a number.
+
+For values too big or too small, returns max/min integer respectively.
+For an empty string or text that doesn't start with a number, returns 0.
+For null raises an error.
+
+**Examples (Lua):**
+
+	S2I("") -- 0
+	S2I("-123") -- -123
+	S2I("-99999999") -- -2147483648
+	S2I("99999999") -- 2147483647
+	S2I("123abc") -- 123
+	S2I("abc123") -- 0
+	S2I(nil) -- error
 
 @param s The string to be converted
 
 @note This function only works for decimal strings. Hexadecimal or octal strings
 are not supported.
 
-@note If the input string starts with some valid input but ends in invalid input
+@note The parser stops at the first non-number character [0-9.].
+If the input string starts with some valid input but ends in invalid input
 this will return the conversion of the valid part: `S2I("123asd") == 123`.
 
 @pure
@@ -52,15 +104,16 @@ native S2I  takes string s returns integer
 
 
 /**
-Converts a string of digits to the represented number.
-Returns `0` in case of an error.
+Returns a real by parsing the string for a number.
+Returns 0 for: values too big or too small, an empty string or text that doesn't start with a number. For null raises an error.
 
 @param s The string to be converted
 
 @note This function only works for decimal strings. Hexadecimal or octal strings
 are not supported.
 
-@note If the input string starts with some valid input but ends in invalid input
+@note The parser stops at the first non-number character [0-9.] - does not support comma `,` as a decimal point.
+If the input string starts with some valid input but ends in invalid input
 this will return the conversion of the valid part: `S2R(".123asd") == 0.123`.
 
 @pure
@@ -68,42 +121,78 @@ this will return the conversion of the valid part: `S2R(".123asd") == 0.123`.
 native S2R  takes string s returns real
 
 /**
+returns the internal index of the given handle.
+
+**Example:** `GetHandleId(Player(0)) -> 1048584`
+
+@param h Handle
+
+@note Sometimes the handle ID may be different between clients.
+
 @patch 1.24b
 */
 native GetHandleId takes handle h returns integer
 
 /**
+Returns a new substring from the interval [start, end) - inclusive, exclusive.
+Positions are zero-indexed.
+For empty or invalid out-of-bounds values returns an empty string "" (in Lua).
+
+For start>end returns substring beginning with start until the actual end of string.
+For start<0 returns an empty string.
+
+**Examples (Lua):**
+
+    SubString("abc", 0, 0) --> ""
+    SubString("abc", 0, 1) --> "a"
+    SubString("abc", 2, 3) --> "c"
+    SubString("abc", 0, 3) --> "abc"
+    SubString("abcdef", 2, 0) --> "cdef"
+
+@param source Text string
+@param start Starting position, zero-indexed, inclusive.
+@param end Last position, zero-indexed, exclusive.
+
 @pure
-
-@note This function does bound-checking on the upper bound, e.g.
-`SubString("test", 0, 9999) == "test"` but not on the lower bound:
-
-    SubString("", -3, 0) == null
-    SubString(null, -3, 0) == null
-    SubString("non-empty/not-null", -3, 0) != ""
-    SubString("non-empty/not-null", -3, 0) != null
-
-<http://www.wc3c.net/showthread.php?p=1090749#post1090749>
 */
 native SubString takes string source, integer start, integer end returns string
 
 /**
 Returns the length of the string in *bytes*.
+This means Unicode (non-ASCII) characters will take up and return a higher byte count than there are letters.
+
+**Example**: `StringLength("я")` returns 2.
+
 @pure
 */
 native StringLength takes string s returns integer
 
 /**
+Turns the text to upper/lower case and returns it. Only works for ASCII characters (A-Z), not Unicode (Дружба).
+
+@param source Text string
+
+@param upper True: turn to UPPER CASE. False: turn to lower case.
+
 @pure
 */
 native StringCase takes string source, boolean upper returns string
 
 /**
-Case and slash insensitive hash function.
+Returns a string hash for the given string. The string is normalized before hashing.
+
+The hash is supposed to be case-insensitive of the input string:
+this works for ASCII and some small subset of Unicode (Latin Supplement, Cyrillic...).
+Also the backslash is the same as forward slash: / and \.
+A probable explanation for this is the usage of file paths, since the game runs on Windows and Mac OS/OSX.
+StringHash is also used for variable lookup: string name -> integer index.
+
 `StringHash("\\") == StringHash("/")`
 `StringHash("AB") == StringHash("ab")`
 
-@note See <http://www.hiveworkshop.com/forums/w-277/b-213272/> for the source-code of StringHash.
+@note The underlying algorithm is subject to change between major versions.
+Code for the old algorithm ["SStrHash2"](https://www.hiveworkshop.com/threads/bits-of-interest.213272/) via ["1997 Dr Dobbs article"](http://burtleburtle.net/bob/hash/doobs.html) and a question about the [changed algorithm in Reforged.](https://www.hiveworkshop.com/threads/stringhash-asm-dump.331097/)
+TODO: In what version was it changed?
 
 @pure
 
@@ -113,12 +202,15 @@ native StringHash takes string s returns integer
 
 
 /**
-Reads a string out of some files and returns the result.
-The result can differ between players with different languages.
-Possible sources are the .fdf files and the war3map.wts file.
-Returns source if no entry was found.
+returns a translated string for the client's local language.
+Without an available translation, returns `source`.
 
-@bug Cannot assign it to a constant variable as it will crash the game.
+The result will differ between players with different languages.
+Possible sources are the .fdf files and the war3map.wts file.
+
+**Example:** `GetLocalizedString("REFORGED")` -> "Reforged"
+
+@bug (Jass) Cannot assign it to a constant variable as it will crash the game.
 `constant string foo = GetLocalizedString("bar")`
 
 @async

@@ -200,4 +200,18 @@ native GetPlayerTaxRate takes player sourcePlayer, player otherPlayer, playersta
 
 native IsPlayerRacePrefSet takes player whichPlayer, racepreference pref returns boolean
 
+/**
+Returns the player name.
+
+**Example (Lua):**
+
+    -- assuming you play as player Red
+    local name = GetPlayerName(Player(0)) --> your player name as text
+
+If the player is not present in the game or is one of the internal players, returns localized string + one-based player number (WorldEdit-like):
+
+    local me = GetPlayerName( Player(0) ) --> your player name as text
+    local np = GetPlayerName( Player(PLAYER_NEUTRAL_PASSIVE) ) --> "Player 28"
+
+*/
 native GetPlayerName takes player whichPlayer returns string

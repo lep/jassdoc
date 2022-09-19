@@ -1,11 +1,29 @@
 // Unit API
 
 /**
+Creates a unit of type `unitid` for player `id`, facing a certain direction at the provided coordinates.
+Returns handle to unit
+
+**Example:** Create a human footman for first player (red) at map coordinates -30, 0, facing north:
+
+    // Jass
+    call CreateUnit(Player(0), 'hfoo', -30, 0, 90)
+    -- Lua
+    CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
+	
+@note See: `bj_UNIT_FACING` constant for default facing direction of units in BJ scripts and GUI.
+
 @param id The owner of the unit.
 @param unitid The rawcode of the unit.
 @param x The x-coordinate of the unit.
 @param y The y-coordinate of the unit.
 @param face Unit facing in degrees.
+* 0   = East
+* 90  = North
+* 180 = West
+* 270 = South
+* -90 = South (wraps around)
+
 */
 native CreateUnit takes player id, integer unitid, real x, real y, real face returns unit
 
@@ -50,7 +68,15 @@ native RemoveUnit takes unit whichUnit returns nothing
 native ShowUnit takes unit whichUnit, boolean show returns nothing
 
 
+/**
+Set unit's unit state to a new absolute value.
 
+**Example:** Set unit's max mana to 105 MP.
+
+    call SetUnitState(myUnit, UNIT_STATE_MAX_MANA, 105.0)
+	
+@note See: `GetUnitState`
+*/
 native SetUnitState takes unit whichUnit, unitstate whichUnitState, real newVal returns nothing
 
 /**
@@ -164,9 +190,11 @@ Changes ownership of a unit.
 
 @param whichUnit Unit to modify
 @param whichPlayer The unit's new owner
-@param changeColor True to change unit's accent color, false to leave old color
+@param changeColor True to change unit's accent color to new owner's color, false to leave old color
 
-@note The HP bar will always have the color of its owner player, regardless of `changeColor`.
+@note Reforged: The HP bar will always have the color of its owner player, regardless of `changeColor`.
+
+@note See: `GetOwningPlayer`, `Player`
 */
 native SetUnitOwner takes unit whichUnit, player whichPlayer, boolean changeColor returns nothing
 
@@ -790,16 +818,26 @@ native UnitUseItemTarget takes unit whichUnit, item whichItem, widget target ret
 
 
 /**
+Returns X map coordinate of whichUnit (alive or dead). Returns 0.0 if unit was removed or is null.
+
 @bug If the unit is loaded into a zeppelin this will not return the position
 of the zeppelin but the last position of the unit before it was loaded into
 the zeppelin.
+
+@note Since unit extends from `widget`, you can use widget-related functions too.
+See: `GetUnitY`, `BlzGetLocalUnitZ`, `BlzGetUnitZ`, `GetWidgetX`, `GetWidgetY`
 */
 constant native GetUnitX takes unit whichUnit returns real
 
 /**
+Returns Y map coordinate of whichUnit (alive or dead). Returns 0.0 if unit was removed or is null.
+
 @bug If the unit is loaded into a zeppelin this will not return the position
 of the zeppelin but the last position of the unit before it was loaded into
 the zeppelin.
+
+@note Since unit extends from `widget`, you can use widget-related functions too.
+See: `GetUnitX`, `BlzGetLocalUnitZ`, `BlzGetUnitZ`, GetWidgetX`, `GetWidgetY`
 */
 constant native GetUnitY takes unit whichUnit returns real
 
@@ -819,8 +857,24 @@ constant native GetUnitMoveSpeed takes unit whichUnit returns real
 
 constant native GetUnitDefaultMoveSpeed takes unit whichUnit returns real
 
+/**
+Returns unit's current unit state as an absolute value.
+
+**Example:** Retrieve a unit's current/max HP and mana:
+
+    call GetUnitState(myUnit, UNIT_STATE_MAX_MANA) // returns 285.0
+	
+@note See: `SetUnitState`
+*/
 constant native GetUnitState takes unit whichUnit, unitstate whichUnitState returns real
 
+/**
+Returns the owner player of the unit.
+
+@param whichUnit Target unit
+
+@note See: `SetUnitOwner`
+*/
 constant native GetOwningPlayer takes unit whichUnit returns player
 
 constant native GetUnitTypeId takes unit whichUnit returns integer
@@ -828,6 +882,14 @@ constant native GetUnitTypeId takes unit whichUnit returns integer
 constant native GetUnitRace takes unit whichUnit returns race
 
 /**
+Returns localized name for unit.
+
+**Example (Lua)**:
+
+    u = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
+    print(GetUnitName(u)) --> "Footman"
+
+@param whichUnit Target unit
 @async
 */
 constant native GetUnitName takes unit whichUnit returns string
@@ -1065,6 +1127,11 @@ native IssueBuildOrderById takes unit whichPeon, integer unitId, real x, real y 
 
 native IssueNeutralImmediateOrder takes player forWhichPlayer, unit neutralStructure, string unitToBuild returns boolean
 
+/**
+TODO
+
+Can be used to buy items and units at a shop.
+*/
 native IssueNeutralImmediateOrderById takes player forWhichPlayer,unit neutralStructure, integer unitId returns boolean
 
 native IssueNeutralPointOrder takes player forWhichPlayer,unit neutralStructure, string unitToBuild, real x, real y returns boolean
@@ -1339,6 +1406,12 @@ native BlzUnitHideAbility                          takes unit whichUnit, integer
 /**
 Enables/disables and hides/unhides an ability for a unit. A visible disabled ability is shown as deactivated, an invisible ability disappears from the grid.
 
+**Example (Lua)**:
+
+    -- assume u is Human Peasant, AHbu is ability for Human building.
+    -- keep enabled, but hide icon
+    BlzUnitDisableAbility(u, FourCC"AHbu", false, true)
+
 @param whichUnit
 Unit to apply this to
 
@@ -1346,12 +1419,13 @@ Unit to apply this to
 Rawcode of ability
 
 @param flag
-isDisabled: true to disable, false to enable ability
+isDisabled: true to disable (cannot click), false to enable ability
 
 @param hideUI
-isHidden: true to hide, false to show
+isHidden: true to completely hide the icon, false to show icon. Icons are different for disabled/enabled abilities.
 
-@bug (1.32.10 confirmed) The flags doesn't work as expected, act more like an integer counter: https://www.hiveworkshop.com/threads/blzunithideability-and-blzunitdisableability-dont-work.312477/
+@bug (1.32.10 confirmed) The game counts isDisabled and hideUI internally as integers(?) If you called 5 times "hideUI = true" to hide an icon then you'll need to multiple times "hideUI = false" to show it again. I do not exactly understand how it's counted. 
+https://www.hiveworkshop.com/threads/blzunithideability-and-blzunitdisableability-dont-work.312477/
 
 @patch 1.29
 */
@@ -1446,9 +1520,16 @@ Works as expected, so you can dynamically calculate the mana cost.
 native BlzSetUnitAbilityManaCost                   takes unit whichUnit, integer abilId, integer level, integer manaCost returns nothing
 
 /**
-Get a specific unit’s Z coordinate (altitude) (Cartesian System), Z is desync prone, this version might cause desyncs, but (unconfirmed) should be faster, hence why both `BlzGetUnitZ` and `BlzGetLocalUnitZ` exist (In case that you are doing a campaign, or something single player, you might decide to use this one instead of `BlzGetUnitZ`).
+Return unit's (altitude) Z map coordinate ([Cartesian System](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)). Unit may be alive or dead.
+
+Returns 0.0 if unit was removed or is null.
+
+Retrieving Z is desync prone, this version might cause desyncs, but (unconfirmed) should be faster than `BlzGetUnitZ`, hence why both exist. In case that you are doing a single player map (campaign), you might decide to use this one instead of `BlzGetUnitZ`.
 
 @note Terrain height is not synced between clients in multiplayer
+
+@note Since unit extends from widget, you can use widget-related functions too.
+See: `BlzGetUnitZ`, `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`
 
 @async
 @patch 1.29
@@ -1457,6 +1538,9 @@ native BlzGetLocalUnitZ                            takes unit whichUnit returns 
 
 /**
 @note Returns the same result as `BlzGetLocalUnitZ`.
+@note Since unit extends from widget, you can use widget-related functions too.
+See: `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`
+
 @async
 @patch 1.30
 */

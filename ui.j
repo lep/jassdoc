@@ -612,25 +612,63 @@ native BlzGetTriggerSyncData                       takes nothing returns string
 
 
 /**
-@patch 1.31
+Registers event to call trigger when player presses a key + metakey.
+Key presses are synced by the game between players automatically.
+
+Meta keys are modifier keys like CTRL, SHIFT, ALT. See `BlzGetTriggerPlayerMetaKey`. If you just want a key press without them, use 0.
+
+**Example (Lua):**
+
+    trg_key = CreateTrigger()
+    -- prints oskey as object, metakey as integer
+    TriggerAddAction(trg_key, function() print(BlzGetTriggerPlayerKey(),  BlzGetTriggerPlayerMetaKey()) end)
+     
+    -- register key press ESCAPE
+    BlzTriggerRegisterPlayerKeyEvent(trg_key, Player(0), OSKEY_ESCAPE, 0, false)
+     
+    -- register key press CTRL+1
+    BlzTriggerRegisterPlayerKeyEvent(trg_key, Player(0), OSKEY_1, 2, false)
+
 @param metaKey
-Bitfield. MetaKeys are "none"(0), "shift"(1), "control"(2), "alt"(4) and "META"(8) (windows key). They can be combined 2 + 4 = 6.
-The player needs to holds this metakeys to trigger the event.
-Inside the OnPress of a Metakey like OSKEY_LSHIFT the shift bit is set.
+Bitfield. MetaKeys are "none"(0), "shift"(1), "control"(2), "alt"(4) and "META"(8) (Windows key). They can be combined 2 + 4 = 6.
+The player needs to hold all specified metakeys to trigger the event.
 
 @param keyDown
-(true) OnPress. In V1.31.1 This happens once, In V1.32.10 repeats until released
-(false) OnRelease
+If keyDown = false: trigger is called once when key is released (unpressed).
+If keyDown = true: calls trigger repeatedly while key is being held down. In V1.31.1 this happens once. In V1.32.10 repeats until released at approximately 30 times per second and fluctuating.
 
+@patch 1.31
 */
 native BlzTriggerRegisterPlayerKeyEvent            takes trigger whichTrigger, player whichPlayer, oskeytype key, integer metaKey, boolean keyDown returns event
 
 /**
+Returns the key that was pressed during current event.
+
+**Example:** `if BlzGetTriggerPlayerKey() == OSKEY_F then ...`
+
+@note See: `BlzTriggerRegisterPlayerKeyEvent`
+
 @patch 1.31
 */
 native BlzGetTriggerPlayerKey                      takes nothing returns oskeytype
 
 /**
+Returns the meta keys that were pressed (aka [modifier keys](https://en.wikipedia.org/wiki/Modifier_key)).
+
+**Example:** if player pressed CTRL+W then metakey=2 and oskeytype=OSKEY_W
+
+**Meta keys:**
+* 0 = None
+* 1 = Shift
+* 2 = Control (CTRL)
+* 4 = ALT
+* 8 = Meta aka Windows key aka Super
+
+Meta keys can be pressed simultaneously (CTRL+SHIFT+W) in that case, you need to add the numbers or use bit OR/AND/XOR.
+CTRL+SHIFT = 2+1 = 3. CTRL+SHIFT+ALT = 2+1+4 = 7.
+
+@note See: `BlzTriggerRegisterPlayerKeyEvent`
+
 @patch 1.31
 */
 native BlzGetTriggerPlayerMetaKey                  takes nothing returns integer
@@ -686,6 +724,19 @@ Returns the used warcraft 3 Lcid
 native BlzGetLocale                                takes nothing returns string
 
 /**
+Displays the message in chat as if it were sent by the specified player. The message does not appear in log (F12).
+
+@param whichPlayer The target player will be shown as sender of the message.
+
+@param recipient Changes the type of chat channel prefix shown. It has no effect on the message's visibility.
+* 0: "All" chat prefix
+* 1: "Allies"
+* 2: "Observers"
+* 3: "Private"
+* 4+: Defaults to private too.
+
+@param message Text to show
+
 @patch 1.31
 */
 native BlzDisplayChatMessage                       takes player whichPlayer, integer recipient, string message returns nothing

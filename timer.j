@@ -10,7 +10,19 @@ then callback is called with `GetElapsedTimer` being `null`.
 native DestroyTimer         takes timer whichTimer returns nothing
 
 /**
-TODO description
+Starts a previously created timer that calls a function when timeout reaches 0.
+
+It is affected by gamespeed at any point of it execution, if the gamespeed is changed at 50% of timeout duration, the rest of the timeout will be correctly affected by new gamespeed.
+
+@param whichTimer Handle to timer
+@param timeout Delay in seconds
+@param periodic
+True: repeat timer after expiration (loop).
+False: timer only runs once.
+
+@param handlerFunc Callback function to be executed when timer expires.
+
+@note See: `GetExpiredTimer` to retrieve the handle of the expired timer inside handlerFunc.
 
 @note The table below shows how often a 0 millisecond timer is executed
 in comparison with `TriggerRegisterTimerEvent`

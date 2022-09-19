@@ -1,7 +1,9 @@
 // Randomization API
 
 /**
-Returns a random integer in the range [lowBound, highBound].
+Returns a random integer in the range [lowBound, highBound] (inclusive).
+Bounds may be negative, but should be lowBound <= highBound.
+When lowBound==highBound, always returns that number.
 
 @note If lowBound > highBound then it just swaps the values.
 
@@ -15,9 +17,29 @@ The inclusive lower bound of the random number returned
 
 @param highBound
 The inclusive higher bound of the random number returned
+
+@note **Desyncs!** The random number generator is a global, shared resource.
+Do not change its state in local blocks asynchronously.
+
+@note See: `GetRandomReal`, `SetRandomSeed`
 */
 native GetRandomInt takes integer lowBound, integer highBound returns integer
 
+/**
+Returns a real in range [lowBound, highBound) that is: inclusive, exclusive.
+Bounds may be negative, but should be lowBound <= highBound. When lowBound==highBound, always returns that number.
+
+TODO: Understand logic when lowBound > highBound. negative lowBound not tested.
+
+**Example (Lua):**
+
+	SetRandomSeed(1229611)
+	string.format("%.16f", GetRandomReal(0, 0.002)) --> 0.00
+	
+@note **Desyncs!** The random number generator is a global, shared resource. Do not change its state in local blocks asynchronously.
+
+@note See: `GetRandomInt`, `SetRandomSeed`
+*/
 native GetRandomReal takes real lowBound, real highBound returns real
 
 
@@ -126,4 +148,23 @@ The level of the items to choose from. Passing a level of -1 is equivalent to an
 */
 native ChooseRandomItemEx       takes itemtype whichType, integer level returns integer
 
+/**
+Sets the internal [PRNG's](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) seed.
+
+Useful for testing or when you want a repeatable outcome. WorldEdit has an option to run test maps with a fixed seed, you can achieve the same result with this.
+
+**Example:**
+
+	SetRandomSeed(42)
+	GetRandomInt(0, 18) --> 12
+	GetRandomInt(0, 18) --> 2
+	SetRandomSeed(42)
+	GetRandomInt(0, 18) --> 12
+	
+@note **Desyncs!** The random number generator is a global, shared resource. Do not change its state in local blocks asynchronously.
+
+@note See: `GetRandomInt`, `GetRandomReal`
+
+@param seed New seed for the PRNG.
+*/
 native SetRandomSeed            takes integer seed returns nothing

@@ -13,6 +13,15 @@ globals
     constant real      bj_E                             = 2.71828
     constant real      bj_CELLWIDTH                     = 128.0
     constant real      bj_CLIFFHEIGHT                   = 128.0
+/**
+Specifies the default unit rotation for BJ functions. Set to 270° meaning facing south.
+
+* 0   = East
+* 90  = North
+* 180 = West
+* 270 = South
+* -90 = South (wraps around)
+*/
     constant real      bj_UNIT_FACING                   = 270.0
     constant real      bj_RADTODEG                      = 180.0/bj_PI
     constant real      bj_DEGTORAD                      = bj_PI/180.0
@@ -44,9 +53,33 @@ globals
 
     // Game constants
     constant integer   bj_MAX_INVENTORY                 =  6
+
+/**
+Stores the maximum number of playable player slots regardless of map options.
+
+@note See: `GetBJMaxPlayers`, `GetBJMaxPlayerSlots`
+*/
     constant integer   bj_MAX_PLAYERS                   =  GetBJMaxPlayers()
+
+/**
+Stores the zero-based ID of neutral victim player.
+
+@note See: `GetBJPlayerNeutralVictim`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`
+*/
     constant integer   bj_PLAYER_NEUTRAL_VICTIM         =  GetBJPlayerNeutralVictim()
+
+/**
+Stores the zero-based ID of neutral extra player.
+
+@note See: `GetBJPlayerNeutralExtra`, `GetPlayerNeutralAggressive`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`
+*/
     constant integer   bj_PLAYER_NEUTRAL_EXTRA          =  GetBJPlayerNeutralExtra()
+
+/**
+Stores the maximum number of internal player slots regardless of map options.
+
+@note See: `GetBJMaxPlayerSlots`, `GetBJMaxPlayers`
+*/
     constant integer   bj_MAX_PLAYER_SLOTS              =  GetBJMaxPlayerSlots()
     constant integer   bj_MAX_SKELETONS                 =  25
     constant integer   bj_MAX_STOCK_ITEM_SLOTS          =  11
@@ -1366,6 +1399,9 @@ function CameraSetupApplyForPlayerSmooth takes boolean doPan, camerasetup whichS
 endfunction
 
 //===========================================================================
+/**
+Swapped arguments of `CameraSetupGetField` for WE usage.
+*/
 function CameraSetupGetFieldSwap takes camerafield whichField, camerasetup whichSetup returns real
     return CameraSetupGetField(whichSetup, whichField)
 endfunction
@@ -1690,6 +1726,13 @@ function DisplayTimedTextToForce takes force toForce, real duration, string mess
 endfunction
 
 //===========================================================================
+/**
+Clears text messages for all players in specified force.
+
+@note See `ClearTextMessages`.
+
+@param toForce Target players who are part of this force
+*/
 function ClearTextMessagesBJ takes force toForce returns nothing
     if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
         // Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1705,10 +1748,16 @@ function SubStringBJ takes string source, integer start, integer end returns str
     return SubString(source, start-1, end)
 endfunction  
   
+/**
+Equivalent to `GetHandleId`.
+*/
 function GetHandleIdBJ takes handle h returns integer
     return GetHandleId(h)
 endfunction
 
+/**
+Equivalent to `StringHash`.
+*/
 function StringHashBJ takes string s returns integer
     return StringHash(s)
 endfunction
@@ -2237,11 +2286,17 @@ function ShowImageBJ takes boolean flag, image whichImage returns nothing
 endfunction
 
 //============================================================================
+/**
+See: `SetImagePosition`. The only difference: takes a location instead of X, Y coordinates.
+*/
 function SetImagePositionBJ takes image whichImage, location where, real zOffset returns nothing
     call SetImagePosition(whichImage, GetLocationX(where), GetLocationY(where), zOffset)
 endfunction
 
 //============================================================================
+/**
+Similar to SetImageColor, however this takes 0-100 values as percent for colors. Alpha channel=(100-alpha)
+*/
 function SetImageColorBJ takes image whichImage, real red, real green, real blue, real alpha returns nothing
     call SetImageColor(whichImage, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0-alpha))
 endfunction
@@ -3534,11 +3589,22 @@ function CreatePermanentCorpseLocBJ takes integer style, integer unitid, player 
 endfunction
 
 //===========================================================================
+/**
+The arguments are swapped for WorldEdit usage. Equivalent to `GetUnitState`.
+*/
 function GetUnitStateSwap takes unitstate whichState, unit whichUnit returns real
     return GetUnitState(whichUnit, whichState)
 endfunction
 
 //===========================================================================
+/**
+Returns the current unit state in percent.
+Unit states representing current value and max value must be provided in that order.
+
+In case of failure returns 0.
+
+**Example:** a unit with 30/60 HP will return 50.0, meaning the unit is at 50% HP.
+*/
 function GetUnitStatePercent takes unit whichUnit, unitstate whichState, unitstate whichMaxState returns real
     local real value    = GetUnitState(whichUnit, whichState)
     local real maxValue = GetUnitState(whichUnit, whichMaxState)
@@ -3733,6 +3799,13 @@ function IsUnitHiddenBJ takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+/**
+Hides unit.
+
+Equivalent to `ShowUnit(whichUnit, false)`
+
+@param whichUnit Target unit to hide
+*/
 function ShowUnitHide takes unit whichUnit returns nothing
     call ShowUnit(whichUnit, false)
 endfunction
@@ -3992,11 +4065,17 @@ function UnitCountBuffsExBJ takes integer polarity, integer resist, unit whichUn
 endfunction
 
 //===========================================================================
+/**
+Equivalent to `UnitRemoveAbility`, but arguments are swapped.
+*/
 function UnitRemoveAbilityBJ takes integer abilityId, unit whichUnit returns boolean
     return UnitRemoveAbility(whichUnit, abilityId)
 endfunction
 
 //===========================================================================
+/**
+Equivalent to `UnitAddAbility`, but arguments are swapped.
+*/
 function UnitAddAbilityBJ takes integer abilityId, unit whichUnit returns boolean
     return UnitAddAbility(whichUnit, abilityId)
 endfunction
@@ -4604,6 +4683,11 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+/**
+Only call `ForceUIKey` locally for whichPlayer. Since this emulates a player's actions, it cannot desync, like if player pressed a keyboard button.
+
+@note See: `ForceUICancel`, `ForceUICancelBJ`
+*/
 function ForceUIKeyBJ takes player whichPlayer, string key returns nothing
     if (GetLocalPlayer() == whichPlayer) then
         // Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4612,6 +4696,11 @@ function ForceUIKeyBJ takes player whichPlayer, string key returns nothing
 endfunction
 
 //===========================================================================
+/**
+Only call `ForceUICancel` locally for whichPlayer. Since this emulates a player's actions, it cannot desync, like if player pressed a keyboard button.
+
+@note See: `ForceUIKey`, `ForceUIKeyBJ`
+*/
 function ForceUICancelBJ takes player whichPlayer returns nothing
     if (GetLocalPlayer() == whichPlayer) then
         // Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4643,11 +4732,17 @@ function ForGroupBJ takes group whichGroup, code callback returns nothing
 endfunction
 
 //===========================================================================
+/**
+See `GroupAddUnit` (native). Here only the argument order is swapped for WorldEdit trigger usage.
+*/
 function GroupAddUnitSimple takes unit whichUnit, group whichGroup returns nothing
     call GroupAddUnit(whichGroup, whichUnit)
 endfunction
 
 //===========================================================================
+/**
+See `GroupRemoveUnit` (native). Here only the argument order is swapped for WorldEdit trigger usage.
+*/
 function GroupRemoveUnitSimple takes unit whichUnit, group whichGroup returns nothing
     call GroupRemoveUnit(whichGroup, whichUnit)
 endfunction
@@ -8140,6 +8235,12 @@ function AddResourceAmountBJ takes integer delta, unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+/**
+returns WorldEdit-type player ID for player (these start with 1).
+
+@param whichPlayer Target player
+@note For zero-based IDs see: `GetPlayerId`, `Player`
+*/
 function GetConvertedPlayerId takes player whichPlayer returns integer
     return GetPlayerId(whichPlayer) + 1
 endfunction

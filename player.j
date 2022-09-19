@@ -1,7 +1,18 @@
 // Player API
 
 /**
-@bug Crashes the game if used with wrong values, that is values greather than 15
+Returns the instance of player based on ID number.
+
+This function always returns the same instance, does not create new objects.
+If used with invalid values (below 0 or above `GetBJMaxPlayerSlots`), returns null in Reforged, crashed on Classic.
+
+@note
+Common.j: IDs start from 0, e.g. Player(0) is red, 1 is blue etc. -> `GetPlayerId`
+Blizzard.j (WorldEdit): IDs start with 1 -> `GetConvertedPlayerId`
+
+@note See: `GetPlayerId`, `GetBJMaxPlayers`, `GetBJMaxPlayerSlots`, `GetPlayerNeutralPassive`, `GetPlayerNeutralAggressive`
+
+@bug In old versions (which?) crashes the game if used with wrong values, that is values greather than 15
 or values lower than 0.
 
 @pure
@@ -9,6 +20,50 @@ or values lower than 0.
 constant native Player takes integer number returns player
 
 /**
+Returns reference to local player, as such it always points to yourself.
+Every other player in the game gets his player respectively.
+
+Do not use this function until you understand it fully and know how to avoid desyncs!
+Always test your map in LAN multiplayer after changing code around it.
+
+Warcraft 3 has the lock-step network/execution model.
+This means the game simulation and code run on all players' computers with the exact same data at any point in time.
+Look at this example (Lua):
+    
+	function whoami_command()
+        -- all players know who entered this command, equal value on every computer
+        local player_who_entered_command = GetTriggerPlayer()
+        -- this always points to you!
+        local myself = GetLocalPlayer() 
+        
+        local command_player_name = GetPlayerName(player_who_entered_command)
+        local my_player_name = GetPlayerName(myself)
+        -- everybody will see this player's name
+        DisplayTextToForce(GetPlayersAll(), "Player ".. command_player_name .." entered the whoami command!")
+        -- everybody will see their own name!
+        DisplayTextToForce(GetPlayersAll(), "But my name is: ".. my_player_name)
+    end
+
+This function is always used when you want something only to happen to a certain player.
+**However if you aren't careful, you will cause a desync:** where one player's game state is different from everybody else!
+For example, you can apply camera position locally, this is how `SetCameraPositionForPlayer` works (Jass):
+
+    if (GetLocalPlayer() == whichPlayer) then
+       // Use only local code (no net traffic) within this block to avoid desyncs.
+       call SetCameraPosition(x, y)
+    endif
+
+Basic rule: anything that's only visual (like unit color) will not desync... unless your code relies on the exact value later in the game:
+*if cameraX is 123 then ...* different players will have different camera positions here.
+
+On the other hand, manipulating handles or creating units locally,
+changing their health, attack, invisibility etc. - anything that changes the game will desync:
+
+    if (GetLocalPlayer() == whichPlayer) then
+       // INSTANTLY DESYNCS! The unit was only killed on one player's screen! Others think it's alive
+       KillUnit(someUnit)
+    endif
+
 @async
 */
 constant native GetLocalPlayer takes nothing returns player
@@ -37,6 +92,13 @@ constant native IsLocationMaskedToPlayer takes location whichLocation, player wh
 
 constant native GetPlayerRace takes player whichPlayer returns race
 
+/**
+Returns player ID of player (which starts with zero).
+
+@param whichPlayer Target player
+
+@note For one-based WorldEdit-type IDs see: `GetPlayerId`. Also: `Player`
+*/
 constant native GetPlayerId takes player whichPlayer returns integer
 
 constant native GetPlayerUnitCount takes player whichPlayer, boolean includeIncomplete returns integer
