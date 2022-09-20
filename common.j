@@ -135,7 +135,38 @@ type leaderboard        extends     agent
 type multiboard         extends     agent
 type multiboarditem     extends     agent
 type trackable          extends     agent
+
+/**
+Gamecaches are designed for transferring data between maps in a campaign, by
+storing data on the hard disk. In multi-player games however, the data is never
+stored on the hard disk, making online campaigns and saving/loading data between
+games impossible.
+
+To be able to read and write from a gamecache across maps you have to use a
+consistent name between them, that is the first parameter for `InitGameCache`.
+If you're developing a campaign it would be reasonable to use something like
+`set my_gc = InitGameCache("my_campaign.w3v")`.
+
+Once you've setup your `gamecache` it is time to fill it with data. There are
+only five natives to store data inside a `gamecache`, that is
+
+* `StoreInteger`
+* `StoreReal`
+* `StoreBoolean`
+* `StoreString`
+* `StoreUnit`
+
+These should be enough to track stats like gold, lumber and all your important
+`unit`s. Just storing values inside the `gamecache` is not enough to transfer
+them between maps though; in fact those natives still work in multiplayer.
+Persisting stored values to disk is achieved by calling `SaveGameCache(my_gc)`.
+
+Now if you create your `gamecache` again via `InitGameCache("my_campaign.w3v")`
+(in another map or another game) it should have all previously stored values
+available and can be queried via `HaveStoredString`, `RestoreUnit`, `GetStoredInteger`, etc.
+*/
 type gamecache          extends     agent
+
 type version            extends     handle
 type itemtype           extends     handle
 type texttag            extends     handle
