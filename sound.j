@@ -190,6 +190,12 @@ You can overcome this by starting one earlier and then using `SetSoundPosition`.
 native StartSound                   takes sound soundHandle returns nothing
 
 /**
+Starts playing a sound. 
+
+@note An officially exported native in: 1.33.0 (checked v1.33.0.18897 PTR).
+Unofficially available in: 1.32 (not declared a native, but visible in Lua).
+
+@note The only difference to StartSound is the optional fadeIn (boolean).
 @patch 1.33
 */
 native StartSoundEx                 takes sound soundHandle, boolean fadeIn returns nothing

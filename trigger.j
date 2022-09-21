@@ -14,6 +14,8 @@ native DestroyTrigger   takes trigger whichTrigger returns nothing
 
 /**
 Resets the evaluate and execution count of the given trigger back to zero.
+
+@note See: `GetTriggerEvalCount`, `GetTriggerExecCount`
 */
 native ResetTrigger     takes trigger whichTrigger returns nothing
 
@@ -82,8 +84,22 @@ constant native GetTriggeringTrigger    takes nothing returns trigger
 
 constant native GetTriggerEventId       takes nothing returns eventid
 
+/**
+Returns the count of how often this trigger was evaluated.
+
+A trigger is evaluated each time it is called. A trigger is executed each time it is called and passes the condition. If the condition is not met, the execution count is not incremented.
+
+@note See: `ResetTrigger`, `GetTriggerExecCount`
+*/
 constant native GetTriggerEvalCount     takes trigger whichTrigger returns integer
 
+/**
+Returns the count of how often this trigger was executed.
+
+A trigger is evaluated each time it is called. A trigger is executed each time it is called and passes the condition. If the condition is not met, the execution count is not incremented.
+
+@note See: `ResetTrigger`, `GetTriggerEvalCount`
+*/
 constant native GetTriggerExecCount     takes trigger whichTrigger returns integer
 
 

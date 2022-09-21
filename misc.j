@@ -19,65 +19,166 @@ native IsNoDefeatCheat  takes nothing returns boolean
 
 
 /**
-Adds a string to the preload buffer.
+It does two things:
 
-@param filename The string to be added to the buffer.
-Should probably not be named `filename`.
+1. Try to read the file, if "Allow Local Files" is enabled then also searches in the game folder
+2. Append filename to preload buffer
 
-@note The data will be put into the file like this:
+@param filename Text string, supposed to be a file path to be preloaded. Max length: 259 characters (see Windows MAX_PATH).
 
-    call Preload("<data here>")
+@note The game only reads these files, does not load them. The reading is done in a separate thread and does not freeze the game. One file is not read twice, no matter how often you call Preload().
 
-So to put any executable code in the file you have to close the string and then
-put your code onto a new line, like this:
+@note Trick: It does not escape double-quotes " on purpose (approved not a bug, it's a feature).
+It is possible to inject custom code in Preload files this way (Lua):
 
-    call Preload("\") \n call your_stuff_here()")
+    PreloadGenClear()
+    PreloadGenStart()
+    Preload(' ")\ncall otherFunction("123")\n//')
+    PreloadGenEnd("its-a-feature.txt")
+	
+Results in the following preload file code (Jass):
 
+    function PreloadFiles takes nothing returns nothing
+     
+            call PreloadStart()
+            call Preload( " ")
+    call otherFunction("123")
+    //" )
+            call PreloadEnd( 754.6 )
+     
+    endfunction
+
+
+@note **Game folder:**
+Reforged: `Warcraft III\_retail_\somefile.txt`, instead of `_retail_` there's also a `_ptr_` game version currently.
+Classic: ?
+
+@note **Mini tutorial:**
+
+**What are Preload files?**
+
+Preload files instruct the game to pre-read a file/resources to avoid freezes/stutter during gameplay. It's done to move the file into OS cache. Blizzard used preload files to load all required files at map init. See blizzard.j or campaign maps.
+
+Create a preload file (Lua)
+
+    PreloadGenClear()
+    PreloadGenStart()
+    -- call Preload("filename.ext") as often as you need, one call per file you add
+    Preload("Textures\\Knight.blp")
+    PreloadGenEnd("MyPreloadFile.txt")
+
+**How to run a preload file**
+
+This must be done manually:
+
+	Preloader("MyPreloadFile.txt")
+	
+**Lua code in preload files?**
+
+It is possible although in a very hacky way, [described here](https://www.hiveworkshop.com/threads/blizzards-hidden-jass2lua-transpiler.337281/).
+You need to use "//! beginusercode" to start a section containing Lua code and end it using "//! endusercode".
+It works because the code is transpiled on the fly with Jass2Lua.
+
+
+@note See: `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
 @note Also see the documentation for `Preloader` for more info on the generated files.
 */
 native Preload          takes string filename returns nothing
 
+/**
+Unknown. It's always generated at the end of a preload file, timeout represents the time between calls to `PreloadStart` and `PreloadGenEnd`.
+
+@note See: `Preload`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+*/
 native PreloadEnd       takes real timeout returns nothing
 
 
+/**
+Clears the preload buffer and starts the timer. (Anything else?)
 
+@note See: `Preload`, `PreloadEnd`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+*/
 native PreloadStart     takes nothing returns nothing
 
+/**
+Unknown. It does not reset the timer or clear the buffer.
+
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+*/
 native PreloadRefresh   takes nothing returns nothing
 
+/**
+Unknown
+
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+*/
 native PreloadEndEx     takes nothing returns nothing
 
 
 
 /**
-Clears the preload buffer.
+Clears all added file paths from the current preload buffer. Does not reset the timer.
+
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
 */
 native PreloadGenClear  takes nothing returns nothing
 
 /**
-Starts a new timer. In the generated file from `PreloadGenEnd` will be a line
-like `call PreloadEnd( 0.123 )`. The argument to `PreloadEnd` is the time elapsed
-between the calls of `PreloadGenStart` and `PreloadGenEnd`.
+Starts an internal timer for preloads. The timer will be used and recorded by PreloadGenEnd. The timer represents the wall clock time (in seconds) spent between the calls PreloadStart() and PreloadGenEnd().
+
+This function does not clear the previous buffer.
+
+The recorded time will be output as `call PreloadEnd( 0.123 )` in the saved preload file.
+
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
 */
 native PreloadGenStart  takes nothing returns nothing
 
 /**
-Writes the preload buffer to the specific file.
+Writes the current Preload buffer to specified file.
+The first and final preload directives are `call PreloadStart()` and `call PreloadEnd( realTime )`. The value represents the time in seconds between the calls `PreloadStart` and `PreloadGenEnd`. There's no way to get this value with the API.
 
-@param filename The filepath to be written to.
+Does not clear the buffer or timer after flushing. The file is overwritten. It's possible to specify subfolders: "myMapFolder/file.txt". Reforged: Any other tricks such as relative paths, UNC or drive letters will not write any files. Classic: possible to write to any path (verify?)
 
-@note In earlier versions you could give any path to write to, but
-nowadays they will be put into your `game-folder/CustomMapData/`.
+**Example preload file:*
+
+	function PreloadFiles takes nothing returns nothing
+
+		call PreloadStart()
+		call Preload( "units\\human\\Knight\\Knight.mdx" )
+		call PreloadEnd( 2.5 )
+
+	endfunction
+
+@param filename The filepath to be written to. Max length for filename is 259 characters (see: Windows MAX_PATH).
+
+@note Before Reforged (which version?) you needed to enable "Allow Local Files" in registry.
+
+@note **Save Path:**
+
+Reforged: `%USERPROFILE%\Documents\Warcraft III\CustomMapData\`
+
+Classic: ?
+
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `Preloader`
 */
 native PreloadGenEnd    takes string filename returns nothing
 
 /**
-Executes the preload-file.
+Runs the filename as a preload script, only if the filename has an extension. For Jass, the capabilities are very restricted.
+
+**Example (from blizzard.j)**:
+
+    if (doPreload) then
+            call Preloader( "scripts\\HumanMelee.pld" )
+    endif
 
 @param filename The file to execute.
 
-@note This only works if you have enable the usage of local files in your registry.
-The registry key is `HKEY_CURRENT_USER\\Software\\Blizzard Entertainment\\Warcraft III\\Allow Local Files\`
+@note There're no restrictions for Lua code if you add it to Preload files (which are supposed to be in Jass), that's only possible with [dirty hacks or manual editing](https://www.hiveworkshop.com/threads/blizzards-hidden-jass2lua-transpiler.337281/). If the map runs in Lua mode, the Jass code is transpiled using Jass2Lua before execution.
+
+@note On pre-Reforged (version?) this only works if you have enabled the usage of local files in your registry.
+The registry key is `HKEY_CURRENT_USER\Software\Blizzard Entertainment\Warcraft III\Allow Local Files\`
 
 @note Here are some ways to get the data out of the preload file into your map:
 To store multiple integers you can use `SetPlayerTechMaxAllowed` to have a good
@@ -95,6 +196,10 @@ even have local files enabled), so treat them as async values.
 @note Also see the documentation of `Preload` to see how to properly get the data
 into the preload script.
 
+@bug 1.33.0 and above: Due to aggressive file caching by the game, the preload file is only loaded and read once.
+This means, updates to the saved preload file cannot be reloaded and old contents will be executed.
+
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`
 */
 native Preloader        takes string filename returns nothing
 

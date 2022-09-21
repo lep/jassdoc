@@ -37,7 +37,12 @@ native TriggerRegisterTimerEvent takes trigger whichTrigger, real timeout, boole
 
 
 /**
-Triggers when the timer you tell it about expires
+Attach trigger to timer t. The trigger executes each time when timer expires.
+Usually used on periodic timers.
+
+Returns event, which is not used by GUI functions.
+
+@note See: `GetExpiredTimer` to retrieve timer inside trigger's actions.
 */
 native TriggerRegisterTimerExpireEvent takes trigger whichTrigger, timer t returns event
 
@@ -61,7 +66,20 @@ native TriggerRegisterDialogButtonEvent takes trigger whichTrigger, button which
 constant native GetEventGameState takes nothing returns gamestate
 
 
+/**
+Registers to execute whichTrigger when a game event occurs.
+Returns a handle to event that represents the registration, you can't do anything with those currently.
 
+**Example (Lua):**
+
+    trg_gameev = CreateTrigger()
+    -- this will print a message when someone opens a build menu
+    TriggerAddAction(trg_gameev, function() print(GetTriggerEventId()) end)
+    TriggerRegisterGameEvent(trg_gameev, EVENT_GAME_BUILD_SUBMENU)
+    --> new event on build menu open
+
+@bug Registered events cannot be destroyed as an object.
+*/
 native TriggerRegisterGameEvent takes trigger whichTrigger, gameevent whichGameEvent returns event
 
   

@@ -8,6 +8,15 @@
 type agent			    extends     handle  // all reference counted objects
 type event              extends     agent  // a reference to an event registration
 type player             extends     agent  // a single player reference
+
+/**
+Types `unit`, `destructable`, `item` extend from widget.
+
+All API functions that accept widget, will also take any of the children types.
+However if doesn't work the other way around, then you need to explicitly cast the type by pushing it through a hashtable, "downcasting":
+Put the widget object in a hashtable and retrieve it as unit/destructable/item - needed since 1.24b, source: [The Helper Wiki](https://web.archive.org/web/20100118203210/http://wiki.thehelper.net/wc3/jass/common.j/Widget_API).
+
+*/
 type widget             extends     agent  // an interactive game object with life
 type unit               extends     widget  // a single unit reference
 type destructable       extends     widget
@@ -467,8 +476,15 @@ constant native ConvertPlayerGameResult     takes integer i returns playergamere
 
 
 /**
-Returns the unitstate that corresponds to the given integer.
+Returns unitstate, first index is 0. 
+
+It is used to define the constants representing unit state. Accepts any integer, the unitstate reference is always the same for a given integer.
+
+**Example:** `constant unitstate UNIT_STATE_MAX_MANA = ConvertUnitState(3)`
+
 @param i The integer representation of the unitstate
+
+@note See: `GetUnitState`, `SetUnitState`
 @pure
 */
 constant native ConvertUnitState            takes integer i returns unitstate
@@ -558,6 +574,9 @@ constant native ConvertUnitType             takes integer i returns unittype
 
 /**
 Returns the gamespeed that corresponds to the given integer.
+
+It is used to define the constants representing gamespeed. First index is 0. Accepts any integer, the reference is always the same for a given integer.
+
 @param i The integer representation of the gamespeed
 @pure
 */
@@ -998,22 +1017,46 @@ constant native ConvertUnitCategory                     takes integer i returns 
 constant native ConvertPathingFlag                      takes integer i returns pathingflag
 
 /**
+Returns an internal ID for the unit order string.
+
+**Example (Lua):**
+
+	OrderId("humanbuild") == 851995 -- this order opens the human build menu
+
+@note See: `OrderId2String`
+
+@bug Do not use this in a global initialisation (map init) as it returns 0 there.
+@bug
+Orders: `humainbuild` / `orcbuild` / `nightelfbuild` / `undeadbuild` are [totally broken](https://www.hiveworkshop.com/threads/build-order-causing-all-player-builders-to-open-build-menu.339196/post-3529953), don't issue them.
+
 @pure
-@bug Do not use this in a global initialisation as it returns 0 there.
 */
 constant native OrderId                     takes string  orderIdString     returns integer
 
 /**
+Returns the human-readable unit order string.
+
+**Example (Lua):**
+
+	OrderId2String(851995) --> returns "humanbuild" (opens human build menu)
+
+@note See: `OrderId`
+
 @pure
 @bug Always returns null after the game is loaded/if the game is a replay.
-@bug Do not use this in a global initialisation as it returns null there.
+@bug Do not use this in a global initialisation (map init) as it returns null there.
 */
 constant native OrderId2String              takes integer orderId           returns string
 constant native UnitId                      takes string  unitIdString      returns integer
 
 /**
+
+**Example (Lua):** `UnitId2String( FourCC("hfoo") ) --> "footman" (internal name, not localized)`
+
+@note See `GetObjectName` if you need to retrieve a unit's localized pretty name by the type ID.
+
 @bug Always returns null after the game is loaded/if the game is a replay.
-@bug Do not use this in a global initialisation as it returns null there.
+@bug Do not use this in a global initialisation (on map init) as it returns null there.
 */
 constant native UnitId2String               takes integer unitId            returns string
 
@@ -1033,39 +1076,91 @@ constant native AbilityId2String            takes integer abilityId         retu
 
 
 /**
-Looks up the "name" field for any object (unit, item, ability)
+Returns localized value for field "name" for the given object type ID (unit, item, ability).
+In WorldEdit this is "Text - Name".
+
+**Example (Lua):** `GetObjectName( FourCC("hfoo") ) --> "Footman"`
+
+@note See: `UnitId2String`
+
 @pure
 @async
-@bug Do not use this in a global initialisation as it crashes the game there.
+@bug Do not use this in a global initialisation (on map init) as it crashes the game there.
 */
 constant native GetObjectName               takes integer objectId          returns string
 
 /**
+Returns the maximum number of playable player slots regardless of map options.
+
+* Classic: 12
+* Reforged: 24
+
+@note This is only affected by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/)
+
+@note See: `bj_MAX_PLAYERS`, `GetBJMaxPlayerSlots`
+
 @patch 1.29
 */
 constant native GetBJMaxPlayers             takes nothing returns integer
 
 /**
+Returns the zero-based ID of neutral victim player.
+
+* Classic = (13?)
+* Reforged: ID = 25
+
+@note See: `bj_PLAYER_NEUTRAL_VICTIM`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`
+
 @patch 1.29
 */
 constant native GetBJPlayerNeutralVictim    takes nothing returns integer
 
 /**
+Returns the zero-based ID of neutral extra player.
+
+* Classic = (14?)
+* Reforged: ID = 26
+
+@note See: `bj_PLAYER_NEUTRAL_EXTRA`, `GetPlayerNeutralAggressive`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`
+
 @patch 1.29
 */
 constant native GetBJPlayerNeutralExtra     takes nothing returns integer
 
 /**
+Returns the maximum number of internal player slots regardless of map options.
+
+* Classic: (16?)
+* Reforged: 28
+
+@note This is only affected by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/)
+
+@note See: `bj_MAX_PLAYER_SLOTS`, `GetBJMaxPlayers`
+
 @patch 1.29
 */
 constant native GetBJMaxPlayerSlots         takes nothing returns integer
 
 /**
+Returns the zero-based ID of neutral passive player.
+
+* Classic = ?
+* Reforged: ID = 27
+
+See: `PLAYER_NEUTRAL_PASSIVE`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetBJPlayerNeutralVictim`
+
 @patch 1.29
 */
 constant native GetPlayerNeutralPassive     takes nothing returns integer
 
 /**
+Returns the zero-based ID of neutral aggressive player.
+
+* Classic = ?
+* Reforged: ID = 24
+
+See: `PLAYER_NEUTRAL_AGGRESSIVE`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`
+
 @patch 1.29
 */
 constant native GetPlayerNeutralAggressive  takes nothing returns integer
@@ -1082,7 +1177,18 @@ globals
     constant boolean            TRUE                            = true
     constant integer            JASS_MAX_ARRAY_SIZE             = 32768
 
+/**
+Stores the zero-based ID of neutral passive player.
+
+@note See: `GetPlayerNeutralPassive`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetBJPlayerNeutralVictim`
+*/
     constant integer            PLAYER_NEUTRAL_PASSIVE          = GetPlayerNeutralPassive()
+
+/**
+Stores the zero-based ID of neutral aggressive player.
+
+@note See: `GetPlayerNeutralAggressive`
+*/
     constant integer            PLAYER_NEUTRAL_AGGRESSIVE       = GetPlayerNeutralAggressive()
 
     constant playercolor        PLAYER_COLOR_RED                = ConvertPlayerColor(0)
@@ -1524,6 +1630,18 @@ globals
     constant gameevent EVENT_GAME_TRACKABLE_TRACK               = ConvertGameEvent(8)
 
     constant gameevent EVENT_GAME_SHOW_SKILL                    = ConvertGameEvent(9)    
+/**
+This event is fired when a build menu is opened (e.g. by human peasant).
+
+**Example (Lua)**:
+
+    trg_gameev = CreateTrigger()
+    -- just print the object representing EventId
+    TriggerAddAction(trg_gameev, function() print(GetTriggerEventId()) end)
+    -- register for this event
+    TriggerRegisterGameEvent(trg_gameev, EVENT_GAME_BUILD_SUBMENU)
+
+*/
     constant gameevent EVENT_GAME_BUILD_SUBMENU                 = ConvertGameEvent(10)
 
     //===================================================

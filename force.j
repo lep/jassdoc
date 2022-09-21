@@ -20,6 +20,9 @@ native ForceClear               takes force whichForce returns nothing
 
 native ForceEnumPlayers         takes force whichForce, boolexpr filter returns nothing
 
+/**
+@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `ForceEnumPlayers`
+*/
 native ForceEnumPlayersCounted  takes force whichForce, boolexpr filter, integer countLimit returns nothing
 
 native ForceEnumAllies          takes force whichForce, player whichPlayer, boolexpr filter returns nothing
