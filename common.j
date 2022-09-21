@@ -1148,7 +1148,7 @@ constant native GetBJMaxPlayerSlots         takes nothing returns integer
 /**
 Returns the zero-based ID of neutral passive player.
 
-* Classic = ?
+* Classic = 15
 * Reforged: ID = 27
 
 See: `PLAYER_NEUTRAL_PASSIVE`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetBJPlayerNeutralVictim`
@@ -1160,7 +1160,7 @@ constant native GetPlayerNeutralPassive     takes nothing returns integer
 /**
 Returns the zero-based ID of neutral aggressive player.
 
-* Classic = ?
+* Classic = 12
 * Reforged: ID = 24
 
 See: `PLAYER_NEUTRAL_AGGRESSIVE`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`
