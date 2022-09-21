@@ -1021,7 +1021,9 @@ Returns an internal ID for the unit order string.
 
 **Example (Lua):**
 
-	OrderId("humanbuild") == 851995 -- this order opens the human build menu
+```{.lua}
+OrderId("humanbuild") == 851995 -- this order opens the human build menu
+```
 
 @note See: `OrderId2String`
 
@@ -1038,7 +1040,9 @@ Returns the human-readable unit order string.
 
 **Example (Lua):**
 
-	OrderId2String(851995) --> returns "humanbuild" (opens human build menu)
+```{.lua}
+OrderId2String(851995) --> returns "humanbuild" (opens human build menu)
+```
 
 @note See: `OrderId`
 
@@ -1051,7 +1055,7 @@ constant native UnitId                      takes string  unitIdString      retu
 
 /**
 
-**Example (Lua):** `UnitId2String( FourCC("hfoo") ) --> "footman" (internal name, not localized)`
+**Example (Lua):** `UnitId2String( FourCC("hfoo") ) --> "footman" (internal name, not localized)`{.lua}
 
 @note See `GetObjectName` if you need to retrieve a unit's localized pretty name by the type ID.
 
@@ -1079,7 +1083,7 @@ constant native AbilityId2String            takes integer abilityId         retu
 Returns localized value for field "name" for the given object type ID (unit, item, ability).
 In WorldEdit this is "Text - Name".
 
-**Example (Lua):** `GetObjectName( FourCC("hfoo") ) --> "Footman"`
+**Example (Lua):** `GetObjectName( FourCC("hfoo") ) --> "Footman"`{.lua}
 
 @note See: `UnitId2String`
 
@@ -1635,11 +1639,13 @@ This event is fired when a build menu is opened (e.g. by human peasant).
 
 **Example (Lua)**:
 
-    trg_gameev = CreateTrigger()
-    -- just print the object representing EventId
-    TriggerAddAction(trg_gameev, function() print(GetTriggerEventId()) end)
-    -- register for this event
-    TriggerRegisterGameEvent(trg_gameev, EVENT_GAME_BUILD_SUBMENU)
+```{.lua}
+trg_gameev = CreateTrigger()
+-- just print the object representing EventId
+TriggerAddAction(trg_gameev, function() print(GetTriggerEventId()) end)
+-- register for this event
+TriggerRegisterGameEvent(trg_gameev, EVENT_GAME_BUILD_SUBMENU)
+```
 
 */
     constant gameevent EVENT_GAME_BUILD_SUBMENU                 = ConvertGameEvent(10)

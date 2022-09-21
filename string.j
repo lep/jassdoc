@@ -15,7 +15,7 @@ Returns an integer representation for real r. The output will be rounded towards
 Lua: Only raises an error if r is null.
 
 For extermely large values the minimum/maximum representable signed integer will be returned
-(e.g. for Lua: `math.mininteger` and `math.maxinteger`)
+(e.g. for Lua: `math.mininteger`{.lua} and `math.maxinteger`{.lua})
 
 @note NaN is not a possible value in Warcraft 3 (always reset to 1.0)
 
@@ -40,8 +40,8 @@ Lua: Raises an error if r is null.
 
 **Example:**
 
-`R2S(1.12) --> 1.120`
-Equivalent to: `R2SW(r, 0, 3)` and Lua: `string.format("%.3f", r)`
+`R2S(1.12) --> 1.120`{.lua}
+Equivalent to: `R2SW(r, 0, 3)` and Lua: `string.format("%.3f", r)`{.lua}
 
 @note See: `R2SW`
 
@@ -60,8 +60,10 @@ but does not support negative width (left-align with right padding).
 
 **Example (Lua):**
 
-	R2SW(31.1235, 5, 3) == "31.124"
-	R2SW(1, 5, 0) == "  1.0" --> two spaces followed by number
+```{.lua}
+R2SW(31.1235, 5, 3) == "31.124"
+R2SW(1, 5, 0) == "  1.0" --> two spaces followed by number
+```
 	
 
 @param r The number to be converted
@@ -87,13 +89,15 @@ Lua: For null raises an error.
 
 **Examples (Lua):**
 
-	S2I("") == 0
-	S2I("-123") == -123
-	S2I("-99999999") == -2147483648
-	S2I("99999999") == 2147483647
-	S2I("123abc") == 123
-	S2I("abc123") == 0
-	S2I(nil) -- error
+```{.lua}
+S2I("") == 0
+S2I("-123") == -123
+S2I("-99999999") == -2147483648
+S2I("99999999") == 2147483647
+S2I("123abc") == 123
+S2I("abc123") == 0
+S2I(nil) -- error
+```
 
 @param s The string to be converted
 
@@ -153,11 +157,13 @@ For start<0 returns an empty string.
 
 **Examples (Lua):**
 
-    SubString("abc", 0, 0) == ""
-    SubString("abc", 0, 1) == "a"
-    SubString("abc", 2, 3) == "c"
-    SubString("abc", 0, 3) == "abc"
-    SubString("abcdef", 2, 0) == "cdef"
+```{.lua}
+SubString("abc", 0, 0) == ""
+SubString("abc", 0, 1) == "a"
+SubString("abc", 2, 3) == "c"
+SubString("abc", 0, 3) == "abc"
+SubString("abcdef", 2, 0) == "cdef"
+```
 
 @param source Text string
 @param start Starting position, zero-indexed, inclusive.

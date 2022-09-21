@@ -6,10 +6,14 @@ Returns handle to unit
 
 **Example:** Create a human footman for first player (red) at map coordinates -30, 0, facing north:
 
+```
     // Jass
     call CreateUnit(Player(0), 'hfoo', -30, 0, 90)
+```
+```{.lua}
     -- Lua
     CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
+```
 	
 @note See: `bj_UNIT_FACING` constant for default facing direction of units in BJ scripts and GUI.
 
@@ -18,6 +22,7 @@ Returns handle to unit
 @param x The x-coordinate of the unit.
 @param y The y-coordinate of the unit.
 @param face Unit facing in degrees.
+
 * 0   = East
 * 90  = North
 * 180 = West
@@ -886,8 +891,10 @@ Returns localized name for unit.
 
 **Example (Lua)**:
 
-    u = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
-    print(GetUnitName(u)) --> "Footman"
+```{.lua}
+u = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
+print(GetUnitName(u)) --> "Footman"
+```
 
 @param whichUnit Target unit
 @async
@@ -1406,9 +1413,11 @@ Enables/disables and hides/unhides an ability for a unit. A visible disabled abi
 
 **Example (Lua)**:
 
-    -- assume u is Human Peasant, AHbu is ability for Human building.
-    -- keep enabled, but hide icon
-    BlzUnitDisableAbility(u, FourCC"AHbu", false, true)
+```{.lua}
+-- assume u is Human Peasant, AHbu is ability for Human building.
+-- keep enabled, but hide icon
+BlzUnitDisableAbility(u, FourCC"AHbu", false, true)
+```
 
 @param whichUnit
 Unit to apply this to

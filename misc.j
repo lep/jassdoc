@@ -31,10 +31,12 @@ It does two things:
 @note Trick: It does not escape double-quotes " on purpose (approved not a bug, it's a feature).
 It is possible to inject custom code in Preload files this way (Lua):
 
-    PreloadGenClear()
-    PreloadGenStart()
-    Preload(' ")\ncall otherFunction("123")\n//')
-    PreloadGenEnd("its-a-feature.txt")
+```{.lua}
+PreloadGenClear()
+PreloadGenStart()
+Preload(' ")\ncall otherFunction("123")\n//')
+PreloadGenEnd("its-a-feature.txt")
+```
 	
 Results in the following preload file code (Jass):
 
@@ -61,17 +63,21 @@ Preload files instruct the game to pre-read a file/resources to avoid freezes/st
 
 Create a preload file (Lua)
 
-    PreloadGenClear()
-    PreloadGenStart()
-    -- call Preload("filename.ext") as often as you need, one call per file you add
-    Preload("Textures\\Knight.blp")
-    PreloadGenEnd("MyPreloadFile.txt")
+```{.lua}
+PreloadGenClear()
+PreloadGenStart()
+-- call Preload("filename.ext") as often as you need, one call per file you add
+Preload("Textures\\Knight.blp")
+PreloadGenEnd("MyPreloadFile.txt")
+```
 
 **How to run a preload file**
 
 This must be done manually:
 
-	Preloader("MyPreloadFile.txt")
+```{.lua}
+Preloader("MyPreloadFile.txt")
+```
 	
 **Lua code in preload files?**
 

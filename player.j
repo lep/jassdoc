@@ -30,19 +30,21 @@ Warcraft 3 has the lock-step network/execution model.
 This means the game simulation and code run on all players' computers with the exact same data at any point in time.
 Look at this example (Lua):
     
-	function whoami_command()
-        -- all players know who entered this command, equal value on every computer
-        local player_who_entered_command = GetTriggerPlayer()
-        -- this always points to you!
-        local myself = GetLocalPlayer() 
-        
-        local command_player_name = GetPlayerName(player_who_entered_command)
-        local my_player_name = GetPlayerName(myself)
-        -- everybody will see this player's name
-        DisplayTextToForce(GetPlayersAll(), "Player ".. command_player_name .." entered the whoami command!")
-        -- everybody will see their own name!
-        DisplayTextToForce(GetPlayersAll(), "But my name is: ".. my_player_name)
-    end
+```{.lua}
+function whoami_command()
+    -- all players know who entered this command, equal value on every computer
+    local player_who_entered_command = GetTriggerPlayer()
+    -- this always points to you!
+    local myself = GetLocalPlayer() 
+    
+    local command_player_name = GetPlayerName(player_who_entered_command)
+    local my_player_name = GetPlayerName(myself)
+    -- everybody will see this player's name
+    DisplayTextToForce(GetPlayersAll(), "Player ".. command_player_name .." entered the whoami command!")
+    -- everybody will see their own name!
+    DisplayTextToForce(GetPlayersAll(), "But my name is: ".. my_player_name)
+end
+```
 
 This function is always used when you want something only to happen to a certain player.
 **However if you aren't careful, you will cause a desync:** where one player's game state is different from everybody else!
@@ -61,7 +63,7 @@ changing their health, attack, invisibility etc. - anything that changes the gam
 
     if (GetLocalPlayer() == whichPlayer) then
        // INSTANTLY DESYNCS! The unit was only killed on one player's screen! Others think it's alive
-       KillUnit(someUnit)
+       call KillUnit(someUnit)
     endif
 
 @async
