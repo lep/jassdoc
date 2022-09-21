@@ -60,9 +60,9 @@ but does not support negative width (left-align with right padding).
 
 **Example (Lua):**
 
-	R2SW(31.1235, 5, 3) --> 31.124
-	R2SW(1, 5, 0) --> two spaces followed by number
-	  1.0
+	R2SW(31.1235, 5, 3) == "31.124"
+	R2SW(1, 5, 0) == "  1.0" --> two spaces followed by number
+	
 
 @param r The number to be converted
 @param width The width of the string. If the width of the resulting conversion
@@ -87,12 +87,12 @@ Lua: For null raises an error.
 
 **Examples (Lua):**
 
-	S2I("") -- 0
-	S2I("-123") -- -123
-	S2I("-99999999") -- -2147483648
-	S2I("99999999") -- 2147483647
-	S2I("123abc") -- 123
-	S2I("abc123") -- 0
+	S2I("") == 0
+	S2I("-123") == -123
+	S2I("-99999999") == -2147483648
+	S2I("99999999") == 2147483647
+	S2I("123abc") == 123
+	S2I("abc123") == 0
 	S2I(nil) -- error
 
 @param s The string to be converted

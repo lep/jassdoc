@@ -32,18 +32,18 @@ Bounds may be negative, but must be lowBound <= highBound. When lowBound==highBo
 **Example (Lua):**
 
 	SetRandomSeed(1229611)
-	string.format("%.16f", GetRandomReal(0, 0.002)) --> 0.00
+	string.format("%.16f", GetRandomReal(0, 0.002)) == "0.00"
 	SetRandomSeed(1229611)
-	string.format("%.16f", GetRandomReal(-0.002, 0)) --> -0.002
+	string.format("%.16f", GetRandomReal(-0.002, 0)) == "-0.002"
 	
 @note **Desyncs!** The random number generator is a global, shared resource. Do not change its state in local blocks asynchronously.
 
 @note Undefined behavior when lowBound > highBound. Test code:
 
 	-- Set seed to zero and then generate and print a random real
-	function testRReal(low, high) SetRandomSeed(0); print(string.format("%.16f", GetRandomReal(low,high))) end
-	testRReal(-42, 42) --> -4.0800933837890625
-	testRReal(42, -42) --> 79.9199066162109375
+	function testRReal(low, high) SetRandomSeed(0); return string.format("%.16f", GetRandomReal(low,high)) end
+	testRReal(-42, 42) == "-4.0800933837890625"
+	testRReal(42, -42) == "79.9199066162109375"
 
 @note See: `GetRandomInt`, `SetRandomSeed`
 */
@@ -163,10 +163,10 @@ Useful for testing or when you want a repeatable outcome. WorldEdit has an optio
 **Example:**
 
 	SetRandomSeed(42)
-	GetRandomInt(0, 18) --> 12
-	GetRandomInt(0, 18) --> 2
+	GetRandomInt(0, 18) == 12
+	GetRandomInt(0, 18) == 2
 	SetRandomSeed(42)
-	GetRandomInt(0, 18) --> 12
+	GetRandomInt(0, 18) == 12
 	
 @note **Desyncs!** The random number generator is a global, shared resource. Do not change its state in local blocks asynchronously.
 

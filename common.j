@@ -990,7 +990,7 @@ Returns an internal ID for the unit order string.
 
 **Example (Lua):**
 
-	OrderId("humanbuild") --> returns 851995 (opens human build menu)
+	OrderId("humanbuild") == 851995 -- this order opens the human build menu
 
 @note See: `OrderId2String`
 
