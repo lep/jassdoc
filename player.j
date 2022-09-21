@@ -21,7 +21,7 @@ constant native Player takes integer number returns player
 
 /**
 Returns reference to local player, as such it always points to yourself.
-Every other player in the game gets his player respectively.
+Every other player in the game gets their player respectively.
 
 Do not use this function until you understand it fully and know how to avoid desyncs!
 Always test your map in LAN multiplayer after changing code around it.

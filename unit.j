@@ -1128,8 +1128,6 @@ native IssueBuildOrderById takes unit whichPeon, integer unitId, real x, real y 
 native IssueNeutralImmediateOrder takes player forWhichPlayer, unit neutralStructure, string unitToBuild returns boolean
 
 /**
-TODO
-
 Can be used to buy items and units at a shop.
 */
 native IssueNeutralImmediateOrderById takes player forWhichPlayer,unit neutralStructure, integer unitId returns boolean

@@ -143,11 +143,11 @@ For start<0 returns an empty string.
 
 **Examples (Lua):**
 
-    SubString("abc", 0, 0) --> ""
-    SubString("abc", 0, 1) --> "a"
-    SubString("abc", 2, 3) --> "c"
-    SubString("abc", 0, 3) --> "abc"
-    SubString("abcdef", 2, 0) --> "cdef"
+    SubString("abc", 0, 0) == ""
+    SubString("abc", 0, 1) == "a"
+    SubString("abc", 2, 3) == "c"
+    SubString("abc", 0, 3) == "abc"
+    SubString("abcdef", 2, 0) == "cdef"
 
 @param source Text string
 @param start Starting position, zero-indexed, inclusive.
@@ -182,21 +182,23 @@ native StringCase takes string source, boolean upper returns string
 Returns a string hash for the given string. The string is normalized before hashing.
 
 The hash is supposed to be case-insensitive of the input string:
-this works for ASCII and some small subset of Unicode (Latin Supplement, Cyrillic...).
-Also the backslash is the same as forward slash: / and \.
+this works for ASCII and (Reforged) some small subset of Unicode (Latin Supplement, Cyrillic...).
+Also the backslash is the same as forward slash: `/` and `\`.
 A probable explanation for this is the usage of file paths, since the game runs on Windows and Mac OS/OSX.
 StringHash is also used for variable lookup: string name -> integer index.
 
 `StringHash("\\") == StringHash("/")`
 `StringHash("AB") == StringHash("ab")`
 
-@note The underlying algorithm is subject to change between major versions.
-Code for the old algorithm ["SStrHash2"](https://www.hiveworkshop.com/threads/bits-of-interest.213272/) via ["1997 Dr Dobbs article"](http://burtleburtle.net/bob/hash/doobs.html) and a question about the [changed algorithm in Reforged.](https://www.hiveworkshop.com/threads/stringhash-asm-dump.331097/)
-TODO: In what version was it changed?
+@note Code for the algorithm ["SStrHash2"](https://www.hiveworkshop.com/threads/bits-of-interest.213272/) via ["1997 Dr Dobbs article"](http://burtleburtle.net/bob/hash/doobs.html).
+
+@note *Breaking:* The hashing of multi-byte characters (Unicode) was changed in v1.30.0/1.31.1.
+It's unknown if hashes of these characters are different in old versions between Windows/Mac OS
+or depends on OS-default character page settings (non-Unicode programs on Windows).
 
 @pure
 
-@patch 1.24b
+@patch 1.24a
 */
 native StringHash takes string s returns integer
 

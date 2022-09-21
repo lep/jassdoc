@@ -137,6 +137,7 @@ native ForceUIKey                   takes string key returns nothing
 Emulates an ESCAPE key press internally, used to interact with UI, e.g. close F10 menu.
 
 @bug Does not always work as expected if you use it to "Cancel" something on behalf of a player, like cancel research in the current building. Since it always sends the Escape key, it will break if hotkey layout was changed from classic to grid/custom in game settings. Explanation:
+
 1. OldPlayer plays with classic hotkey layout, the Cancelling abilities are bound to Escape.
 2. ModernPlayer plays with grid layout, the Cancelling abilities' hotkey depends on their position but it's usually V.
 3. ForceUICancel() is executed for both players

@@ -334,7 +334,7 @@ Sets the effect's Z position (height).
 @note Before 1.29 there was no direct way to set a special effect's height. The following trick was used as a workaround:
 
     // Creates a temporary platform in the air, the special effect will be put on top of it:
-    tempDestr = call CreateDestructableZ('OTis', x, y, z, 0, 1, 0)
+    set tempDestr = CreateDestructableZ('OTis', x, y, z, 0, 1, 0)
     // Effect spawns on top of platform
     call DestroyEffect(AddSpecialEffect(effectPath, x, y))
     // Remove platform immediately, only the effect will remain visible for its life duration

@@ -20,8 +20,9 @@ native IsNoDefeatCheat  takes nothing returns boolean
 
 /**
 It does two things:
-1) Try to read the file, if "Allow Local Files" is enabled then also searches in the game folder
-2) Append filename to preload buffer
+
+1. Try to read the file, if "Allow Local Files" is enabled then also searches in the game folder
+2. Append filename to preload buffer
 
 @param filename Text string, supposed to be a file path to be preloaded. Max length: 259 characters (see Windows MAX_PATH).
 

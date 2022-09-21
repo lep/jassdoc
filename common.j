@@ -992,7 +992,7 @@ Returns an internal ID for the unit order string.
 
 	OrderId("humanbuild") --> returns 851995 (opens human build menu)
 
-@note See: OrderId2String
+@note See: `OrderId2String`
 
 @bug Do not use this in a global initialisation (map init) as it returns 0 there.
 @bug

@@ -27,16 +27,23 @@ native GetRandomInt takes integer lowBound, integer highBound returns integer
 
 /**
 Returns a real in range [lowBound, highBound) that is: inclusive, exclusive.
-Bounds may be negative, but should be lowBound <= highBound. When lowBound==highBound, always returns that number.
-
-TODO: Understand logic when lowBound > highBound. negative lowBound not tested.
+Bounds may be negative, but must be lowBound <= highBound. When lowBound==highBound, always returns that number.
 
 **Example (Lua):**
 
 	SetRandomSeed(1229611)
 	string.format("%.16f", GetRandomReal(0, 0.002)) --> 0.00
+	SetRandomSeed(1229611)
+	string.format("%.16f", GetRandomReal(-0.002, 0)) --> -0.002
 	
 @note **Desyncs!** The random number generator is a global, shared resource. Do not change its state in local blocks asynchronously.
+
+@note Undefined behavior when lowBound > highBound. Test code:
+
+	-- Set seed to zero and then generate and print a random real
+	function testRReal(low, high) SetRandomSeed(0); print(string.format("%.16f", GetRandomReal(low,high))) end
+	testRReal(-42, 42) --> -4.0800933837890625
+	testRReal(42, -42) --> 79.9199066162109375
 
 @note See: `GetRandomInt`, `SetRandomSeed`
 */

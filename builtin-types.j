@@ -19,6 +19,7 @@ type real extends void
 A 32-bit twos-complement integer type.
 
 Representations in Jass code:
+
 * Decimal: Any number positive or negative, without the fractional part: -1, 0, 1337
 * Octal: Any number beginning with 0: `07 == 7`, `08` is a syntax error.
 * Hexadecimal: If the number starts with `0x` or `$` then the following comprises a hex value: `0x01da`, `$01da`
@@ -27,8 +28,10 @@ Representations in Jass code:
 `'dddd'` = (100 << 24) + (100 << 16) + (100 << 8 ) + 100 = 1677721600 + 6553600 + 25600 + 100 = 1684300900
 
 @note Lua is also compiled with 32-bit integers (game's exe is 64-bit).
+
 * Octal: The Jass2Lua transpiler does not support integers defined in octal representation and crashes. (Reforged, v1.32.10)
-* Character: `'hfoo'` represents a human footman object code in Jass.
+* Charater: same as Jass
+* 4 characters: `'hfoo'` represents a human footman object code in Jass.
 These are also called "raw codes" or FourCC.
 In Jass, these are automatically read as integers by the Jass interpreter.
 If you use Lua, you must manually convert a string of four characters to integer with `FourCC("hfoo")`.

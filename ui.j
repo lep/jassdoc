@@ -658,6 +658,7 @@ Returns the meta keys that were pressed (aka [modifier keys](https://en.wikipedi
 **Example:** if player pressed CTRL+W then metakey=2 and oskeytype=OSKEY_W
 
 **Meta keys:**
+
 * 0 = None
 * 1 = Shift
 * 2 = Control (CTRL)
@@ -729,6 +730,7 @@ Displays the message in chat as if it were sent by the specified player. The mes
 @param whichPlayer The target player will be shown as sender of the message.
 
 @param recipient Changes the type of chat channel prefix shown. It has no effect on the message's visibility.
+
 * 0: "All" chat prefix
 * 1: "Allies"
 * 2: "Observers"
