@@ -2,20 +2,22 @@
 
 /**
 Returns a real representation for integer i.
-If i is not an integer or i is null, raises an error.
+
+Lua: If i is not an integer or i is null, raises an error.
 
 @pure
 */
 native I2R  takes integer i returns real
 
 /**
-Returns an integer representation for real r.
-The output will be rounded towards 0 if it is a real number.
-Only raises an error if r is null.
-NaN is not a possible value in Warcraft 3 (always reset to 1.0)
+Returns an integer representation for real r. The output will be rounded towards 0 if it is a real number.
+
+Lua: Only raises an error if r is null.
 
 For extermely large values the minimum/maximum representable signed integer will be returned
 (e.g. for Lua: `math.mininteger` and `math.maxinteger`)
+
+@note NaN is not a possible value in Warcraft 3 (always reset to 1.0)
 
 @pure
 */
@@ -23,7 +25,8 @@ native R2I  takes real r returns integer
 
 /**
 Returns the string representation for integer i.
-Raises an error if i is null or has no integer representation.
+
+Lua: Raises an error if i is null or has no integer representation.
 
 @pure
 */
@@ -31,7 +34,9 @@ native I2S  takes integer i returns string
 
 /**
 Returns a string representation for real r with precision of 3 digits.
-The real is correctly rounded to nearest to fit within the precision. Raises an error if r is null.
+The real is correctly rounded to nearest to fit within the precision.
+
+Lua: Raises an error if r is null.
 
 **Example:**
 
@@ -47,7 +52,8 @@ native R2S  takes real r returns string
 /**
 Returns a string representation for real r with precision digits and width.
 The real is correctly rounded to nearest to fit within the precision.
-Raises an error if r is null.
+
+Lua: Raises an error if r is null.
 
 Works similar to C/C++ [printf](https://www.cplusplus.com/reference/cstdio/printf/),
 but does not support negative width (left-align with right padding).
@@ -75,7 +81,9 @@ Returns an integer by parsing the string for a number.
 
 For values too big or too small, returns max/min integer respectively.
 For an empty string or text that doesn't start with a number, returns 0.
-For null raises an error.
+
+
+Lua: For null raises an error.
 
 **Examples (Lua):**
 
@@ -105,7 +113,9 @@ native S2I  takes string s returns integer
 
 /**
 Returns a real by parsing the string for a number.
-Returns 0 for: values too big or too small, an empty string or text that doesn't start with a number. For null raises an error.
+Returns 0 for: values too big or too small, an empty string or text that doesn't start with a number.
+
+Lua: For null raises an error.
 
 @param s The string to be converted
 
