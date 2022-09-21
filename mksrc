@@ -23,12 +23,12 @@ foreach my $file (@ARGV){
     say "BEGIN TRANSACTION;";
 
     while (my $line = <$fh>){
-        if($line =~ /^(?:constant\s+)?function\s+(\w+)/){
+        if( $state eq "nothing" && $line =~ /^(?:constant\s+)?function\s+(\w+)/){
             $start = $.;
             $state = "function";
             $fn = $1;
             $src = $line;
-        }elsif($line =~ /^endfunction/){
+        }elsif($state eq "function" && $line =~ /^endfunction/){
             $end = $.;
             chomp $line;
             $state = "nothing";
@@ -61,7 +61,7 @@ foreach my $file (@ARGV){
                     'function'
                 );
 SQL
-        }elsif( $line =~ /^(?:constant\s+)?native\s+(\w+)/ && $state eq "nothing" ){
+        }elsif( $state eq "nothing" && $line =~ /^(?:constant\s+)?native\s+(\w+)/ ){
             chomp $line;
             $src = $line;
             $src = escape($src);
@@ -94,8 +94,10 @@ SQL
 SQL
         }elsif ( $state eq "function"){
             $src .= $line;
-        }elsif ( $line =~ m/^\s*globals/){
+        }elsif ( $state eq "nothing" && $line =~ m/^\s*globals/){
             $state = "globals";
+        }elsif( $state eq "globals" && $line =~ m/^\s*endglobals/){
+            $state = "nothing";
         }elsif ( $state eq "globals" ){
             my $name;
             given($line){
@@ -133,9 +135,7 @@ SQL
 SQL
 
             }
-        }elsif( $state eq "globals" && $line =~ m/^\s*endglobals/){
-            $state = "nothing";
-        }elsif( $line =~m /^type\s+(\w+)\s+extends\s+.+/){
+        }elsif( $state eq "nothing" && $line =~m /^type\s+(\w+)\s+extends\s+.+/){
             my $type = escape($1);
             my $line = escape($line);
             say <<SQL;
@@ -163,7 +163,11 @@ SQL
                     'type'
                 );
 SQL
-        }
+        }elsif( $state eq "nothing" && $line =~ m[^/\*\*] ){
+	    $state = "docstring";
+	}elsif( $state eq "docstring" && $line =~ m[^\*/] ){
+	    $state = "nothing";
+	}
 
 
     }
