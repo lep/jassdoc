@@ -13,15 +13,79 @@
 //
 
 
+/**
+Sets the map name.
 
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+
+@note v1.32.10: WorldEditor limits map name input to 36 characters (ASCII/Unicode)
+
+@note
+Old game versions (tested v1.0) used different sources for map name based on
+where it was intended to be displayed:
+
+- In map selection (to create a lobby), the map name embedded in HM3W map's header
+was used (see legacy .w3m/.w3x file format).
+- The map preview (right-hand side) runs the map's `config` code and thus
+makes use of `SetMapName` and strings in .wts files.
+- (Unused) Map name field in war3map.w3i
+
+Reforged runs the configuration code in both cases. Therefore it always uses
+the proper name at the expense of increasing the loading time of map selection list.
+
+@note Supports color codes (they also affect sorting)
+
+@note Map name length:
+
+- Classic (1.0): Limited by total text width, e.g. `DescriptionFirstL...`
+- Reforged (1.32.10): Up to two lines, then limited by text width, e.g. `VeryLongMapName-ABCDEFGHIJKLMNOP...`
+*/
 native SetMapName takes string name returns nothing
 
+/**
+Sets the map description.
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+
+@note The map description is saved to "war3map.w3i" too, but this field is unused.
+
+@note Supports color codes
+
+@note Length limits:
+
+- Classic (1.0): Limited by total text width,
+approx. 40 latin characters per line. Automatic line breaks.
+- Reforged: Seemingly no limit, the description box gets (bugged)
+vertical & horizontal scroll bars along with automatic line-breaking.
+
+@note Line limits:
+
+- Classic (1.0): Maximum 9 lines.
+- Reforged (1.32.10): Seemingly no limit.
+*/
 native SetMapDescription takes string description returns nothing
 
 
+/**
 
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+*/
 native SetTeams takes integer teamcount returns nothing
 
+/**
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+
+@note The maximum amount of players (12 or 24) is determined by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/)
+*/
 native SetPlayers takes integer playercount returns nothing
 
 
@@ -30,7 +94,9 @@ Defines a player's start location at the specified coordinates. The start
 location determines where the camera is initially positioned. For melee maps,
 it will also determine where the player's first town hall structure will be placed.
 
-@note It is only recommended to use this in the `config` function in the war3map.j.
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
 Using it elsewhere will affect the returned values of `GetStartLocationX` and
 `GetStartLocationY`, but will have no effect on the camera's initial position and
 the melee starting positions.
@@ -48,7 +114,9 @@ Defines a player's start location at the specified location. The start
 location determines where the camera is initially positioned. For melee maps,
 it will also determine where the player's first town hall structure will be placed.
 
-@note It is only recommended to use this in the `config` function in the war3map.j.
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
 Using it elsewhere will affect the returned values of `GetStartLocationX` and
 `GetStartLocationY`, but will have no effect on the camera's initial position and
 the melee starting positions.
@@ -59,8 +127,20 @@ the melee starting positions.
 */
 native DefineStartLocationLoc takes integer whichStartLoc, location whichLocation returns nothing
 
+/**
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+*/
 native SetStartLocPrioCount takes integer whichStartLoc, integer prioSlotCount returns nothing
 
+/**
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+*/
 native SetStartLocPrio takes integer whichStartLoc, integer prioSlotIndex, integer otherStartLocIndex, startlocprio priority returns nothing
 
 native GetStartLocPrioSlot takes integer whichStartLoc, integer prioSlotIndex returns integer
@@ -84,6 +164,12 @@ native SetGameTypeSupported takes gametype whichGameType, boolean value returns 
 
 native SetMapFlag takes mapflag whichMapFlag, boolean value returns nothing
 
+/**
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+*/
 native SetGamePlacement takes placement whichPlacementType returns nothing
 
 /**
@@ -145,6 +231,12 @@ constant native GetStartLocationLoc takes integer whichStartLocation returns loc
 
 native SetPlayerTeam takes player whichPlayer, integer whichTeam returns nothing
 
+/**
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+*/
 native SetPlayerStartLocation takes player whichPlayer, integer startLocIndex returns nothing
 
 /**
@@ -152,19 +244,46 @@ Forces player to have the specified start loc and marks the start loc as occupie
 which removes it from consideration for subsequently placed players
 ( i.e. you can use this to put people in a fixed loc and then
 use random placement for any unplaced players etc. ).
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
 */
 native ForcePlayerStartLocation takes player whichPlayer, integer startLocIndex returns nothing 
 
+/**
+
+@note This function is called by the game within the scope of `config`
+to set each player's color.
+*/
 native SetPlayerColor takes player whichPlayer, playercolor color returns nothing
 
 native SetPlayerAlliance takes player sourcePlayer, player otherPlayer, alliancetype whichAllianceSetting, boolean value returns nothing
 
 native SetPlayerTaxRate takes player sourcePlayer, player otherPlayer, playerstate whichResource, integer rate returns nothing
 
+/**
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+*/
 native SetPlayerRacePreference takes player whichPlayer, racepreference whichRacePreference returns nothing
 
+/**
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+*/
 native SetPlayerRaceSelectable takes player whichPlayer, boolean value returns nothing
 
+/**
+
+@note This function shall only be used within the scope of function `config`
+in war3map.j, it is executed by the game when you load the lobby/selected
+the map for preview.
+*/
 native SetPlayerController takes player whichPlayer, mapcontrol controlType returns nothing
 
 native SetPlayerName takes player whichPlayer, string name returns nothing
