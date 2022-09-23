@@ -10192,6 +10192,12 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+/**
+This function will pre-initialize `bj_slotControlUsed` and `bj_slotControl` arrays, representing player slots, with default values of `false` and `MAP_CONTROL_USER`.
+
+@note It is safe to call this function repeatedly, it will only ever run the
+initialization once.
+*/
 function CheckInitPlayerSlotAvailability takes nothing returns nothing
     local integer index
 
@@ -10208,6 +10214,17 @@ function CheckInitPlayerSlotAvailability takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+This function is called in the scope of `config` to save map's slots settings in
+two arrays:
+
+- `bj_slotControlUsed` (index playerId, zero-based): `true` if player is defined in config (defaults to `false`).
+- `bj_slotControl` (index playerId, zero-based): value is of type `mapcontrol` for
+user/computer-controlled player (defaults to `MAP_CONTROL_USER`).
+
+@param whichPlayer Initialize target player
+@param control Player's slot type
+*/
 function SetPlayerSlotAvailable takes player whichPlayer, mapcontrol control returns nothing
     local integer playerIndex = GetPlayerId(whichPlayer)
 
@@ -10225,6 +10242,20 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+/**
+Assign all players to a team (force) in a "pseudo-random" fashion.
+
+@note Players aren't assigned to teams randomly, but in a round-robin way.
+This means if `teamCount == 2` with 4 players:
+
+- player 0 -> team 0
+- player 1 -> team 1
+- player 2 -> team 0
+- player 3 -> team 1
+- etc.
+
+@note This function is called in the scope of `config` by `InitGenericPlayerSlots` etc. to set up the map based on chosen *default game type*.
+*/
 function TeamInitPlayerSlots takes integer teamCount returns nothing
     local integer index
     local player  indexPlayer
@@ -10251,16 +10282,25 @@ function TeamInitPlayerSlots takes integer teamCount returns nothing
 endfunction
 
 //===========================================================================
+/**
+This function is called in the scope of `config` by `InitGenericPlayerSlots` to set up the map based on chosen game type `GAME_TYPE_MELEE`.
+*/
 function MeleeInitPlayerSlots takes nothing returns nothing
     call TeamInitPlayerSlots(bj_MAX_PLAYERS)
 endfunction
 
 //===========================================================================
+/**
+This function is called in the scope of `config` by `InitGenericPlayerSlots` to set up the map based on chosen game type `GAME_TYPE_FFA`.
+*/
 function FFAInitPlayerSlots takes nothing returns nothing
     call TeamInitPlayerSlots(bj_MAX_PLAYERS)
 endfunction
 
 //===========================================================================
+/**
+This function is called in the scope of `config` by `InitGenericPlayerSlots` to set up the map based on chosen game type `GAME_TYPE_ONE_ON_ONE`.
+*/
 function OneOnOneInitPlayerSlots takes nothing returns nothing
     // Limit the game to 2 players.
     call SetTeams(2)
@@ -10269,6 +10309,12 @@ function OneOnOneInitPlayerSlots takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+This function is called in the scope of `config` to set up the map based on
+game type. Specifically, this assigns players into teams, unless the
+game type is `GAME_TYPE_USE_MAP_SETTINGS` (then map-specific code does this)
+or unknown (nothing is done in that case).
+*/
 function InitGenericPlayerSlots takes nothing returns nothing
     local gametype gType = GetGameTypeSelected()
 
@@ -10340,6 +10386,9 @@ function SetDNCSoundsNight takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+Initializes day-night cycle sounds, global "bj_" variables and triggers.
+*/
 function InitDNCSounds takes nothing returns nothing
     // Create sounds to be played at dawn and dusk.
     set bj_dawnSound = CreateSoundFromLabel("RoosterSound", false, false, false, 10000, 10000)
