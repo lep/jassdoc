@@ -29,7 +29,7 @@ Representations in Jass code:
 
 @note Lua is also compiled with 32-bit integers (game's exe is 64-bit).
 
-* Octal: The Jass2Lua transpiler does not support integers defined in octal representation and crashes. (Reforged, v1.32.10)
+* Octal: The Jass2Lua compiler does not support integers defined in octal representation and crashes. (Reforged, v1.32.10)
 * Charater: same as Jass
 * 4 characters: `'hfoo'` represents a human footman object code in Jass.
 These are also called "raw codes" or FourCC.

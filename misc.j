@@ -83,7 +83,7 @@ Preloader("MyPreloadFile.txt")
 
 It is possible although in a very hacky way, [described here](https://www.hiveworkshop.com/threads/blizzards-hidden-jass2lua-transpiler.337281/).
 You need to use "//! beginusercode" to start a section containing Lua code and end it using "//! endusercode".
-It works because the code is transpiled on the fly with Jass2Lua.
+It works because the code is compiled on the fly with Jass2Lua.
 
 
 @note See: `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
@@ -181,7 +181,7 @@ Runs the filename as a preload script, only if the filename has an extension. Fo
 
 @param filename The file to execute.
 
-@note There're no restrictions for Lua code if you add it to Preload files (which are supposed to be in Jass), that's only possible with [dirty hacks or manual editing](https://www.hiveworkshop.com/threads/blizzards-hidden-jass2lua-transpiler.337281/). If the map runs in Lua mode, the Jass code is transpiled using Jass2Lua before execution.
+@note There're no restrictions for Lua code if you add it to Preload files (which are supposed to be in Jass), that's only possible with [dirty hacks or manual editing](https://www.hiveworkshop.com/threads/blizzards-hidden-jass2lua-transpiler.337281/). If the map runs in Lua mode, the Jass code is compiled using Jass2Lua before execution.
 
 @note On pre-Reforged (version?) this only works if you have enabled the usage of local files in your registry.
 The registry key is `HKEY_CURRENT_USER\Software\Blizzard Entertainment\Warcraft III\Allow Local Files\`

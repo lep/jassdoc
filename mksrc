@@ -20,6 +20,8 @@ foreach my $file (@ARGV){
     my $start = 0;
     my $end = 0;
 
+    my $prev_state;
+
     say "BEGIN TRANSACTION;";
 
     while (my $line = <$fh>){
@@ -61,6 +63,12 @@ foreach my $file (@ARGV){
                     'function'
                 );
 SQL
+        }elsif( ( $state eq "nothing" || $state eq "globals") && $line =~ m[^/\*\*] ){
+	    $prev_state = $state;
+	    $state = "docstring";
+	}elsif( $state eq "docstring" && $prev_state && $line =~ m[^\*/] ){
+	    $state = $prev_state;
+	    $prev_state = undef;
         }elsif( $state eq "nothing" && $line =~ /^(?:constant\s+)?native\s+(\w+)/ ){
             chomp $line;
             $src = $line;
@@ -163,10 +171,6 @@ SQL
                     'type'
                 );
 SQL
-        }elsif( $state eq "nothing" && $line =~ m[^/\*\*] ){
-	    $state = "docstring";
-	}elsif( $state eq "docstring" && $line =~ m[^\*/] ){
-	    $state = "nothing";
 	}
 
 
