@@ -125,6 +125,15 @@ GENERAL_DESCRIPTION
 
 # Build
 
-To build this project you need a somewhat recent GHC,
-the haskell library megaparsec-7, gnu make and the sqlite3 cli binary.
+## By hand
+
+To build this project you need a somewhat recent GHC, cabal, gnu make and the
+sqlite3 cli binary. To build jass.db all you have to do is to clone the
+repository and run `make` inside it.
+
+
+## nix
+
+If you have a working [nix/nixos](https://nixos.org/) installation you
+can use the provided flake file and simply run `nix build github:lep/jassdoc`.
 
