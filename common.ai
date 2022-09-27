@@ -11,9 +11,27 @@ native DisplayTextIII       takes integer p, string str, integer v1, integer v2,
 native DoAiScriptDebug      takes nothing                               returns boolean
 
 native GetAiPlayer          takes nothing                               returns integer
+
+/**
+Returns the ID of the leveled up hero, so it can be used in the heroes levels code function
+(probably `SetHeroLevels`).
+*/
 native GetHeroId            takes nothing                               returns integer
+
+/**
+Returns the level of the leveling hero so it can be used in the heroes levels code function
+(probably `SetHeroLevels`).
+*/
 native GetHeroLevelAI       takes nothing                               returns integer
 
+
+/**
+Counts units of type for the AI player whether it is trained/built or in progress.
+
+@param unitid Rawcode to specify unit type to count
+
+@note See: `GetUnitCountDone`
+*/
 native GetUnitCount         takes integer unitid                        returns integer
 
 /**
@@ -22,18 +40,40 @@ Returns how many `unit`s of a certain type a `player` has.
 @commonai
 */
 native GetPlayerUnitTypeCount takes player p, integer unitid            returns integer
+
+/**
+Counts units of type for the AI player that is trained/built or in progress.
+
+@param unitid Rawcode to specify unit type to count
+
+@note See: `GetUnitCount`
+*/
 native GetUnitCountDone     takes integer unitid                        returns integer
+
+/**
+Counts buildings of specific type for the AI player in a town.
+
+@param unitid Rawcode to specify unit type to count
+@param tn ID of target town
+@param dn If true: only count finished units
+
+@note This will return 0 for `tn = -1` and will only work for buildings; normal units will always return 0.
+*/
 native GetTownUnitCount     takes integer id, integer tn, boolean dn    returns integer
 
 /**
 Gets the gold cost of a unit-type.
+
+@param unitid Rawcode to specify unit type
 
 @commonai
 */
 native GetUnitGoldCost      takes integer unitid                        returns integer
 
 /**
-Gets the wood cost of a unit-type.
+Gets the lumber cost of a unit-type.
+
+@param unitid Rawcode to specify unit type
 
 @commonai
 */
@@ -41,6 +81,8 @@ native GetUnitWoodCost      takes integer unitid                        returns 
 
 /**
 Gets the building time of a unit-type.
+
+@param unitid Rawcode to specify unit type
 
 @commonai
 */
@@ -59,7 +101,15 @@ native GetNextExpansion     takes nothing                               returns 
 native GetMegaTarget        takes nothing                               returns unit
 
 /**
-Returns the last created building of a `player`.
+Get the last constructed or pre-placed building for the given player.
+
+@note For pre-placed buildings the order is the number that you find in the WE.
+Example: Blacksmith_0023, Workshop_0065, then the last building will be Workshop_0065,
+but if a peasent in game constructed an altar then that will be the last building.
+
+@note Player `p` can be a human controlled player not necessarily computer.
+
+@param p Target player
 
 @commonai
 */
@@ -68,68 +118,279 @@ native GetEnemyPower        takes nothing                               returns 
 native SetAllianceTarget    takes unit id                               returns nothing
 native GetAllianceTarget    takes nothing                               returns unit
 
+/**
+Trains unit(s) of specified type at target town.
+
+Returns true if the unit can be trained successfully, i.e. the AI player has all the resources and requirments of the training as well as the building that will start the training.
+
+@note The parameter `qty` will only work if the player has `qty` amount of buildings that can train this unit.
+
+However this action *will not queue*.
+Example: the player has 1 barracks and `qty = 3` then 1 unit will be trained.
+Lets suppose that another barracks is built then 2 units will be trained.
+
+@param qty Select this many buildings (e.g. Barracks) to train units in
+@param id Rawcode to specify unit type to train
+@param town Index of town
+*/
 native SetProduce           takes integer qty, integer id, integer town returns boolean
 native Unsummon             takes unit unitid                           returns nothing
 native SetExpansion         takes unit peon, integer id                 returns boolean
+
+/**
+Starts an upgrade for the AI player.
+
+Return true if the upgrade has started successfully, i.e. the AI player has all the resources and requirments of the upgrade as well as the building that will start the upgrade.
+
+@param id Rawcode of the upgrade to be researched
+*/
 native SetUpgrade           takes integer id                            returns boolean
+
+/**
+This native will set how the heroes of the AI player will allocate their skill points as defined in the code function `func`.
+*/
 native SetHeroLevels        takes code func                             returns nothing
 native SetNewHeroes         takes boolean state                         returns nothing
+
+/**
+Purchace a zeppelin, must be called when a hero is standing near a goblin lab.
+*/
 native PurchaseZeppelin     takes nothing                               returns nothing
 
+/**
+Merges two units, who can be merged, like the hippogryph rider. The use of this native gives better response if called from inside a loop.
+*/
 native MergeUnits           takes integer qty, integer a, integer b, integer make returns boolean
+
+/**
+This native have the same effect on units like the obsidian statue when converted to destroyer. The use of this native gives better response if called from inside a loop.
+*/
 native ConvertUnits         takes integer qty, integer id               returns boolean
 
 native SetCampaignAI        takes nothing                               returns nothing
 native SetMeleeAI           takes nothing                               returns nothing
+
+/**
+Toggle the feature of making the AI target heroes. 
+
+Gives priority to target heroes if enabled.
+
+@param state True: turned on. False: turned off.
+*/
 native SetTargetHeroes      takes boolean state                         returns nothing
+
+/**
+Toggle the feature of making peons to repair damaged structures and mechanical units.
+
+@param state True: turned on. False: turned off.
+*/
 native SetPeonsRepair       takes boolean state                         returns nothing
 native SetRandomPaths       takes boolean state                         returns nothing
 native SetDefendPlayer      takes boolean state                         returns nothing
+
+/**
+Toggle the feature of making the heroes flee when they are seriously damaged.
+
+@param state True: turned on. False: turned off.
+*/
 native SetHeroesFlee        takes boolean state                         returns nothing
+
+/**
+Toggle the feature of making the heroes buy items.
+
+@param state True: turned on. False: turned off.
+*/
 native SetHeroesBuyItems    takes boolean state                         returns nothing
 native SetWatchMegaTargets  takes boolean state                         returns nothing
 native SetIgnoreInjured     takes boolean state                         returns nothing
+
+/**
+Toggle the feature of making the heroes take items.
+
+@param state True: turned on. False: turned off.
+*/
 native SetHeroesTakeItems   takes boolean state                         returns nothing
+
+/**
+Toggle the feature of making the units flee when they are seriously damaged.
+
+@param state True: turned on. False: turned off.
+*/
 native SetUnitsFlee         takes boolean state                         returns nothing
+
+/**
+Toggle the feature of making the entire group flee when it is seriously damaged.
+
+@param state True: turned on. False: turned off.
+*/
 native SetGroupsFlee        takes boolean state                         returns nothing
+
+/**
+If true the gold harvested by the AI player peons will be 1 per period, instead of 10 per period for false state.
+*/
 native SetSlowChopping      takes boolean state                         returns nothing
 native SetCaptainChanges    takes boolean allow                         returns nothing
 native SetSmartArtillery    takes boolean state                         returns nothing
+
+/**
+Replaces every AI's player pre-placed units or units that are assigned to a guard posts N times when it is killed.
+
+@note This only works for units not classified as workers and will not work for peon-type (Peasants, Peons, Acolytes, Wisps and Mur'gul Slaves) even if not classified as workers.
+*/
 native SetReplacementCount  takes integer qty                           returns nothing
 native GroupTimedLife       takes boolean allow                         returns nothing
 native RemoveInjuries       takes nothing                               returns nothing
 native RemoveSiege          takes nothing                               returns nothing
 
 native InitAssault          takes nothing                               returns nothing
+
+/**
+Creates a group from already-existing units that can be assigned to attack a specific target.
+When `AttackMoveXY` is called then this group will attack the specified target.
+
+@note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+*/
 native AddAssault           takes integer qty, integer id               returns boolean
+
+/**
+Creates a group from already-existing units to guard the AI player town. The units assemble around the most important building in the town with no specific formation.
+
+@note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+*/
 native AddDefenders         takes integer qty, integer id               returns boolean
 
+/**
+Searches for the nearest creep camp, the parameters defines the power of the camp.
+
+The power is the total level of all creeps. For example, lets say `min = 3` and `max = 3` then the camp that will be detected will have 3 possibilities:
+
+1. 3 creeps of level 1
+2. 1 creep of level 3
+3. 1 creep of level 2 and 1 creep of level 1
+
+@param min Minimal power allowed
+@param max Maximum power allowed
+@param flyers_ok Filter by flying units in the camp. Set to true to allow flying and false for ground units only.
+*/
 native GetCreepCamp         takes integer min, integer max, boolean flyers_ok returns unit
 
+/**
+Must be called before using the native `GetEnemyBase` in order to make it work.
+*/
 native StartGetEnemyBase    takes nothing                               returns nothing
 native WaitGetEnemyBase     takes nothing                               returns boolean
+
+/**
+Returns the enemy base unit. Must call `StartGetEnemyBase` first or it will return null.
+*/
 native GetEnemyBase         takes nothing                               returns unit
+
+/**
+Returns an enemy unit near the expansion location, whether this unit is a creep or belong to an enemy to the AI player.
+
+@note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+*/
 native GetExpansionFoe      takes nothing                               returns unit
+
+/**
+Returns the enemy expansion base.
+*/
 native GetEnemyExpansion    takes nothing                               returns unit
+
+/**
+Returns the integer X coordinate of the AI player expansion location whether it is constructed or not.
+
+@note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+*/
 native GetExpansionX        takes nothing                               returns integer
+
+/**
+Returns the integer Y coordinate of the AI player expansion location whether it is constructed or not.
+
+@note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+*/
 native GetExpansionY        takes nothing                               returns integer
 native SetStagePoint        takes real x, real y                        returns nothing
 native AttackMoveKill       takes unit target                           returns nothing
+
+/**
+Pings a location on the mini-map where 'unit' intends to attack-move this unit.
+
+If `AddAssault` is not called before this one, then the units (**if any**) will remain at their position and will not attack-move the signaled unit. Once the units go to the unit they will return to the base when the unit is killed.
+
+If they didn't find any enemy on their route or it if is destroyed and at least one unit survived in the group.
+
+@note Important: in order to use this native, the native `CreateCaptains` must be called first or the game will crash. It is already added in the function CampaignAI found at `common.ai`
+*/
 native AttackMoveXY         takes integer x, integer y                  returns nothing
 native LoadZepWave          takes integer x, integer y                  returns nothing
 native SuicidePlayer        takes player id, boolean check_full         returns boolean
 native SuicidePlayerUnits   takes player id, boolean check_full         returns boolean
 native CaptainInCombat      takes boolean attack_captain                returns boolean
+
+/**
+Returns either true if the parameter target is guarded by a tower, the tower can be a custom-made unit but there are rules when checking if the target is guarded or not; the target has to be in the proximity of a base and a tower belonging to the AI player, however acquisition range and attack range of the tower doesn't affect whether the target is defended or not.
+*/
 native IsTowered            takes unit target                           returns boolean
 
 native ClearHarvestAI       takes nothing                               returns nothing
+
+/**
+Order peons to harvest a gold mine in the town.
+
+@param town Index ID of town
+@param peons Amount of peons
+*/
 native HarvestGold          takes integer town, integer peons           returns nothing
+
+/**
+Order peons to harvest trees near the town.
+
+@param town Index ID of town
+@param peons Amount of peons
+*/
 native HarvestWood          takes integer town, integer peons           returns nothing
+
+/**
+Returns the peon unit that will start a new expansion for the AI player, however, it will return null if there is no gold mine (excluding a gold mine the AI player already own) found on the map.
+
+@note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+*/
 native GetExpansionPeon     takes nothing                               returns unit
 
+
+/**
+This native must be called at the start of an AI file so that the following native `FillGuardPosts` works, if not then `FillGuardPosts` will continuosly train units if it is nested in a loop and also will cause the trained units not to go to replace the killed ones, instead they will remain near the building that trained them.
+*/
 native StopGathering        takes nothing                               returns nothing
+
+/**
+This marks a spot at point (x,y) as a guard post and a unit of specified type will be
+guarding that spot.
+The spot will remain empty until the function `FillGuardPosts` is called, after that
+the specified unit will go to guard that spot. If the unit is killed another one will replace it.
+However, this process is not unlimited, by default, the unit is replaced 3 times
+but if the native `SetReplacementCount(N)` is called in the AI script the unit will be
+replaced N times. Note that if this is used on heroes they will be trained only but will not
+go to the post.
+
+@param id Rawcode for unit type of the guard unit
+*/
 native AddGuardPost         takes integer id, real x, real y            returns nothing
+
+/**
+When called, a unit of the same type of the last killed unit that belong to the AI player will be trained and replace the previous one.
+
+@note This native is instant and will not queue, so in order to keep replacing killed units,
+it has to be nested inside a continuous loop.
+*/
 native FillGuardPosts       takes nothing                               returns nothing
+
+/**
+Order every unit that is assigned a guard post to return to it. This native works for pre-placed units and newly trained ones. 
+
+@note There is a small tolerance of 82.006 radius offset to the guard post.
+*/
 native ReturnGuardPosts     takes nothing                               returns nothing
 native CreateCaptains       takes nothing                               returns nothing
 native SetCaptainHome       takes integer which, real x, real y         returns nothing
@@ -152,7 +413,7 @@ native CaptainReadinessMa   takes nothing                               returns 
 native CaptainAtGoal        takes nothing                               returns boolean
 
 /**
-Returns `true` any units on the map have the classification of creep.
+Returns `true` if any units of any level on the map have the classification of creep.
 
 @commonai
 */
@@ -176,13 +437,46 @@ Checks if a unit is invisible.
 */
 native UnitInvis            takes unit id                               returns boolean
 native IgnoredUnits         takes integer unitid                        returns integer
+
+/**
+Although the name suggests otherwise, this returns true if any unit (building or unit) for the AI player is being attacked.
+*/
 native TownThreatened       takes nothing                               returns boolean
 native DisablePathing       takes nothing                               returns nothing
 native SetAmphibious        takes nothing                               returns nothing
 
+/**
+Every time you use the trigger action 'Send AI Command' the command queue counter 
+increases by 1.
+This has nothing to do with the value of the command in the argument of the
+trigger action; so sending an AI signal with (1,0) is like (5,0) everyone will increase the
+counter by 1.
+
+@note See: `GetLastCommand`, `GetLastData`, `PopLastCommand`
+*/
 native CommandsWaiting      takes nothing                               returns integer
+
+/**
+When an AI signal is sent via triggers, this returns the command value.
+So sending an AI signal of (5,3) returns 5.
+
+@note See: `CommandsWaiting` `GetLastData`, `PopLastCommand`
+*/
 native GetLastCommand       takes nothing                               returns integer
+
+/**
+The same as `GetLastCommand` but it returns the data value.
+For the previous example, it will return 3.
+
+@note See: `CommandsWaiting`, `GetLastCommand`, `PopLastCommand`
+*/
 native GetLastData          takes nothing                               returns integer
+
+/**
+Reduce the command queue counter by 1. It's important to pop last command because many sleep function in `common.ai` exits when the value of the command counter not equal to zero.
+
+@note See: `CommandsWaiting`, `GetLastCommand`, `GetLastData`
+*/
 native PopLastCommand       takes nothing                               returns nothing
 native MeleeDifficulty      takes nothing                               returns integer
 
@@ -1345,6 +1639,9 @@ function StartUnit takes integer ask_qty, integer unitid, integer town returns b
 endfunction
 
 //============================================================================
+/**
+@note If `exitwhen i == 12` represents a player ID, then it buggy when run in 24-player mode.
+*/
 function WaitForTown takes integer towns, integer townid returns nothing
     local integer i = 0
     loop
@@ -2156,6 +2453,9 @@ endfunction
 //===========================================================================
 //  GetAllyCount
 //============================================================================
+/**
+@bug Not compatible with 24-player mode.
+*/
 function GetAllyCount takes player whichPlayer returns integer
     local integer    playerIndex = 0
     local integer    count = 0
