@@ -95,11 +95,11 @@ constant native IsLocationMaskedToPlayer takes location whichLocation, player wh
 constant native GetPlayerRace takes player whichPlayer returns race
 
 /**
-Returns player ID of player (which starts with zero).
+Returns player ID of player (which starts with zero; e.g. player red is 0).
 
 @param whichPlayer Target player
 
-@note For one-based WorldEdit-type IDs see: `GetPlayerId`. Also: `Player`
+@note For one-based WorldEdit-type IDs see: `GetConvertedPlayerId`. Also: `Player`
 */
 constant native GetPlayerId takes player whichPlayer returns integer
 

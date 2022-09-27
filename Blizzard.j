@@ -8236,7 +8236,7 @@ endfunction
 
 //===========================================================================
 /**
-returns WorldEdit-type player ID for player (these start with 1).
+returns WorldEdit-type player ID for player (these start with 1; e.g. player red is 1).
 
 @param whichPlayer Target player
 @note For zero-based IDs see: `GetPlayerId`, `Player`
