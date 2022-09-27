@@ -15,11 +15,35 @@ native GetHeroId            takes nothing                               returns 
 native GetHeroLevelAI       takes nothing                               returns integer
 
 native GetUnitCount         takes integer unitid                        returns integer
+
+/**
+Returns how many `unit`s of a certain type a `player` has.
+
+@commonai
+*/
 native GetPlayerUnitTypeCount takes player p, integer unitid            returns integer
 native GetUnitCountDone     takes integer unitid                        returns integer
 native GetTownUnitCount     takes integer id, integer tn, boolean dn    returns integer
+
+/**
+Gets the gold cost of a unit-type.
+
+@commonai
+*/
 native GetUnitGoldCost      takes integer unitid                        returns integer
+
+/**
+Gets the wood cost of a unit-type.
+
+@commonai
+*/
 native GetUnitWoodCost      takes integer unitid                        returns integer
+
+/**
+Gets the building time of a unit-type.
+
+@commonai
+*/
 native GetUnitBuildTime     takes integer unitid                        returns integer
 
 native GetMinesOwned        takes nothing                               returns integer
@@ -33,6 +57,12 @@ native GetUpgradeGoldCost   takes integer id                            returns 
 native GetUpgradeWoodCost   takes integer id                            returns integer
 native GetNextExpansion     takes nothing                               returns integer
 native GetMegaTarget        takes nothing                               returns unit
+
+/**
+Returns the last created building of a `player`.
+
+@commonai
+*/
 native GetBuilding          takes player p                              returns unit
 native GetEnemyPower        takes nothing                               returns integer
 native SetAllianceTarget    takes unit id                               returns nothing
@@ -120,12 +150,30 @@ native CaptainRetreating    takes nothing                               returns 
 native CaptainReadinessHP   takes nothing                               returns integer
 native CaptainReadinessMa   takes nothing                               returns integer
 native CaptainAtGoal        takes nothing                               returns boolean
+
+/**
+Returns `true` any units on the map have the classification of creep.
+
+@commonai
+*/
 native CreepsOnMap          takes nothing                               returns boolean
 native SuicideUnit          takes integer count, integer unitid         returns nothing
 native SuicideUnitEx        takes integer ct, integer uid, integer pid  returns nothing
 native StartThread          takes code func                             returns nothing
 native Sleep                takes real seconds                          returns nothing
+
+/**
+Checks if a unit is alive.
+
+@commonai
+*/
 native UnitAlive            takes unit id                               returns boolean
+
+/**
+Checks if a unit is invisible.
+
+@commonai
+*/
 native UnitInvis            takes unit id                               returns boolean
 native IgnoredUnits         takes integer unitid                        returns integer
 native TownThreatened       takes nothing                               returns boolean
