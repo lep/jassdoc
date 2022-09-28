@@ -71,9 +71,9 @@ Both `\n` and `\r` are treated as new-line characters (v1.32.10).
 `\\` Allows to use the backslash `\` character, because a single `\` is used to escape the next character. When you use `\\` the game considers it a single `\`,
 if you only place a single `\` it may cause a compiler crash.
 
-- Correct: `"Here comes the backslash: \\ end"
-- Correct: `"Here comes the new line: \n end"
-- Incorrect: `"The space character should not be escaped: \ end"
+- Correct: `"Here comes the backslash: \\ end"`
+- Correct: `"Here comes the new line: \n end"`
+- Incorrect: `"The space character should not be escaped: \ end"`
 
 **Formatting**
 
