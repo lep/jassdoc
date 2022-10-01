@@ -1487,6 +1487,12 @@ function PanCameraToTimedLocWithZForPlayer takes player whichPlayer, location lo
 endfunction
 
 //===========================================================================
+/**
+
+@bug Fixed in 1.31: Caused a desync in multiplayer by creating a `location` inside
+the local block. It was known as "Camera - Pan Camera as necessary (timed)" in GUI.
+[Explanation](https://www.hiveworkshop.com/threads/fixing-smartcamerapanbj-desync.243334/)
+*/
 function SmartCameraPanBJ takes player whichPlayer, location loc, real duration returns nothing
     local real dist
 	local location cameraLoc = GetCameraTargetPositionLoc()
