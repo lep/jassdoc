@@ -82,6 +82,7 @@ The itempool to add the item to
 
 @param itemId
 The rawcode of the item
+An invalid itemId (like 0) can be added & rolled
 
 @param weight
 The weight of the item
