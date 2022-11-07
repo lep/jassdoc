@@ -78,14 +78,14 @@ native DestroyItemPool          takes itempool whichItemPool returns nothing
 Adds an item-id to the itempool.
 
 @param whichItemPool
-The itempool to add the item to
+The itempool to add the item to.
 
 @param itemId
-The rawcode of the item
-An invalid itemId (like 0) can be added & rolled
+The rawcode of the item.
+An invalid itemId (like 0) can be added & rolled.
 
 @param weight
-The weight of the item
+The weight of the item.
 The weight determines how likely it is for the item to be chose by `PlaceRandomItem`.
 */
 native ItemPoolAddItemType      takes itempool whichItemPool, integer itemId, real weight returns nothing
