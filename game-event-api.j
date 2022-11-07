@@ -122,14 +122,20 @@ constant native GetLeavingUnit takes nothing returns unit
 
 
 
+/**
+Registers when a player clicks on the given `trackable`.
+*/
 native TriggerRegisterTrackableHitEvent takes trigger whichTrigger, trackable t returns event
 
+/**
+Registers when a player hovers over the given `trackable`.
+*/
 native TriggerRegisterTrackableTrackEvent takes trigger whichTrigger, trackable t returns event
 
 
 /**
-@event EVENT_GAME_TRACKABLE_HIT
-@event EVENT_GAME_TRACKABLE_TRACK
+@event `EVENT_GAME_TRACKABLE_HIT`
+@event `EVENT_GAME_TRACKABLE_TRACK`
 */
 constant native GetTriggeringTrackable takes nothing returns trackable
 

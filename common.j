@@ -143,6 +143,40 @@ type timerdialog        extends     agent
 type leaderboard        extends     agent
 type multiboard         extends     agent
 type multiboarditem     extends     agent
+
+/**
+Trackables can register both click and hover events by players. But they don't
+provide a way to get the triggering player. In fact the only (as of writing)
+functions that have the trackable type in their signature are:
+
+* `CreateTrackable`
+* `TriggerRegisterTrackableHitEvent`
+* `TriggerRegisterTrackableTrackEvent`
+* `GetTriggeringTrackable`
+* `SaveTrackableHandle`
+* `LoadTrackableHandle`
+
+To create a trackable which can distinguish the triggering player we simply
+create a trackable for each player but with a *locally* different path:
+
+```
+function CreateTrackableForPlayer takes player p, string path, real x, real y, real facing returns trackable
+    if GetLocalPlayer() != p then
+	set path = ""
+    endif
+    return CreateTrackable(path, x, y, facing)
+endfunction
+```
+
+Now using something like `hashtable`s or [lua tables](https://www.lua.org/pil/2.5.html)
+we can attach the correct player to the trackable handle and retrieve it by
+accessing `GetTriggeringTrackable`. You can use the same technique to attach
+other information like the trackables position, facing, etc.
+
+@note See `CreateTrackable` for a way to create a trackable with a non-zero
+z-coordinate.
+
+*/
 type trackable          extends     agent
 
 /**
