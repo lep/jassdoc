@@ -16,6 +16,9 @@ To display a multiboard after creation, you must use `MultiboardDisplay`.
 
 @note Multiboards must be destroyed to prevent leaks: `DestroyMultiboard`.
 
+@note There's a bug that causes big multiboards to
+[freeze/crash the game on 1.33](https://www.hiveworkshop.com/threads/maximizing-the-multiboard-leads-to-freezing-game-with-the-latest-reforged-patch.341873/#post-3550996)
+
 @bug Do not use this in a global initialisation as it crashes the game there.
 */
 native CreateMultiboard                 takes nothing returns multiboard
@@ -23,6 +26,10 @@ native CreateMultiboard                 takes nothing returns multiboard
 
 /**
 Destroys the given multiboard by handle.
+
+@note Many [people reported](https://www.hiveworkshop.com/threads/destroying-or-hiding-timer-window-causes-game-to-crash.310883/post-3312587)
+that you need to *hide* the multiboard before destroying it to avoid crashes.
+See: `MultiboardMinimize`.
 
 @bug Caused a crash on 1.30, 1.31 when [toggling letterbox mode](https://www.hiveworkshop.com/threads/1-31-1-bug-destroymultiboard-causes-crash-after-disabling-letterbox.315554/). (Test other versions?)
 
@@ -175,8 +182,8 @@ native MultiboardSetColumnCount         takes multiboard lb, integer count retur
 Sets the number of content rows (lines, horizontal) for the multiboard.
 
 @bug It is only safe to change the row count by one. Use multiple calls for bigger values.
-<http://www.hiveworkshop.com/forums/l-715/m-250775/>
-<http://www.hiveworkshop.com/forums/t-269/w-234897/>
+<http://www.hiveworkshop.com/forums/l-715/m-250775/> (has test map)
+<http://www.hiveworkshop.com/forums/t-269/w-234897/> (has only code)
 
 @note See: `MultiboardGetRowCount`
 
