@@ -348,7 +348,7 @@ moved left/right, the multiboard is not redrawn to accomodate the new width.
 
 To update the entire multiboard's width, you must manually minimize/maximize
 the multiboard or call `MultiboardDisplay(udg_myMultiboard, true)`
-or `MultiboardMinimize(udg_myMultiboard, false).
+or `MultiboardMinimize(udg_myMultiboard, false)`.
 
 For example, if you only change the width of cell at (x=0, y=0) to
 be 0.2x of screen width, then the cell (x=1, y=0) will be moved right beyond the
