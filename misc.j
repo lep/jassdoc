@@ -12,8 +12,14 @@ The cheat to enter.
 */
 native Cheat            takes string cheatStr returns nothing
 
+/**
+Returns true if "ItVexesMe" aka "no victory" cheat is enabled.
+*/
 native IsNoVictoryCheat takes nothing returns boolean
 
+/**
+Returns true if "StrengthAndHonor" aka "no defeat" cheat is enabled.
+*/
 native IsNoDefeatCheat  takes nothing returns boolean
 
 
