@@ -1,22 +1,53 @@
 // Effects API
 
 /**
-Adds the weather effect with id effectID to the rect where.
+Creates a weather effect that is spatially limited to the specified area.
 
-@param where The rect to apply the weathereffect to.
+This creates a new object and returns its handle, to prevent leaks it must be destroyed
+with `RemoveWeatherEffect` when no longer needed.
 
-@param effectID Which effect to apply.
+The weather effect is created initially disabled and must be turned on with `EnableWeatherEffect`.
+
+**Example (Lua):** to create an "Ashenvale Heavy Rain" at map center:
+
+```{.lua}
+center = Rect(-1024, -1024, 1024, 1024)
+weather = AddWeatherEffect(center, FourCC("RAhr"))
+EnableWeatherEffect(weather, true)
+```
+
+@param where The rect where the weather will be visible.
+
+@param effectID (Rawcode) Which weather preset to apply.
 
 @note To understand more about weather effects nature, I advise to read
 Ammorth's article about weather effects: <http://www.wc3c.net/showthread.php?t=91176>.
 
 @note To get an idea on how to add your own weather effects, you may read
 CryoniC's article about custom weather effects: <http://www.wc3c.net/showthread.php?t=67949>.
+
+@note The weather effects are defined in `terrainart/weather.slk` in game files.
+The [current default list is here](https://www.hiveworkshop.com/threads/how-to-create-random-weather.198658/post-1953519) (v1.32.10).
 */
 native AddWeatherEffect takes rect where, integer effectID returns weathereffect
 
+
+/**
+Removes the weather effect (visually instant) and frees the handle.
+
+@note See: `AddWeatherEffect`, `EnableWeatherEffect`
+*/
 native RemoveWeatherEffect takes weathereffect whichEffect returns nothing
 
+
+/**
+Smoothly enables/disables the given weather effect.
+
+@param whichEffect A handle of target weather effect.
+@param enable `true` to enable, `false` to disable the effect.
+
+@note See: `AddWeatherEffect`, `RemoveWeatherEffect`
+*/
 native EnableWeatherEffect takes weathereffect whichEffect, boolean enable returns nothing
 
 
