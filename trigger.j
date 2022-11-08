@@ -226,4 +226,8 @@ native TriggerExecuteWait   takes trigger whichTrigger returns nothing
 
 native TriggerSyncStart     takes nothing returns nothing
 
+/**
+Waits until all currently running `SynctedStoredX` (like `SyncStoredInteger`)
+calls are done.
+*/
 native TriggerSyncReady     takes nothing returns nothing
