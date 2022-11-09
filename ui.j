@@ -588,12 +588,11 @@ native BlzTriggerRegisterPlayerSyncEvent           takes trigger whichTrigger, p
 
 /**
 The player running this function sends a string message to all players.
+See also `BlzTriggerRegisterPlayerSyncEvent`.
 
-@param prefix
-identity
-Limited to something like 255 bytes
+@param prefix Limited to something like 255 bytes.
 
-@param data Limited to something like 255 bytes
+@param data Limited to something like 255 bytes.
 
 @patch 1.31
 */

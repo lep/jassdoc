@@ -40,11 +40,11 @@ native  StoreString						takes gamecache cache, string missionKey, string key, s
 /**
 Synchronizes the value stored in the `gamecache` under the mission key and key.
 Calling this function sends a sync packet from each player in the calling
-context (citation needed), that is everybody if called simply as is.
+context (citation needed), that is everybody sends a packet to everybody.
 The game then picks the first packet arrived (at the host). Often (but not
-lways) that is the packet coming from the game host.
+always) that is the packet coming from the game host.
 
-More interesting perhaps is the use to synchronize local data (like a players
+More interesting perhaps is the use to synchronize local data (like a player's
 camera position) to all other players. To do this only store and sync the value
 in a local context:
 
@@ -72,8 +72,10 @@ This is a very high-level overview and the process has many edges to look out
 for, so it's probably a good idea to use an already made system like
 [this one](https://www.hiveworkshop.com/threads/sync-game-cache.279148/).
 
+@note You might rather use `BlzSendSyncData` if possible.
+
 @note Calling multiple `SyncStoredX` in a row will keep their order in the
-syncing process.
+syncing process, i.e. first sync will be received first (FIFO).
 */
 native SyncStoredInteger        takes gamecache cache, string missionKey, string key returns nothing
 
