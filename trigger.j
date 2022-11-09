@@ -112,6 +112,18 @@ called in another type of context, it will spawn a new trigger, which can be see
 @bug `ExecuteFunc` does not seem to release the trigger it spawns.
 
 @note As `ExecuteFunc` will run the target function in a trigger action context one way or another, `TriggerSleepAction` can be used.
+
+@note Performance numbers:
+
+- 10000 regular function calls in Jass: 3ms (300ns/call)
+- 10000 regular function calls in Lua: 0.07ms (6.9ns/call)
+- 10000 "ExecuteFunc" calls in Jass: ~50ms (5µs/call)
+
+Result: plain Lua is ~43.5x and ~724x faster respectively.
+
+Source: Unryze's test results using
+[this code](https://github.com/Luashine/wc3-test-maps/blob/31138de4f481b0186ee1002481324f0003baa51b/JassTestSpeed-ujAPI-20221109.j)
+and his UjAPI (Jass on 1.26a; Lua on 1.32.10 and 1.26a).
 */
 native ExecuteFunc          takes string funcName returns nothing
 
