@@ -137,13 +137,13 @@ type terraindeformation extends     handle
 Represents different fog of war types.
 
 - `FOG_OF_WAR_MASKED` (1): Black mask, an unexplored map area.
-   - If "Masked areas are partially visible" is enabled in
+    - If "Masked areas are partially visible" is enabled in
 Map Properties, unexplored areas are shown in dark grey.
 You can see the terrain, but no units.
-   - If disabled, unexplored areas are black and not visible.
+    - If disabled, unexplored areas are black and not visible.
 - `FOG_OF_WAR_FOGGED` (2): Haze, a previously explored
 map area that is currently not visible.
-   - You can see the terrain, but no units.
+    - You can see the terrain, but no units.
 - `FOG_OF_WAR_VISIBLE` (4): A fully visible map area.
 - Other (non-existent) fog types do nothing.
 */
