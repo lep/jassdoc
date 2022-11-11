@@ -162,7 +162,7 @@ create a trackable for each player but with a *locally* different path:
 ```
 function CreateTrackableForPlayer takes player p, string path, real x, real y, real facing returns trackable
     if GetLocalPlayer() != p then
-	set path = ""
+        set path = ""
     endif
     return CreateTrackable(path, x, y, facing)
 endfunction

@@ -22,7 +22,8 @@ endfunction
 ```
 
 @param trackableModelPath The path to the model the trackable should use. Models
-with team colours will use the neutral-hostile team colour.
+with team colours will use the neutral-hostile team colour. To create an
+invisible trackable provide the empty string `""`.
 
 @param x The x-coordinate where the trackable should be created
 
