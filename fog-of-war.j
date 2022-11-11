@@ -9,7 +9,7 @@ which areas were explored or still hidden; which are fogged (not visible); which
 visible. What is visible in game is a combination of personal fog state & fog modifiers.
 
 @param forWhichPlayer Target player.
-@param whichState Change fog to this type.
+@param whichState Change fog to this type. See `fogstate` for type explanation.
 @param where Target rectangle area
 @param useSharedVision
 If true, apply new state to player and whoever player shares their vision.
@@ -26,7 +26,7 @@ which areas were explored or still hidden; which are fogged (not visible); which
 visible. What is visible in game is a combination of personal fog state & fog modifiers.
 
 @param forWhichPlayer Target player.
-@param whichState Change fog to this type.
+@param whichState Change fog to this type. See `fogstate` for type explanation.
 @param centerx X-coordinate of the circle center.
 @param centery Y-coordinate of the circle center.
 @param radius Circle's radius (from center to its edge)
@@ -44,7 +44,7 @@ which areas were explored or still hidden; which are fogged (not visible); which
 visible. What is visible in game is a combination of personal fog state & fog modifiers.
 
 @param forWhichPlayer Target player.
-@param whichState Change fog to this type.
+@param whichState Change fog to this type. See `fogstate` for type explanation.
 @param center Location describing the center of the circle.
 @param radius Circle's radius (from center to its edge)
 @param useSharedVision
@@ -117,7 +117,7 @@ A fog modifier is disabled by default, use `FogModifierStart` to enable.
 This creates a new object with a handle and must be removed to avoid leaks: `DestroyFogModifier`.
 
 @param whichState
-Determines what type of fog the area is being modified to.
+Determines what type of fog the area is being modified to. See `fogstate` for type explanation.
 
 @param where The rect where the fog is
 
@@ -143,7 +143,7 @@ A fog modifier is disabled by default, use `FogModifierStart` to enable.
 This creates a new object with a handle and must be removed to avoid leaks: `DestroyFogModifier`.
 
 @param whichState
-Determines what type of fog the area is being modified to.
+Determines what type of fog the area is being modified to. See `fogstate` for type explanation.
 
 @param centerx
 The x-coordinate where the fog modifier begins.
@@ -158,7 +158,7 @@ Determines the extent that the fog travels (expanding from the coordinates ( cen
 Apply modifier to target's allied players with shared vision?
 
 @param afterUnits
-Will determine whether or not units in that area will be masked by the fog. If it is set to true and the fogstate is masked, it will hide all the units in the fog modifier's radius and mask the area. If set to false, it will only mask the areas that are not visible to the units.
+Will determine whether or not units in that area will be masked by the fog. If it is set to true and the `fogstate` is masked, it will hide all the units in the fog modifier's radius and mask the area. If set to false, it will only mask the areas that are not visible to the units.
 
 @bug (v1.32.10) Just by creating a modifier of type `FOG_OF_WAR_FOGGED` or
 `FOG_OF_WAR_VISIBLE`, this will modify the player's global fog state before it is
@@ -176,7 +176,7 @@ A fog modifier is disabled by default, use `FogModifierStart` to enable.
 This creates a new object with a handle and must be removed to avoid leaks: `DestroyFogModifier`.
 
 @param whichState
-Determines what type of fog the area is being modified to.
+Determines what type of fog the area is being modified to. See `fogstate` for type explanation.
 
 @param center
 The location where the fog modifier begins.
@@ -188,7 +188,7 @@ Determines the extent that the fog travels (expanding from the location `center`
 Apply modifier to target's allied players with shared vision?
 
 @param afterUnits
-Will determine whether or not units in that area will be masked by the fog. If it is set to true and the fogstate is masked, it will hide all the units in the fog modifier's radius and mask the area. If set to false, it will only mask the areas that are not visible to the units.
+Will determine whether or not units in that area will be masked by the fog. If it is set to true and the `fogstate` is masked, it will hide all the units in the fog modifier's radius and mask the area. If set to false, it will only mask the areas that are not visible to the units.
 
 @bug (v1.32.10) Just by creating a modifier of type `FOG_OF_WAR_FOGGED` or
 `FOG_OF_WAR_VISIBLE`, this will modify the player's global fog state before it is
