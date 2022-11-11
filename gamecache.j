@@ -8,7 +8,16 @@ native  ReloadGameCachesFromDisk takes nothing returns boolean
 
 
 /**
-@note You cannot create more than 255 gamecaches
+@note You cannot create more than 255 gamecaches.
+In multiplayer the existing game caches are not considered, so you can get a
+full 255 new game caches.
+
+In singleplayer, when you call `InitGameCache`, it looks in the Campaigns.w3v
+file if a `gamecache` with that name already exists, if yes, it will create a
+`gamecache` handle (you can get multiple handles for the same game cache, and
+that will only count once to the 255 limit in the current game), if no and it
+does not exist yet in the current game either, it will take a new slot among
+the 255.
 */
 native  InitGameCache    takes string campaignFile returns gamecache
 
