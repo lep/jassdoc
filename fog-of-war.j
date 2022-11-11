@@ -4,8 +4,9 @@
 /**
 Sets target player's fog of war data in the specified rectangle.
 
-The fog state is a reflection of what the player currently sees in game
-and on the minimap.
+Individual player's fog state is a reflection of player's map exploration progress:
+which areas were explored or still hidden; which are fogged (not visible); which are
+visible. What is visible in game is a combination of personal fog state & fog modifiers.
 
 @param forWhichPlayer Target player.
 @param whichState Change fog to this type.
@@ -20,8 +21,9 @@ native SetFogStateRect takes player forWhichPlayer, fogstate whichState, rect wh
 /**
 Sets target player's fog of war data in the specified circle area.
 
-The fog state is a reflection of what the player currently sees in game
-and on the minimap.
+Individual player's fog state is a reflection of player's map exploration progress:
+which areas were explored or still hidden; which are fogged (not visible); which are
+visible. What is visible in game is a combination of personal fog state & fog modifiers.
 
 @param forWhichPlayer Target player.
 @param whichState Change fog to this type.
@@ -37,8 +39,9 @@ native SetFogStateRadius takes player forWhichPlayer, fogstate whichState, real 
 /**
 Sets target player's fog of war data in the specified circle area.
 
-The fog state is a reflection of what the player currently sees in game
-and on the minimap.
+Individual player's fog state is a reflection of player's map exploration progress:
+which areas were explored or still hidden; which are fogged (not visible); which are
+visible. What is visible in game is a combination of personal fog state & fog modifiers.
 
 @param forWhichPlayer Target player.
 @param whichState Change fog to this type.
@@ -62,7 +65,7 @@ True: unexplored areas are masked.
 
 False: unexplored areas are not masked (whether visible depends on `IsFogEnabled`).
 
-@note See: `IsFogMaskEnabled`, `FogEnable`
+@note See: `IsFogMaskEnabled`, `IsFogEnabled`. "Fog mask" is explained in `fogstate`.
 */
 native FogMaskEnable takes boolean enable returns nothing
 
@@ -73,6 +76,8 @@ Returns whether global FOW masking is in effect.
 True: unexplored areas are globally masked.
 
 False: unexplored areas are not globally masked (whether visible depends on `IsFogEnabled`).
+
+@note See: `FogMaskEnable`, `FogEnable`. "Fog mask" is explained in `fogstate`.
 */
 native IsFogMaskEnabled takes nothing returns boolean
 
@@ -86,6 +91,8 @@ reversible.
 True: explored areas are fogged if not in sight.
 
 False: explored areas remain permanently visible.
+
+@note See: `IsFogEnabled`, `IsFogMaskEnabled`. "Fog" is explained in `fogstate`.
 */
 native FogEnable takes boolean enable returns nothing
 
@@ -96,12 +103,16 @@ Toggles global FOW fogging of explored yet not visible areas.
 True: explored areas are fogged if not in sight.
 
 False: explored areas remain permanently visible.
+
+@note See: `FogEnable`, `FogMaskEnable`. "Fog" is explained in `fogstate`.
 */
 native IsFogEnabled takes nothing returns boolean
 
 
 /**
 Creates an object that overrides the fog in a rect for a specific player.
+
+A fog modifier is disabled by default, use `FogModifierStart` to enable.
 
 This creates a new object with a handle and must be removed to avoid leaks: `DestroyFogModifier`.
 
@@ -119,13 +130,15 @@ Will determine whether or not units in that area will be masked by the fog. If i
 @bug (v1.32.10) Just by creating a modifier of type `FOG_OF_WAR_FOGGED` or
 `FOG_OF_WAR_VISIBLE`, this will modify the player's global fog state before it is
 enabled. "VISIBLE" will instantly become "FOGGED" and "FOGGED" will cause unexplored
-areas to become explored. You must workaround this by using e.g. `SetFogStateRect`
+areas to become explored. You can workaround this by using e.g. `SetFogStateRect`
 after fog modifier creation.
 */
 native CreateFogModifierRect takes player forWhichPlayer, fogstate whichState, rect where, boolean useSharedVision, boolean afterUnits returns fogmodifier
 
 /**
 Creates an object that overrides the fog in a circular radius for a specific player.
+
+A fog modifier is disabled by default, use `FogModifierStart` to enable.
 
 This creates a new object with a handle and must be removed to avoid leaks: `DestroyFogModifier`.
 
@@ -147,18 +160,18 @@ Apply modifier to target's allied players with shared vision?
 @param afterUnits
 Will determine whether or not units in that area will be masked by the fog. If it is set to true and the fogstate is masked, it will hide all the units in the fog modifier's radius and mask the area. If set to false, it will only mask the areas that are not visible to the units.
 
-@note You must use `FogModifierStart` to enable the fog modifier. 
-
 @bug (v1.32.10) Just by creating a modifier of type `FOG_OF_WAR_FOGGED` or
 `FOG_OF_WAR_VISIBLE`, this will modify the player's global fog state before it is
 enabled. "VISIBLE" will instantly become "FOGGED" and "FOGGED" will cause unexplored
-areas to become explored. You must workaround this by using e.g. `SetFogStateRect`
+areas to become explored. You can workaround this by using e.g. `SetFogStateRect`
 after fog modifier creation.
 */
 native CreateFogModifierRadius takes player forWhichPlayer, fogstate whichState, real centerx, real centerY, real radius, boolean useSharedVision, boolean afterUnits returns fogmodifier
 
 /**
 Creates an object that overrides the fog in a circular radius for a specific player.
+
+A fog modifier is disabled by default, use `FogModifierStart` to enable.
 
 This creates a new object with a handle and must be removed to avoid leaks: `DestroyFogModifier`.
 
@@ -177,12 +190,10 @@ Apply modifier to target's allied players with shared vision?
 @param afterUnits
 Will determine whether or not units in that area will be masked by the fog. If it is set to true and the fogstate is masked, it will hide all the units in the fog modifier's radius and mask the area. If set to false, it will only mask the areas that are not visible to the units.
 
-@note You must use `FogModifierStart` to enable the fog modifier. 
-
 @bug (v1.32.10) Just by creating a modifier of type `FOG_OF_WAR_FOGGED` or
 `FOG_OF_WAR_VISIBLE`, this will modify the player's global fog state before it is
 enabled. "VISIBLE" will instantly become "FOGGED" and "FOGGED" will cause unexplored
-areas to become explored. You must workaround this by using e.g. `SetFogStateRect`
+areas to become explored. You can workaround this by using e.g. `SetFogStateRect`
 after fog modifier creation.
 */
 native CreateFogModifierRadiusLoc takes player forWhichPlayer, fogstate whichState, location center, real radius, boolean useSharedVision, boolean afterUnits returns fogmodifier
@@ -203,6 +214,6 @@ native FogModifierStart takes fogmodifier whichFogModifier returns nothing
 
 /**
 Disable the effect of the modifier. Once disabled the player's visibility
-will return to the regular global fog state.
+will return to player's regular fog state.
 */
 native FogModifierStop takes fogmodifier whichFogModifier returns nothing
