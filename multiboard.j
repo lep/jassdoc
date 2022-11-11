@@ -16,6 +16,9 @@ To display a multiboard after creation, you must use `MultiboardDisplay`.
 
 @note Multiboards must be destroyed to prevent leaks: `DestroyMultiboard`.
 
+@note Only one multiboard can be visible at a time.
+However there's a workaround using [Frame API](https://www.hiveworkshop.com/threads/ui-showing-3-multiboards.316610/).
+
 @note There's a bug that causes big multiboards to
 [freeze/crash the game on 1.33](https://www.hiveworkshop.com/threads/maximizing-the-multiboard-leads-to-freezing-game-with-the-latest-reforged-patch.341873/#post-3550996)
 
@@ -25,15 +28,19 @@ native CreateMultiboard                 takes nothing returns multiboard
 
 
 /**
-Destroys the given multiboard by handle.
+Destroys the multiboard and frees the handle.
 
-@note Many [people reported](https://www.hiveworkshop.com/threads/destroying-or-hiding-timer-window-causes-game-to-crash.310883/post-3312587)
-that you need to *hide* the multiboard before destroying it to avoid crashes.
-See: `MultiboardMinimize`.
+@bug **Fixed in 1.33:** Crash on 1.30-1.32.10 (earlier?) when a multiboard is destroyed
+while `ShowInterface` is false for a player and the game crashes later, once turned on.
 
-@bug Caused a crash on 1.30, 1.31 when [toggling letterbox mode](https://www.hiveworkshop.com/threads/1-31-1-bug-destroymultiboard-causes-crash-after-disabling-letterbox.315554/). (Test other versions?)
+`ShowInterface` is used by the cinematic mode, also known as "letterbox mode" as GUI trigger.
 
-@bug Crash on 1.30 when destroying and [toggling off cinematic mode](https://www.hiveworkshop.com/threads/fatal-error-after-cinematics.316707/post-3358087).
+**Workaround:** hide the multiboard before destroying it, see: `MultiboardMinimize`.
+
+**Bug reports:**
+[Cinematic mode, multiboard](https://www.hiveworkshop.com/threads/fatal-error-after-cinematics.316707/post-3358087),
+[toggling letterbox mode](https://www.hiveworkshop.com/threads/1-31-1-bug-destroymultiboard-causes-crash-after-disabling-letterbox.315554/),
+[multiboard](https://www.hiveworkshop.com/threads/destroying-or-hiding-timer-window-causes-game-to-crash.310883/post-3312587)
 */
 native DestroyMultiboard                takes multiboard lb returns nothing
 
@@ -97,9 +104,9 @@ Erases all items in a multiboard and sets row count to 0, column count to 0.
 The multiboard's name is preserved.
 
 @note *Implementation-specific:* Clearing a multiboard does not automatically invalidate
-previous cell (item) handles. If you expand the multiboard again, you'll be able to reuse
-old handles. BUT you really shouldn't be doing this, it's seems buggy/specific behavior.
-When you clear or shrink a table, it's best to release old cell (item) handles.
+previous `multiboarditem` handles. If you expand the multiboard again, you'll be able to reuse
+old handles. BUT you really shouldn't be doing this, it seems to be a buggy/undefined behavior.
+When you clear or shrink a table, it's best to release old cell (item) handles with `MultiboardReleaseItem`.
 
 @param lb Target multiboard
 
@@ -111,6 +118,7 @@ native MultiboardClear                  takes multiboard lb returns nothing
 /**
 Sets a multiboard's name.
 
+The new text appears instantly.
 The multiboard will expand as wide as necessary to display the title.
 
 @note See: `MultiboardGetTitleText`
@@ -260,9 +268,11 @@ native MultiboardSetItemsIcon           takes multiboard lb, string iconPath ret
 /**
 Acquires and returns a new handle for the multiboard cell.
 
-@note Because a new handle is created each time, the handle must be freed with `MultiboardReleaseItem`.
+@note Because a new handle is created each time, the handle must be
+freed with `MultiboardReleaseItem`. The handle is different even if you
+retrieve the same cell of the multiboard (v1.32.10, Lua).
 
-@note The parameter order of row and column is (y,x) if you think of coordinates.
+@note The parameter order of `row` and `column` is (y,x) if you think of coordinates.
 
 @param lb Target multiboard
 @param row In which row is the target cell (Y-coord, up-down). Starts from 0.
