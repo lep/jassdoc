@@ -103,4 +103,9 @@ native SetDestructableOccluderHeight takes destructable d, real height returns n
 */
 native GetDestructableName takes destructable d returns string
 
+/**
+
+@note Can be used in `TriggerRegisterDeathEvent` if the dead widget is actually
+a destructable.
+*/
 constant native GetTriggerDestructable takes nothing returns destructable
