@@ -28,7 +28,7 @@ visible. What is visible in game is a combination of personal fog state & fog mo
 @param forWhichPlayer Target player.
 @param whichState Change fog to this type. See `fogstate` for type explanation.
 @param centerx X-coordinate of the circle center.
-@param centery Y-coordinate of the circle center.
+@param centerY Y-coordinate of the circle center.
 @param radius Circle's radius (from center to its edge)
 @param useSharedVision
 If true, apply new state to player and whoever player shares their vision.
