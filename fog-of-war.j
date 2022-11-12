@@ -41,7 +41,7 @@ Determines what type of fog the area is being modified to.
 @param centerx
 The x-coordinate where the fog modifier begins.
 
-@param centery
+@param centerY
 The y-coordinate where the fog modifier begins.
 
 @param radius

@@ -53,7 +53,7 @@ native GetUnitCountDone     takes integer unitid                        returns 
 /**
 Counts buildings of specific type for the AI player in a town.
 
-@param unitid Rawcode to specify unit type to count
+@param id Rawcode to specify unit type to count
 @param tn ID of target town
 @param dn If true: only count finished units
 

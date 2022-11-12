@@ -113,7 +113,7 @@ native SetImageAboveWater           takes image whichImage, boolean flag, boolea
 /**
 Changes the specified images type.
 
-@param imageTypes Influence the order in which images are drawn above one another:
+@param imageType Influence the order in which images are drawn above one another:
 
 | Value | Name           | Description |
 |-------|----------------|-------------|

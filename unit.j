@@ -1007,7 +1007,7 @@ Returns:
 - false otherwise (hero already has this ability)
 
 @param whichUnit Target unit
-@param abilcode Abilities' raw code identifier
+@param abilityId Abilities' raw code identifier
 */
 native UnitAddAbility takes unit whichUnit, integer abilityId returns boolean
 
@@ -1020,7 +1020,7 @@ Returns:
 - false otherwise (hero does not have this ability)
 
 @param whichUnit Target unit
-@param abilcode Abilities' raw code identifier
+@param abilityId Abilities' raw code identifier
 
 @bug Removing non-interrupt abilities like divine shile while they're being
 cast (at the EVENT_PLAYER_UNIT_SPELL_EFFECT point), and while the caster is

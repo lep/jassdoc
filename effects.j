@@ -82,9 +82,6 @@ native TerrainDeformCrater takes real x, real y, real radius, real depth, intege
 native TerrainDeformRipple takes real x, real y, real radius, real depth, integer duration, integer count, real spaceWaves, real timeWaves, real radiusStartPct, boolean limitNeg returns terraindeformation
 
 /**
-
-@param duration The duration in milliseconds.
-
 @note Permanent terrain deformations are not present in saved game files.
 */
 native TerrainDeformWave takes real x, real y, real dirX, real dirY, real distance, real speed, real radius, real depth, integer trailTime, integer count returns terraindeformation
