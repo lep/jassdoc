@@ -20,7 +20,7 @@ type event              extends     agent  // a reference to an event registrati
 type player             extends     agent  // a single player reference
 
 /**
-A widget is an "interactive game object" with HP, inventory etc.
+A widget is an "interactive game object" with HP, possibly an inventory etc.
 
 Types `unit`, `destructable`, `item` extend from widget.
 Widget is the parent type and unit etc. are the descendant types (children).
