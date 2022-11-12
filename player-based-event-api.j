@@ -489,7 +489,61 @@ Returns the string that you registered for
 constant native GetEventPlayerChatStringMatched takes nothing returns string
 
 
+/**
+Makes the target trigger execute when specified widget dies.
+Returns registered event.
 
+Use `GetTriggerWidget` to retrieve the target. These work too if the widget
+is of the correct sub-type: `GetTriggerUnit`, `GetTriggerDestructable`.
+
+@note There's no "GetTriggerItem" so you have to downcast it from `widget` type.
+See example.
+
+@note **Example (Lua):** This event and trigger can be used to operate on
+widgets, units, destructables, items (with typecasting).
+
+```{.lua}
+-- Create necessary widgets
+u = CreateUnit(Player(0), FourCC("Hamg"), -30, 0, 90)
+d = CreateDestructable(FourCC("ZTg1"), 256, 0, 90, 1, 0)
+item = CreateItem(FourCC("war2"), 256, 384)
+
+-- This is our trigger action
+hasht = InitHashtable() -- for type-casting
+function widgetDied()
+	local w,u,d,i
+	w,u,d = GetTriggerWidget(),GetTriggerUnit(),GetTriggerDestructable()
+	if not u and not d then -- the widget is an item
+		-- Downcasting (explicit type casting from widget to a child type)
+		SaveWidgetHandle(hasht, 1, 1, w) -- put as widget
+		i = LoadItemHandle(hasht, 1, 1) -- retrieve as item
+	end
+	print("died object (widget, unit, destr, item):", w, u, d, i)
+	
+	local wXpos, uXpos, dXpos, iXpos
+	wXpos = GetWidgetX(w)
+	if u then uXpos = GetUnitX(u) end
+	if d then dXpos = GetDestructableX(d) end
+	if i then iXpos = GetItemX(i) end
+	print("died obj x pos (widget, unit, destr, item):", wXpos, uXpos, dXpos, iXpos)
+end
+
+-- Create and register widgets to this trigger
+trig = CreateTrigger()
+TriggerAddAction(trig, widgetDied)
+for k,widg in pairs({u,d,item}) do TriggerRegisterDeathEvent(trig, widg) end
+
+-- Kill widgets and observe what happens
+SetWidgetLife(u, 0)
+SetWidgetLife(d, 0)
+SetWidgetLife(item, 0)
+```
+
+@note You can use this with units, items, destructables. Explained in `widget`.
+
+@param whichTrigger Register death event to execute this trigger.
+@param whichWidget Trigger when this widget dies.
+*/
 native TriggerRegisterDeathEvent takes trigger whichTrigger, widget whichWidget returns event
 
 

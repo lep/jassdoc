@@ -6,16 +6,43 @@
 @patch 1.24b
 */
 type agent			    extends     handle  // all reference counted objects
+
+
+/**
+Currently useless, although triggers return an event reference when you register
+a new trigger-event, there are no useful functions, and you cannot destroy
+an event object too.
+
+The only functions that take event are: `SaveTriggerEventHandle` and
+`SaveTriggerEventHandleBJ`.
+*/
 type event              extends     agent  // a reference to an event registration
 type player             extends     agent  // a single player reference
 
 /**
+A widget is an "interactive game object" with HP, inventory etc.
+
 Types `unit`, `destructable`, `item` extend from widget.
+Widget is the parent type and unit etc. are the descendant types (children).
 
-All API functions that accept widget, will also take any of the children types.
-However if doesn't work the other way around, then you need to explicitly cast the type by pushing it through a hashtable, "downcasting":
-Put the widget object in a hashtable and retrieve it as unit/destructable/item - needed since 1.24b, source: [The Helper Wiki](https://web.archive.org/web/20100118203210/http://wiki.thehelper.net/wc3/jass/common.j/Widget_API).
+Therefore all API functions that accept `widget` as a type, will also work with
+any of the children types.
 
+However if doesn't work the other way around, then you need to explicitly cast the type by pushing it through a hashtable, this is called "downcasting":
+
+1. Put the widget object in a hashtable
+2. Retrieve it as unit/destructable/item - needed since 1.24b,
+[source](https://web.archive.org/web/20100118203210/http://wiki.thehelper.net/wc3/jass/common.j/Widget_API)
+
+**Example (Lua)**:
+
+```{.lua}
+hasht = InitHashtable() -- for type-casting
+SaveWidgetHandle(hasht, 1, 1, widgetHandle) -- put as widget
+itemHandle = LoadItemHandle(hasht, 1, 1) -- retrieve as item
+```
+
+See `TriggerRegisterDeathEvent` for a full practical example.
 */
 type widget             extends     agent  // an interactive game object with life
 type unit               extends     widget  // a single unit reference
@@ -56,6 +83,10 @@ type playerevent        extends     eventid
 type playerunitevent    extends     eventid
 type unitevent          extends     eventid
 type limitop            extends     eventid
+
+/**
+Currently useless, there are no functions that take `widgetevent`.
+*/
 type widgetevent        extends     eventid
 type dialogevent        extends     eventid
 type unittype           extends     handle
@@ -1826,6 +1857,16 @@ TriggerRegisterGameEvent(trg_gameev, EVENT_GAME_BUILD_SUBMENU)
 
     constant unitevent EVENT_UNIT_LOADED                                = ConvertUnitEvent(88)
 
+/**
+Currently useless, there are no functions that take `widgetevent`.
+
+@note It was probably intended to be used in a similar way like
+`TriggerRegisterUnitEvent` and `TriggerRegisterFilterUnitEvent` that take
+a `unitevent`. It would have allowed to register an event for
+a specific widget (unit/item/destructable).
+
+@note See: `TriggerRegisterDeathEvent`
+*/
     constant widgetevent EVENT_WIDGET_DEATH                             = ConvertWidgetEvent(89)
 
     constant dialogevent EVENT_DIALOG_BUTTON_CLICK                      = ConvertDialogEvent(90)
