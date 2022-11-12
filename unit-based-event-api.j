@@ -3,6 +3,9 @@
 /**
 Returns handle to unit which triggered the most recent event when called from
 within a trigger action function...returns null handle when used incorrectly
+
+@note Can be used in `TriggerRegisterDeathEvent` if the dead widget is actually
+a unit.
 */
 constant native GetTriggerUnit takes nothing returns unit
 

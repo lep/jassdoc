@@ -44,7 +44,8 @@ See `widget` for an explanation how this applies to units, destructables, items.
 native GetWidgetY takes widget whichWidget returns real
 
 /**
-Returns the target widget inside a trigger action. Otherwise returns null.
+Returns the target widget (that caused the trigger-event) inside a trigger action.
+Otherwise returns null.
 
 @note Only works in triggers that operate on actual `widget` type, like `TriggerRegisterDeathEvent`.
 */
