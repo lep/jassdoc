@@ -37,14 +37,65 @@ native  StoreString						takes gamecache cache, string missionKey, string key, s
 
 
 
+/**
+Synchronizes the value stored in the `gamecache` under the mission key and key.
+Calling this function sends a sync packet from each player in the calling
+context (citation needed), that is everybody sends a packet to everybody.
+The game then picks the first packet arrived (at the host). Often (but not
+always) that is the packet coming from the game host.
+
+More interesting perhaps is the use to synchronize local data (like a player's
+camera position) to all other players. To do this only store and sync the value
+in a local context:
+
+```
+if GetLocalPlayer() == p then
+    call StoreInteger(my_cache, "missionkey", "key", my_value)
+    call SyncStoredInteger(my_cache, "missionkey", "key")
+endif
+```
+
+Now this will synchronize the local value `my_value` to each player but we don't
+know when each player has actually received it. You can use `TriggerSyncReady`
+to wait for each sync action, but it's not recommended as it is very slow and
+can hang for minutes (cf. [sync doc](https://www.hiveworkshop.com/pastebin/1ce4fe042832e6bd7d06697a43055373.5801))
+Instead it is recommended to use a rapid timer to check if the key is present
+in the gamecache. Note that this is still a local operation as different players
+can receive the sync at different times. If a player has received all the data
+you synchronize the fact that that player has got all the data. This is
+reasonably done via `SelectUnit` and
+`TriggerRegisterPlayerUnitEvent(trig, p, EVENT_PLAYER_UNIT_SELECTED, null)`.
+Now once the last player has sent their selection event you have synchronized
+your data.
+
+This is a very high-level overview and the process has many edges to look out
+for, so it's probably a good idea to use an already made system like
+[this one](https://www.hiveworkshop.com/threads/sync-game-cache.279148/).
+
+@note You might rather use `BlzSendSyncData` if possible.
+
+@note Calling multiple `SyncStoredX` in a row will keep their order in the
+syncing process, i.e. first sync will be received first (FIFO).
+*/
 native SyncStoredInteger        takes gamecache cache, string missionKey, string key returns nothing
 
+/**
+Synchronizes the value stored in the `gamecache` under the mission key and key.
+See `SyncStoredInteger` for a more in-depth explanation.
+*/
 native SyncStoredReal           takes gamecache cache, string missionKey, string key returns nothing
 
+/**
+Synchronizes the value stored in the `gamecache` under the mission key and key.
+See `SyncStoredInteger` for a more in-depth explanation.
+*/
 native SyncStoredBoolean        takes gamecache cache, string missionKey, string key returns nothing
 
 native SyncStoredUnit           takes gamecache cache, string missionKey, string key returns nothing
 
+/**
+@bug Does not seem to work.
+*/
 native SyncStoredString         takes gamecache cache, string missionKey, string key returns nothing
 
 
