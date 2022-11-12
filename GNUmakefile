@@ -1,6 +1,6 @@
 MKDOCS ?= cabal run mkdocs --
 
-.PHONY: all clean release
+.PHONY: all clean release check
 
 SRC := trackable.j quest.j random.j leaderboard.j terrain.j fog-of-war.j
 SRC += game-event-api.j computer-ai.j destructable.j unit.j doodad.j timer.j
@@ -21,6 +21,9 @@ db.sql: mksrc $(SRC)
 
 jass.db: db.sql
 	sqlite3 $@ < $<
+
+check: jass.db
+	sqlite3 $< < check-wrong-params.sql
 
 clean:
 	rm -f db.sql
