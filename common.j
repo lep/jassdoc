@@ -132,6 +132,21 @@ type effect             extends     agent
 type effecttype         extends     handle
 type weathereffect      extends     handle
 type terraindeformation extends     handle
+
+/**
+Represents different fog of war types.
+
+- `FOG_OF_WAR_MASKED` (1): Black mask, an unexplored map area.
+    - If "Masked areas are partially visible" is enabled in
+Map Properties, unexplored areas are shown in dark grey.
+You can see the terrain, but no units.
+    - If disabled, unexplored areas are black and not visible.
+- `FOG_OF_WAR_FOGGED` (2): Haze, a previously explored
+map area that is currently not visible.
+    - You can see the terrain, but no units.
+- `FOG_OF_WAR_VISIBLE` (4): A fully visible map area.
+- Other (non-existent) fog types do nothing.
+*/
 type fogstate           extends     handle
 type fogmodifier        extends     agent
 type dialog             extends     agent
@@ -848,6 +863,8 @@ constant native ConvertSubAnimType          takes integer i returns subanimtype
 
 
 /**
+Converts a bitmask in integer i to a fog of war type. See: `fogstate`.
+
 @note Can be used for extended typecasting.
 <http://www.hiveworkshop.com/forums/j-280/t-232039/>
 @pure
@@ -1975,8 +1992,17 @@ TriggerRegisterGameEvent(trg_gameev, EVENT_GAME_BUILD_SUBMENU)
     constant texmapflags    TEXMAP_FLAG_WRAP_V              = ConvertTexMapFlags(2)
     constant texmapflags    TEXMAP_FLAG_WRAP_UV             = ConvertTexMapFlags(3)
 
+/**
+See `fogstate` for an explanation.
+*/
     constant fogstate       FOG_OF_WAR_MASKED               = ConvertFogState(1)
+/**
+See `fogstate` for an explanation.
+*/
     constant fogstate       FOG_OF_WAR_FOGGED               = ConvertFogState(2)
+/**
+See `fogstate` for an explanation.
+*/
     constant fogstate       FOG_OF_WAR_VISIBLE              = ConvertFogState(4)
 
 //===================================================
