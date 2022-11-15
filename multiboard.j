@@ -146,10 +146,11 @@ it will override this color.
 @note You can use this to avoid using color tags and text manipulation in code.
 
 @param lb Target multiboard
-@param red 0-255 red color (clamped to 0-255)
-@param green 0-255 green color (clamped to 0-255)
-@param blue 0-255 blue color (clamped to 0-255)
-@param alpha (unused) 0-255 alpha color, please set to 255.
+@param red 0-255 red color (value mod 256)
+@param green 0-255 green color (value mod 256)
+@param blue 0-255 blue color (value mod 256)
+@param alpha (unused) 0-255 transparency, please set to 255.
+A value of 0 is complete transparency, while a value of 255 is complete opacity.
 
 @note See: `MultiboardSetItemValueColor`
 */
@@ -230,9 +231,9 @@ it will override this color.
 @note You can use this to avoid using color tags and text manipulation in code.
 
 @param lb Target multiboard
-@param red 0-255 red color (clamped to 0-255)
-@param green 0-255 green color (clamped to 0-255)
-@param blue 0-255 blue color (clamped to 0-255)
+@param red 0-255 red color (value mod 256)
+@param green 0-255 green color (value mod 256)
+@param blue 0-255 blue color (value mod 256)
 @param alpha (unused) 0-255 alpha color, please set to 255.
 
 @note See: `MultiboardSetItemValueColor`
@@ -328,9 +329,9 @@ it will override this color.
 
 @note You can use this to avoid using color tags and text manipulation in code.
 
-@param red 0-255 red color (clamped to 0-255)
-@param green 0-255 green color (clamped to 0-255)
-@param blue 0-255 blue color (clamped to 0-255)
+@param red 0-255 red color (value mod 256)
+@param green 0-255 green color (value mod 256)
+@param blue 0-255 blue color (value mod 256)
 @param alpha (unused) 0-255 alpha color, please set to 255.
 
 @note See: `MultiboardSetItemsValueColor`
