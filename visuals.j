@@ -56,6 +56,10 @@ native ShowInterface                takes boolean flag, real fadeDuration return
 
 native PauseGame                    takes boolean flag returns nothing
 
+
+/**
+@note See: `AddIndicator` (it is a more generic version as it takes a `widget`)
+*/
 native UnitAddIndicator             takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
 
 /**
@@ -69,6 +73,8 @@ this, you must edit the object editor field of the widget listed as "Art - Selec
 The indicator is shown below the unit selection.
 If the unit is currently selected, the blinking indicator will be practically
 hidden by the selection circle.
+
+@note See: `UnitAddIndicator` (functionally equivalent to this widget version)
 
 @param whichWidget The widget the indicator will be applied to.
 @param red 0-255 red color (value mod 256)
