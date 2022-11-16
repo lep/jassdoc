@@ -1,33 +1,82 @@
 // Visual API
 
 /**
-@bug Does nothing.
+@bug Does nothing (unknown, unused).
 */
 native SetTerrainFog                takes real a, real b, real c, real d, real e returns nothing
 
 native ResetTerrainFog              takes nothing returns nothing
 
 
-
+/**
+Unknown, unused.
+*/
 native SetUnitFog                   takes real a, real b, real c, real d, real e returns nothing
 
 native SetTerrainFogEx              takes integer style, real zstart, real zend, real density, real red, real green, real blue returns nothing
 
-native DisplayTextToPlayer          takes player toPlayer, real x, real y, string message returns nothing
-
-native DisplayTimedTextToPlayer     takes player toPlayer, real x, real y, real duration, string message returns nothing
 
 /**
-Displays the message to *all* players but the first "%s" in the message will
+Displays a trigger message to player.
+
+The text line fades out in the end.
+
+@bug Changing x or y moves the entire text box, including previously displayed lines.
+
+@note The text lines are bottom-left aligned: text continues to the right and new lines
+continue upwards.
+
+@note This is equivalent to `DisplayTimedTextToPlayer` with `duration` set to 4.
+
+@note See: `DisplayTimedTextToPlayer`, `DisplayTimedTextFromPlayer`, `BlzDisplayChatMessage`.
+
+@param toPlayer target player
+@param x new text box position (default is 0, clamped to: 0.0-1.0)
+@param y new text box position (default is 0, clamped to: 0.0-1.0)
+@param message text (supports color codes)
+*/
+native DisplayTextToPlayer          takes player toPlayer, real x, real y, string message returns nothing
+
+
+/**
+Displays a trigger message to player with a custom display duration.
+
+The text line fades out in the end.
+
+@note See: `DisplayTextToPlayer` for the full description.
+Also: `DisplayTimedTextFromPlayer`, `BlzDisplayChatMessage`.
+
+@param toPlayer target player
+@param x new text box position (default is 0, clamped to: 0.0-1.0)
+@param y new text box position (default is 0, clamped to: 0.0-1.0)
+@param duration text lifetime in seconds
+@param message text (supports color codes)
+*/
+native DisplayTimedTextToPlayer     takes player toPlayer, real x, real y, real duration, string message returns nothing
+
+
+/**
+Displays a trigger message to *all* players but the first "%s" in the message will
 be replaced by `GetPlayerName(toPlayer)`.
 
 @bug Only the first "%s" will be replaced correctly. Following "%s" will be
-printed as garbage.
+printed as garbage or (v1.32.10, Lua) crash the game.
 
-@bug Using formatters like "%i" will also print garbage and following "%s" wont
+Using formatters like "%i" will also print garbage and following "%s" wont
 work either.
 
+See: [C stdlib printf documentation](https://cplusplus.com/reference/cstdio/printf/).
+
 @note A better name for the parameter `toPlayer` would be `fromPlayer`.
+
+@note See: `DisplayTextToPlayer` for the full description.
+Also: `DisplayTimedTextToPlayer`, `BlzDisplayChatMessage`.
+
+@param toPlayer this player's name will be used to replace the `%s` placeholder
+@param x new text box position (default is 0, clamped to: 0.0-1.0)
+@param y new text box position (default is 0, clamped to: 0.0-1.0)
+@param duration text lifetime in seconds
+@param message text (supports color codes), may contain only one `%s` placeholder
 */
 native DisplayTimedTextFromPlayer   takes player toPlayer, real x, real y, real duration, string message returns nothing
 
@@ -42,14 +91,57 @@ native SetDayNightModels            takes string terrainDNCFile, string unitDNCF
 
 native SetSkyModel                  takes string skyModelFile returns nothing
 
+
+/**
+Toggles user's input controls.
+
+When disabled this includes:
+
+- hide the cursor (you can still see UI on-hover effects with menu buttons and
+even mouse-down animation on ability buttons)
+- on-hover unit selection circles no longer show (cannot be overriden with
+`EnableDragSelect`, `EnablePreSelect`, `EnableSelect`)
+- disable all hotkeys (binds, abilities, minimap, menus like F10), only Alt+F4 continues to work
+
+@param b `true` to enable control, `false` to disable
+*/
 native EnableUserControl            takes boolean b returns nothing
 
+
+/**
+Toggles the display of tooltips, other features unknown (v1.32.10).
+Group hotkeys, selection etc. continue to work.
+
+@param b `true` to enable tooltips, `false` to disable the display of tooltips.
+*/
 native EnableUserUI                 takes boolean b returns nothing
 
+
+/**
+Controls the ticking of the in-game day/night time.
+
+@param b `true` to stop time ticking, `false` to enable time progression (default).
+*/
 native SuspendTimeOfDay             takes boolean b returns nothing
 
+
+/**
+Sets the speed of the in-game day/night time.
+
+By default: `1.0` or 100%. `2.0` would make it twice as fast.
+
+@param r new scaling factor
+
+@bug A negative scaling factor is applied and the time ticks backwards until
+00:00 is reached. Then the time freezes at 00:00, the day does not progress backwards.
+*/
 native SetTimeOfDayScale            takes real r returns nothing
 
+
+/**
+Returns the speed of the in-game day/night time (a scaling factor).
+By default: `1.0` or 100%.
+*/
 native GetTimeOfDayScale            takes nothing returns real
 
 /**
@@ -206,6 +298,12 @@ Emulates an ESCAPE key press internally, used to interact with UI, e.g. close F1
 */
 native ForceUICancel                takes nothing returns nothing
 
+
+/**
+Opens the "Load game" menu where you can load a previous save.
+
+@note Singleplayer only! This menu is disabled in multiplayer and nothing will happen.
+*/
 native DisplayLoadDialog            takes nothing returns nothing
 
 /**
@@ -217,6 +315,15 @@ player a different icon via `GetLocalPlayer`.
 */
 native SetAltMinimapIcon            takes string iconPath returns nothing
 
+
+/**
+Toggles the "Restart Mission" button (found in: Menu (F10) -> End Game).
+
+@note This button is only enabled in singleplayer (default),
+you cannot enable it in multiplayer.
+
+@param flag `true` to disable the button, `false` to allow game restarts by the player.
+*/
 native DisableRestartMission        takes boolean flag returns nothing
 
 
@@ -251,20 +358,133 @@ native SetTextTagFadepoint          takes texttag t, real fadepoint returns noth
 
 native SetReservedLocalHeroButtons  takes integer reserved returns nothing
 
+
+/**
+Returns the currently chosen player color display mode.
+
+This is called "ally color mode" by the game (hotkey: Alt+A).
+
+- `0` aka "Mode 1" (default):
+    - Minimap: Player colors, youself are white
+	- World: Unit colors same as player color
+- `1` aka "Mode 2":
+    - Minimap: Allies are teal, enemies are red, yourself are white
+	- World: Unit colors same as player color
+- `2` aka "Mode 3":
+    - Minimap: Allies are teal, enemies are red, yourself are white
+	- World: Allies are teal, enemies are red, own units are blue
+
+@note See: `SetAllyColorFilterState`
+
+@note This setting affects how a unit's "Art - Team Color" (WE name) is displayed.
+If the models you use rely on this color to match player color,
+you can choose to force state=0 with `SetAllyColorFilterState`.
+
+@async
+*/
 native GetAllyColorFilterState      takes nothing returns integer
 
+
+/**
+Sets the player color display mode.
+
+@note This is a player setting. Do not change it without a reason.
+
+@bug You can set other states than 0-2, but they'll still display like state 0.
+
+@note See: `GetAllyColorFilterState`
+
+@param state new state (only 0, 1, 2 are valid).
+See `GetAllyColorFilterState` for a description.
+*/
 native SetAllyColorFilterState      takes integer state returns nothing
 
+
+/**
+Returns `true` if the local player has enabled the display of creep camps on the minimap.
+
+@note See: `SetCreepCampFilterState`, `GetAllyColorFilterState`
+
+@async
+*/
 native GetCreepCampFilterState      takes nothing returns boolean
 
+/**
+Toggles minimap creep display.
+
+The creep camps are shown as green/orange/red circles by default and there's a button
+next to the minimap to toggle it while playing (hotkey: Alt+R).
+
+@note See: `GetCreepCampFilterState`, `SetAllyColorFilterState`
+
+@param state `true` to highlight camps, `false` to hide
+*/
 native SetCreepCampFilterState      takes boolean state returns nothing
 
 native EnableMinimapFilterButtons   takes boolean enableAlly, boolean enableCreep returns nothing
 
+/**
+Sets the functionality of the rectangular unit multi-select.
+
+"Drag Select" allows you to hold left-click to select multiple units by
+expanding the green selection rectangle over the units.
+
+@param state
+If `true`, default game behavior (drag select is enabled).
+
+If `false`, drag select is disabled. Only the first unit in the rectangle will
+be selected (closest to the point where you first clicked the mouse).
+
+Note that you can still select multiple units with Shift+Click even if drag
+select is disabled.
+
+@param ui
+If `true`, render the visual indicator that shows the green rectangular selection area (default).
+Units, that are not yet selected but are inside the rectangle,
+have a semi-transparent green circle around them.
+
+If `false`, the green rectangle is not rendered.
+This has no effect on `state`, Drag Select can still work without the visual indicator.
+*/
 native EnableDragSelect             takes boolean state, boolean ui returns nothing
 
+
+/**
+Sets the functionality when you hover over a unit with your cursor.
+
+@param state unknown
+@param ui
+If `true`, show semi-transparent green circle around the unit and the health bar etc.
+
+If `false`, the green circle and the health bar is not shown.
+The cursor still blinks green/yellow/red like when you hover over a unit.
+The color depends on whether the unit is your own/ally/enemy.
+*/
 native EnablePreSelect              takes boolean state, boolean ui returns nothing
 
+
+/**
+Controls whether you can de/select any units and the green visual indicator.
+
+@note
+You can use `SelectUnit` and other functions to select the units for a player,
+even when `state` is set to `false`.
+
+The player cannot manually deselect any units they have control over (after `SelectUnit`).
+
+@param state
+If `true`, you can de/select units (default).
+
+If `false`, deselects any currently selected units and disables your ability
+to select any unit. Mouse clicks and group binds ("CTRL+1" then press "1")
+don't work any more.
+Drag select will not allow you to select too.
+
+@param ui
+If `true`, show the green selection indicator around selected units (default).
+
+If `false`, no visual indicator is shown.
+*/
 native EnableSelect                 takes boolean state, boolean ui returns nothing
 
 //============================================================================
@@ -272,6 +492,15 @@ native EnableSelect                 takes boolean state, boolean ui returns noth
 //============================================================================
 
 /**
+
+@bug (v1.32.10, Lua)
+Enabling this mode without cinematic mode produces no visible differences. (TODO)
+
+However, it shifts the rendered view towards north (without changing the
+camera position) until disabled again.
+
+See [test code](https://github.com/Luashine/wc3-test-maps/blob/master/BlzHideCinematicPanels.md)
+
 @patch 1.32
 */
 native BlzHideCinematicPanels                     takes boolean enable returns nothing
@@ -283,21 +512,38 @@ native SetPortraitLight             takes string portraitDNCFile returns nothing
 
 
 /**
+Toggles the rendering of terrain.
+
+@param show `true` to render terrain, `false` no terrain (black background by default)
+
+@note See: `BlzShowSkyBox`
+
 @patch 1.32
 */
 native BlzShowTerrain                              takes boolean show returns nothing
 
 /**
+
+@note See: `BlzShowTerrain`
+
 @patch 1.32
 */
 native BlzShowSkyBox                               takes boolean show returns nothing
 
 /**
+Does nothing (v1.32.10 without Battle.net App running), no files are created.
+
+@note See: `BlzEndRecording`
+
 @patch 1.32
 */
 native BlzStartRecording                           takes integer fps returns nothing
 
 /**
+Does nothing (v1.32.10 without Battle.net App running), no files are created.
+
+@note See: `BlzStartRecording`
+
 @patch 1.32
 */
 native BlzEndRecording                             takes nothing returns nothing
