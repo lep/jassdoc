@@ -66,11 +66,16 @@ and is seen in `TransmissionFromUnitWithNameBJ`.
 @note The size of the indicator depends on a widget's selection size. To modify
 this, you must edit the object editor field of the widget listed as "Art - Selection Size".
 
+The indicator is shown below the unit selection.
+If the unit is currently selected, the blinking indicator will be practically
+hidden by the selection circle.
+
 @param whichWidget The widget the indicator will be applied to.
-@param red An integer from 0-255 determining the amount of red color in the indicator.
-@param green An integer from 0-255 determining the amount of green color in the indicator.
-@param blue An integer from 0-255 determining the amount of blue color in the indicator.
-@param alpha An integer from 0-255 determining the transparency of the indicator. A value of 0 is complete transparency while a value of 255 is complete opacity.
+@param red 0-255 red color (value mod 256)
+@param green 0-255 green color (value mod 256)
+@param blue 0-255 blue color (value mod 256)
+@param alpha 0-255 opacity (value mod 256). Determining the transparency
+of the indicator. `0` is total transparency, `255` is total opacity.
 */
 native AddIndicator                 takes widget whichWidget, integer red, integer green, integer blue, integer alpha returns nothing
 

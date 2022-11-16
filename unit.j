@@ -239,10 +239,10 @@ The vertex color changes how the model is rendered. For example, setting all r,g
 To imagine the final result of changing vertex colors, it is helpful to think of individual RGB layers in a color image, if you disable the Red channel, only Green & Blue channels will be shown.
 
 @param whichUnit The unit to modify.
-@param red An integer from 0-255 determining the amount of red color.
-@param green An integer from 0-255 determining the amount of green color.
-@param blue An integer from 0-255 determining the amount of blue color.
-@param alpha An integer from 0-255 determining the opacity. A value of 255 is complete opacity (fully visible). A value of 0 is complete transparency; the model will be invisible, but you'll still see the shadow, HP bar etc.
+@param red visibility of red channel (clamped to 0-255)
+@param green visibility of green channel (clamped to 0-255)
+@param blue visibility of blue channel (clamped to 0-255)
+@param alpha opacity (clamped to 0-255). A value of 255 is total opacity (fully visible). A value of 0 is total transparency; the model will be invisible, but you'll still see the shadow, HP bar etc.
 
 @note Not to be confused with `SetUnitColor` which changes a unit's player accent color.
 */
