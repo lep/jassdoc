@@ -72,7 +72,7 @@ this, you must edit the object editor field of the widget listed as "Art - Selec
 
 The indicator is shown below the unit selection.
 If the unit is currently selected, the blinking indicator will be practically
-hidden by the selection circle.
+hidden by the selection circle. For more see `SetImageType` description.
 
 @note See: `UnitAddIndicator` (functionally equivalent to this widget version)
 
