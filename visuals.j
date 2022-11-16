@@ -261,10 +261,68 @@ native SetCreepCampFilterState      takes boolean state returns nothing
 
 native EnableMinimapFilterButtons   takes boolean enableAlly, boolean enableCreep returns nothing
 
+/**
+Sets the functionality of the rectangular unit multi-select.
+
+"Drag Select" allows you to hold left-click to select multiple units by
+expanding the green selection rectangle over the units.
+
+@param state
+If `true`, default game behavior (drag select is enabled).
+
+If `false`, drag select is disabled. Only the first unit in the rectangle will
+be selected (closest to the point where you first clicked the mouse).
+
+Note that you can still select multiple units with Shift+Click even if drag
+select is disabled.
+
+@param ui
+If `true`, render the visual indicator that shows the green rectangular selection area (default).
+Units, that are not yet selected but are inside the rectangle,
+have a semi-transparent green circle around them.
+
+If `false`, the green rectangle is not rendered.
+This has no effect on `state`, Drag Select can still work without the visual indicator.
+*/
 native EnableDragSelect             takes boolean state, boolean ui returns nothing
 
+
+/**
+Sets the functionality when you hover over a unit with your cursor.
+
+@param state unknown
+@param ui
+If `true`, show semi-transparent green circle around the unit and the health bar etc.
+
+If `false`, the green circle and the health bar is not shown.
+The cursor still blinks green/yellow/red like when you hover over a unit.
+The color depends on whether the unit is your own/ally/enemy.
+*/
 native EnablePreSelect              takes boolean state, boolean ui returns nothing
 
+
+/**
+Controls whether you can de/select any units and the green visual indicator.
+
+@note
+You can use `SelectUnit` and other functions to select the units for a player,
+even when `state` is set to `false`.
+
+The player cannot manually deselect any units they have control over (after `SelectUnit`).
+
+@param state
+If `true`, you can de/select units (default).
+
+If `false`, deselects any currently selected units and disables your ability
+to select any unit. Mouse clicks and group binds ("CTRL+1" then press "1")
+don't work any more.
+Drag select will not allow you to select too.
+
+@param ui
+If `true`, show the green selection indicator around selected units (default).
+
+If `false`, no visual indicator is shown.
+*/
 native EnableSelect                 takes boolean state, boolean ui returns nothing
 
 //============================================================================
@@ -272,6 +330,15 @@ native EnableSelect                 takes boolean state, boolean ui returns noth
 //============================================================================
 
 /**
+
+@bug (v1.32.10, Lua)
+Enabling this mode without cinematic mode produces no visible differences. (TODO)
+
+However, it shifts the rendered view towards north (without changing the
+camera position) until disabled again.
+
+See [test code](https://github.com/Luashine/wc3-test-maps/blob/master/BlzHideCinematicPanels.md)
+
 @patch 1.32
 */
 native BlzHideCinematicPanels                     takes boolean enable returns nothing
@@ -283,21 +350,38 @@ native SetPortraitLight             takes string portraitDNCFile returns nothing
 
 
 /**
+Toggles the rendering of terrain.
+
+@param show `true` to render terrain, `false` no terrain (black background by default)
+
+@note See: `BlzShowSkyBox`
+
 @patch 1.32
 */
 native BlzShowTerrain                              takes boolean show returns nothing
 
 /**
+
+@note See: `BlzShowTerrain`
+
 @patch 1.32
 */
 native BlzShowSkyBox                               takes boolean show returns nothing
 
 /**
+Does nothing (v1.32.10 without Battle.net App running), no files are created.
+
+@note See: `BlzEndRecording`
+
 @patch 1.32
 */
 native BlzStartRecording                           takes integer fps returns nothing
 
 /**
+Does nothing (v1.32.10 without Battle.net App running), no files are created.
+
+@note See: `BlzStartRecording`
+
 @patch 1.32
 */
 native BlzEndRecording                             takes nothing returns nothing
