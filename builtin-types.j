@@ -16,9 +16,21 @@ type boolean extends void
 /**
 A 32-bit IEEE-754 float type.
 
-<http://www.hiveworkshop.com/forums/lab-715/real-talk-floats-warcraft-3-a-270579/>
+@note The equality `==` and inequality `!=` operators are different for type `real.`
 
-<http://www.hiveworkshop.com/forums/lab-715/100-accurate-pretty-fast-realtoindex-back-247170/>
+`0.0 == 0.0009` is true, effectively the precision is set to `0.001` (epsilon)
+in the Jass VM. As a result, `0.0 == 0.001` is false.
+
+However, the `!=` operator does not have its accuracy limited, so
+`0.0 != 0.0009` will return true too. The inequality operator can be used to
+compare reals of arbitrary precision (as long they are actually different in
+binary).
+
+@note In-depth analysis of floating-point behavior of `real` in Jass:
+[real Talk - Floats in Warcraft 3](https://www.hiveworkshop.com/threads/real-talk-floats-in-warcraft-3.270579/)
+
+@note (2014) Typecast explot conversion between real and integer:
+[100% accurate and pretty fast realToIndex and back](https://www.hiveworkshop.com/threads/100-accurate-and-pretty-fast-realtoindex-and-back.247170/)
 */
 type real extends void
 
