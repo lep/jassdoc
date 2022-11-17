@@ -52,6 +52,9 @@ native SetTimeOfDayScale            takes real r returns nothing
 
 native GetTimeOfDayScale            takes nothing returns real
 
+/**
+@bug If fadeDuration is not greater than 0 the unit portrait always appear empty.
+*/
 native ShowInterface                takes boolean flag, real fadeDuration returns nothing
 
 native PauseGame                    takes boolean flag returns nothing
