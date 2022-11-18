@@ -53,7 +53,7 @@ native SetTimeOfDayScale            takes real r returns nothing
 native GetTimeOfDayScale            takes nothing returns real
 
 /**
-@bug If fadeDuration is not greater than 0 the unit portrait always appear empty.
+@bug If fadeDuration equal 0 the unit portrait always appears invisible.
 */
 native ShowInterface                takes boolean flag, real fadeDuration returns nothing
 
