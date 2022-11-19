@@ -112,6 +112,8 @@ Adds a ping on the minimap. In contrast to `PingMinimap`, there are some additio
 @note There can only be 16 pings at a time. When a new one is created but there are already 16,
 the oldest will be deleted in favor of the new one. This includes user pings: user pings can be deleted by this function
 and user pings can overwrite scripted pings.
+
+@note Pings with red == 255 && green == 0 && blue == 0 (mod 256) have special semantics, appearing as "attack pings".
 */
 native PingMinimapEx                takes real x, real y, real duration, integer red, integer green, integer blue, boolean extraEffects returns nothing
 
