@@ -86,11 +86,18 @@ of the indicator. `0` is total transparency, `255` is total opacity.
 native AddIndicator                 takes widget whichWidget, integer red, integer green, integer blue, integer alpha returns nothing
 
 /**
-Adds a ping on the minimap.
+Pings a spot on the minimap.
 
 @param x horizontal world coordinate of the ping
 @param y vertical world coordinate of the ping
 @param duration duration of the ping in seconds
+
+@note This ping has the semantics of a "simple" ping (GUI/blizzard.j terminology).
+
+@note As a "simple" ping, pings created with this function have a default shape of a rotating circle with 4 arrows
+pointing inwards and periodically emitting a growing circle that fades out like a pulse. There is also a dot in the center.
+
+@note This ping is neon green on default.
 
 @note There can only be 16 pings at a time. When a new one is created but there are already 16,
 the oldest will be deleted in favor of the new one. This includes user pings: user pings can be deleted by this function
@@ -99,7 +106,7 @@ and user pings can overwrite scripted pings.
 native PingMinimap                  takes real x, real y, real duration returns nothing
 
 /**
-Adds a ping on the minimap. In contrast to `PingMinimap`, there are some additional options.
+Pings a spot on the minimap.
 
 @param x horizontal world coordinate of the ping
 @param y vertical world coordinate of the ping
@@ -107,13 +114,22 @@ Adds a ping on the minimap. In contrast to `PingMinimap`, there are some additio
 @param red 0-255 red color (value mod 256)
 @param green 0-255 green color (value mod 256)
 @param blue 0-255 blue color (value mod 256)
-@param extraEffects When true, the ping will have the appearance of a user ping.
+@param extraEffects When true, the ping will have the appearance of a "flashy" ping. Otherwise it will be a "simple" ping (see notes).
+
+@note "Simple" pings (GUI/blizzard.j terminology) have a default shape of a rotating circle with 4 arrows
+pointing inwards and periodically emitting a growing circle that fades out like a pulse. There is also a dot in the center.
+
+@note "Flashy" pings (GUI/blizzard.j terminology) have the same shape as user-generated pings. On default, they first feature an exclamation mark
+and a large circle growing and fading out before going into a stable state where smaller circles are periodically emitted growing and fading out
+like a pulse and there is a static exclamation mark in the center.
+
+@note Pings with red == 255 && green == 0 && blue == 0 (mod 256) have a special shape, appearing as "attack" or "warning" pings (GUI/blizzard.j terminology).
+On default, if extraEffects is false, it is similar to "simple" pings but the rotating arrows are flying in from outside before getting attached to the circle.
+On default, if extraEffects is true, it additionally briefly shows an exclamation mark when the ping vanishes (bug?).
 
 @note There can only be 16 pings at a time. When a new one is created but there are already 16,
 the oldest will be deleted in favor of the new one. This includes user pings: user pings can be deleted by this function
 and user pings can overwrite scripted pings.
-
-@note Pings with red == 255 && green == 0 && blue == 0 (mod 256) have special semantics, appearing as "attack pings".
 */
 native PingMinimapEx                takes real x, real y, real duration, integer red, integer green, integer blue, boolean extraEffects returns nothing
 
