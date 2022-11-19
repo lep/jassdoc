@@ -85,8 +85,34 @@ of the indicator. `0` is total transparency, `255` is total opacity.
 */
 native AddIndicator                 takes widget whichWidget, integer red, integer green, integer blue, integer alpha returns nothing
 
+/**
+Adds a ping on the minimap.
+
+@param x horizontal world coordinate of the ping
+@param y vertical world coordinate of the ping
+@param duration duration of the ping in seconds
+
+@note There can only be 16 pings at a time. When a new one is created but there are already 16,
+the oldest will be deleted in favor of the new one. This includes user pings: user pings can be deleted by this function
+and user pings can overwrite scripted pings.
+*/
 native PingMinimap                  takes real x, real y, real duration returns nothing
 
+/**
+Adds a ping on the minimap. In contrast to `PingMinimap`, there are some additional options.
+
+@param x horizontal world coordinate of the ping
+@param y vertical world coordinate of the ping
+@param duration duration of the ping in seconds
+@param red 0-255 red color (value mod 256)
+@param green 0-255 green color (value mod 256)
+@param blue 0-255 blue color (value mod 256)
+@param extraEffects When true, the ping will have the appearance of a user ping.
+
+@note There can only be 16 pings at a time. When a new one is created but there are already 16,
+the oldest will be deleted in favor of the new one. This includes user pings: user pings can be deleted by this function
+and user pings can overwrite scripted pings.
+*/
 native PingMinimapEx                takes real x, real y, real duration, integer red, integer green, integer blue, boolean extraEffects returns nothing
 
 
