@@ -1,11 +1,7 @@
 // Visual API
 
 /**
-<<<<<<< HEAD
-@bug Does nothing.
-=======
-@bug Does nothing (unknown, unused)
->>>>>>> cf5d718 (visuals.j: describe selection, minimap modes, text natives etc.)
+@bug Does nothing (unknown, unused).
 */
 native SetTerrainFog                takes real a, real b, real c, real d, real e returns nothing
 
