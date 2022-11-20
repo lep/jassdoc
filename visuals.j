@@ -22,6 +22,8 @@ Displays a trigger message to player.
 The text line fades out in the end.
 
 @bug Changing x or y moves the entire text box, including previously displayed lines.
+An example is shown at 
+[Luashine/DisplayTextToPlayer-position](https://github.com/Luashine/wc3-test-maps/blob/master/DisplayTextToPlayer-position/DisplayTextToPlayer-position.md)
 
 @note The text lines are bottom-left aligned: text continues to the right and new lines
 continue upwards.
