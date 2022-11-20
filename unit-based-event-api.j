@@ -2,7 +2,7 @@
 
 /**
 Returns handle to unit which triggered the most recent event when called from
-within a trigger action function...returns null handle when used incorrectly
+within a trigger action function. Returns `null` handle when used incorrectly.
 
 @note Can be used in `TriggerRegisterDeathEvent` if the dead widget is actually
 a unit.
@@ -46,7 +46,7 @@ In 1.31 PTR there’s currently 3 new damage events:
         // This seems to work fine anyway:
         call TriggerRegisterAnyUnitEventBJ(gg_trg_a, EVENT_PLAYER_UNIT_DAMAGING)
 
-3. `EVENT_UNIT_DAMAGING` - triggers before any armor, armor type and other resistances. Event for a specific unit like 1;
+3. `EVENT_UNIT_DAMAGING` - triggers before any armor, armor type and other resistances. Event for a specific unit like 1.
 4. `EVENT_PLAYER_UNIT_DAMAGING` - triggers before any armor, armor type and other resistances. Useful to modify either damage amount, attack type or damage type before any reductions done by game.
 
 1 and 2 - modify the damage after any reduction.
@@ -55,7 +55,7 @@ In 1.31 PTR there’s currently 3 new damage events:
 If set to <=0 during 3 or 4, then 1 or 2 will never fire.
 Misses don’t trigger any damage events.
 Set to 0.00 to completely block the damage.
-Set to negative value to heal the target instead of damaging
+Set to negative value to heal the target instead of damaging.
 
 @note Tip: calling `GetEventDamage` after you set it with this function will return the value you set.
 @note If you’ll call `UnitDamageTarget` from within a trigger, which reacts to a damage event or triggered by one, it will cause infinite loop and game will crash, so you should handle such scenarios with additional logic.
@@ -68,7 +68,7 @@ native BlzSetEventDamage                           takes real damage returns not
 /**
 The target unit of the damage event.
 If damage is AoE, your trigger will run separately for each target without known issues.
-This returns the same result as `GetTriggerUnit`
+This returns the same result as `GetTriggerUnit`.
 
 @event EVENT_UNIT_DAMAGED
 @patch 1.31
@@ -77,7 +77,7 @@ native BlzGetEventDamageTarget 	                   takes nothing returns unit
 
 /**
 Returns attacktype of the damage being taken.
-Spell-damage is `ATTACK_TYPE_NORMAL`
+Spell-damage is `ATTACK_TYPE_NORMAL`.
 
 @event EVENT_UNIT_DAMAGED
 @patch 1.31
@@ -86,7 +86,7 @@ native BlzGetEventAttackType  	                   takes nothing returns attackty
 
 /**
 Returns damagetype of the damage being taken.
-Regular attack is `DAMAGE_TYPE_NORMAL`
+Regular attack is `DAMAGE_TYPE_NORMAL`.
 
 @event EVENT_UNIT_DAMAGED
 @patch 1.31

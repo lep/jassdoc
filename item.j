@@ -7,10 +7,10 @@ Creates an item object at the specified coordinates ( x , y ).
 The rawcode of the item.
 
 @param x
-The x-coordinate of the item
+The x-coordinate of the item.
 
 @param y
-The y-coordinate of the item
+The y-coordinate of the item.
 */
 native CreateItem takes integer itemid, real x, real y returns item
 
@@ -85,7 +85,7 @@ native SetItemUserData takes item whichItem, integer data returns nothing
 Change(set) the item name at runtime.
 
 @patch 1.29
-@bug Doesn't work
+@bug Doesn't work.
 */
 native BlzSetItemName                              takes item whichItem, string name returns nothing
 
@@ -109,7 +109,7 @@ native BlzGetItemDescription                       takes item whichItem returns 
 Change(set) the item tooltip at runtime.
 
 @patch 1.29
-@bug Doesn't work
+@bug Doesn't work.
 */
 native BlzSetItemTooltip                           takes item whichItem, string tooltip returns nothing
 

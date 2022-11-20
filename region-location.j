@@ -22,7 +22,7 @@ X for the maximum point (maxX, maxY).
 of `GetWorldBounds`. The maxX and maxY will be smaller by `16.0` than that of
 the world bounds.
 
-@note See: `RectFromLoc`, `RemoveRect`, `GetWorldBounds`
+@note See: `RectFromLoc`, `RemoveRect`, `GetWorldBounds`.
 
 */
 native Rect                     takes real minx, real miny, real maxx, real maxy returns rect
@@ -38,7 +38,7 @@ The rectangle size and coordinates are limited to valid map coordinates, see
 of `GetWorldBounds`. The maxX and maxY will be smaller by `16.0` than that of
 the world bounds.
 
-@note See: `Rect`, `RemoveRect`, `GetWorldBounds`
+@note See: `Rect`, `RemoveRect`, `GetWorldBounds`.
 
 */
 native RectFromLoc              takes location min, location max returns rect
@@ -61,7 +61,7 @@ The rectangle size and coordinates are limited to valid map coordinates, see
 of `GetWorldBounds`. The maxX and maxY will be smaller by `16.0` than that of
 the world bounds.
 
-@note See: `Rect`, `SetRectFromLoc`, `MoveRectTo`, `MoveRectToLoc`
+@note See: `Rect`, `SetRectFromLoc`, `MoveRectTo`, `MoveRectToLoc`.
 
 */
 native SetRect                  takes rect whichRect, real minx, real miny, real maxx, real maxy returns nothing
@@ -76,7 +76,7 @@ Does nothing if either location is null or invalid.
 of `GetWorldBounds`. The maxX and maxY will be smaller by `16.0` than that of
 the world bounds.
 
-@note See: `Rect`, `SetRect`, `MoveRectTo`, `MoveRectToLoc`
+@note See: `Rect`, `SetRect`, `MoveRectTo`, `MoveRectToLoc`.
 
 */
 native SetRectFromLoc           takes rect whichRect, location min, location max returns nothing
@@ -88,7 +88,7 @@ specified point. Thus it moves the rectangle to a new position.
 @bug This can be used to move the rectangle outside of the map bounds, bypassing
 the limiting checks.
 
-@note See: `Rect`, `SetRect`, `SetRectFromLoc`, `MoveRectToLoc`
+@note See: `Rect`, `SetRect`, `SetRectFromLoc`, `MoveRectToLoc`.
 
 */
 native MoveRectTo               takes rect whichRect, real newCenterX, real newCenterY returns nothing
@@ -102,7 +102,7 @@ Does nothing if either location is null or invalid.
 @bug This can be used to move the rectangle outside of the map bounds, bypassing
 the limiting checks.
 
-@note See: `Rect`, `SetRect`, `SetRectFromLoc`, `MoveRectTo`
+@note See: `Rect`, `SetRect`, `SetRectFromLoc`, `MoveRectTo`.
 
 */
 native MoveRectToLoc            takes rect whichRect, location newCenterLoc returns nothing
@@ -212,7 +212,7 @@ unplayable borders, in world coordinates.
 Since this creates a new rectangle on each call, the rectangle object must be
 destroyed manually by calling `RemoveRect`.
 
-@note See: `Rect`, `RemoveRect`
+@note See: `Rect`, `RemoveRect`.
 
 */
 native GetWorldBounds           takes nothing returns rect

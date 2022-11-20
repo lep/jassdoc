@@ -48,7 +48,7 @@ native          ForceCampaignSelectScreen takes nothing returns nothing
 - Shorter file names for savegames.
 - Probably no dots in savegames or campaign names.
 
-For more info see <http://www.hiveworkshop.com/threads/map-transition-does-not-work-when-loading-a-custom-savegame.286927/>
+For more info see <http://www.hiveworkshop.com/threads/map-transition-does-not-work-when-loading-a-custom-savegame.286927/>.
 */
 native          LoadGame            takes string saveFileName, boolean doScoreScreen returns nothing
 

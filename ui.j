@@ -1,24 +1,24 @@
 
 
 /**
-Controls selection settings globally: enables/disables selection of units, and visibility of selection circles
+Controls selection settings globally: enables/disables selection of units, and visibility of selection circles.
 
-@param enableSelection true to enable, false to disable selection
-@param enableSelectionCircle true to show, false to hide selection circles on units and doodads
+@param enableSelection true to enable, false to disable selection.
+@param enableSelectionCircle true to show, false to hide selection circles on units and doodads.
 
 @patch 1.31
 */
 native BlzEnableSelections                         takes boolean enableSelection, boolean enableSelectionCircle returns nothing
 
 /**
-Returns whether unit selection is enabled (a global setting, see `BlzEnableSelections`)
+Returns whether unit selection is enabled (a global setting, see `BlzEnableSelections`).
 
 @patch 1.31
 */
 native BlzIsSelectionEnabled                       takes nothing returns boolean
 
 /**
-Returns whether unit selection circles are shown (a global setting, see `BlzEnableSelections`)
+Returns whether unit selection circles are shown (a global setting, see `BlzEnableSelections`).
 
 @patch 1.31
 */
@@ -82,7 +82,7 @@ Here is a basic example that creates a custom timerdialog window:
 @note This is up for edition, this native is lacking a more in-depth explanation. For example a list of all of the originframetypes, and their possible indexes.
 
 @patch 1.31
-@param index to high values will return the frame from the last valid Index
+@param index to high values will return the frame from the last valid Index.
 */
 native BlzGetOriginFrame                           takes originframetype frameType, integer index returns framehandle
 
@@ -95,10 +95,10 @@ native BlzEnableUIAutoPosition                     takes boolean enable returns 
 
 /**
 Hides/Shows most of the default in-game UI.
-Unaffected: Mouse, Command Buttons, Chat, Messages, TimerDialog, Multiboard, Leaderboard and ConsoleUIBackdrop
+Unaffected: Mouse, Command Buttons, Chat, Messages, TimerDialog, Multiboard, Leaderboard and ConsoleUIBackdrop.
 
 
-(De)Activades some auto-repositioning of default frames (see: `BlzEnableUIAutoPosition`)
+(De)Activades some auto-repositioning of default frames (see: `BlzEnableUIAutoPosition`).
 
 @patch 1.31
 */
@@ -106,9 +106,9 @@ native BlzHideOriginFrames                         takes boolean enable returns 
 
 /**
 Loads in a TOCFile, to add/define Frame-Blueprints or Localized Strings
-A TOC file contains a list, Each line is a path to a fdf (not case sensitve)
+A TOC file contains a list, Each line is a path to a fdf (not case sensitve).
 
-@bug The TOC needs to end with one or two empty lines
+@bug The TOC needs to end with one or two empty lines.
 
 @patch 1.31
 */
@@ -195,14 +195,14 @@ Example:
     BlzFrameSetAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_WORLD_FRAME, 0), BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
 
 @patch 1.31
-@param frame the frame moved/resized
+@param frame the frame moved/resized.
 */
 native BlzFrameSetAllPoints                        takes framehandle frame, framehandle relative returns nothing
 
 /**
 Sets visibility of a frame and its children.
 
-@param visible true is visible, false is invisible
+@param visible true is visible, false is invisible.
 
 @patch 1.31
 */
@@ -211,7 +211,7 @@ native BlzFrameSetVisible                          takes framehandle frame, bool
 /**
 Returns visibility status of frame.
 
-@param frame Target frame
+@param frame Target frame.
 
 @async
 @patch 1.31
@@ -225,9 +225,9 @@ Requires a string for the frame name that you want to retrieve (get), and an int
 Read from the internal Frame-Storage.
 The first time a Frame enters the map's script it takes a handleId.
 
-Example: `BlzGetFrameByName("SimpleHeroLevelBar", 0)`
+Example: `BlzGetFrameByName("SimpleHeroLevelBar", 0)`.
 
-@note Refer to fdf files for frame names
+@note Refer to fdf files for frame names.
 
 @patch 1.31
 */
@@ -239,14 +239,14 @@ Returns the string representation of frame name.
 Inherited Frames lose their Name.
 SimpleFrames return an empty String.
 
-@param frame A handle to frame
+@param frame A handle to frame.
 
 @patch 1.31
 */
 native BlzFrameGetName                             takes framehandle frame returns string
 
 /**
-Ignores visibility. Triggers `FRAMEEVENT_CONTROL_CLICK`
+Ignores visibility. Triggers `FRAMEEVENT_CONTROL_CLICK`.
 
 @patch 1.31
 */
@@ -307,7 +307,7 @@ native BlzFrameSetFocus                            takes framehandle frame, bool
 native BlzFrameSetModel                            takes framehandle frame, string modelFile, integer cameraIndex returns nothing
 
 /**
-Turns on/off Interactivity/Events of frame
+Turns on/off Interactivity/Events of frame.
 A disabled frame is transparent to the mouse (can click on things behind it) and can have a different color/texture/frame than in enabled state.
 The frame's Tooltip is still shown on hover.
 (false) Removes KeyboardFocus.
@@ -325,7 +325,7 @@ native BlzFrameGetEnable                           takes framehandle frame retur
 /**
 Affects child-Frames, when they don't have an own Alpha.
 
-@param alpha 0 to 255
+@param alpha 0 to 255.
 @patch 1.31
 */
 native BlzFrameSetAlpha                            takes framehandle frame, integer alpha returns nothing
@@ -346,8 +346,8 @@ Overwrittes some fdf setup.
 
 @patch 1.31
 
-@param flag texture fill setting: 0 to stretch, 1 to tile (BACKDROP)
-@param blend use transparency
+@param flag texture fill setting: 0 to stretch, 1 to tile (BACKDROP).
+@param blend Use transparency.
 
 */
 native BlzFrameSetTexture                          takes framehandle frame, string texFile, integer flag, boolean blend returns nothing
@@ -365,7 +365,7 @@ tooltip is limited to 4:3, but not it's children.
 SimpleFrame tooltips are not hidden with this call.
 frame and tooltip have to be from the same Family (Frames/SimpleFrames).
 tooltip can only serve one frame.
-It's not possible to undo this
+It's not possible to undo this.
 
 @bug Crashes the game, on hover, when done twice (same pair).
 @bug Frames should not be used as tooltips for simple Frames (Crash on PTR 1.31).
@@ -377,7 +377,7 @@ native BlzFrameSetTooltip                          takes framehandle frame, fram
 /**
 The mouse cursor is forced into the frame and can not leave it. New cages (true) will overwrite old ones. Some frames can not be used to imprison the mouse.
 
-@param enable Enable mouse cage
+@param enable Enable mouse cage.
 
 @patch 1.31
 */
@@ -385,7 +385,7 @@ native BlzFrameCageMouse                           takes framehandle frame, bool
 
 /**
 Sets the current Frame Value. Only for FrameType that use this feature:
-POPUPMENU, SLIDER, SIMPLESTATUSBAR, STATUSBAR
+POPUPMENU, SLIDER, SIMPLESTATUSBAR, STATUSBAR.
 
 @patch 1.31
 */
@@ -416,9 +416,9 @@ native BlzFrameSetStepSize                         takes framehandle frame, real
 native BlzFrameSetSize                             takes framehandle frame, real width, real height returns nothing
 
 /**
-SimpleFrames only
+SimpleFrames only.
 @patch 1.31
-@param color Four byte integer of the form 0xaarrggbb. You can also use
+@param color Four byte integer of the form 0xaarrggbb. You can also use `BlzConvertColor` to create such an integer.
 */
 native BlzFrameSetVertexColor                      takes framehandle frame, integer color returns nothing
 
@@ -455,7 +455,7 @@ native BlzFrameGetHeight                           takes framehandle frame retur
 native BlzFrameGetWidth                            takes framehandle frame returns real
 
 /**
-Only works for String (SimpleFrames)
+Only works for String (SimpleFrames).
 @patch 1.31
 */
 native BlzFrameSetFont                             takes framehandle frame, string fileName, real height, integer flags returns nothing
@@ -491,7 +491,7 @@ native BlzTriggerRegisterFrameEvent                takes trigger whichTrigger, f
 native BlzGetTriggerFrame                          takes nothing returns framehandle
 
 /**
-Ignores String/Texture
+Ignores String/Texture.
 
 @patch 1.32.6
 */
@@ -534,16 +534,16 @@ Limited to something like ~255 bytes.
 native BlzGetTriggerFrameText                      takes nothing returns string
 
 /**
-Sets cursor visibility
+Sets cursor visibility.
 
-@param enable true to show, false to hide cursor
+@param enable true to show, false to hide cursor.
 
 @patch 1.31
 */
 native BlzEnableCursor                             takes boolean enable returns nothing
 
 /**
-x & y are px upto the used resolution `BlzGetLocalClientWidth()` `BlzGetLocalClientHeight()`
+x & y are px upto the used resolution `BlzGetLocalClientWidth()` `BlzGetLocalClientHeight()`.
 
 @patch 1.31
 */
@@ -574,13 +574,13 @@ native BlzChangeMinimapTerrainTex                  takes string texFile returns 
 
 
 /**
-Create an event that listens to messages sent by player with prefix. (see: `BlzSendSyncData`)
+Create an event that listens to messages sent by player with prefix. (see: `BlzSendSyncData`).
 
 One can create a player SyncEvent for any prefix with `TriggerRegisterPlayerEvent(whichTrigger, whichPlayer, EVENT_PLAYER_SYNC_DATA)`.
 
 `GetTriggerPlayer()` is the message source.
 
-@param fromServer "should be false"
+@param fromServer "should be false".
 
 @patch 1.31
 */
@@ -645,7 +645,7 @@ Returns the key that was pressed during current event.
 
 **Example:** `if BlzGetTriggerPlayerKey() == OSKEY_F then ...`
 
-@note See: `BlzTriggerRegisterPlayerKeyEvent`
+@note See: `BlzTriggerRegisterPlayerKeyEvent`.
 
 @patch 1.31
 */
@@ -667,7 +667,7 @@ Returns the meta keys that were pressed (aka [modifier keys](https://en.wikipedi
 Meta keys can be pressed simultaneously (CTRL+SHIFT+W) in that case, you need to add the numbers or use bit OR/AND/XOR.
 CTRL+SHIFT = 2+1 = 3. CTRL+SHIFT+ALT = 2+1+4 = 7.
 
-@note See: `BlzTriggerRegisterPlayerKeyEvent`
+@note See: `BlzTriggerRegisterPlayerKeyEvent`.
 
 @patch 1.31
 */
@@ -696,7 +696,7 @@ Gets the height (pixels) of the Warcraft 3 window.
 native BlzGetLocalClientHeight                     takes nothing returns integer
 
 /**
-Returns the used warcraft 3 Lcid
+Returns the used warcraft 3 Lcid.
 
     //  English (US)            = 'enUS' 
     //  English (UK)            = 'enGB' 
@@ -736,7 +736,7 @@ Displays the message in chat as if it were sent by the specified player. The mes
 * 3: "Private"
 * 4+: Defaults to private too.
 
-@param message Text to show
+@param message Text to show.
 
 @patch 1.31
 */

@@ -6,7 +6,7 @@ Returns target's health points on succcess. Returns 0.0 if widget was removed or
 @note See: `SetWidgetLife`.
 See `widget` for an explanation how this applies to units, destructables, items.
 
-@param whichWidget target widget
+@param whichWidget target widget.
 */
 native GetWidgetLife takes widget whichWidget returns real
 
@@ -18,8 +18,8 @@ It is limited by target's maximum health points. A value of ≤0 kills the targe
 @note See: `GetWidgetLife`.
 See `widget` for an explanation how this applies to units, destructables, items.
 
-@param whichWidget target widget
-@param newLife set health points to this amount
+@param whichWidget target widget.
+@param newLife set health points to this amount.
 */
 native SetWidgetLife takes widget whichWidget, real newLife returns nothing
 
@@ -29,7 +29,7 @@ Returns X map coordinate of widget on success. Returns 0.0 if widget was removed
 @note See: `GetWidgetY`.
 See `widget` for an explanation how this applies to units, destructables, items.
 
-@param whichWidget target widget
+@param whichWidget target widget.
 */
 native GetWidgetX takes widget whichWidget returns real
 
@@ -39,7 +39,7 @@ Returns Y map coordinate of widget on success. Returns 0.0 if widget was removed
 @note See: `GetWidgetX`.
 See `widget` for an explanation how this applies to units, destructables, items.
 
-@param whichWidget target widget
+@param whichWidget target widget.
 */
 native GetWidgetY takes widget whichWidget returns real
 

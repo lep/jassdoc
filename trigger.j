@@ -15,7 +15,7 @@ native DestroyTrigger   takes trigger whichTrigger returns nothing
 /**
 Resets the evaluate and execution count of the given trigger back to zero.
 
-@note See: `GetTriggerEvalCount`, `GetTriggerExecCount`
+@note See: `GetTriggerEvalCount`, `GetTriggerExecCount`.
 */
 native ResetTrigger     takes trigger whichTrigger returns nothing
 
@@ -56,7 +56,7 @@ This returns the current unit in calls to the `GroupEnumUnits-`natives.
 constant native GetFilterUnit       takes nothing returns unit
 
 /**
-This returns the current unit in calls to the `ForGroup` native
+This returns the current unit in calls to the `ForGroup` native.
 */
 constant native GetEnumUnit         takes nothing returns unit
 
@@ -89,7 +89,7 @@ Returns the count of how often this trigger was evaluated.
 
 A trigger is evaluated each time it is called. A trigger is executed each time it is called and passes the condition. If the condition is not met, the execution count is not incremented.
 
-@note See: `ResetTrigger`, `GetTriggerExecCount`
+@note See: `ResetTrigger`, `GetTriggerExecCount`.
 */
 constant native GetTriggerEvalCount     takes trigger whichTrigger returns integer
 
@@ -98,7 +98,7 @@ Returns the count of how often this trigger was executed.
 
 A trigger is evaluated each time it is called. A trigger is executed each time it is called and passes the condition. If the condition is not met, the execution count is not incremented.
 
-@note See: `ResetTrigger`, `GetTriggerEvalCount`
+@note See: `ResetTrigger`, `GetTriggerEvalCount`.
 */
 constant native GetTriggerExecCount     takes trigger whichTrigger returns integer
 
@@ -213,7 +213,7 @@ will return `false`. Note that an empty string `""` would return `true`.
 `TriggerEvaluate` will return `false`.
 
 @note If you want to return false for a condition-function that returns
-string (for whatever reason) return `null` instead of `""`
+string (for whatever reason) return `null` instead of `""`.
 
 @note *All* functions added via `TriggerAddCondition` are run.
 There is no short-circuting. If you want short-circuting use `And` or `Or`.

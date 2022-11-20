@@ -15,8 +15,8 @@ Returns true if the unit was added, false if the unit is already in the group or
 
 Even if there's a null "hole" at index 0, the unit will still be added at the tail end.
 
-@param whichGroup Target group
-@param whichUnit Target unit
+@param whichGroup Target group.
+@param whichUnit Target unit.
 */
 native GroupAddUnit                         takes group whichGroup, unit whichUnit returns boolean
 
@@ -48,7 +48,7 @@ native GroupClear                           takes group whichGroup returns nothi
 Returns the size (length) of group.
 The size refers to game's internal representation of group data (array), group's last index is `size - 1`.
 
-@note See: `BlzGroupUnitAt`
+@note See: `BlzGroupUnitAt`.
 @patch 1.31
 */
 native BlzGroupGetSize                      takes group whichGroup returns integer
@@ -70,16 +70,16 @@ native GroupEnumUnitsOfType                 takes group whichGroup, string unitn
 native GroupEnumUnitsOfPlayer               takes group whichGroup, player whichPlayer, boolexpr filter returns nothing
 
 /**
-@bug Causes irregular behavior when used with large numbers
-@note *Probably* countLimit doesn't work similar to GroupEnumUnitsInRangeCounted. Instead see GroupEnumUnitsOfType
+@bug Causes irregular behavior when used with large numbers.
+@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsOfType`.
 */
 native GroupEnumUnitsOfTypeCounted          takes group whichGroup, string unitname, boolexpr filter, integer countLimit returns nothing
 
 native GroupEnumUnitsInRect                 takes group whichGroup, rect r, boolexpr filter returns nothing
 
 /**
-@bug Causes irregular behavior when used with large numbers
-@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsInRect`
+@bug Causes irregular behavior when used with large numbers.
+@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsInRect`.
 */
 native GroupEnumUnitsInRectCounted          takes group whichGroup, rect r, boolexpr filter, integer countLimit returns nothing
 
@@ -90,27 +90,27 @@ A null as filter means that every nearby unit is added to group.
 If the group has had units previously, it will be first cleared (old units will not be preserved).
 A group that has been destroyed will not be recreated.
 
-@param whichGroup Group to add units to
-@param x X map coordinate
-@param y Y map coordinate
-@param radius Radius in map units
-@param filter Filter function
+@param whichGroup Group to add units to.
+@param x X map coordinate.
+@param y Y map coordinate.
+@param radius Radius in map units.
+@param filter Filter function.
 
-@note See: `GroupEnumUnitsInRect`, `GroupEnumUnitsInRangeOfLoc`
+@note See: `GroupEnumUnitsInRect`, `GroupEnumUnitsInRangeOfLoc`.
 */
 native GroupEnumUnitsInRange                takes group whichGroup, real x, real y, real radius, boolexpr filter returns nothing
 
 native GroupEnumUnitsInRangeOfLoc           takes group whichGroup, location whichLocation, real radius, boolexpr filter returns nothing
 
 /**
-@bug Causes irregular behavior when used with large numbers
+@bug Causes irregular behavior when used with large numbers.
 @bug countLimit does not work, tested in 1.32.10.18067. Therefore behaves like `GroupEnumUnitsInRange` adding all units in range.
 */
 native GroupEnumUnitsInRangeCounted         takes group whichGroup, real x, real y, real radius, boolexpr filter, integer countLimit returns nothing
 
 /**
-@bug Causes irregular behavior when used with large numbers
-@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsInRangeOfLoc`
+@bug Causes irregular behavior when used with large numbers.
+@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsInRangeOfLoc`.
 */
 native GroupEnumUnitsInRangeOfLocCounted    takes group whichGroup, location whichLocation, real radius, boolexpr filter, integer countLimit returns nothing
 
@@ -139,7 +139,7 @@ native ForGroup                 takes group whichGroup, code callback returns no
 /**
 Returns the unit at the first position in group or null if that unit no longer exists.
 
-Equivalent to: `BlzGroupUnitAt(varGroup, 0)`
+Equivalent to: `BlzGroupUnitAt(varGroup, 0)`.
 
 @bug If the first unit of this group was removed from the game (RemoveUnit or decayed) then null be returned, regardless if there're valid units in group at further indeces. To iterate over all existing units of a group, use `ForGroup`/`ForGroupBJ`.
 You cannot remove such null "holes" from a group without destroying or clearing it (`DestroyGroup`/`GroupClear`).

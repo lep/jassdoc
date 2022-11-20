@@ -461,7 +461,7 @@ should fire the trigger. `false` will trigger if the `chatMessageToDetect` appea
 anywhere in the entered string.
 
 @note The callback event will not have the `EVENT_PLAYER_CHAT` eventid,
-instead `ConvertPlayerEvent(96)` which has no attached global in common.j
+instead `ConvertPlayerEvent(96)` which has no attached global in common.j.
 
 @event ConvertPlayerEvent(96)
 */
@@ -470,7 +470,7 @@ native TriggerRegisterPlayerChatEvent takes trigger whichTrigger, player whichPl
 
 /**
 Returns the actual string they typed in ( same as what you registered for
- if you required exact match )
+ if you required exact match ).
 
 @event ConvertPlayerEvent(96)
 
@@ -480,7 +480,7 @@ constant native GetEventPlayerChatString takes nothing returns string
 
 
 /**
-Returns the string that you registered for
+Returns the string that you registered for.
 
 @event ConvertPlayerEvent(96)
 

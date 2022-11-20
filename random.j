@@ -13,15 +13,15 @@ it will always return the same value, namely `INT_MIN` or `INT_MAX`.
 @note See <http://hiveworkshop.com/threads/random.286109#post-3073222> for an overview of the algorithm used.
 
 @param lowBound
-The inclusive lower bound of the random number returned
+The inclusive lower bound of the random number returned.
 
 @param highBound
-The inclusive higher bound of the random number returned
+The inclusive higher bound of the random number returned.
 
 @note **Desyncs!** The random number generator is a global, shared resource.
 Do not change its state in local blocks asynchronously.
 
-@note See: `GetRandomReal`, `SetRandomSeed`
+@note See: `GetRandomReal`, `SetRandomSeed`.
 */
 native GetRandomInt takes integer lowBound, integer highBound returns integer
 
@@ -45,7 +45,7 @@ Bounds may be negative, but must be lowBound <= highBound. When lowBound==highBo
 	testRReal(-42, 42) == "-4.0800933837890625"
 	testRReal(42, -42) == "79.9199066162109375"
 
-@note See: `GetRandomInt`, `SetRandomSeed`
+@note See: `GetRandomInt`, `SetRandomSeed`.
 */
 native GetRandomReal takes real lowBound, real highBound returns real
 
@@ -96,13 +96,13 @@ native ItemPoolRemoveItemType   takes itempool whichItemPool, integer itemId ret
 Draws a random itemid from the itempool and creates the item.
 
 @param whichItemPool
-The itempool to draw from
+The itempool to draw from.
 
 @param x
-The x-coordinate of the item
+The x-coordinate of the item.
 
 @param y
-The y-coordinate of the item
+The y-coordinate of the item.
 */
 native PlaceRandomItem          takes itempool whichItemPool, real x, real y returns item
 
@@ -171,7 +171,7 @@ Useful for testing or when you want a repeatable outcome. WorldEdit has an optio
 	
 @note **Desyncs!** The random number generator is a global, shared resource. Do not change its state in local blocks asynchronously.
 
-@note See: `GetRandomInt`, `GetRandomReal`
+@note See: `GetRandomInt`, `GetRandomReal`.
 
 @param seed New seed for the PRNG.
 */

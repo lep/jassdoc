@@ -3,8 +3,7 @@
 native CreateTimer          takes nothing returns timer
 
 /**
-@bug Destroying does not pause timer,
-so if call of its callback is scheduled,
+@bug Destroying does not pause timer, so if call of its callback is scheduled,
 then callback is called with `GetElapsedTimer` being `null`.
 */
 native DestroyTimer         takes timer whichTimer returns nothing
@@ -14,8 +13,8 @@ Starts a previously created timer that calls a function when timeout reaches 0.
 
 It is affected by gamespeed at any point of it execution, if the gamespeed is changed at 50% of timeout duration, the rest of the timeout will be correctly affected by new gamespeed.
 
-@param whichTimer Handle to timer
-@param timeout Delay in seconds
+@param whichTimer Handle to timer.
+@param timeout Delay in seconds.
 @param periodic
 True: repeat timer after expiration (loop).
 False: timer only runs once.

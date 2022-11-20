@@ -35,7 +35,7 @@ native AddWeatherEffect takes rect where, integer effectID returns weathereffect
 /**
 Removes the weather effect (visually instant) and frees the handle.
 
-@note See: `AddWeatherEffect`, `EnableWeatherEffect`
+@note See: `AddWeatherEffect`, `EnableWeatherEffect`.
 */
 native RemoveWeatherEffect takes weathereffect whichEffect returns nothing
 
@@ -46,7 +46,7 @@ Smoothly enables/disables the given weather effect.
 @param whichEffect A handle of target weather effect.
 @param enable `true` to enable, `false` to disable the effect.
 
-@note See: `AddWeatherEffect`, `RemoveWeatherEffect`
+@note See: `AddWeatherEffect`, `RemoveWeatherEffect`.
 */
 native EnableWeatherEffect takes weathereffect whichEffect, boolean enable returns nothing
 
@@ -64,10 +64,10 @@ See the other note on a way to compute an appropiate height to use instead.
 
 @note Permanent terrain deformations are not present in saved game files.
 
-@param x The x coordinate of the craters center
-@param y The y coordinate of the craters center
-@param radius The radius of the crater
-@param depth The depth of the crater
+@param x The x coordinate of the craters center.
+@param y The y coordinate of the craters center.
+@param radius The radius of the crater.
+@param depth The depth of the crater.
 @param duration The duration in milliseconds.
 @param permanent Make the deformation permanent.
 */
@@ -116,7 +116,7 @@ model file with a path modelName.
 
 @note To create an effect with a z-position not zero see <http://www.hiveworkshop.com/forums/1561722-post10.html>.
 
-@note To create an effect only visible to one player see <https://www.hiveworkshop.com/threads/gs.300430/#post-3209073>
+@note To create an effect only visible to one player see <https://www.hiveworkshop.com/threads/gs.300430/#post-3209073>.
 */
 native AddSpecialEffectLoc takes string modelName, location where returns effect
 
@@ -143,7 +143,7 @@ it is attached to. You can add or remove these by going to the object editor and
 modifying "Art - Required Animation Names - Attachments" for a particular unit
 you are attaching effects to. 
 
-@note To create an effect only visible to one player see <https://www.hiveworkshop.com/threads/gs.300430/#post-3209073>
+@note To create an effect only visible to one player see <https://www.hiveworkshop.com/threads/gs.300430/#post-3209073>.
 
 */
 native AddSpecialEffectTarget takes string modelName, widget targetWidget, string attachPointName returns effect
@@ -430,7 +430,7 @@ Clears all subanimations (tags) of the special effect. It does not affect normal
 native BlzSpecialEffectClearSubAnimations          takes effect whichEffect returns nothing
 
 /**
-Clears a specific subanimation (tag) of a specified special effect. (It does not affect normal animations)
+Clears a specific subanimation (tag) of a specified special effect. (It does not affect normal animations).
 
 @patch 1.30
 */

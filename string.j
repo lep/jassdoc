@@ -17,7 +17,7 @@ Lua: Only raises an error if r is null.
 For extermely large values the minimum/maximum representable signed integer will be returned
 (e.g. for Lua: `math.mininteger`{.lua} and `math.maxinteger`{.lua})
 
-@note NaN is not a possible value in Warcraft 3 (always reset to 1.0)
+@note NaN is not a possible value in Warcraft 3 (always reset to 1.0).
 
 @pure
 */
@@ -43,7 +43,7 @@ Lua: Raises an error if r is null.
 `R2S(1.12) --> 1.120`{.lua}
 Equivalent to: `R2SW(r, 0, 3)` and Lua: `string.format("%.3f", r)`{.lua}
 
-@note See: `R2SW`
+@note See: `R2SW`.
 
 @pure
 */
@@ -66,13 +66,13 @@ R2SW(1, 5, 0) == "  1.0" --> two spaces followed by number
 ```
 	
 
-@param r The number to be converted
+@param r The number to be converted.
 @param width The width of the string. If the width of the resulting conversion
              is too small the string will be filled with spaces.
              Use 0 for no padding.
 @param precision The amount of decimal places. The minimum possible precision is 1 (automatically set).
 
-@note See: `R2S` for a simple converter with preset values
+@note See: `R2S` for a simple converter with preset values.
 
 @pure
 */
@@ -99,7 +99,7 @@ S2I("abc123") == 0
 S2I(nil) -- error
 ```
 
-@param s The string to be converted
+@param s The string to be converted.
 
 @note This function only works for decimal strings. Hexadecimal or octal strings
 are not supported.
@@ -121,7 +121,7 @@ Returns 0 for: values too big or too small, an empty string or text that doesn't
 
 Lua: For null raises an error.
 
-@param s The string to be converted
+@param s The string to be converted.
 
 @note This function only works for decimal strings. Hexadecimal or octal strings
 are not supported.
@@ -165,7 +165,7 @@ SubString("abc", 0, 3) == "abc"
 SubString("abcdef", 2, 0) == "cdef"
 ```
 
-@param source Text string
+@param source Text string.
 @param start Starting position, zero-indexed, inclusive.
 @param end Last position, zero-indexed, exclusive.
 
@@ -186,7 +186,7 @@ native StringLength takes string s returns integer
 /**
 Turns the text to upper/lower case and returns it. Only works for ASCII characters (A-Z), not Unicode (Дружба).
 
-@param source Text string
+@param source Text string.
 
 @param upper True: turn to UPPER CASE. False: turn to lower case.
 

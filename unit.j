@@ -2,7 +2,7 @@
 
 /**
 Creates a unit of type `unitid` for player `id`, facing a certain direction at the provided coordinates.
-Returns handle to unit
+Returns handle to unit.
 
 **Example:** Create a human footman for first player (red) at map coordinates -30, 0, facing north:
 
@@ -33,7 +33,7 @@ Returns handle to unit
 native CreateUnit takes player id, integer unitid, real x, real y, real face returns unit
 
 /**
-@param face Unit facing in degrees
+@param face Unit facing in degrees.
 */
 native CreateUnitByName takes player whichPlayer, string unitname, real x, real y, real face returns unit
 
@@ -46,7 +46,7 @@ native CreateUnitByName takes player whichPlayer, string unitname, real x, real 
 native CreateUnitAtLoc takes player id, integer unitid, location whichLocation, real face returns unit
 
 /**
-@param face Unit facing in degrees
+@param face Unit facing in degrees.
 */
 native CreateUnitAtLocByName takes player id, string unitname, location whichLocation, real face returns unit
 
@@ -80,7 +80,7 @@ Set unit's unit state to a new absolute value.
 
     call SetUnitState(myUnit, UNIT_STATE_MAX_MANA, 105.0)
 	
-@note See: `GetUnitState`
+@note See: `GetUnitState`.
 */
 native SetUnitState takes unit whichUnit, unitstate whichUnitState, real newVal returns nothing
 
@@ -178,12 +178,12 @@ native GetUnitDefaultTurnSpeed takes unit whichUnit returns real
 Returns a unit's default propulsion window angle in degrees.
 
 @param whichUnit
-The unit of which to return the default prop window
+The unit of which to return the default prop window.
 
 @note This native is the odd case in the asymmetric prop window API, since the
 other prop window natives use radians. Therefore, to reset a unit's prop window
 you need the explicit conversion, i.e.
-`SetUnitPropWindow(u, GetUnitDefaultPropWindow(u) * bj_DEGTORAD)`
+`SetUnitPropWindow(u, GetUnitDefaultPropWindow(u) * bj_DEGTORAD)`.
 */
 native GetUnitDefaultPropWindow takes unit whichUnit returns real
 
@@ -193,21 +193,21 @@ native GetUnitDefaultFlyHeight takes unit whichUnit returns real
 /**
 Changes ownership of a unit.
 
-@param whichUnit Unit to modify
-@param whichPlayer The unit's new owner
-@param changeColor True to change unit's accent color to new owner's color, false to leave old color
+@param whichUnit Unit to modify.
+@param whichPlayer The unit's new owner.
+@param changeColor True to change unit's accent color to new owner's color, false to leave old color.
 
 @note Reforged: The HP bar will always have the color of its owner player, regardless of `changeColor`.
 
-@note See: `GetOwningPlayer`, `Player`
+@note See: `GetOwningPlayer`, `Player`.
 */
 native SetUnitOwner takes unit whichUnit, player whichPlayer, boolean changeColor returns nothing
 
 /**
 Sets a unit's player color accent.
 
-@param whichUnit Unit to modify
-@param whichColor Set to this player's color
+@param whichUnit Unit to modify.
+@param whichColor Set to this player's color.
 
 @bug Visual bug (tested v1.32.10): if you create two units of the same type (Normal and Colored)
 and set Colored's color to a different color, then clicking between the two units
@@ -220,9 +220,9 @@ native SetUnitColor takes unit whichUnit, playercolor whichColor returns nothing
 
 /**
 @bug Only takes scaleX into account and uses scaleX for all three dimensions.
-@param scaleX This is actually the scale for *all* dimensions
-@param scaleY This parameter is not taken into account
-@param scaleZ This parameter is not taken into account
+@param scaleX This is actually the scale for *all* dimensions.
+@param scaleY This parameter is not taken into account.
+@param scaleZ This parameter is not taken into account.
 */
 native SetUnitScale takes unit whichUnit, real scaleX, real scaleY, real scaleZ returns nothing
 
@@ -239,9 +239,9 @@ The vertex color changes how the model is rendered. For example, setting all r,g
 To imagine the final result of changing vertex colors, it is helpful to think of individual RGB layers in a color image, if you disable the Red channel, only Green & Blue channels will be shown.
 
 @param whichUnit The unit to modify.
-@param red visibility of red channel (clamped to 0-255)
-@param green visibility of green channel (clamped to 0-255)
-@param blue visibility of blue channel (clamped to 0-255)
+@param red visibility of red channel (clamped to 0-255).
+@param green visibility of green channel (clamped to 0-255).
+@param blue visibility of blue channel (clamped to 0-255).
 @param alpha opacity (clamped to 0-255). A value of 255 is total opacity (fully visible). A value of 0 is total transparency; the model will be invisible, but you'll still see the shadow, HP bar etc.
 
 @note Not to be confused with `SetUnitColor` which changes a unit's player accent color.
@@ -294,7 +294,7 @@ rename a helper so that it will move that set of bones instead.
 
 @note SetUnitLookAt is affected by animation speed and blend time.
 
-@note [How to instantly set a unit's facing](http://www.wc3c.net/showthread.php?t=105830)
+@note [How to instantly set a unit's facing](http://www.wc3c.net/showthread.php?t=105830).
 */
 native SetUnitLookAt takes unit whichUnit, string whichBone, unit lookAtTarget, real offsetX, real offsetY, real offsetZ returns nothing
 
@@ -428,16 +428,16 @@ Requirements:
 1. The hero has an unspent skill point
 2. The skill is available for learning (not level-locked etc.)
 
-@param whichHero Target hero
-@param abilcode Abilities' raw code identifier
+@param whichHero Target hero.
+@param abilcode Abilities' raw code identifier.
 */
 native SelectHeroSkill takes unit whichHero, integer abilcode returns nothing
 
 /**
 Returns the level of the ability for the unit.
 
-@param whichUnit Target unit
-@param abilcode Abilities' raw code identifier
+@param whichUnit Target unit.
+@param abilcode Abilities' raw code identifier.
 */
 native GetUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
@@ -468,9 +468,9 @@ native IncUnitAbilityLevel takes unit whichUnit, integer abilcode returns intege
 /**
 Sets the new level of unit's ability.
 
-@param whichUnit Target unit
-@param abilcode Abilities' raw code identifier
-@param level New ability level
+@param whichUnit Target unit.
+@param abilcode Abilities' raw code identifier.
+@param level New ability level.
 
 @note You can only set levels which are defined for the current ability.
 For example, most WC3 abilities have levels 1-3.
@@ -483,15 +483,15 @@ native SetUnitAbilityLevel takes unit whichUnit, integer abilcode, integer level
 Revives a dead hero at target coordinates, with or without special effects.
 
 Returns true if hero was dead and revived.
-Returns false otherwise (hero alive, unit isn't a hero/doesn't exist etc.)
+Returns false otherwise (hero alive, unit isn't a hero/doesn't exist etc.).
 
-@param whichHero Target dead hero
-@param x X map coordinate
-@param y Y map coordinate
+@param whichHero Target dead hero.
+@param x X map coordinate.
+@param y Y map coordinate.
 @param doEyecandy True to revive with revival special effects, false without.
 Special effects include: sound, visual effect. 
 
-@note See: `ReviveHeroLoc`
+@note See: `ReviveHeroLoc`.
 */
 native ReviveHero takes unit whichHero, real x, real y, boolean doEyecandy returns boolean
 
@@ -501,11 +501,11 @@ Revives a dead hero at target location, with or without special effects.
 Returns true if hero was dead and revived.
 Returns false otherwise (hero alive, unit isn't a hero/doesn't exist etc.)
 
-@param loc Location on map
+@param loc Location on map.
 @param doEyecandy True to revive with revival special effects, false without.
 Special effects include: sound, visual effect. 
 
-@note See: `ReviveHero`
+@note See: `ReviveHero`.
 */
 native ReviveHeroLoc takes unit whichHero, location loc, boolean doEyecandy returns boolean
 
@@ -561,8 +561,8 @@ Returns:
 - true if this exact item is already in unit's inventory or if it was put there successfully
 - false if unit has no inventory or space, or invalid item/unit
 
-@param whichUnit Target unit
-@param whichItem Handle to item instance
+@param whichUnit Target unit.
+@param whichItem Handle to item instance.
 */
 native UnitAddItem takes unit whichUnit, item whichItem returns boolean
 
@@ -581,10 +581,10 @@ Returns:
 - item handle if the item was successfully placed in unit's inventory
 - null if inventory is full, unit cannot carry items, itemId/unit invalid etc.
 
-@param whichUnit Target unit
-@param itemId Item's raw code identifier
+@param whichUnit Target unit.
+@param itemId Item's raw code identifier.
 
-@note See: `UnitAddItemToSlotById`
+@note See: `UnitAddItemToSlotById`.
 */
 native UnitAddItemById takes unit whichUnit, integer itemId returns item
 
@@ -606,11 +606,11 @@ Returns:
 - true if the item was successfully placed in unit's inventory
 - false otherwise: slot occupied, unit cannot carry items, itemId/unit/itemSlot invalid etc.
 
-@param whichUnit Target unit
-@param itemId Item's raw code identifier
-@param itemSlot Slot number (zero-based, i.e. 0 to 5)
+@param whichUnit Target unit.
+@param itemId Item's raw code identifier.
+@param itemSlot Slot number (zero-based, i.e. 0 to 5).
 
-@note See: `UnitAddItemById`
+@note See: `UnitAddItemById`.
 */
 native UnitAddItemToSlotById takes unit whichUnit, integer itemId, integer itemSlot returns boolean
 
@@ -619,8 +619,8 @@ If the target unit carries the item, it is removed from the inventory and droppe
 
 Nothing happens if unit or item instance is invalid.
 
-@param whichUnit Target unit
-@param whichItem Handle to item instance
+@param whichUnit Target unit.
+@param whichItem Handle to item instance.
 
 @note See `UnitRemoveItemFromSlot` to drop an item from a specific slot.
 */
@@ -632,8 +632,8 @@ If an item exists in the given slot, it is removed from the inventory and droppe
 Returns the handle of dropped item when successful.
 Returns null on failure (no item, invalid slot/unit).
 
-@param whichUnit Target unit
-@param itemSlot Slot number (zero-based, i.e. 0 to 5)
+@param whichUnit Target unit.
+@param itemSlot Slot number (zero-based, i.e. 0 to 5).
 
 @note See `UnitRemoveItem` to drop an item by handle.
 */
@@ -643,8 +643,8 @@ native UnitRemoveItemFromSlot takes unit whichUnit, integer itemSlot returns ite
 Returns true if unit has this specific instance of item somewhere in inventory.
 Returns false otherwise (null unit, item not found in inventory, null item etc).
 
-@param whichUnit Target unit
-@param whichItem Handle to item instance
+@param whichUnit Target unit.
+@param whichItem Handle to item instance.
 */
 native UnitHasItem takes unit whichUnit, item whichItem returns boolean
 
@@ -654,8 +654,8 @@ Returns a handle to item in slot number `itemSlot` of the specified unit.
 Returns null otherwise:
 when there's no item in slot, no slot (less than 6 slots), invalid slot number, invalid unit.
 
-@param whichUnit Target unit
-@param itemSlot Slot number (zero-based, i.e. 0 to 5)
+@param whichUnit Target unit.
+@param itemSlot Slot number (zero-based, i.e. 0 to 5).
 */
 native UnitItemInSlot takes unit whichUnit, integer itemSlot returns item
 
@@ -663,7 +663,7 @@ native UnitItemInSlot takes unit whichUnit, integer itemSlot returns item
 Returns amount of inventory slots for unit (0 to `bj_MAX_INVENTORY` inclusive).
 Returns zero if unit is invalid or has no inventory.
 
-@param whichUnit Target unit
+@param whichUnit Target unit.
 */
 native UnitInventorySize takes unit whichUnit returns integer
 
@@ -679,12 +679,12 @@ Returns:
 - true if item was found in inventory of unit and an order was issued.
 - false if unit/item invalid, unit is paused and cannot take orders etc.
 
-@param whichUnit Target unit
-@param whichItem Handle to item instance
-@param x X map coordinate
-@param y Y map coordinate
+@param whichUnit Target unit.
+@param whichItem Handle to item instance.
+@param x X map coordinate.
+@param y Y map coordinate.
 
-@note See: `UnitDropItemSlot`, `UnitDropItemTarget`
+@note See: `UnitDropItemSlot`, `UnitDropItemTarget`.
 */
 native UnitDropItemPoint takes unit whichUnit, item whichItem, real x, real y returns boolean
 
@@ -699,9 +699,9 @@ Returns:
 - true if the move was successful, even if moving an item to its current slot (no change)
 - false if unit/item invalid, item not in inventory, invalid item slot specified
 
-@param whichUnit Target unit
-@param whichItem Handle to item instance
-@param slot Move to this slot
+@param whichUnit Target unit.
+@param whichItem Handle to item instance.
+@param slot Move to this slot.
 */
 native UnitDropItemSlot takes unit whichUnit, item whichItem, integer slot returns boolean
 
@@ -720,11 +720,11 @@ Returns:
 - false if `whichUnit`/item/widget invalid, `whichUnit` is paused and cannot take orders etc.
 Target widget can be a paused unit and will receive the item.
 
-@param whichUnit Target unit
-@param whichItem Handle to item instance
-@param target Target unit or widget
+@param whichUnit Target unit.
+@param whichItem Handle to item instance.
+@param target Target unit or widget.
 
-@note See: `UnitDropItemSlot`, `UnitDropItemPoint`
+@note See: `UnitDropItemSlot`, `UnitDropItemPoint`.
 
 */
 native UnitDropItemTarget takes unit whichUnit, item whichItem, widget target returns boolean
@@ -754,7 +754,7 @@ However, an order is issued, hence returns true.
 
 - Inferno Stone `'infs'`: same as with dagger above.
 
-@note See: `UnitUseItemPoint`, `UnitUseItemTarget`
+@note See: `UnitUseItemPoint`, `UnitUseItemTarget`.
 
 */
 native UnitUseItem takes unit whichUnit, item whichItem returns boolean
@@ -778,14 +778,14 @@ Does not cast if position is already reached (no cooldown).
 runs towards (x,y) and once in range, casts to spawn an Infernal.
 If already in range, casts immediately.
 
-@param whichUnit Target unit
-@param whichItem Handle to item instance
-@param x Point at X map coordinate to use the item
-@param y Point at Y map coordinate to use the item
+@param whichUnit Target unit.
+@param whichItem Handle to item instance.
+@param x Point at X map coordinate to use the item.
+@param y Point at Y map coordinate to use the item.
 
 @bug Seems to always return false (tested v1.32.10).
 
-@note See: `UnitUseItem`, `UnitUseItemTarget`
+@note See: `UnitUseItem`, `UnitUseItemTarget`.
 
 */
 native UnitUseItemPoint takes unit whichUnit, item whichItem, real x, real y returns boolean
@@ -811,11 +811,11 @@ see the building being highlighted on cursor hover.
 
 - Inferno Stone `'infs'`: does not cast, same as above.
 
-@param whichUnit Target unit
-@param whichItem Handle to item instance
-@param target Target unit or widget
+@param whichUnit Target unit.
+@param whichItem Handle to item instance.
+@param target Target unit or widget.
 
-@note See: `UnitUseItem`, `UnitUseItemPoint`
+@note See: `UnitUseItem`, `UnitUseItemPoint`.
 
 */
 native UnitUseItemTarget takes unit whichUnit, item whichItem, widget target returns boolean
@@ -830,7 +830,7 @@ of the zeppelin but the last position of the unit before it was loaded into
 the zeppelin.
 
 @note Since unit extends from `widget`, you can use widget-related functions too.
-See: `GetUnitY`, `BlzGetLocalUnitZ`, `BlzGetUnitZ`, `GetWidgetX`, `GetWidgetY`
+See: `GetUnitY`, `BlzGetLocalUnitZ`, `BlzGetUnitZ`, `GetWidgetX`, `GetWidgetY`.
 */
 constant native GetUnitX takes unit whichUnit returns real
 
@@ -842,7 +842,7 @@ of the zeppelin but the last position of the unit before it was loaded into
 the zeppelin.
 
 @note Since unit extends from `widget`, you can use widget-related functions too.
-See: `GetUnitX`, `BlzGetLocalUnitZ`, `BlzGetUnitZ`, GetWidgetX`, `GetWidgetY`
+See: `GetUnitX`, `BlzGetLocalUnitZ`, `BlzGetUnitZ`, GetWidgetX`, `GetWidgetY`.
 */
 constant native GetUnitY takes unit whichUnit returns real
 
@@ -869,16 +869,16 @@ Returns unit's current unit state as an absolute value.
 
     call GetUnitState(myUnit, UNIT_STATE_MAX_MANA) // returns 285.0
 	
-@note See: `SetUnitState`
+@note See: `SetUnitState`.
 */
 constant native GetUnitState takes unit whichUnit, unitstate whichUnitState returns real
 
 /**
 Returns the owner player of the unit.
 
-@param whichUnit Target unit
+@param whichUnit Target unit.
 
-@note See: `SetUnitOwner`
+@note See: `SetUnitOwner`.
 */
 constant native GetOwningPlayer takes unit whichUnit returns player
 
@@ -896,7 +896,7 @@ u = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
 print(GetUnitName(u)) --> "Footman"
 ```
 
-@param whichUnit Target unit
+@param whichUnit Target unit.
 @async
 */
 constant native GetUnitName takes unit whichUnit returns string
@@ -949,7 +949,7 @@ constant native IsUnitRace takes unit whichUnit, race whichRace returns boolean
 @note This native returns a boolean, which when typecasted to integer might
 be greater than 1. It's probably implemented via a bitset.
 
-@note In past patches this native bugged when used in conditionfuncs.
+@note In past patches this native bugged when used in `conditionfunc`s.
 The fix back then was to compare with true (`==true`).
 I cannot reproduce the faulty behaviour in patch 1.27 so this is only a note.
 */
@@ -1006,8 +1006,8 @@ Returns:
 - true if the addition was successful (hero did not have this ability before)
 - false otherwise (hero already has this ability)
 
-@param whichUnit Target unit
-@param abilityId Abilities' raw code identifier
+@param whichUnit Target unit.
+@param abilityId Abilities' raw code identifier.
 */
 native UnitAddAbility takes unit whichUnit, integer abilityId returns boolean
 
@@ -1019,8 +1019,8 @@ Returns:
 - true if the removal was successful (hero did have this ability before)
 - false otherwise (hero does not have this ability)
 
-@param whichUnit Target unit
-@param abilityId Abilities' raw code identifier
+@param whichUnit Target unit.
+@param abilityId Abilities' raw code identifier.
 
 @bug Removing non-interrupt abilities like divine shile while they're being
 cast (at the EVENT_PLAYER_UNIT_SPELL_EFFECT point), and while the caster is
@@ -1030,7 +1030,7 @@ they reach their ordered move point.
 native UnitRemoveAbility takes unit whichUnit, integer abilityId returns boolean
 
 /**
-This native is used to keep abilities when morphing units
+This native is used to keep abilities when morphing units.
 */
 native UnitMakeAbilityPermanent takes unit whichUnit, boolean permanent, integer abilityId returns boolean
 
@@ -1073,7 +1073,7 @@ native UnitSetUsesAltIcon takes unit whichUnit, boolean flag returns nothing
 
 
 /**
-@bug Has been known to cause crashes in battle.net
+@bug Has been known to cause crashes in battle.net.
 */
 native UnitDamagePoint takes unit whichUnit, real delay, real radius, real x, real y, real amount, boolean attack, boolean ranged, attacktype attackType, damagetype damageType, weapontype weaponType returns boolean
 
@@ -1164,7 +1164,7 @@ If peasant enters a mine with <0 gold, it's destroyed and he runs back to the ca
 
 @param amount The new gold amount.
 
-@note See: `AddResourceAmount`, `GetResourceAmount`
+@note See: `AddResourceAmount`, `GetResourceAmount`.
 */
 native SetResourceAmount takes unit whichUnit, integer amount returns nothing
 
@@ -1176,7 +1176,7 @@ Adds the amount of available gold to a gold mine. The amount can be negative, wh
 
 @param amount The amount of gold to add to the unit.
 
-@note See `SetResourceAmount` for edge-case descriptions. Also: `SetResourceAmount`, `GetResourceAmount`
+@note See `SetResourceAmount` for edge-case descriptions. Also: `SetResourceAmount`, `GetResourceAmount`.
 */
 native AddResourceAmount takes unit whichUnit, integer amount returns nothing
 
@@ -1186,7 +1186,7 @@ Returns the amount of available gold in a gold mine. The amount can be negative,
 
 @param whichUnit Add gold to this gold mine unit.
 
-@note See `SetResourceAmount` for edge-case descriptions. Also: `SetResourceAmount`, `AddResourceAmount`
+@note See `SetResourceAmount` for edge-case descriptions. Also: `SetResourceAmount`, `AddResourceAmount`.
 */
 native GetResourceAmount takes unit whichUnit returns integer
 
@@ -1382,7 +1382,7 @@ Get the current unit armor of a specific unit (real value).
 native BlzGetUnitArmor                             takes unit whichUnit returns real
 
 /**
-Changes(set) the unit armor of a specific unit, you pass it a real value, can be negative
+Changes(set) the unit armor of a specific unit, you pass it a real value, can be negative.
 
 *Changes TOTAL amount of armor a unit has. If unit has a bonus (green) armor from an aura or item, base armor will be reduced to achieve total amount of armor you specified. E.g. a unit has 1+3 armor, if you set armor to 1.00, unit’s armor will be changed to -2+3*
 
@@ -1397,12 +1397,12 @@ Hides or unhides an ability for a unit.
 Unit to apply this to
 
 @param abilId
-Rawcode of ability
+Rawcode of ability.
 
 @param flag
-isHidden: true to hide, false to show
+isHidden: true to hide, false to show.
 
-@bug The boolean flag doesn't work as expected, it acts more like an integer counter: https://www.hiveworkshop.com/threads/blzunithideability-and-blzunitdisableability-dont-work.312477/
+@bug The boolean flag doesn't work as expected, it acts more like an integer counter: <https://www.hiveworkshop.com/threads/blzunithideability-and-blzunitdisableability-dont-work.312477/>.
 
 @patch 1.29
 */
@@ -1420,13 +1420,13 @@ BlzUnitDisableAbility(u, FourCC"AHbu", false, true)
 ```
 
 @param whichUnit
-Unit to apply this to
+Unit to apply this to.
 
 @param abilId
-Rawcode of ability
+Rawcode of ability.
 
 @param flag
-isDisabled: true to disable (cannot click), false to enable ability
+isDisabled: true to disable (cannot click), false to enable ability.
 
 @param hideUI
 isHidden: true to completely hide the icon, false to show icon. Icons are different for disabled/enabled abilities.
@@ -1476,10 +1476,10 @@ native BlzGetUnitCollisionSize                     takes unit whichUnit returns 
 /**
 Changes(set) an ability’s cooldown at runtime for a specific unit.
 
-@param whichUnit Target unit (handle)
-@param abilId Rawcode of ability
-@param level Ability level
-@param cooldown New cooldown
+@param whichUnit Target unit (handle).
+@param abilId Rawcode of ability.
+@param level Ability level.
+@param cooldown New cooldown.
 
 @note Cooldown is a real, which means that it supports negative and positive numbers with decimals, in this case setting it to negative allows you to reduce an ability’s cooldown.
 @note It does not reduce the cooldown if the ability is currently on CD, it will have its new cooldown after the CD is over though.
@@ -1533,10 +1533,10 @@ Returns 0.0 if unit was removed or is null.
 
 Retrieving Z is desync prone, this version might cause desyncs, but (unconfirmed) should be faster than `BlzGetUnitZ`, hence why both exist. In case that you are doing a single player map (campaign), you might decide to use this one instead of `BlzGetUnitZ`.
 
-@note Terrain height is not synced between clients in multiplayer
+@note Terrain height is not synced between clients in multiplayer.
 
 @note Since unit extends from widget, you can use widget-related functions too.
-See: `BlzGetUnitZ`, `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`
+See: `BlzGetUnitZ`, `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`.
 
 @async
 @patch 1.29
@@ -1546,7 +1546,7 @@ native BlzGetLocalUnitZ                            takes unit whichUnit returns 
 /**
 @note Returns the same result as `BlzGetLocalUnitZ`.
 @note Since unit extends from widget, you can use widget-related functions too.
-See: `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`
+See: `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`.
 
 @async
 @patch 1.30
@@ -1665,7 +1665,7 @@ native BlzSetUnitWeaponIntegerField                takes unit whichUnit, unitwea
 Problems:
 unitweaponfields `UNIT_WEAPON_RF_ATTACK_RANGE` and `UNIT_WEAPON_RF_ATTACK_PROJECTILE_SPEED` do not appear to change in value, even if the operation is reported successful (returns a false positive). This was tested at indices 0 - 3.
 
-The getter equivalent of the native above does not work too (returns 0)
+The getter equivalent of the native above does not work too (returns 0).
 
 @patch 1.31
 */
@@ -1691,7 +1691,7 @@ native BlzGetUnitAbility                           takes unit whichUnit, integer
 /**
 Returns a handle to specific unit's ability instance.
 
-@note Last added ability is at index 0, older abilities are pushed up
+@note Last added ability is at index 0, older abilities are pushed up.
 
 @patch 1.31
 */

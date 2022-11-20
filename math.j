@@ -55,22 +55,29 @@ native Tan takes real radians returns real
 /**
 Arcsine, one of inverse trigonometric functions. The result is returned in
 radians in range [-Pi/2;Pi/2].
-Expect values between -1 and 1...returns 0 for invalid input
+Returns 0 for invalid input.
+
+@param y A value between -1 and 1.
 @pure
 */
 native Asin takes real y returns real
 
 /**
-Arctangent, one of inverse trigonometric functions. The result is returned in
+Arccos, one of inverse trigonometric functions. The result is returned in
 radians in range [-Pi/2;Pi/2].
-Expect values between -1 and 1...returns 0 for invalid input
+Returns 0 for invalid input.
+
+@param x A value between -1 and 1.
 @pure
 */
 native Acos takes real x returns real
 
 /**
-Expect values between -1 and 1
-Returns 0 for invalid input
+Arctangen, one of the inverse trigonometric functions. The result is returned
+in radians in range [-π/2, π/2].
+Returns 0 for invalid input.
+
+@param x A value between -1 and 1.
 @pure
 */
 native Atan takes real x returns real
@@ -88,6 +95,8 @@ native Atan2 takes real y, real x returns real
 /**
 Returns the square root of x.
 If x is less than or equal to zero this returns 0.0
+
+@param x Should be greater than or equal to 0.
 
 @pure
 */
@@ -135,8 +144,8 @@ native BlzBitAnd                                   takes integer x, integer y re
 /**
 Returns the result of connecting all bits of both numbers using XOR (Difference) (in regards of binary numeral system). Each Bit being different between x and y becomes 1; every bit being equal becomes 0.
 
-2Xor5 => 7 (0010 xor 0101 => 0111)
-6Xor8 => 14  (0110 xor 1000 => 1110)
+2 xor 5 => 7 (0010 xor 0101 => 0111)
+6 xor 8 => 14  (0110 xor 1000 => 1110)
 
 
 @pure

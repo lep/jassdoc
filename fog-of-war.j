@@ -10,7 +10,7 @@ visible. What is visible in game is a combination of personal fog state & fog mo
 
 @param forWhichPlayer Target player.
 @param whichState Change fog to this type. See `fogstate` for type explanation.
-@param where Target rectangle area
+@param where Target rectangle area.
 @param useSharedVision
 If true, apply new state to player and whoever player shares their vision.
 If false, apply only to player themself.
@@ -29,7 +29,7 @@ visible. What is visible in game is a combination of personal fog state & fog mo
 @param whichState Change fog to this type. See `fogstate` for type explanation.
 @param centerx X-coordinate of the circle center.
 @param centerY Y-coordinate of the circle center.
-@param radius Circle's radius (from center to its edge)
+@param radius Circle's radius (from center to its edge).
 @param useSharedVision
 If true, apply new state to player and whoever player shares their vision.
 If false, apply only to player themself.
@@ -46,7 +46,7 @@ visible. What is visible in game is a combination of personal fog state & fog mo
 @param forWhichPlayer Target player.
 @param whichState Change fog to this type. See `fogstate` for type explanation.
 @param center Location describing the center of the circle.
-@param radius Circle's radius (from center to its edge)
+@param radius Circle's radius (from center to its edge).
 @param useSharedVision
 If true, apply new state to player and whoever player shares their vision.
 If false, apply only to player themself.
@@ -119,7 +119,7 @@ This creates a new object with a handle and must be removed to avoid leaks: `Des
 @param whichState
 Determines what type of fog the area is being modified to. See `fogstate` for type explanation.
 
-@param where The rect where the fog is
+@param where The rect where the fog is.
 
 @param useSharedVision
 Apply modifier to target's allied players with shared vision?

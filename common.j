@@ -485,7 +485,7 @@ type commandbuttoneffect	    extends handle
 
 /**
 Returns the race that corresponds to the given integer.
-@param i The integer representation of the race
+@param i The integer representation of the race.
 @pure
 */
 constant native ConvertRace                 takes integer i returns race
@@ -494,7 +494,7 @@ constant native ConvertRace                 takes integer i returns race
 
 /**
 Returns the alliancetype that corresponds to the given integer.
-@param i The integer representation of the alliancetype
+@param i The integer representation of the alliancetype.
 @pure
 */
 constant native ConvertAllianceType         takes integer i returns alliancetype
@@ -503,7 +503,7 @@ constant native ConvertAllianceType         takes integer i returns alliancetype
 
 /**
 Returns the racepreference that corresponds to the given integer.
-@param i The integer representation of the racepreference
+@param i The integer representation of the racepreference.
 @pure
 */
 constant native ConvertRacePref             takes integer i returns racepreference
@@ -512,7 +512,7 @@ constant native ConvertRacePref             takes integer i returns racepreferen
 
 /**
 Returns the igamestate that corresponds to the given integer.
-@param i The integer representation of the igamestate
+@param i The integer representation of the igamestate.
 @pure
 */
 constant native ConvertIGameState           takes integer i returns igamestate
@@ -521,7 +521,7 @@ constant native ConvertIGameState           takes integer i returns igamestate
 
 /**
 Returns the fgamestate that corresponds to the given integer.
-@param i The integer representation of the fgamestate
+@param i The integer representation of the fgamestate.
 @pure
 */
 constant native ConvertFGameState           takes integer i returns fgamestate
@@ -530,7 +530,7 @@ constant native ConvertFGameState           takes integer i returns fgamestate
 
 /**
 Returns the playerstate that corresponds to the given integer.
-@param i The integer representation of the playerstate
+@param i The integer representation of the playerstate.
 @pure
 */
 constant native ConvertPlayerState          takes integer i returns playerstate
@@ -539,7 +539,7 @@ constant native ConvertPlayerState          takes integer i returns playerstate
 
 /**
 Returns the playerscore that corresponds to the given integer.
-@param i The integer representation of the playerscore
+@param i The integer representation of the playerscore.
 @pure
 */
 constant native ConvertPlayerScore          takes integer i returns playerscore
@@ -548,7 +548,7 @@ constant native ConvertPlayerScore          takes integer i returns playerscore
 
 /**
 Returns the playergameresult that corresponds to the given integer.
-@param i The integer representation of the playergameresult
+@param i The integer representation of the playergameresult.
 @pure
 */
 constant native ConvertPlayerGameResult     takes integer i returns playergameresult
@@ -562,9 +562,9 @@ It is used to define the constants representing unit state. Accepts any integer,
 
 **Example:** `constant unitstate UNIT_STATE_MAX_MANA = ConvertUnitState(3)`
 
-@param i The integer representation of the unitstate
+@param i The integer representation of the unitstate.
 
-@note See: `GetUnitState`, `SetUnitState`
+@note See: `GetUnitState`, `SetUnitState`.
 @pure
 */
 constant native ConvertUnitState            takes integer i returns unitstate
@@ -573,7 +573,7 @@ constant native ConvertUnitState            takes integer i returns unitstate
 
 /**
 Returns the aidifficulty that corresponds to the given integer.
-@param i The integer representation of the aidifficulty
+@param i The integer representation of the aidifficulty.
 @pure
 */
 constant native ConvertAIDifficulty         takes integer i returns aidifficulty
@@ -582,7 +582,7 @@ constant native ConvertAIDifficulty         takes integer i returns aidifficulty
 
 /**
 Returns the gameevent that corresponds to the given integer.
-@param i The integer representation of the gameevent
+@param i The integer representation of the gameevent.
 @pure
 */
 constant native ConvertGameEvent            takes integer i returns gameevent
@@ -591,7 +591,7 @@ constant native ConvertGameEvent            takes integer i returns gameevent
 
 /**
 Returns the playerevent that corresponds to the given integer.
-@param i The integer representation of the playerevent
+@param i The integer representation of the playerevent.
 @pure
 */
 constant native ConvertPlayerEvent          takes integer i returns playerevent
@@ -600,7 +600,7 @@ constant native ConvertPlayerEvent          takes integer i returns playerevent
 
 /**
 Returns the playerunitevent that corresponds to the given integer.
-@param i The integer representation of the playerunitevent
+@param i The integer representation of the playerunitevent.
 @pure
 */
 constant native ConvertPlayerUnitEvent      takes integer i returns playerunitevent
@@ -609,7 +609,7 @@ constant native ConvertPlayerUnitEvent      takes integer i returns playerunitev
 
 /**
 Returns the widgetevent that corresponds to the given integer.
-@param i The integer representation of the widgetevent
+@param i The integer representation of the widgetevent.
 @pure
 */
 constant native ConvertWidgetEvent          takes integer i returns widgetevent
@@ -618,7 +618,7 @@ constant native ConvertWidgetEvent          takes integer i returns widgetevent
 
 /**
 Returns the dialogevent that corresponds to the given integer.
-@param i The integer representation of the dialogevent
+@param i The integer representation of the dialogevent.
 @pure
 */
 constant native ConvertDialogEvent          takes integer i returns dialogevent
@@ -627,7 +627,7 @@ constant native ConvertDialogEvent          takes integer i returns dialogevent
 
 /**
 Returns the unitevent that corresponds to the given integer.
-@param i The integer representation of the unitevent
+@param i The integer representation of the unitevent.
 @pure
 */
 constant native ConvertUnitEvent            takes integer i returns unitevent
@@ -636,7 +636,7 @@ constant native ConvertUnitEvent            takes integer i returns unitevent
 
 /**
 Returns the limitop that corresponds to the given integer.
-@param i The integer representation of the limitop
+@param i The integer representation of the limitop.
 @pure
 */
 constant native ConvertLimitOp              takes integer i returns limitop
@@ -645,7 +645,7 @@ constant native ConvertLimitOp              takes integer i returns limitop
 
 /**
 Returns the unittype that corresponds to the given integer.
-@param i The integer representation of the unittype
+@param i The integer representation of the unittype.
 @pure
 */
 constant native ConvertUnitType             takes integer i returns unittype
@@ -657,7 +657,7 @@ Returns the gamespeed that corresponds to the given integer.
 
 It is used to define the constants representing gamespeed. First index is 0. Accepts any integer, the reference is always the same for a given integer.
 
-@param i The integer representation of the gamespeed
+@param i The integer representation of the gamespeed.
 @pure
 */
 constant native ConvertGameSpeed            takes integer i returns gamespeed
@@ -666,7 +666,7 @@ constant native ConvertGameSpeed            takes integer i returns gamespeed
 
 /**
 Returns the placement that corresponds to the given integer.
-@param i The integer representation of the placement
+@param i The integer representation of the placement.
 @pure
 */
 constant native ConvertPlacement            takes integer i returns placement
@@ -675,7 +675,7 @@ constant native ConvertPlacement            takes integer i returns placement
 
 /**
 Returns the startlocprio that corresponds to the given integer.
-@param i The integer representation of the startlocprio
+@param i The integer representation of the startlocprio.
 @pure
 */
 constant native ConvertStartLocPrio         takes integer i returns startlocprio
@@ -684,7 +684,7 @@ constant native ConvertStartLocPrio         takes integer i returns startlocprio
 
 /**
 Returns the gamedifficulty that corresponds to the given integer.
-@param i The integer representation of the gamedifficulty
+@param i The integer representation of the gamedifficulty.
 @pure
 */
 constant native ConvertGameDifficulty       takes integer i returns gamedifficulty
@@ -693,7 +693,7 @@ constant native ConvertGameDifficulty       takes integer i returns gamedifficul
 
 /**
 Returns the gametype that corresponds to the given integer.
-@param i The integer representation of the gametype
+@param i The integer representation of the gametype.
 @pure
 */
 constant native ConvertGameType             takes integer i returns gametype
@@ -702,7 +702,7 @@ constant native ConvertGameType             takes integer i returns gametype
 
 /**
 Returns the mapflag that corresponds to the given integer.
-@param i The integer representation of the mapflag
+@param i The integer representation of the mapflag.
 @pure
 */
 constant native ConvertMapFlag              takes integer i returns mapflag
@@ -711,7 +711,7 @@ constant native ConvertMapFlag              takes integer i returns mapflag
 
 /**
 Returns the mapvisibility that corresponds to the given integer.
-@param i The integer representation of the mapvisibility
+@param i The integer representation of the mapvisibility.
 @pure
 */
 constant native ConvertMapVisibility        takes integer i returns mapvisibility
@@ -720,7 +720,7 @@ constant native ConvertMapVisibility        takes integer i returns mapvisibilit
 
 /**
 Returns the mapsetting that corresponds to the given integer.
-@param i The integer representation of the mapsetting
+@param i The integer representation of the mapsetting.
 @pure
 */
 constant native ConvertMapSetting           takes integer i returns mapsetting
@@ -729,7 +729,7 @@ constant native ConvertMapSetting           takes integer i returns mapsetting
 
 /**
 Returns the mapdensity that corresponds to the given integer.
-@param i The integer representation of the mapdensity
+@param i The integer representation of the mapdensity.
 @pure
 */
 constant native ConvertMapDensity           takes integer i returns mapdensity
@@ -738,7 +738,7 @@ constant native ConvertMapDensity           takes integer i returns mapdensity
 
 /**
 Returns the mapcontrol that corresponds to the given integer.
-@param i The integer representation of the mapcontrol
+@param i The integer representation of the mapcontrol.
 @pure
 */
 constant native ConvertMapControl           takes integer i returns mapcontrol
@@ -747,7 +747,7 @@ constant native ConvertMapControl           takes integer i returns mapcontrol
 
 /**
 Returns the playercolor that corresponds to the given integer.
-@param i The integer representation of the playercolor
+@param i The integer representation of the playercolor.
 @pure
 */
 constant native ConvertPlayerColor          takes integer i returns playercolor
@@ -756,14 +756,14 @@ constant native ConvertPlayerColor          takes integer i returns playercolor
 
 /**
 Returns the playerslotstate that corresponds to the given integer.
-@param i The integer representation of the playerslotstate
+@param i The integer representation of the playerslotstate.
 @pure
 */
 constant native ConvertPlayerSlotState      takes integer i returns playerslotstate
 
 /**
 Returns the volumegroup that corresponds to the given integer.
-@param i The integer representation of the volumegroup
+@param i The integer representation of the volumegroup.
 @pure
 */
 constant native ConvertVolumeGroup          takes integer i returns volumegroup
@@ -771,7 +771,7 @@ constant native ConvertVolumeGroup          takes integer i returns volumegroup
 
 /**
 Returns the camerafield that corresponds to the given integer.
-@param i The integer representation of the camerafield
+@param i The integer representation of the camerafield.
 @pure
 */
 constant native ConvertCameraField          takes integer i returns camerafield
@@ -780,7 +780,7 @@ constant native ConvertCameraField          takes integer i returns camerafield
 
 /**
 Returns the blendmode that corresponds to the given integer.
-@param i The integer representation of the blendmode
+@param i The integer representation of the blendmode.
 @pure
 */
 constant native ConvertBlendMode            takes integer i returns blendmode
@@ -789,7 +789,7 @@ constant native ConvertBlendMode            takes integer i returns blendmode
 
 /**
 Returns the raritycontrol that corresponds to the given integer.
-@param i The integer representation of the raritycontrol
+@param i The integer representation of the raritycontrol.
 @pure
 */
 constant native ConvertRarityControl        takes integer i returns raritycontrol
@@ -798,7 +798,7 @@ constant native ConvertRarityControl        takes integer i returns raritycontro
 
 /**
 Returns the texmapflags that corresponds to the given integer.
-@param i The integer representation of the texmapflags
+@param i The integer representation of the texmapflags.
 @pure
 */
 constant native ConvertTexMapFlags          takes integer i returns texmapflags
@@ -809,7 +809,7 @@ constant native ConvertTexMapFlags          takes integer i returns texmapflags
 
 /**
 Returns the effecttype that corresponds to the given integer.
-@param i The integer representation of the effecttype
+@param i The integer representation of the effecttype.
 @pure
 */
 constant native ConvertEffectType           takes integer i returns effecttype
@@ -818,7 +818,7 @@ constant native ConvertEffectType           takes integer i returns effecttype
 
 /**
 Returns the version that corresponds to the given integer.
-@param i The integer representation of the version
+@param i The integer representation of the version.
 @pure
 */
 constant native ConvertVersion              takes integer i returns version
@@ -827,7 +827,7 @@ constant native ConvertVersion              takes integer i returns version
 
 /**
 Returns the itemtype that corresponds to the given integer.
-@param i The integer representation of the itemtype
+@param i The integer representation of the itemtype.
 @pure
 */
 constant native ConvertItemType             takes integer i returns itemtype
@@ -837,7 +837,7 @@ constant native ConvertItemType             takes integer i returns itemtype
 
 /**
 Returns the damagetype that corresponds to the given integer.
-@param i The integer representation of the damagetype
+@param i The integer representation of the damagetype.
 @pure
 */
 constant native ConvertDamageType           takes integer i returns damagetype
@@ -845,7 +845,7 @@ constant native ConvertDamageType           takes integer i returns damagetype
 
 /**
 Returns the weapontype that corresponds to the given integer.
-@param i The integer representation of the weapontype
+@param i The integer representation of the weapontype.
 @pure
 */
 constant native ConvertWeaponType           takes integer i returns weapontype
@@ -854,7 +854,7 @@ constant native ConvertWeaponType           takes integer i returns weapontype
 
 /**
 Returns the soundtype that corresponds to the given integer.
-@param i The integer representation of the soundtype
+@param i The integer representation of the soundtype.
 @pure
 */
 constant native ConvertSoundType            takes integer i returns soundtype
@@ -862,7 +862,7 @@ constant native ConvertSoundType            takes integer i returns soundtype
 
 /**
 Returns the pathingtype that corresponds to the given integer.
-@param i The integer representation of the pathingtype
+@param i The integer representation of the pathingtype.
 @pure
 */
 constant native ConvertPathingType          takes integer i returns pathingtype
@@ -870,7 +870,7 @@ constant native ConvertPathingType          takes integer i returns pathingtype
 
 /**
 Returns the mousebuttontype that corresponds to the given integer.
-@param i The integer representation of the mousebuttontype
+@param i The integer representation of the mousebuttontype.
 @pure
 @patch 1.29
 */
@@ -878,7 +878,7 @@ constant native ConvertMouseButtonType      takes integer i returns mousebuttont
 
 /**
 Returns the animtype that corresponds to the given integer.
-@param i The integer representation of the animtype
+@param i The integer representation of the animtype.
 @pure
 @patch 1.30
 */
@@ -886,7 +886,7 @@ constant native ConvertAnimType             takes integer i returns animtype
 
 /**
 Returns the subanimtype that corresponds to the given integer.
-@param i The integer representation of the subanimtype
+@param i The integer representation of the subanimtype.
 @pure
 @patch 1.30
 */
@@ -1148,13 +1148,13 @@ constant native UnitId2String               takes integer unitId            retu
 
 
 /**
-@bug Not working correctly
+@bug Not working correctly.
 @pure
 */
 constant native AbilityId                   takes string  abilityIdString   returns integer
 
 /**
-@bug Not working correctly
+@bug Not working correctly.
 @pure
 */
 constant native AbilityId2String            takes integer abilityId         returns string
@@ -1167,7 +1167,7 @@ In WorldEdit this is "Text - Name".
 
 **Example (Lua):** `GetObjectName( FourCC("hfoo") ) --> "Footman"`{.lua}
 
-@note See: `UnitId2String`
+@note See: `UnitId2String`.
 
 @pure
 @async
@@ -1181,9 +1181,9 @@ Returns the maximum number of playable player slots regardless of map options.
 * Classic: 12
 * Reforged: 24
 
-@note This is only affected by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/)
+@note This is only affected by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
 
-@note See: `bj_MAX_PLAYERS`, `GetBJMaxPlayerSlots`
+@note See: `bj_MAX_PLAYERS`, `GetBJMaxPlayerSlots`.
 
 @patch 1.29
 */
@@ -1195,7 +1195,7 @@ Returns the zero-based ID of neutral victim player.
 * Classic = (13?)
 * Reforged: ID = 25
 
-@note See: `bj_PLAYER_NEUTRAL_VICTIM`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`
+@note See: `bj_PLAYER_NEUTRAL_VICTIM`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`.
 
 @patch 1.29
 */
@@ -1207,7 +1207,7 @@ Returns the zero-based ID of neutral extra player.
 * Classic = (14?)
 * Reforged: ID = 26
 
-@note See: `bj_PLAYER_NEUTRAL_EXTRA`, `GetPlayerNeutralAggressive`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`
+@note See: `bj_PLAYER_NEUTRAL_EXTRA`, `GetPlayerNeutralAggressive`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`.
 
 @patch 1.29
 */
@@ -1219,9 +1219,9 @@ Returns the maximum number of internal player slots regardless of map options.
 * Classic: (16?)
 * Reforged: 28
 
-@note This is only affected by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/)
+@note This is only affected by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
 
-@note See: `bj_MAX_PLAYER_SLOTS`, `GetBJMaxPlayers`
+@note See: `bj_MAX_PLAYER_SLOTS`, `GetBJMaxPlayers`.
 
 @patch 1.29
 */
@@ -1233,7 +1233,7 @@ Returns the zero-based ID of neutral passive player.
 * Classic = 15
 * Reforged: ID = 27
 
-See: `PLAYER_NEUTRAL_PASSIVE`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetBJPlayerNeutralVictim`
+See: `PLAYER_NEUTRAL_PASSIVE`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetBJPlayerNeutralVictim`.
 
 @patch 1.29
 */
@@ -1245,7 +1245,7 @@ Returns the zero-based ID of neutral aggressive player.
 * Classic = 12
 * Reforged: ID = 24
 
-See: `PLAYER_NEUTRAL_AGGRESSIVE`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`
+See: `PLAYER_NEUTRAL_AGGRESSIVE`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`.
 
 @patch 1.29
 */
@@ -1266,14 +1266,14 @@ globals
 /**
 Stores the zero-based ID of neutral passive player.
 
-@note See: `GetPlayerNeutralPassive`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetBJPlayerNeutralVictim`
+@note See: `GetPlayerNeutralPassive`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetBJPlayerNeutralVictim`.
 */
     constant integer            PLAYER_NEUTRAL_PASSIVE          = GetPlayerNeutralPassive()
 
 /**
 Stores the zero-based ID of neutral aggressive player.
 
-@note See: `GetPlayerNeutralAggressive`
+@note See: `GetPlayerNeutralAggressive`.
 */
     constant integer            PLAYER_NEUTRAL_AGGRESSIVE       = GetPlayerNeutralAggressive()
 
@@ -1865,7 +1865,7 @@ Currently useless, there are no functions that take `widgetevent`.
 a `unitevent`. It would have allowed to register an event for
 a specific widget (unit/item/destructable).
 
-@note See: `TriggerRegisterDeathEvent`
+@note See: `TriggerRegisterDeathEvent`.
 */
     constant widgetevent EVENT_WIDGET_DEATH                             = ConvertWidgetEvent(89)
 

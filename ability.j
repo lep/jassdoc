@@ -43,7 +43,7 @@ native BlzSetAbilityResearchExtendedTooltip        takes integer abilCode, strin
 
 /**
 Get the ability tooltip of an ability.
-Supports Unit/Item/Ability/Tech Codes
+Supports Unit/Item/Ability/Tech Codes.
 
 @async
 @patch 1.29
@@ -60,7 +60,7 @@ native BlzGetAbilityActivatedTooltip               takes integer abilCode, integ
 
 /**
 Get the extended ability tooltip of an ability.
-Supports Unit/Item/Ability/Tech Codes
+Supports Unit/Item/Ability/Tech Codes.
 
 @async
 @patch 1.29
@@ -100,7 +100,7 @@ native BlzSetAbilityIcon                           takes integer abilCode, strin
 
 /**
 Get an ability’s icon at runtime, returns the icon path.
-Supports Unit/Item/Ability/Tech Codes
+Supports Unit/Item/Ability/Tech Codes.
 
 @patch 1.29
 */
@@ -221,7 +221,7 @@ native BlzGetAbilityStringField                    takes ability whichAbility, a
 
 /**
 @patch 1.31
-@bug Should not be used (crash): Use `BlzGetAbilityIntegerLevelField`
+@bug Should not be used (crash): Use `BlzGetAbilityIntegerLevelField`.
 */
 native BlzGetAbilityBooleanLevelField              takes ability whichAbility, abilitybooleanlevelfield whichField, integer level returns boolean
 
@@ -282,7 +282,7 @@ native BlzSetAbilityStringField                    takes ability whichAbility, a
 
 /**
 @patch 1.31
-@bug Should not be used (crash): Use `BlzSetAbilityIntegerLevelField`
+@bug Should not be used (crash): Use `BlzSetAbilityIntegerLevelField`.
 */
 native BlzSetAbilityBooleanLevelField              takes ability whichAbility, abilitybooleanlevelfield whichField, integer level, boolean value returns boolean
 

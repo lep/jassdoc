@@ -1,7 +1,7 @@
 // Visual API
 
 /**
-@bug Does nothing
+@bug Does nothing.
 */
 native SetTerrainFog                takes real a, real b, real c, real d, real e returns nothing
 
@@ -53,7 +53,7 @@ native SetTimeOfDayScale            takes real r returns nothing
 native GetTimeOfDayScale            takes nothing returns real
 
 /**
-@bug If fadeDuration equal 0 the unit portrait always appears invisible.
+@bug If fadeDuration equals 0 the unit portrait always appears invisible.
 */
 native ShowInterface                takes boolean flag, real fadeDuration returns nothing
 
@@ -61,7 +61,7 @@ native PauseGame                    takes boolean flag returns nothing
 
 
 /**
-@note See: `AddIndicator` (it is a more generic version as it takes a `widget`)
+@note See: `AddIndicator` (it is a more generic version as it takes a `widget`).
 */
 native UnitAddIndicator             takes unit whichUnit, integer red, integer green, integer blue, integer alpha returns nothing
 
@@ -77,12 +77,12 @@ The indicator is shown below the unit selection.
 If the unit is currently selected, the blinking indicator will be practically
 hidden by the selection circle. For more see `SetImageType` description.
 
-@note See: `UnitAddIndicator` (functionally equivalent to this widget version)
+@note See: `UnitAddIndicator` (functionally equivalent to this widget version).
 
 @param whichWidget The widget the indicator will be applied to.
-@param red 0-255 red color (value mod 256)
-@param green 0-255 green color (value mod 256)
-@param blue 0-255 blue color (value mod 256)
+@param red 0-255 red color (value mod 256).
+@param green 0-255 green color (value mod 256).
+@param blue 0-255 blue color (value mod 256).
 @param alpha 0-255 opacity (value mod 256). Determining the transparency
 of the indicator. `0` is total transparency, `255` is total opacity.
 */
@@ -91,9 +91,9 @@ native AddIndicator                 takes widget whichWidget, integer red, integ
 /**
 Pings a spot on the minimap.
 
-@param x horizontal world coordinate of the ping
-@param y vertical world coordinate of the ping
-@param duration duration of the ping in seconds
+@param x horizontal world coordinate of the ping.
+@param y vertical world coordinate of the ping.
+@param duration duration of the ping in seconds.
 
 @note This ping has the semantics of a "simple" ping (GUI/blizzard.j terminology).
 
@@ -111,12 +111,12 @@ native PingMinimap                  takes real x, real y, real duration returns 
 /**
 Pings a spot on the minimap.
 
-@param x horizontal world coordinate of the ping
-@param y vertical world coordinate of the ping
-@param duration duration of the ping in seconds
-@param red 0-255 red color (value mod 256)
-@param green 0-255 green color (value mod 256)
-@param blue 0-255 blue color (value mod 256)
+@param x horizontal world coordinate of the ping.
+@param y vertical world coordinate of the ping.
+@param duration duration of the ping in seconds.
+@param red 0-255 red color (value mod 256).
+@param green 0-255 green color (value mod 256).
+@param blue 0-255 blue color (value mod 256).
 @param extraEffects When true, the ping will have the appearance of a "flashy" ping. Otherwise it will be a "simple" ping (see notes).
 
 @note "Simple" pings (GUI/blizzard.j terminology) have a default shape of a rotating circle with 4 arrows
@@ -202,7 +202,7 @@ Emulates an ESCAPE key press internally, used to interact with UI, e.g. close F1
 4. OldPlayer executes a Cancel ability, nothing happens to ModernPlayer
 5. The game doesn't desync because it thinks OldPlayer really pressed that key, and even though ModernPlayer did "press" it too, he didn't trigger Cancel for his unit.
 
-@note Does not trigger (physical) player key events like `BlzTriggerRegisterPlayerKeyEvent`
+@note Does not trigger (physical) player key events like `BlzTriggerRegisterPlayerKeyEvent`.
 */
 native ForceUICancel                takes nothing returns nothing
 

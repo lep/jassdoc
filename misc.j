@@ -92,7 +92,7 @@ You need to use "//! beginusercode" to start a section containing Lua code and e
 It works because the code is compiled on the fly with Jass2Lua.
 
 
-@note See: `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+@note See: `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`.
 @note Also see the documentation for `Preloader` for more info on the generated files.
 */
 native Preload          takes string filename returns nothing
@@ -100,7 +100,7 @@ native Preload          takes string filename returns nothing
 /**
 Unknown. It's always generated at the end of a preload file, timeout represents the time between calls to `PreloadStart` and `PreloadGenEnd`.
 
-@note See: `Preload`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+@note See: `Preload`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`.
 */
 native PreloadEnd       takes real timeout returns nothing
 
@@ -108,21 +108,21 @@ native PreloadEnd       takes real timeout returns nothing
 /**
 Clears the preload buffer and starts the timer. (Anything else?)
 
-@note See: `Preload`, `PreloadEnd`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+@note See: `Preload`, `PreloadEnd`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`.
 */
 native PreloadStart     takes nothing returns nothing
 
 /**
 Unknown. It does not reset the timer or clear the buffer.
 
-@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`.
 */
 native PreloadRefresh   takes nothing returns nothing
 
 /**
 Unknown
 
-@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`.
 */
 native PreloadEndEx     takes nothing returns nothing
 
@@ -131,18 +131,18 @@ native PreloadEndEx     takes nothing returns nothing
 /**
 Clears all added file paths from the current preload buffer. Does not reset the timer.
 
-@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`.
 */
 native PreloadGenClear  takes nothing returns nothing
 
 /**
-Starts an internal timer for preloads. The timer will be used and recorded by PreloadGenEnd. The timer represents the wall clock time (in seconds) spent between the calls PreloadStart() and PreloadGenEnd().
+Starts an internal timer for preloads. The timer will be used and recorded by `PreloadGenEnd`. The timer represents the wall clock time (in seconds) spent between the calls `PreloadStart()` and `PreloadGenEnd()`.
 
 This function does not clear the previous buffer.
 
 The recorded time will be output as `call PreloadEnd( 0.123 )` in the saved preload file.
 
-@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`.
 */
 native PreloadGenStart  takes nothing returns nothing
 
@@ -172,7 +172,7 @@ Reforged: `%USERPROFILE%\Documents\Warcraft III\CustomMapData\`
 
 Classic: ?
 
-@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `Preloader`
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `Preloader`.
 */
 native PreloadGenEnd    takes string filename returns nothing
 
@@ -211,7 +211,7 @@ into the preload script.
 @bug 1.33.0 and above: Due to aggressive file caching by the game, the preload file is only loaded and read once.
 This means, updates to the saved preload file cannot be reloaded and old contents will be executed.
 
-@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`
+@note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`.
 */
 native Preloader        takes string filename returns nothing
 
@@ -238,7 +238,7 @@ native AutomationTestEnd                        takes nothing returns nothing
 native AutomationTestingFinished                takes nothing returns nothing
 
 /**
-"They do nothing of interest, just a compatibility thing" - MindWorX (Blizzard Developer), on [The Hive Discord](https://discord.com/channels/178569180625240064/311662737015046144/572101913349193738)
+"They do nothing of interest, just a compatibility thing" - MindWorX (Blizzard Developer), on [The Hive Discord](https://discord.com/channels/178569180625240064/311662737015046144/572101913349193738).
 
 @patch 1.30
 */

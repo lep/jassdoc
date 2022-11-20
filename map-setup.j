@@ -20,7 +20,7 @@ Sets the map name.
 in war3map.j, it is executed by the game when you load the lobby/selected
 the map for preview.
 
-@note v1.32.10: WorldEditor limits map name input to 36 characters (ASCII/Unicode)
+@note v1.32.10: WorldEditor limits map name input to 36 characters (ASCII/Unicode).
 
 @note
 Old game versions (tested v1.0) used different sources for map name based on
@@ -53,7 +53,7 @@ the map for preview.
 
 @note The map description is saved to "war3map.w3i" too, but this field is unused.
 
-@note Supports color codes
+@note Supports color codes.
 
 @note Length limits:
 
@@ -84,7 +84,7 @@ native SetTeams takes integer teamcount returns nothing
 in war3map.j, it is executed by the game when you load the lobby/selected
 the map for preview.
 
-@note The maximum amount of players (12 or 24) is determined by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/)
+@note The maximum amount of players (12 or 24) is determined by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
 */
 native SetPlayers takes integer playercount returns nothing
 

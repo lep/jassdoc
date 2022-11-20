@@ -79,10 +79,11 @@ their loudest when the camera is close to the sound's coordinates.
 the faster the sound fades in. Maximum number is 127.
 
 @param fadeOutRate How quickly the sound fades out. The higher the number,
-the faster the sound fades out. Maximum number is 127. used, e.g. values like
-volume, pitch, pitch variance, priority, channel, min distance, max distance, distance cutoff or eax.
+the faster the sound fades out. Maximum number is 127.
 
 @param SLKEntryName the label out of one of the SLK-files, whose settings should be
+used, e.g. values like volume, pitch, pitch variance, priority, channel, min distance, max distance, distance cutoff or eax.
+
 */
 native CreateSoundFilenameWithLabel takes string fileName, boolean looping, boolean is3D, boolean stopwhenoutofrange, integer fadeInRate, integer fadeOutRate, string SLKEntryName returns sound
 
@@ -114,9 +115,9 @@ native SetSoundDistanceCutoff       takes sound soundHandle, real cutoff returns
 native SetSoundChannel              takes sound soundHandle, integer channel returns nothing
 
 /**
-Sets the sounds volume
+Sets the sounds volume.
 
-@param soundHandle which sound
+@param soundHandle which sound.
 
 @param volume Volume, between 0 and 127.
 */
@@ -139,27 +140,27 @@ native SetSoundPlayPosition         takes sound soundHandle, integer millisecs r
 
 
 /**
-@note This call is only valid if the sound was created with 3d enabled
+@note This call is only valid if the sound was created with 3d enabled.
 */
 native SetSoundDistances            takes sound soundHandle, real minDist, real maxDist returns nothing
 
 /**
-@note This call is only valid if the sound was created with 3d enabled
+@note This call is only valid if the sound was created with 3d enabled.
 */
 native SetSoundConeAngles           takes sound soundHandle, real inside, real outside, integer outsideVolume returns nothing
 
 /**
-@note This call is only valid if the sound was created with 3d enabled
+@note This call is only valid if the sound was created with 3d enabled.
 */
 native SetSoundConeOrientation      takes sound soundHandle, real x, real y, real z returns nothing
 
 /**
-@note This call is only valid if the sound was created with 3d enabled
+@note This call is only valid if the sound was created with 3d enabled.
 */
 native SetSoundPosition             takes sound soundHandle, real x, real y, real z returns nothing
 
 /**
-@note This call is only valid if the sound was created with 3d enabled
+@note This call is only valid if the sound was created with 3d enabled.
 */
 native SetSoundVelocity             takes sound soundHandle, real x, real y, real z returns nothing
 
@@ -168,7 +169,7 @@ Attaches the sound soundHandle to unit whichUnit. Attaching sound to unit means
 that the more far away the player stays from the unit to which the sound is attached, the less
 loud the sound plays (the volume of the attached sound decreases with increasing distance).
 
-@note This call is only valid if the sound was created with 3d enabled
+@note This call is only valid if the sound was created with 3d enabled.
 
 @param soundHandle The 3D sound to play.
 @param whichUnit The unit to attach the sound to.
@@ -203,7 +204,7 @@ native StartSoundEx                 takes sound soundHandle, boolean fadeIn retu
 /**
 Stops the sound.
 
-@param soundHandle The sound to stop
+@param soundHandle The sound to stop.
 @param killWhenDone The sound gets destroyed if true.
 @param fadeOut turns down the volume with `fadeOutRate` as stated in constructor.
 */
@@ -219,7 +220,7 @@ native KillSoundWhenDone            takes sound soundHandle returns nothing
 // Music Interface. Note that if music is disabled, these calls do nothing
 
 /**
-@note If music is disabled, these calls do nothing
+@note If music is disabled, these calls do nothing.
 */
 native SetMapMusic                  takes string musicName, boolean random, integer index returns nothing
 
@@ -265,8 +266,8 @@ native ResumeMusic                  takes nothing returns nothing
 /**
 The thematic music does not play repeatedly, but interrupts the PlayMusic-music.
 
-@note Only one thematic music at a time, cancels the previous one
-@note Probably meant for boss fights and similar where the sound should go in foreground
+@note Only one thematic music at a time, cancels the previous one.
+@note Probably meant for boss fights and similar where the sound should go in foreground.
 
 @param musicFileName The path to the music file.
 */
@@ -275,8 +276,8 @@ native PlayThematicMusic            takes string musicFileName returns nothing
 /**
 The thematic music does not play repeatedly, but interrupts the PlayMusic-music.
 
-@note Only one thematic music at a time, cancels the previous one
-@note Probably meant for boss fights and similar where the sound should go in foreground
+@note Only one thematic music at a time, cancels the previous one.
+@note Probably meant for boss fights and similar where the sound should go in foreground.
 
 @param musicFileName The path to the music file.
 @param frommsecs At what offset the music starts. In milliseconds.

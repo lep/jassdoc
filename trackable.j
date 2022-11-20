@@ -25,11 +25,11 @@ endfunction
 with team colours will use the neutral-hostile team colour. To create an
 invisible trackable provide the empty string `""`.
 
-@param x The x-coordinate where the trackable should be created
+@param x The x-coordinate where the trackable should be created.
 
-@param y The x-coordinate where the trackable should be created
+@param y The x-coordinate where the trackable should be created.
 
-@param facing The facing of the trackable
+@param facing The facing of the trackable.
 
 */
 native CreateTrackable      takes string trackableModelPath, real x, real y, real facing returns trackable

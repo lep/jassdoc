@@ -15,13 +15,13 @@ Creates a new, undead blighted gold mine unit at the specified coordinates for t
 The player to create the goldmine for.
 
 @param x
-The x-coordinate of the goldmine
+The x-coordinate of the goldmine.
 
 @param y
-The y-coordinate of the goldmine
+The y-coordinate of the goldmine.
 
 @param face
-The facing of the goldmine in degrees
+The facing of the goldmine in degrees.
 */
 native CreateBlightedGoldmine   takes player id, real x, real y, real face returns unit
 

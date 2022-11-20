@@ -1,6 +1,6 @@
 
 /**
-@note You cannot create more than 255 hashtables
+@note You cannot create more than 255 hashtables.
 @patch 1.24
 */
 native  InitHashtable    takes nothing returns hashtable

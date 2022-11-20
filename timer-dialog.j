@@ -25,7 +25,7 @@ Destroys the timer dialog and frees the handle.
 
 This does not affect the timer you might have provided in `CreateTimerDialog`.
 
-@param whichDialog target dialog
+@param whichDialog target dialog.
 */
 native DestroyTimerDialog               takes timerdialog whichDialog returns nothing
 
@@ -37,22 +37,22 @@ Sets the shown dialog title. Replaces the default "Remaining" text.
 14 full-width characters like "@" (at character). If the text is wider,
 it is shortened and an ellipsis "..." is shown at the end.
 
-@note See: `TimerDialogSetTitle`, `TimerDialogSetTitleColor`, `TimerDialogSetTimeColor`
+@note See: `TimerDialogSetTitle`, `TimerDialogSetTitleColor`, `TimerDialogSetTimeColor`.
 
-@param whichDialog target dialog
-@param title new title
+@param whichDialog target dialog.
+@param title new title.
 */
 native TimerDialogSetTitle              takes timerdialog whichDialog, string title returns nothing
 
 /**
 Sets the timer-dialogs color.
 
-See: `TimerDialogSetTitle`, `TimerDialogSetTimeColor`
+See: `TimerDialogSetTitle`, `TimerDialogSetTimeColor`.
 
-@param whichDialog The timerdialog
-@param red 0-255 red color (value mod 256)
-@param green 0-255 green color (value mod 256)
-@param blue 0-255 blue color (value mod 256)
+@param whichDialog The timerdialog.
+@param red 0-255 red color (value mod 256).
+@param green 0-255 green color (value mod 256).
+@param blue 0-255 blue color (value mod 256).
 @param alpha (unused) 0-255 transparency, please set to 255.
 A value of 0 is complete transparency, while a value of 255 is complete opacity.
 */
@@ -61,12 +61,12 @@ native TimerDialogSetTitleColor         takes timerdialog whichDialog, integer r
 /**
 Sets the timer-dialogs time color.
 
-@note See: `TimerDialogSetTitleColor`
+@note See: `TimerDialogSetTitleColor`.
 
-@param whichDialog The timerdialog
-@param red 0-255 red color (value mod 256)
-@param green 0-255 green color (value mod 256)
-@param blue 0-255 blue color (value mod 256)
+@param whichDialog The timerdialog.
+@param red 0-255 red color (value mod 256).
+@param green 0-255 green color (value mod 256).
+@param blue 0-255 blue color (value mod 256).
 @param alpha (unused) 0-255 transparency, please set to 255.
 A value of 0 is complete transparency, while a value of 255 is complete opacity.
 */
@@ -83,8 +83,8 @@ The multiplier factor is applied literally to the displayed time:
 If you set the speed too high, the display will not become smoother as
 it updates roughly 2-3 times per second.
 
-@param whichDialog target dialog to modify the speed of
-@param speedMultFactor new multiplicator factor
+@param whichDialog target dialog to modify the speed of.
+@param speedMultFactor new multiplicator factor.
 
 For factor `2.0` the displayed time will appear twice as fast (200% speed).
 
@@ -135,10 +135,10 @@ in a single frame, the first dialog will appear below the second one.
 1. Hide *every* dialog, then show those that you need.
 2. Introduce a sleep-wait before turning dialog display on.
 
-@note See: `IsTimerDialogDisplayed`
+@note See: `IsTimerDialogDisplayed`.
 
-@param whichDialog target dialog
-@param display `true` to show, `false` to hide
+@param whichDialog target dialog.
+@param display `true` to show, `false` to hide.
 */
 native TimerDialogDisplay               takes timerdialog whichDialog, boolean display returns nothing
 
@@ -146,9 +146,9 @@ native TimerDialogDisplay               takes timerdialog whichDialog, boolean d
 /**
 Returns `true` if the dialog is shown, `false` if it is hidden.
 
-@note See: `TimerDialogDisplay`
+@note See: `TimerDialogDisplay`.
 
-@param whichDialog check visibility of this timer dialog
+@param whichDialog check visibility of this timer dialog.
 */
 native IsTimerDialogDisplayed           takes timerdialog whichDialog returns boolean
 
@@ -165,7 +165,7 @@ timer. Once it reaches zero, it'll stay at zero.
 @note There's no way to retrieve the internal timer value or to have an event
 trigger.
 
-@param whichDialog target dialog
-@param timeRemaining new time in seconds
+@param whichDialog target dialog.
+@param timeRemaining new time in seconds.
 */
 native TimerDialogSetRealTimeRemaining  takes timerdialog whichDialog, real timeRemaining returns nothing

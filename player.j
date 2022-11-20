@@ -8,9 +8,9 @@ If used with invalid values (below 0 or above `GetBJMaxPlayerSlots`), returns nu
 
 @note
 Common.j: IDs start from 0, e.g. Player(0) is red, 1 is blue etc. -> `GetPlayerId`
-Blizzard.j (WorldEdit): IDs start with 1 -> `GetConvertedPlayerId`
+Blizzard.j (WorldEdit): IDs start with 1 -> `GetConvertedPlayerId`.
 
-@note See: `GetPlayerId`, `GetBJMaxPlayers`, `GetBJMaxPlayerSlots`, `GetPlayerNeutralPassive`, `GetPlayerNeutralAggressive`
+@note See: `GetPlayerId`, `GetBJMaxPlayers`, `GetBJMaxPlayerSlots`, `GetPlayerNeutralPassive`, `GetPlayerNeutralAggressive`.
 
 @bug In old versions (which?) crashes the game if used with wrong values, that is values greather than 15
 or values lower than 0.
@@ -97,9 +97,9 @@ constant native GetPlayerRace takes player whichPlayer returns race
 /**
 Returns player ID of player (which starts with zero; e.g. player red is 0).
 
-@param whichPlayer Target player
+@param whichPlayer Target player.
 
-@note For one-based WorldEdit-type IDs see: `GetConvertedPlayerId`. Also: `Player`
+@note For one-based WorldEdit-type IDs see: `GetConvertedPlayerId`. Also: `Player`.
 */
 constant native GetPlayerId takes player whichPlayer returns integer
 
@@ -154,7 +154,7 @@ constant native GetPlayerTechMaxAllowed takes player whichPlayer, integer techid
 /**
 In upgrades that have multiple levels, it will research the upgrade by the
 number of levels specified. (it adds the number of levels to the current
-research level, see `SetPlayerTechResearched` to set the research level)
+research level, see `SetPlayerTechResearched` to set the research level).
 
 @param whichPlayer The player who the upgrade will be researched for.
 
@@ -203,7 +203,7 @@ native SetPlayerUnitsOwner takes player whichPlayer, integer newOwner returns no
 
 /**
 Reveals a player's remaining buildings to a force. The black mask over the
-buildings will be removed as if the territory had been discovered
+buildings will be removed as if the territory had been discovered.
 
 @note his function will not check whether the player has a town hall before revealing.
 

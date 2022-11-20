@@ -1,7 +1,7 @@
 // Boolean Expr API ( for compositing trigger conditions and unit filter funcs...)
 
 /**
-Returns a new boolean expression that has the result of evaluating logical (expr1 AND expr2)
+Returns a new boolean expression that has the result of evaluating logical (expr1 AND expr2).
 
 @note `boolexpr` extends from `agent` and must be explicitly destroyed with `DestroyBoolExpr` to prevent leaks.
 However, most functions from blizzard.j destroy passed boolexpr automatically.
@@ -9,7 +9,7 @@ However, most functions from blizzard.j destroy passed boolexpr automatically.
 native And              takes boolexpr operandA, boolexpr operandB returns boolexpr
 
 /**
-Returns a new boolean expression that has the result of evaluating logical (expr1 OR expr2)
+Returns a new boolean expression that has the result of evaluating logical (expr1 OR expr2).
 
 @note `boolexpr` extends from `agent` and must be explicitly destroyed with `DestroyBoolExpr` to prevent leaks.
 However, most functions from blizzard.j destroy passed boolexpr automatically.
@@ -71,18 +71,18 @@ However, most functions from blizzard.j destroy passed boolexpr automatically.
 
 @note Only call this on filterfunc created via `And`,`Or`,`Not`.
 
-@note See: `Filter`
+@note See: `Filter`.
 */
 native DestroyFilter    takes filterfunc f returns nothing
 
 /**
-destroys the provided boolean expression
+Destroys the provided boolean expression.
 
 @note `boolexpr` extends from `agent` and must be explicitly destroyed to prevent leaks.
 However, most functions from blizzard.j destroy passed boolexpr automatically.
 
 @note Only call this on boolexpr created via `And`,`Or`,`Not`.
 
-@note See: `And`, `Or`, `Not`, `Condition`, `Filter`
+@note See: `And`, `Or`, `Not`, `Condition`, `Filter`.
 */
 native DestroyBoolExpr  takes boolexpr e returns nothing
