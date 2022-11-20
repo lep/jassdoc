@@ -419,8 +419,6 @@ next to the minimap to toggle it while playing (hotkey: Alt+R).
 
 @note See: `GetCreepCampFilterState`, `SetAllyColorFilterState`
 
-@async
-
 @param state `true` to highlight camps, `false` to hide
 */
 native SetCreepCampFilterState      takes boolean state returns nothing
