@@ -542,6 +542,11 @@ Clears all widget selections for all players.
 */
 native ClearSelection takes nothing returns nothing
 
+/**
+@bug If you use this function to select a unit after calling `ClearSelection` (like `SelectUnitSingle`
+does) and you have a unit sub-menu opened (like spellbook or build structure), the command buttons
+of the selected unit won't show until you select another unit.
+*/
 native SelectUnit takes unit whichUnit, boolean flag returns nothing
 
 
