@@ -391,10 +391,24 @@ native GetAllyColorFilterState      takes nothing returns integer
 Sets the player color display mode.
 
 @note This is a player setting. Do not change it without a reason.
+Moreover this is an accessibility setting that may be used by visually impaired
+players.
 
 @bug You can set other states than 0-2, but they'll still display like state 0.
 
-@note See: `GetAllyColorFilterState`
+@bug (v1.32.10) You can permanently break this feature for a player
+if you set a large negative value.
+
+Any negative value will display like `state=0` and clicking the button
+will increase the state by 1. However if you set a very large negative value,
+the player will use the button to no avail. The issue here is that the value
+will be saved in player's game settings and persist forever, thus breaking this
+feature until a reinstall or until you set this to a sane value (0-2).
+
+Using large positive values instantly reverts to `state=0` after the first button
+click.
+
+@note See: `GetAllyColorFilterState` for full description; `EnableMinimapFilterButtons`.
 
 @param state new state (only 0, 1, 2 are valid).
 See `GetAllyColorFilterState` for a description.
@@ -405,6 +419,9 @@ native SetAllyColorFilterState      takes integer state returns nothing
 /**
 Returns `true` if the local player has enabled the display of creep camps on the minimap.
 
+The creep camps are shown as green/orange/red circles by default and there's a button
+next to the minimap to toggle it while playing (hotkey: Alt+R).
+
 @note See: `SetCreepCampFilterState`, `GetAllyColorFilterState`
 
 @async
@@ -414,15 +431,31 @@ native GetCreepCampFilterState      takes nothing returns boolean
 /**
 Toggles minimap creep display.
 
-The creep camps are shown as green/orange/red circles by default and there's a button
-next to the minimap to toggle it while playing (hotkey: Alt+R).
-
-@note See: `GetCreepCampFilterState`, `SetAllyColorFilterState`
+@note See: `GetCreepCampFilterState` for full description; `SetAllyColorFilterState`, `EnableMinimapFilterButtons`.
 
 @param state `true` to highlight camps, `false` to hide
 */
 native SetCreepCampFilterState      takes boolean state returns nothing
 
+
+/**
+Toggles the "player color display mode" and "minimap creep display" buttons.
+
+When the buttons are disabled, the player cannot control the minimap appearance
+or player colors (ally/enemy).
+
+@note This controls a player setting. Do not change it without a reason.
+Moreover this is an accessibility setting that may be used by visually impaired
+players.
+
+@note The buttons turn gray and their hotkeys stop working too.
+
+@param enableAlly `true` to enable the button (default), `false` to disable.
+See: `GetAllyColorFilterState` for an explanation.
+
+@param enableCreep `true` to enable the button (default), `false` to disable.
+See: `GetCreepCampFilterState` for an explanation.
+*/
 native EnableMinimapFilterButtons   takes boolean enableAlly, boolean enableCreep returns nothing
 
 /**
