@@ -3,6 +3,9 @@
 /**
 Controls selection settings globally: enables/disables selection of units, and visibility of selection circles.
 
+@note
+Acts exactly the same as `EnableSelect`
+
 @param enableSelection true to enable, false to disable selection.
 @param enableSelectionCircle true to show, false to hide selection circles on units and doodads.
 
@@ -11,14 +14,20 @@ Controls selection settings globally: enables/disables selection of units, and v
 native BlzEnableSelections                         takes boolean enableSelection, boolean enableSelectionCircle returns nothing
 
 /**
-Returns whether unit selection is enabled (a global setting, see `BlzEnableSelections`).
+Returns whether unit selection is enabled (a global setting, see `BlzEnableSelections` and `EnableSelect`).
+
+@note 
+Does not account for `EnablePreSelect` or `EnableDragSelect` settings.
 
 @patch 1.31
 */
 native BlzIsSelectionEnabled                       takes nothing returns boolean
 
 /**
-Returns whether unit selection circles are shown (a global setting, see `BlzEnableSelections`).
+Returns whether unit selection circles are shown (a global setting, see `BlzEnableSelections` and `EnableSelect`).
+
+@note 
+Does not account for `EnablePreSelect` or `EnableDragSelect` settings.
 
 @patch 1.31
 */
