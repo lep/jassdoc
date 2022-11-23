@@ -1449,88 +1449,92 @@ constant native GetObjectName               takes integer objectId          retu
 /**
 Returns the maximum number of playable player slots regardless of map options.
 
-* Classic: 12
+* Classic: 12 (hardcoded as `bj_MAX_PLAYERS`)
 * Reforged: 24
 
-
-@note This is only affected by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
+@note This is only affected by WorldEditor version (>=6060) specified in the map's war3map.w3i file.
+[Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
 
 @note See: `bj_MAX_PLAYERS`, `GetBJMaxPlayerSlots`.
 
-@patch 1.29
-
+@patch 1.29.0.8803
 */
 constant native GetBJMaxPlayers             takes nothing returns integer
 
 /**
 Returns the zero-based ID of neutral victim player.
 
-* Classic = (13?)
-* Reforged: ID = 25
+* Classic: 13 (hardcoded as `bj_PLAYER_NEUTRAL_VICTIM`)
+* Reforged: 25
+
+@note This is only affected by WorldEditor version (>=6060) specified in the map's war3map.w3i file.
+[Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
 
 
 @note See: `bj_PLAYER_NEUTRAL_VICTIM`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`.
 
-@patch 1.29
-
+@patch 1.29.0.8803
 */
 constant native GetBJPlayerNeutralVictim    takes nothing returns integer
 
 /**
 Returns the zero-based ID of neutral extra player.
 
-* Classic = (14?)
-* Reforged: ID = 26
+* Classic: 14 (hardcoded as `bj_PLAYER_NEUTRAL_EXTRA`)
+* Reforged: 26
+
+@note This is only affected by WorldEditor version (>=6060) specified in the map's war3map.w3i file.
+[Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
 
 
 @note See: `bj_PLAYER_NEUTRAL_EXTRA`, `GetPlayerNeutralAggressive`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`.
 
-@patch 1.29
-
+@patch 1.29.0.8803
 */
 constant native GetBJPlayerNeutralExtra     takes nothing returns integer
 
 /**
 Returns the maximum number of internal player slots regardless of map options.
 
-* Classic: (16?)
+* Classic: 16 (hardcoded as `bj_MAX_PLAYER_SLOTS`)
 * Reforged: 28
 
-
-@note This is only affected by WorldEditor version specified in the map's war3map.w3i file. [Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
+@note This is only affected by WorldEditor version (>=6060) specified in the map's war3map.w3i file.
+[Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
 
 @note See: `bj_MAX_PLAYER_SLOTS`, `GetBJMaxPlayers`.
 
-@patch 1.29
-
+@patch 1.29.0.8803
 */
 constant native GetBJMaxPlayerSlots         takes nothing returns integer
 
 /**
 Returns the zero-based ID of neutral passive player.
 
-* Classic = 15
-* Reforged: ID = 27
+* Classic: 15 (hardcoded as `PLAYER_NEUTRAL_PASSIVE`)
+* Reforged: 27
+
+@note This is only affected by WorldEditor version (>=6060) specified in the map's war3map.w3i file.
+[Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
 
 See: `PLAYER_NEUTRAL_PASSIVE`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetBJPlayerNeutralVictim`.
 
-
-@patch 1.29
-
+@patch 1.29.0.8803
 */
 constant native GetPlayerNeutralPassive     takes nothing returns integer
 
 /**
 Returns the zero-based ID of neutral aggressive player.
 
-* Classic = 12
-* Reforged: ID = 24
+* Classic: 12 (hardcoded as `PLAYER_NEUTRAL_AGGRESSIVE`)
+* Reforged: 24
+
+@note This is only affected by WorldEditor version (>=6060) specified in the map's war3map.w3i file.
+[Further reading](https://www.hiveworkshop.com/threads/success-hybrid-12-24-player-map-backwards-compatible-1-24-1-28-5-1-31.339722/).
 
 See: `PLAYER_NEUTRAL_AGGRESSIVE`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`.
 
-
-@patch 1.29
-
+@patch 1.29.0.8803
 */
 constant native GetPlayerNeutralAggressive  takes nothing returns integer
 
