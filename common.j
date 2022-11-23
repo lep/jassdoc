@@ -11851,6 +11851,8 @@ Starts playing a sound.
 @note An officially exported native in: 1.33.0 (checked v1.33.0.18897 PTR).
 Unofficially available in: 1.32 (not declared a native, but visible in Lua).
 
+@bug The `fadeIn` parameter does nothing (unused); thus equivalent to `StartSound`.
+
 @note The only difference to StartSound is the optional fadeIn (boolean).
 @patch 1.33
 
