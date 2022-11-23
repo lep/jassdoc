@@ -3935,14 +3935,27 @@ this will return the conversion of the valid part: `S2R(".123asd") == 0.123`.
 native S2R  takes string s returns real
 
 /**
-returns the internal index of the given handle.
+Returns the internal index of the given handle; returns 0 if `h` is `null`.
 
 **Example:** `GetHandleId(Player(0)) -> 1048584`
 
-@param h Handle
+@note Removing a game object does not automatically invalidate an allocated handle:
 
+```{.lua}
+uf = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
+GetHandleId(uf) --> 1049016
+RemoveUnit(uf)
+GetHandleId(uf) --> 1049016
+uf = nil
+GetHandleId(uf) --> 0
+```
 
 @note Sometimes the handle ID may be different between clients.
+
+@note The handle index returned here is only a weak and not a conclusive indicator
+of leaking game objects. In other words, the number may be high without an actual leak.
+
+@param h Handle
 
 @patch 1.24b
 
