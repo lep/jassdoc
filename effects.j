@@ -101,18 +101,21 @@ native TerrainDeformStopAll takes nothing returns nothing
 
 
 /**
-Creates the special effect in point with coordinates (x;y) with Z = 0 using the
-model file with a path modelName.
+Creates the special effect in point with coordinates (x;y) using the model file with a path modelName.
+The altitude (Z) of the newly spawned effect is at the ground level, be it terrain, some pathable destructable or on top of water.
+In other words, the effect's Z coordinate does not have to be 0.
 
-@note To create an effect with a z-position not zero see <http://www.hiveworkshop.com/forums/1561722-post10.html>.
+@note To create an effect with an offset in relation to the ground before 1.30 patch, see <http://www.hiveworkshop.com/forums/1561722-post10.html>
+@note In case of 1.30 patch or higher, use `BlzSetSpecialEffectZ` native.
 
 @note To create an effect only visible to one player see <https://www.hiveworkshop.com/threads/gs.300430/#post-3209073>
 */
 native AddSpecialEffect takes string modelName, real x, real y returns effect
 
 /**
-Creates the special effect in the stated location where with Z = 0 using the
-model file with a path modelName.
+Creates the special effect in the stated location using the model file with a path modelName.
+The altitude (Z) of the newly spawned effect is at the ground level, be it terrain, some pathable destructable or on top of water.
+In other words, the effect's Z coordinate does not have to be 0.
 
 @note To create an effect with a z-position not zero see <http://www.hiveworkshop.com/forums/1561722-post10.html>.
 
@@ -293,12 +296,14 @@ native BlzSetSpecialEffectScale                    takes effect whichEffect, rea
 /**
 Changes(set) the X, Y and Z (altitude) coordinate (Cartesian System) of the current location of the special effect.
 
+@note Z is not relative to terrain, it is absolute.
+
 @patch 1.29
 */
 native BlzSetSpecialEffectPosition                 takes effect whichEffect, real x, real y, real z returns nothing
 
 /**
-Changes(set) the model height of the passed special effect.
+Changes(set) the model height of the passed special effect. 
 
 @patch 1.29
 */
@@ -347,17 +352,21 @@ native BlzSetSpecialEffectPitch                    takes effect whichEffect, rea
 native BlzSetSpecialEffectRoll                     takes effect whichEffect, real roll returns nothing
 
 /**
+@bug In 1.29 this native is bugged, it will set the X coordinate, but reset the Y and Z to where it was spawned in.
+
 @patch 1.29
 */
 native BlzSetSpecialEffectX                        takes effect whichEffect, real x returns nothing
 
 /**
+@bug In 1.29 this native is bugged, it will set the Y coordinate, but reset the X and Z to where it was spawned in.
+
 @patch 1.29
 */
 native BlzSetSpecialEffectY                        takes effect whichEffect, real y returns nothing
 
 /**
-Sets the effect's Z position (height).
+Sets the effect's absolute Z position (height). 
 
 @note Before 1.29 there was no direct way to set a special effect's height. The following trick was used as a workaround:
 
@@ -367,6 +376,8 @@ Sets the effect's Z position (height).
     call DestroyEffect(AddSpecialEffect(effectPath, x, y))
     // Remove platform immediately, only the effect will remain visible for its life duration
     call RemoveDestructable(tempDestr)
+
+@bug In 1.29 this native is bugged, it will set the Z coordinate, but reset the X and Y to where it was spawned in.
 
 @patch 1.29
 */
@@ -396,7 +407,7 @@ Get the Y coordinate (Cartesian System) of the current location of the special e
 native BlzGetLocalSpecialEffectY                   takes effect whichEffect returns real
 
 /**
-Get the Z coordinate (altitude)(Cartesian System) of the current location of the special effect.
+Get the absolute Z coordinate (altitude)(Cartesian System) of the current location of the special effect.
 
 @async
 @patch 1.29
