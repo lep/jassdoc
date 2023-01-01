@@ -303,7 +303,7 @@ Changes(set) the X, Y and Z (altitude) coordinate (Cartesian System) of the curr
 native BlzSetSpecialEffectPosition                 takes effect whichEffect, real x, real y, real z returns nothing
 
 /**
-Changes(set) the model height of the passed special effect. 
+Sets the effect's absolute Z position (height). This native is functionally identical to BlzSetSpecialEffectZ.
 
 @patch 1.29
 */
