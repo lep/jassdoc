@@ -1505,6 +1505,8 @@ native BlzGetUnitAbilityCooldown                   takes unit whichUnit, integer
 /**
 Get a specific unit’s remaining ability cooldown.
 
+@bug Sometimes it may return 0 for abilities based on Channel even when they are on cooldown.
+
 @patch 1.29
 */
 native BlzGetUnitAbilityCooldownRemaining          takes unit whichUnit, integer abilId returns real
