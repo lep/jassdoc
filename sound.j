@@ -221,6 +221,7 @@ native KillSoundWhenDone            takes sound soundHandle returns nothing
 
 /**
 @note If music is disabled, these calls do nothing.
+@note If musicName is a semicolon-delimited list, the whole list of music is played. The index and random parameters seem to be with respect to the list.
 */
 native SetMapMusic                  takes string musicName, boolean random, integer index returns nothing
 
@@ -237,6 +238,7 @@ Sets the file as the current music for the map, and plays it.
 @bug This native may cause a short lag spike as soon as the music starts. To circumvent this lag, stop the current music without fadeout before calling this function (`call StopMusic(false)`). 
 @param musicName The path to the music file.
 @note Should work with mp3s, midis and wavs.
+@note If musicName is a semicolon-delimited list, the whole list of music is played.
 */
 native PlayMusic                    takes string musicName returns nothing
 
