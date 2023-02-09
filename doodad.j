@@ -5,10 +5,13 @@ Makes doodads in the vicinity of a point play an animation.
 
 @param x x-coordinate (world units) of the point.
 @param y y-coordinate (world units) of the point.
+@param radius Maximum pick distance from the point.
 @param doodadID The type of the doodad that should be affected.
 @param nearestOnly If true, only the single doodad (of the given type) closest to the point will be affected, otherwise all in the vicinity (of the given type).
 @param animName String identifier of the animation that should be played.
 @param animRandom If true, the animation to be played will be picked from an extended set including different variations of the animName, e.g., if animName is "walk", it can also be "walk defend".
+
+@note Only doodads whose origin is within the radius distance of the point are considered.
 
 @note There are the special values "hide" and "show" for animName, which will hide respectively show the doodad. When a doodad is hidden this way, its animation will pause at the current time frame. Re-showing the doodad resumes the animation.
 
