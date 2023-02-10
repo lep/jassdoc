@@ -30,6 +30,8 @@ Makes doodads within a rect play an animation.
 
 @note Only doodads whose origin is in the rect are considered targets.
 
+@note The animation won't play for an observer until they have sight visibility of the doodad, at which point it will play.
+
 See SetDoodadAnimation for other parameters and notes.
 */
 native SetDoodadAnimationRect   takes rect r, integer doodadID, string animName, boolean animRandom returns nothing
