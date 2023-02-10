@@ -204,36 +204,104 @@ native AddSpellEffectTargetById takes integer abilityId, effecttype t, widget ta
 
 
 /**
-Adds the lightning of type codeName between two points with coordinates (x1;y1)
-and (x2;y2). The checkVisibility parameter allows to toggle lightning's
-visibility in fog of war and black mask: true will force it to show in the fog
-of war and black mask when false is the reverse operation. This function is
-making Z coordinates of both lightning edges equal to 0.
+Creates a lightning between two points.
+
+@param codeName 4 letter id from the LightningData.slk.
+@param checkVisibility If this is true, the lightning won't be created and the function will return null unless the local player
+currently has as visibility of at least one of the endpoints of the to be created lightning.
+@param x1 x-coordinate (World) of source point.
+@param y1 y-coordinate (World) of source point.
+@param x2 x-coordinate (World) of target point.
+@param y2 y-coordinate (World) of target point.
+
+@note The source z value of the new lightning is set to match the current terrain height of the source point, analogously, the target z value
+matches the current terrain height of the target point. Later changes to the terrain height do not affect herewith created existing lightnings anymore.
 */
 native AddLightning takes string codeName, boolean checkVisibility, real x1, real y1, real x2, real y2 returns lightning
 
 /**
-Adds the lightning of type codeName between two points with coordinates (x1;y1;z1)
-and (x2;y2;z2). The checkVisibility parameter allows to toggle lightning's
-visibility in fog of war and black mask: true will force it to show in the fog
-of war and black mask when false is the reverse operation.
+Creates a lightning between two points.
+
+@param codeName 4 letter id from the LightningData.slk.
+@param checkVisibility If this is true, the lightning won't be created and the function will return null unless the local player
+currently has visibility of at least one of the endpoints of the to be created lightning.
+@param x1 x-coordinate (World) of source point.
+@param y1 y-coordinate (World) of source point.
+@param z1 z-coordinate (World) of source point.
+@param x2 x-coordinate (World) of target point.
+@param y2 y-coordinate (World) of target point.
+@param z2 z-coordinate (World) of target point.
 */
 native AddLightningEx takes string codeName, boolean checkVisibility, real x1, real y1, real z1, real x2, real y2, real z2 returns lightning
 
+/**
+Destroys a lightning.
+
+@param whichBolt The lightning to be destroyed.
+*/
 native DestroyLightning takes lightning whichBolt returns boolean
 
+/**
+Moves a lightning.
+
+@param whichBolt The lightning to be moved.
+@param checkVisibility If this is true, the lightning won't be moved (at all) unless the local player
+currently has visibility of at least one of the new endpoints.
+@param x1 x-coordinate (World) of the new source point.
+@param y1 y-coordinate (World) of the new source point.
+@param x2 x-coordinate (World) of the new target point.
+@param y2 y-coordinate (World) of the new target point.
+*/
 native MoveLightning takes lightning whichBolt, boolean checkVisibility, real x1, real y1, real x2, real y2 returns boolean
 
+/**
+Moves a lightning.
+
+@param whichBolt The lightning to be moved.
+@param checkVisibility If this is true, the lightning won't be moved (at all) unless the local player
+currently has visibility of at least one of the new endpoints.
+@param x1 x-coordinate (World) of the new source point.
+@param y1 y-coordinate (World) of the new source point.
+@param z1 z-coordinate (World) of the new source point.
+@param x2 x-coordinate (World) of the new target point.
+@param y2 y-coordinate (World) of the new target point.
+@param z2 z-coordinate (World) of the new target point.
+*/
 native MoveLightningEx takes lightning whichBolt, boolean checkVisibility, real x1, real y1, real z1, real x2, real y2, real z2 returns boolean
 
+/**
+Gets the alpha value of a lightning.
+*/
 native GetLightningColorA takes lightning whichBolt returns real
 
+/**
+Gets the red color value of a lightning.
+*/
 native GetLightningColorR takes lightning whichBolt returns real
 
+/**
+Gets the green color value of a lightning.
+*/
 native GetLightningColorG takes lightning whichBolt returns real
 
+/**
+Gets the blue color value of a lightning.
+*/
 native GetLightningColorB takes lightning whichBolt returns real
 
+/**
+Sets the coloring of a lightning.
+
+@param whichBolt The lightning to be colored.
+@param r 0-1 visibility of red channel (value mod 1)
+@param g 0-1 visibility of green channel (value mod 1)
+@param b 0-1 visibility of blue channel (value mod 1)
+@param a 0-1 alpha value/overall visibility multiplier (value mod 1)
+
+@note The default is 1, 1, 1, 1.
+
+@bug This native is inaccurate. The modulo is not exactly 1 and even setting a color value to e.g. 0.1 yields 0.098.
+*/
 native SetLightningColor takes lightning whichBolt, real r, real g, real b, real a returns boolean
 
 
