@@ -1741,6 +1741,11 @@ TriggerRegisterGameEvent(trg_gameev, EVENT_GAME_BUILD_SUBMENU)
     constant playerevent EVENT_PLAYER_DEFEAT                    = ConvertPlayerEvent(13)
     constant playerevent EVENT_PLAYER_VICTORY                   = ConvertPlayerEvent(14)
     constant playerevent EVENT_PLAYER_LEAVE                     = ConvertPlayerEvent(15)
+/**
+@bug Do not use this with `TriggerRegisterPlayerEvent` as `GetEventPlayerChatString`
+will return `""`. Use `TriggerRegisterPlayerChatEvent` instead.
+
+*/
     constant playerevent EVENT_PLAYER_CHAT                      = ConvertPlayerEvent(16)
     constant playerevent EVENT_PLAYER_END_CINEMATIC             = ConvertPlayerEvent(17)
 

@@ -471,6 +471,7 @@ native TriggerRegisterPlayerChatEvent takes trigger whichTrigger, player whichPl
 /**
 Returns the actual string they typed in ( same as what you registered for
  if you required exact match ).
+Used in conjunction with `TriggerRegisterPlayerChatEvent`.
 
 @event ConvertPlayerEvent(96)
 
@@ -481,6 +482,7 @@ constant native GetEventPlayerChatString takes nothing returns string
 
 /**
 Returns the string that you registered for.
+Used in conjunction with `TriggerRegisterPlayerChatEvent`.
 
 @event ConvertPlayerEvent(96)
 
