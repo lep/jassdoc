@@ -31,6 +31,27 @@ native  StoreReal						takes gamecache cache, string missionKey, string key, rea
 
 native  StoreBoolean					takes gamecache cache, string missionKey, string key, boolean value returns nothing
 
+/**
+Stores a description of a unit in a game cache that can be retrieved with `RestoreUnit`.
+
+The saved attributes of the unit are (non-exhaustive): unitId, experience, hero level, unused skill points, hero proper name (index),
+strength/agility/intelligence, attack speed/move speed increments from agility, life, mana and attack damage increments
+(can be adjusted individually using tome abilities), sight range (day) (can be adjusted with UNIT_RF_SIGHT_RADIUS), armor increment
+
+Descriptions of the items in the unit's inventory will also be saved (non-exhaustive): itemId, charges, flags: drop upon death, perishable,
+invulnerable, pawnable, used on acquire (powerup), droppable, actively used
+
+Descriptions of the unit's hero abilities will also be saved: abilityId, currentLevel
+
+See also https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/main/w3-w3v.ksy
+
+@bug When a unit obtains armor from a research and is then stored in a game cache, restoring it will retain the armor increment without the research, so if
+the research is done again, the unit will benefit doubly.
+
+@bug If a hero unit was stored under some key pair and later the key pair is overwritten with a non-hero unit, the previous hero attributes will not
+be overwritten, i.e., they will remain and be merged with the non-hero attributes. This can be observed in the persisted .w3v file. Ingame, it
+would not make a difference because the restored non-hero unit normally would not use the hero attributes.
+*/
 native  StoreUnit						takes gamecache cache, string missionKey, string key, unit whichUnit returns boolean
 
 native  StoreString						takes gamecache cache, string missionKey, string key, string value returns boolean
