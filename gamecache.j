@@ -34,16 +34,16 @@ native  StoreBoolean					takes gamecache cache, string missionKey, string key, b
 /**
 Stores a description of a unit in a game cache that can be retrieved with `RestoreUnit`.
 
-The saved attributes of the unit are (non-exhaustive): unitId, experience, hero level, unused skill points, hero proper name (index),
+The saved attributes of the unit are (non-exhaustive): unit id, experience, hero level, unused skill points, hero proper name (index),
 strength/agility/intelligence, attack speed/move speed increments from agility, life, mana and attack damage increments
-(can be adjusted individually using tome abilities), sight range (day) (can be adjusted with UNIT_RF_SIGHT_RADIUS), armor increment
+(can be adjusted individually using tome abilities), sight range (day) (can be adjusted with `UNIT_RF_SIGHT_RADIUS`), armor increment
 
-Descriptions of the items in the unit's inventory will also be saved (non-exhaustive): itemId, charges, flags: drop upon death, perishable,
+Descriptions of the items in the unit's inventory will also be saved (non-exhaustive): item id, charges, flags: drop upon death, perishable,
 invulnerable, pawnable, used on acquire (powerup), droppable, actively used
 
-Descriptions of the unit's hero abilities will also be saved: abilityId, currentLevel
+Descriptions of the unit's hero abilities will also be saved: ability id, current level
 
-See also https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/main/w3-w3v.ksy
+See also the unit entry in the following Kaitai Struct file describing the w3v format (gamecaches file): https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/main/w3-w3v.ksy
 
 @bug When a unit obtains armor from a research and is then stored in a game cache, restoring it will retain the armor increment without the research, so if
 the research is done again, the unit will benefit doubly.
