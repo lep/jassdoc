@@ -37,6 +37,7 @@
 		devShell = pkgs.mkShell {
 		    buildInputs = buildInputs ++ [ pkgs.cabal-install ];
 		    inputsFrom = builtins.attrValues self.packages.${system};
+				packages = [ pkgs.perlPackages.DBI pkgs.perlPackages.DBDSQLite ];
 		};
 	    });
 }

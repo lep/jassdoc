@@ -170,7 +170,12 @@ parseDocstring = bimap (trimWhitespace . myUnlines . reverse)
                . L8.lines
   where
     go :: [L8.ByteString] -> Accumulator -> Accumulator
-    go [] acc = acc
+    -- we reverse the annotations to have it inserted in the db in the same
+    -- order they are written in the file. that way we can use sqlites _rowid_
+    -- to query the annotations in the same order as they were written.
+    -- this *might* only work for fresh builds as i don't know if sqlite
+    -- recycles their internal rowids.
+    go [] acc = second reverse acc 
     go (x:xs) (descr, annotations)
         | Just ann <- getAnn x = go xs (descr, ann:annotations)
         | null annotations = go xs (x:descr, annotations)
