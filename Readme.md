@@ -9,11 +9,6 @@ This goal of this project is not to document *every* function and native but
 to add helpful comments for unclear functions, give notes about buggy functions
 and inform about other misc information.
 
-The jass natives are grouped into categories and split into files (e.g.
-`unit.j` and `timer.j`). This project is structured like code so that it can be
-compiled into one large document, but doing so is not necessary for making use
-of this repository.
-
 Currently there's [Jassbot - a JASS API search engine](https://lep.duckdns.org/app/jassbot/) running that uses this as a database.
 
 # How to add documentation

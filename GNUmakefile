@@ -1,6 +1,7 @@
 MKDOCS ?= cabal run mkdocs --
 
 .PHONY: all clean release check
+.PHONY: check-missing check-params
 
 SRC := common.j Blizzard.j common.ai builtin-types.j
 
@@ -14,8 +15,13 @@ db.sql: mksrc $(SRC)
 jass.db: db.sql
 	sqlite3 $@ < $<
 
-check: jass.db
+check-missing: jass.db
+	./lint $(SRC)
+
+check-params: jass.db
 	sqlite3 $< < check-wrong-params.sql
+
+check: check-missing check-params
 
 clean:
 	rm -f db.sql

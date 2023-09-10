@@ -5,55 +5,120 @@ use 5.30.0;
 use strict;
 use warnings;
 
+use open ':std', ':utf8', ':encoding(UTF-8)';
+
+# no feature qw(indirect);
+use feature qw(signatures);
+no warnings qw(experimental::signatures);
+
+use Getopt::Long;
 use DBI;
 
-my $dbh = DBI->connect('DBI:SQLite:jass.db');
-my $stm = $dbh->prepare( 'SELECT 1 from annotations where fnname == ? limit 1' );
+# my $dbh = DBI->connect('DBI:SQLite:jass.db');
+my $dbPath = "jass.db";
+my $help   = 0;
+
+GetOptions(
+    "db=s" => \$dbPath,
+    help   => \$help
+) or die pod2usage( -verbose => 1 );
+
+pod2usage( -verbose => 2 ) if $help;
+pod2usage( -verbose => 1 ) unless @ARGV;
+
+my @files = @ARGV;
+
+my $dbh = DBI->connect("DBI:SQLite:$dbPath");
+my $stm = $dbh->prepare('SELECT 1 from annotations where fnname == ? limit 1');
 
 sub check_name {
     my $name = shift;
-    $stm->execute( $name );
+    $stm->execute($name);
     print "Missing $name\n" unless $stm->fetchrow_array;
 }
 
+for my $file (@files) {
+    say "Linting $file";
+    open( my $fh, "<", $file ) or die;
 
-open(my $fh, "<", $ARGV[0]) or die;
+    my $fn    = "";
+    my $start = 0;
+    my $end   = 0;
+    my @state = ("nothing");
 
+    while ( my $line = <$fh> ) {
+        if (   $state[0] eq "nothing"
+            && $line =~ /^(?:constant\s+)?function\s+(\w+)/ )
+        {
+            unshift @state, "function";
+            $fn = $1;
+            check_name $fn;
+        }
+        elsif ( $state[0] eq "function" && $line =~ /^endfunction/ ) {
+            shift @state;
+        }
+        elsif ($line =~ /^(?:constant\s+)?native\s+(\w+)/
+            && $state[0] eq "nothing" )
+        {
+            $fn = $1;
+            check_name $fn;
+        }
+        elsif ( $state[0] eq "nothing" && $line =~ m/^\s*globals/ ) {
+            unshift @state, "globals";
+        }
+        elsif ( $line =~ m/^\/\*\*/ ) {
+            unshift @state, "docstring";
+        }
+        elsif ( $state[0] eq "docstring" && $line =~ m(^\*/) ) {
+            shift @state;
+        }
+        elsif ( $state[0] eq "docstring" ) {
 
-my $state = "nothing";
-my $src = "";
-my $fn = "";
-my $start = 0;
-my $end = 0;
-
-while (my $line = <$fh>){
-    if($state eq "nothing" && $line =~ /^(?:constant\s+)?function\s+(\w+)/){
-	$state = "function";
-	$fn = $1;
-	check_name $fn;
-    }elsif($state eq "function" && $line =~ /^endfunction/){
-	$state = "nothing";
-    }elsif( $line =~ /^(?:constant\s+)?native\s+(\w+)/ && $state eq "nothing" ){
-	$fn = $1;
-	check_name $fn;
-    }elsif ( $state eq "nothing" && $line =~ m/^\s*globals/){
-	$state = "globals";
-    }elsif( $state eq "globals" && $line =~ m/^\s*endglobals/){
-	$state = "nothing";
-    }elsif( $state eq "nothing" && $line =~ m/^type\s+(\w+)\s+extends\s+.+/){
-	my $type = $1;
-	check_name $type;
-    }elsif ( $state eq "globals" ){
-	my $name;
-	given($line){
-	    $name = $1 when /^\s*constant\s+\w+\s+(\w+)\s*=.+$/;
-	    $name = $1 when /^\s*\w+\s+array\s+(\w+)/;
-	    $name = $1 when /^\s*\w+\s+(\w+)/;
-	}
-	if($name){
-	    check_name $name;
-
-	}
+            # do nothing
+        }
+        elsif ( $state[0] eq "globals" && $line =~ m/^\s*endglobals/ ) {
+            shift @state;
+        }
+        elsif ($state[0] eq "nothing"
+            && $line =~ m/^type\s+(\w+)\s+extends\s+.+/ )
+        {
+            my $type = $1;
+            check_name $type;
+        }
+        elsif ( $state[0] eq "globals" ) {
+            my $name;
+            if ( $line =~ /^\s*constant\s+\w+\s+(\w+)\s*=.+$/ ) {
+                $name = $1;
+            }
+            elsif ( $line =~ /^\s*\w+\s+array\s+(\w+)/ ) {
+                $name = $1;
+            }
+            elsif ( $line =~ /^\s*\w+\s+(\w+)/ ) {
+                $name = $1;
+            }
+            check_name $name if $name;
+        }
     }
 }
+
+__END__
+
+=head1 NAME
+
+lint - Checks jass files for missing DB entries
+
+=head1 SYNOPSIS
+
+lint [options] [FILES]
+
+ Options:
+  --db    Path to jass.db. Default: jass.db
+  --help  Prints this help message
+
+=head1 DESCRIPTION
+
+B<This program> checks for each jass file provided if any top-level definition
+has no entry in the database. This can be used see if a new common.j for
+example has any new natives/types/globals.
+
 
