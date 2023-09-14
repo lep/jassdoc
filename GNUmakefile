@@ -24,5 +24,5 @@ check-params: jass.db
 check: check-missing check-params
 
 clean:
-	rm -f db.sql
+	rm -f db.sql jass.db
 
