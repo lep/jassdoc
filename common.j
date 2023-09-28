@@ -6787,8 +6787,25 @@ Returns handle to unit.
 
 */
 native          CreateUnit              takes player id, integer unitid, real x, real y, real face returns unit
+
+
+/**
+@param face Unit facing in degrees.
+*/
 native          CreateUnitByName        takes player whichPlayer, string unitname, real x, real y, real face returns unit
+
+
+/**
+@param id The owner of the unit.
+@param unitid The rawcode of the unit.
+@param whichLocation The position of the unit.
+@param face Unit facing in degrees.
+*/
 native          CreateUnitAtLoc         takes player id, integer unitid, location whichLocation, real face returns unit
+
+/**
+@param face Unit facing in degrees.
+*/
 native          CreateUnitAtLocByName   takes player id, string unitname, location whichLocation, real face returns unit
 
 /**
@@ -6854,7 +6871,56 @@ canceling its orders use `SetUnitX`/`SetUnitY`.
 */
 native          SetUnitPosition     takes unit whichUnit, real newX, real newY returns nothing
 native          SetUnitPositionLoc  takes unit whichUnit, location whichLocation returns nothing
+
+
+/**
+Makes the unit slowly turn around on the spot to look at new direction.
+
+@param whichUnit Target unit.
+@param facingAngle Unit facing in degrees.
+
+* 0   = East
+* 90  = North
+* 180 = West
+* 270 = South
+* -90 = South (wraps around)
+*/
 native          SetUnitFacing       takes unit whichUnit, real facingAngle returns nothing
+
+
+/**
+Makes the unit slowly turn around on the spot to look at new direction,
+the turn speed can be modified with `duration`.
+
+@note Not affected by `GetUnitTurnSpeed`/`SetUnitTurnSpeed`.
+
+@bug For `duration == 0.5` the footman plays the running animation while turning.
+
+```{.lua}
+uf1 = CreateUnit(Player(0), FourCC("hfoo"), -128, 0, 90)
+uf2 = CreateUnit(Player(0), FourCC("hfoo"), 128, 0, 90)
+
+SetUnitFacing(uf1, -90)
+SetUnitFacingTimed(uf2, -90, 0.5)
+```
+
+@bug For `duration` values other than zero, the final angle is different
+than the requested angle, even when called repeatedly.
+
+```{.lua}
+SetUnitFacing(uf1, 90)
+SetUnitFacingTimed(uf2, 90, 1) --> final angle = 96.91184 (expected 90)
+```
+
+@param whichUnit Target unit.
+
+@param facingAngle New angle in degrees (direction), see: `SetUnitFacing`.
+
+@param duration
+Value >= 0 and < 1: same turn speed as `SetUnitFacing`.
+
+Values >= 1 seem to be applied like a multiplier, slowing down the turn speed.
+*/
 native          SetUnitFacingTimed  takes unit whichUnit, real facingAngle, real duration returns nothing
 native          SetUnitMoveSpeed    takes unit whichUnit, real newSpeed returns nothing
 native          SetUnitFlyHeight    takes unit whichUnit, real newHeight, real rate returns nothing
