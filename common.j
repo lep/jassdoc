@@ -8151,6 +8151,12 @@ constant native IsLocationFoggedToPlayer    takes location whichLocation, player
 constant native IsMaskedToPlayer            takes real x, real y, player whichPlayer returns boolean
 constant native IsLocationMaskedToPlayer    takes location whichLocation, player whichPlayer returns boolean
 
+
+/**
+Returns race of the player.
+
+The handle is constant and does not change between invocations. (Lua, v1.32.10)
+*/
 constant native GetPlayerRace           takes player whichPlayer returns race
 
 /**
