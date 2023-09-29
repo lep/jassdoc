@@ -1214,6 +1214,9 @@ function SetForLoopIndexB takes integer newIndex returns nothing
     set bj_forLoopBIndex = newIndex
 endfunction
 
+/**
+@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 //===========================================================================
 // We can't do game-time waits, so this simulates one by starting a timer
 // and polling until the timer expires.
@@ -1331,6 +1334,9 @@ function GetTimeOfDayScalePercentBJ takes nothing returns real
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `soundHandle`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function PlaySound takes string soundName returns nothing
     local sound soundHandle = CreateSound(soundName, false, false, true, 12700, 12700, "")
     call StartSound(soundHandle)
@@ -1350,6 +1356,11 @@ endfunction
 //===========================================================================
 // Returns a square rect that exactly encompasses the specified circle.
 //
+/**
+Returns a new, centered rectangle with the dimensions to encompass the circle. 
+
+@note It does not touch the passed `center` location, you must remove it manually to avoid leaks.
+*/
 function GetRectFromCircleBJ takes location center, real radius returns rect
     local real centerX = GetLocationX(center)
     local real centerY = GetLocationY(center)
@@ -1365,6 +1376,9 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+/**
+@bug Leaks handle `theCam`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function GetCurrentCameraSetup takes nothing returns camerasetup
     local camerasetup theCam = CreateCameraSetup()
     local real duration = 0
@@ -1492,6 +1506,8 @@ endfunction
 @bug Fixed in 1.31: Caused a desync in multiplayer by creating a `location` inside
 the local block. It was known as "Camera - Pan Camera as necessary (timed)" in GUI.
 [Explanation](https://www.hiveworkshop.com/threads/fixing-smartcamerapanbj-desync.243334/)
+
+@bug Leaks handle `cameraLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
 */
 function SmartCameraPanBJ takes player whichPlayer, location loc, real duration returns nothing
     local real dist
@@ -1912,6 +1928,9 @@ function TriggerRegisterLeaveRegionSimple takes trigger trig, region whichRegion
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `rectRegion`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function TriggerRegisterEnterRectSimple takes trigger trig, rect r returns event
     local region rectRegion = CreateRegion()
     call RegionAddRect(rectRegion, r)
@@ -1919,6 +1938,9 @@ function TriggerRegisterEnterRectSimple takes trigger trig, rect r returns event
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `rectRegion`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function TriggerRegisterLeaveRectSimple takes trigger trig, rect r returns event
     local region rectRegion = CreateRegion()
     call RegionAddRect(rectRegion, r)
@@ -3194,6 +3216,9 @@ endfunction
 //===========================================================================
 // Translates 0-based slot indices to 1-based slot indices.
 //
+/**
+@bug Leaks handle `indexItem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function GetInventoryIndexOfItemTypeBJ takes unit whichUnit, integer itemId returns integer
     local integer index
     local item    indexItem
@@ -3503,6 +3528,9 @@ function UnitSuspendDecayBJ takes boolean suspend, unit whichUnit returns nothin
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function DelayedSuspendDecayStopAnimEnum takes nothing returns nothing
     local unit enumUnit = GetEnumUnit()
 
@@ -3512,6 +3540,9 @@ function DelayedSuspendDecayStopAnimEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function DelayedSuspendDecayBoneEnum takes nothing returns nothing
     local unit enumUnit = GetEnumUnit()
 
@@ -3526,6 +3557,9 @@ endfunction
 // initial corpse fades away, so we reset it now.  It's best not to show
 // off corpses thus created until after this grace period has passed.
 //
+/**
+@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function DelayedSuspendDecayFleshEnum takes nothing returns nothing
     local unit enumUnit = GetEnumUnit()
 
@@ -3540,6 +3574,11 @@ endfunction
 // Waits a short period of time to ensure that the corpse is decaying, and
 // then suspend the animation and corpse decay.
 //
+/**
+@bug Leaks handle `boneGroup`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `fleshGroup`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function DelayedSuspendDecay takes nothing returns nothing
     local group boneGroup
     local group fleshGroup
@@ -3832,6 +3871,11 @@ function IssueHauntOrderAtLocBJFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `goldMine`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function IssueHauntOrderAtLocBJ takes unit whichPeon, location loc returns boolean
     local group g = null
     local unit goldMine = null
@@ -3949,6 +3993,9 @@ function WakePlayerUnitsEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function WakePlayerUnits takes player whichPlayer returns nothing
     local group g = CreateGroup()
     call GroupEnumUnitsOfPlayer(g, whichPlayer, null)
@@ -3983,6 +4030,9 @@ endfunction
 
 //===========================================================================
 // Pause all units 
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function PauseAllUnitsBJ takes boolean pause returns nothing
     local integer index
     local player  indexPlayer
@@ -4141,6 +4191,15 @@ endfunction
 // This attempts to replace a unit with a new unit type by creating a new
 // unit of the desired type using the old unit's location, facing, etc.
 //
+/**
+@bug Leaks handles:
+
+1. `oldUnit`
+1. `newUnit`
+1. `indexItem`
+
+In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function ReplaceUnitBJ takes unit whichUnit, integer newUnitId, integer unitStateMethod returns unit
     local unit    oldUnit = whichUnit
     local unit    newUnit
@@ -4323,6 +4382,9 @@ function IsDestructableInvulnerableBJ takes destructable d returns boolean
 endfunction
 
 //===========================================================================
+/**
+Returns a new location of destructable's position.
+*/
 function GetDestructableLoc takes destructable whichDestructable returns location
     return Location(GetDestructableX(whichDestructable), GetDestructableY(whichDestructable))
 endfunction
@@ -4333,6 +4395,9 @@ function EnumDestructablesInRectAll takes rect r, code actionFunc returns nothin
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `destLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function EnumDestructablesInCircleBJFilter takes nothing returns boolean
     local location destLoc = GetDestructableLoc(GetFilterDestructable())
     local boolean result
@@ -4365,6 +4430,9 @@ endfunction
 //===========================================================================
 // Picks a random destructable from within a rect, matching a condition
 //
+/**
+@note Destroys the `filter` `boolexpr` received as argument.
+*/
 function RandomDestructableInRectBJ takes rect r, boolexpr filter returns destructable
     set bj_destRandomConsidered = 0
     set bj_destRandomCurrentPick = null
@@ -4384,6 +4452,9 @@ endfunction
 // Enumerates within a rect, with a filter to narrow the enumeration down
 // objects within a circular area.
 //
+/**
+@bug Leaks handle `r`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function EnumDestructablesInCircleBJ takes real radius, location loc, code actionFunc returns nothing
     local rect r
 
@@ -4502,6 +4573,9 @@ endfunction
 // Grab the unit and throw his own coords in his face, forcing him to push
 // and shove until he finds a spot where noone will bother him.
 //
+/**
+@bug Leaks handle `nudgee`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function NudgeUnitsInRectEnum takes nothing returns nothing
     local unit nudgee = GetEnumUnit()
 
@@ -4509,6 +4583,9 @@ function NudgeUnitsInRectEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `nudgee`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function NudgeItemsInRectEnum takes nothing returns nothing
     local item nudgee = GetEnumItem()
 
@@ -4520,6 +4597,9 @@ endfunction
 // encourage them to find locations where they can peacefully coexist with
 // pathing restrictions and live happy, fruitful lives.
 //
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function NudgeObjectsInRect takes rect nudgeArea returns nothing
     local group        g
 
@@ -4532,6 +4612,9 @@ function NudgeObjectsInRect takes rect nudgeArea returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function NearbyElevatorExistsEnum takes nothing returns nothing
     local destructable d     = GetEnumDestructable()
     local integer      dType = GetDestructableTypeId(d)
@@ -4542,6 +4625,9 @@ function NearbyElevatorExistsEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `r`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function NearbyElevatorExists takes real x, real y returns boolean
     local real findThreshold = 32
     local rect r
@@ -4565,6 +4651,11 @@ endfunction
 // or reviving a pathing blocker at the appropriate location (and creating
 // the pathing blocker in the first place, if it does not yet exist).
 //
+/**
+@bug Leaks handle `blocker`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `r`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function ChangeElevatorWallBlocker takes real x, real y, real facing, boolean open returns nothing
     local destructable blocker = null
     local real         findThreshold = 32
@@ -4666,11 +4757,17 @@ function WaygateIsActiveBJ takes unit waygate returns boolean
 endfunction
 
 //===========================================================================
+/**
+@note The caller must not forget to remove the passed `loc` location.
+*/
 function WaygateSetDestinationLocBJ takes unit waygate, location loc returns nothing
     call WaygateSetDestination(waygate, GetLocationX(loc), GetLocationY(loc))
 endfunction
 
 //===========================================================================
+/**
+@note Creates a new location object and returns it. The caller must remove it on its own after use.
+*/
 function WaygateGetDestinationLocBJ takes unit waygate returns location
     return Location(WaygateGetDestinationX(waygate), WaygateGetDestinationY(waygate))
 endfunction
@@ -4723,6 +4820,9 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+/**
+@note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `whichGroup`.
+*/
 function ForGroupBJ takes group whichGroup, code callback returns nothing
     // If the user wants the group destroyed, remember that fact and clear
     // the flag, in case it is used again in the callback.
@@ -4759,6 +4859,9 @@ function GroupAddGroupEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `sourceGroup`.
+*/
 function GroupAddGroup takes group sourceGroup, group destGroup returns nothing
     // If the user wants the group destroyed, remember that fact and clear
     // the flag, in case it is used again in the callback.
@@ -4780,6 +4883,9 @@ function GroupRemoveGroupEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `sourceGroup`.
+*/
 function GroupRemoveGroup takes group sourceGroup, group destGroup returns nothing
     // If the user wants the group destroyed, remember that fact and clear
     // the flag, in case it is used again in the callback.
@@ -4822,6 +4928,9 @@ endfunction
 //===========================================================================
 // Picks a random unit from a group.
 //
+/**
+@note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `whichGroup`.
+*/
 function GroupPickRandomUnit takes group whichGroup returns unit
     // If the user wants the group destroyed, remember that fact and clear
     // the flag, in case it is used again in the callback.
@@ -4860,6 +4969,13 @@ function ForcePickRandomPlayer takes force whichForce returns player
 endfunction
 
 //===========================================================================
+/**
+For the target player choose all currently selected units that match the filter and run `enumAction` on them.
+
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Destroys the `enumFilter` `boolexpr` received as argument.
+*/
 function EnumUnitsSelected takes player whichPlayer, boolexpr enumFilter, code enumAction returns nothing
     local group g = CreateGroup()
     call SyncSelections()
@@ -4870,6 +4986,13 @@ function EnumUnitsSelected takes player whichPlayer, boolexpr enumFilter, code e
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Destroys the `filter` `boolexpr` received as argument.
+
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
+*/
 function GetUnitsInRectMatching takes rect r, boolexpr filter returns group
     local group g = CreateGroup()
     call GroupEnumUnitsInRect(g, r, filter)
@@ -4878,6 +5001,9 @@ function GetUnitsInRectMatching takes rect r, boolexpr filter returns group
 endfunction
 
 //===========================================================================
+/**
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
+*/
 function GetUnitsInRectAll takes rect r returns group
     return GetUnitsInRectMatching(r, null)
 endfunction
@@ -4888,6 +5014,11 @@ function GetUnitsInRectOfPlayerFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
+*/
 function GetUnitsInRectOfPlayer takes rect r, player whichPlayer returns group
     local group g = CreateGroup()
     set bj_groupEnumOwningPlayer = whichPlayer
@@ -4896,6 +5027,11 @@ function GetUnitsInRectOfPlayer takes rect r, player whichPlayer returns group
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
+*/
 function GetUnitsInRangeOfLocMatching takes real radius, location whichLocation, boolexpr filter returns group
     local group g = CreateGroup()
     call GroupEnumUnitsInRangeOfLoc(g, whichLocation, radius, filter)
@@ -4904,6 +5040,9 @@ function GetUnitsInRangeOfLocMatching takes real radius, location whichLocation,
 endfunction
 
 //===========================================================================
+/**
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
+*/
 function GetUnitsInRangeOfLocAll takes real radius, location whichLocation returns group
     return GetUnitsInRangeOfLocMatching(radius, whichLocation, null)
 endfunction
@@ -4914,6 +5053,13 @@ function GetUnitsOfTypeIdAllFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `result`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
+*/
 function GetUnitsOfTypeIdAll takes integer unitid returns group
     local group   result = CreateGroup()
     local group   g      = CreateGroup()
@@ -4935,6 +5081,13 @@ function GetUnitsOfTypeIdAll takes integer unitid returns group
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Destroys the `filter` `boolexpr` received as argument.
+
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
+*/
 function GetUnitsOfPlayerMatching takes player whichPlayer, boolexpr filter returns group
     local group g = CreateGroup()
     call GroupEnumUnitsOfPlayer(g, whichPlayer, filter)
@@ -4953,6 +5106,11 @@ function GetUnitsOfPlayerAndTypeIdFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
+*/
 function GetUnitsOfPlayerAndTypeId takes player whichPlayer, integer unitid returns group
     local group g = CreateGroup()
     set bj_groupEnumTypeId = unitid
@@ -4961,6 +5119,11 @@ function GetUnitsOfPlayerAndTypeId takes player whichPlayer, integer unitid retu
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
+*/
 function GetUnitsSelectedAll takes player whichPlayer returns group
     local group g = CreateGroup()
     call SyncSelections()
@@ -4969,6 +5132,13 @@ function GetUnitsSelectedAll takes player whichPlayer returns group
 endfunction
 
 //===========================================================================
+/**
+Creates a new force to include the target player.
+
+@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new force object and returns it. The caller must remove it on its own after use.
+*/
 function GetForceOfPlayer takes player whichPlayer returns force
     local force f = CreateForce()
     call ForceAddPlayer(f, whichPlayer)
@@ -4981,6 +5151,11 @@ function GetPlayersAll takes nothing returns force
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new force object and returns it. The caller must remove it on its own after use.
+*/
 function GetPlayersByMapControl takes mapcontrol whichControl returns force
     local force f = CreateForce()
     local integer playerIndex
@@ -5001,6 +5176,11 @@ function GetPlayersByMapControl takes mapcontrol whichControl returns force
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new force object and returns it. The caller must remove it on its own after use.
+*/
 function GetPlayersAllies takes player whichPlayer returns force
     local force f = CreateForce()
     call ForceEnumAllies(f, whichPlayer, null)
@@ -5008,6 +5188,11 @@ function GetPlayersAllies takes player whichPlayer returns force
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new force object and returns it. The caller must remove it on its own after use.
+*/
 function GetPlayersEnemies takes player whichPlayer returns force
     local force f = CreateForce()
     call ForceEnumEnemies(f, whichPlayer, null)
@@ -5015,6 +5200,13 @@ function GetPlayersEnemies takes player whichPlayer returns force
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Destroys the `filter` `boolexpr` received as argument.
+
+@note Creates a new force object and returns it. The caller must remove it on its own after use.
+*/
 function GetPlayersMatching takes boolexpr filter returns force
     local force f = CreateForce()
     call ForceEnumPlayers(f, filter)
@@ -5028,6 +5220,9 @@ function CountUnitsInGroupEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `g`.
+*/
 function CountUnitsInGroup takes group g returns integer
     // If the user wants the group destroyed, remember that fact and clear
     // the flag, in case it is used again in the callback.
@@ -5074,6 +5269,10 @@ endfunction
 //===========================================================================
 /**
 @bug Not an even distribution. See <http://www.hiveworkshop.com/forums/l-715/g-275344/>.
+
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@note Creates a new group object and returns it. The caller must remove it on its own after use.
 */
 function GetRandomSubGroup takes integer count, group sourceGroup returns group
     local group g = CreateGroup()
@@ -5092,12 +5291,18 @@ function GetRandomSubGroup takes integer count, group sourceGroup returns group
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `filterUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function LivingPlayerUnitsOfTypeIdFilter takes nothing returns boolean
     local unit filterUnit = GetFilterUnit()
     return IsUnitAliveBJ(filterUnit) and GetUnitTypeId(filterUnit) == bj_livingPlayerUnitsTypeId
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function CountLivingPlayerUnitsOfTypeId takes integer unitId, player whichPlayer returns integer
     local group g
     local integer matchedCount
@@ -5212,6 +5417,9 @@ endfunction
 //===========================================================================
 // Sets a unit's facing to point directly at a location.
 //
+/**
+@bug Leaks handle `unitLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function SetUnitFacingToFaceLocTimed takes unit whichUnit, location target, real duration returns nothing
     local location unitLoc = GetUnitLoc(whichUnit)
 
@@ -5222,6 +5430,9 @@ endfunction
 //===========================================================================
 // Sets a unit's facing to point directly at another unit.
 //
+/**
+@bug Leaks handle `unitLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function SetUnitFacingToFaceUnitTimed takes unit whichUnit, unit target, real duration returns nothing
     local location unitLoc = GetUnitLoc(target)
 
@@ -5581,6 +5792,11 @@ function EndGameBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeVictoryDialogBJ takes player whichPlayer, boolean leftGame returns nothing
     local trigger t = CreateTrigger()
     local dialog  d = DialogCreate()
@@ -5606,6 +5822,11 @@ function MeleeVictoryDialogBJ takes player whichPlayer, boolean leftGame returns
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeDefeatDialogBJ takes player whichPlayer, boolean leftGame returns nothing
     local trigger t = CreateTrigger()
     local dialog  d = DialogCreate()
@@ -5635,6 +5856,11 @@ function MeleeDefeatDialogBJ takes player whichPlayer, boolean leftGame returns 
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function GameOverDialogBJ takes player whichPlayer, boolean leftGame returns nothing
     local trigger t = CreateTrigger()
     local dialog  d = DialogCreate()
@@ -5703,6 +5929,11 @@ function CustomVictoryQuitBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function CustomVictoryDialogBJ takes player whichPlayer returns nothing
     local trigger t = CreateTrigger()
     local dialog  d = DialogCreate()
@@ -5811,6 +6042,11 @@ function CustomDefeatQuitBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function CustomDefeatDialogBJ takes player whichPlayer, string message returns nothing
     local trigger t = CreateTrigger()
     local dialog  d = DialogCreate()
@@ -7272,6 +7508,9 @@ function RescueUnitBJ takes unit whichUnit, player rescuer, boolean changeColor 
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `theUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function TriggerActionUnitRescuedBJ takes nothing returns nothing
     local unit theUnit = GetTriggerUnit()
 
@@ -8269,6 +8508,9 @@ endfunction
 //===========================================================================
 // Replaces a gold mine with a blighted gold mine for the given player.
 //
+/**
+@bug Leaks handle `newMine`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function BlightGoldMineForPlayerBJ takes unit goldMine, player whichPlayer returns unit
     local real    mineX
     local real    mineY
@@ -8314,6 +8556,9 @@ function SetPlayerColorBJEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function SetPlayerColorBJ takes player whichPlayer, playercolor color, boolean changeExisting returns nothing
     local group g
 
@@ -8471,6 +8716,9 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+/**
+@bug Leaks handle `v`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeStartingResources takes nothing returns nothing
     local integer index
     local player  indexPlayer
@@ -8647,6 +8895,9 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+/**
+@bug Leaks handle `theUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeClearExcessUnit takes nothing returns nothing
     local unit    theUnit = GetEnumUnit()
     local integer owner   = GetPlayerId(GetOwningPlayer(theUnit))
@@ -8663,6 +8914,9 @@ function MeleeClearExcessUnit takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `nearbyUnits`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeClearNearbyUnits takes real x, real y, real range returns nothing
     local group nearbyUnits
     
@@ -8705,6 +8959,11 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+/**
+@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `unitLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeEnumFindNearestMine takes nothing returns nothing
     local unit enumUnit = GetEnumUnit()
     local real dist
@@ -8724,6 +8983,9 @@ function MeleeEnumFindNearestMine takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `nearbyMines`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeFindNearestMine takes location src, real range returns unit
     local group nearbyMines
 
@@ -8740,6 +9002,14 @@ function MeleeFindNearestMine takes location src, real range returns unit
 endfunction
 
 //===========================================================================
+/**
+
+@note It does not touch the passed `loc` location, you must remove it manually to avoid leaks.
+
+@bug Leaks handle `hero`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `v`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeRandomHeroLoc takes player p, integer id1, integer id2, integer id3, integer id4, location loc returns unit
     local unit    hero = null
     local integer roll
@@ -8779,6 +9049,10 @@ endfunction
 //===========================================================================
 // Returns a location which is (distance) away from (src) in the direction of (targ).
 //
+/**
+@note It returns a new location, does not remove or alter location passed as `src` or `targ`.
+It means you must call `RemoveLocation` yourself after calling this function.
+*/
 function MeleeGetProjectedLoc takes location src, location targ, real distance, real deltaAngle returns location
     local real srcX = GetLocationX(src)
     local real srcY = GetLocationY(src)
@@ -8787,6 +9061,11 @@ function MeleeGetProjectedLoc takes location src, location targ, real distance, 
 endfunction
 
 //===========================================================================
+/**
+It's the typical math.clamp. Returns `val` if it's within the bounds, else min/maxVal.
+
+`minVal` must be less than or equal <= `maxVal`
+*/
 function MeleeGetNearestValueWithin takes real val, real minVal, real maxVal returns real
     if (val < minVal) then
         return minVal
@@ -8798,6 +9077,10 @@ function MeleeGetNearestValueWithin takes real val, real minVal, real maxVal ret
 endfunction
 
 //===========================================================================
+/**
+@note It returns a new location, does not remove or alter location passed as `src`.
+It means you must call `RemoveLocation` yourself after calling this function.
+*/
 function MeleeGetLocWithinRect takes location src, rect r returns location
     local real withinX = MeleeGetNearestValueWithin(GetLocationX(src), GetRectMinX(r), GetRectMaxX(r))
     local real withinY = MeleeGetNearestValueWithin(GetLocationY(src), GetRectMinY(r), GetRectMaxY(r))
@@ -8809,6 +9092,25 @@ endfunction
 //   - 1 Town Hall, placed at start location
 //   - 5 Peasants, placed between start location and nearest gold mine
 //
+/**
+@bug Leaks.
+
+Uncleared handle variables:
+
+1. `nearestMine`
+2. `nearMineLoc`
+3. `heroLoc`
+4. `townHall`
+
+In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+Objects not removed (e.g. RemoveLocation):
+
+1. Loc, Loc `nearMineLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
+2. Loc, Loc `heroLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
+3. Loc `heroLoc = Location(peonX, peonY - 2.00 * unitSpacing)`
+
+*/
 function MeleeStartingUnitsHuman takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
     local boolean  useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
     local real     unitSpacing   = 64.00
@@ -8884,6 +9186,24 @@ endfunction
 //   - 1 Great Hall, placed at start location
 //   - 5 Peons, placed between start location and nearest gold mine
 //
+/**
+@bug Leaks.
+
+Uncleared handle variables:
+
+1. `nearestMine`
+2. `nearMineLoc`
+3. `heroLoc`
+
+In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+Objects not removed (e.g. RemoveLocation):
+
+1. Loc, Loc `nearMineLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
+2. Loc, Loc `heroLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
+3. Loc `heroLoc = Location(peonX, peonY - 2.00 * unitSpacing)`
+
+*/
 function MeleeStartingUnitsOrc takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
     local boolean  useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
     local real     unitSpacing   = 64.00
@@ -8956,6 +9276,26 @@ endfunction
 //   - 1 Ghoul, placed between start location and nearest gold mine
 //   - Blight, centered on nearest gold mine, spread across a "large area"
 //
+/**
+@bug Leaks.
+
+Uncleared handle variables:
+
+1. `nearestMine`
+2. `nearMineLoc`
+3. `nearTownLoc`
+4. `heroLoc`
+
+In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+Objects not removed (e.g. RemoveLocation):
+
+1. Loc, Loc `nearTownLoc = MeleeGetProjectedLoc(startLoc, GetUnitLoc(nearestMine)`
+2. Loc, Loc `nearMineLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
+3. Loc, Loc `heroLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
+4. Loc, Loc `heroLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
+5. Loc `heroLoc = Location(peonX, peonY - 2.00 * unitSpacing)`
+*/
 function MeleeStartingUnitsUndead takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
     local boolean  useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
     local real     unitSpacing   = 64.00
@@ -9040,6 +9380,28 @@ endfunction
 //   - 1 Tree of Life, placed by nearest gold mine, already entangled
 //   - 5 Wisps, placed between Tree of Life and nearest gold mine
 //
+/**
+@bug Leaks.
+
+Uncleared handle variables:
+
+1. `nearestMine`
+2. `nearMineLoc`
+3. `wispLoc`
+4. `heroLoc`
+5. `tree`
+
+In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+Objects not removed (e.g. RemoveLocation):
+
+1. Location,Location `nearMineLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
+2. Location, Rect, Location `nearMineLoc = MeleeGetLocWithinRect(nearMineLoc, GetRectFromCircleBJ(GetUnitLoc(nearestMine), minTreeDist))`
+3. Loc, Loc `wispLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine), startLoc, 320, 0)`
+4. Loc, Rect, Loc `wispLoc = MeleeGetLocWithinRect(wispLoc, GetRectFromCircleBJ(GetUnitLoc(nearestMine`
+5. Loc, Loc `heroLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
+6. Loc `heroLoc = Location(peonX, peonY - 2.00 * unitSpacing)`
+*/
 function MeleeStartingUnitsNightElf takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
     local boolean  useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
     local real     unitSpacing   = 64.00
@@ -9144,6 +9506,9 @@ function MeleeStartingUnitsUnknownRace takes player whichPlayer, location startL
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `indexStartLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeStartingUnits takes nothing returns nothing
     local integer  index
     local player   indexPlayer
@@ -9472,6 +9837,9 @@ endfunction
 // remaining players.  If even one player is not allied towards another,
 // everyone must be denied victory.
 //
+/**
+@bug Leaks handle `opponentlessPlayers`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeCheckForVictors takes nothing returns force
     local integer    playerIndex
     local integer    opponentIndex
@@ -9513,6 +9881,11 @@ endfunction
 //===========================================================================
 // Test each player to determine if anyone has been defeated.
 //
+/**
+@bug Leaks handle `defeatedPlayers`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+@bug Leaks handle `victoriousPlayers`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeCheckForLosersAndVictors takes nothing returns nothing
     local integer    playerIndex
     local player     indexPlayer
@@ -9619,6 +9992,9 @@ function MeleeGetCrippledRevealedMessage takes player whichPlayer returns string
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `toExposeTo`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeExposePlayer takes player whichPlayer, boolean expose returns nothing
     local integer playerIndex
     local player  indexPlayer
@@ -9643,6 +10019,9 @@ function MeleeExposePlayer takes player whichPlayer, boolean expose returns noth
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `toExposeTo`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeExposeAllPlayers takes nothing returns nothing
     local integer playerIndex
     local player  indexPlayer
@@ -9681,6 +10060,9 @@ function MeleeExposeAllPlayers takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `expiredTimer`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MeleeCrippledPlayerTimeout takes nothing returns nothing
     local timer expiredTimer = GetExpiredTimer()
     local integer playerIndex
@@ -9727,6 +10109,11 @@ endfunction
 //===========================================================================
 // Test each player to determine if anyone has become crippled.
 //
+/**
+@bug Leaks handle `crippledPlayers`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
+The function was refactored, it no longer uses locals `indexRace` and `crippledPlayers`.
+*/
 function MeleeCheckForCrippledPlayers takes nothing returns nothing
     local integer    playerIndex
     local player     indexPlayer
@@ -10320,6 +10707,8 @@ This function is called in the scope of `config` to set up the map based on
 game type. Specifically, this assigns players into teams, unless the
 game type is `GAME_TYPE_USE_MAP_SETTINGS` (then map-specific code does this)
 or unknown (nothing is done in that case).
+
+@bug Leaks handle `gType`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
 */
 function InitGenericPlayerSlots takes nothing returns nothing
     local gametype gType = GetGameTypeSelected()
@@ -10422,6 +10811,9 @@ function InitDNCSounds takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `v`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function InitBlizzardGlobals takes nothing returns nothing
     local integer index
     local integer userControlledPlayers
@@ -10543,6 +10935,9 @@ endfunction
 //===========================================================================
 // Update the per-class stock limits.
 //
+/**
+@bug Leaks handle `iType`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function UpdateStockAvailability takes item whichItem returns nothing
     local itemtype iType  = GetItemType(whichItem)
     local integer  iLevel = GetItemLevel(whichItem)
@@ -10581,6 +10976,9 @@ function UpdateEachStockBuildingEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function UpdateEachStockBuilding takes itemtype iType, integer iLevel returns nothing
     local group g
 
@@ -10596,6 +10994,9 @@ endfunction
 //===========================================================================
 // Update stock inventory.
 //
+/**
+@bug Leaks handle `pickedItemType`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function PerformStockUpdates takes nothing returns nothing
     local integer  pickedItemId
     local itemtype pickedItemType
@@ -10804,7 +11205,9 @@ endfunction
 //*        item into the unpathable area where nobody can get it...
 //*
 //***************************************************************************
-
+/**
+@bug Leaks handle `droppedItem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function UnitDropItem takes unit inUnit, integer inItemID returns item
     local real x
     local real y
