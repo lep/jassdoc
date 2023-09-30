@@ -1657,6 +1657,9 @@ function WaitForTown takes integer towns, integer townid returns nothing
 endfunction
 
 //============================================================================
+/**
+@bug Leaks handle `peon`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function StartExpansion takes integer qty, integer hall returns boolean
     local integer count
     local integer town
@@ -2385,6 +2388,9 @@ endfunction
 
 //============================================================================
 function MinorCreepAttack takes nothing returns nothing
+/**
+@bug Leaks handle `target`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
     local unit target = GetMinorCreep()
     call SetAllianceTarget(target)
     call FormGroup(3, true)
@@ -2392,6 +2398,9 @@ function MinorCreepAttack takes nothing returns nothing
 endfunction
 
 //============================================================================
+/**
+@bug Leaks handle `target`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MajorCreepAttack takes nothing returns nothing
     local unit target = GetMajorCreep()
     call SetAllianceTarget(target)
@@ -2400,6 +2409,9 @@ function MajorCreepAttack takes nothing returns nothing
 endfunction
 
 //============================================================================
+/**
+@bug Leaks handle `target`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function CreepAttackEx takes nothing returns nothing
     local unit target = GetCreepCamp(min_creeps,max_creeps,allow_air_creeps)
     call SetAllianceTarget(target)
@@ -2408,6 +2420,9 @@ function CreepAttackEx takes nothing returns nothing
 endfunction
 
 //============================================================================
+/**
+@bug Leaks handle `hall`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function AnyPlayerAttack takes nothing returns nothing
     local unit hall
 
@@ -2427,6 +2442,9 @@ function AnyPlayerAttack takes nothing returns nothing
 endfunction
 
 //============================================================================
+/**
+@bug Leaks handle `creep`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function ExpansionAttack takes nothing returns nothing
     local unit creep = GetExpansionFoe()
     local integer x
@@ -2488,6 +2506,16 @@ endfunction
 //============================================================================
 //  SingleMeleeAttack
 //============================================================================
+/**
+@bug Leaks handle:
+
+1. hall
+2. mega
+3. creep
+4. common
+
+In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function SingleMeleeAttack takes boolean needs_exp, boolean has_siege, boolean major_ok, boolean air_units returns nothing
     local boolean   can_siege
     local real      daytime
@@ -2795,6 +2823,9 @@ function CampaignAI takes integer farms, code heroes returns nothing
 endfunction
 
 //============================================================================
+/**
+@bug Leaks handle `bldg`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function UnsummonAll takes nothing returns nothing
     local unit bldg
     loop
