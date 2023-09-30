@@ -6831,6 +6831,14 @@ unit corresponding to the rawcode cannot have a corpse, then the returned value 
 native          CreateCorpse            takes player whichPlayer, integer unitid, real x, real y, real face returns unit
 
 native          KillUnit            takes unit whichUnit returns nothing
+
+/**
+
+@note A comment in Blizzard.j, `ReplaceUnitBJ` states that it's "sometimes unsafe to remove hidden units",
+as a workaround it calls `KillUnit` right before `RemoveUnit`.
+
+TODO: Propagate this note to other functions that use hidden units.
+*/
 native          RemoveUnit          takes unit whichUnit returns nothing
 native          ShowUnit            takes unit whichUnit, boolean show returns nothing
 
@@ -7819,7 +7827,8 @@ constant native IsUnitInRangeLoc    takes unit whichUnit, location whichLocation
 /**
 Returns `true` if `whichUnit` is hidden, for example by means of `ShowUnit`.
 
-
+@note A comment in Blizzard.j, `ReplaceUnitBJ` states that it's "sometimes unsafe to remove hidden units",
+as a workaround it calls `KillUnit` right before `RemoveUnit`.
 */
 constant native IsUnitHidden        takes unit whichUnit returns boolean
 constant native IsUnitIllusion      takes unit whichUnit returns boolean
