@@ -6631,6 +6631,9 @@ function MultiboardAllowDisplayBJ takes boolean flag returns nothing
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MultiboardSetItemStyleBJ takes multiboard mb, integer col, integer row, boolean showValue, boolean showIcon returns nothing
     local integer curRow = 0
     local integer curCol = 0
@@ -6663,6 +6666,9 @@ function MultiboardSetItemStyleBJ takes multiboard mb, integer col, integer row,
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MultiboardSetItemValueBJ takes multiboard mb, integer col, integer row, string val returns nothing
     local integer curRow = 0
     local integer curCol = 0
@@ -6695,6 +6701,9 @@ function MultiboardSetItemValueBJ takes multiboard mb, integer col, integer row,
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MultiboardSetItemColorBJ takes multiboard mb, integer col, integer row, real red, real green, real blue, real transparency returns nothing
     local integer curRow = 0
     local integer curCol = 0
@@ -6727,6 +6736,9 @@ function MultiboardSetItemColorBJ takes multiboard mb, integer col, integer row,
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MultiboardSetItemWidthBJ takes multiboard mb, integer col, integer row, real width returns nothing
     local integer curRow = 0
     local integer curCol = 0
@@ -6759,6 +6771,9 @@ function MultiboardSetItemWidthBJ takes multiboard mb, integer col, integer row,
 endfunction
 
 //===========================================================================
+/**
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+*/
 function MultiboardSetItemIconBJ takes multiboard mb, integer col, integer row, string iconFileName returns nothing
     local integer curRow = 0
     local integer curCol = 0
