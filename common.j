@@ -4661,6 +4661,12 @@ native GroupEnumUnitsInRangeCounted         takes group whichGroup, real x, real
 
 */
 native GroupEnumUnitsInRangeOfLocCounted    takes group whichGroup, location whichLocation, real radius, boolexpr filter, integer countLimit returns nothing
+
+/**
+@param whichGroup Should be an empty group.
+
+@note Must call `SyncSelections` before this to have up-to-date players' selections.
+*/
 native GroupEnumUnitsSelected               takes group whichGroup, player whichPlayer, boolexpr filter returns nothing
 
 native GroupImmediateOrder                  takes group whichGroup, string order returns boolean
