@@ -1215,7 +1215,7 @@ function SetForLoopIndexB takes integer newIndex returns nothing
 endfunction
 
 /**
-@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 //===========================================================================
 // We can't do game-time waits, so this simulates one by starting a timer
@@ -1335,7 +1335,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `soundHandle`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `soundHandle`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function PlaySound takes string soundName returns nothing
     local sound soundHandle = CreateSound(soundName, false, false, true, 12700, 12700, "")
@@ -1377,7 +1377,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `theCam`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `theCam`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function GetCurrentCameraSetup takes nothing returns camerasetup
     local camerasetup theCam = CreateCameraSetup()
@@ -1507,7 +1507,7 @@ endfunction
 the local block. It was known as "Camera - Pan Camera as necessary (timed)" in GUI.
 [Explanation](https://www.hiveworkshop.com/threads/fixing-smartcamerapanbj-desync.243334/)
 
-@bug Leaks handle `cameraLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `cameraLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function SmartCameraPanBJ takes player whichPlayer, location loc, real duration returns nothing
     local real dist
@@ -1929,7 +1929,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `rectRegion`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `rectRegion`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function TriggerRegisterEnterRectSimple takes trigger trig, rect r returns event
     local region rectRegion = CreateRegion()
@@ -1939,7 +1939,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `rectRegion`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `rectRegion`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function TriggerRegisterLeaveRectSimple takes trigger trig, rect r returns event
     local region rectRegion = CreateRegion()
@@ -3217,7 +3217,7 @@ endfunction
 // Translates 0-based slot indices to 1-based slot indices.
 //
 /**
-@bug Leaks handle `indexItem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `indexItem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function GetInventoryIndexOfItemTypeBJ takes unit whichUnit, integer itemId returns integer
     local integer index
@@ -3529,7 +3529,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function DelayedSuspendDecayStopAnimEnum takes nothing returns nothing
     local unit enumUnit = GetEnumUnit()
@@ -3541,7 +3541,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function DelayedSuspendDecayBoneEnum takes nothing returns nothing
     local unit enumUnit = GetEnumUnit()
@@ -3558,7 +3558,7 @@ endfunction
 // off corpses thus created until after this grace period has passed.
 //
 /**
-@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function DelayedSuspendDecayFleshEnum takes nothing returns nothing
     local unit enumUnit = GetEnumUnit()
@@ -3575,9 +3575,9 @@ endfunction
 // then suspend the animation and corpse decay.
 //
 /**
-@bug Leaks handle `boneGroup`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `boneGroup`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `fleshGroup`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `fleshGroup`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function DelayedSuspendDecay takes nothing returns nothing
     local group boneGroup
@@ -3872,9 +3872,9 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `goldMine`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `goldMine`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function IssueHauntOrderAtLocBJ takes unit whichPeon, location loc returns boolean
     local group g = null
@@ -3994,7 +3994,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function WakePlayerUnits takes player whichPlayer returns nothing
     local group g = CreateGroup()
@@ -4031,7 +4031,7 @@ endfunction
 //===========================================================================
 // Pause all units 
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function PauseAllUnitsBJ takes boolean pause returns nothing
     local integer index
@@ -4198,7 +4198,7 @@ endfunction
 1. `newUnit`
 1. `indexItem`
 
-In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function ReplaceUnitBJ takes unit whichUnit, integer newUnitId, integer unitStateMethod returns unit
     local unit    oldUnit = whichUnit
@@ -4396,7 +4396,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `destLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `destLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function EnumDestructablesInCircleBJFilter takes nothing returns boolean
     local location destLoc = GetDestructableLoc(GetFilterDestructable())
@@ -4453,7 +4453,7 @@ endfunction
 // objects within a circular area.
 //
 /**
-@bug Leaks handle `r`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `r`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function EnumDestructablesInCircleBJ takes real radius, location loc, code actionFunc returns nothing
     local rect r
@@ -4574,7 +4574,7 @@ endfunction
 // and shove until he finds a spot where noone will bother him.
 //
 /**
-@bug Leaks handle `nudgee`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `nudgee`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function NudgeUnitsInRectEnum takes nothing returns nothing
     local unit nudgee = GetEnumUnit()
@@ -4584,7 +4584,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `nudgee`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `nudgee`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function NudgeItemsInRectEnum takes nothing returns nothing
     local item nudgee = GetEnumItem()
@@ -4598,7 +4598,7 @@ endfunction
 // pathing restrictions and live happy, fruitful lives.
 //
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function NudgeObjectsInRect takes rect nudgeArea returns nothing
     local group        g
@@ -4613,7 +4613,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function NearbyElevatorExistsEnum takes nothing returns nothing
     local destructable d     = GetEnumDestructable()
@@ -4626,7 +4626,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `r`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `r`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function NearbyElevatorExists takes real x, real y returns boolean
     local real findThreshold = 32
@@ -4652,9 +4652,9 @@ endfunction
 // the pathing blocker in the first place, if it does not yet exist).
 //
 /**
-@bug Leaks handle `blocker`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `blocker`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `r`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `r`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function ChangeElevatorWallBlocker takes real x, real y, real facing, boolean open returns nothing
     local destructable blocker = null
@@ -4972,7 +4972,7 @@ endfunction
 /**
 For the target player choose all currently selected units that match the filter and run `enumAction` on them.
 
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Destroys the `enumFilter` `boolexpr` received as argument.
 */
@@ -4987,7 +4987,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Destroys the `filter` `boolexpr` received as argument.
 
@@ -5015,7 +5015,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
 */
@@ -5028,7 +5028,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
 */
@@ -5054,9 +5054,9 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `result`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `result`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
 */
@@ -5082,7 +5082,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Destroys the `filter` `boolexpr` received as argument.
 
@@ -5107,7 +5107,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
 */
@@ -5120,7 +5120,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
 */
@@ -5135,7 +5135,7 @@ endfunction
 /**
 Creates a new force to include the target player.
 
-@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new force object and returns it. The caller must remove it on its own after use.
 */
@@ -5152,7 +5152,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new force object and returns it. The caller must remove it on its own after use.
 */
@@ -5177,7 +5177,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new force object and returns it. The caller must remove it on its own after use.
 */
@@ -5189,7 +5189,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new force object and returns it. The caller must remove it on its own after use.
 */
@@ -5201,7 +5201,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `f`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Destroys the `filter` `boolexpr` received as argument.
 
@@ -5270,7 +5270,7 @@ endfunction
 /**
 @bug Not an even distribution. See <http://www.hiveworkshop.com/forums/l-715/g-275344/>.
 
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
 */
@@ -5292,7 +5292,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `filterUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `filterUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function LivingPlayerUnitsOfTypeIdFilter takes nothing returns boolean
     local unit filterUnit = GetFilterUnit()
@@ -5301,7 +5301,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function CountLivingPlayerUnitsOfTypeId takes integer unitId, player whichPlayer returns integer
     local group g
@@ -5418,7 +5418,7 @@ endfunction
 // Sets a unit's facing to point directly at a location.
 //
 /**
-@bug Leaks handle `unitLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `unitLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function SetUnitFacingToFaceLocTimed takes unit whichUnit, location target, real duration returns nothing
     local location unitLoc = GetUnitLoc(whichUnit)
@@ -5431,7 +5431,7 @@ endfunction
 // Sets a unit's facing to point directly at another unit.
 //
 /**
-@bug Leaks handle `unitLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `unitLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function SetUnitFacingToFaceUnitTimed takes unit whichUnit, unit target, real duration returns nothing
     local location unitLoc = GetUnitLoc(target)
@@ -5793,9 +5793,9 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeVictoryDialogBJ takes player whichPlayer, boolean leftGame returns nothing
     local trigger t = CreateTrigger()
@@ -5823,9 +5823,9 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeDefeatDialogBJ takes player whichPlayer, boolean leftGame returns nothing
     local trigger t = CreateTrigger()
@@ -5857,9 +5857,9 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function GameOverDialogBJ takes player whichPlayer, boolean leftGame returns nothing
     local trigger t = CreateTrigger()
@@ -5930,9 +5930,9 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function CustomVictoryDialogBJ takes player whichPlayer returns nothing
     local trigger t = CreateTrigger()
@@ -6043,9 +6043,9 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `t`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `d`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function CustomDefeatDialogBJ takes player whichPlayer, string message returns nothing
     local trigger t = CreateTrigger()
@@ -6632,7 +6632,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MultiboardSetItemStyleBJ takes multiboard mb, integer col, integer row, boolean showValue, boolean showIcon returns nothing
     local integer curRow = 0
@@ -6667,7 +6667,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MultiboardSetItemValueBJ takes multiboard mb, integer col, integer row, string val returns nothing
     local integer curRow = 0
@@ -6702,7 +6702,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MultiboardSetItemColorBJ takes multiboard mb, integer col, integer row, real red, real green, real blue, real transparency returns nothing
     local integer curRow = 0
@@ -6737,7 +6737,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MultiboardSetItemWidthBJ takes multiboard mb, integer col, integer row, real width returns nothing
     local integer curRow = 0
@@ -6772,7 +6772,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `mbitem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MultiboardSetItemIconBJ takes multiboard mb, integer col, integer row, string iconFileName returns nothing
     local integer curRow = 0
@@ -7524,7 +7524,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `theUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `theUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function TriggerActionUnitRescuedBJ takes nothing returns nothing
     local unit theUnit = GetTriggerUnit()
@@ -8524,7 +8524,7 @@ endfunction
 // Replaces a gold mine with a blighted gold mine for the given player.
 //
 /**
-@bug Leaks handle `newMine`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `newMine`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function BlightGoldMineForPlayerBJ takes unit goldMine, player whichPlayer returns unit
     local real    mineX
@@ -8572,7 +8572,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function SetPlayerColorBJ takes player whichPlayer, playercolor color, boolean changeExisting returns nothing
     local group g
@@ -8732,7 +8732,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `v`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `v`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeStartingResources takes nothing returns nothing
     local integer index
@@ -8911,7 +8911,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `theUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `theUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeClearExcessUnit takes nothing returns nothing
     local unit    theUnit = GetEnumUnit()
@@ -8930,7 +8930,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `nearbyUnits`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `nearbyUnits`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeClearNearbyUnits takes real x, real y, real range returns nothing
     local group nearbyUnits
@@ -8975,9 +8975,9 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `enumUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `unitLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `unitLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeEnumFindNearestMine takes nothing returns nothing
     local unit enumUnit = GetEnumUnit()
@@ -8999,7 +8999,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `nearbyMines`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `nearbyMines`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeFindNearestMine takes location src, real range returns unit
     local group nearbyMines
@@ -9021,9 +9021,9 @@ endfunction
 
 @note It does not touch the passed `loc` location, you must remove it manually to avoid leaks.
 
-@bug Leaks handle `hero`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `hero`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `v`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `v`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeRandomHeroLoc takes player p, integer id1, integer id2, integer id3, integer id4, location loc returns unit
     local unit    hero = null
@@ -9117,7 +9117,7 @@ Uncleared handle variables:
 3. `heroLoc`
 4. `townHall`
 
-In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 Objects not removed (e.g. RemoveLocation):
 
@@ -9210,7 +9210,7 @@ Uncleared handle variables:
 2. `nearMineLoc`
 3. `heroLoc`
 
-In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 Objects not removed (e.g. RemoveLocation):
 
@@ -9301,7 +9301,7 @@ Uncleared handle variables:
 3. `nearTownLoc`
 4. `heroLoc`
 
-In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 Objects not removed (e.g. RemoveLocation):
 
@@ -9406,7 +9406,7 @@ Uncleared handle variables:
 4. `heroLoc`
 5. `tree`
 
-In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 Objects not removed (e.g. RemoveLocation):
 
@@ -9522,7 +9522,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `indexStartLoc`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `indexStartLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeStartingUnits takes nothing returns nothing
     local integer  index
@@ -9853,7 +9853,7 @@ endfunction
 // everyone must be denied victory.
 //
 /**
-@bug Leaks handle `opponentlessPlayers`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `opponentlessPlayers`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeCheckForVictors takes nothing returns force
     local integer    playerIndex
@@ -9897,9 +9897,9 @@ endfunction
 // Test each player to determine if anyone has been defeated.
 //
 /**
-@bug Leaks handle `defeatedPlayers`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `defeatedPlayers`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
-@bug Leaks handle `victoriousPlayers`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `victoriousPlayers`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeCheckForLosersAndVictors takes nothing returns nothing
     local integer    playerIndex
@@ -10008,7 +10008,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `toExposeTo`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `toExposeTo`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeExposePlayer takes player whichPlayer, boolean expose returns nothing
     local integer playerIndex
@@ -10035,7 +10035,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `toExposeTo`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `toExposeTo`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeExposeAllPlayers takes nothing returns nothing
     local integer playerIndex
@@ -10076,7 +10076,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `expiredTimer`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `expiredTimer`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeCrippledPlayerTimeout takes nothing returns nothing
     local timer expiredTimer = GetExpiredTimer()
@@ -10125,7 +10125,7 @@ endfunction
 // Test each player to determine if anyone has become crippled.
 //
 /**
-@bug Leaks handle `crippledPlayers`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `crippledPlayers`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 The function was refactored, it no longer uses locals `indexRace` and `crippledPlayers`.
 */
@@ -10723,7 +10723,7 @@ game type. Specifically, this assigns players into teams, unless the
 game type is `GAME_TYPE_USE_MAP_SETTINGS` (then map-specific code does this)
 or unknown (nothing is done in that case).
 
-@bug Leaks handle `gType`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `gType`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function InitGenericPlayerSlots takes nothing returns nothing
     local gametype gType = GetGameTypeSelected()
@@ -10827,7 +10827,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `v`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `v`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function InitBlizzardGlobals takes nothing returns nothing
     local integer index
@@ -10951,7 +10951,7 @@ endfunction
 // Update the per-class stock limits.
 //
 /**
-@bug Leaks handle `iType`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `iType`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function UpdateStockAvailability takes item whichItem returns nothing
     local itemtype iType  = GetItemType(whichItem)
@@ -10992,7 +10992,7 @@ endfunction
 
 //===========================================================================
 /**
-@bug Leaks handle `g`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function UpdateEachStockBuilding takes itemtype iType, integer iLevel returns nothing
     local group g
@@ -11010,7 +11010,7 @@ endfunction
 // Update stock inventory.
 //
 /**
-@bug Leaks handle `pickedItemType`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `pickedItemType`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function PerformStockUpdates takes nothing returns nothing
     local integer  pickedItemId
@@ -11221,7 +11221,7 @@ endfunction
 //*
 //***************************************************************************
 /**
-@bug Leaks handle `droppedItem`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@bug Leaks handle `droppedItem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function UnitDropItem takes unit inUnit, integer inItemID returns item
     local real x
