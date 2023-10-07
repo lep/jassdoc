@@ -2387,10 +2387,10 @@ function AttackMoveKillA takes unit target returns nothing
 endfunction
 
 //============================================================================
-function MinorCreepAttack takes nothing returns nothing
 /**
 @bug Leaks handle `target`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
 */
+function MinorCreepAttack takes nothing returns nothing
     local unit target = GetMinorCreep()
     call SetAllianceTarget(target)
     call FormGroup(3, true)
