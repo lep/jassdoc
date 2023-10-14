@@ -6184,6 +6184,8 @@ anywhere in the entered string.
 @note The callback event will not have the `EVENT_PLAYER_CHAT` eventid,
 instead `ConvertPlayerEvent(96)` which has no attached global in common.j.
 
+@note Players removed by `RemovePlayer` will not fire chat events.
+
 @event ConvertPlayerEvent(96)
 
 */
