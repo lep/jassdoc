@@ -4736,7 +4736,7 @@ native ForceEnumEnemies         takes force whichForce, player whichPlayer, bool
 /**
 Executes a callback function for every player in a given force. Within the callback function, calling `GetEnumPlayer` returns the player of the current iteration.
 
-@note: The iteration order is given by the player id, ascending (e.g., Player(3), then Player(7), then Player(15)) regardless in which order the players were added to the force.
+@note: The iteration order is given by the player id, ascending (e.g., `Player(3)`, then `Player(7)`, then `Player(15)`) regardless in which order the players were added to the force.
 */
 native ForForce                 takes force whichForce, code callback returns nothing
 
