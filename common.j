@@ -4704,9 +4704,10 @@ native FirstOfGroup             takes group whichGroup returns unit
 //
 
 /**
-Creates an empty force object. Forces act as objects which can point to groups of players. To add a player to a force, see `ForceAddPlayer`. 
+Creates an empty force object, returns a handle to it.
 
-
+Forces are groups containing players.
+To add/remove a player, see `ForceAddPlayer`/`ForceRemovePlayer`.
 */
 native CreateForce              takes nothing returns force
 native DestroyForce             takes force whichForce returns nothing
