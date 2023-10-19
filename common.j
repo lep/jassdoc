@@ -4809,7 +4809,7 @@ The rectangle size and coordinates are limited to valid map coordinates, see
 
 
 @bug You can't create your own rectangle that would match the dimensions
-of `GetWorldBounds`. The maxX and maxY will be smaller by `16.0` than that of
+of `GetWorldBounds`. The maxX and maxY will be smaller by `32.0` than that of
 the world bounds.
 
 @note See: `Rect`, `SetRectFromLoc`, `MoveRectTo`, `MoveRectToLoc`.
@@ -4826,7 +4826,7 @@ Does nothing if either location is null or invalid.
 
 
 @bug You can't create your own rectangle that would match the dimensions
-of `GetWorldBounds`. The maxX and maxY will be smaller by `16.0` than that of
+of `GetWorldBounds`. The maxX and maxY will be smaller by `32.0` than that of
 the world bounds.
 
 @note See: `Rect`, `SetRect`, `MoveRectTo`, `MoveRectToLoc`.
