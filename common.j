@@ -7311,6 +7311,11 @@ For example, most WC3 abilities have levels 1-3.
 Setting level <=0 will instead set it to level 1.
 Setting level >maximum will instead set it to abilities' highest level defined in WorldEditor.
 
+@note When a unit picks up an item with an ability, the ability will be added to the unit's list of abilities. Thus, this function can be used
+to set the level of an ability for an item on the unit, too. Since it's an attribute of the unit, a level set this way will not be retained
+when the item is dropped and picked up again. Via item abilities, a unit can have more than one instance of ability with the same ability id.
+This function will only set the level of the most recently obtained ability instance, then, which corresponds to the first ability instance found
+when using `BlzGetUnitAbilityByIndex` counting upwards.
 */
 native          SetUnitAbilityLevel takes unit whichUnit, integer abilcode, integer level returns integer
 
