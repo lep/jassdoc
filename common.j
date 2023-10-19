@@ -4710,7 +4710,17 @@ Forces are groups containing players.
 To add/remove a player, see `ForceAddPlayer`/`ForceRemovePlayer`.
 */
 native CreateForce              takes nothing returns force
+
+/**
+Destroys the force. Any further actions on it will have no effect.
+
+For example, checks if player is part of force will return false, enums will not iterate.
+*/
 native DestroyForce             takes force whichForce returns nothing
+
+/**
+Adds player to force.
+*/
 native ForceAddPlayer           takes force whichForce, player whichPlayer returns nothing
 native ForceRemovePlayer        takes force whichForce, player whichPlayer returns nothing
 
@@ -4722,6 +4732,14 @@ native ForceRemovePlayer        takes force whichForce, player whichPlayer retur
 */
 native BlzForceHasPlayer        takes force whichForce, player whichPlayer returns boolean
 native ForceClear               takes force whichForce returns nothing
+
+/**
+Populates the force by iterating all existing players and AI (excluding player neutral etc.) and adds them to force if filter returned true.
+
+Calling `GetFilterPlayer` will return the current player, see `Filter`.
+
+@note If you only want to iterate the force without changing it, use `ForForce`.
+*/
 native ForceEnumPlayers         takes force whichForce, boolexpr filter returns nothing
 
 /**
@@ -4735,7 +4753,7 @@ native ForceEnumAllies          takes force whichForce, player whichPlayer, bool
 native ForceEnumEnemies         takes force whichForce, player whichPlayer, boolexpr filter returns nothing
 
 /**
-Executes a callback function for every player in a given force. Within the callback function, calling `GetEnumPlayer` returns the player of the current iteration.
+Executes a callback function for every player in a given force. Within the callback, calling `GetEnumPlayer` returns the player of the current iteration.
 
 @note: The iteration order is given by the player id, ascending (e.g., `Player(3)`, then `Player(7)`, then `Player(15)`) regardless in which order the players were added to the force.
 */
