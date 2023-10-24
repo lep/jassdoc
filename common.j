@@ -7998,9 +7998,37 @@ native UnitDamageTarget             takes unit whichUnit, widget target, real am
 
 native IssueImmediateOrder          takes unit whichUnit, string order returns boolean
 native IssueImmediateOrderById      takes unit whichUnit, integer order returns boolean
+
+/**
+@note If the order is to build a structure and the unit can build that structure in principle but the player lacks the resources for it, then the unit
+will be pinged on the minimap in yellow for its owning player.
+
+@bug If the order is to build a structure, this function will return `false` even if the unit accepts the order.
+*/
 native IssuePointOrder              takes unit whichUnit, string order, real x, real y returns boolean
+
+/**
+@note If the order is to build a structure and the unit can build that structure in principle but the player lacks the resources for it, then the unit
+will be pinged on the minimap in yellow for its owning player.
+
+@bug If the order is to build a structure, this function will return `false` even if the unit accepts the order.
+*/
 native IssuePointOrderLoc           takes unit whichUnit, string order, location whichLocation returns boolean
+
+/**
+@note If the order is to build a structure and the unit can build that structure in principle but the player lacks the resources for it, then the unit
+will be pinged on the minimap in yellow for its owning player.
+
+@bug If the order is to build a structure, this function will return `false` even if the unit accepts the order.
+*/
 native IssuePointOrderById          takes unit whichUnit, integer order, real x, real y returns boolean
+
+/**
+@note If the order is to build a structure and the unit can build that structure in principle but the player lacks the resources for it, then the unit
+will be pinged on the minimap in yellow for its owning player.
+
+@bug If the order is to build a structure, this function will return `false` even if the unit accepts the order.
+*/
 native IssuePointOrderByIdLoc       takes unit whichUnit, integer order, location whichLocation returns boolean
 native IssueTargetOrder             takes unit whichUnit, string order, widget targetWidget returns boolean
 native IssueTargetOrderById         takes unit whichUnit, integer order, widget targetWidget returns boolean
@@ -8008,7 +8036,23 @@ native IssueInstantPointOrder       takes unit whichUnit, string order, real x, 
 native IssueInstantPointOrderById   takes unit whichUnit, integer order, real x, real y, widget instantTargetWidget returns boolean
 native IssueInstantTargetOrder      takes unit whichUnit, string order, widget targetWidget, widget instantTargetWidget returns boolean
 native IssueInstantTargetOrderById  takes unit whichUnit, integer order, widget targetWidget, widget instantTargetWidget returns boolean
+
+/**
+@note If the order is to build a structure and the unit can build that structure in principle but the player lacks the resources for it, then the unit
+will be pinged on the minimap in yellow for its owning player.
+
+@bug If the order is to build a structure and the unit can build that structure in principle (and the spot is not blocked, either),
+this function will still return `true` even if the player lacks the resources for it.
+*/
 native IssueBuildOrder              takes unit whichPeon, string unitToBuild, real x, real y returns boolean
+
+/**
+@note If the order is to build a structure and the unit can build that structure in principle but the player lacks the resources for it, then the unit
+will be pinged on the minimap in yellow for its owning player.
+
+@bug If the order is to build a structure and the unit can build that structure in principle (and the spot is not blocked, either),
+this function will still return `true` even if the player lacks the resources for it.
+*/
 native IssueBuildOrderById          takes unit whichPeon, integer unitId, real x, real y returns boolean
 
 native IssueNeutralImmediateOrder       takes player forWhichPlayer, unit neutralStructure, string unitToBuild returns boolean
@@ -16184,6 +16228,10 @@ native BlzQueueImmediateOrderById      takes unit whichUnit, integer order retur
 
 /**
 
+@note If the order is to build a structure and the unit can build that structure in principle but the player lacks the resources for it, then the unit
+will be pinged on the minimap in yellow for its owning player.
+
+@bug If the order is to build a structure, this function will return `false` even if the unit accepts the order.
 
 @patch 1.33
 
@@ -16216,6 +16264,11 @@ native BlzQueueInstantTargetOrderById  takes unit whichUnit, integer order, widg
 
 /**
 
+@note If the order is to build a structure and the unit can build that structure in principle but the player lacks the resources for it, then the unit
+will be pinged on the minimap in yellow for its owning player.
+
+@note If the order is to build a structure and the unit can build that structure in principle (and the spot is not blocked, either),
+this function will still return `true` even if the player lacks the resources for it and the unit has no other orders.
 
 @patch 1.33
 
