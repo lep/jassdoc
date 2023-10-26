@@ -6952,6 +6952,9 @@ Makes the unit slowly turn around on the spot to look at new direction.
 * 180 = West
 * 270 = South
 * -90 = South (wraps around)
+
+@note While the unit is moving, calling this function will have no effect.
+
 */
 native          SetUnitFacing       takes unit whichUnit, real facingAngle returns nothing
 
@@ -6961,6 +6964,8 @@ Makes the unit slowly turn around on the spot to look at new direction,
 the turn speed can be modified with `duration`.
 
 @note Not affected by `GetUnitTurnSpeed`/`SetUnitTurnSpeed`.
+
+@note If `duration < 0.1`, while the unit is moving, calling this function will have no effect.
 
 @bug For `duration == 0.5` the footman plays the running animation while turning.
 
