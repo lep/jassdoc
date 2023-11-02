@@ -1,0 +1,18 @@
+# See for explanation: https://github.com/lep/jassdoc/issues/109
+# To avoid surprises, it is recommended you have safecrlf set to true:
+# git config --local core.safecrlf true
+
+# "a later line overrides an earlier line."
+# Let git autodetect text, but if so then LF as EOL
+* text=auto eol=lf
+
+# All game scripts are CRLF, but LF works fine and we already use it
+*.j			text eol=lf
+*.ai		text eol=lf
+# Not yet included in repo but can go with LF for consistency?
+*.pld		text eol=lf
+*.wts		text eol=lf
+
+*.sql		text eol=lf
+*.hs		text eol=lf
+*.md		text eol=lf
