@@ -12,7 +12,7 @@ module Jass.Parser
 
     , docstring
     , symbol
-    
+
     ) where
 
 import Control.Applicative hiding (many, some)
@@ -20,6 +20,7 @@ import Control.Monad
 
 import Data.Maybe
 import Data.Void
+import Data.Functor( ($>))
 
 import Jass.Ast
 import Jass.Types
@@ -29,6 +30,9 @@ import Text.Megaparsec.Char
 import qualified Text.Megaparsec.Char.Lexer as L
 
 import Control.Monad.Combinators.Expr
+
+import Annotation
+import qualified Data.ByteString.Lazy.Char8 as L8
 
 type Parser = Parsec Void String
 
@@ -43,7 +47,7 @@ lexeme = L.lexeme sc
 stringlit = lexeme $ char '"' >> manyTill L.charLiteral (char '"')
 
 rawcode :: Parser String
-rawcode = lexeme $ char '\'' *> (escaped <|> anyCC) 
+rawcode = lexeme $ char '\'' *> (escaped <|> anyCC)
   where
     escaped = do
        char '\\'
@@ -104,29 +108,37 @@ brackets = between (symbol "[") (symbol "]")
 
 horizontalSpace = void $ some $ lexeme $ optional (L.skipLineComment "//") *> eol
 
-docstring :: Parser String
-docstring =  do
+docstring :: Parser Annotations
+docstring = option mempty $ do
     symbol "/**"
-    manyTill anySingle (symbol "*/")
+    anns <- parseDocstring . L8.pack <$> manyTill anySingle (symbol "*/")
+    horizontalSpace
+    pure anns
 
+toplevel :: Parser [Ast Annotations Toplevel]
 toplevel = globals
         <|> doc'd
 
   where
+    doc'd :: Parser [Ast Annotations Toplevel]
     doc'd = do
-        doc <- optional (docstring <* horizontalSpace)
+        doc <- docstring
         functionLike doc <|> typedef doc
+
+    functionLike :: Annotations -> Parser [Ast Annotations Toplevel]
     functionLike doc = do
-        const <- fromMaybe Normal <$> optional (reserved "constant"*> pure Jass.Types.Const)
+        const <- fromMaybe Normal <$> optional (reserved "constant" $> Jass.Types.Const)
         native doc const <|> function doc const
 
+    globals :: Parser [Ast Annotations Toplevel]
     globals = between (reserved "globals" <* horizontalSpace)
                       (reserved "endglobals" <* horizontalSpace) $ many $ do
-        doc <- optional (docstring <* horizontalSpace)
-        const <- fromMaybe Normal <$> optional (reserved "constant" *> pure Jass.Types.Const)
+        doc <-  docstring
+        const <- fromMaybe Normal <$> optional (reserved "constant" $> Jass.Types.Const)
         vdecl <- vardecl doc const
         return $ Global vdecl
 
+    typedef :: Annotations -> Parser [Ast Annotations Toplevel]
     typedef doc = do
         reserved "type"
         new <- identifier
@@ -139,17 +151,19 @@ toplevel = globals
 pSignature = do
     name <- identifier
     reserved "takes"
-    args <- (reserved "nothing" *> pure []) <|> ((,) <$> identifier <*> identifier) `sepBy` symbol ","
+    args <- (reserved "nothing" $> []) <|> ((,) <$> identifier <*> identifier) `sepBy` symbol ","
     reserved "returns"
-    ret <- (reserved "nothing" *> pure "nothing") <|> identifier
+    ret <- (reserved "nothing" $> "nothing") <|> identifier
     horizontalSpace
     return (name, args, ret)
 
+native :: Annotations -> Constant -> Parser [Ast Annotations Toplevel]
 native doc const = do
     reserved "native"
     (name, args, ret) <- pSignature
     return [Native doc const name args ret]
 
+function :: Annotations -> Constant -> Parser [Ast Annotations Toplevel]
 function doc const = do
     reserved "function"
     (name, args, ret) <- pSignature
@@ -158,6 +172,7 @@ function doc const = do
     horizontalSpace
     return [Function doc const name args ret body]
 
+statement :: Parser (Ast Annotations Stmt)
 statement = returnStmt
           <|> if_
           <|> callStmt
@@ -167,7 +182,7 @@ statement = returnStmt
           <|> local
           <?> "statement"
     where
-        local = Local <$> (reserved "local"*> vardecl Nothing Normal)
+        local = Local <$> (reserved "local"*> vardecl mempty Normal)
         returnStmt = Return <$> (reserved "return" *> optional expression <* horizontalSpace)
         callStmt = Call <$> (optional (reserved "debug") *> reserved "call" *> identifier) <*> parens arglist <* horizontalSpace
         loop = Loop <$> between startLoop endLoop (many statement)
@@ -182,7 +197,7 @@ statement = returnStmt
                 Just idx -> return $ AVar v idx
                 Nothing -> return $ SVar v
 
-            
+
         exitwhen = Exitwhen <$> (reserved "exitwhen" *> expression <* horizontalSpace)
 
         if_ = If <$> (reserved "if" *> expression <* reserved "then" <* horizontalSpace)
@@ -202,9 +217,10 @@ statement = returnStmt
         startLoop = reserved "loop" <* horizontalSpace
         endLoop = reserved "endloop" <* horizontalSpace
 
+vardecl :: Annotations -> Constant -> Parser (Ast Annotations VarDef)
 vardecl doc constantness = do
     typ <- identifier
-    isArray <- reserved "array" *> pure True <|> pure False
+    isArray <- (reserved "array" $> True) <|> pure False
     if isArray
     then varArray doc typ <* horizontalSpace
     else varNormal doc typ <* horizontalSpace
@@ -224,7 +240,7 @@ expression = makeExprParser term table
             , [ binary (reserved "or") "or"]
             , [ binary (reserved "and") "and"]
             ]
-    binary t op = InfixL (t *> pure (\a b -> Call op [a, b]))
+    binary t op = InfixL (t $> (\a b -> Call op [a, b]))
 
 term = parens expression
     <|> literal
@@ -237,9 +253,9 @@ term = parens expression
     literal = String <$> stringlit
             <|> either Real Int <$> eitherP (try reallit) intlit
             <|> Rawcode <$> rawcode
-            <|> (reserved "true" *> pure ( Bool True))
-            <|> (reserved "false" *> pure ( Bool False))
-            <|> (reserved "null" *> pure Null)
+            <|> (reserved "true" $> Bool True)
+            <|> (reserved "false" $> Bool False)
+            <|> (reserved "null" $> Null)
             <|> Code <$> (reserved "function" *> identifier)
 
     varOrCall = do
@@ -252,5 +268,6 @@ term = parens expression
 
 arglist = expression `sepBy` symbol ","
 
+programm :: Parser (Ast Annotations Programm)
 programm = Programm . concat <$> (many horizontalSpace *> many toplevel <* eof)
 

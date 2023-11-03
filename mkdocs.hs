@@ -26,35 +26,38 @@ import Text.Megaparsec (parse, errorBundlePretty)
 
 import Options.Applicative
 
+import Annotation
+import Jass.Ast (Ast(Programm))
+
 
 pattern N x <- (L8.pack -> x)
 pattern P x <- (fmap L8.pack -> x)
 pattern P2 x <- (fmap (L8.pack***L8.pack) -> x)
 
-handleToplevel :: FilePath -> Ast (Maybe String) Toplevel -> L8.ByteString
+handleToplevel :: FilePath -> Ast Annotations Toplevel -> L8.ByteString
 handleToplevel file toplevel =
   case toplevel of
-    Typedef (P doc) (N name) _ -> L8.unlines [ delete name, handle doc name, attachFile file name]
-    Native (P doc) _ (N name) (P2 params) r ->
+    Typedef doc (N name) _ -> L8.unlines [ delete name, handle doc name, attachFile file name]
+    Native doc _ (N name) (P2 params) r ->
       L8.unlines [ delete name
                  , handle doc name
                  , paramOrdering name params
                  , attachFile file name
                  , returnType name r
                  ]
-    Function (P doc) _ (N name) (P2 params) r _ ->
+    Function doc _ (N name) (P2 params) r _ ->
       L8.unlines [ delete name
                  , handle doc name
                  , paramOrdering name params
                  , attachFile file name
                  , returnType name r
                  ]
-    Global (ADef (P doc) (N name) (N ty)) -> L8.unlines
+    Global (ADef doc (N name) (N ty)) -> L8.unlines
         [ delete name
         , handle doc name
         , attachFile file name
         ]
-    Global (SDef (P doc) isConst (N name) (N ty) _) -> L8.unlines
+    Global (SDef doc isConst (N name) (N ty) _) -> L8.unlines
         [ delete name
         , handle doc name
         , attachFile file name
@@ -69,14 +72,11 @@ handleToplevel file toplevel =
         ]
 
 
-    handle (Just doc) name =
-        let (descr, anns) = parseDocstring doc
-            (params, annotations) = first (map $ extractParam . snd) $ split isParam anns
-        in L8.unlines [ insertDescr name descr
-                      , L8.unlines $ map (uncurry $ insertParam name) params
+    handle (Annotations anns) name =
+        let (params, annotations) = first (map $ extractParam . snd) $ split isParam anns
+        in L8.unlines [ L8.unlines $ map (uncurry $ insertParam name) params
                       , L8.unlines $ map (uncurry $ insertAnn name) annotations
                       ]
-    handle _ _ = ""
 
     returnType name (L8.pack -> r) =
         L8.unwords [ "insert into annotations values("
@@ -112,6 +112,7 @@ handleToplevel file toplevel =
                   ]
      ]
 
+split :: (a -> Bool) -> [a] -> ([a], [a])
 split pred xs = foldr ins mempty xs
   where
     ins elem (l, r)
@@ -124,14 +125,6 @@ extractParam xs =
     in (name, L8.dropWhile isSpace descr)
 
 isParam = ("param" == ) . fst
-
-insertDescr name descr
-  | L8.null descr = L8.empty
-  | otherwise = L8.unwords
-    [ "insert into annotations (fnname, anname, value) values ("
-    , L8.intercalate "," [t name, t "comment", t descr]
-    , ");"
-    ]
 
 insertParam name param value = L8.unwords
     [ "insert into parameters (fnname, param, value) values ("
@@ -150,48 +143,6 @@ t x = "'" <> escape x <> "'"
 escape = L8.pack . concatMap e . L8.unpack
 e '\'' = "''"
 e x    = [x]
-
-
-trimWhitespace =
-    {-  L8.reverse
-    . L8.dropWhile (\x -> x=='\r' || x == '\n') -- drop back newline
-    . L8.reverse
-    . -} L8.dropWhile (\x -> x=='\r' || x == '\n') -- drop front newline
-
-type Accumulator = ([L8.ByteString], [(L8.ByteString, [L8.ByteString])])
-
-
-myUnlines = L8.intercalate "\n"
-
-
-parseDocstring = bimap (trimWhitespace . myUnlines . reverse)
-                       (map (second $ myUnlines . reverse ) )
-               . flip go mempty
-               . L8.lines
-  where
-    go :: [L8.ByteString] -> Accumulator -> Accumulator
-    -- we reverse the annotations to have it inserted in the db in the same
-    -- order they are written in the file. that way we can use sqlites _rowid_
-    -- to query the annotations in the same order as they were written.
-    -- this *might* only work for fresh builds as i don't know if sqlite
-    -- recycles their internal rowids.
-    go [] acc = second reverse acc 
-    go (x:xs) (descr, annotations)
-        | Just ann <- getAnn x = go xs (descr, ann:annotations)
-        | null annotations = go xs (x:descr, annotations)
-        | otherwise =
-            let (anTag, anLines):as = annotations
-            in go xs (descr, (anTag, x:anLines):as)
-
-
-
-    getAnn line =
-        let words = map L8.unpack $ L8.words line
-        in case words of
-            ('@':ann):text -> Just (L8.pack ann, [trimWhitespace . L8.pack $ unwords text])
-            _ -> Nothing
-
-
 
 emptyLine = L8.null . L8.filter (not . isVerticalSpace)
   where
@@ -229,7 +180,7 @@ schema = L8.unlines
          , ");                                            "
          ]
 
-data Args = Args FilePath [FilePath] 
+data Args = Args FilePath [FilePath]
 
 argsParser :: Parser Args
 argsParser =
@@ -237,7 +188,7 @@ argsParser =
          <*> many (argument str (metavar "INPUTS..."))
 
 opts :: ParserInfo Args
-opts = info (argsParser <**> helper) 
+opts = info (argsParser <**> helper)
     ( fullDesc
     <> progDesc "Process jassdoc'd jass files"
     )
@@ -251,8 +202,7 @@ main = do
         handle <- openFile file ReadMode
         hSetBinaryMode handle True
         x <- parse programm file <$> hGetContents handle -- closes handle
-        let toplevel :: [Ast (Maybe String) Toplevel]
-            toplevel = case x of
+        let toplevel = case x of
                 Right (Programm y) -> y
                 Left err -> error $ errorBundlePretty err
         L8.hPutStrLn h "BEGIN TRANSACTION;"
