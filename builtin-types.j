@@ -29,7 +29,7 @@ binary).
 @note In-depth analysis of floating-point behavior of `real` in Jass:
 [real Talk - Floats in Warcraft 3](https://www.hiveworkshop.com/threads/real-talk-floats-in-warcraft-3.270579/).
 
-@note (2014) Typecast explot conversion between real and integer:
+@note (2014) Typecast exploit conversion between real and integer:
 [100% accurate and pretty fast realToIndex and back](https://www.hiveworkshop.com/threads/100-accurate-and-pretty-fast-realtoindex-and-back.247170/).
 */
 type real extends void
