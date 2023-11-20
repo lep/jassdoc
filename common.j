@@ -4369,6 +4369,11 @@ endfunction
 ```
 
 @note Players are not required to be allies. Tested in v1.07.
+
+However in this case after sharing control, the player with control will see controllable enemy units
+colored in "green-ally" color when hovering over them. The minimap will still correctly show all of them
+as enemies (for all ally color modes, see `GetAllyColorFilterState`). Enemy units will attack correctly.
+
 @note See: `ShareEverythingWithTeam` which is a more limited version available from GUI.
 */
 native SetPlayerAlliance        takes player sourcePlayer, player otherPlayer, alliancetype whichAllianceSetting, boolean value returns nothing
