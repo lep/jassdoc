@@ -4348,6 +4348,29 @@ to set each player's color.
 
 */
 native SetPlayerColor           takes player whichPlayer, playercolor color returns nothing
+
+/**
+Sets the given alliance setting on `sourcePlayer` towards `otherPlayer`.
+
+@param sourcePlayer is the target being changed
+@param otherPlayer is the receiver of the effect (beneficiary)
+@param whichAllianceSetting handle to alliance type
+@param value `true` to share, `false` to stop sharing
+
+Example, make it so red has vision of blue's units:
+
+```{.jass}
+function ShowBlueToRed takes nothing returns nothing
+   local player red = Player(0)
+   local player blue = Player(1)
+   // note the reversed order: "blue's vision is shared to red"
+   call SetPlayerAlliance(blue, red, ALLIANCE_SHARED_VISION, true)
+endfunction
+```
+
+@note Players are not required to be allies. Tested in v1.07.
+@note See: `ShareEverythingWithTeam` which is a more limited version available from GUI.
+*/
 native SetPlayerAlliance        takes player sourcePlayer, player otherPlayer, alliancetype whichAllianceSetting, boolean value returns nothing
 native SetPlayerTaxRate         takes player sourcePlayer, player otherPlayer, playerstate whichResource, integer rate returns nothing
 
