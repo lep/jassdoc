@@ -1,9 +1,31 @@
 #!/usr/bin/env perl
 
-use 5.30.0;
+use utf8;
+
+use v5.30.0;
 
 use strict;
 use warnings;
+
+use open ':std', ':utf8', ':encoding(UTF-8)';
+# no feature qw(indirect);
+use feature qw(signatures);
+no warnings qw(experimental::signatures);
+
+
+use Getopt::Long;
+use Pod::Usage;
+
+my $help = 0;
+
+GetOptions(
+  help => \$help
+) or die pod2usage(-verbose => 1);
+
+pod2usage(-verbose => 2) if $help;
+pod2usage(-verbose => 1) unless @ARGV;
+
+my @files = @ARGV;
 
 sub escape {
     my ($in) = @_;
@@ -11,7 +33,7 @@ sub escape {
     return $in;
 }
 
-foreach my $file (@ARGV){
+foreach my $file (@files){
     open(my $fh, "<", $file);
 
     my $state = "nothing";
@@ -178,5 +200,25 @@ SQL
 
     say "END TRANSACTION;";
 }
+
+__END__
+
+=head1 NAME
+
+mksrc - Write jass source to SQL
+
+=head1 SYNOPSIS
+
+mksrc [options] [FILES]
+
+ Options:
+  --help  Prints this help message
+
+=head1 DESCRIPTION
+
+B<This program> takes any number of jass files and writes an SQL program to
+stdout. That SQL program will add a bunch of annotations to the annotations
+table, like the literal source code of each toplevel defintion, the start- and
+end line numbers and the kind of the definition (funciton, native, global, etc.).
 
 

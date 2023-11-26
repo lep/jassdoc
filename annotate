@@ -2,7 +2,7 @@
 
 use utf8;
 
-use v5.38.0;
+use v5.30.0;
 
 use strict;
 use warnings;
@@ -14,6 +14,7 @@ no warnings qw(experimental::signatures);
 
 
 use Getopt::Long;
+use Pod::Usage;
 use DBI;
 
 use DBD::SQLite::Constants ':dbd_sqlite_string_mode';
@@ -217,6 +218,8 @@ annotate [options] [FILES]
 =head1 DESCRIPTION
 
 B<This program> can be used to annotate a fresh jass file with annotations
-allready present in a jass.db-Sqlite file.
+allready present in a jass.db-Sqlite file. The workflow in case of a new
+common.j or Blizzard.j would be to build the jass.db with the old version
+and then running `annotate new-common.j new-Blizzard.j`.
 
 
