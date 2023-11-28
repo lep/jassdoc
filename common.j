@@ -5227,7 +5227,7 @@ it MAY return the same handle depending on unknown conditions (consecutive calls
 For this reason, do **not** destroy filterfuncs created with `Condition` in Jass,
 in the best case it does nothing but in the worst case it would affect some internals.
 
-This behavior is similar to `Condition`.
+This behavior is similar to `Filter`.
 
 @pure 
 
