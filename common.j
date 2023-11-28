@@ -13216,7 +13216,10 @@ Does not clear the buffer or timer after flushing. The file is overwritten. It's
 
 @note **Save Path:**
 
-Reforged: `%USERPROFILE%\Documents\Warcraft III\CustomMapData\`
+Reforged:
+
+- Windows: `%USERPROFILE%\Documents\Warcraft III\CustomMapData\`
+- MacOS: `~/Library/Application\ Support/Blizzard/Warcraft\ III/CustomMapData/`
 
 Classic: ?
 
