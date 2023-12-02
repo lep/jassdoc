@@ -220,6 +220,9 @@ annotate [options] [FILES]
 B<This program> can be used to annotate a fresh jass file with annotations
 allready present in a jass.db-Sqlite file. The workflow in case of a new
 common.j or Blizzard.j would be to build the jass.db with the old version
-and then running `annotate new-common.j new-Blizzard.j`.
+and then running `annotate new-common.j new-Blizzard.j`. This would create
+two files called `new-common.j-out` and `new-Blizzard.j-out`.
 
+Another use-case for this is to clean an annotated file. If the database has
+not matching annotations the input file will be stripped of all docstrings.
 
