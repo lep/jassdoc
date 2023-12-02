@@ -8714,6 +8714,9 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+/**
+@note It is called directly by the default "Melee Initialization" trigger.
+*/
 function MeleeStartingVisibility takes nothing returns nothing
     // Start by setting the ToD.
     call SetFloatGameState(GAME_STATE_TIME_OF_DAY, bj_MELEE_STARTING_TOD)
@@ -8732,6 +8735,8 @@ endfunction
 
 //===========================================================================
 /**
+@note It is called directly by the default "Melee Initialization" trigger.
+
 @bug Leaks handle `v`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeStartingResources takes nothing returns nothing
@@ -8783,6 +8788,9 @@ function ReducePlayerTechMaxAllowed takes player whichPlayer, integer techId, in
 endfunction
 
 //===========================================================================
+/**
+@note It is called directly by the default "Melee Initialization" trigger.
+*/
 function MeleeStartingHeroLimit takes nothing returns nothing
     local integer index
 
@@ -8865,6 +8873,9 @@ function MeleeGrantItemsToHiredHero takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@note It is called directly by the default "Melee Initialization" trigger.
+*/
 function MeleeGrantHeroItems takes nothing returns nothing
     local integer index
     local trigger trig
@@ -8911,6 +8922,8 @@ endfunction
 
 //===========================================================================
 /**
+@note It is called directly by the default "Melee Initialization" trigger.
+
 @bug Leaks handle `theUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeClearExcessUnit takes nothing returns nothing
@@ -9522,6 +9535,8 @@ endfunction
 
 //===========================================================================
 /**
+@note It is called directly by the default "Melee Initialization" trigger.
+
 @bug Leaks handle `indexStartLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 */
 function MeleeStartingUnits takes nothing returns nothing
@@ -9613,6 +9628,9 @@ function PickMeleeAI takes player num, string s1, string s2, string s3 returns n
 endfunction
 
 //===========================================================================
+/**
+@note It is called directly by the default "Melee Initialization" trigger.
+*/
 function MeleeStartingAI takes nothing returns nothing
     local integer index
     local player  indexPlayer
@@ -10503,6 +10521,9 @@ function MeleeTriggerTournamentFinishNow takes nothing returns nothing
 endfunction
 
 //===========================================================================
+/**
+@note It is called directly by the default "Melee Initialization" trigger.
+*/
 function MeleeInitVictoryDefeat takes nothing returns nothing
     local trigger    trig
     local integer    index
