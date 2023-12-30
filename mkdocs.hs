@@ -27,7 +27,6 @@ import Text.Megaparsec (parse, errorBundlePretty)
 import Options.Applicative
 
 import Annotation
-import Jass.Ast (Ast(Programm))
 
 
 pattern N x <- (L8.pack -> x)
@@ -113,7 +112,7 @@ handleToplevel file toplevel =
      ]
 
 split :: (a -> Bool) -> [a] -> ([a], [a])
-split pred xs = foldr ins mempty xs
+split pred = foldr ins mempty
   where
     ins elem (l, r)
         | pred elem = (elem:l, r)
@@ -139,7 +138,9 @@ insertAnn name ann value = L8.unwords
     ]
 
 
-t x = "'" <> escape x <> "'"
+chop = L8.dropWhileEnd (`elem` ['\r', '\n'])
+
+t x = "'" <> escape (chop x) <> "'"
 escape = L8.pack . concatMap e . L8.unpack
 e '\'' = "''"
 e x    = [x]

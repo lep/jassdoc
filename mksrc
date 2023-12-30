@@ -129,6 +129,7 @@ SQL
         }elsif( $state eq "globals" && $line =~ m/^\s*endglobals/){
             $state = "nothing";
         }elsif ( $state eq "globals" ){
+	    chomp $line;
             my $name;
             given($line){
                 $name = $1 when /^\s*constant\s+\w+\s+(\w+)\s*=.+$/;
@@ -166,6 +167,7 @@ SQL
 
             }
         }elsif( $state eq "nothing" && $line =~m /^type\s+(\w+)\s+extends\s+.+/){
+	    chomp $line;
             my $type = escape($1);
             my $line = escape($line);
             say <<SQL;
