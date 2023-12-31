@@ -14409,6 +14409,7 @@ native BlzGetUnitAbilityManaCost                   takes unit whichUnit, integer
 Set manacost of an ability (at ability level) for a unit.
 Works as expected, so you can dynamically calculate the mana cost.
 
+@bug v1.29.2: Crashes when loading a saved game after this function was used on a unit. Confirmed as fixed as of v1.31.1.
 
 @patch 1.29
 
