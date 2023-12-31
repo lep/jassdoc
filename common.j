@@ -3523,34 +3523,157 @@ See `fogstate` for an explanation.
     constant unitstringfield UNIT_SF_SHADOW_IMAGE_UNIT      = ConvertUnitStringField('ushu')
 
     // Unit Weapon
+/**
+@note Has non-field native, see `BlzGetUnitDiceNumber` and `BlzSetUnitDiceNumber`.
+*/
     constant unitweaponintegerfield UNIT_WEAPON_IF_ATTACK_DAMAGE_NUMBER_OF_DICE     = ConvertUnitWeaponIntegerField('ua1d')
+
+
+/**
+@note Has non-field native, see `BlzGetUnitBaseDamage` and `BlzSetUnitBaseDamage`
+*/
     constant unitweaponintegerfield UNIT_WEAPON_IF_ATTACK_DAMAGE_BASE               = ConvertUnitWeaponIntegerField('ua1b')
+
+
+/**
+@note Has non-field native, see `BlzGetUnitDiceSides` and `BlzSetUnitDiceSides`
+*/
     constant unitweaponintegerfield UNIT_WEAPON_IF_ATTACK_DAMAGE_SIDES_PER_DIE      = ConvertUnitWeaponIntegerField('ua1s')
+	
+/**
+@note GET works, SET is ignored
+*/
     constant unitweaponintegerfield UNIT_WEAPON_IF_ATTACK_MAXIMUM_NUMBER_OF_TARGETS = ConvertUnitWeaponIntegerField('utc1')
+
+/**
+@note Works as intended
+*/
     constant unitweaponintegerfield UNIT_WEAPON_IF_ATTACK_ATTACK_TYPE               = ConvertUnitWeaponIntegerField('ua1t')
+
+
+/**
+@note Works as intended
+*/
     constant unitweaponintegerfield UNIT_WEAPON_IF_ATTACK_WEAPON_SOUND              = ConvertUnitWeaponIntegerField('ucs1')
+
+
+/**
+@note Doesn't work/crashes (version?)
+*/
     constant unitweaponintegerfield UNIT_WEAPON_IF_ATTACK_AREA_OF_EFFECT_TARGETS    = ConvertUnitWeaponIntegerField('ua1p')
+
+
+/**
+@note Works as intended
+*/
     constant unitweaponintegerfield UNIT_WEAPON_IF_ATTACK_TARGETS_ALLOWED           = ConvertUnitWeaponIntegerField('ua1g')
 
+
+/**
+@note Seems to work though I can't tell the difference
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_BACKSWING_POINT              = ConvertUnitWeaponRealField('ubs1')
+
+
+/**
+@note Works as intended
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_DAMAGE_POINT                 = ConvertUnitWeaponRealField('udp1')
+
+
+/**
+@note Has non-field native (which? because `BlzGetUnitAttackCooldown` and `BlzSetUnitAttackCooldown` modify the current cooldown).
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_BASE_COOLDOWN                = ConvertUnitWeaponRealField('ua1c')
+
+
+/**
+@note GET works, SET is ignored.
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_DAMAGE_LOSS_FACTOR           = ConvertUnitWeaponRealField('udl1')
+
+
+/**
+@note Sets small and attack cooldown to same value.
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_DAMAGE_FACTOR_MEDIUM         = ConvertUnitWeaponRealField('uhd1')
+
+
+/**
+@note Sets attack cooldown to same value.
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_DAMAGE_FACTOR_SMALL          = ConvertUnitWeaponRealField('uqd1')
+
+
+/**
+@note GET works, SET is ignored.
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_DAMAGE_SPILL_DISTANCE        = ConvertUnitWeaponRealField('usd1')
+
+
+/**
+@note GET works, SET is ignored.
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_DAMAGE_SPILL_RADIUS          = ConvertUnitWeaponRealField('usr1')
+
+
+/**
+@note Works as intended
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_PROJECTILE_SPEED             = ConvertUnitWeaponRealField('ua1z')
+
+
+/**
+@note Works as intended
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_PROJECTILE_ARC               = ConvertUnitWeaponRealField('uma1')
+
+
+/**
+@note Sets medium, small and attack cooldown to same value.
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_AREA_OF_EFFECT_FULL_DAMAGE   = ConvertUnitWeaponRealField('ua1f')
+
+
+/**
+@note Sets small and attack cooldown to same value.
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_AREA_OF_EFFECT_MEDIUM_DAMAGE = ConvertUnitWeaponRealField('ua1h')
+
+
+/**
+@note Sets attack cooldown to same value.
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_AREA_OF_EFFECT_SMALL_DAMAGE  = ConvertUnitWeaponRealField('ua1q')
+
+
+/**
+@note Index is +1 (offset by +1?), adds amount to value instead of setting the value
+*/
     constant unitweaponrealfield UNIT_WEAPON_RF_ATTACK_RANGE                        = ConvertUnitWeaponRealField('ua1r')
 
+
+/**
+@note Can set to false, not to true. Will remove attack/stop(/hold?) buttons, not the actual attack tooltip.
+*/
     constant unitweaponbooleanfield UNIT_WEAPON_BF_ATTACK_SHOW_UI                   = ConvertUnitWeaponBooleanField('uwu1')
+
+
+/**
+@note Works as intended
+*/
     constant unitweaponbooleanfield UNIT_WEAPON_BF_ATTACKS_ENABLED                  = ConvertUnitWeaponBooleanField('uaen')
+
+
+/**
+@note Ignored (always returns true?)
+*/
     constant unitweaponbooleanfield UNIT_WEAPON_BF_ATTACK_PROJECTILE_HOMING_ENABLED = ConvertUnitWeaponBooleanField('umh1')
-    
+
+
+/**
+@note Works as intended
+*/
     constant unitweaponstringfield UNIT_WEAPON_SF_ATTACK_PROJECTILE_ART             = ConvertUnitWeaponStringField('ua1m')
 
     // Move Type
