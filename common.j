@@ -14352,6 +14352,9 @@ Changes(set) an ability’s cooldown at runtime for a specific unit.
 @note Cooldown is a real, which means that it supports negative and positive numbers with decimals, in this case setting it to negative allows you to reduce an ability’s cooldown.
 @note It does not reduce the cooldown if the ability is currently on CD, it will have its new cooldown after the CD is over though.
 
+@bug v1.29.2: Crashes when loading a saved game after this function was used on a unit.
+Probably fixed as of v1.31.1 like with `BlzSetUnitAbilityManaCost`.
+
 @patch 1.29
 
 */
@@ -14410,6 +14413,7 @@ Set manacost of an ability (at ability level) for a unit.
 Works as expected, so you can dynamically calculate the mana cost.
 
 @bug v1.29.2: Crashes when loading a saved game after this function was used on a unit. Confirmed as fixed as of v1.31.1.
+Crash likely related to `BlzSetUnitAbilityCooldown`.
 
 @patch 1.29
 
