@@ -12578,6 +12578,9 @@ currently has as visibility of at least one of the endpoints of the to be create
 @note The source z value of the new lightning is set to match the current terrain height of the source point, analogously, the target z value
 matches the current terrain height of the target point. Later changes to the terrain height do not affect herewith created existing lightnings anymore.
 
+@note For lightning types see:
+[screenshot](https://www.hiveworkshop.com/attachments/lightninglist-png.116282/)
+and [test map](https://www.hiveworkshop.com/threads/lightning-test-v1-0.204927/).
 */
 native AddLightning                 takes string codeName, boolean checkVisibility, real x1, real y1, real x2, real y2 returns lightning
 
@@ -12594,7 +12597,9 @@ currently has visibility of at least one of the endpoints of the to be created l
 @param y2 y-coordinate (World) of target point.
 @param z2 z-coordinate (World) of target point.
 
-
+@note For lightning types see:
+[screenshot](https://www.hiveworkshop.com/attachments/lightninglist-png.116282/)
+and [test map](https://www.hiveworkshop.com/threads/lightning-test-v1-0.204927/).
 */
 native AddLightningEx               takes string codeName, boolean checkVisibility, real x1, real y1, real z1, real x2, real y2, real z2 returns lightning
 
