@@ -28,13 +28,13 @@
             installPhase = ''
               install -Dt $out/bin mkdocs
             '';
-
           };
 
           jassdoc = pkgs.stdenv.mkDerivation {
             name = "jassdoc";
             src = self;
-            buildInputs = [ pkgs.gnumake pkgs.perl pkgs.sqlite ];
+            buildInputs =
+              [ pkgs.gnumake pkgs.perl pkgs.sqlite pkgs.cabal-install ];
 
             buildPhase = ''
               MKDOCS=${mkdocs}/bin/mkdocs make jass.db
