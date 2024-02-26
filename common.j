@@ -6995,6 +6995,33 @@ Returns handle to unit.
 
 @note See: `bj_UNIT_FACING` constant for default facing direction of units in BJ scripts and GUI.
 
+@note
+If you want to create a unit with a specific shadow you can use something along
+these lines. [See also](https://www.hiveworkshop.com/threads/how-to-remove-building-shadow.246701/#post-2469975).
+
+```
+// Dummy but valid image path required.
+local image i = CreateImage( "ReplaceableTextures\\Splats\\AuraRune9b.blp", 1, 1, 0, 0, 0, 0, 1, 1, 0, 3)
+local unit u
+// If the image creation failed, abort, as it can screw up the game.
+if GetHandleId(i) == -1 then
+    return
+endif
+call DestroyImage(i)
+set u = CreateUnit(Player(0), 'hpea', 0, 0, 0)
+
+// Destroy the units shadow, because it seems like you can't really work with it.
+call DestroyImage(i)
+
+// Create a new image. This will be the units new shadow.
+call CreateImage( "ReplaceableTextures\\Splats\\AuraRune9b.blp", 128, 128, 0, 0, 0, 0, 0, 0, 0, 1)
+
+// Now you can do stuff with the image that is u's shadow.
+// Do note though that you cannot change the position of the image.
+call SetImageRenderAlways(i, true)
+call SetImageColor(i, 255, 0, 0, 255)
+```
+
 
 */
 native          CreateUnit              takes player id, integer unitid, real x, real y, real face returns unit
@@ -12954,7 +12981,6 @@ imageTypes also influence the order in which images are drawn above one another:
 
 Multiple images with the same type are drawn in their order of creation,
 meaning that the image created first is drawn below the image created after.
-
 
 */
 native CreateImage                  takes string file, real sizeX, real sizeY, real sizeZ, real posX, real posY, real posZ, real originX, real originY, real originZ, integer imageType returns image
