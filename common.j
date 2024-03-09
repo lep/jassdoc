@@ -8139,6 +8139,29 @@ native UnitAddSleepPerm             takes unit whichUnit, boolean add returns no
 native UnitCanSleepPerm             takes unit whichUnit returns boolean
 native UnitIsSleeping               takes unit whichUnit returns boolean
 native UnitWakeUp                   takes unit whichUnit returns nothing
+
+/**
+Adds a specific timed-life buff to a unit and kills the unit after a time. The unit will show a decreasing progress bar in its UI indicating the remaining time and what buff was used.
+
+@param whichUnit Target unit.
+@param buffId id of the buff to use.
+The only allowed values are: `BUan` (Animate Dead), `Bapl` (Plague Ward), `BEfn` (Force of Nature), `BTLF` (Generic), `Bhwd` (Healing Ward), `Brai` (Raise Dead) and `BHwe` (Water Elemental).
+@param duration game time from now until the unit is killed.
+
+@note When another buff id than the allowed ones is given, it will fall back to use `BTLF` (Generic), even if the buff is derived from one of the allowed ones.
+
+@note The text that appears on the progress bar is the tooltip (`Bufftip`/`ftip`) of the buff.
+
+@note The buff won't show up in the unit's status UI.
+
+@note The buff can be queried with `BlzGetUnitAbilityByIndex`.
+
+@note Timed life can be stacked (even the same buff id), the timers will be running down in parallel, so the first expired timer will kill the unit but only the timed life applied first
+will show up in the unit's UI. Timed life can also stem from summoning abilities as the allowed buff id values suggest.
+
+@note Removing any timed-life buff from the unit will kill the unit.
+
+*/
 native UnitApplyTimedLife           takes unit whichUnit, integer buffId, real duration returns nothing
 native UnitIgnoreAlarm              takes unit whichUnit, boolean flag returns boolean
 native UnitIgnoreAlarmToggled       takes unit whichUnit returns boolean
