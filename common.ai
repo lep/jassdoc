@@ -101,6 +101,8 @@ Gets the gold cost of a unit-type.
 
 @param unitid Rawcode to specify unit type
 
+@bug Crashes the game for hero ids (tested in a normal script).
+
 @commonai
 @patch 1.00
 */
@@ -110,6 +112,8 @@ native GetUnitGoldCost      takes integer unitid                        returns 
 Gets the lumber cost of a unit-type.
 
 @param unitid Rawcode to specify unit type
+
+@bug Crashes the game for hero ids (tested in a normal script).
 
 @commonai
 @patch 1.00
