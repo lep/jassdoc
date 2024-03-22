@@ -11572,7 +11572,7 @@ constant native GetDetectedUnit takes nothing returns unit
 /**
 
 
-@event EVENT_PLAYER_UNIT_SUMMONED
+@event EVENT_PLAYER_UNIT_SUMMON
 
 @patch 1.00
 */
@@ -11581,7 +11581,7 @@ constant native GetSummoningUnit    takes nothing returns unit
 /**
 
 
-@event EVENT_PLAYER_UNIT_SUMMONED
+@event EVENT_PLAYER_UNIT_SUMMON
 
 @patch 1.00
 */
