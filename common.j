@@ -3461,6 +3461,14 @@ will return `""`. Use `TriggerRegisterPlayerChatEvent` instead.
 */
     constant playerunitevent EVENT_PLAYER_HERO_REVIVE_FINISH            = ConvertPlayerUnitEvent(46)
 /**
+Runs when something summons a new unit under specified player's control.
+
+Use `GetSummonedUnit` for the new unit and `GetSummoningUnit` for the spell caster.
+
+@note See: `EVENT_UNIT_SUMMON`
+
+@note `GetTriggerUnit` is equivalent to `GetSummonedUnit`.
+
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_SUMMON                   = ConvertPlayerUnitEvent(47)
@@ -3642,6 +3650,17 @@ will return `""`. Use `TriggerRegisterPlayerChatEvent` instead.
     constant unitevent EVENT_UNIT_HERO_REVIVE_FINISH                    = ConvertUnitEvent(83)
                                                                         
 /**
+Runs when a unit summons another unit.
+
+Use `GetSummoningUnit` to get the spell caster.
+
+@note `GetSummonedUnit` returns null, probably because the event happens before
+the new unit is spawned.
+
+@note `GetTriggerUnit` is equivalent to `GetSummoningUnit`.
+
+@note See: `EVENT_PLAYER_UNIT_SUMMON`
+
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_SUMMON                                = ConvertUnitEvent(84)
@@ -11570,18 +11589,23 @@ constant native GetDetectedUnit takes nothing returns unit
 // EVENT_PLAYER_UNIT_SUMMONED
 
 /**
-
+Returns the unit who casted the summoning spell.
 
 @event EVENT_PLAYER_UNIT_SUMMON
+@event EVENT_UNIT_SUMMON
+
+@note See: `GetSummonedUnit`.
 
 @patch 1.00
 */
 constant native GetSummoningUnit    takes nothing returns unit
 
 /**
-
+Returns the newly spawned unit.
 
 @event EVENT_PLAYER_UNIT_SUMMON
+
+@note See: `GetSummoningUnit`.
 
 @patch 1.00
 */
