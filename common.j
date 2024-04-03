@@ -10605,36 +10605,110 @@ Returns zero if `whichRect` is null or invalid.
 native GetRectMaxY              takes rect whichRect returns real
 
 /**
+Creates an empty region with initially no cells.
+
 @patch 1.00
 */
 native CreateRegion             takes nothing returns region
 /**
+Destroys a region.
+
+@param whichRegion The region to be destroyed.
+
 @patch 1.00
 */
 native RemoveRegion             takes region whichRegion returns nothing
 
 /**
+Adds the cells of a rect to a region.
+
+@param whichRegion The region to be modified.
+@param r The rect whose cells to add.
+
+@note Cells are 32x32 world units and aligned with multiples of 32 in each direction (smallest grid in World Editor).
+
+@note The current cells of the rect are transferred. Changing the rect afterwards has no effect on the region.
+
+@note Even if the rect is moved out of map bounds, only cells within the map bounds will be added to the region.
+
+@bug An extra row and column of cells in positive x and y direction is added. E.g., if the rect is
+[minX=0, minY=0, maxX=96, maxY=96], the region will gain cells spanning the area [minX=0, minY=0, maxX=128, maxY=128].
+This is reflected in `IsPointInRegion`, `IsUnitInRegion`, `TriggerRegisterEnterRegion` and
+`TriggerRegisterLeaveRegion`. It still respects the map bounds.
+
 @patch 1.00
 */
 native RegionAddRect            takes region whichRegion, rect r returns nothing
 /**
+Removes the cells of a rect from a region.
+
+@param whichRegion The region to be modified.
+@param r The rect whose cells to remove.
+
+@note Cells are 32x32 world units and aligned with multiples of 32 in each direction (smallest grid in World Editor).
+
+@note The current cells of the rect are removed. Changing the rect afterwards has no effect on the region.
+
+@bug An extra row and column of cells in positive x and y direction is removed. E.g., if the rect is
+[minX=0, minY=0, maxX=96, maxY=96], the region will lose cells spanning the area [minX=0, minY=0, maxX=128, maxY=128].
+This is reflected in `IsPointInRegion`, `IsUnitInRegion`, `TriggerRegisterEnterRegion` and
+`TriggerRegisterLeaveRegion`.
+
 @patch 1.00
 */
 native RegionClearRect          takes region whichRegion, rect r returns nothing
 
 /**
+Adds a single cell to a region.
+
+@param whichRegion The region to be modified.
+@param x The x-coordinate of the cell to be added.
+@param y The y-coordinate of the cell to be added.
+
+@note Cells are 32x32 world units and aligned with multiples of 32 in each direction (smallest grid in World Editor).
+
+@note The passed coordinates rounded down to a multiple of 32 are the minimum coordinates of the cell. E.g., (32, 32),
+(40, 40) and (63, 63) all yield the cell [minX=32, minY=32, maxX=64, maxY=64], (-64, -64), (-40, -40) and (-32, -32)
+all yield the cell [minX=-64, minY=-64, maxX=-32, maxY=-32].
+
 @patch 1.00
 */
 native RegionAddCell           takes region whichRegion, real x, real y returns nothing
 /**
+Adds a single cell to a region.
+
+@param whichRegion The region to be modified.
+@param whichLocation The location with the coordinates of the cell to be added.
+
+@note See: `RegionAddCell`
+
 @patch 1.00
 */
 native RegionAddCellAtLoc      takes region whichRegion, location whichLocation returns nothing
 /**
+Removes a single cell from a region.
+
+@param whichRegion The region to be modified.
+@param x The x-coordinate of the cell to be removed.
+@param y The y-coordinate of the cell to be removed.
+
+@note Cells are 32x32 world units and aligned with multiples of 32 in each direction (smallest grid in World Editor).
+
+@note The passed coordinates rounded down to a multiple of 32 are the minimum coordinates of the cell. E.g., (32, 32),
+(40, 40) and (63, 63) all yield the cell [minX=32, minY=32, maxX=64, maxY=64], (-64, -64), (-40, -40) and (-32, -32)
+all yield the cell [minX=-64, minY=-64, maxX=-32, maxY=-32].
+
 @patch 1.00
 */
 native RegionClearCell         takes region whichRegion, real x, real y returns nothing
 /**
+Removes a single cell from a region.
+
+@param whichRegion The region to be modified.
+@param whichLocation The location with the coordinates of the cell to be removed.
+
+@note See: `RegionClearCell`
+
 @patch 1.00
 */
 native RegionClearCellAtLoc    takes region whichRegion, location whichLocation returns nothing
@@ -10677,14 +10751,37 @@ Other reasons could be the rendering state of destructables and visibility diffe
 native GetLocationZ             takes location whichLocation returns real
 
 /**
+Checks whether a unit is contained within a region.
+
+@param whichRegion The region to check.
+@param whichUnit The unit to check for.
+
+@note Only checks the origin of the unit. Its collision size is not considered.
+
 @patch 1.00
 */
 native IsUnitInRegion               takes region whichRegion, unit whichUnit returns boolean
 /**
+Checks whether a point is contained within a region.
+
+@param whichRegion The region to check.
+@param x The x-coordinate of the cell to check.
+@param y The y-coordinate of the cell to check.
+
+@note The passed coordinates rounded down to a multiple of 32 are the minimum coordinates of the cell. E.g., (32, 32),
+(40, 40) and (63, 63) all yield the cell [minX=32, minY=32, maxX=64, maxY=64], (-64, -64), (-40, -40) and (-32, -32)
+all yield the cell [minX=-64, minY=-64, maxX=-32, maxY=-32].
+
 @patch 1.00
 */
 native IsPointInRegion              takes region whichRegion, real x, real y returns boolean
 /**
+Checks whether a point is contained within a region.
+
+@param whichLocation The location with the coordinates of the cell to be checked.
+
+@note See: `IsPointInRegion`
+
 @patch 1.00
 */
 native IsLocationInRegion           takes region whichRegion, location whichLocation returns boolean
@@ -11155,6 +11252,27 @@ constant native GetWinningPlayer takes nothing returns player
 
 
 /**
+Registers when a unit enters a region.
+
+@param whichTrigger The trigger to add the event to.
+@param whichRegion The region of the event.
+@param filter An additional filter to determine what units will fire the trigger.
+
+@note Only reacts to the origin of units. Their collision sizes are not considered.
+
+@note The filter can be `null` to allow any unit to fire the trigger. If there is a filter, the filter will
+be fired when a unit enters the region. In this case, the trigger will only be fired if the filter returns `true`
+(a truthy value in Lua) and `GetFilterUnit` can be used to refer to the unit in this scope.
+
+@note When moving a unit by trigger and causing the unit to enter the region, the filter will be fired instantly
+but the trigger will be fired in a deferred fashion.
+
+@note Adding cells to the region so that units that were previously outside are now inside does not fire the trigger
+nor the filter. But those units will then be considered inside and can fire leave events
+(see `TriggerRegisterEnterRegion`) again when they cross the boundaries of the region.
+
+@note When the region is destroyed, the filter and trigger will not be fired anymore.
+
 @patch 1.00
 */
 native TriggerRegisterEnterRegion takes trigger whichTrigger, region whichRegion, boolexpr filter returns event
@@ -11182,6 +11300,27 @@ constant native GetEnteringUnit takes nothing returns unit
 // EVENT_GAME_LEAVE_REGION
 
 /**
+Registers when a unit leaves a region.
+
+@param whichTrigger The trigger to add the event to.
+@param whichRegion The region of the event.
+@param filter An additional filter to determine what units will fire the trigger.
+
+@note Only reacts to the origin of units. Their collision sizes are not considered.
+
+@note The filter can be `null` to allow any unit to fire the trigger. If there is a filter, the filter will
+be fired when a unit leaves the region. In this case, the trigger will only be fired if the filter returns `true`
+(a truthy value in Lua) and `GetFilterUnit` can be used to refer to the unit in this scope.
+
+@note When moving a unit by trigger and causing the unit to leave the region, the filter will be fired instantly
+but the trigger will be fired in a deferred fashion.
+
+@note Removing cells from the region so that units that were previously inside are now outside does not fire the trigger
+nor the filter. But those units will then be considered outside and can fire leave events
+(see `TriggerRegisterEnterRegion`) again when they cross the boundaries of the region.
+
+@note When the region is destroyed, the filter and trigger will not be fired anymore.
+
 @patch 1.00
 */
 native TriggerRegisterLeaveRegion takes trigger whichTrigger, region whichRegion, boolexpr filter returns event
