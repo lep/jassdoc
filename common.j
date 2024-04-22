@@ -10198,7 +10198,7 @@ Clears a group and then adds units of a unit type name to it.
 
 @note If the filter function is `null` (`nil` in Lua), all considered units will be added to the group.
 
-@note The units are added consecutively to the group between filter runs, not in a bulk after all filter runs were processed.
+@note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
 
 @note In terms of running the filter function, units are processed in reverse order in which they were created.
 
@@ -10222,7 +10222,7 @@ Clears a group and then adds existing units of a player to it.
 
 @note If the filter function is `null` (`nil` in Lua), all considered units will be added to the group.
 
-@note The units are added consecutively to the group between filter runs, not in a bulk after all filter runs were processed.
+@note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
 
 @note In terms of running the filter function, units are processed in reverse order in which they were created.
 
@@ -10261,7 +10261,7 @@ Clears a group and then adds units located within a rect to it.
 
 @note If the filter function is `null` (`nil` in Lua), all considered units will be added to the group.
 
-@note The units are added consecutively to the group between filter runs, not in a bulk after all filter runs were processed.
+@note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
 
 @note In terms of running the filter function, units are processed in a certain order. The playing field is divided into
 sectors of 256x256, i.e., {[minX=0, minY=0, maxX=256, maxY=256], [minX=256, minY=0, maxX=512, maxY=256],
@@ -10314,7 +10314,7 @@ Clears a group and then adds units within a radius of map coordinates to it.
 
 @note If the filter function is `null` (`nil` in Lua), all considered units will be added to the group.
 
-@note The units are added consecutively to the group between filter runs, not in a bulk after all filter runs were processed.
+@note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
 
 @note In terms of running the filter function, units are processed in a certain order. The playing field is divided into
 sectors of 256x256, i.e., {[minX=0, minY=0, maxX=256, maxY=256], [minX=256, minY=0, maxX=512, maxY=256],
