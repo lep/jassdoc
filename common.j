@@ -10202,6 +10202,9 @@ Clears a group and then adds units of a unit type name to it.
 
 @note In terms of running the filter function, units are processed in reverse order in which they were created.
 
+@note Dependency equivalents are not considered. Querying Crypt Fiends ("cryptfiend") won't enumerate
+Burrowed Crypt Fiends ("cryptfiendmorph") and vice versa.
+
 @patch 1.00
 */
 native GroupEnumUnitsOfType                 takes group whichGroup, string unitname, boolexpr filter returns nothing
