@@ -10272,6 +10272,8 @@ were added to the sector.
 @bug There is an off-by-one error with the rect bounds. The unit's origin must be within [minX+32, minY+32, maxX, maxY],
 i.e., the minimum bounds are off by one cell.
 
+@note Hidden units are not enumerated with this function.
+
 @patch 1.00
 */
 native GroupEnumUnitsInRect                 takes group whichGroup, rect r, boolexpr filter returns nothing
@@ -10317,6 +10319,8 @@ sectors of 256x256, i.e., {[minX=0, minY=0, maxX=256, maxY=256], [minX=256, minY
 in what sector and the order in which they were added. The filters run from bottom to top sectors as an outer loop and
 from left to right sectors as an inner loop. Within each sector, the units are processed in reverse order in which they
 were added to the sector.
+
+@note Hidden units are not enumerated with this function.
 
 @note See: `GroupEnumUnitsInRect`, `GroupEnumUnitsInRangeOfLoc`.
 
