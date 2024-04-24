@@ -10240,7 +10240,7 @@ Clears a group and then adds existing units of a unit type name to it.
 @param whichGroup The group to be modified.
 @param unitname The unit type name to consider for adding units. For original unit types, this equals the `name` property in `units/unitui.slk`, for custom units, it equals "custom_" + fourcc (e.g., "custom_h000").
 @param filter A filter function that is run for each considered unit.
-@param countLimit Maximum amount of units to be considered.
+@param countLimit Maximum amount of units to be considered. (Does not work)
 
 @note See `GroupEnumUnitsOfType`
 
@@ -10291,7 +10291,7 @@ Clears a group and then adds units located within a rect to it.
 @param whichGroup The group to be modified.
 @param r The rect in which units are considered.
 @param filter A filter function that is run for each considered unit.
-@param countLimit Maximum amount of units to be considered.
+@param countLimit Maximum amount of units to be considered. (Does not work)
 
 @note See `GroupEnumUnitsInRect`
 
@@ -10361,7 +10361,7 @@ Clears a group and then adds units within a radius of map coordinates to it.
 @param y Y map coordinate.
 @param radius Radius in map units.
 @param filter A filter function that is run for each considered unit.
-@param countLimit Maximum of amount of units to be considered.
+@param countLimit Maximum of amount of units to be considered. (Does not work)
 
 @bug Causes irregular behavior when used with large numbers.
 @bug `countLimit` does not work, tested in 1.32.10.18067. Therefore behaves like `GroupEnumUnitsInRange` adding all units in range.
@@ -10377,7 +10377,7 @@ Clears a group and then adds units within a radius of a location to it.
 @param whichLocation Center location of the circle within which units should be considered.
 @param radius Radius in map units.
 @param filter A filter function that is run for each considered unit.
-@param countLimit Maximum amount of units to be considered.
+@param countLimit Maximum amount of units to be considered. (Does not work)
 
 @See `GroupEnumUnitsInRangeOfLoc`
 
@@ -10510,7 +10510,7 @@ native ForceEnumPlayers         takes force whichForce, boolexpr filter returns 
 /**
 
 
-@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `ForceEnumPlayers`.
+@note *Probably* `countLimit` doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `ForceEnumPlayers`.
 
 @patch 1.00
 */
