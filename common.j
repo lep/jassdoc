@@ -10202,7 +10202,7 @@ Clears a group and then adds units of a unit type name to it.
 
 @note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
 
-@note In terms of running the filter function, units are processed in reverse order in which they were created.
+@note In terms of running the filter function, units are processed in reverse order in which they were created on the map.
 
 @note Dependency equivalents are not considered. Querying Crypt Fiends ("cryptfiend") won't enumerate
 Burrowed Crypt Fiends ("cryptfiendmorph") and vice versa.
@@ -10228,7 +10228,7 @@ Clears a group and then adds existing units of a player to it.
 
 @note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
 
-@note In terms of running the filter function, units are processed in reverse order in which they were created.
+@note In terms of running the filter function, units are processed in reverse order in which they were created on the map.
 
 @patch 1.00
 */
