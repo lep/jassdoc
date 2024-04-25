@@ -10186,10 +10186,10 @@ If the unit was removed from the game or index is out of bounds, returns null.
 */
 native BlzGroupUnitAt                       takes group whichGroup, integer index returns unit
 /**
-Clears a group and then adds units of a unit type name to it.
+Clears a group and then adds units of matching internal name to it.
 
 @param whichGroup The group to be modified.
-@param unitname The unit type name to consider for adding units. For original unit types, this equals the `name` property in `units/unitui.slk`, for custom units, it equals "custom_" + fourcc (e.g., "custom_h000").
+@param unitname The internal name of the unit definition to consider for adding units. For original unit definitions, this equals the `name` property in `units/unitui.slk`, for custom unit definitions, it equals "custom_" + fourcc (e.g., "custom_h000").
 @param filter A filter function that is run for each considered unit.
 
 @note In contrast to spatial GroupEnum-functions, this function enumarates units with locust.
@@ -10212,7 +10212,7 @@ Burrowed Crypt Fiends ("cryptfiendmorph") and vice versa.
 native GroupEnumUnitsOfType                 takes group whichGroup, string unitname, boolexpr filter returns nothing
 
 /**
-Clears a group and then adds existing units of a player to it.
+Clears a group and then adds units of matching player to it.
 
 @param whichGroup The group to be modified.
 @param whichPlayer The player whose units to consider for adding units.
@@ -10235,10 +10235,10 @@ Clears a group and then adds existing units of a player to it.
 native GroupEnumUnitsOfPlayer               takes group whichGroup, player whichPlayer, boolexpr filter returns nothing
 
 /**
-Clears a group and then adds existing units of a unit type name to it.
+Clears a group and then adds units of matching internal name to it.
 
 @param whichGroup The group to be modified.
-@param unitname The unit type name to consider for adding units. For original unit types, this equals the `name` property in `units/unitui.slk`, for custom units, it equals "custom_" + fourcc (e.g., "custom_h000").
+@param unitname The internal name of the unit definition to consider for adding units. For original unit definitions, this equals the `name` property in `units/unitui.slk`, for custom unit definitions, it equals "custom_" + fourcc (e.g., "custom_h000").
 @param filter A filter function that is run for each considered unit.
 @param countLimit Maximum amount of units to be considered. (Does not work)
 
@@ -10251,7 +10251,7 @@ Clears a group and then adds existing units of a unit type name to it.
 */
 native GroupEnumUnitsOfTypeCounted          takes group whichGroup, string unitname, boolexpr filter, integer countLimit returns nothing
 /**
-Clears a group and then adds units located within a rect to it.
+Clears a group and then adds units located within given rect to it.
 
 @param whichGroup The group to be modified.
 @param r The rect in which units are considered.
@@ -10286,7 +10286,7 @@ i.e., the minimum bounds are off by one cell.
 native GroupEnumUnitsInRect                 takes group whichGroup, rect r, boolexpr filter returns nothing
 
 /**
-Clears a group and then adds units located within a rect to it.
+Clears a group and then adds units located within given rect to it.
 
 @param whichGroup The group to be modified.
 @param r The rect in which units are considered.
@@ -10302,7 +10302,7 @@ Clears a group and then adds units located within a rect to it.
 native GroupEnumUnitsInRectCounted          takes group whichGroup, rect r, boolexpr filter, integer countLimit returns nothing
 
 /**
-Clears a group and then adds units within a radius of map coordinates to it.
+Clears a group and then adds units within given radius of map coordinates to it.
 
 @param whichGroup The group to be modified.
 @param x X map coordinate.
@@ -10338,7 +10338,7 @@ does not matter.
 */
 native GroupEnumUnitsInRange                takes group whichGroup, real x, real y, real radius, boolexpr filter returns nothing
 /**
-Clears a group and then adds units within a radius of a location to it.
+Clears a group and then adds units within given radius of location to it.
 
 @param whichGroup The group to be modified.
 @param whichLocation Center location of the circle within which units should be considered.
@@ -10354,7 +10354,7 @@ Clears a group and then adds units within a radius of a location to it.
 native GroupEnumUnitsInRangeOfLoc           takes group whichGroup, location whichLocation, real radius, boolexpr filter returns nothing
 
 /**
-Clears a group and then adds units within a radius of map coordinates to it.
+Clears a group and then adds units within given radius of map coordinates to it.
 
 @param whichGroup The group to be modified.
 @param x X map coordinate.
@@ -10371,7 +10371,7 @@ Clears a group and then adds units within a radius of map coordinates to it.
 native GroupEnumUnitsInRangeCounted         takes group whichGroup, real x, real y, real radius, boolexpr filter, integer countLimit returns nothing
 
 /**
-Clears a group and then adds units within a radius of a location to it.
+Clears a group and then adds units within given radius of location to it.
 
 @param whichGroup The group to be modified.
 @param whichLocation Center location of the circle within which units should be considered.
