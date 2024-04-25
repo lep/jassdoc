@@ -10238,7 +10238,7 @@ native GroupEnumUnitsOfPlayer               takes group whichGroup, player which
 Clears a group and then adds units of matching internal name to it.
 
 @param whichGroup The group to be modified.
-@param unitname The unit type name to consider for adding units. For original unit types, this equals the `name` property in `units/unitui.slk`, for custom units, it equals "custom_" + fourcc (e.g., "custom_h000").
+@param unitname The internal name of the unit definition to consider for adding units. For original unit definitions, this equals the `name` property in `units/unitui.slk`, for custom unit definitions, it equals "custom_" + fourcc (e.g., "custom_h000").
 @param filter A filter function that is run for each considered unit.
 @param countLimit Maximum amount of units to be considered. (Does not work)
 
