@@ -10212,7 +10212,7 @@ Burrowed Crypt Fiends ("cryptfiendmorph") and vice versa.
 native GroupEnumUnitsOfType                 takes group whichGroup, string unitname, boolexpr filter returns nothing
 
 /**
-Clears a group and then adds units of a player to it.
+Clears a group and then adds units of matching player to it.
 
 @param whichGroup The group to be modified.
 @param whichPlayer The player whose units to consider for adding units.
@@ -10251,7 +10251,7 @@ Clears a group and then adds units of matching internal name to it.
 */
 native GroupEnumUnitsOfTypeCounted          takes group whichGroup, string unitname, boolexpr filter, integer countLimit returns nothing
 /**
-Clears a group and then adds units located within a rect to it.
+Clears a group and then adds units located within given rect to it.
 
 @param whichGroup The group to be modified.
 @param r The rect in which units are considered.
@@ -10286,7 +10286,7 @@ i.e., the minimum bounds are off by one cell.
 native GroupEnumUnitsInRect                 takes group whichGroup, rect r, boolexpr filter returns nothing
 
 /**
-Clears a group and then adds units located within a rect to it.
+Clears a group and then adds units located within given rect to it.
 
 @param whichGroup The group to be modified.
 @param r The rect in which units are considered.
@@ -10302,7 +10302,7 @@ Clears a group and then adds units located within a rect to it.
 native GroupEnumUnitsInRectCounted          takes group whichGroup, rect r, boolexpr filter, integer countLimit returns nothing
 
 /**
-Clears a group and then adds units within a radius of map coordinates to it.
+Clears a group and then adds units within given radius of map coordinates to it.
 
 @param whichGroup The group to be modified.
 @param x X map coordinate.
@@ -10338,7 +10338,7 @@ does not matter.
 */
 native GroupEnumUnitsInRange                takes group whichGroup, real x, real y, real radius, boolexpr filter returns nothing
 /**
-Clears a group and then adds units within a radius of a location to it.
+Clears a group and then adds units within given radius of location to it.
 
 @param whichGroup The group to be modified.
 @param whichLocation Center location of the circle within which units should be considered.
@@ -10354,7 +10354,7 @@ Clears a group and then adds units within a radius of a location to it.
 native GroupEnumUnitsInRangeOfLoc           takes group whichGroup, location whichLocation, real radius, boolexpr filter returns nothing
 
 /**
-Clears a group and then adds units within a radius of map coordinates to it.
+Clears a group and then adds units within given radius of map coordinates to it.
 
 @param whichGroup The group to be modified.
 @param x X map coordinate.
@@ -10371,7 +10371,7 @@ Clears a group and then adds units within a radius of map coordinates to it.
 native GroupEnumUnitsInRangeCounted         takes group whichGroup, real x, real y, real radius, boolexpr filter, integer countLimit returns nothing
 
 /**
-Clears a group and then adds units within a radius of a location to it.
+Clears a group and then adds units within given radius of location to it.
 
 @param whichGroup The group to be modified.
 @param whichLocation Center location of the circle within which units should be considered.
