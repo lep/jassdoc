@@ -10186,56 +10186,151 @@ If the unit was removed from the game or index is out of bounds, returns null.
 */
 native BlzGroupUnitAt                       takes group whichGroup, integer index returns unit
 /**
+Clears a group and then adds units of a unit type name to it.
+
+@param whichGroup The group to be modified.
+@param unitname The unit type name to consider for adding units. For original unit types, this equals the `name` property in `units/unitui.slk`, for custom units, it equals "custom_" + fourcc (e.g., "custom_h000").
+@param filter A filter function that is run for each considered unit.
+
+@note In contrast to spatial GroupEnum-functions, this function enumarates units with locust.
+
+@note Within the filter function, the considered unit can be accessed with `GetFilterUnit`.
+
+@note The filter function must return true (a truthy value in Lua) in order to add the unit to the group.
+
+@note If the filter function is `null` (`nil` in Lua), all considered units will be added to the group.
+
+@note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
+
+@note In terms of running the filter function, units are processed in reverse order in which they were created on the map.
+
+@note Dependency equivalents are not considered. Querying Crypt Fiends ("cryptfiend") won't enumerate
+Burrowed Crypt Fiends ("cryptfiendmorph") and vice versa.
+
 @patch 1.00
 */
 native GroupEnumUnitsOfType                 takes group whichGroup, string unitname, boolexpr filter returns nothing
 
 /**
+Clears a group and then adds existing units of a player to it.
 
+@param whichGroup The group to be modified.
+@param whichPlayer The player whose units to consider for adding units.
+@param filter A filter function that is run for each considered unit.
 
-@note In contrast to other Enum-functions this function enumarates units with locust.
+@note In contrast to spatial GroupEnum-functions, this function enumarates units with locust.
+
+@note Within the filter function, the considered unit can be accessed with `GetFilterUnit`.
+
+@note The filter function must return true (a truthy value in Lua) in order to add the unit to the group.
+
+@note If the filter function is `null` (`nil` in Lua), all considered units will be added to the group.
+
+@note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
+
+@note In terms of running the filter function, units are processed in reverse order in which they were created on the map.
 
 @patch 1.00
 */
 native GroupEnumUnitsOfPlayer               takes group whichGroup, player whichPlayer, boolexpr filter returns nothing
 
 /**
+Clears a group and then adds existing units of a unit type name to it.
 
+@param whichGroup The group to be modified.
+@param unitname The unit type name to consider for adding units. For original unit types, this equals the `name` property in `units/unitui.slk`, for custom units, it equals "custom_" + fourcc (e.g., "custom_h000").
+@param filter A filter function that is run for each considered unit.
+@param countLimit Maximum amount of units to be considered. (Does not work)
+
+@note See `GroupEnumUnitsOfType`
 
 @bug Causes irregular behavior when used with large numbers.
-@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsOfType`.
+@note *Probably* `countLimit` doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsOfType`.
 
 @patch 1.00
 */
 native GroupEnumUnitsOfTypeCounted          takes group whichGroup, string unitname, boolexpr filter, integer countLimit returns nothing
 /**
+Clears a group and then adds units located within a rect to it.
+
+@param whichGroup The group to be modified.
+@param r The rect in which units are considered.
+@param filter A filter function that is run for each considered unit.
+
+@note Does not consider locust units. Locust units cannot be spatially enumerated.
+
+@note Within the filter function, the considered unit can be accessed with `GetFilterUnit`.
+
+@note The filter function must return true (a truthy value in Lua) in order to add the unit to the group.
+
+@note If the filter function is `null` (`nil` in Lua), all considered units will be added to the group.
+
+@note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
+
+@note In terms of running the filter function, units are processed in a certain order. The playing field is divided into
+sectors of 256x256, i.e., {[minX=0, minY=0, maxX=256, maxY=256], [minX=256, minY=0, maxX=512, maxY=256],
+[minX=0, minY=256, maxX=256, maxY=512], [minX=256, minY=256, maxX=512, maxY=512], ...}. The game keeps track what units are
+in what sector and the order in which they were added. The filters run from bottom to top sectors as an outer loop and
+from left to right sectors as an inner loop. Within each sector, the units are processed in reverse order in which they
+were added to the sector.
+
+@note The origin of the unit must be within the bounds to be considered. The collision size of the unit does not matter.
+
+@bug There is an off-by-one error with the rect bounds. The unit's origin must be within [minX+32, minY+32, maxX, maxY],
+i.e., the minimum bounds are off by one cell.
+
+@note Hidden units are not enumerated with this function.
+
 @patch 1.00
 */
 native GroupEnumUnitsInRect                 takes group whichGroup, rect r, boolexpr filter returns nothing
 
 /**
+Clears a group and then adds units located within a rect to it.
 
+@param whichGroup The group to be modified.
+@param r The rect in which units are considered.
+@param filter A filter function that is run for each considered unit.
+@param countLimit Maximum amount of units to be considered. (Does not work)
 
-@bug Causes irregular behavior when used with large numbers.
-@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsInRect`.
+@note See `GroupEnumUnitsInRect`
+
+@bug The `countLimit` parameter does not work, all units will be considered regardless of the value of `countLimit`.
 
 @patch 1.00
 */
 native GroupEnumUnitsInRectCounted          takes group whichGroup, rect r, boolexpr filter, integer countLimit returns nothing
 
 /**
-Adds units within radius of map coordinates X, Y who match filter to whichGroup.
-A null as filter means that every nearby unit is added to group.
+Clears a group and then adds units within a radius of map coordinates to it.
 
-If the group has had units previously, it will be first cleared (old units will not be preserved).
-A group that has been destroyed will not be recreated.
-
-@param whichGroup Group to add units to.
+@param whichGroup The group to be modified.
 @param x X map coordinate.
 @param y Y map coordinate.
 @param radius Radius in map units.
-@param filter Filter function.
+@param filter A filter function that is run for each considered unit.
 
+@note Does not consider locust units. Locust units cannot be spatially enumerated.
+
+@note Within the filter function, the considered unit can be accessed with `GetFilterUnit`.
+
+@note The filter function must return true (a truthy value in Lua) in order to add the unit to the group.
+
+@note If the filter function is `null` (`nil` in Lua), all considered units will be added to the group.
+
+@note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
+
+@note In terms of running the filter function, units are processed in a certain order. The playing field is divided into
+sectors of 256x256, i.e., {[minX=0, minY=0, maxX=256, maxY=256], [minX=256, minY=0, maxX=512, maxY=256],
+[minX=0, minY=256, maxX=256, maxY=512], [minX=256, minY=256, maxX=512, maxY=512], ...}. The game keeps track what units are
+in what sector and the order in which they were added. The filters run from bottom to top sectors as an outer loop and
+from left to right sectors as an inner loop. Within each sector, the units are processed in reverse order in which they
+were added to the sector.
+
+@note The origin of the unit must be within the area of the circle to be considered. The collision size of the unit
+does not matter.
+
+@note Hidden units are not enumerated with this function.
 
 @note See: `GroupEnumUnitsInRect`, `GroupEnumUnitsInRangeOfLoc`.
 
@@ -10243,25 +10338,51 @@ A group that has been destroyed will not be recreated.
 */
 native GroupEnumUnitsInRange                takes group whichGroup, real x, real y, real radius, boolexpr filter returns nothing
 /**
+Clears a group and then adds units within a radius of a location to it.
+
+@param whichGroup The group to be modified.
+@param whichLocation Center location of the circle within which units should be considered.
+@param radius Radius in map units.
+@param filter A filter function that is run for each considered unit.
+
+@note See `GroupEnumUnitsInRange`
+
+@note If `whichLocation` is `null` (`nil` in Lua), no units will be added and the group won't be cleared.
+
 @patch 1.00
 */
 native GroupEnumUnitsInRangeOfLoc           takes group whichGroup, location whichLocation, real radius, boolexpr filter returns nothing
 
 /**
+Clears a group and then adds units within a radius of map coordinates to it.
 
+@param whichGroup The group to be modified.
+@param x X map coordinate.
+@param y Y map coordinate.
+@param radius Radius in map units.
+@param filter A filter function that is run for each considered unit.
+@param countLimit Maximum of amount of units to be considered. (Does not work)
 
 @bug Causes irregular behavior when used with large numbers.
-@bug countLimit does not work, tested in 1.32.10.18067. Therefore behaves like `GroupEnumUnitsInRange` adding all units in range.
+@bug `countLimit` does not work, tested in 1.32.10.18067. Therefore behaves like `GroupEnumUnitsInRange` adding all units in range.
 
 @patch 1.00
 */
 native GroupEnumUnitsInRangeCounted         takes group whichGroup, real x, real y, real radius, boolexpr filter, integer countLimit returns nothing
 
 /**
+Clears a group and then adds units within a radius of a location to it.
 
+@param whichGroup The group to be modified.
+@param whichLocation Center location of the circle within which units should be considered.
+@param radius Radius in map units.
+@param filter A filter function that is run for each considered unit.
+@param countLimit Maximum amount of units to be considered. (Does not work)
+
+@See `GroupEnumUnitsInRangeOfLoc`
 
 @bug Causes irregular behavior when used with large numbers.
-@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsInRangeOfLoc`.
+@note *Probably* `countLimit` doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `GroupEnumUnitsInRangeOfLoc`.
 
 @patch 1.00
 */
@@ -10389,7 +10510,7 @@ native ForceEnumPlayers         takes force whichForce, boolexpr filter returns 
 /**
 
 
-@note *Probably* countLimit doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `ForceEnumPlayers`.
+@note *Probably* `countLimit` doesn't work similar to `GroupEnumUnitsInRangeCounted`. Instead see `ForceEnumPlayers`.
 
 @patch 1.00
 */
