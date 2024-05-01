@@ -17610,54 +17610,195 @@ you cannot enable it in multiplayer.
 native DisableRestartMission        takes boolean flag returns nothing
 
 /**
+Creates a text tag.
+
+@note The text tag initially has the absolute world coordinates (0, 0, 0).
+
+@note You can have a maximum amount of 100 text tags at a time.
+
+@note The ids (see `GetHandleId`) of the text tags range from 99 to 0.
+
+@note When there are already 100 text tags, this function will return the text tag with the id 0 without resetting any of its properties.
+
+@note When a text tag is destroyed, its id is pushed to a stack. Creating a text tag, when there are still ids available, will pop from the stack, i.e., the last
+destroyed id will be re-used first. You can also envision that 100 ids counting up from 0 to 99 are pushed to the stack at the beginning of the game and id 99 will
+be popped first.
+
 @patch 1.07
 */
 native CreateTextTag                takes nothing returns texttag
 /**
+Destroys a text tag.
+
+@param t The text tag to destroy.
+
+@note When a text tag is destroyed, its id is pushed to a stack for recycling (see `CreateTextTag`).
+
 @patch 1.07
 */
 native DestroyTextTag               takes texttag t returns nothing
 /**
+Sets the text of a text tag.
+
+@param t The text tag to modify.
+@param s The new text.
+@param height The new font size.
+
+@note The `height` is independent from the camera distance, relative to the screen.
+
+@note Reasonable values for `height` are `0.02` to `0.1`, but there is a limited space the text can be rendered into. The text will be wrapped (character-wise) and
+begin a new line, respectively be cut off when the vertical limit is exceeded as well or the character is wider than the whole width of the available area. Thus, with a
+large enough value for `height`, the text tag won't be visible at all.
+
 @patch 1.07
 */
 native SetTextTagText               takes texttag t, string s, real height returns nothing
 /**
+Sets the position of a text tag.
+
+@param t The text tag to modify.
+@param x x coordinate of the new position.
+@param y y coordinate of the new position.
+@param heightOffset z offset added.
+
+@note The absolute z coordinate is computed by terrain height at (x, y) + heightOffset when this function is called. This also considers walkable destructables.
+Later changes to the terrain height are not reacted to.
+
 @patch 1.07
 */
 native SetTextTagPos                takes texttag t, real x, real y, real heightOffset returns nothing
 /**
+Sets the position of a text tag to the position of a unit.
+
+@param t The text tag to modify.
+@param whichUnit The unit to move the text tag to.
+@param heightOffset z offset added.
+
+@note The absolute z coordinate is computed by terrain height at (x, y) + fly height of `whichUnit` + max z extent of the model of `whichUnit`. This also considers
+model scaling changes from 'bloodlust' but not from `SetUnitScale` (since `SetUnitScale` does not affect the model extents). Later changes to the terrain height,
+fly height or model are not reacted to.
+
 @patch 1.07
 */
 native SetTextTagPosUnit            takes texttag t, unit whichUnit, real heightOffset returns nothing
 /**
+Sets the color of a text tag.
+
+@param t The text tag to modify.
+@param red 0-255 red color (value mod 256).
+@param green 0-255 green color (value mod 256).
+@param blue 0-255 blue color (value mod 256).
+@param alpha 0-255 alpha color (value mod 256).
+
+@note The color can be set with this function even if the text tag is fading.
+
+@note The alpha value can only be set with this function while the text tag is in suspended state (see `SetTextTagSuspended`).
+
 @patch 1.07
 */
 native SetTextTagColor              takes texttag t, integer red, integer green, integer blue, integer alpha returns nothing
 /**
+Sets the velocity of a text tag.
+
+@param t The text tag to modify.
+@param xvel velocity in x direction.
+@param yvel velocity in y direction.
+
+@note The velocity adds a rendered offset to the text tag linearly related to the age of the text tag, i.e., doubled age means doubled offset.
+
+@note Doubled velocity means doubled offset.
+
+@note Those velocities do not refer to absolute world units. Rather, when changing the camera distance, the added offset will be invariant relative to the screen.
+
 @patch 1.07
 */
 native SetTextTagVelocity           takes texttag t, real xvel, real yvel returns nothing
 /**
+Sets the visibility of a text tag.
+
+@param t The text tag to modify.
+@param flag `true` (a truthy value in Lua) for showing, `false` (a falsy value in Lua) for hiding.
+
 @patch 1.07
 */
 native SetTextTagVisibility         takes texttag t, boolean flag returns nothing
 /**
+Suspends or resumes the aging process of a text tag.
+
+@param t The text tag to modify.
+@param flag `true` (a truthy value in Lua) for suspending, `false` (a falsy value in Lua) for resuming.
+
+@note This halts the aging process of the text tag, i.e., the velocity offset will be frozen and the fading process and lifespan will be frozen.
+
+@note Undoing the suspension will resume the aging process from the current age.
+
+@note During the suspension, you can set the age with `SetTextTagAge`.
+
 @patch 1.18a
 */
 native SetTextTagSuspended          takes texttag t, boolean flag returns nothing
 /**
+Makes a text tag permanent or temporary.
+
+@param t The text tag to modify.
+@param flag `true` (a truthy value in Lua) for permanence, `false` (a falsy value in Lua) for temporariness.
+
+@note A temporary text tag will be subject to the fading process and to be destroyed after its lifespan.
+
+@note Text tags are permanent on default.
+
+@note A permanent text tag still ages.
+
+@note When you make a text tag permanent during the fading process, the current alpha value will be reset to 255.
+
 @patch 1.18a
 */
 native SetTextTagPermanent          takes texttag t, boolean flag returns nothing
 /**
+Sets the age of a text tag.
+
+@param t The text tag to modify.
+@param age The new age in seconds.
+
+@note The age of a text tag governs its processes movement from velocity, fading and lifespan.
+
+@note A text tag starts with 0 age. It will steadily increment after the creation of the text tag unless text tag is suspended.
+
+@note You can set the age to a negative amount. The offset from velocity will then be inverted and fadepoint and lifespan longer to reach as expected.
+
 @patch 1.18a
 */
 native SetTextTagAge                takes texttag t, real age returns nothing
 /**
+Sets the lifespan of a text tag.
+
+@param t The text tag to modify.
+@param lifespan The new lifespan in seconds.
+
+@note The lifespan governs at what age a non-permanent text tag will be destroyed.
+
+@note The lifespan is not added on top of the fadepoint and can be shorter than the fadepoint. The text tag won't fade in that case.
+
+@note The default life span is 100 seconds.
+
 @patch 1.18a
 */
 native SetTextTagLifespan           takes texttag t, real lifespan returns nothing
 /**
+Sets the fadepoint of a text tag.
+
+@param t The text tag to modify.
+@param fadepoint The new fadepoint in seconds.
+
+@note The fadepoint governs at what age a non-permanent text tag will start fading. The fading process is a linear interpolation of reducing the text tag's alpha value
+to 0 from fadepoint to lifespan. The fadepoint will assume an alpha value of 255. So when the age of a non-permanent text tag becomes fadepoint, its alpha value will
+be set to 255, if its age is set to fadepoint + (lifespan - fadepoint) * 0.5 or the text tag is made non-permanent at that age, the alpha value will be set to
+255 - 255 * 0.5 and continue to gradually reduce to 0. So, during the fading process, the alpha value is computed by 255 - (age - fadepoint) / (lifespan - fadepoint).
+
+@note Jumping out of a fading process by changing age or fadepoint does not reset the alpha value.
+
+@note When a text tag is destroyed, its id is pushed to a stack for recycling (see `CreateTextTag`).
+
 @patch 1.18a
 */
 native SetTextTagFadepoint          takes texttag t, real fadepoint returns nothing
