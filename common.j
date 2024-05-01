@@ -17705,6 +17705,7 @@ Sets the velocity of a text tag.
 @param yvel velocity in y direction.
 
 @note The velocity adds a rendered offset to the text tag linearly related to the age of the text tag, i.e., doubled age means doubled offset.
+@note The velocity adds a rendered offset to the text tag linearly during the lifetime of the text tag, i.e., doubled age means doubled offset.
 
 @note Doubled velocity means doubled offset.
 
@@ -17729,8 +17730,7 @@ Suspends or resumes the aging process of a text tag.
 @param flag `true` (a truthy value in Lua) for suspending, `false` (a falsy value in Lua) for resuming.
 
 @note This halts the aging process of the text tag, i.e., the velocity offset will be frozen and the fading process and lifespan will be frozen.
-
-@note Undoing the suspension will resume the aging process from the current age.
+Undoing the suspension will resume the aging process from the current age.
 
 @note During the suspension, you can set the age with `SetTextTagAge`.
 
