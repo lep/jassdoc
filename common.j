@@ -17668,14 +17668,14 @@ Later changes to the terrain height are not reacted to.
 */
 native SetTextTagPos                takes texttag t, real x, real y, real heightOffset returns nothing
 /**
-Sets the position of a text tag to the position of a unit.
+Sets the position of a text tag to the current position of a unit without following it around.
 
 @param t The text tag to modify.
 @param whichUnit The unit to move the text tag to.
 @param heightOffset z offset added.
 
 @note The absolute z coordinate is computed by terrain height at (x, y) + fly height of `whichUnit` + max z extent of the model of `whichUnit`. This also considers
-model scaling changes from 'bloodlust' but not from `SetUnitScale` (since `SetUnitScale` does not affect the model extents). Later changes to the terrain height,
+model scaling changes from 'Bloodlust' but not from `SetUnitScale` (since `SetUnitScale` does not affect the model extents). Later changes to the terrain height,
 fly height or model are not reacted to.
 
 @patch 1.07
