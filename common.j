@@ -12655,8 +12655,8 @@ native TriggerClearActions  takes trigger whichTrigger returns nothing
 Makes a trigger execution sleep for a given duration. The thread will yield so other threads can do their work.
 
 
-@note This works only in a trigger action execution context, not in trigger conditions nor for example in timer functions or `ForGroup` functions. However, it
-also works in `ExecuteFunc` contexts, even if the `ExecuteFunc` call is not in a trigger action execution context.
+@bug This works only in a trigger action execution context, not in trigger conditions nor for example in timer functions or `ForGroup` functions. However, it
+also works in `ExecuteFunc` contexts, even if the `ExecuteFunc` call is not in a trigger action execution context. If this is called in the wrong context, it crashes the thread.
 
 @note This has many implications, see other trigger-related natives.
 
