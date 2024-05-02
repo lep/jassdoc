@@ -17704,10 +17704,9 @@ Sets the velocity of a text tag.
 @param xvel velocity in x direction.
 @param yvel velocity in y direction.
 
-@note The velocity adds a rendered offset to the text tag linearly related to the age of the text tag, i.e., doubled age means doubled offset.
-@note The velocity adds a rendered offset to the text tag linearly during the lifetime of the text tag, i.e., doubled age means doubled offset.
+@note Adds a rendered offset changing over the lifetime of the text tag. The offset is linearly related to age of the text tag, i.e., doubled age means doubled offset.
 
-@note Doubled velocity means doubled offset.
+@note Separately, doubled velocity means doubled offset too.
 
 @note Those velocities do not refer to absolute world units. Rather, when changing the camera distance, the added offset will be invariant relative to the screen.
 
