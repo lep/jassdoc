@@ -18165,7 +18165,7 @@ native QuestSetDiscovered   takes quest whichQuest, boolean discovered returns n
 Sets a quest failed or unfailed.
 
 @param whichQuest The quest to modify.
-@param completed The new failed state.
+@param failed The new failed state.
 
 @note Quests are unfailed on default.
 
@@ -18281,7 +18281,7 @@ native QuestItemSetDescription  takes questitem whichQuestItem, string descripti
 Sets the completed state of a quest item.
 
 @param whichQuestItem The quest item to modify.
-@aram completed The new completed state. `true` for completed, `false` for incompleted.
+@param completed The new completed state. `true` for completed, `false` for incompleted.
 
 @note Quest items are incompleted on default.
 
