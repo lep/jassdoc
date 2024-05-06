@@ -18026,119 +18026,351 @@ native CreateTrackable      takes string trackableModelPath, real x, real y, rea
 // Quest API
 
 /**
+Creates a new quest.
 
+@note Quests are enabled on default (see `QuestSetEnabled`).
+
+@bug You should either immediately set the description of the quest to a non-null, non-empty string
+(see `QuestSetDescription`), disable it (see `QuestSetEnabled`), or set in undiscovered (see `QuestSetDiscovered`)
+to avoid the game crashing when the quest's description is trying to render in the quest menu.
 
 @bug Do not use this in a global initialisation as it crashes the game there.
+
+@note A new enabled quest will only show after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`).
 
 @patch 1.00
 */
 native CreateQuest          takes nothing returns quest
 /**
+Destroys a quest.
+
+@param whichQuest The quest to destroy.
+
+@bug Ids of quests and contained quest items are not recycled.
+
+@bug Destroying the last remaining enabled (see `QuestSetEnabled`) quest will not disable the quest menu and it will
+still display the last rendered quest description.
+
+@note A destroyed quest will only stop showing after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`). When reselecting a destroyed quest in the quest menu, it will still show its
+last description and current defeat conditions, but the quest items will not render any longer.
+
 @patch 1.00
 */
 native DestroyQuest         takes quest whichQuest returns nothing
 /**
+Sets the title of a quest displayed in the list in the quest menu and above the description box when the quest
+is selected.
+
+@param whichQuest The quest to modify.
+@param title The new title.
+
+@note The title of a quest will only be re-rendered after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestSetTitle        takes quest whichQuest, string title returns nothing
 /**
+Sets the description of a quest displayed when a quest is selected in the quest menu.
+
+@param whichQuest The quest to modify.
+@param description The new description.
+
+@bug If `description` is null or an empty string, the quest is enabled (see `QuestSetEnabled`), and discovered
+(see `QuestSetDiscovered`), rendering the description of the quest (when selected) in the quest menu will crash the game.
+
+@note The description of a quest will only be re-rendered after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestSetDescription  takes quest whichQuest, string description returns nothing
 /**
+Sets the icon of a quest displayed next to the title in the quest menu.
+
+@param whichQuest The quest to modify.
+@param iconPath The path of the new icon.
+
+@note This will only show if the quest is enabled (see `QuestSetEnabled`) and discovered (see `QuestSetDiscovered`).
+
+@note When a null or empty icon path is set, the quest icon will render as a fallback full green graphic.
+
+@note A null or empty icon path is set on default.
+
+@note The icon path of a quest will only be re-rendered after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestSetIconPath     takes quest whichQuest, string iconPath returns nothing
 
 /**
+Sets a quest required or optional adding to main quests or optional quests in the quest menu.
+
+@param whichQuest The quest to modify.
+@param required The new required state. `true` for required/main quest, `false` for non-required/optional quest.
+
+@note Quests are required on default.
+
+@note The required state of a quest will only be re-rendered after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestSetRequired     takes quest whichQuest, boolean required   returns nothing
 /**
+Sets a quest completed or incompleted.
+
+@param whichQuest The quest to modify.
+@param completed The new completed state.
+
+@note Completed quests show an extra label "Completed" in the title of the quest in the quest menu. The "Completed"
+label trumps the "Failed" label (see `QuestSetFailed`), i.e., when a quest is both completed and failed, it only shows
+the "Completed" label, but, otherwise, the states are independent from each other.
+
+@note Quests are incompleted on default.
+
+@note The completed state of a quest will only be re-rendered after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestSetCompleted    takes quest whichQuest, boolean completed  returns nothing
 /**
+Sets a quest discovered or undiscovered.
+
+@param whichQuest The quest to modify.
+@param discovered The new discovered state.
+
+@note Undiscovered quests do not show their icon (see `QuestSetIconPath`) in the quest menu but rather a fallback
+question mark icon.
+
+@note Undiscovered quests do not show their title (see `QuestSetTitle`) in the quest menu but rather a fallback
+"Undiscovered Quest" title.
+
+@note Undiscovered quests do not show their description (see `QuestSetDescription`) in the quest menu but rather a
+fallback "Quest Not Yet Discovered" description.
+
+@note Quests are discovered on default.
+
+@note The discovered state of a quest will only be re-rendered after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestSetDiscovered   takes quest whichQuest, boolean discovered returns nothing
 /**
+Sets a quest failed or unfailed.
+
+@param whichQuest The quest to modify.
+@param completed The new failed state.
+
+@note Quests are unfailed on default.
+
+@note The failed state of a quest will only be re-rendered after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestSetFailed       takes quest whichQuest, boolean failed     returns nothing
 /**
+Enables or disables a quest, showing or hiding it in the quest menu.
+
+@param whichQuest The quest to modify.
+@param enabled The new enabled state. `true` for enabled/showing, `false` for disabled/hiding.
+
+@note Quests created earlier show further up in the lists in the quest menu.
+
+@note Quests are enabled on default.
+
+@note When the quest that is currently selected in the quest menu is disabled, opening the quest menu will try to select
+the next enabled quest (from any of the required or optional quest lists).
+
+@bug Disabling the last remaining enabled quest will not disable the quest menu and it will
+still display the last rendered quest description.
+
+@note The enabled state of a quest will only be re-rendered after the quest menu is re-opened or when an update is forced
+(see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestSetEnabled      takes quest whichQuest, boolean enabled    returns nothing
 
 /**
+Returns the required state of a quest (see `QuestSetRequired`).
+
+@param whichQuest The quest to query.
+
 @patch 1.00
 */
 native IsQuestRequired     takes quest whichQuest returns boolean
 /**
+Returns the completed state of a quest (see `QuestSetCompleted`).
+
+@param whichQuest The quest to query.
+
 @patch 1.00
 */
 native IsQuestCompleted    takes quest whichQuest returns boolean
 /**
+Returns the discovered state of a quest (see `QuestSetDiscovered`).
+
+@param whichQuest The quest to query.
+
 @patch 1.00
 */
 native IsQuestDiscovered   takes quest whichQuest returns boolean
 /**
+Returns the failed state of a quest (see `QuestSetFailed`).
+
+@param whichQuest The quest to query.
+
 @patch 1.00
 */
 native IsQuestFailed       takes quest whichQuest returns boolean
 /**
+Returns the enabled state of a quest (see `QuestSetEnabled`).
+
+@param whichQuest The quest to query.
+
 @patch 1.00
 */
 native IsQuestEnabled      takes quest whichQuest returns boolean
 
 /**
+Creates a new item/requirement for a quest displayed above the description text field of the quest
+in the quest menu.
+
+@param whichQuest The quest to add the requirement to.
+
+@note Each quest item has a hyphen "-" symbol prepended.
+
+@note Quest items are rendered in the order they were created.
+
+@note There seems to be no reasonable limit to how many quest items a quest can contain. But the text field has limited
+height. If it does not fit otherwise, the text field will become scrollable. Still, at some point, when having too many
+quest items, it cannot be scrolled precisely enough to be able to scroll exactly to all of the items.
+
+@note Quest items share the text field with defeat conditions (see `CreateDefeatCondition`).
+
+@note The quest item will only be rendered after the quest is reselected, the quest menu is re-opened, or
+when an update is forced (see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestCreateItem          takes quest whichQuest returns questitem
 /**
+Sets the description of a quest item.
+
+@param whichQuestItem The quest item to modify.
+@param description The new description.
+
+@note Quest item descriptions are null or empty string on default.
+
+@note A null or empty string quest item description will still render as an empty bullet point.
+
+@note The quest item description will only be re-rendered after the quest is reselected, the quest menu is re-opened, or
+when an update is forced (see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestItemSetDescription  takes questitem whichQuestItem, string description returns nothing
 /**
+Sets the completed state of a quest item.
+
+@param whichQuestItem The quest item to modify.
+@aram completed The new completed state. `true` for completed, `false` for incompleted.
+
+@note Quest items are incompleted on default.
+
+@note The quest item completed state will only be re-rendered after the quest is reselected, the quest menu is re-opened, or
+when an update is forced (see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native QuestItemSetCompleted    takes questitem whichQuestItem, boolean completed returns nothing
 
 /**
+Returns the completed state of a quest item (see `QuestItemSetCompleted`).
+
+@param whichQuestItem The quest item to query.
+
 @patch 1.00
 */
 native IsQuestItemCompleted     takes questitem whichQuestItem returns boolean
 
 
 /**
-Defeat conditions tell players what conditions would warrant a defeat.
-They are shown above all quest descriptions. Note that this function will only
-display text. To put the condition in effect, you would need additional
-triggering (i.e. registering when a unit dies to end the game). This updates
-all quests with the list of defeat condition descriptions.
+Creates a defeat condition globally displayed for every enabled quest above the description text field of the quest menu.
+
+@note Defeat conditions tell players what conditions would warrant a defeat.
+Note that this function will only display text. To put the condition in effect,
+you would need additional triggering (i.e. registering when a unit dies to end the game).
+This updates all quests with the list of defeat condition descriptions.
 To actually set the text use `DefeatConditionSetDescription`.
 
+@note Each defeat condition has a hyphen "-" symbol prepended.
 
-@note Each defeat condition has a hyphen "-" symbol appended to the front.
+@note Defeat conditions share the text field with quest items (see `QuestCreateItem`),
+but they are rendered below quest items, regardless if they were created earlier than the items.
+
+@note Defeat conditions are rendered in the order in which they were created.
+
+@note The defeat condition will only be rendered after the quest is reselected, the quest menu is re-opened, or
+when an update is forced (see `ForceQuestDialogUpdate`).
 
 @patch 1.00
 */
 native CreateDefeatCondition            takes nothing returns defeatcondition
 /**
+Destroys a defeat condition.
+
+@param whichCondition The defeatcondition to be destroyed.
+
+@note The defeat condition will only stop showing after the quest is reselected,
+the quest menu is re-opened, or when an update is forced (see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native DestroyDefeatCondition           takes defeatcondition whichCondition returns nothing
 /**
+Sets the description of a defeat condition.
+
+@param whichCondition The defeatcondition to be modified.
+@param description The new description.
+
+@note The description is shown above the description of every enabled quest in the quest menu in the same text field
+as quest items (see `QuestCreateItem`).
+
+@note The defeat condition description will only be re-rendered after the quest is reselected,
+the quest menu is re-opened, or when an update is forced (see `ForceQuestDialogUpdate`).
+
 @patch 1.00
 */
 native DefeatConditionSetDescription    takes defeatcondition whichCondition, string description returns nothing
 
 /**
+Highlights the quest menu button.
+
+@bug This can be done even if there is no enabled quest and will enable the quest menu, allowing to open it.
+
+@note The button will be highlighted for 10 seconds. The highlighting stops when the quest menu button is clicked.
+The button will not be highlighted if the quest menu is already opened.
+
 @patch 1.00
 */
 native FlashQuestDialogButton   takes nothing returns nothing
 /**
+Forces an update of the quest menu, allowing to re-render changes even if the quest menu is already open or if a changed
+quest is already selected.
+
+@note If there was no quest selected priorly or if the selected quest has been destroyed or disabled, the first
+enabled quest will be selected if available.
+
+@note This is useful for multiplayer, as in singleplayer the game is paused while the quest menu is open.
+
 @patch 1.00
 */
 native ForceQuestDialogUpdate   takes nothing returns nothing
