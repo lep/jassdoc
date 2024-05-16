@@ -13866,6 +13866,8 @@ Returns false otherwise (hero alive, unit isn't a hero/doesn't exist etc.).
 @param doEyecandy True to revive with revival special effects, false without.
 Special effects include: sound, visual effect. 
 
+@note If the unit has a food cost != 0 (greater or less than 0), for the revival to be successful, the owning player of the unit must not exceed the maximum food limit
+(including the revived unit's food cost), i.e., `PLAYER_STATE_RESOURCE_FOOD_USED` + unit's food cost <= `PLAYER_STATE_FOOD_CAP_CEILING`.
 
 @note See: `ReviveHeroLoc`.
 
@@ -13883,6 +13885,8 @@ Returns false otherwise (hero alive, unit isn't a hero/doesn't exist etc.)
 @param doEyecandy True to revive with revival special effects, false without.
 Special effects include: sound, visual effect. 
 
+@note If the unit has a food cost != 0 (greater or less than 0), for the revival to be successful, the owning player of the unit must not exceed the maximum food limit
+(including the revived unit's food cost), i.e., `PLAYER_STATE_RESOURCE_FOOD_USED` + unit's food cost <= `PLAYER_STATE_FOOD_CAP_CEILING`.
 
 @note See: `ReviveHero`.
 
