@@ -13680,22 +13680,58 @@ native          SetHeroXP           takes unit whichHero, integer newXpVal,  boo
 /**
 Returns the units available skill points.
 
+@bug Returns 1 if `whichHero` is not a hero.
 
 @patch 1.07
 */
 native          GetHeroSkillPoints      takes unit whichHero returns integer
 
 /**
-Adds the amount to the units available skill points. Calling with a negative
-number reduces the skill points by that amount.
-Returns false if the amount of available skill points is already zero and
-if it's called with any non-positive number.
+Increases or decreases a hero's amount of available skill points.
+
+Returns false if `skillPointDelta` is negative and the previous amount of skillpoints was exactly 0.
+Returns false if `skillPointDelta` is 0.
+Returns false if `whichHero` is not a hero.
 Returns true in any other case.
 
+@note If `skillPointDelta` is greater than the amount of skillpoints the hero actually can theoretically still spend due to the levels of learnable abilities
+(like 9 for three 3-level abilities minus 2 skillpoints that were already spent, regardless of conditions like currently unsatisfied level skip requirement),
+only that amount will be added.
+That means that if the hero has learned everything, no more skillpoints can be added with this function.
 
-@note If `skillPointDelta` is greater than the amount of skillpoints the hero
-actually can spend (like 9 for three 3-level abilities) only that amount will
-be added. Negative `skillPointDelta` works as expected.
+@note A negative `skillPointDelta` works as expected, reducing the amount of available skillpoints up to 0.
+
+@bug Returns true if `skillPointDelta` is positive even if no skillpoints were effectively added (due to the hero having learned everything).
+
+@bug Through repeated application or the hero already having spent skillpoints for learning, the skillpoints can be increased beyond the amount of skillpoints
+that can still theoretically be spent. This shows up in the hero skill button, the left-side hero buttons as well as in `GetHeroSkillPoints`. When the hero has
+learned everything, the hero skill button will vanish, but the excessive remaining skillpoints will still show up in the left-side hero buttons and
+in `GetHeroSkillPoints`. The excessive skillpoints can still be reduced via calling this function with a negative `skillPointDelta` (and the function will still
+return true as long as the remaining skillpoints are not 0).
+
+Mental model:
+```
+if (not IsHero(whichHero))
+    return false
+
+if (skillPointDelta == 0)
+    return false
+
+if (skillPointDelta < 0) {
+    if (GetHeroSkillPoints(whichHero) <= 0) {
+        // actually we don't know about the case where GetHeroSkillPoints(whichHero) < 0 since it cannot be reached
+        return false
+    }
+    whichHero.skillPoints = max(0, GetHeroSkillPoints(whichHero) - skillPointDelta)
+    return true
+}
+
+if (skillPointDelta > 0) {
+    maxSkillPointsThatCanBeAdded = GetHeroSpendableSkillpointsInTotal(whichHero) - GetHeroSkillpointsAlreadySpent(whichHero)
+    whichHero.skillPoints = GetHeroSkillPoints(whichHero) + min(maxSkillPointsThatCanBeAdded, skillPointDelta)
+    return true
+}
+```
 
 @patch 1.07
 */
