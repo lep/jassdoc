@@ -13680,8 +13680,6 @@ native          SetHeroXP           takes unit whichHero, integer newXpVal,  boo
 /**
 Returns the units available skill points.
 
-@bug Returns 1 if `whichHero` is not a hero.
-
 @patch 1.07
 */
 native          GetHeroSkillPoints      takes unit whichHero returns integer
