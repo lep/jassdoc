@@ -13676,6 +13676,8 @@ I.e., returns true if any levels were actually subtracted.
 
 @note The level can be reduced to 1 at most.
 
+@note If `howManyLevels` is negative, the level of the hero will be reduced to 1.
+
 @note The hero attributes agility, intelligence, and strength will be decreased according to the increments per level multiplied with the effective amount
 of levels stripped.
 
