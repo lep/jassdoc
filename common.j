@@ -13663,6 +13663,37 @@ native          GetHeroAgi          takes unit whichHero, boolean includeBonuses
 native          GetHeroInt          takes unit whichHero, boolean includeBonuses returns integer
 
 /**
+Decreases the level of a hero.
+
+@param whichHero The hero to modify.
+@param howManyLevels The levels to subtract.
+
+Returns false if `whichHero` is not a hero.
+Returns false if `howManyLevels` is negative or 0.
+Returns false if the hero is level 1.
+Otherwise returns true.
+I.e., returns true if any levels were actually subtracted.
+
+@note The level can be reduced to 1 at most.
+
+@note The hero attributes agility, intelligence, and strength will be decreased according to the increments per level multiplied with the effective amount
+of levels stripped.
+
+@note Skillpoints will be taken away in the amount of effective amount of levels stripped up to a minimum of 0 skillpoints.
+
+@note Learned hero abilities whose requirements are no longer fulfilled due to the level reduction will be unlearned, respectively their level will be reduced.
+The invested skillpoints will be restored.
+
+@bug Concerning the restoring of skillpoints from unlearning, stripping levels away can only reduce skillpoints or be neutral (per reduced level),
+it won't add skillpoints even if multiple abilities/ability levels were unlearned.
+
+@bug In relation to the previous note, abilities will be unleaned/reduced in level even if the cheat `whoisjohngalt` is being used (which overrides learning requirements).
+
+@note Learned hero abilities will be unlearned if the level reduction leads to the hero having less total skillpoints (as determined by level and modification via `UnitModifySkillPoints`)
+then are invested in abilities. E.g., when a hero is level 2 and is given an additional skillpoint via `UnitModifySkillPoints`, there will be 3 skillpoints that can be used to learn the first level of
+3 abilities (that each require level 1). Now, when 1 level is stripped from the hero, the hero is supposed to only remain with 2 skillpoints and will unlearn 1 of the previously learned abilities to free
+the skillpoint that needs to be subtracted. Abilities that appear earlier in the hero ability list (heroAbilList) are prioritized in this unlearning mechanism.
+
 @patch 1.07
 */
 native          UnitStripHeroLevel  takes unit whichHero, integer howManyLevels returns boolean
@@ -13731,6 +13762,9 @@ if (skillPointDelta > 0) {
 }
 ```
 
+@bug If you increase the skillpoints beyond the amount that could theoretically still be spent in abilities, the next time the hero levels up,
+it will ignore the extra skillpoints beyond that limit and snap back.
+
 @patch 1.07
 */
 native          UnitModifySkillPoints   takes unit whichHero, integer skillPointDelta returns boolean
@@ -13776,6 +13810,8 @@ Further, the level will not exceed the hero's maximum level set in WorldEditor.
 @param showEyeCandy False to hide level-up effects, true to show.
 The level-up effects include: floating experience gain text, sound and a visual effect.
 
+@bug Making a hero level up using this function (or via other means) will reset the skillpoint modification caused by `UnitModifySkillPoints` if the amount of skillpoints
+is beyond the amount of ability levels that can still be learned. See `UnitModifySkillPoints`.
 
 @patch 1.00
 */
