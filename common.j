@@ -13665,14 +13665,14 @@ native          GetHeroInt          takes unit whichHero, boolean includeBonuses
 /**
 Decreases the level of a hero.
 
-@param whichHero The hero to modify.
-@param howManyLevels The levels to subtract.
-
 Returns false if `whichHero` is not a hero.
 Returns false if `howManyLevels` is negative or 0.
 Returns false if the hero is level 1.
 Otherwise returns true.
 I.e., returns true if any levels were actually subtracted.
+
+@param whichHero The hero to modify.
+@param howManyLevels The levels to subtract.
 
 @note The level can be reduced to 1 at most.
 
