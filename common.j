@@ -14630,18 +14630,124 @@ This native is used to keep abilities when morphing units.
 */
 native UnitMakeAbilityPermanent     takes unit whichUnit, boolean permanent, integer abilityId returns boolean
 /**
+Removes all buffs matching criteria from a given unit.
+
+@param whichUnit The unit to modify.
+@param removePositive Should be true if positive buffs should be included.
+@param removeNegative Should be true if negative buffs should be included.
+
+@note This is like calling `UnitRemoveBuffsEx(whichUnit, removePostive, removeNegative, false, false, true, true, false)`.
+
 @patch 1.00
 */
 native UnitRemoveBuffs              takes unit whichUnit, boolean removePositive, boolean removeNegative returns nothing
 /**
+Removes all buffs matching criteria from a given unit.
+
+@param whichUnit The unit to modify.
+@param removePositive Should be true if positive buffs should be included.
+@param removeNegative Should be true if negative buffs should be included.
+@param magic Should be true (or both magic and physical should be false) if buffs that are magical should included.
+@param physical Should be true (or both magic and physical should be false) if buffs that are physical should to be included.
+@param timedLife Should be true if timed life buffs should be included.
+@param aura Should be true if aura buffs should be included.
+@param autoDispel Should be true if exclusively buffs that are dispelable should be included.
+
+@note Buffs are either positive or negative. Buffs are either magical or physical or neither. Buffs are either timed life (see `UnitApplyTimedLife`) or not.
+Buffs either stem from an aura or not. Buffs are either dispelable (via dispelling abilities) or not.
+
+@note Specifying both `removePositive` and `removeNegative` as true will include both positive and negative buffs (given that other criteria are satisfied).
+These two criteria are additive.
+
+@note Specifying both `magic` and `physical` as true will not include any buff.
+Specifying `magic` as true and `physical` as false will include only magical buffs (given that other criteria are satisfied), no physical buffs nor buffs
+that are neither magical nor physical.
+Specifying `magic` as false and `physical` as true will include only physical buffs (given that other criteria are satisfied), no magical buffs nor buffs
+that are neither magical nor physical.
+Specifying both `magic` and `physical` as false will include magical buffs, physical buffs, and buffs that are neither magical nor physical
+(given that other criteria are satisfied).
+
+@note Specifying `timedLife` as true will include timed life buffs (given that other criteria are satisfied); non-timed life buffs will also be included.
+Specifying `timedLife` as false will exclude timed life buffs.
+
+@note Specifying `aura` as true will include aura buffs (given that other criteria are satisfied); non-aura buffs will also be included.
+Specifying `aura` as false will exclude aura buffs.
+
+@note Specifying `autoDispel` as true will exclusively include dispelable (via dispelling abilities) buffs (given that other criteria are satisfied); non-dispelable buffs
+will not be excluded. Specifying `autoDispel` as false will include both dispelable and non-dispelable buffs.
+
+@note Mental model:
+```
+DELETE FROM whichUnit.buffs
+WHERE
+	(POSITIVE = removePositive OR NEGATIVE = removeNegative) AND
+	((magic = FALSE AND physical = FALSE) OR (MAGIC = magic AND physical = FALSE) OR (PHYSICAL = physical AND magic = FALSE)) AND
+	(TIMED_LIFE = timedLife OR TIMED_LIFE = FALSE) AND
+	(AURA = aura OR AURA = FALSE) AND
+	(DISPELABLE = autoDispel OR DISPELABLE = TRUE)
+```
+
+@bug The criteria work differently than in `UnitHasBuffsEx`.
+
 @patch 1.07
 */
 native UnitRemoveBuffsEx            takes unit whichUnit, boolean removePositive, boolean removeNegative, boolean magic, boolean physical, boolean timedLife, boolean aura, boolean autoDispel returns nothing
 /**
+Checks if a given unit has any buff matching criteria.
+
+@note See `UnitCountBuffsEx` for parameters and criteria explanations.
+
 @patch 1.07
 */
 native UnitHasBuffsEx               takes unit whichUnit, boolean removePositive, boolean removeNegative, boolean magic, boolean physical, boolean timedLife, boolean aura, boolean autoDispel returns boolean
 /**
+Counts all buffs matching criteria on a given unit.
+
+@param whichUnit The unit to query.
+@param removePositive Should be true (or both removePositive and removeNegative should be false) if positive buffs should be included.
+@param removeNegative Should be true (or both removePositive and removeNegative should be false) if negative buffs should be included.
+@param magic Should be true and physical should be false (or both magic and physical should be false) if magical buffs should be included.
+@param physical Should be true and magic should be false (or both magic and physical should be false) if physical  buffs should be included.
+@param timedLife Should be true if timed life buffs should be included.
+@param aura Should be true if aura buffs should be included.
+@param autoDispel Should be true if exclusively buffs that are dispelable should be included.
+
+@note Buffs are either positive or negative. Buffs are either magical or physical or neither. Buffs are either timed life (see `UnitApplyTimedLife`) or not.
+Buffs either stem from an aura or not. Buffs are either dispelable (via dispelling abilities) or not.
+
+@note Specifying both `removePositive` and `removeNegative` as false will include both positive and negative buffs (given that other criteria are satisfied).
+These two criteria are additive; thus specifying both `removePositive` and `removeNegative` will include both positve and negative buffs as well
+(given that other criteria are satisfied).
+
+@note Specifying both `magic` and `physical` as false will include both magical and physical buffs (given that other criteria are satisfied).
+Specifying `magic` as true and `physical` as false will include only magical buffs (given that other criteria are satisfied), no physical buffs nor buffs
+that are neither magical nor physical.
+Specifying `magic` as false and `physical` as true will include only physical buffs (given that other criteria are satisfied), no magical buffs nor buffs
+that are neither magical nor physical.
+Specifying both `magic` and `physical` as true will not include any buff.
+
+@note Specifying `timedLife` as true will include timed life buffs (given that other criteria are satisfied); non-timed life buffs will also be included.
+Specifying `timedLife` as false will exclude timed life buffs.
+
+@note Specifying `aura` as true will include aura buffs (given that other criteria are satisfied); non-aura buffs will also be included.
+Specifying `aura` as false will exclude aura buffs.
+
+@note Specifying `autoDispel` as true will exclusively include dispelable (via dispelling abilities) buffs (given that other criteria are satisfied); non-dispelable buffs
+will not be excluded. Specifying `autoDispel` as false will include both dispelable and non-dispelable buffs.
+
+@note Mental model:
+```
+SELECT COUNT(*) FROM whichUnit.buffs
+WHERE
+	((removePositive = FALSE AND removeNegative = FALSE) OR POSITIVE = removePositive OR NEGATIVE = removeNegative) AND
+	((magic = FALSE AND physical = FALSE) OR (MAGIC = magic AND PHYSICAL = FALSE) OR (PHYSICAL = physical AND magic = FALSE)) AND (MAGIC = TRUE OR PHYSICAL = TRUE) AND
+	(TIMED_LIFE = timedLife OR TIMED_LIFE = FALSE) AND
+	(AURA = aura OR AURA = FALSE) AND
+	(DISPELABLE = autoDispel OR DISPELABLE = TRUE)
+```
+
+@bug The criteria work differently than in `UnitRemoveBuffsEx`.
+
 @patch 1.07
 */
 native UnitCountBuffsEx             takes unit whichUnit, boolean removePositive, boolean removeNegative, boolean magic, boolean physical, boolean timedLife, boolean aura, boolean autoDispel returns integer
