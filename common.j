@@ -10192,7 +10192,7 @@ Clears a group and then adds units of matching internal name to it.
 @param unitname The internal name of the unit definition to consider for adding units. For original unit definitions, this equals the `name` property in `units/unitui.slk`, for custom unit definitions, it equals "custom_" + fourcc (e.g., "custom_h000").
 @param filter A filter function that is run for each considered unit.
 
-@note In contrast to spatial GroupEnum-functions, this function enumarates units with locust.
+@note In contrast to spatial GroupEnum-functions, this function enumerates units with locust.
 
 @note Within the filter function, the considered unit can be accessed with `GetFilterUnit`.
 
@@ -10218,7 +10218,7 @@ Clears a group and then adds units of matching player to it.
 @param whichPlayer The player whose units to consider for adding units.
 @param filter A filter function that is run for each considered unit.
 
-@note In contrast to spatial GroupEnum-functions, this function enumarates units with locust.
+@note In contrast to spatial GroupEnum-functions, this function enumerates units with locust.
 
 @note Within the filter function, the considered unit can be accessed with `GetFilterUnit`.
 
