@@ -10859,11 +10859,13 @@ native GetLocationY             takes location whichLocation returns real
 //  If you attempt to use it in a synchronous manner, it may cause a desync.
 
 /**
-
+Returns the current terrain height at a location.
 
 @note Reasons for returning different values might be terrain-deformations
 caused by spells/abilities and different graphic settings.
 Other reasons could be the rendering state of destructables and visibility differences.
+
+@note Returns 0 if `whichLocation` is null.
 
 @async 
 
@@ -10879,6 +10881,8 @@ Checks whether a unit is contained within a region.
 
 @note Only checks the origin of the unit. Its collision size is not considered.
 
+@note Returns false if `whichRegion` or `whichUnit` is null.
+
 @patch 1.00
 */
 native IsUnitInRegion               takes region whichRegion, unit whichUnit returns boolean
@@ -10893,6 +10897,8 @@ Checks whether a point is contained within a region.
 (40, 40) and (63, 63) all yield the cell [minX=32, minY=32, maxX=64, maxY=64], (-64, -64), (-40, -40) and (-32, -32)
 all yield the cell [minX=-64, minY=-64, maxX=-32, maxY=-32].
 
+@note Returns false if `whichRegion` is null.
+
 @patch 1.00
 */
 native IsPointInRegion              takes region whichRegion, real x, real y returns boolean
@@ -10900,6 +10906,8 @@ native IsPointInRegion              takes region whichRegion, real x, real y ret
 Checks whether a point is contained within a region.
 
 @param whichLocation The location with the coordinates of the cell to be checked.
+
+@note Returns false if `whichRegion` or `whichLocation` is null.
 
 @note See: `IsPointInRegion`
 
@@ -11381,16 +11389,21 @@ Registers when a unit enters a region.
 
 @note Only reacts to the origin of units. Their collision sizes are not considered.
 
+@note Units can enter a region by walking, being dispositioned by other game mechanisms, or programmatically
+(`SetUnitX`, `SetUnitY`, `SetUnitPosition`), or when they are created. Hidden, dead, and locust units can enter as well.
+
 @note The filter can be `null` to allow any unit to fire the trigger. If there is a filter, the filter will
 be fired when a unit enters the region. In this case, the trigger will only be fired if the filter returns `true`
 (a truthy value in Lua) and `GetFilterUnit` can be used to refer to the unit in this scope.
 
 @note When moving a unit by trigger and causing the unit to enter the region, the filter will be fired instantly
-but the trigger will be fired in a deferred fashion.
+but the trigger will be fired in a deferred fashion (using a 0-timer). The trigger will not fire if the trigger, region, or unit
+have been destroyed in the meantime. Due to the deferment, it may be good to use `IsUnitInRegion` when the trigger fires to check
+if the unit is actually still inside the region at this point in time, in case that is a wanted assumption.
 
 @note Adding cells to the region so that units that were previously outside are now inside does not fire the trigger
 nor the filter. But those units will then be considered inside and can fire leave events
-(see `TriggerRegisterEnterRegion`) again when they cross the boundaries of the region.
+(see `TriggerRegisterLeaveRegion`) again when they cross the boundaries of the region.
 
 @note When the region is destroyed, the filter and trigger will not be fired anymore.
 
@@ -11429,12 +11442,18 @@ Registers when a unit leaves a region.
 
 @note Only reacts to the origin of units. Their collision sizes are not considered.
 
+@note Units can leave a region by walking, being dispositioned by other game mechanisms, or programmatically
+(`SetUnitX`, `SetUnitY`, `SetUnitPosition`). Hidden, dead, and locust units can leave as well.
+Removing a unit will not fire the trigger nor the filter.
+
 @note The filter can be `null` to allow any unit to fire the trigger. If there is a filter, the filter will
 be fired when a unit leaves the region. In this case, the trigger will only be fired if the filter returns `true`
 (a truthy value in Lua) and `GetFilterUnit` can be used to refer to the unit in this scope.
 
 @note When moving a unit by trigger and causing the unit to leave the region, the filter will be fired instantly
-but the trigger will be fired in a deferred fashion.
+but the trigger will be fired in a deferred fashion (using a 0-timer). The trigger will not fire if the trigger, region, or unit
+have been destroyed in the meantime. Due to the deferment, it may be good to use `IsUnitInRegion` when the trigger fires to check
+if the unit is actually still outside the region at this point in time, in case that is a wanted assumption.
 
 @note Removing cells from the region so that units that were previously inside are now outside does not fire the trigger
 nor the filter. But those units will then be considered outside and can fire leave events
