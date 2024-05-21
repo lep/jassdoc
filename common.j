@@ -10176,9 +10176,9 @@ The size refers to game's internal representation of group data (array), group's
 native BlzGroupGetSize                      takes group whichGroup returns integer
 
 /**
-Returns unit at the given index in group. Groups start at index 0.
+Returns unit at the given index in group. Groups start at index 0 and count up to `BlzGroupGetSize(whichGroup) - 1`.
 
-If the unit was removed from the game or index is out of bounds, returns null.
+If the index is out of bounds, returns null.
 
 
 @patch 1.31.0.11889
