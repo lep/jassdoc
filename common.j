@@ -14636,7 +14636,7 @@ Removes all buffs matching criteria from a given unit.
 @param removePositive Should be true if positive buffs should be included.
 @param removeNegative Should be true if negative buffs should be included.
 
-@note This is like calling `UnitRemoveBuffsEx(removePostive, removeNegative, false, false, true, true, false)`.
+@note This is like calling `UnitRemoveBuffsEx(whichUnit, removePostive, removeNegative, false, false, true, true, false)`.
 
 @patch 1.00
 */
@@ -14662,7 +14662,7 @@ These two criteria are additive.
 @note Specifying both `magic` and `physical` as true will not include any buff.
 Specifying `magic` as true and `physical` as false will include only magical buffs (given that other criteria are satisfied), no physical buffs nor buffs
 that are neither magical nor physical.
-Specifying `magic` as false and `magic` as true will include only physical buffs (given that other criteria are satisfied), no magical buffs nor buffs
+Specifying `magic` as false and `physical` as true will include only physical buffs (given that other criteria are satisfied), no magical buffs nor buffs
 that are neither magical nor physical.
 Specifying both `magic` and `physical` as false will include magical buffs, physical buffs, and buffs that are neither magical nor physical
 (given that other criteria are satisfied).
@@ -14722,7 +14722,7 @@ These two criteria are additive; thus specifying both `removePositive` and `remo
 @note Specifying both `magic` and `physical` as false will include both magical and physical buffs (given that other criteria are satisfied).
 Specifying `magic` as true and `physical` as false will include only magical buffs (given that other criteria are satisfied), no physical buffs nor buffs
 that are neither magical nor physical.
-Specifying `magic` as false and `magic` as true will include only physical buffs (given that other criteria are satisfied), no magical buffs nor buffs
+Specifying `magic` as false and `physical` as true will include only physical buffs (given that other criteria are satisfied), no magical buffs nor buffs
 that are neither magical nor physical.
 Specifying both `magic` and `physical` as true will not include any buff.
 
@@ -14737,7 +14737,7 @@ will not be excluded. Specifying `autoDispel` as false will include both dispela
 
 @note Mental model:
 ```
-SELECT COUNT(*) FROM buffs
+SELECT COUNT(*) FROM whichUnit.buffs
 WHERE
 	((removePositive = FALSE AND removeNegative = FALSE) OR POSITIVE = removePositive OR NEGATIVE = removeNegative) AND
 	((magic = FALSE AND physical = FALSE) OR (MAGIC = magic AND PHYSICAL = FALSE) OR (PHYSICAL = physical AND magic = FALSE)) AND (MAGIC = TRUE OR PHYSICAL = TRUE) AND
