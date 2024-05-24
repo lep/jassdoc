@@ -2047,10 +2047,18 @@ Stores the zero-based ID of neutral aggressive player.
 */
     constant alliancetype       ALLIANCE_SHARED_VISION          = ConvertAllianceType(5)
 /**
+Allows to command units of an other player.
+
+Commands that would spent the other players resources require  `ALLIANCE_SHARED_ADVANCED_CONTROL`.
 @patch 1.00
 */
     constant alliancetype       ALLIANCE_SHARED_CONTROL         = ConvertAllianceType(6)
 /**
+Shows the allied Hero Icons below your heroes up to (7 - `SetReservedLocalHeroButtons`). When you have `ALLIANCE_SHARED_ADVANCED_CONTROL` without `ALLIANCE_SHARED_CONTROL` then you will see hero icons on the left but can't command them.
+
+Shows the allied resources multiboard.
+
+Allows to spent the other player's resources.
 @patch 1.00
 */
     constant alliancetype       ALLIANCE_SHARED_ADVANCED_CONTROL= ConvertAllianceType(7)
