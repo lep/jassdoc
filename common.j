@@ -2056,7 +2056,9 @@ Commands that would spent the other players resources require  `ALLIANCE_SHARED_
 /**
 Shows the allied Hero Icons below your heroes up to (7 - `SetReservedLocalHeroButtons`). When you have `ALLIANCE_SHARED_ADVANCED_CONTROL` without `ALLIANCE_SHARED_CONTROL` then you will see hero icons on the left but can't command them.
 
-Any adv shared shows the allied resources multiboard and allows to spent the other player's resources.
+Shows the allied resources multiboard.
+
+Allows to spent the other player's resources.
 @patch 1.00
 */
     constant alliancetype       ALLIANCE_SHARED_ADVANCED_CONTROL= ConvertAllianceType(7)
