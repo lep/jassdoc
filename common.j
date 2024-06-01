@@ -15749,6 +15749,9 @@ enabled. "VISIBLE" will instantly become "FOGGED" and "FOGGED" will cause unexpl
 areas to become explored. You can workaround this by using e.g. `SetFogStateRect`
 after fog modifier creation.
 
+@note Moving the location with `MoveLocation` will effectively move the fog modifier. No restart of the fog modifier (`FogModifierStart`) is necessary. When the location is destroyed (`RemoveLocation`),
+the fog modifier will remain at the last position. Since the fog modifier manages a reference to the location, the handle id of the location won't be released until the fog modifier is fully released as well.
+
 @patch 1.00
 */
 native CreateFogModifierRadiusLoc   takes player forWhichPlayer, fogstate whichState, location center, real radius, boolean useSharedVision, boolean afterUnits returns fogmodifier
