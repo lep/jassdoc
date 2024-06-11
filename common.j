@@ -9985,14 +9985,17 @@ Returns the player name.
 
 **Example (Lua):**
 
-    -- assuming you play as player Red
-    local name = GetPlayerName(Player(0)) --> your player name as text
+````{.lua}
+-- assuming you play as player Red
+local name = GetPlayerName(Player(0)) --> your player name as text
+````
 
 If the player is not present in the game or is one of the internal players, returns localized string + one-based player number (WorldEdit-like):
 
-    local me = GetPlayerName( Player(0) ) --> your player name as text
-    local np = GetPlayerName( Player(PLAYER_NEUTRAL_PASSIVE) ) --> "Player 28"
-
+````{.lua}
+local me = GetPlayerName( Player(0) ) --> your player name as text
+local np = GetPlayerName( Player(PLAYER_NEUTRAL_PASSIVE) ) --> "Player 28"
+````
 
 
 @patch 1.00
@@ -11363,11 +11366,13 @@ Returns a handle to event that represents the registration, you can't do anythin
 
 **Example (Lua):**
 
-    trg_gameev = CreateTrigger()
-    -- this will print a message when someone opens a build menu
-    TriggerAddAction(trg_gameev, function() print(GetTriggerEventId()) end)
-    TriggerRegisterGameEvent(trg_gameev, EVENT_GAME_BUILD_SUBMENU)
-    --> new event on build menu open
+````{.lua}
+trg_gameev = CreateTrigger()
+-- this will print a message when someone opens a build menu
+TriggerAddAction(trg_gameev, function() print(GetTriggerEventId()) end)
+TriggerRegisterGameEvent(trg_gameev, EVENT_GAME_BUILD_SUBMENU)
+--> new event on build menu open
+````
 
 
 @bug Registered events cannot be destroyed as an object.
@@ -17212,20 +17217,23 @@ Bounds may be negative, but must be lowBound <= highBound. When lowBound==highBo
 
 **Example (Lua):**
 
-	SetRandomSeed(1229611)
-	string.format("%.16f", GetRandomReal(0, 0.002)) == "0.00"
-	SetRandomSeed(1229611)
-	string.format("%.16f", GetRandomReal(-0.002, 0)) == "-0.002"
-	
+````{.lua}
+SetRandomSeed(1229611)
+string.format("%.16f", GetRandomReal(0, 0.002)) == "0.00"
+SetRandomSeed(1229611)
+string.format("%.16f", GetRandomReal(-0.002, 0)) == "-0.002"
+````
 
 @note **Desyncs!** The random number generator is a global, shared resource. Do not change its state in local blocks asynchronously.
 
 @note Undefined behavior when lowBound > highBound. Test code:
 
-	-- Set seed to zero and then generate and print a random real
-	function testRReal(low, high) SetRandomSeed(0); return string.format("%.16f", GetRandomReal(low,high)) end
-	testRReal(-42, 42) == "-4.0800933837890625"
-	testRReal(42, -42) == "79.9199066162109375"
+````{.lua}
+-- Set seed to zero and then generate and print a random real
+function testRReal(low, high) SetRandomSeed(0); return string.format("%.16f", GetRandomReal(low,high)) end
+testRReal(-42, 42) == "-4.0800933837890625"
+testRReal(42, -42) == "79.9199066162109375"
+````
 
 @note See: `GetRandomInt`, `SetRandomSeed`.
 
@@ -18723,18 +18731,18 @@ displayed incorrectly in ultra-wide mode (beyond 1800x920, 1.95 ratio).
 in a single frame, the first dialog will appear below the second one.
 
 ```{.lua}
-	tdialog = CreateTimerDialog(CreateTimer())
-	TimerDialogSetTitle(tdialog, "Timer1 Dialog __ 1")
-	TimerDialogDisplay(tdialog, true)
-	tdialog2 = CreateTimerDialog(CreateTimer())
-	TimerDialogSetTitle(tdialog2, "Timer2 Dialog")
-	TimerDialogDisplay(tdialog2, true)
-	-- Correct up to this point.
-	-- This is buggy:
-	TimerDialogDisplay(tdialog, false)
-	TimerDialogDisplay(tdialog2, true)
-	TimerDialogDisplay(tdialog, true)
-	-- Now tdialog will appear beneath tdialog2.
+    tdialog = CreateTimerDialog(CreateTimer())
+    TimerDialogSetTitle(tdialog, "Timer1 Dialog __ 1")
+    TimerDialogDisplay(tdialog, true)
+    tdialog2 = CreateTimerDialog(CreateTimer())
+    TimerDialogSetTitle(tdialog2, "Timer2 Dialog")
+    TimerDialogDisplay(tdialog2, true)
+    -- Correct up to this point.
+    -- This is buggy:
+    TimerDialogDisplay(tdialog, false)
+    TimerDialogDisplay(tdialog2, true)
+    TimerDialogDisplay(tdialog, true)
+    -- Now tdialog will appear beneath tdialog2.
 ```
 
 **Workarounds:**
@@ -23076,8 +23084,10 @@ native BlzFrameClearAllPoints                      takes framehandle frame retur
 /**
 Example:
 
-    BlzHideOriginFrames(true)
-    BlzFrameSetAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_WORLD_FRAME, 0), BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
+````{.lua}
+BlzHideOriginFrames(true)
+BlzFrameSetAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_WORLD_FRAME, 0), BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
+````
 
 @param frame the frame moved/resized.
 
@@ -23570,15 +23580,17 @@ Meta keys are modifier keys like CTRL, SHIFT, ALT. See `BlzGetTriggerPlayerMetaK
 
 **Example (Lua):**
 
-    trg_key = CreateTrigger()
-    -- prints oskey as object, metakey as integer
-    TriggerAddAction(trg_key, function() print(BlzGetTriggerPlayerKey(),  BlzGetTriggerPlayerMetaKey()) end)
-     
-    -- register key press ESCAPE
-    BlzTriggerRegisterPlayerKeyEvent(trg_key, Player(0), OSKEY_ESCAPE, 0, false)
-     
-    -- register key press CTRL+1
-    BlzTriggerRegisterPlayerKeyEvent(trg_key, Player(0), OSKEY_1, 2, false)
+````{.lua}
+trg_key = CreateTrigger()
+-- prints oskey as object, metakey as integer
+TriggerAddAction(trg_key, function() print(BlzGetTriggerPlayerKey(),  BlzGetTriggerPlayerMetaKey()) end)
+ 
+-- register key press ESCAPE
+BlzTriggerRegisterPlayerKeyEvent(trg_key, Player(0), OSKEY_ESCAPE, 0, false)
+ 
+-- register key press CTRL+1
+BlzTriggerRegisterPlayerKeyEvent(trg_key, Player(0), OSKEY_1, 2, false)
+````
 
 @param metaKey Bitfield. MetaKeys are "none"(0), "shift"(1), "control"(2), "alt"(4) and "META"(8) (Windows key). They can be combined 2 + 4 = 6.
 The player needs to hold all specified metakeys to trigger the event.
