@@ -13901,6 +13901,8 @@ Returns the level of the ability for the unit.
 @param whichUnit Target unit.
 @param abilcode Abilities' raw code identifier.
 
+@note Building abilities {'ANbu','AHbu','AEbu','AObu','AUbu','AGbu'} are considered equal by the game.
+If the unit has one of them, it has all of them (and vice-versa). Therefore a wisp with 'ANbu'==1 also has 'AHbu'==1.
 
 @patch 1.13
 */
@@ -13913,6 +13915,7 @@ Returns the new ability level.
 @param whichUnit The unit with the ability.
 @param abilcode The four digit rawcode representation of the ability.
 
+@note It's not possible to reduce the level of a building ability like 'AHbu'. See `GetUnitAbilityLevel` and <https://github.com/lep/jassdoc/issues/152>.
 
 @patch 1.17a
 */
@@ -13954,6 +13957,9 @@ to set the level of an ability for an item on the unit, too. Since it's an attri
 when the item is dropped and picked up again. Via item abilities, a unit can have more than one instance of ability with the same ability id.
 This function will only set the level of the most recently obtained ability instance, then, which corresponds to the first ability instance found
 when using `BlzGetUnitAbilityByIndex` counting upwards.
+
+@bug It's possible to set a unit's building ability (like 'AHbu') to level 0 without an effect. See `GetUnitAbilityLevel`.
+
 @patch 1.17a
 */
 native          SetUnitAbilityLevel takes unit whichUnit, integer abilcode, integer level returns integer
