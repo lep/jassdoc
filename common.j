@@ -13901,8 +13901,9 @@ Returns the level of the ability for the unit.
 @param whichUnit Target unit.
 @param abilcode Abilities' raw code identifier.
 
-@note Building abilities {'ANbu','AHbu','AEbu','AObu','AUbu','AGbu'} are considered equal by the game.
+@note Building abilities {'ANbu','AHbu','AEbu','AObu','AUbu','AGbu'} are considered equivalent by the game (identical ability instance).
 If the unit has one of them, it has all of them (and vice-versa). Therefore a wisp with 'ANbu'==1 also has 'AHbu'==1.
+See: <https://github.com/lep/jassdoc/issues/152>
 
 @patch 1.13
 */
@@ -13915,7 +13916,7 @@ Returns the new ability level.
 @param whichUnit The unit with the ability.
 @param abilcode The four digit rawcode representation of the ability.
 
-@note It's not possible to reduce the level of a building ability like 'AHbu'. See `GetUnitAbilityLevel` and <https://github.com/lep/jassdoc/issues/152>.
+@note It's not possible to reduce the level of a building ability like 'AHbu'. See `GetUnitAbilityLevel`.
 
 @patch 1.17a
 */
@@ -14693,6 +14694,9 @@ Returns:
 cast (at the EVENT_PLAYER_UNIT_SPELL_EFFECT point), and while the caster is
 moving, will cause the caster to become unresponsive to new commands until
 they reach their ordered move point. 
+
+@note All different building ability codes like 'AHbu', 'ANbu' are considered equivalent. For example, removing 'AHbu' on a unit with only 'ANbu' would remove 'ANbu' instead. 
+See `GetUnitAbilityLevel`.
 
 @patch 1.00
 */
@@ -22441,6 +22445,9 @@ BlzUnitDisableAbility(u, FourCC"AHbu", false, true)
 @bug (1.32.10 confirmed) The game counts isDisabled and hideUI internally as integers(?) If you called 5 times "hideUI = true" to hide an icon then you'll need to multiple times "hideUI = false" to show it again. I do not exactly understand how it's counted.
 https://www.hiveworkshop.com/threads/blzunithideability-and-blzunitdisableability-dont-work.312477/
 
+@note All different building ability codes like 'AHbu', 'ANbu' are considered equivalent. For example, disabling 'AHbu' on a unit with only 'ANbu' would disable 'ANbu' instead. 
+See `GetUnitAbilityLevel`.
+
 @patch 1.29.2.9231
 
 */
@@ -23777,7 +23784,7 @@ native BlzSetSpecialEffectMatrixScale              takes effect whichEffect, rea
 native BlzResetSpecialEffectMatrix                 takes effect whichEffect returns nothing
 
 /**
-
+@note Returns the same ability instance for different building ability codes like 'AHbu', 'ANbu' etc. See `GetUnitAbilityLevel`.
 
 @patch 1.31.0.11889
 
