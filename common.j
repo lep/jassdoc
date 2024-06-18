@@ -17294,27 +17294,51 @@ Do not change its state in local blocks asynchronously.
 native GetRandomInt takes integer lowBound, integer highBound returns integer
 
 /**
-Returns a real in range [lowBound, highBound) that is: inclusive, exclusive.
-Bounds may be negative, but must be lowBound <= highBound. When lowBound==highBound, always returns that number.
+When `lowBound<highBound` returns a real in range \[lowBound, highBound) that is: inclusive, exclusive.
+When `lowBound==highBound`, always returns that number.
+
+When bounds are reversed `lowBound>highBound` then the behavior might surprise you.
+For example, the min/mid/max limits for (1,-8\] are 1/5.5/10.
+See the formula below or table at <https://github.com/lep/jassdoc/issues/151#issuecomment-2177178728>.
 
 **Example (Lua):**
 
 ````{.lua}
-SetRandomSeed(1229611)
-string.format("%.16f", GetRandomReal(0, 0.002)) == "0.00"
-SetRandomSeed(1229611)
-string.format("%.16f", GetRandomReal(-0.002, 0)) == "-0.002"
+local lowSeed = 1229611
+local midSeed = 7685839
+local highSeed = 23999343
+
+SetRandomSeed(lowSeed)
+string.format("%.16f", GetRandomReal(0, 0.002)) --> "0.00"
+SetRandomSeed(lowSeed)
+string.format("%.16f", GetRandomReal(-0.002, 0)) --> "-0.002"
+
+SetRandomSeed(midSeed)
+string.format("%.16f", GetRandomReal(0, 50)) --> "25.000"
+
+SetRandomSeed(highSeed)
+string.format("%.16f", GetRandomReal(0, 50)) --> "49.9999580383300781"
 ````
 
 @note **Desyncs!** The random number generator is a global, shared resource. Do not change its state in local blocks asynchronously.
 
-@note Undefined behavior when lowBound > highBound. Test code:
+@note The bounds for generated values can be calculated with these formulas:
 
 ````{.lua}
--- Set seed to zero and then generate and print a random real
-function testRReal(low, high) SetRandomSeed(0); return string.format("%.16f", GetRandomReal(low,high)) end
-testRReal(-42, 42) == "-4.0800933837890625"
-testRReal(42, -42) == "79.9199066162109375"
+function reFormula(low, high)
+	local min = low
+	local mid
+	local max = (low > high) and (2 * low - high) or high
+	if low == high then
+		mid = low
+	elseif low < high then
+		mid = (low + high) / 2
+	else -- low > high
+		mid = (low + -high) / 2 + low
+	end
+	
+	return min, mid, max
+end
 ````
 
 @note See: `GetRandomInt`, `SetRandomSeed`.
