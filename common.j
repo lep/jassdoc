@@ -17325,19 +17325,13 @@ string.format("%.16f", GetRandomReal(0, 50)) --> "49.9999580383300781"
 @note The bounds for generated values can be calculated with these formulas:
 
 ````{.lua}
-function reFormula(low, high)
-	local min = low
-	local mid
-	local max = (low > high) and (2 * low - high) or high
-	if low == high then
-		mid = low
-	elseif low < high then
-		mid = (low + high) / 2
-	else -- low > high
-		mid = (low + -high) / 2 + low
-	end
-	
-	return min, mid, max
+function bounds(low, high)
+    local min = low
+    local delta = (low > high) and (low - high) or (high - low)
+    local mid = low + delta / 2
+    local max = low + delta
+		
+    return min, mid, max
 end
 ````
 
