@@ -776,7 +776,9 @@ type itemstringfield                extends handle
 type movetype                       extends handle
 
 /**
+Constants of this type were defined (and their list is incomplete), but this type remains completely unused.
 
+@note See `UNIT_WEAPON_IF_ATTACK_TARGETS_ALLOWED` to access a unit's attack properties.
 @patch 1.31.0.11889
 
 */
@@ -8654,7 +8656,66 @@ See `fogstate` for an explanation.
 
 
 /**
+Used to access WorldEditor's unit data field "Combat - Attack 1/2 - Targets Allowed" (ua1g/ua2g aka targs1/targs2) which is a bitfield for allowed types.
+
+Indexing starts from zero, hence access "Attack 1" with index 0 and "Attack 2" with index 1. Units can only have 2 attacks max.
+
+**Example (Lua):**
+
+```{.lua}
+function printUnitAttacks(unitType)
+	local u = CreateUnit(Player(0), FourCC(unitType), -30, 0, 90)
+	local wpn0 = BlzGetUnitWeaponIntegerField(u, UNIT_WEAPON_IF_ATTACK_TARGETS_ALLOWED, 0)
+	local wpn1 = BlzGetUnitWeaponIntegerField(u, UNIT_WEAPON_IF_ATTACK_TARGETS_ALLOWED, 1)
+	local wpn2 = BlzGetUnitWeaponIntegerField(u, UNIT_WEAPON_IF_ATTACK_TARGETS_ALLOWED, 2)
+	print(string.format("%4s: %14d %14d %6d", unitType, wpn0, wpn1, wpn2))
+	RemoveUnit(u)
+end
+print("unitType | idx0, idx1, idx2 (if buggy)")
+printUnitAttacks("hgry")
+```
 @note Works as intended
+@note Each type has a corresponding bit if targetting is enabled
+
+```{.lua}
+TARGETS_ALLOWED = {
+	Terrain = 0, -- bug or not implemented? Appears to use default
+	None = 1, -- disables weapon, weird behavior, beware <https://github.com/lep/jassdoc/issues/129>
+	Ground = 1 << 1,
+	Air = 1 << 2,
+	Structure = 1 << 3,
+	Ward = 1 << 4,
+	Item = 1 << 5,
+	Tree = 1 << 6,
+	Wall = 1 << 7,
+	Debris = 1 << 8,
+	Decoration = 1 << 9,
+	Bridge = 1 << 10,
+
+	Self = 1 << 12,
+	PlayerUnits = 1 << 13,
+	Allies = 1 << 14,
+	Neutral = 1 << 15,
+	Enemy = 1 << 16,
+
+	Vulnerable = 1 << 20,
+	Invulnerable = 1 << 21,
+	Hero = 1 << 22,
+	NonHero = 1 << 23,
+	Alive = 1 << 24,
+	Dead = 1 << 25,
+	Organic = 1 << 26,
+	Mechanical = 1 << 27,
+	NonSapper = 1 << 28,
+	Sapper = 1 << 29,
+	NonAncient = 1 << 30,
+	Ancient = 1 << 31,
+
+	NotSelf = PlayerUnits | Allies | Neutral | Enemy,
+	Friend = PlayerUnits | Allies,
+	DefaultWE = Ground | Air | Structure | Self | PlayerUnits | Allied | Neutral | Enemy | Vulnerable | Hero | NonHero | Alive | Organic | Mech | NonSapper | Sapper | NonAncient | Ancient -- -36573170; when nothing was selected
+}
+```
 @patch 1.31.0.11889
 */
     constant unitweaponintegerfield UNIT_WEAPON_IF_ATTACK_TARGETS_ALLOWED           = ConvertUnitWeaponIntegerField('ua1g')
@@ -8821,46 +8882,57 @@ See `fogstate` for an explanation.
     
     // Target Flag
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_NONE                = ConvertTargetFlag(1)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_GROUND              = ConvertTargetFlag(2)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_AIR                 = ConvertTargetFlag(4)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_STRUCTURE           = ConvertTargetFlag(8)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_WARD                = ConvertTargetFlag(16)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_ITEM                = ConvertTargetFlag(32)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_TREE                = ConvertTargetFlag(64)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_WALL                = ConvertTargetFlag(128)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_DEBRIS              = ConvertTargetFlag(256)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_DECORATION          = ConvertTargetFlag(512)
 /**
+Unused.
 @patch 1.31.0.11889
 */
     constant targetflag     TARGET_FLAG_BRIDGE              = ConvertTargetFlag(1024)
