@@ -17272,12 +17272,12 @@ Returns a random integer in the range [lowBound, highBound] (inclusive).
 Bounds may be negative, but should be lowBound <= highBound.
 When lowBound==highBound, always returns that number.
 
+The behaviour is a bit surprising if lowBound > highBound. See `GetRandomReal`
+for a full description.
+
 @param lowBound The inclusive lower bound of the random number returned.
 
 @param highBound The inclusive higher bound of the random number returned.
-
-
-@note If lowBound > highBound then it just swaps the values.
 
 @bug If you call `GetRandomInt(INT_MIN, INT_MAX)` or `GetRandomInt(INT_MAX, INT_MIN)`
 it will always return the same value, namely `INT_MIN` or `INT_MAX`.
