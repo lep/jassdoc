@@ -13601,12 +13601,18 @@ Sets a unit's player color accent.
 @param whichUnit Unit to modify.
 @param whichColor Set to this player's color.
 
-
-@bug Visual bug (tested v1.32.10): if you create two units of the same type (Normal and Colored)
+@bug Visual bug (tested v1.32.10): if you create two units of the same type, the same owning player (Normal and Colored),
 and set Colored's color to a different color, then clicking between the two units
-will not change the portrait color. The portrait will only update correctly if you
-deselect the unit. 
+will not change the portrait color (switching to a unit of the same type and player will not do a re-render of the
+portrait model, it won't restart the animation, either). The portrait model can be updated by deselect the unit, switching
+to another unit of a differet type or of a different player. Another option is to call `SetUnitColor` on the unit that is
+showing its portrait model or using `SetAllyColorFilterState` (see `SetAllyColorFilterState` for specifics).
 
+@note If the unit being re-colored is the one currently showing its portrait model in the user interface,
+it will correctly re-color the portrait model.
+
+@note If the unit being re-colored is the one currently showing its portrait model in the user interface,
+the portrait model will be forced to update and restart its animation.
 
 @patch 1.00
 */
@@ -18181,6 +18187,19 @@ click.
 
 @note See: `GetAllyColorFilterState` for full description; `EnableMinimapFilterButtons`.
 
+@note This can be used to force a playercolor update of unit-attached effects (see `AddSpecialEffectTarget`).
+To do so, the effective rendered playercolor must be changed. You can toggle through all the states to achieve this, like:
+```
+function updateColor takes nothing returns nothing
+    local integer previousColor = GetAllyColorFilterState()
+    call SetAllyColorFilterState(0)
+    call SetAllyColorFilterState(1)
+    call SetAllyColorFilterState(2)
+    call SetAllyColorFilterState(previousColor)
+endfunction
+```
+Warning: This will also force an update on the portrait model of a unit if its currently showing in the user interface
+and restart its animation.
 
 @patch 1.07
 */
@@ -20764,6 +20783,13 @@ you are attaching effects to.
 
 @note To create an effect only visible to one player see <https://www.hiveworkshop.com/threads/gs.300430/#post-3209073>.
 
+@bug Only works on units. For destructables and items, the function will still return a non-null effect.
+
+@bug Attached effects initially have red playercolor (like PLAYER_COLOR_RED, ally color filter state modifications apply)
+even if the unit the effect is attached to is not owned by a player with red playercolor. After creation, the color can be
+set by using `SetUnitColor` on the unit (directly set to the color desired, no need to set the color to an intermediate
+first) or by using `SetAllyColorFilterState` to set to the color to the current color of the unit
+(ally color filter state modifications apply, see `SetAllyColorFilterState` for specifics).
 
 @patch 1.00
 */
