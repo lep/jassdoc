@@ -13653,7 +13653,7 @@ To imagine the final result of changing vertex colors, it is helpful to think of
 @param alpha opacity (clamped to 0-255). A value of 255 is total opacity (fully visible). A value of 0 is total transparency; the model will be invisible, but you'll still see the shadow, HP bar etc.
 
 @note Also changes the colors of attached custom special effects.
-@bug If the unit has some secondary models/animations, these are not affected.
+@bug Tested 1.36.2 SD: If the unit has some secondary models/animations, these are not affected.
 E.g. the skulls surrounding Blood Mage are fully visible despite low alpha setting:
 
 ```{.lua}
@@ -22260,9 +22260,13 @@ that new color will be applied to attached effects too: `SetUnitColor`, `SetUnit
 **Example (Lua):** 
 
 ```{.lua}
+-- hero created for Player Red
 bloodmageSorc = CreateUnit(Player(0), FourCC("Hblm"), 0,0, 0)
+-- Sorceress has red color by default, it's the standard color for tinted models
 sorceressBm = AddSpecialEffectTarget([[units\human\sorceress\sorceress.mdx]], bloodmageSorc, "head")
+-- both hero and sorceress turn green
 SetUnitColor(bloodmageSorc, PLAYER_COLOR_GREEN)
+-- change only sorceress to purple
 BlzSetSpecialEffectColorByPlayer(sorceressBm, Player(3))
 ```
 
@@ -22362,7 +22366,7 @@ native BlzSetSpecialEffectPosition                 takes effect whichEffect, rea
 /**
 Sets the effect's absolute Z position (height). This native *appears* to be *mostly* identical to `BlzSetSpecialEffectZ`.
 
-@bug Crashes the game if used on an attached effect (tested 1.36.2):
+@bug Crashes the game if used on an attached effect (tested 1.36.2 SD):
 ```{.lua}
 bloodmage = CreateUnit(Player(0), FourCC("Hblm"), 0,0, 0)
 birdEffect = AddSpellEffectTargetById(FourCC("hsor"), EFFECT_TYPE_MISSILE, bloodmage, "head")
@@ -24062,7 +24066,7 @@ Resets the effect's 3-dimensional scaling matrix. Default is {1,1,1}.
 
 @note Does not reset the general scale `BlzSetSpecialEffectScale`.
 
-@bug Resets yaw, roll, pitch too.
+@bug (Tested 1.36.2) Resets yaw, roll, pitch too.
 @note See: `BlzSetSpecialEffectMatrixScale`, `BlzSetSpecialEffectOrientation`,
 `BlzSetSpecialEffectYaw`, `BlzSetSpecialEffectRoll`, `BlzSetSpecialEffectPitch`
 @patch 1.31.0.11889
