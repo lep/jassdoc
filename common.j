@@ -20370,6 +20370,9 @@ Sets the file as the current music for the map, and plays it.
 
 @param musicName The path to the music file.
 
+@bug Only ever plays the first song played with this native. Trying to play
+another song just plays the first one again. Tested on patch 1.36.2.2130.
+
 @note Music is on its own channel and can be toggled on and off within the Warcraft III game menu.
 @bug This native may cause a short lag spike as soon as the music starts. To circumvent this lag, stop the current music without fadeout before calling this function (`call StopMusic(false)`).
 @note Should work with mp3s, midis and wavs.
@@ -20381,6 +20384,9 @@ native PlayMusic                    takes string musicName returns nothing
 
 /**
 Sets the file as the current music for the map, and plays it.
+
+@bug Only ever plays the first song played with this native. Trying to play
+another song just plays the first one again. Tested on patch 1.36.2.2130.
 
 @param musicName The path to the music file.
 @param frommsecs At what offset the music starts. In milliseconds.
