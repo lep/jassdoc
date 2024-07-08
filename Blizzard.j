@@ -4752,6 +4752,9 @@ endfunction
 
 
 //===========================================================================
+/**
+@patch 1.32.1.14604
+*/
 function SetThematicMusicVolumeBJ takes real volumePercent returns nothing
     call SetThematicMusicVolume(PercentToInt(volumePercent, 127))
 endfunction
