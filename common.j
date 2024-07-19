@@ -22469,7 +22469,8 @@ Sets the effect's absolute X map position (east-west).
 @note Does not apply if the effect is attached to some model's attachment point (remains 0.0).
 
 @bug In 1.29-?? it will set the X coordinate, but reset the Y and Z to where it was spawned in.
-@bug In 1.36.2 it will set the X coordinate, but reset only Z to zero.
+@bug In 1.36.2 it will set the X coordinate,
+but reset Z to the height (relative to terrain and walkable elevating doodads) the effect was spawned at.
 @note See: `BlzSetSpecialEffectPosition`
 
 @patch 1.29.2.9231
@@ -22483,7 +22484,8 @@ Sets the effect's absolute Y map position (north/south).
 @note Does not apply if the effect is attached to some model's attachment point (remains 0.0).
 
 @bug In 1.29-?? it will set the Y coordinate, but reset the X and Z to where it was spawned in.
-@bug In 1.36.2 it will set the Y coordinate, but reset only Z to zero.
+@bug In 1.36.2 it will set the Y coordinate,
+but reset Z to the height (relative to terrain and walkable elevating doodads) the effect was spawned at.
 @note See: `BlzSetSpecialEffectPosition`
 
 @patch 1.29.2.9231
@@ -22519,7 +22521,8 @@ Sets the effect's absolute X and Y map position based on given location.
 
 @note Does not apply if the effect is attached to some model's attachment point (remains 0.0).
 
-@bug In 1.36.2 (and earlier?) it will set the X and Y coordinates, but reset Z to zero.
+@bug In 1.36.2 (and earlier?) it will set the X and Y coordinates,
+but reset Z to the height (relative to terrain and walkable elevating doodads) the effect was spawned at.
 @note See: `BlzSetSpecialEffectPosition`
 @patch 1.29.2.9231
 
