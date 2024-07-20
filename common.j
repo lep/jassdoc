@@ -192,10 +192,18 @@ type gameevent          extends     eventid
 */
 type playerevent        extends     eventid
 /**
+Events of this type are similar to `unitevent` but are limited to the specified player.
+
+This can be useful to reduce the amount of triggered events, because the "condition" check
+will be handled within the game rather than your code.
+
+@note See: `TriggerRegisterPlayerUnitEvent`,
+or BJ `TriggerRegisterAnyUnitEventBJ`, `TriggerRegisterPlayerUnitEventSimple` to register for this event.
 @patch 1.00
 */
 type playerunitevent    extends     eventid
 /**
+@note See: `TriggerRegisterUnitEvent`, `TriggerRegisterFilterUnitEvent` to register for this event.
 @patch 1.00
 */
 type unitevent          extends     eventid
@@ -1663,7 +1671,7 @@ OrderId("humanbuild") == 851995 -- this order opens the human build menu
 ```
 
 
-@note See: `OrderId2String`
+@note See: `OrderId2String`, `GetIssuedOrderId`
 
 @bug Do not use this in a global initialisation (map init) as it returns 0 there.
 @bug 
@@ -1678,6 +1686,8 @@ constant native OrderId                     takes string  orderIdString     retu
 /**
 Returns the human-readable unit order string.
 
+Not all order IDs have a corresponding text string. Returns empty string in this case.
+
 **Example (Lua):**
 
 ```{.lua}
@@ -1685,7 +1695,7 @@ OrderId2String(851995) --> returns "humanbuild" (opens human build menu)
 ```
 
 
-@note See: `OrderId`
+@note See: `OrderId`, `GetIssuedOrderId`
 
 @pure 
 @bug Always returns null after the game is loaded/if the game is a replay.
@@ -3432,18 +3442,22 @@ will return `""`. Use `TriggerRegisterPlayerChatEvent` instead.
 */
     constant playerunitevent EVENT_PLAYER_UNIT_RESEARCH_FINISH          = ConvertPlayerUnitEvent(37)
 /**
+See description of `EVENT_UNIT_ISSUED_ORDER`.
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_ORDER             = ConvertPlayerUnitEvent(38)
 /**
+See description of `EVENT_UNIT_ISSUED_POINT_ORDER`.
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER       = ConvertPlayerUnitEvent(39)
 /**
+See description of `EVENT_UNIT_ISSUED_TARGET_ORDER`.
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER      = ConvertPlayerUnitEvent(40)
 /**
+@note A generic, "non-player" version of this does not exist.
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER        = ConvertPlayerUnitEvent(40)    // for compat
@@ -3625,14 +3639,34 @@ Use `GetSummonedUnit` for the new unit and `GetSummoningUnit` for the spell cast
     constant unitevent EVENT_UNIT_RESEARCH_FINISH                       = ConvertUnitEvent(74)
                                                                         
 /**
+A generic order for a unit, without an explicit target.
+
+Examples:
+- Hold aka "holdposition", 851993
+- Stop current action aka "stop", 851972
+
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_ISSUED_ORDER                          = ConvertUnitEvent(75)
 /**
+An order for a unit, with a map position (terrain) as the target.
+
+Examples:
+- Move somewhere on the map aka "move", 851986
+- Right click to move somewhre aka "smart", 851971
+- Patrol aka "patrol", 851990
+
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_ISSUED_POINT_ORDER                    = ConvertUnitEvent(76)
 /**
+An order for a unit, with a widget (unit, destructable etc.) as the target.
+
+Examples:
+- Move to teleport through a waygate aka "move", 851986 or "smart", 851971
+- Attack aka "attack", 851983
+- Patrol when clicked on another unit aka "patrol", 851990
+
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_ISSUED_TARGET_ORDER                   = ConvertUnitEvent(77)
@@ -12154,9 +12188,19 @@ constant native BlzGetStackingItemTargetPreviousCharges takes nothing returns in
 // EVENT_PLAYER_UNIT_ISSUED_ORDER
 
 /**
+Returns the unit that received the order.
 
+Same as `GetTriggerUnit` in this context.
+
+@note When you order a group of units, each of them receives the order at the same time.
+The event will run once per registered unit in the group.
+
+@note See: `GetIssuedOrderId`, `GetOrderPointX`, `GetOrderTargetUnit`
 
 @event EVENT_PLAYER_UNIT_ISSUED_ORDER
+@event EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER
+@event EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER
+@event EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
 
 @event EVENT_UNIT_ISSUED_ORDER
 @event EVENT_UNIT_ISSUED_POINT_ORDER
@@ -12167,9 +12211,85 @@ constant native BlzGetStackingItemTargetPreviousCharges takes nothing returns in
 constant native GetOrderedUnit takes nothing returns unit
 
 /**
+Returns the numeric order ID constant of the currently issued unit order.
 
+@note See: `OrderId`, `OrderId2String`, `GetOrderedUnit`, `GetOrderPointX`, `GetOrderTargetUnit`.
+@note See the list of all known order IDs <https://www.hiveworkshop.com/threads/list-of-order-ids.350361/>.
+
+@note **Example (Lua):**
+
+The code below creates a unit and registers all issued order events for debugging.
+
+```{.lua}
+function printOrderInfo()
+	local orderId = GetIssuedOrderId()
+	local unitName = GetUnitName(GetTriggerUnit())
+	assert(GetOrderedUnit() == GetTriggerUnit(), "GetOrderedUnit() expected to equal GetTriggerUnit()")
+	print("For: ".. unitName ..", Order: ".. orderId ..", oName:".. OrderId2String(orderId))
+end
+function printIssuedOrder()
+	print("Next is an Issued Order:")
+	printOrderInfo()
+end
+function printIssuedTargetOrder()
+	local widget = GetOrderTarget()
+	local destr = GetOrderTargetDestructable()
+	local item = GetOrderTargetItem()
+	local unit = GetOrderTargetUnit()
+	
+	local targetIsText = "Target is a '"
+	if widget then targetIsText = targetIsText .. "widget," end
+	if destr then targetIsText = targetIsText .. "destructable" end
+	if item then targetIsText = targetIsText .. "item" end
+	if unit then targetIsText = targetIsText .. "unit" end
+	targetIsText = targetIsText .."'"
+	
+	print("Next is an Issued Target Order:")
+	print(targetIsText)
+	printOrderInfo()
+end
+function printIssuedPointOrder()
+	local loc = GetOrderPointLoc()
+	local x,y,z = GetLocationX(loc),GetLocationY(loc),GetLocationZ(loc)
+	-- GetOrderPointX(),GetOrderPointY() is identical to location
+	print("Next is an Issued Point Order at:", x,y,z)
+	printOrderInfo()
+end
+function printIssuedAllOrder()
+	printIssuedOrder()
+	printIssuedTargetOrder()
+	printIssuedPointOrder()
+	printOrderInfo()
+end
+
+footman = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
+peasant = CreateUnit(Player(0), FourCC("hpea"), 30, 0, 90)
+item = CreateItem(FourCC("war2"), 64, 128)
+destructable = CreateDestructable(FourCC("LTbr"), 96, 0, 180, 1, 0)
+
+whichIssuedOrderTrig = CreateTrigger()
+whichIssuedTargetOrderTrig = CreateTrigger()
+whichIssuedPointOrderTrig = CreateTrigger()
+
+whichOrderTrigEvent = 
+	TriggerRegisterUnitEvent(whichIssuedOrderTrig,       footman, EVENT_UNIT_ISSUED_ORDER)
+	
+whichIssuedTargetOrderTrigEvent =
+	TriggerRegisterUnitEvent(whichIssuedTargetOrderTrig, footman, EVENT_UNIT_ISSUED_TARGET_ORDER)
+	
+whichIssuedPointOrderTrigEvent =
+	TriggerRegisterUnitEvent(whichIssuedPointOrderTrig,  footman, EVENT_UNIT_ISSUED_POINT_ORDER)
+
+
+whichIssuedOrderTrigAct = TriggerAddAction(      whichIssuedOrderTrig,       printIssuedOrder)
+whichIssuedTargetOrderTrigAct = TriggerAddAction(whichIssuedTargetOrderTrig, printIssuedTargetOrder)
+whichIssuedPointOrderTrigAct = TriggerAddAction( whichIssuedPointOrderTrig,  printIssuedPointOrder)
+```
 
 @event EVENT_PLAYER_UNIT_ISSUED_ORDER
+@event EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER
+@event EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER
+@event EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
 
 @event EVENT_UNIT_ISSUED_ORDER
 @event EVENT_UNIT_ISSUED_POINT_ORDER
@@ -12182,8 +12302,12 @@ constant native GetIssuedOrderId takes nothing returns integer
 // EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER
 
 /**
+Returns X map coordinate for the current point order (anywhere on map terrain).
 
+Returns 0 for other event types. If you want to get the position of the target for a target order,
+get that target object first.
 
+@note See: `GetOrderPointLoc` if you need the height (Z coordinate).
 @event EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER
 @event EVENT_UNIT_ISSUED_POINT_ORDER
 
@@ -12192,8 +12316,12 @@ constant native GetIssuedOrderId takes nothing returns integer
 constant native GetOrderPointX takes nothing returns real
 
 /**
+Returns Y map coordinate for the current point order (anywhere on map terrain).
 
+Returns 0 for other event types. If you want to get the position of the target for a target order,
+get that target object first.
 
+@note See: `GetOrderPointLoc` if you need the height (Z coordinate).
 @event EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER
 @event EVENT_UNIT_ISSUED_POINT_ORDER
 
@@ -12202,8 +12330,17 @@ constant native GetOrderPointX takes nothing returns real
 constant native GetOrderPointY takes nothing returns real
 
 /**
+Returns a new location for the current point order (anywhere on map terrain).
 
+This location contains (x, y, z) map coordinates,
+correctly reporting terrain and walkable destructable elevation.
 
+Returns 0,0,0 for other event types. If you want to get the position of the target for a target order,
+get that target object first.
+
+@note Returned location must be removed with `RemoveLocation` to avoid leaks.
+
+@note See: `GetOrderPointX`, `GetOrderPointY` if you want to avoid object creation or don't need the Z coordinate.
 @event EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER
 @event EVENT_UNIT_ISSUED_POINT_ORDER
 
@@ -12214,8 +12351,9 @@ constant native GetOrderPointLoc takes nothing returns location
 // EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
 
 /**
+Returns the target widget (unit/item/destructable) for the current order.
 
-
+@note See: `GetOrderTargetDestructable`, `GetOrderTargetItem`, `GetOrderTargetUnit`.
 @event EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
 @event EVENT_UNIT_ISSUED_TARGET_ORDER
 
@@ -12224,8 +12362,9 @@ constant native GetOrderPointLoc takes nothing returns location
 constant native GetOrderTarget              takes nothing returns widget
 
 /**
+Returns the targetted destructable, if the order target is a destructable.
 
-
+@note See: `GetOrderTarget`, `GetOrderTargetItem`, `GetOrderTargetUnit`.
 @event EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
 @event EVENT_UNIT_ISSUED_TARGET_ORDER
 
@@ -12234,8 +12373,9 @@ constant native GetOrderTarget              takes nothing returns widget
 constant native GetOrderTargetDestructable  takes nothing returns destructable
 
 /**
+Returns the targetted item, if the order target is an item.
 
-
+@note See: `GetOrderTarget`, `GetOrderTargetDestructable`, `GetOrderTargetUnit`.
 @event EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
 @event EVENT_UNIT_ISSUED_TARGET_ORDER
 
@@ -12244,8 +12384,9 @@ constant native GetOrderTargetDestructable  takes nothing returns destructable
 constant native GetOrderTargetItem          takes nothing returns item
 
 /**
+Returns the targetted unit, if the order target is a unit.
 
-
+@note See: `GetOrderTarget`, `GetOrderTargetDestructable`, `GetOrderTargetItem`.
 @event EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
 @event EVENT_UNIT_ISSUED_TARGET_ORDER
 
@@ -12320,6 +12461,7 @@ constant native GetSpellAbility             takes nothing returns ability
 
 /**
 
+@note Check if the Location returns the correct Z height like in `GetOrderPointLoc`.
 
 @event EVENT_UNIT_SPELL_CHANNEL
 @event EVENT_UNIT_SPELL_CAST
@@ -12927,17 +13069,49 @@ constant native GetTriggerWidget takes nothing returns widget
 // Destructable Object API
 // Facing arguments are specified in degrees
 /**
+Creates a destructable on the ground at the coordinates ( x, y ).
+
+**Example:**
+```
+call CreateDestructable('LTbr', 96, 0, 180, 1, 0) // Jass
+```
+```{.lua}
+myDestr = CreateDestructable(FourCC("LTbr"), 96, 0, 180, 1, 0) // Lua
+```
+
+@param objectid The rawcode of the destructable to be created.
+@param x The map x-coordinate of the destructable.
+@param y The map y-coordinate of the destructable.
+@param face Rotation, destructable facing in degrees.
+
+* 0   = East
+* 90  = North
+* 180 = West
+* 270 = South
+* -90 = South (wraps around)
+
+@param scale The X-Y-Z scaling value of the destructable.
+@param variation The integer representing the variation of the destructable to be created.
+
 @patch 1.00
 */
 native          CreateDestructable          takes integer objectid, real x, real y, real face, real scale, integer variation returns destructable
 
 /**
-Creates a destructable at the coordinates ( x , y ).
+Creates an elevated destructable at the coordinates ( x, y, z ).
 
 @param objectid The rawcode of the destructable to be created.
-@param x The x-coordinate of the destructable.
-@param y The y-coordinate of the destructable.
-@param face The facing of the destructable.
+@param x The map x-coordinate of the destructable.
+@param y The map y-coordinate of the destructable.
+@param y The map z-coordinate of the destructable.
+@param face Rotation, destructable facing in degrees.
+
+* 0   = East
+* 90  = North
+* 180 = West
+* 270 = South
+* -90 = South (wraps around)
+
 @param scale The X-Y-Z scaling value of the destructable.
 @param variation The integer representing the variation of the destructable to be created.
 
@@ -12955,7 +13129,14 @@ be created in memory but will not visibly appear.
 @param objectid The rawcode of the destructable to be created.
 @param x The x-coordinate of the destructable.
 @param y The y-coordinate of the destructable.
-@param face The facing of the destructable.
+@param face Rotation, destructable facing in degrees.
+
+* 0   = East
+* 90  = North
+* 180 = West
+* 270 = South
+* -90 = South (wraps around)
+
 @param scale The X-Y-Z scaling value of the destructable.
 @param variation The integer representing the variation of the destructable to be created.
 
@@ -12965,7 +13146,7 @@ be created in memory but will not visibly appear.
 native          CreateDeadDestructable      takes integer objectid, real x, real y, real face, real scale, integer variation returns destructable
 
 /**
-Creates the dead version of a destructable at the coordinates ( x , y , z ).
+Creates the dead version of a destructable elevating at the coordinates ( x , y , z ).
 If the destructable has no animations, it will show the destructable's default
 form. If it has a death animation, but no decay animation, then the object will
 be created in memory but will not visibly appear.
@@ -12974,7 +13155,14 @@ be created in memory but will not visibly appear.
 @param x The x-coordinate of the destructable.
 @param y The y-coordinate of the destructable.
 @param z The z-coordinate of the destructable.
-@param face The facing of the destructable.
+@param face Rotation, destructable facing in degrees.
+
+* 0   = East
+* 90  = North
+* 180 = West
+* 270 = South
+* -90 = South (wraps around)
+
 @param scale The X-Y-Z scaling value of the destructable.
 @param variation The integer representing the variation of the destructable to be created.
 
@@ -13074,10 +13262,17 @@ native          GetDestructableOccluderHeight takes destructable d returns real
 native          SetDestructableOccluderHeight takes destructable d, real height returns nothing
 
 /**
+Returns localized name for destructable.
 
+**Example (Lua)**:
+
+```{.lua}
+d = CreateDestructable(FourCC("LTbr"), 96, 0, 180, 1, 0)
+print(GetDestructableName(d)) --> "Barrel"
+```
 
 @async 
-
+@note See: `GetUnitName`, `GetItemName`, `GetObjectName`.
 @patch 1.13
 */
 native          GetDestructableName         takes destructable d returns string
@@ -13097,6 +13292,15 @@ constant native GetTriggerDestructable takes nothing returns destructable
 
 /**
 Creates an item object at the specified coordinates ( x , y ).
+
+**Example:**
+
+```
+call CreateItem('war2', 256, 384) // Jass
+```
+```{.lua}
+myItem = CreateItem(FourCC("war2"), 256, 384) -- Lua
+```
 
 @param itemid The rawcode of the item.
 
@@ -13216,10 +13420,17 @@ native          GetItemType     takes item whichItem returns itemtype
 native          SetItemDropID   takes item whichItem, integer unitId returns nothing
 
 /**
+Returns localized name of the item.
 
+**Example (Lua):**
+
+```{.lua}
+item = CreateItem(FourCC("war2"), 64, 128)
+print(GetItemName(item)) --> Боевые барабаны орков (Orcs' battledrums)
+```
 
 @async 
-
+@note See: `GetUnitName`, `GetDestructableName`, `GetObjectName`.
 @patch 1.13
 */
 constant native GetItemName     takes item whichItem returns string
@@ -14576,6 +14787,7 @@ print(GetUnitName(u)) --> "Footman"
 @param whichUnit Target unit.
 
 @async 
+@note See: `GetHeroProperName`, `GetDestructableName`, `GetItemName`, `GetObjectName`.
 
 @patch 1.00
 */
@@ -15199,22 +15411,90 @@ Returns the amount of available gold in a gold mine. The amount can be negative,
 native GetResourceAmount            takes unit whichUnit returns integer
 
 /**
+Returns the X map coordinate of the teleporter's target.
+
+If the unit does not have the 'Awrp' ability, returns 0.
+
+@note See: `WaygateGetDestinationY`, `WaygateSetDestination`.
 @patch 1.00
 */
 native WaygateGetDestinationX       takes unit waygate returns real
+
+
 /**
+Returns the Y map coordinate of the teleporter's target.
+
+If the unit does not have the 'Awrp' ability, returns 0.
+
+@note See: `WaygateGetDestinationX`, `WaygateSetDestination`.
 @patch 1.00
 */
 native WaygateGetDestinationY       takes unit waygate returns real
+
+
 /**
+Sets the teleporter's target.
+
+The unit must have the 'Awrp' ability, otherwise does nothing.
+
+@note If this ability is temporarily removed from the unit and readded later,
+the unit remembers the previously set target position.
+
+@note The values are rounded to fit on a 64-based grid, offset by 32. (exact formula?)
+
+Examples:
+- \-65 => -96
+- \-64 => -32
+- \-63 => -32
+- \-1 => -32
+- 0 and -0 => 32
+- 63 => 32
+- 64 => 96
+
+@note See: `WaygateIsActive`, `WaygateActivate`, `WaygateGetDestinationX`, `WaygateGetDestinationY`.
+
+@param x map coordinate
+@param y map coordinate
+
 @patch 1.00
 */
 native WaygateSetDestination        takes unit waygate, real x, real y returns nothing
+
+
 /**
+Activates the unit's ability to act as a teleporter. It must have the 'Awrp' ability.
+
+**Example (Lua):**
+
+```{.lua}
+portal = CreateUnit(Player(GetPlayerNeutralPassive()), FourCC("hprt"), 256, 0, 90)
+UnitAddAbility(portal, FourCC('Awrp'))
+WaygateSetDestination(portal, -800, 32)
+WaygateActivate(portal, true)
+print("Waygate is Active: ", WaygateIsActive(portal))
+print("Waygate target is: ", WaygateGetDestinationX(portal), WaygateGetDestinationY(portal))
+```
+
+@note The unit should be *walkable* because units, that want to teleport, must reach its center.
+@note Removing the 'Awrp' ability also deactivates the waygate. Use `WaygateActivate` again.
+@note The advantage of using waygates compared to triggered regions is that units
+can use waygates for pathing around the map. In contrast, triggered "teleport regions" are not
+recognized by the game for pathfinding.
+
+@note See: `WaygateIsActive`, `WaygateSetDestination`, `UnitAddAbility`.
 @patch 1.00
 */
 native WaygateActivate              takes unit waygate, boolean activate returns nothing
+
+
 /**
+Returns true if the waygate is enabled and working.
+
+For this it must have the 'Awrp' ability and have been activated using `WaygateActivate`.
+
+@note Removing the 'Awrp' ability also deactivates the waygate. Use `WaygateActivate` again.
+
+@note See: `WaygateActivate`, `WaygateSetDestination`.
 @patch 1.00
 */
 native WaygateIsActive              takes unit waygate returns boolean
@@ -18335,7 +18615,13 @@ invisible trackable provide the empty string `""`.
 
 @param y The x-coordinate where the trackable should be created.
 
-@param facing The facing of the trackable.
+@param facing Rotation, trackable facing in degrees.
+
+* 0   = East
+* 90  = North
+* 180 = West
+* 270 = South
+* -90 = South (wraps around)
 
 
 @note To create a trackable with a non-zero z-coordinate you can use the same
