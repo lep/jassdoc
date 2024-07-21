@@ -3642,6 +3642,7 @@ Use `GetSummonedUnit` for the new unit and `GetSummoningUnit` for the spell cast
 A generic order for a unit, without an explicit target.
 
 Examples:
+
 - Hold aka "holdposition", 851993
 - Stop current action aka "stop", 851972
 
@@ -3652,6 +3653,7 @@ Examples:
 An order for a unit, with a map position (terrain) as the target.
 
 Examples:
+
 - Move somewhere on the map aka "move", 851986
 - Right click to move somewhre aka "smart", 851971
 - Patrol aka "patrol", 851990
@@ -3663,6 +3665,7 @@ Examples:
 An order for a unit, with a widget (unit, destructable etc.) as the target.
 
 Examples:
+
 - Move to teleport through a waygate aka "move", 851986 or "smart", 851971
 - Attack aka "attack", 851983
 - Patrol when clicked on another unit aka "patrol", 851990
@@ -13106,7 +13109,7 @@ Creates a destructable on the ground at the coordinates ( x, y ).
 call CreateDestructable('LTbr', 96, 0, 180, 1, 0) // Jass
 ```
 ```{.lua}
-myDestr = CreateDestructable(FourCC("LTbr"), 96, 0, 180, 1, 0) // Lua
+myDestr = CreateDestructable(FourCC("LTbr"), 96, 0, 180, 1, 0) -- Lua
 ```
 
 @param objectid The rawcode of the destructable to be created.
@@ -13133,7 +13136,7 @@ Creates an elevated destructable at the coordinates ( x, y, z ).
 @param objectid The rawcode of the destructable to be created.
 @param x The map x-coordinate of the destructable.
 @param y The map y-coordinate of the destructable.
-@param y The map z-coordinate of the destructable.
+@param z The map z-coordinate of the destructable.
 @param face Rotation, destructable facing in degrees.
 
 * 0   = East
@@ -15473,6 +15476,7 @@ the unit remembers the previously set target position.
 @note The values are rounded to fit on a 64-based grid, offset by 32. (exact formula?)
 
 Examples:
+
 - \-65 => -96
 - \-64 => -32
 - \-63 => -32
