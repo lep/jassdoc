@@ -10956,6 +10956,15 @@ Removes a single cell from a region.
 native RegionClearCellAtLoc    takes region whichRegion, location whichLocation returns nothing
 
 /**
+Creates a new location that points to the (x,y) map coordinates.
+
+The current Z-height at that map position can be retrieved with `GetLocationZ`.
+
+To avoid leaks, use `RemoveLocation` to destroy the location.
+
+@note Some natives may return a location with (0,0,0) which is different from
+a manually created location at (x=0,y=0) that will return the map's height via `GetLocationZ`. 
+
 @patch 1.00
 */
 native Location                 takes real x, real y returns location
@@ -10980,9 +10989,35 @@ native GetLocationY             takes location whichLocation returns real
 //  If you attempt to use it in a synchronous manner, it may cause a desync.
 
 /**
-Returns the current terrain height at a location.
+Returns the current surface elevation at the (x,y) location.
 
-@note Reasons for returning different values might be terrain-deformations
+This includes the terrain (hills or water) and walkable destructables.
+
+@note Destructables spawn in the dead state/animation by default.
+
+If the "dead" animation has a different height than its "alive" animation, then the following code
+will return the Z position as if the destructable was dead:
+
+```{.lua}
+x, y = 0, -1024
+platform = CreateDestructable(FourCC("DTrx"), x, y, 180, 1, 0)
+loc = Location(x, y)
+print("IsDead, HP: ", IsDestructableDeadBJ(platform), GetDestructableLife(platform))
+
+print(GetLocationX(loc), GetLocationY(loc), GetLocationZ(loc)) -- "dead" state height
+
+--KillDestructable(platform)
+--RemoveDestructable(platform); RemoveLocation(loc)
+```
+
+And if you rerun the last print line in the next tick like after `TriggerSleepAction` then
+you will see its expected lower height because it's now in the "alive" animation.
+
+`SetDestructableAnimation(platform, "stand")` does not work as a workaround.
+
+HD Model: "Stand 1", "Death 1" & SD Model: "Stand", "Death".
+
+@note Reasons for returning different values between players might be terrain-deformations
 caused by spells/abilities and different graphic settings.
 Other reasons could be the rendering state of destructables and visibility differences.
 
@@ -12332,13 +12367,13 @@ constant native GetOrderPointY takes nothing returns real
 /**
 Returns a new location for the current point order (anywhere on map terrain).
 
-This location contains (x, y, z) map coordinates,
-correctly reporting terrain and walkable destructable elevation.
-
 Returns 0,0,0 for other event types. If you want to get the position of the target for a target order,
 get that target object first.
 
 @note Returned location must be removed with `RemoveLocation` to avoid leaks.
+
+@note When this is used improperly, it returns a location with (0,0,0) which is different from
+a manually created location at (x=0,y=0) that will return the map's height via `GetLocationZ`. 
 
 @note See: `GetOrderPointX`, `GetOrderPointY` if you want to avoid object creation or don't need the Z coordinate.
 @event EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER
@@ -12461,7 +12496,7 @@ constant native GetSpellAbility             takes nothing returns ability
 
 /**
 
-@note Check if the Location returns the correct Z height like in `GetOrderPointLoc`.
+@note (TODO) See location-specific notes in `GetOrderPointLoc`.
 
 @event EVENT_UNIT_SPELL_CHANNEL
 @event EVENT_UNIT_SPELL_CAST
