@@ -12286,14 +12286,9 @@ end
 function printIssuedPointOrder()
 	local loc = GetOrderPointLoc()
 	local x,y,z = GetLocationX(loc),GetLocationY(loc),GetLocationZ(loc)
-	-- GetOrderPointX(),GetOrderPointY() is identical to location
+	-- GetOrderPointX(),GetOrderPointY() is identical to location...
+	-- if you only wanted (x,y)
 	print("Next is an Issued Point Order at:", x,y,z)
-	printOrderInfo()
-end
-function printIssuedAllOrder()
-	printIssuedOrder()
-	printIssuedTargetOrder()
-	printIssuedPointOrder()
 	printOrderInfo()
 end
 
