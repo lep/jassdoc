@@ -12271,14 +12271,14 @@ function printIssuedTargetOrder()
 	local destr = GetOrderTargetDestructable()
 	local item = GetOrderTargetItem()
 	local unit = GetOrderTargetUnit()
-	
+
 	local targetIsText = "Target is a '"
 	if widget then targetIsText = targetIsText .. "widget," end
 	if destr then targetIsText = targetIsText .. "destructable" end
 	if item then targetIsText = targetIsText .. "item" end
 	if unit then targetIsText = targetIsText .. "unit" end
 	targetIsText = targetIsText .."'"
-	
+
 	print("Next is an Issued Target Order:")
 	print(targetIsText)
 	printOrderInfo()
@@ -12308,10 +12308,10 @@ whichIssuedPointOrderTrig = CreateTrigger()
 
 whichOrderTrigEvent = 
 	TriggerRegisterUnitEvent(whichIssuedOrderTrig,       footman, EVENT_UNIT_ISSUED_ORDER)
-	
+
 whichIssuedTargetOrderTrigEvent =
 	TriggerRegisterUnitEvent(whichIssuedTargetOrderTrig, footman, EVENT_UNIT_ISSUED_TARGET_ORDER)
-	
+
 whichIssuedPointOrderTrigEvent =
 	TriggerRegisterUnitEvent(whichIssuedPointOrderTrig,  footman, EVENT_UNIT_ISSUED_POINT_ORDER)
 
