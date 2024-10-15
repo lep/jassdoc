@@ -9,7 +9,7 @@ This goal of this project is not to document *every* function and native but
 to add helpful comments for unclear functions, give notes about buggy functions
 and inform about other misc information.
 
-Currently there's [Jassbot - a JASS API search engine](https://lep.duckdns.org/app/jassbot/) running that uses this as a database.
+Currently there's [Jassbot - a JASS API search engine](https://lep.duckdns.org/jassbot/) running that uses this as a database.
 
 # How to add documentation
 
