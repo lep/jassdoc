@@ -49,6 +49,12 @@
             installPhase = ''
               install -Dt $out jass.db
             '';
+
+	    checkPhase = ''
+		make check
+	    '';
+
+	    doCheck = true;
           };
 
         in {
