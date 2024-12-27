@@ -10194,6 +10194,10 @@ native TimerGetRemaining    takes timer whichTimer returns real
 */
 native TimerGetTimeout      takes timer whichTimer returns real
 /**
+
+
+@bug The timer's periodic flag will be cleared.
+
 @patch 1.00
 */
 native PauseTimer           takes timer whichTimer returns nothing
