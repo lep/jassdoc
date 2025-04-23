@@ -50,13 +50,14 @@ sub fetch_annotations {
     order by _rowid_
   ");
   $stm->execute($name);
+
+  my @annotations;
   while ( my $row = $stm->fetchrow_hashref() ) {
-    $ret .= join "", "@", $row->{anname}, " ", $row->{value};
-    $ret .= "\n";
+    my $annotation = join "", "@", $row->{anname}, " ", $row->{value};
+    push @annotations, $annotation;
   }
 
-  return $ret;
-  
+  return @annotations;
 }
 
 sub fetch_comment {
@@ -68,12 +69,12 @@ sub fetch_comment {
   ");
   $stm->execute($name);
 
-  if(my @row = $stm->fetchrow_array() ){
-    return $row[0];
-  }
+  my @rows;
 
-  return "";
-  
+  if(my @row = $stm->fetchrow_array() ){
+    push @rows, $row[0] if $row[0];
+  }
+  return @rows;
 }
 
 sub fetch_params {
@@ -99,14 +100,14 @@ sub fetch_params {
   ");
   $stm->execute($name, $name);
 
+  my @params;
+
   while( my $row = $stm->fetchrow_hashref() ){
     next if !$row->{param} or !$row->{value};
-    $ret .= join " ", '@param', $row->{param}, $row->{value};
-    $ret .= "\n";
+    my $param = join " ", '@param', $row->{param}, $row->{value}; 
+    push @params, $param;
   }
-
-  return $ret;
-  
+  return @params;
 }
 
 sub has_docstring {
@@ -125,23 +126,24 @@ sub has_docstring {
 
 sub recreate_docstring {
   return "" unless has_docstring ($1);
-  return join "\n",
-    "",
-    "/**",
-    fetch_comment ($1),
-    fetch_annotations ($1),
-    "*/\n";
+
+  my @lines;
+  push @lines, fetch_comment($1);
+  push @lines, fetch_annotations($1);
+  return join("\n", "\n/**", join("\n\n", @lines), "*/\n");
 }
 
 sub recreate_docstring_function {
   return "" unless has_docstring $1;
-  return join "\n",
-    "",
-    "/**",
-    fetch_comment ($1),
-    fetch_params ($1),
-    fetch_annotations ($1),
-    "*/\n";
+  my $comment = fetch_comment $1;
+  my $params = fetch_params $1;
+  my $annotations = fetch_annotations $1;
+
+  my @lines;
+  push @lines, fetch_comment($1);
+  push @lines, fetch_params($1);
+  push @lines, fetch_annotations($1);
+  return join("\n", "\n/**", join("\n\n", @lines), "*/\n");
 }
 
 

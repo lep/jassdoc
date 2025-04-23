@@ -202,7 +202,7 @@ main = do
         hPutStrLn stderr file
         handle <- openFile file ReadMode
         hSetBinaryMode handle True
-        x <- parse programm file <$> hGetContents handle -- closes handle
+        x <- parse programm file . (++"\n") <$> hGetContents handle -- closes handle
         let toplevel = case x of
                 Right (Programm y) -> y
                 Left err -> error $ errorBundlePretty err
