@@ -8,10 +8,10 @@ use strict;
 use warnings;
 
 use open ':std', ':utf8', ':encoding(UTF-8)';
+
 # no feature qw(indirect);
 use feature qw(signatures);
 no warnings qw(experimental::signatures);
-
 
 use Getopt::Long;
 use Pod::Usage;
@@ -20,68 +20,71 @@ use DBI;
 use DBD::SQLite::Constants ':dbd_sqlite_string_mode';
 
 my $dbPath = "jass.db";
-my $help = 0;
+my $help   = 0;
 
 GetOptions(
-  "db=s" => \$dbPath,
-  help => \$help
-) or die pod2usage(-verbose => 1);
+    "db=s" => \$dbPath,
+    help   => \$help
+) or die pod2usage( -verbose => 1 );
 
-pod2usage(-verbose => 2) if $help;
-pod2usage(-verbose => 1) unless @ARGV;
+pod2usage( -verbose => 2 ) if $help;
+pod2usage( -verbose => 1 ) unless @ARGV;
 
 my @files = @ARGV;
 
 my $dbh = DBI->connect("DBI:SQLite:$dbPath");
 $dbh->{sqlite_string_mode} = DBD_SQLITE_STRING_MODE_UNICODE_FALLBACK;
 
-my @auto_generated_annotations = ("source-file", "return-type", "common-ai",
-  "source-code", "start-line", "end-line", "type" );
-my $auto_generated_annotations = join ", ", map { "'$_'" } @auto_generated_annotations;
+my @auto_generated_annotations = (
+    "source-file", "return-type", "common-ai", "source-code",
+    "start-line",  "end-line",    "type"
+);
+my $auto_generated_annotations = join ", ",
+  map { "'$_'" } @auto_generated_annotations;
 
 sub fetch_annotations {
-  my $name = shift;
-  my $ret = "";
-  
-  my $stm = $dbh->prepare("
+    my $name = shift;
+    my $ret  = "";
+
+    my $stm = $dbh->prepare( "
     select anname, value
     from annotations 
     where fnname = ? and anname not in ('comment', $auto_generated_annotations)
     order by _rowid_
-  ");
-  $stm->execute($name);
+  " );
+    $stm->execute($name);
 
-  my @annotations;
-  while ( my $row = $stm->fetchrow_hashref() ) {
-    my $annotation = join "", "@", $row->{anname}, " ", $row->{value};
-    push @annotations, $annotation;
-  }
+    my @annotations;
+    while ( my $row = $stm->fetchrow_hashref() ) {
+        my $annotation = join "", "@", $row->{anname}, " ", $row->{value};
+        push @annotations, $annotation;
+    }
 
-  return @annotations;
+    return @annotations;
 }
 
 sub fetch_comment {
-  my $name = shift;
-  my $stm = $dbh->prepare("
+    my $name = shift;
+    my $stm  = $dbh->prepare( "
     select value
     from annotations
     where fnname = ? and anname = 'comment'
-  ");
-  $stm->execute($name);
+  " );
+    $stm->execute($name);
 
-  my @rows;
+    my @rows;
 
-  if(my @row = $stm->fetchrow_array() ){
-    push @rows, $row[0] if $row[0];
-  }
-  return @rows;
+    if ( my @row = $stm->fetchrow_array() ) {
+        push @rows, $row[0] if $row[0];
+    }
+    return @rows;
 }
 
 sub fetch_params {
-  my $name = shift;
-  my $ret = "";
+    my $name = shift;
+    my $ret  = "";
 
-  my $stm = $dbh->prepare("
+    my $stm = $dbh->prepare( "
     select doc.param, doc.value
     from (
       select value, param
@@ -97,111 +100,130 @@ sub fetch_params {
     ) as doc on doc.param = ord.param
 
     order by ord.value
-  ");
-  $stm->execute($name, $name);
+  " );
+    $stm->execute( $name, $name );
 
-  my @params;
+    my @params;
 
-  while( my $row = $stm->fetchrow_hashref() ){
-    next if !$row->{param} or !$row->{value};
-    my $param = join " ", '@param', $row->{param}, $row->{value}; 
-    push @params, $param;
-  }
-  return @params;
+    while ( my $row = $stm->fetchrow_hashref() ) {
+        next if !$row->{param} or !$row->{value};
+        my $param = join " ", '@param', $row->{param}, $row->{value};
+        push @params, $param;
+    }
+    return @params;
 }
 
 sub has_docstring {
-  my $name = shift;
-  my $stm = $dbh->prepare("
+    my $name = shift;
+    my $stm  = $dbh->prepare( "
     select 1
     from annotations
     where fnname == ?
       and anname not in ($auto_generated_annotations)
     limit 1
-  ");
-  $stm->execute( $name );
-  my @row = $stm->fetchrow_array();
-  return scalar @row;
+  " );
+    $stm->execute($name);
+    my @row = $stm->fetchrow_array();
+    return scalar @row;
 }
 
 sub recreate_docstring {
-  return "" unless has_docstring ($1);
+    return "" unless has_docstring($1);
 
-  my @lines;
-  push @lines, fetch_comment($1);
-  push @lines, fetch_annotations($1);
-  return join("\n", "\n/**", join("\n\n", @lines), "*/\n");
+    my @lines;
+    push @lines, fetch_comment($1);
+    push @lines, fetch_annotations($1);
+    return join( "\n", "\n/**", join( "\n\n", @lines ), "*/\n" );
 }
 
 sub recreate_docstring_function {
-  return "" unless has_docstring $1;
-  my $comment = fetch_comment $1;
-  my $params = fetch_params $1;
-  my $annotations = fetch_annotations $1;
+    return "" unless has_docstring $1;
+    my $comment     = fetch_comment $1;
+    my $params      = fetch_params $1;
+    my $annotations = fetch_annotations $1;
 
-  my @lines;
-  push @lines, fetch_comment($1);
-  push @lines, fetch_params($1);
-  push @lines, fetch_annotations($1);
-  return join("\n", "\n/**", join("\n\n", @lines), "*/\n");
+    my @lines;
+    push @lines, fetch_comment($1);
+    push @lines, fetch_params($1);
+    push @lines, fetch_annotations($1);
+    return join( "\n", "\n/**", join( "\n\n", @lines ), "*/\n" );
 }
-
-
 
 for my $file (@files) {
-  say STDERR "Annotating $file";
-  open my $fh, "<", $file or die "Failed to open '$file'";
-  open my $out, ">", "$file-out" or die "Failed to open '$file-out'";
+    say STDERR "Annotating $file";
+    open my $fh,  "<", $file       or die "Failed to open '$file'";
+    open my $out, ">", "$file-out" or die "Failed to open '$file-out'";
 
-  # TODO: create a "jass-parser" package since this is just copied from mksrc
-  my @state = ("nothing");
-  my $src = "";
-  my $fn = "";
-  my $start = 0;
-  my $end = 0;
+    # TODO: create a "jass-parser" package since this is just copied from mksrc
+    my @state = ("nothing");
+    my $src   = "";
+    my $fn    = "";
+    my $start = 0;
+    my $end   = 0;
 
-  while (my $line = <$fh>) {
-    if( $state[0] eq "nothing" && $line =~ /^(?:constant\s+)?function\s+(\w+)/){
-      unshift @state, "function";
-      print $out recreate_docstring_function $1;
-    }elsif($state[0] eq "function" && $line =~ /^endfunction/){
-      shift @state;
-    }elsif( $state[0] eq "nothing" && $line =~ /^(?:constant\s+)?native\s+(\w+)/ ){
-      print $out recreate_docstring_function $1;
-    }elsif ( $state[0] eq "function"){
-      # do nothing
-    }elsif ( $state[0] eq "nothing" && $line =~ m/^\s*globals/){
-      unshift @state, "globals";
-    }elsif( $line =~ m/^\/\*\*/ ){
-      unshift @state, "docstring";
-      # dont print
-      next;
-    }elsif( $state[0] eq "docstring" && $line =~ m(^\*/) ){
-      shift @state;
-      # dont print
-      next;
-    }elsif( $state[0] eq "docstring" ){
-      # dont print
-      next;
-    }elsif( $state[0] eq "globals" && $line =~ m/^\s*endglobals/){
-      shift @state;
-    }elsif ( $state[0] eq "globals" ){
-    	my $name;
-      if( $line =~ /^\s*constant\s+\w+\s+(\w+)\s*=.+$/ ){
-        $name = $1;
-      }elsif( $line =~ /^\s*\w+\s+array\s+(\w+)/ ){
-        $name = $1;
-      }elsif( $line =~ /^\s*\w+\s+(\w+)/ ){
-        $name = $1;
-      }
-      print $out recreate_docstring $name if $name;
-    }elsif( $state[0] eq "nothing" && $line =~ m/^type\s+(\w+)\s+extends\s+.+/){
-      print $out recreate_docstring $1;
+    while ( my $line = <$fh> ) {
+        if (   $state[0] eq "nothing"
+            && $line =~ /^(?:constant\s+)?function\s+(\w+)/ )
+        {
+            unshift @state, "function";
+            print $out recreate_docstring_function $1;
+        }
+        elsif ( $state[0] eq "function" && $line =~ /^endfunction/ ) {
+            shift @state;
+        }
+        elsif ($state[0] eq "nothing"
+            && $line =~ /^(?:constant\s+)?native\s+(\w+)/ )
+        {
+            print $out recreate_docstring_function $1;
+        }
+        elsif ( $state[0] eq "function" ) {
+
+            # do nothing
+        }
+        elsif ( $state[0] eq "nothing" && $line =~ m/^\s*globals/ ) {
+            unshift @state, "globals";
+        }
+        elsif ( $line =~ m/^\/\*\*/ ) {
+            unshift @state, "docstring";
+
+            # dont print
+            next;
+        }
+        elsif ( $state[0] eq "docstring" && $line =~ m(^\*/) ) {
+            shift @state;
+
+            # dont print
+            next;
+        }
+        elsif ( $state[0] eq "docstring" ) {
+
+            # dont print
+            next;
+        }
+        elsif ( $state[0] eq "globals" && $line =~ m/^\s*endglobals/ ) {
+            shift @state;
+        }
+        elsif ( $state[0] eq "globals" ) {
+            my $name;
+            if ( $line =~ /^\s*constant\s+\w+\s+(\w+)\s*=.+$/ ) {
+                $name = $1;
+            }
+            elsif ( $line =~ /^\s*\w+\s+array\s+(\w+)/ ) {
+                $name = $1;
+            }
+            elsif ( $line =~ /^\s*\w+\s+(\w+)/ ) {
+                $name = $1;
+            }
+            print $out recreate_docstring $name if $name;
+        }
+        elsif ($state[0] eq "nothing"
+            && $line =~ m/^type\s+(\w+)\s+extends\s+.+/ )
+        {
+            print $out recreate_docstring $1;
+        }
+        print $out $line;
     }
-    print $out $line;
-  }
 }
-
 
 __END__
 
