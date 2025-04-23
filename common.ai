@@ -1,26 +1,32 @@
 //==================================================================================================
 //  $Id: common.ai,v 1.68 2003/05/12 02:34:18 bfitch Exp $
 //==================================================================================================
+
 /**
 @patch 1.00
 */
 native DebugS               takes string str                            returns nothing
+
 /**
 @patch 1.00
 */
 native DebugFI              takes string str, integer val               returns nothing
+
 /**
 @patch 1.00
 */
 native DebugUnitID          takes string str, integer val               returns nothing
+
 /**
 @patch 1.00
 */
 native DisplayText          takes integer p, string str                 returns nothing
+
 /**
 @patch 1.00
 */
 native DisplayTextI         takes integer p, string str, integer val    returns nothing
+
 /**
 @patch 1.07
 */
@@ -28,13 +34,16 @@ native DisplayTextII        takes integer p, string str, integer v1, integer v2 
 
 /**
 Does nothing in release build v1.33.
+
 @patch 1.07
 */
 native DisplayTextIII       takes integer p, string str, integer v1, integer v2, integer v3 returns nothing
+
 /**
 @patch 1.00
 */
 native DoAiScriptDebug      takes nothing                               returns boolean
+
 
 /**
 @patch 1.00
@@ -44,6 +53,7 @@ native GetAiPlayer          takes nothing                               returns 
 /**
 Returns the ID of the leveled up hero, so it can be used in the heroes levels code function
 (probably `SetHeroLevels`).
+
 @patch 1.00
 */
 native GetHeroId            takes nothing                               returns integer
@@ -51,6 +61,7 @@ native GetHeroId            takes nothing                               returns 
 /**
 Returns the level of the leveling hero so it can be used in the heroes levels code function
 (probably `SetHeroLevels`).
+
 @patch 1.00
 */
 native GetHeroLevelAI       takes nothing                               returns integer
@@ -62,6 +73,7 @@ Counts units of type for the AI player whether it is trained/built or in progres
 @param unitid Rawcode to specify unit type to count
 
 @note See: `GetUnitCountDone`
+
 @patch 1.00
 */
 native GetUnitCount         takes integer unitid                        returns integer
@@ -69,7 +81,8 @@ native GetUnitCount         takes integer unitid                        returns 
 /**
 Returns how many `unit`s of a certain type a `player` has.
 
-@commonai
+@commonai 
+
 @patch 1.00
 */
 native GetPlayerUnitTypeCount takes player p, integer unitid            returns integer
@@ -80,6 +93,7 @@ Counts units of type for the AI player that is trained/built or in progress.
 @param unitid Rawcode to specify unit type to count
 
 @note See: `GetUnitCount`
+
 @patch 1.00
 */
 native GetUnitCountDone     takes integer unitid                        returns integer
@@ -88,10 +102,13 @@ native GetUnitCountDone     takes integer unitid                        returns 
 Counts buildings of specific type for the AI player in a town.
 
 @param id Rawcode to specify unit type to count
+
 @param tn ID of target town
+
 @param dn If true: only count finished units
 
 @note This will return 0 for `tn = -1` and will only work for buildings; normal units will always return 0.
+
 @patch 1.00
 */
 native GetTownUnitCount     takes integer id, integer tn, boolean dn    returns integer
@@ -103,7 +120,8 @@ Gets the gold cost of a unit-type.
 
 @bug Crashes the game for hero ids (tested in a normal script).
 
-@commonai
+@commonai 
+
 @patch 1.00
 */
 native GetUnitGoldCost      takes integer unitid                        returns integer
@@ -115,7 +133,8 @@ Gets the lumber cost of a unit-type.
 
 @bug Crashes the game for hero ids (tested in a normal script).
 
-@commonai
+@commonai 
+
 @patch 1.00
 */
 native GetUnitWoodCost      takes integer unitid                        returns integer
@@ -125,48 +144,59 @@ Gets the building time of a unit-type.
 
 @param unitid Rawcode to specify unit type
 
-@commonai
+@commonai 
+
 @patch 1.07
 */
 native GetUnitBuildTime     takes integer unitid                        returns integer
+
 
 /**
 @patch 1.00
 */
 native GetMinesOwned        takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
 native GetGoldOwned         takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
 native TownWithMine         takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
 native TownHasMine          takes integer townid                        returns boolean
+
 /**
 @patch 1.00
 */
 native TownHasHall          takes integer townid                        returns boolean
 
+
 /**
 @patch 1.00
 */
 native GetUpgradeLevel      takes integer id                            returns integer
+
 /**
 @patch 1.00
 */
 native GetUpgradeGoldCost   takes integer id                            returns integer
+
 /**
 @patch 1.00
 */
 native GetUpgradeWoodCost   takes integer id                            returns integer
+
 /**
 @patch 1.00
 */
 native GetNextExpansion     takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
@@ -175,35 +205,46 @@ native GetMegaTarget        takes nothing                               returns 
 /**
 Get the last constructed or pre-placed building for the given player.
 
+@param p Target player
+
 @note For pre-placed buildings the order is the number that you find in the WE.
 Example: Blacksmith_0023, Workshop_0065, then the last building will be Workshop_0065,
 but if a peasent in game constructed an altar then that will be the last building.
 
 @note Player `p` can be a human controlled player not necessarily computer.
 
-@param p Target player
+@commonai 
 
-@commonai
 @patch 1.00
 */
 native GetBuilding          takes player p                              returns unit
+
 /**
 @patch 1.00
 */
 native GetEnemyPower        takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
 native SetAllianceTarget    takes unit id                               returns nothing
+
 /**
 @patch 1.00
 */
 native GetAllianceTarget    takes nothing                               returns unit
 
+
 /**
 Trains unit(s) of specified type at target town.
 
 Returns true if the unit can be trained successfully, i.e. the AI player has all the resources and requirments of the training as well as the building that will start the training.
+
+@param qty Select this many buildings (e.g. Barracks) to train units in
+
+@param id Rawcode to specify unit type to train
+
+@param town Index of town
 
 @note The parameter `qty` will only work if the player has `qty` amount of buildings that can train this unit.
 
@@ -211,16 +252,15 @@ However this action *will not queue*.
 Example: the player has 1 barracks and `qty = 3` then 1 unit will be trained.
 Lets suppose that another barracks is built then 2 units will be trained.
 
-@param qty Select this many buildings (e.g. Barracks) to train units in
-@param id Rawcode to specify unit type to train
-@param town Index of town
 @patch 1.00
 */
 native SetProduce           takes integer qty, integer id, integer town returns boolean
+
 /**
 @patch 1.00
 */
 native Unsummon             takes unit unitid                           returns nothing
+
 /**
 @patch 1.00
 */
@@ -232,15 +272,18 @@ Starts an upgrade for the AI player.
 Return true if the upgrade has started successfully, i.e. the AI player has all the resources and requirments of the upgrade as well as the building that will start the upgrade.
 
 @param id Rawcode of the upgrade to be researched
+
 @patch 1.00
 */
 native SetUpgrade           takes integer id                            returns boolean
 
 /**
 This native will set how the heroes of the AI player will allocate their skill points as defined in the code function `func`.
+
 @patch 1.00
 */
 native SetHeroLevels        takes code func                             returns nothing
+
 /**
 @patch 1.00
 */
@@ -248,26 +291,32 @@ native SetNewHeroes         takes boolean state                         returns 
 
 /**
 Purchace a zeppelin, must be called when a hero is standing near a goblin lab.
+
 @patch 1.00
 */
 native PurchaseZeppelin     takes nothing                               returns nothing
 
+
 /**
 Merges two units, who can be merged, like the hippogryph rider. The use of this native gives better response if called from inside a loop.
+
 @patch 1.00
 */
 native MergeUnits           takes integer qty, integer a, integer b, integer make returns boolean
 
 /**
 This native have the same effect on units like the obsidian statue when converted to destroyer. The use of this native gives better response if called from inside a loop.
+
 @patch 1.07
 */
 native ConvertUnits         takes integer qty, integer id               returns boolean
+
 
 /**
 @patch 1.00
 */
 native SetCampaignAI        takes nothing                               returns nothing
+
 /**
 @patch 1.00
 */
@@ -279,6 +328,7 @@ Toggle the feature of making the AI target heroes.
 Gives priority to target heroes if enabled.
 
 @param state True: turned on. False: turned off.
+
 @patch 1.00
 */
 native SetTargetHeroes      takes boolean state                         returns nothing
@@ -287,13 +337,16 @@ native SetTargetHeroes      takes boolean state                         returns 
 Toggle the feature of making peons to repair damaged structures and mechanical units.
 
 @param state True: turned on. False: turned off.
+
 @patch 1.00
 */
 native SetPeonsRepair       takes boolean state                         returns nothing
+
 /**
 @patch 1.07
 */
 native SetRandomPaths       takes boolean state                         returns nothing
+
 /**
 @patch 1.07
 */
@@ -303,6 +356,7 @@ native SetDefendPlayer      takes boolean state                         returns 
 Toggle the feature of making the heroes flee when they are seriously damaged.
 
 @param state True: turned on. False: turned off.
+
 @patch 1.00
 */
 native SetHeroesFlee        takes boolean state                         returns nothing
@@ -311,13 +365,16 @@ native SetHeroesFlee        takes boolean state                         returns 
 Toggle the feature of making the heroes buy items.
 
 @param state True: turned on. False: turned off.
+
 @patch 1.07
 */
 native SetHeroesBuyItems    takes boolean state                         returns nothing
+
 /**
 @patch 1.00
 */
 native SetWatchMegaTargets  takes boolean state                         returns nothing
+
 /**
 @patch 1.00
 */
@@ -327,6 +384,7 @@ native SetIgnoreInjured     takes boolean state                         returns 
 Toggle the feature of making the heroes take items.
 
 @param state True: turned on. False: turned off.
+
 @patch 1.00
 */
 native SetHeroesTakeItems   takes boolean state                         returns nothing
@@ -335,6 +393,7 @@ native SetHeroesTakeItems   takes boolean state                         returns 
 Toggle the feature of making the units flee when they are seriously damaged.
 
 @param state True: turned on. False: turned off.
+
 @patch 1.00
 */
 native SetUnitsFlee         takes boolean state                         returns nothing
@@ -343,19 +402,23 @@ native SetUnitsFlee         takes boolean state                         returns 
 Toggle the feature of making the entire group flee when it is seriously damaged.
 
 @param state True: turned on. False: turned off.
+
 @patch 1.00
 */
 native SetGroupsFlee        takes boolean state                         returns nothing
 
 /**
 If true the gold harvested by the AI player peons will be 1 per period, instead of 10 per period for false state.
+
 @patch 1.00
 */
 native SetSlowChopping      takes boolean state                         returns nothing
+
 /**
 @patch 1.00
 */
 native SetCaptainChanges    takes boolean allow                         returns nothing
+
 /**
 @patch 1.00
 */
@@ -365,21 +428,26 @@ native SetSmartArtillery    takes boolean state                         returns 
 Replaces every AI's player pre-placed units or units that are assigned to a guard posts N times when it is killed.
 
 @note This only works for units not classified as workers and will not work for peon-type (Peasants, Peons, Acolytes, Wisps and Mur'gul Slaves) even if not classified as workers.
+
 @patch 1.00
 */
 native SetReplacementCount  takes integer qty                           returns nothing
+
 /**
 @patch 1.00
 */
 native GroupTimedLife       takes boolean allow                         returns nothing
+
 /**
 @patch 1.00
 */
 native RemoveInjuries       takes nothing                               returns nothing
+
 /**
 @patch 1.00
 */
 native RemoveSiege          takes nothing                               returns nothing
+
 
 /**
 @patch 1.00
@@ -391,6 +459,7 @@ Creates a group from already-existing units that can be assigned to attack a spe
 When `AttackMoveXY` is called then this group will attack the specified target.
 
 @note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+
 @patch 1.00
 */
 native AddAssault           takes integer qty, integer id               returns boolean
@@ -399,9 +468,11 @@ native AddAssault           takes integer qty, integer id               returns 
 Creates a group from already-existing units to guard the AI player town. The units assemble around the most important building in the town with no specific formation.
 
 @note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+
 @patch 1.00
 */
 native AddDefenders         takes integer qty, integer id               returns boolean
+
 
 /**
 Searches for the nearest creep camp, the parameters defines the power of the camp.
@@ -413,17 +484,23 @@ The power is the total level of all creeps. For example, lets say `min = 3` and 
 3. 1 creep of level 2 and 1 creep of level 1
 
 @param min Minimal power allowed
+
 @param max Maximum power allowed
+
 @param flyers_ok Filter by flying units in the camp. Set to true to allow flying and false for ground units only.
+
 @patch 1.00
 */
 native GetCreepCamp         takes integer min, integer max, boolean flyers_ok returns unit
 
+
 /**
 Must be called before using the native `GetEnemyBase` in order to make it work.
+
 @patch 1.00
 */
 native StartGetEnemyBase    takes nothing                               returns nothing
+
 /**
 @patch 1.00
 */
@@ -431,6 +508,7 @@ native WaitGetEnemyBase     takes nothing                               returns 
 
 /**
 Returns the enemy base unit. Must call `StartGetEnemyBase` first or it will return null.
+
 @patch 1.00
 */
 native GetEnemyBase         takes nothing                               returns unit
@@ -439,12 +517,14 @@ native GetEnemyBase         takes nothing                               returns 
 Returns an enemy unit near the expansion location, whether this unit is a creep or belong to an enemy to the AI player.
 
 @note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+
 @patch 1.00
 */
 native GetExpansionFoe      takes nothing                               returns unit
 
 /**
 Returns the enemy expansion base.
+
 @patch 1.00
 */
 native GetEnemyExpansion    takes nothing                               returns unit
@@ -453,6 +533,7 @@ native GetEnemyExpansion    takes nothing                               returns 
 Returns the integer X coordinate of the AI player expansion location whether it is constructed or not.
 
 @note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+
 @patch 1.00
 */
 native GetExpansionX        takes nothing                               returns integer
@@ -461,13 +542,16 @@ native GetExpansionX        takes nothing                               returns 
 Returns the integer Y coordinate of the AI player expansion location whether it is constructed or not.
 
 @note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+
 @patch 1.00
 */
 native GetExpansionY        takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
 native SetStagePoint        takes real x, real y                        returns nothing
+
 /**
 @patch 1.00
 */
@@ -481,21 +565,26 @@ If `AddAssault` is not called before this one, then the units (**if any**) will 
 If they didn't find any enemy on their route or it if is destroyed and at least one unit survived in the group.
 
 @note Important: in order to use this native, the native `CreateCaptains` must be called first or the game will crash. It is already added in the function CampaignAI found at `common.ai`
+
 @patch 1.00
 */
 native AttackMoveXY         takes integer x, integer y                  returns nothing
+
 /**
 @patch 1.07
 */
 native LoadZepWave          takes integer x, integer y                  returns nothing
+
 /**
 @patch 1.00
 */
 native SuicidePlayer        takes player id, boolean check_full         returns boolean
+
 /**
 @patch 1.07
 */
 native SuicidePlayerUnits   takes player id, boolean check_full         returns boolean
+
 /**
 @patch 1.00
 */
@@ -503,9 +592,11 @@ native CaptainInCombat      takes boolean attack_captain                returns 
 
 /**
 Returns either true if the parameter target is guarded by a tower, the tower can be a custom-made unit but there are rules when checking if the target is guarded or not; the target has to be in the proximity of a base and a tower belonging to the AI player, however acquisition range and attack range of the tower doesn't affect whether the target is defended or not.
+
 @patch 1.00
 */
 native IsTowered            takes unit target                           returns boolean
+
 
 /**
 @patch 1.00
@@ -516,7 +607,9 @@ native ClearHarvestAI       takes nothing                               returns 
 Order peons to harvest a gold mine in the town.
 
 @param town Index ID of town
+
 @param peons Amount of peons
+
 @patch 1.00
 */
 native HarvestGold          takes integer town, integer peons           returns nothing
@@ -525,7 +618,9 @@ native HarvestGold          takes integer town, integer peons           returns 
 Order peons to harvest trees near the town.
 
 @param town Index ID of town
+
 @param peons Amount of peons
+
 @patch 1.00
 */
 native HarvestWood          takes integer town, integer peons           returns nothing
@@ -534,6 +629,7 @@ native HarvestWood          takes integer town, integer peons           returns 
 Returns the peon unit that will start a new expansion for the AI player, however, it will return null if there is no gold mine (excluding a gold mine the AI player already own) found on the map.
 
 @note Important: in order to use this native, `CreateCaptains` must be called first or the game will crash. It is already called in the function `CampaignAI` found in `common.ai`.
+
 @patch 1.00
 */
 native GetExpansionPeon     takes nothing                               returns unit
@@ -541,6 +637,7 @@ native GetExpansionPeon     takes nothing                               returns 
 
 /**
 This native must be called at the start of an AI file so that the following native `FillGuardPosts` works, if not then `FillGuardPosts` will continuosly train units if it is nested in a loop and also will cause the trained units not to go to replace the killed ones, instead they will remain near the building that trained them.
+
 @patch 1.00
 */
 native StopGathering        takes nothing                               returns nothing
@@ -556,6 +653,7 @@ replaced N times. Note that if this is used on heroes they will be trained only 
 go to the post.
 
 @param id Rawcode for unit type of the guard unit
+
 @patch 1.00
 */
 native AddGuardPost         takes integer id, real x, real y            returns nothing
@@ -565,6 +663,7 @@ When called, a unit of the same type of the last killed unit that belong to the 
 
 @note This native is instant and will not queue, so in order to keep replacing killed units,
 it has to be nested inside a continuous loop.
+
 @patch 1.00
 */
 native FillGuardPosts       takes nothing                               returns nothing
@@ -573,81 +672,101 @@ native FillGuardPosts       takes nothing                               returns 
 Order every unit that is assigned a guard post to return to it. This native works for pre-placed units and newly trained ones. 
 
 @note There is a small tolerance of 82.006 radius offset to the guard post.
+
 @patch 1.00
 */
 native ReturnGuardPosts     takes nothing                               returns nothing
+
 /**
 @patch 1.00
 */
 native CreateCaptains       takes nothing                               returns nothing
+
 /**
 @patch 1.00
 */
 native SetCaptainHome       takes integer which, real x, real y         returns nothing
+
 /**
 @patch 1.07
 */
 native ResetCaptainLocs     takes nothing                               returns nothing
+
 /**
 @patch 1.00
 */
 native ShiftTownSpot        takes real x, real y                        returns nothing
+
 /**
 @patch 1.00
 */
 native TeleportCaptain      takes real x, real y                        returns nothing
+
 /**
 @patch 1.00
 */
 native ClearCaptainTargets  takes nothing                               returns nothing
+
 /**
 @patch 1.00
 */
 native CaptainAttack        takes real x, real y                        returns nothing
+
 /**
 @patch 1.00
 */
 native CaptainVsUnits       takes player id                             returns nothing
+
 /**
 @patch 1.00
 */
 native CaptainVsPlayer      takes player id                             returns nothing
+
 /**
 @patch 1.00
 */
 native CaptainGoHome        takes nothing                               returns nothing
+
 /**
 @patch 1.00
 */
 native CaptainIsHome        takes nothing                               returns boolean
+
 /**
 @patch 1.00
 */
 native CaptainIsFull        takes nothing                               returns boolean
+
 /**
 @patch 1.00
 */
 native CaptainIsEmpty       takes nothing                               returns boolean
+
 /**
 @patch 1.00
 */
 native CaptainGroupSize     takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
 native CaptainReadiness     takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
 native CaptainRetreating    takes nothing                               returns boolean
+
 /**
 @patch 1.00
 */
 native CaptainReadinessHP   takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
 native CaptainReadinessMa   takes nothing                               returns integer
+
 /**
 @patch 1.00
 */
@@ -656,22 +775,27 @@ native CaptainAtGoal        takes nothing                               returns 
 /**
 Returns `true` if any units of any level on the map have the classification of creep.
 
-@commonai
+@commonai 
+
 @patch 1.00
 */
 native CreepsOnMap          takes nothing                               returns boolean
+
 /**
 @patch 1.00
 */
 native SuicideUnit          takes integer count, integer unitid         returns nothing
+
 /**
 @patch 1.00
 */
 native SuicideUnitEx        takes integer ct, integer uid, integer pid  returns nothing
+
 /**
 @patch 1.00
 */
 native StartThread          takes code func                             returns nothing
+
 /**
 @patch 1.00
 */
@@ -680,7 +804,8 @@ native Sleep                takes real seconds                          returns 
 /**
 Checks if a unit is alive.
 
-@commonai
+@commonai 
+
 @patch 1.00
 */
 native UnitAlive            takes unit id                               returns boolean
@@ -688,10 +813,12 @@ native UnitAlive            takes unit id                               returns 
 /**
 Checks if a unit is invisible.
 
-@commonai
+@commonai 
+
 @patch 1.07
 */
 native UnitInvis            takes unit id                               returns boolean
+
 /**
 @patch 1.00
 */
@@ -699,17 +826,21 @@ native IgnoredUnits         takes integer unitid                        returns 
 
 /**
 Although the name suggests otherwise, this returns true if any unit (building or unit) for the AI player is being attacked.
+
 @patch 1.07
 */
 native TownThreatened       takes nothing                               returns boolean
+
 /**
 @patch 1.07
 */
 native DisablePathing       takes nothing                               returns nothing
+
 /**
 @patch 1.07
 */
 native SetAmphibious        takes nothing                               returns nothing
+
 
 /**
 Every time you use the trigger action 'Send AI Command' the command queue counter 
@@ -719,6 +850,7 @@ trigger action; so sending an AI signal with (1,0) is like (5,0) everyone will i
 counter by 1.
 
 @note See: `GetLastCommand`, `GetLastData`, `PopLastCommand`
+
 @patch 1.00
 */
 native CommandsWaiting      takes nothing                               returns integer
@@ -728,6 +860,7 @@ When an AI signal is sent via triggers, this returns the command value.
 So sending an AI signal of (5,3) returns 5.
 
 @note See: `CommandsWaiting` `GetLastData`, `PopLastCommand`
+
 @patch 1.00
 */
 native GetLastCommand       takes nothing                               returns integer
@@ -737,6 +870,7 @@ The same as `GetLastCommand` but it returns the data value.
 For the previous example, it will return 3.
 
 @note See: `CommandsWaiting`, `GetLastCommand`, `PopLastCommand`
+
 @patch 1.00
 */
 native GetLastData          takes nothing                               returns integer
@@ -745,9 +879,11 @@ native GetLastData          takes nothing                               returns 
 Reduce the command queue counter by 1. It's important to pop last command because many sleep function in `common.ai` exits when the value of the command counter not equal to zero.
 
 @note See: `CommandsWaiting`, `GetLastCommand`, `GetLastData`
+
 @patch 1.00
 */
 native PopLastCommand       takes nothing                               returns nothing
+
 /**
 @patch 1.03
 */
@@ -763,369 +899,457 @@ globals
     //--------------------------------------------------------------------
 
     // human heroes
+
 /**
 @patch 1.00
 */
     constant integer ARCHMAGE           = 'Hamg'
+
 /**
 @patch 1.00
 */
     constant integer PALADIN            = 'Hpal'
+
 /**
 @patch 1.00
 */
     constant integer MTN_KING           = 'Hmkg'
+
 /**
 @patch 1.07
 */
     constant integer BLOOD_MAGE         = 'Hblm'
 
     // human hero abilities
+
 /**
 @patch 1.00
 */
     constant integer AVATAR             = 'AHav'
+
 /**
 @patch 1.00
 */
     constant integer BASH               = 'AHbh'
+
 /**
 @patch 1.00
 */
     constant integer THUNDER_BOLT       = 'AHtb'
+
 /**
 @patch 1.00
 */
     constant integer THUNDER_CLAP       = 'AHtc'
 
+
 /**
 @patch 1.00
 */
     constant integer DEVOTION_AURA      = 'AHad'
+
 /**
 @patch 1.00
 */
     constant integer DIVINE_SHIELD      = 'AHds'
+
 /**
 @patch 1.00
 */
     constant integer HOLY_BOLT          = 'AHhb'
+
 /**
 @patch 1.00
 */
     constant integer RESURRECTION       = 'AHre'
 
+
 /**
 @patch 1.00
 */
     constant integer BLIZZARD           = 'AHbz'
+
 /**
 @patch 1.00
 */
     constant integer BRILLIANCE_AURA    = 'AHab'
+
 /**
 @patch 1.00
 */
     constant integer MASS_TELEPORT      = 'AHmt'
+
 /**
 @patch 1.00
 */
     constant integer WATER_ELEMENTAL    = 'AHwe'
 
+
 /**
 @patch 1.07
 */
     constant integer BANISH             = 'AHbn'
+
 /**
 @patch 1.07
 */
     constant integer FLAME_STRIKE       = 'AHfs'
+
 /**
 @patch 1.07
 */
     constant integer SUMMON_PHOENIX     = 'AHpx'
+
 /**
 @patch 1.07
 */
     constant integer SIPHON_MANA        = 'AHdr'
 
     // special human heroes
+
 /**
 @patch 1.00
 */
     constant integer JAINA              = 'Hjai'
+
 /**
 @patch 1.00
 */
     constant integer MURADIN            = 'Hmbr'
+
 /**
 @patch 1.07
 */
     constant integer GARITHOS           = 'Hlgr'
+
 /**
 @patch 1.07
 */
     constant integer KAEL               = 'Hkal'
 
     // human units
+
 /**
 @patch 1.00
 */
     constant integer COPTER             = 'hgyr'
+
 /**
 @patch 1.07
 */
     constant integer GYRO               =  COPTER
+
 /**
 @patch 1.00
 */
     constant integer ELEMENTAL          = 'hwat'
+
 /**
 @patch 1.00
 */
     constant integer FOOTMAN            = 'hfoo'
+
 /**
 @patch 1.00
 */
     constant integer FOOTMEN            =  FOOTMAN
+
 /**
 @patch 1.00
 */
     constant integer GRYPHON            = 'hgry'
+
 /**
 @patch 1.00
 */
     constant integer KNIGHT             = 'hkni'
+
 /**
 @patch 1.00
 */
     constant integer MORTAR             = 'hmtm'
+
 /**
 @patch 1.00
 */
     constant integer PEASANT            = 'hpea'
+
 /**
 @patch 1.00
 */
     constant integer PRIEST             = 'hmpr'
+
 /**
 @patch 1.00
 */
     constant integer RIFLEMAN           = 'hrif'
+
 /**
 @patch 1.00
 */
     constant integer RIFLEMEN           =  RIFLEMAN
+
 /**
 @patch 1.00
 */
     constant integer SORCERESS          = 'hsor'
+
 /**
 @patch 1.00
 */
     constant integer TANK               = 'hmtt'
+
 /**
 @patch 1.07
 */
     constant integer STEAM_TANK         =  TANK
+
 /**
 @patch 1.07
 */
     constant integer ROCKET_TANK        = 'hrtt'
+
 /**
 @patch 1.00
 */
     constant integer MILITIA            = 'hmil'
+
 /**
 @patch 1.07
 */
     constant integer SPELL_BREAKER      = 'hspt'
+
 /**
 @patch 1.07
 */
     constant integer HUMAN_DRAGON_HAWK  = 'hdhw'
 
     // special human units
+
 /**
 @patch 1.07
 */
     constant integer BLOOD_PRIEST       = 'hbep'
+
 /**
 @patch 1.07
 */
     constant integer BLOOD_SORCERESS    = 'hbes'
+
 /**
 @patch 1.07
 */
     constant integer BLOOD_PEASANT      = 'nhew'
 
     // human buildings
+
 /**
 @patch 1.00
 */
     constant integer AVIARY             = 'hgra'
+
 /**
 @patch 1.00
 */
     constant integer BARRACKS           = 'hbar'
+
 /**
 @patch 1.00
 */
     constant integer BLACKSMITH         = 'hbla'
+
 /**
 @patch 1.00
 */
     constant integer CANNON_TOWER       = 'hctw'
+
 /**
 @patch 1.00
 */
     constant integer CASTLE             = 'hcas'
+
 /**
 @patch 1.00
 */
     constant integer CHURCH             = 'htws'
+
 /**
 @patch 1.00
 */
     constant integer MAGE_TOWER         =  CHURCH
+
 /**
 @patch 1.00
 */
     constant integer GUARD_TOWER        = 'hgtw'
+
 /**
 @patch 1.00
 */
     constant integer HOUSE              = 'hhou'
+
 /**
 @patch 1.00
 */
     constant integer HUMAN_ALTAR        = 'halt'
+
 /**
 @patch 1.00
 */
     constant integer KEEP               = 'hkee'
+
 /**
 @patch 1.00
 */
     constant integer LUMBER_MILL        = 'hlum'
+
 /**
 @patch 1.00
 */
     constant integer SANCTUM            = 'hars'
+
 /**
 @patch 1.07
 */
     constant integer ARCANE_SANCTUM     =  SANCTUM
+
 /**
 @patch 1.00
 */
     constant integer TOWN_HALL          = 'htow'
+
 /**
 @patch 1.00
 */
     constant integer WATCH_TOWER        = 'hwtw'
+
 /**
 @patch 1.00
 */
     constant integer WORKSHOP           = 'harm'
+
 /**
 @patch 1.07
 */
     constant integer ARCANE_VAULT       = 'hvlt'
+
 /**
 @patch 1.07
 */
     constant integer ARCANE_TOWER       = 'hatw'
 
     // human upgrades
+
 /**
 @patch 1.00
 */
     constant integer UPG_MELEE          = 'Rhme'
+
 /**
 @patch 1.00
 */
     constant integer UPG_RANGED         = 'Rhra'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ARTILLERY      = 'Rhaa'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ARMOR          = 'Rhar'
+
 /**
 @patch 1.00
 */
     constant integer UPG_GOLD           = 'Rhmi'
+
 /**
 @patch 1.00
 */
     constant integer UPG_MASONRY        = 'Rhac'
+
 /**
 @patch 1.00
 */
     constant integer UPG_SIGHT          = 'Rhss'
+
 /**
 @patch 1.00
 */
     constant integer UPG_DEFEND         = 'Rhde'
+
 /**
 @patch 1.00
 */
     constant integer UPG_BREEDING       = 'Rhan'
+
 /**
 @patch 1.00
 */
     constant integer UPG_PRAYING        = 'Rhpt'
+
 /**
 @patch 1.00
 */
     constant integer UPG_SORCERY        = 'Rhst'
+
 /**
 @patch 1.00
 */
     constant integer UPG_LEATHER        = 'Rhla'
+
 /**
 @patch 1.00
 */
     constant integer UPG_GUN_RANGE      = 'Rhri'
+
 /**
 @patch 1.00
 */
     constant integer UPG_WOOD           = 'Rhlh'
+
 /**
 @patch 1.00
 */
     constant integer UPG_SENTINEL       = 'Rhse'
+
 /**
 @patch 1.00
 */
     constant integer UPG_SCATTER        = 'Rhsr'
+
 /**
 @patch 1.00
 */
     constant integer UPG_BOMBS          = 'Rhgb'
+
 /**
 @patch 1.00
 */
     constant integer UPG_HAMMERS        = 'Rhhb'
+
 /**
 @patch 1.07
 */
     constant integer UPG_CONT_MAGIC     = 'Rhss'
+
 /**
 @patch 1.07
 */
     constant integer UPG_FRAGS          = 'Rhfs'
+
 /**
 @patch 1.07
 */
     constant integer UPG_TANK           = 'Rhrt'
+
 /**
 @patch 1.07
 */
     constant integer UPG_FLAK           = 'Rhfc'
+
 /**
 @patch 1.07
 */
@@ -1136,363 +1360,449 @@ globals
     //--------------------------------------------------------------------
 
     // orc heroes
+
 /**
 @patch 1.00
 */
     constant integer BLADE_MASTER       = 'Obla'
+
 /**
 @patch 1.00
 */
     constant integer FAR_SEER           = 'Ofar'
+
 /**
 @patch 1.00
 */
     constant integer TAUREN_CHIEF       = 'Otch'
+
 /**
 @patch 1.07
 */
     constant integer SHADOW_HUNTER      = 'Oshd'
 
     // special orc heroes
+
 /**
 @patch 1.00
 */
     constant integer GROM               = 'Ogrh'
+
 /**
 @patch 1.00
 */
     constant integer THRALL             = 'Othr'
 
     // orc hero abilities
+
 /**
 @patch 1.00
 */
     constant integer CRITICAL_STRIKE    = 'AOcr'
+
 /**
 @patch 1.00
 */
     constant integer MIRROR_IMAGE       = 'AOmi'
+
 /**
 @patch 1.00
 */
     constant integer BLADE_STORM        = 'AOww'
+
 /**
 @patch 1.00
 */
     constant integer WIND_WALK          = 'AOwk'
 
+
 /**
 @patch 1.00
 */
     constant integer CHAIN_LIGHTNING    = 'AOcl'
+
 /**
 @patch 1.00
 */
     constant integer EARTHQUAKE         = 'AOeq'
+
 /**
 @patch 1.00
 */
     constant integer FAR_SIGHT          = 'AOfs'
+
 /**
 @patch 1.00
 */
     constant integer SPIRIT_WOLF        = 'AOsf'
 
+
 /**
 @patch 1.00
 */
     constant integer ENDURANE_AURA      = 'AOae'
+
 /**
 @patch 1.00
 */
     constant integer REINCARNATION      = 'AOre'
+
 /**
 @patch 1.00
 */
     constant integer SHOCKWAVE          = 'AOsh'
+
 /**
 @patch 1.00
 */
     constant integer WAR_STOMP          = 'AOws'
 
+
 /**
 @patch 1.07
 */
     constant integer HEALING_WAVE       = 'AOhw'
+
 /**
 @patch 1.07
 */
     constant integer HEX                = 'AOhx'
+
 /**
 @patch 1.07
 */
     constant integer SERPENT_WARD       = 'AOsw'
+
 /**
 @patch 1.07
 */
     constant integer VOODOO             = 'AOvd'
 
     // orc units
+
 /**
 @patch 1.00
 */
     constant integer GUARDIAN           = 'oang'
+
 /**
 @patch 1.00
 */
     constant integer CATAPULT           = 'ocat'
+
 /**
 @patch 1.00
 */
     constant integer WITCH_DOCTOR       = 'odoc'
+
 /**
 @patch 1.00
 */
     constant integer GRUNT              = 'ogru'
+
 /**
 @patch 1.00
 */
     constant integer HEAD_HUNTER        = 'ohun'
+
 /**
 @patch 1.07
 */
     constant integer BERSERKER          = 'otbk'
+
 /**
 @patch 1.00
 */
     constant integer KODO_BEAST         = 'okod'
+
 /**
 @patch 1.00
 */
     constant integer PEON               = 'opeo'
+
 /**
 @patch 1.00
 */
     constant integer RAIDER             = 'orai'
+
 /**
 @patch 1.00
 */
     constant integer SHAMAN             = 'oshm'
+
 /**
 @patch 1.00
 */
     constant integer TAUREN             = 'otau'
+
 /**
 @patch 1.00
 */
     constant integer WYVERN             = 'owyv'
+
 /**
 @patch 1.07
 */
     constant integer BATRIDER           = 'otbr'
+
 /**
 @patch 1.07
 */
     constant integer SPIRIT_WALKER      = 'ospw'
+
 /**
 @patch 1.07
 */
     constant integer SPIRIT_WALKER_M    = 'ospm'
 
     // orc buildings
+
 /**
 @patch 1.00
 */
     constant integer ORC_ALTAR          = 'oalt'
+
 /**
 @patch 1.00
 */
     constant integer ORC_BARRACKS       = 'obar'
+
 /**
 @patch 1.00
 */
     constant integer BESTIARY           = 'obea'
+
 /**
 @patch 1.00
 */
     constant integer FORGE              = 'ofor'
+
 /**
 @patch 1.00
 */
     constant integer FORTRESS           = 'ofrt'
+
 /**
 @patch 1.00
 */
     constant integer GREAT_HALL         = 'ogre'
+
 /**
 @patch 1.00
 */
     constant integer LODGE              = 'osld'
+
 /**
 @patch 1.00
 */
     constant integer STRONGHOLD         = 'ostr'
+
 /**
 @patch 1.00
 */
     constant integer BURROW             = 'otrb'
+
 /**
 @patch 1.00
 */
     constant integer TOTEM              = 'otto'
+
 /**
 @patch 1.00
 */
     constant integer ORC_WATCH_TOWER    = 'owtw'
+
 /**
 @patch 1.07
 */
     constant integer VOODOO_LOUNGE      = 'ovln'
 
     // orc upgrades
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_MELEE      = 'Rome'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_RANGED     = 'Rora'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_ARTILLERY  = 'Roaa'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_ARMOR      = 'Roar'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_WAR_DRUMS  = 'Rwdm'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_PILLAGE    = 'Ropg'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_BERSERK    = 'Robs'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_PULVERIZE  = 'Rows'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_ENSNARE    = 'Roen'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_VENOM      = 'Rovs'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_DOCS       = 'Rowd'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_SHAMAN     = 'Rost'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_SPIKES     = 'Rosp'
+
 /**
 @patch 1.07
 */
     constant integer UPG_ORC_BURROWS    = 'Rorb'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ORC_REGEN      = 'Rotr'
+
 /**
 @patch 1.07
 */
     constant integer UPG_ORC_FIRE       = 'Rolf'
+
 /**
 @patch 1.07
 */
     constant integer UPG_ORC_SWALKER    = 'Rowt'
+
 /**
 @patch 1.07
 */
     constant integer UPG_ORC_BERSERKER  = 'Robk'
+
 /**
 @patch 1.07
 */
     constant integer UPG_ORC_NAPTHA     = 'Robf'
+
 /**
 @patch 1.07
 */
     constant integer UPG_ORC_CHAOS      = 'Roch'
 
     // Warcraft 2 orc units
+
 /**
 @patch 1.00
 */
     constant integer OGRE_MAGI          = 'nomg'
+
 /**
 @patch 1.00
 */
     constant integer ORC_DRAGON         = 'nrwm'
+
 /**
 @patch 1.00
 */
     constant integer SAPPER             = 'ngsp'
+
 /**
 @patch 1.00
 */
     constant integer ZEPPLIN            = 'nzep'
+
 /**
 @patch 1.00
 */
     constant integer ZEPPELIN           =  ZEPPLIN
+
 /**
 @patch 1.00
 */
     constant integer W2_WARLOCK         = 'nw2w'
+
 /**
 @patch 1.00
 */
     constant integer PIG_FARM           = 'npgf'
+
 /**
 @patch 1.32.0.13369
 */
     constant integer FOREST_TROLL       = 'nftr'
+
 /**
 @patch 1.32.10.19202
 */
 	constant integer DRAGON_ROOST       = 'ndrb'
 
     // special orc units
+
 /**
 @patch 1.00
 */
     constant integer CHAOS_GRUNT        = 'nchg'
+
 /**
 @patch 1.00
 */
     constant integer CHAOS_WARLOCK      = 'nchw'
+
 /**
 @patch 1.00
 */
     constant integer CHAOS_RAIDER       = 'nchr'
+
 /**
 @patch 1.00
 */
     constant integer CHAOS_PEON         = 'ncpn'
+
 /**
 @patch 1.00
 */
     constant integer CHAOS_KODO         = 'nckb'
+
 /**
 @patch 1.07
 */
     constant integer CHAOS_GROM         = 'Opgh'
+
 /**
 @patch 1.07
 */
     constant integer CHAOS_BLADEMASTER  = 'Nbbc'
+
 /**
 @patch 1.07
 */
@@ -1503,327 +1813,405 @@ globals
     //--------------------------------------------------------------------
 
     // undead heroes
+
 /**
 @patch 1.00
 */
     constant integer DEATH_KNIGHT       = 'Udea'
+
 /**
 @patch 1.00
 */
     constant integer DREAD_LORD         = 'Udre'
+
 /**
 @patch 1.00
 */
     constant integer LICH               = 'Ulic'
+
 /**
 @patch 1.07
 */
     constant integer CRYPT_LORD         = 'Ucrl'
 
     // special undead heroes
+
 /**
 @patch 1.00
 */
     constant integer MALGANIS           = 'Umal'
+
 /**
 @patch 1.00
 */
     constant integer TICHONDRIUS        = 'Utic'
+
 /**
 @patch 1.00
 */
     constant integer PIT_LORD           = 'Npld'
+
 /**
 @patch 1.07
 */
     constant integer DETHEROC           = 'Udth'
 
     // undead hero abilities
+
 /**
 @patch 1.00
 */
     constant integer SLEEP              = 'AUsl'
+
 /**
 @patch 1.00
 */
     constant integer VAMP_AURA          = 'AUav'
+
 /**
 @patch 1.00
 */
     constant integer CARRION_SWARM      = 'AUcs'
+
 /**
 @patch 1.00
 */
     constant integer INFERNO            = 'AUin'
 
+
 /**
 @patch 1.00
 */
     constant integer DARK_RITUAL        = 'AUdr'
+
 /**
 @patch 1.00
 */
     constant integer DEATH_DECAY        = 'AUdd'
+
 /**
 @patch 1.00
 */
     constant integer FROST_ARMOR        = 'AUfu'
+
 /**
 @patch 1.00
 */
     constant integer FROST_NOVA         = 'AUfn'
 
+
 /**
 @patch 1.00
 */
     constant integer ANIM_DEAD          = 'AUan'
+
 /**
 @patch 1.00
 */
     constant integer DEATH_COIL         = 'AUdc'
+
 /**
 @patch 1.00
 */
     constant integer DEATH_PACT         = 'AUdp'
+
 /**
 @patch 1.00
 */
     constant integer UNHOLY_AURA        = 'AUau'
 
+
 /**
 @patch 1.07
 */
     constant integer CARRION_SCARAB     = 'AUcb'
+
 /**
 @patch 1.07
 */
     constant integer IMPALE             = 'AUim'
+
 /**
 @patch 1.07
 */
     constant integer LOCUST_SWARM       = 'AUls'
+
 /**
 @patch 1.07
 */
     constant integer THORNY_SHIELD      = 'AUts'
 
     // undead units
+
 /**
 @patch 1.00
 */
     constant integer ABOMINATION        = 'uabo'
+
 /**
 @patch 1.00
 */
     constant integer ACOLYTE            = 'uaco'
+
 /**
 @patch 1.00
 */
     constant integer BANSHEE            = 'uban'
+
 /**
 @patch 1.00
 */
     constant integer PIT_FIEND          = 'ucry'
+
 /**
 @patch 1.00
 */
     constant integer CRYPT_FIEND        =  PIT_FIEND
+
 /**
 @patch 1.00
 */
     constant integer FROST_WYRM         = 'ufro'
+
 /**
 @patch 1.00
 */
     constant integer GARGOYLE           = 'ugar'
+
 /**
 @patch 1.00
 */
     constant integer GARGOYLE_MORPH     = 'ugrm'
+
 /**
 @patch 1.00
 */
     constant integer GHOUL              = 'ugho'
+
 /**
 @patch 1.00
 */
     constant integer MEAT_WAGON         = 'umtw'
+
 /**
 @patch 1.00
 */
     constant integer NECRO              = 'unec'
+
 /**
 @patch 1.00
 */
     constant integer SKEL_WARRIOR       = 'uske'
+
 /**
 @patch 1.00
 */
     constant integer SHADE              = 'ushd'
+
 /**
 @patch 1.07
 */
     constant integer UNDEAD_BARGE       = 'uarb'
+
 /**
 @patch 1.07
 */
     constant integer OBSIDIAN_STATUE    = 'uobs'
+
 /**
 @patch 1.07
 */
     constant integer OBS_STATUE         =  OBSIDIAN_STATUE
+
 /**
 @patch 1.07
 */
     constant integer BLK_SPHINX         = 'ubsp'
 
     // undead buildings
+
 /**
 @patch 1.00
 */
     constant integer UNDEAD_MINE        = 'ugol'
+
 /**
 @patch 1.00
 */
     constant integer UNDEAD_ALTAR       = 'uaod'
+
 /**
 @patch 1.00
 */
     constant integer BONEYARD           = 'ubon'
+
 /**
 @patch 1.00
 */
     constant integer GARG_SPIRE         = 'ugsp'
+
 /**
 @patch 1.00
 */
     constant integer NECROPOLIS_1       = 'unpl'    // normal
+
 /**
 @patch 1.00
 */
     constant integer NECROPOLIS_2       = 'unp1'    // upgraded once
+
 /**
 @patch 1.00
 */
     constant integer NECROPOLIS_3       = 'unp2'    // full upgrade
+
 /**
 @patch 1.00
 */
     constant integer SAC_PIT            = 'usap'
+
 /**
 @patch 1.00
 */
     constant integer CRYPT              = 'usep'
+
 /**
 @patch 1.00
 */
     constant integer SLAUGHTERHOUSE     = 'uslh'
+
 /**
 @patch 1.00
 */
     constant integer DAMNED_TEMPLE      = 'utod'
+
 /**
 @patch 1.00
 */
     constant integer ZIGGURAT_1         = 'uzig'    // normal
+
 /**
 @patch 1.00
 */
     constant integer ZIGGURAT_2         = 'uzg1'    // upgraded
+
 /**
 @patch 1.07
 */
     constant integer ZIGGURAT_FROST     = 'uzg2'    // frost tower
+
 /**
 @patch 1.00
 */
     constant integer GRAVEYARD          = 'ugrv'
+
 /**
 @patch 1.07
 */
     constant integer TOMB_OF_RELICS     = 'utom'
 
     // undead upgrades
+
 /**
 @patch 1.00
 */
     constant integer UPG_UNHOLY_STR     = 'Rume'
+
 /**
 @patch 1.00
 */
     constant integer UPG_CR_ATTACK      = 'Rura'
+
 /**
 @patch 1.00
 */
     constant integer UPG_UNHOLY_ARMOR   = 'Ruar'
+
 /**
 @patch 1.00
 */
     constant integer UPG_CANNIBALIZE    = 'Ruac'
+
 /**
 @patch 1.00
 */
     constant integer UPG_GHOUL_FRENZY   = 'Rugf'
+
 /**
 @patch 1.00
 */
     constant integer UPG_FIEND_WEB      = 'Ruwb'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ABOM           = 'Ruab'
+
 /**
 @patch 1.00
 */
     constant integer UPG_STONE_FORM     = 'Rusf'
+
 /**
 @patch 1.00
 */
     constant integer UPG_NECROS         = 'Rune'
+
 /**
 @patch 1.00
 */
     constant integer UPG_BANSHEE        = 'Ruba'
+
 /**
 @patch 1.00
 */
     constant integer UPG_MEAT_WAGON     = 'Rump'
+
 /**
 @patch 1.00
 */
     constant integer UPG_WYRM_BREATH    = 'Rufb'
+
 /**
 @patch 1.00
 */
     constant integer UPG_SKEL_LIFE      = 'Rusl'
+
 /**
 @patch 1.07
 */
     constant integer UPG_SKEL_MASTERY   = 'Rusm'
+
 /**
 @patch 1.07
 */
     constant integer UPG_EXHUME         = 'Ruex'
+
 /**
 @patch 1.00
 */
     constant integer UPG_SACRIFICE      = 'Rurs'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ABOM_EXPL      = 'Ruax'
+
 /**
 @patch 1.00
 */
     constant integer UPG_CR_ARMOR       = 'Rucr'
+
 /**
 @patch 1.00
 */
     constant integer UPG_PLAGUE         = 'Rupc'
+
 /**
 @patch 1.07
 */
     constant integer UPG_BLK_SPHINX     = 'Rusp'
+
 /**
 @patch 1.07
 */
@@ -1834,415 +2222,514 @@ globals
     //--------------------------------------------------------------------
 
     // elf heroes
+
 /**
 @patch 1.00
 */
     constant integer DEMON_HUNTER       = 'Edem'
+
 /**
 @patch 1.00
 */
     constant integer DEMON_HUNTER_M     = 'Edmm'
+
 /**
 @patch 1.00
 */
     constant integer KEEPER             = 'Ekee'
+
 /**
 @patch 1.00
 */
     constant integer MOON_CHICK         = 'Emoo'
+
 /**
 @patch 1.00
 */
     constant integer MOON_BABE          =  MOON_CHICK
+
 /**
 @patch 1.00
 */
     constant integer MOON_HONEY         =  MOON_CHICK
+
 /**
 @patch 1.07
 */
     constant integer WARDEN             = 'Ewar'
 
     // special elf heroes
+
 /**
 @patch 1.00
 */
     constant integer SYLVANUS           = 'Hvwd'
+
 /**
 @patch 1.00
 */
     constant integer CENARIUS           = 'Ecen'
+
 /**
 @patch 1.07
 */
     constant integer ILLIDAN            = 'Eevi'
+
 /**
 @patch 1.07
 */
     constant integer ILLIDAN_DEMON      = 'Eevm'
+
 /**
 @patch 1.07
 */
     constant integer MAIEV              = 'Ewrd'
 
     // elf hero abilities
+
 /**
 @patch 1.00
 */
     constant integer FORCE_NATURE       = 'AEfn'
+
 /**
 @patch 1.00
 */
     constant integer ENT_ROOTS          = 'AEer'
+
 /**
 @patch 1.00
 */
     constant integer THORNS_AURA        = 'AEah'
+
 /**
 @patch 1.00
 */
     constant integer TRANQUILITY        = 'AEtq'
 
+
 /**
 @patch 1.00
 */
     constant integer EVASION            = 'AEev'
+
 /**
 @patch 1.00
 */
     constant integer IMMOLATION         = 'AEim'
+
 /**
 @patch 1.00
 */
     constant integer MANA_BURN          = 'AEmb'
+
 /**
 @patch 1.00
 */
     constant integer METAMORPHOSIS      = 'AEme'
 
+
 /**
 @patch 1.00
 */
     constant integer SEARING_ARROWS     = 'AHfa'
+
 /**
 @patch 1.00
 */
     constant integer SCOUT              = 'AEst'
+
 /**
 @patch 1.00
 */
     constant integer STARFALL           = 'AEsf'
+
 /**
 @patch 1.00
 */
     constant integer TRUESHOT           = 'AEar'
 
+
 /**
 @patch 1.07
 */
     constant integer BLINK              = 'AEbl'
+
 /**
 @patch 1.07
 */
     constant integer FAN_KNIVES         = 'AEfk'
+
 /**
 @patch 1.07
 */
     constant integer SHADOW_TOUCH       = 'AEsh'
+
 /**
 @patch 1.07
 */
     constant integer VENGEANCE          = 'AEsv'
 
     // elf units
+
 /**
 @patch 1.00
 */
     constant integer WISP               = 'ewsp'
+
 /**
 @patch 1.00
 */
     constant integer ARCHER             = 'earc'
+
 /**
 @patch 1.00
 */
     constant integer DRUID_TALON        = 'edot'
+
 /**
 @patch 1.00
 */
     constant integer DRUID_TALON_M      = 'edtm'
+
 /**
 @patch 1.00
 */
     constant integer BALLISTA           = 'ebal'
+
 /**
 @patch 1.00
 */
     constant integer DRUID_CLAW         = 'edoc'
+
 /**
 @patch 1.00
 */
     constant integer DRUID_CLAW_M       = 'edcm'
+
 /**
 @patch 1.00
 */
     constant integer DRYAD              = 'edry'
+
 /**
 @patch 1.00
 */
     constant integer HIPPO              = 'ehip'
+
 /**
 @patch 1.00
 */
     constant integer HIPPO_RIDER        = 'ehpr'
+
 /**
 @patch 1.00
 */
     constant integer HUNTRESS           = 'esen'
+
 /**
 @patch 1.00
 */
     constant integer CHIMAERA           = 'echm'
+
 /**
 @patch 1.00
 */
     constant integer ENT                = 'efon'
+
 /**
 @patch 1.07
 */
     constant integer MOUNTAIN_GIANT     = 'emtg'
+
 /**
 @patch 1.07
 */
     constant integer FAERIE_DRAGON      = 'efdr'
 
     // special elf units
+
 /**
 @patch 1.00
 */
     constant integer HIGH_ARCHER        = 'nhea'
+
 /**
 @patch 1.00
 */
     constant integer HIGH_FOOTMAN       = 'hcth'
+
 /**
 @patch 1.00
 */
     constant integer HIGH_FOOTMEN       =  HIGH_FOOTMAN
+
 /**
 @patch 1.00
 */
     constant integer HIGH_SWORDMAN      = 'hhes'
+
 /**
 @patch 1.00
 */
     constant integer DRAGON_HAWK        = 'nws1'
+
 /**
 @patch 1.00
 */
     constant integer CORRUPT_TREANT     = 'nenc'
+
 /**
 @patch 1.00
 */
     constant integer POISON_TREANT      = 'nenp'
+
 /**
 @patch 1.00
 */
     constant integer PLAGUE_TREANT      = 'nepl'
+
 /**
 @patch 1.00
 */
     constant integer SHANDRIS           = 'eshd'
 
     // elf buildings
+
 /**
 @patch 1.00
 */
     constant integer ANCIENT_LORE       = 'eaoe'
+
 /**
 @patch 1.00
 */
     constant integer ANCIENT_WAR        = 'eaom'
+
 /**
 @patch 1.00
 */
     constant integer ANCIENT_WIND       = 'eaow'
+
 /**
 @patch 1.00
 */
     constant integer TREE_AGES          = 'etoa'
+
 /**
 @patch 1.00
 */
     constant integer TREE_ETERNITY      = 'etoe'
+
 /**
 @patch 1.00
 */
     constant integer TREE_LIFE          = 'etol'
+
 /**
 @patch 1.00
 */
     constant integer ANCIENT_PROTECT    = 'etrp'
+
 /**
 @patch 1.00
 */
     constant integer ELF_ALTAR          = 'eate'
+
 /**
 @patch 1.00
 */
     constant integer BEAR_DEN           = 'edol'
+
 /**
 @patch 1.00
 */
     constant integer CHIMAERA_ROOST     = 'edos'
+
 /**
 @patch 1.00
 */
     constant integer HUNTERS_HALL       = 'edob'
+
 /**
 @patch 1.00
 */
     constant integer MOON_WELL          = 'emow'
+
 /**
 @patch 1.00
 */
     constant integer ELF_MINE           = 'egol'
+
 /**
 @patch 1.07
 */
     constant integer DEN_OF_WONDERS     = 'eden'
 
     // special elf buildings
+
 /**
 @patch 1.00
 */
     constant integer ELF_FARM           = 'nefm'
+
 /**
 @patch 1.00
 */
     constant integer ELF_GUARD_TOWER    = 'negt'
+
 /**
 @patch 1.00
 */
     constant integer HIGH_SKY           = 'negm'
+
 /**
 @patch 1.00
 */
     constant integer HIGH_EARTH         = 'negf'
+
 /**
 @patch 1.00
 */
     constant integer HIGH_TOWER         = 'negt'
+
 /**
 @patch 1.00
 */
     constant integer ELF_HIGH_BARRACKS  = 'nheb'
+
 /**
 @patch 1.00
 */
     constant integer CORRUPT_LIFE       = 'nctl'
+
 /**
 @patch 1.32.10.19202
 */
 	constant integer CORRUPT_AGES       = 'ncta'
+
 /**
 @patch 1.32.10.19202
 */
 	constant integer CORRUPT_ETERNITY   = 'ncte'
+
 /**
 @patch 1.00
 */
     constant integer CORRUPT_WELL       = 'ncmw'
+
 /**
 @patch 1.00
 */
     constant integer CORRUPT_PROTECTOR  = 'ncap'
+
 /**
 @patch 1.00
 */
     constant integer CORRUPT_WAR        = 'ncaw'
 
     // elf upgrades
+
 /**
 @patch 1.00
 */
     constant integer UPG_STR_MOON       = 'Resm'
+
 /**
 @patch 1.00
 */
     constant integer UPG_STR_WILD       = 'Resw'
+
 /**
 @patch 1.00
 */
     constant integer UPG_MOON_ARMOR     = 'Rema'
+
 /**
 @patch 1.00
 */
     constant integer UPG_HIDES          = 'Rerh'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ULTRAVISION    = 'Reuv'
+
 /**
 @patch 1.00
 */
     constant integer UPG_BLESSING       = 'Renb'
+
 /**
 @patch 1.00
 */
     constant integer UPG_SCOUT          = 'Resc'
+
 /**
 @patch 1.00
 */
     constant integer UPG_GLAIVE         = 'Remg'
+
 /**
 @patch 1.00
 */
     constant integer UPG_BOWS           = 'Reib'
+
 /**
 @patch 1.00
 */
     constant integer UPG_MARKSMAN       = 'Remk'
+
 /**
 @patch 1.00
 */
     constant integer UPG_DRUID_TALON    = 'Redt'
+
 /**
 @patch 1.00
 */
     constant integer UPG_DRUID_CLAW     = 'Redc'
+
 /**
 @patch 1.00
 */
     constant integer UPG_ABOLISH        = 'Resi'
+
 /**
 @patch 1.00
 */
     constant integer UPG_CHIM_ACID      = 'Recb'
+
 /**
 @patch 1.00
 */
     constant integer UPG_HIPPO_TAME     = 'Reht'
+
 /**
 @patch 1.00
 */
     constant integer UPG_BOLT           = 'Repd'
+
 /**
 @patch 1.07
 */
     constant integer UPG_MARK_CLAW      = 'Reeb'
+
 /**
 @patch 1.07
 */
     constant integer UPG_MARK_TALON     = 'Reec'
+
 /**
 @patch 1.07
 */
     constant integer UPG_HARD_SKIN      = 'Rehs'
+
 /**
 @patch 1.07
 */
     constant integer UPG_RESIST_SKIN    = 'Rers'
+
 /**
 @patch 1.07
 */
@@ -2251,74 +2738,92 @@ globals
     //--------------------------------------------------------------------
     // Neutral
     //--------------------------------------------------------------------
+
 /**
 @patch 1.00
 */
     constant integer DEMON_GATE         = 'ndmg'
+
 /**
 @patch 1.00
 */
     constant integer FELLHOUND          = 'nfel'
+
 /**
 @patch 1.00
 */
     constant integer INFERNAL           = 'ninf'
+
 /**
 @patch 1.00
 */
     constant integer DOOMGUARD          = 'nbal'
+
 /**
 @patch 1.00
 */
     constant integer SATYR              = 'nsty'
+
 /**
 @patch 1.00
 */
     constant integer TRICKSTER          = 'nsat'
+
 /**
 @patch 1.00
 */
     constant integer SHADOWDANCER       = 'nsts'
+
 /**
 @patch 1.00
 */
     constant integer SOULSTEALER        = 'nstl'
+
 /**
 @patch 1.00
 */
     constant integer HELLCALLER         = 'nsth'
+
 /**
 @patch 1.00
 */
     constant integer SKEL_ARCHER        = 'nska'
+
 /**
 @patch 1.00
 */
     constant integer SKEL_MARKSMAN      = 'nskm'
+
 /**
 @patch 1.00
 */
     constant integer SKEL_BURNING       = 'nskf'
+
 /**
 @patch 1.00
 */
     constant integer SKEL_GIANT         = 'nskg'
+
 /**
 @patch 1.00
 */
     constant integer FURBOLG            = 'nfrl'
+
 /**
 @patch 1.00
 */
     constant integer FURBOLG_TRACKER    = 'nfrb'
+
 /**
 @patch 1.00
 */
     constant integer FURBOLG_SHAMAN     = 'nfrs'
+
 /**
 @patch 1.00
 */
     constant integer FURBOLG_CHAMP      = 'nfrg'
+
 /**
 @patch 1.00
 */
@@ -2329,109 +2834,134 @@ globals
     //--------------------------------------------------------------------
 
     // naga heroes
+
 /**
 @patch 1.07
 */
     constant integer NAGA_SORCERESS     = 'Nngs'
+
 /**
 @patch 1.07
 */
     constant integer NAGA_VASHJ         = 'Hvsh'
 
     // naga units
+
 /**
 @patch 1.07
 */
     constant integer NAGA_DRAGON        = 'nsnp'        // old names
+
 /**
 @patch 1.07
 */
     constant integer NAGA_WITCH         = 'nnsw'
+
 /**
 @patch 1.07
 */
     constant integer NAGA_SERPENT       = 'nwgs'
+
 /**
 @patch 1.07
 */
     constant integer NAGA_HYDRA         = 'nhyc'
 
+
 /**
 @patch 1.07
 */
     constant integer NAGA_SLAVE         = 'nmpe'        // peon
+
 /**
 @patch 1.07
 */
     constant integer NAGA_SNAP_DRAGON   =  NAGA_DRAGON  // weak ranged
+
 /**
 @patch 1.07
 */
     constant integer NAGA_COUATL        =  NAGA_SERPENT // weak air
+
 /**
 @patch 1.07
 */
     constant integer NAGA_SIREN         =  NAGA_WITCH   // caster
+
 /**
 @patch 1.07
 */
     constant integer NAGA_MYRMIDON      = 'nmyr'        // knight
+
 /**
 @patch 1.07
 */
     constant integer NAGA_REAVER        = 'nnmg'        // footman
+
 /**
 @patch 1.07
 */
     constant integer NAGA_TURTLE        =  NAGA_HYDRA   // siege
+
 /**
 @patch 1.07
 */
     constant integer NAGA_ROYAL         = 'nnrg'        // royal guard
 
     // naga buildings
+
 /**
 @patch 1.07
 */
     constant integer NAGA_TEMPLE        = 'nntt'        // town hall
+
 /**
 @patch 1.07
 */
     constant integer NAGA_CORAL         = 'nnfm'        // farm
+
 /**
 @patch 1.07
 */
     constant integer NAGA_SHRINE        = 'nnsa'        // sirens & couatls
+
 /**
 @patch 1.07
 */
     constant integer NAGA_SPAWNING      = 'nnsg'        // myrm, snap dragon, hydra
+
 /**
 @patch 1.07
 */
     constant integer NAGA_GUARDIAN      = 'nntg'        // tower
+
 /**
 @patch 1.07
 */
     constant integer NAGA_ALTAR         = 'nnad'        // altar
 
     // naga upgrades
+
 /**
 @patch 1.07
 */
     constant integer UPG_NAGA_ARMOR     = 'Rnam'
+
 /**
 @patch 1.07
 */
     constant integer UPG_NAGA_ATTACK    = 'Rnat'
+
 /**
 @patch 1.07
 */
     constant integer UPG_NAGA_ABOLISH   = 'Rnsi'
+
 /**
 @patch 1.07
 */
     constant integer UPG_SIREN          = 'Rnsw'
+
 /**
 @patch 1.07
 */
@@ -2439,127 +2969,157 @@ globals
 
 
     //--------------------------------------------------------------------
+
 /**
 @patch 1.00
 */
     constant integer M1                 =    60
+
 /**
 @patch 1.00
 */
     constant integer M2                 =  2*60
+
 /**
 @patch 1.00
 */
     constant integer M3                 =  3*60
+
 /**
 @patch 1.00
 */
     constant integer M4                 =  4*60
+
 /**
 @patch 1.00
 */
     constant integer M5                 =  5*60
+
 /**
 @patch 1.00
 */
     constant integer M6                 =  6*60
+
 /**
 @patch 1.00
 */
     constant integer M7                 =  7*60
+
 /**
 @patch 1.00
 */
     constant integer M8                 =  8*60
+
 /**
 @patch 1.00
 */
     constant integer M9                 =  9*60
+
 /**
 @patch 1.00
 */
     constant integer M10                = 10*60
+
 /**
 @patch 1.00
 */
     constant integer M11                = 11*60
+
 /**
 @patch 1.00
 */
     constant integer M12                = 12*60
+
 /**
 @patch 1.00
 */
     constant integer M13                = 13*60
+
 /**
 @patch 1.00
 */
     constant integer M14                = 14*60
+
 /**
 @patch 1.00
 */
     constant integer M15                = 15*60
 
+
 /**
 @patch 1.00
 */
     constant integer EASY               = 1
+
 /**
 @patch 1.00
 */
     constant integer NORMAL             = 2
+
 /**
 @patch 1.00
 */
     constant integer HARD               = 3
+
 /**
 @patch 1.00
 */
     constant integer INSANE             = 4 // not used
 
+
 /**
 @patch 1.03
 */
     constant integer MELEE_NEWBIE       = 1
+
 /**
 @patch 1.03
 */
     constant integer MELEE_NORMAL       = 2
+
 /**
 @patch 1.03
 */
     constant integer MELEE_INSANE       = 3
 
+
 /**
 @patch 1.00
 */
     constant integer ATTACK_CAPTAIN     = 1
+
 /**
 @patch 1.00
 */
     constant integer DEFENSE_CAPTAIN    = 2
+
 /**
 @patch 1.00
 */
     constant integer BOTH_CAPTAINS      = 3
 
+
 /**
 @patch 1.00
 */
     constant integer BUILD_UNIT         = 1
+
 /**
 @patch 1.00
 */
     constant integer BUILD_UPGRADE      = 2
+
 /**
 @patch 1.00
 */
     constant integer BUILD_EXPAND       = 3
 
+
 /**
 @patch 1.07
 */
     constant integer UPKEEP_TIER1       = 50
+
 /**
 @patch 1.07
 */
@@ -2567,203 +3127,251 @@ globals
 
     //--------------------------------------------------------------------
 
+
 /**
 @patch 1.00
 */
     player  ai_player
 
+
 /**
 @patch 1.00
 */
     integer sleep_seconds
+
 /**
 @patch 1.00
 */
     integer total_gold              = 0
+
 /**
 @patch 1.00
 */
     integer total_wood              = 0
+
 /**
 @patch 1.00
 */
     integer gold_buffer             = 0 // usually for potion money
+
 /**
 @patch 1.00
 */
     integer difficulty              = NORMAL
+
 /**
 @patch 1.07
 */
     integer exp_seen                = 0
+
 /**
 @patch 1.00
 */
     integer racial_farm             = 'hhou'
+
 /**
 @patch 1.00
 */
     integer hero_id                 = 'Hamg'
+
 /**
 @patch 1.00
 */
     integer hero_id2                = 'Hmkg'
+
 /**
 @patch 1.07
 */
     integer hero_id3                = 'Hpal'
+
 /**
 @patch 1.07
 */
     integer array skill
+
 /**
 @patch 1.00
 */
     integer array skills1
+
 /**
 @patch 1.00
 */
     integer array skills2
+
 /**
 @patch 1.07
 */
     integer array skills3
+
 /**
 @patch 1.00
 */
     integer max_hero_level          = 0
 
+
 /**
 @patch 1.00
 */
     integer array harass_qty
+
 /**
 @patch 1.00
 */
     integer array harass_max
+
 /**
 @patch 1.00
 */
     integer array harass_units
+
 /**
 @patch 1.00
 */
     integer harass_length           = 0
 
+
 /**
 @patch 1.00
 */
     integer array defense_qty
+
 /**
 @patch 1.00
 */
     integer array defense_units
+
 /**
 @patch 1.00
 */
     integer defense_length          = 0
 
+
 /**
 @patch 1.00
 */
     integer array build_qty
+
 /**
 @patch 1.00
 */
     integer array build_type
+
 /**
 @patch 1.00
 */
     integer array build_item
+
 /**
 @patch 1.00
 */
     integer array build_town
+
 /**
 @patch 1.00
 */
     integer build_length            = 0
 
+
 /**
 @patch 1.00
 */
     integer campaign_gold_peons     = 5
+
 /**
 @patch 1.00
 */
     integer campaign_wood_peons     = 3
+
 /**
 @patch 1.00
 */
     integer campaign_basics_speed   = 5
 
+
 /**
 @patch 1.07
 */
     integer min_creeps              = -1
+
 /**
 @patch 1.07
 */
     integer max_creeps              = -1
 
+
 /**
 @patch 1.00
 */
     boolean harvest_town1           = true
+
 /**
 @patch 1.00
 */
     boolean harvest_town2           = true
+
 /**
 @patch 1.00
 */
     boolean harvest_town3           = true
+
 /**
 @patch 1.00
 */
     boolean do_campaign_farms       = true
+
 /**
 @patch 1.00
 */
     boolean two_heroes              = false
+
 /**
 @patch 1.00
 */
     boolean allow_air_creeps        = false
+
 /**
 @patch 1.00
 */
     boolean take_exp                = false
+
 /**
 @patch 1.00
 */
     boolean allow_signal_abort      = false
+
 /**
 @patch 1.00
 */
     boolean ready_for_zeppelin      = true
+
 /**
 @patch 1.00
 */
     boolean get_zeppelin            = false
+
 
 /**
 @patch 1.00
 */
     boolean build_campaign_attackers = true
 
+
 /**
 @patch 1.00
 */
     boolean do_debug_cheats         = false
+
 /**
 @patch 1.00
 */
     boolean trace_on                = true
+
 /**
 @patch 1.07
 */
     boolean zep_next_wave           = false
+
 /**
 @patch 1.07
 */
@@ -2771,6 +3379,7 @@ globals
 endglobals
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -2779,6 +3388,7 @@ function PlayerEx takes integer slot returns player
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -2789,6 +3399,7 @@ function Trace takes string message returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -2799,6 +3410,7 @@ function TraceI takes string message, integer val returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -2809,6 +3421,7 @@ function TraceII takes string message, integer v1, integer v2 returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -2819,6 +3432,7 @@ function TraceIII takes string message, integer v1, integer v2, integer v3 retur
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -2829,6 +3443,7 @@ function InitAI takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -2864,6 +3479,7 @@ endfunction
 //============================================================================
 //  Utility Functions
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -2874,6 +3490,7 @@ function Min takes integer A, integer B returns integer
         return B
     endif
 endfunction
+
 
 /**
 @patch 1.07
@@ -2886,12 +3503,14 @@ function Max takes integer A, integer B returns integer
     endif
 endfunction
 
+
 /**
 @patch 1.07
 */
 function SetZepNextWave takes nothing returns nothing
     set zep_next_wave = true
 endfunction
+
 
 /**
 @patch 1.00
@@ -2913,6 +3532,7 @@ function SuicideSleep takes integer seconds returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -2950,6 +3570,7 @@ function WaitForSignal takes nothing returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -2958,6 +3579,7 @@ function SetWoodPeons takes integer count returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -2966,6 +3588,7 @@ function SetGoldPeons takes integer count returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -2978,6 +3601,7 @@ function SetHarvestLumber takes boolean harvest returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -2986,6 +3610,7 @@ function SetFormGroupTimeouts takes boolean state returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -2994,6 +3619,7 @@ function DoCampaignFarms takes boolean state returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3002,6 +3628,7 @@ function GetMinorCreep takes nothing returns unit
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3010,6 +3637,7 @@ function GetMajorCreep takes nothing returns unit
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3018,6 +3646,7 @@ function GetGold takes nothing returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3026,6 +3655,7 @@ function GetWood takes nothing returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3034,6 +3664,7 @@ function InitBuildArray takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3042,6 +3673,7 @@ function InitAssaultGroup takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3050,6 +3682,7 @@ function InitDefenseGroup takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3060,6 +3693,7 @@ function InitMeleeGroup takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3071,6 +3705,7 @@ function PrepFullSuicide takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3085,6 +3720,7 @@ function SetReplacements takes integer easy, integer med, integer hard returns n
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3093,6 +3729,7 @@ function StartTownBuilder takes code func returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3107,6 +3744,7 @@ function SetBuildAll takes integer t, integer qty, integer unitid, integer town 
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3115,6 +3753,7 @@ function SetBuildUnit takes integer qty, integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -3127,6 +3766,7 @@ function SetBuildNext takes integer qty, integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3141,6 +3781,7 @@ function SetBuildUnitEx takes integer easy, integer med, integer hard, integer u
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3149,6 +3790,7 @@ function SecondaryTown takes integer town, integer qty, integer unitid returns n
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3157,6 +3799,7 @@ function SecTown takes integer town, integer qty, integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3167,6 +3810,7 @@ function SetBuildUpgr takes integer qty, integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3181,6 +3825,7 @@ function SetBuildUpgrEx takes integer easy, integer med, integer hard, integer u
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3189,6 +3834,7 @@ function SetBuildExpa takes integer qty, integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3214,6 +3860,7 @@ function StartUpgrade takes integer level, integer upgid returns boolean
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3226,6 +3873,7 @@ function BuildFactory takes integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3234,6 +3882,7 @@ function HallsCompleted takes integer unitid returns boolean
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3244,6 +3893,7 @@ function GuardSecondary takes integer townid, integer qty, integer unitid return
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3260,6 +3910,7 @@ function GetUnitCountEx takes integer unitid, boolean only_done, integer townid 
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3325,6 +3976,7 @@ function TownCountEx takes integer unitid, boolean only_done, integer townid ret
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3333,6 +3985,7 @@ function TownCountDone takes integer base returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3341,6 +3994,7 @@ function TownCount takes integer base returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3351,6 +4005,7 @@ function BasicExpansion takes boolean build_it, integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3359,6 +4014,7 @@ function UpgradeAll takes integer baseid, integer newid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3369,6 +4025,7 @@ endfunction
 //============================================================================
 //  FoodPool
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3383,6 +4040,7 @@ endfunction
 //============================================================================
 //  MeleeTownHall
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3393,6 +4051,7 @@ function MeleeTownHall takes integer townid, integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3404,6 +4063,7 @@ function WaitForUnits takes integer unitid, integer qty returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3484,8 +4144,10 @@ function StartUnit takes integer ask_qty, integer unitid, integer town returns b
 endfunction
 
 //============================================================================
+
 /**
 @note If `exitwhen i == 12` represents a player ID, then it buggy when run in 24-player mode.
+
 @patch 1.00
 */
 function WaitForTown takes integer towns, integer townid returns nothing
@@ -3499,8 +4161,10 @@ function WaitForTown takes integer towns, integer townid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @bug Leaks handle `peon`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
 @patch 1.00
 */
 function StartExpansion takes integer qty, integer hall returns boolean
@@ -3540,6 +4204,7 @@ function StartExpansion takes integer qty, integer hall returns boolean
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3581,6 +4246,7 @@ function OneBuildLoop takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3589,6 +4255,7 @@ function StaggerSleep takes real base, real spread returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3602,6 +4269,7 @@ function BuildLoop takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3610,6 +4278,7 @@ function StartBuildLoop takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3618,6 +4287,7 @@ function SetInitialWave takes integer seconds returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3626,6 +4296,7 @@ function AddSleepSeconds takes integer seconds returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3637,6 +4308,7 @@ function SleepForever takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3646,6 +4318,7 @@ function PlayGame takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -3656,6 +4329,7 @@ function ConvertNeeds takes integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3677,6 +4351,7 @@ function Conversions takes integer desire, integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3693,6 +4368,7 @@ function SetAssaultGroup takes integer qty, integer max, integer unitid returns 
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3742,6 +4418,7 @@ function Interleave3 takes integer e1, integer m1, integer h1, integer u1, integ
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3754,6 +4431,7 @@ function SetMeleeGroup takes integer unitid returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3768,6 +4446,7 @@ function CampaignDefender takes integer level, integer qty, integer unitid retur
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3782,6 +4461,7 @@ function CampaignDefenderEx takes integer easy, integer med, integer hard, integ
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3792,6 +4472,7 @@ function CampaignAttacker takes integer level, integer qty, integer unitid retur
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3806,6 +4487,7 @@ function CampaignAttackerEx takes integer easy, integer med, integer hard, integ
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3874,6 +4556,7 @@ function FormGroup takes integer seconds, boolean testReady returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3882,6 +4565,7 @@ function WavePrepare takes integer unitid returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3912,6 +4596,7 @@ function PrepTime takes nothing returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -3940,6 +4625,7 @@ function PrepSuicideOnPlayer takes integer seconds returns boolean
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3954,6 +4640,7 @@ function SleepUntilAtGoal takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3977,6 +4664,7 @@ function SleepInCombat takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -3993,6 +4681,7 @@ function AttackMoveXYA takes integer x, integer y returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -4050,6 +4739,7 @@ function SuicideOnPlayerWave takes nothing returns nothing
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.07
 */
@@ -4101,6 +4791,7 @@ function CommonSuicideOnPlayer takes boolean standard, boolean bldgs, integer se
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.00
 */
@@ -4109,6 +4800,7 @@ function SuicideOnPlayer takes integer seconds, player p returns nothing
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.07
 */
@@ -4117,6 +4809,7 @@ function SuicideOnUnits takes integer seconds, player p returns nothing
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.07
 */
@@ -4125,6 +4818,7 @@ function SuicideOnPoint takes integer seconds, player p, integer x, integer y re
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4162,6 +4856,7 @@ function SuicideUntilSignal takes integer seconds, player p returns nothing
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.07
 */
@@ -4176,6 +4871,7 @@ function SuicideOnce takes integer easy, integer med, integer hard, integer unit
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.00
 */
@@ -4187,6 +4883,7 @@ function SuicideUnitA takes integer unitid returns nothing
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.07
 */
@@ -4198,6 +4895,7 @@ function SuicideUnitB takes integer unitid, integer playerid returns nothing
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.00
 */
@@ -4220,6 +4918,7 @@ function SuicideUnits takes integer u1, integer u2, integer u3, integer u4, inte
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.07
 */
@@ -4242,6 +4941,7 @@ function SuicideUnitsEx takes integer playerid, integer u1, integer u2, integer 
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.00
 */
@@ -4256,6 +4956,7 @@ function SuicideOnPlayerEx takes integer easy, integer med, integer hard, player
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.07
 */
@@ -4270,6 +4971,7 @@ function SuicideOnUnitsEx takes integer easy, integer med, integer hard, player 
 endfunction
 
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.07
 */
@@ -4284,6 +4986,7 @@ function SuicideOnPointEx takes integer easy, integer med, integer hard, player 
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4297,6 +5000,7 @@ function ForeverSuicideOnPlayer takes integer seconds, player p returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4326,6 +5030,7 @@ function CommonSleepUntilTargetDead takes unit target, boolean reform returns no
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4334,6 +5039,7 @@ function SleepUntilTargetDead takes unit target returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4343,6 +5049,7 @@ function ReformUntilTargetDead takes unit target returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4359,8 +5066,10 @@ function AttackMoveKillA takes unit target returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @bug Leaks handle `target`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
 @patch 1.00
 */
 function MinorCreepAttack takes nothing returns nothing
@@ -4371,8 +5080,10 @@ function MinorCreepAttack takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @bug Leaks handle `target`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
 @patch 1.00
 */
 function MajorCreepAttack takes nothing returns nothing
@@ -4383,8 +5094,10 @@ function MajorCreepAttack takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @bug Leaks handle `target`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
 @patch 1.07
 */
 function CreepAttackEx takes nothing returns nothing
@@ -4395,8 +5108,10 @@ function CreepAttackEx takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @bug Leaks handle `hall`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
 @patch 1.00
 */
 function AnyPlayerAttack takes nothing returns nothing
@@ -4418,8 +5133,10 @@ function AnyPlayerAttack takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @bug Leaks handle `creep`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
 @patch 1.00
 */
 function ExpansionAttack takes nothing returns nothing
@@ -4440,6 +5157,7 @@ endfunction
 //============================================================================
 //  AddSiege
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4455,8 +5173,10 @@ endfunction
 //===========================================================================
 //  GetAllyCount
 //============================================================================
+
 /**
 @bug Not compatible with 24-player mode.
+
 @patch 1.07
 */
 function GetAllyCount takes player whichPlayer returns integer
@@ -4487,6 +5207,7 @@ endfunction
 //============================================================================
 //  SingleMeleeAttack
 //============================================================================
+
 /**
 @bug Leaks handle:
 
@@ -4496,6 +5217,7 @@ endfunction
 4. common
 
 In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
 @patch 1.00
 */
 function SingleMeleeAttack takes boolean needs_exp, boolean has_siege, boolean major_ok, boolean air_units returns nothing
@@ -4634,6 +5356,7 @@ function SingleMeleeAttack takes boolean needs_exp, boolean has_siege, boolean m
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4644,6 +5367,7 @@ function GetZeppelin takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4652,6 +5376,7 @@ function FoodUsed takes nothing returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -4660,6 +5385,7 @@ function FoodCap takes nothing returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.07
 */
@@ -4668,6 +5394,7 @@ function FoodSpace takes nothing returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4676,6 +5403,7 @@ function FoodAvail takes integer base returns integer
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4703,6 +5431,7 @@ function BuildAttackers takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4724,6 +5453,7 @@ function BuildDefenders takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4774,6 +5504,7 @@ function CampaignBasicsA takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4788,6 +5519,7 @@ function CampaignBasics takes nothing returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4835,8 +5567,10 @@ function CampaignAI takes integer farms, code heroes returns nothing
 endfunction
 
 //============================================================================
+
 /**
 @bug Leaks handle `bldg`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+
 @patch 1.00
 */
 function UnsummonAll takes nothing returns nothing
@@ -4852,6 +5586,7 @@ endfunction
 //============================================================================
 //  SkillArrays
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4874,6 +5609,7 @@ endfunction
 //--------------------------------------------------------------------------------------------------
 //  SetSkillArray
 //--------------------------------------------------------------------------------------------------
+
 /**
 @patch 1.07
 */
@@ -4913,6 +5649,7 @@ endfunction
 //============================================================================
 //  AwaitMeleeHeroes
 //============================================================================
+
 /**
 @patch 1.00
 */
@@ -4929,6 +5666,7 @@ endfunction
 //============================================================================
 //  PickMeleeHero
 //============================================================================
+
 /**
 @patch 1.00
 */

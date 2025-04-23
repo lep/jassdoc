@@ -9,22 +9,27 @@ globals
     //
 
     // Misc constants
+
 /**
 @patch 1.00
 */
     constant real      bj_PI                            = 3.14159
+
 /**
 @patch 1.00
 */
     constant real      bj_E                             = 2.71828
+
 /**
 @patch 1.00
 */
     constant real      bj_CELLWIDTH                     = 128.0
+
 /**
 @patch 1.07
 */
     constant real      bj_CLIFFHEIGHT                   = 128.0
+
 /**
 Specifies the default unit rotation for BJ functions. Set to 270° meaning facing south.
 
@@ -33,119 +38,148 @@ Specifies the default unit rotation for BJ functions. Set to 270° meaning facin
 * 180 = West
 * 270 = South
 * -90 = South (wraps around)
+
 @patch 1.00
 */
     constant real      bj_UNIT_FACING                   = 270.0
+
 /**
 @patch 1.00
 */
     constant real      bj_RADTODEG                      = 180.0/bj_PI
+
 /**
 @patch 1.00
 */
     constant real      bj_DEGTORAD                      = bj_PI/180.0
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_QUEST              = 20.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_QUESTUPDATE        = 20.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_QUESTDONE          = 20.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_QUESTFAILED        = 20.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_QUESTREQUIREMENT   = 20.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_MISSIONFAILED      = 20.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_ALWAYSHINT         = 12.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_HINT               = 12.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_SECRET             = 10.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_UNITACQUIRED       = 15.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_UNITAVAILABLE      = 10.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TEXT_DELAY_ITEMACQUIRED       = 10.00
+
 /**
 @patch 1.07
 */
     constant real      bj_TEXT_DELAY_WARNING            = 12.00
+
 /**
 @patch 1.00
 */
     constant real      bj_QUEUE_DELAY_QUEST             =  5.00
+
 /**
 @patch 1.00
 */
     constant real      bj_QUEUE_DELAY_HINT              =  5.00
+
 /**
 @patch 1.00
 */
     constant real      bj_QUEUE_DELAY_SECRET            =  3.00
+
 /**
 @patch 1.00
 */
     constant real      bj_HANDICAP_EASY                 = 60.00
+
 /**
 @patch 1.32.0.14411
 */
     constant real      bj_HANDICAP_NORMAL               = 90.00
+
 /**
 @patch 1.32.0.13369
 */
     constant real      bj_HANDICAPDAMAGE_EASY           = 50.00
+
 /**
 @patch 1.32.0.14411
 */
     constant real      bj_HANDICAPDAMAGE_NORMAL         = 90.00
+
 /**
 @patch 1.32.0.13369
 */
 	constant real      bj_HANDICAPREVIVE_NOTHARD        = 50.00
+
 /**
 @patch 1.00
 */
     constant real      bj_GAME_STARTED_THRESHOLD        =  0.01
+
 /**
 @patch 1.07
 */
     constant real      bj_WAIT_FOR_COND_MIN_INTERVAL    =  0.10
+
 /**
 @patch 1.07
 */
     constant real      bj_POLLED_WAIT_INTERVAL          =  0.10
+
 /**
 @patch 1.07
 */
     constant real      bj_POLLED_WAIT_SKIP_THRESHOLD    =  2.00
 
     // Game constants
+
 /**
 @patch 1.00
 */
@@ -155,6 +189,7 @@ Specifies the default unit rotation for BJ functions. Set to 270° meaning facin
 Stores the maximum number of playable player slots regardless of map options.
 
 @note See: `GetBJMaxPlayers`, `GetBJMaxPlayerSlots`
+
 @patch 1.00
 */
     constant integer   bj_MAX_PLAYERS                   =  GetBJMaxPlayers()
@@ -163,6 +198,7 @@ Stores the maximum number of playable player slots regardless of map options.
 Stores the zero-based ID of neutral victim player.
 
 @note See: `GetBJPlayerNeutralVictim`, `GetPlayerNeutralAggressive`, `GetBJPlayerNeutralExtra`, `GetPlayerNeutralPassive`
+
 @patch 1.00
 */
     constant integer   bj_PLAYER_NEUTRAL_VICTIM         =  GetBJPlayerNeutralVictim()
@@ -171,6 +207,7 @@ Stores the zero-based ID of neutral victim player.
 Stores the zero-based ID of neutral extra player.
 
 @note See: `GetBJPlayerNeutralExtra`, `GetPlayerNeutralAggressive`, `GetPlayerNeutralPassive`, `GetBJPlayerNeutralVictim`
+
 @patch 1.07
 */
     constant integer   bj_PLAYER_NEUTRAL_EXTRA          =  GetBJPlayerNeutralExtra()
@@ -179,27 +216,33 @@ Stores the zero-based ID of neutral extra player.
 Stores the maximum number of internal player slots regardless of map options.
 
 @note See: `GetBJMaxPlayerSlots`, `GetBJMaxPlayers`
+
 @patch 1.00
 */
     constant integer   bj_MAX_PLAYER_SLOTS              =  GetBJMaxPlayerSlots()
+
 /**
 @patch 1.00
 */
     constant integer   bj_MAX_SKELETONS                 =  25
+
 /**
 @patch 1.07
 */
     constant integer   bj_MAX_STOCK_ITEM_SLOTS          =  11
+
 /**
 @patch 1.07
 */
     constant integer   bj_MAX_STOCK_UNIT_SLOTS          =  11
+
 /**
 @patch 1.07
 */
     constant integer   bj_MAX_ITEM_LEVEL                =  10
-
+    
     // Auto Save constants
+
 /**
 @patch 1.32.0.13369
 */
@@ -207,10 +250,12 @@ Stores the maximum number of internal player slots regardless of map options.
 
     // Ideally these would be looked up from Units/MiscData.txt,
     // but there is currently no script functionality exposed to do that
+
 /**
 @patch 1.00
 */
     constant real      bj_TOD_DAWN                      = 6.00
+
 /**
 @patch 1.00
 */
@@ -225,324 +270,398 @@ Stores the maximum number of internal player slots regardless of map options.
     //   - Max heroes allowed per hero type
     //   - Distance from start loc to search for nearby mines
     //
+
 /**
 @patch 1.00
 */
     constant real      bj_MELEE_STARTING_TOD            = 8.00
+
 /**
 @patch 1.07
 */
     constant integer   bj_MELEE_STARTING_GOLD_V0        = 750
+
 /**
 @patch 1.07
 */
     constant integer   bj_MELEE_STARTING_GOLD_V1        = 500
+
 /**
 @patch 1.07
 */
     constant integer   bj_MELEE_STARTING_LUMBER_V0      = 200
+
 /**
 @patch 1.07
 */
     constant integer   bj_MELEE_STARTING_LUMBER_V1      = 150
+
 /**
 @patch 1.00
 */
     constant integer   bj_MELEE_STARTING_HERO_TOKENS    = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_MELEE_HERO_LIMIT              = 3
+
 /**
 @patch 1.00
 */
     constant integer   bj_MELEE_HERO_TYPE_LIMIT         = 1
+
 /**
 @patch 1.00
 */
     constant real      bj_MELEE_MINE_SEARCH_RADIUS      = 2000
+
 /**
 @patch 1.07
 */
     constant real      bj_MELEE_CLEAR_UNITS_RADIUS      = 1500
+
 /**
 @patch 1.07
 */
     constant real      bj_MELEE_CRIPPLE_TIMEOUT         = 120.00
+
 /**
 @patch 1.07
 */
     constant real      bj_MELEE_CRIPPLE_MSG_DURATION    = 20.00
+
 /**
 @patch 1.07
 */
     constant integer   bj_MELEE_MAX_TWINKED_HEROES_V0   = 3
+
 /**
 @patch 1.07
 */
     constant integer   bj_MELEE_MAX_TWINKED_HEROES_V1   = 1
 
     // Delay between a creep's death and the time it may drop an item.
+
 /**
 @patch 1.00
 */
     constant real      bj_CREEP_ITEM_DELAY              = 0.50
 
     // Timing settings for Marketplace inventories.
+
 /**
 @patch 1.07
 */
     constant real      bj_STOCK_RESTOCK_INITIAL_DELAY   = 120
+
 /**
 @patch 1.07
 */
     constant real      bj_STOCK_RESTOCK_INTERVAL        = 30
+
 /**
 @patch 1.07
 */
     constant integer   bj_STOCK_MAX_ITERATIONS          = 20
 
     // Max events registered by a single "dest dies in region" event.
+
 /**
 @patch 1.07
 */
     constant integer   bj_MAX_DEST_IN_REGION_EVENTS     = 64
 
     // Camera settings
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMERA_MIN_FARZ               = 100
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMERA_DEFAULT_DISTANCE       = 1650
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMERA_DEFAULT_FARZ           = 5000
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMERA_DEFAULT_AOA            = 304
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMERA_DEFAULT_FOV            = 70
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMERA_DEFAULT_ROLL           = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMERA_DEFAULT_ROTATION       = 90
 
     // Rescue
+
 /**
 @patch 1.00
 */
     constant real      bj_RESCUE_PING_TIME              = 2.00
 
     // Transmission behavior settings
+
 /**
 @patch 1.00
 */
     constant real      bj_NOTHING_SOUND_DURATION        = 5.00
+
 /**
 @patch 1.00
 */
     constant real      bj_TRANSMISSION_PING_TIME        = 1.00
+
 /**
 @patch 1.00
 */
     constant integer   bj_TRANSMISSION_IND_RED          = 255
+
 /**
 @patch 1.00
 */
     constant integer   bj_TRANSMISSION_IND_BLUE         = 255
+
 /**
 @patch 1.00
 */
     constant integer   bj_TRANSMISSION_IND_GREEN        = 255
+
 /**
 @patch 1.00
 */
     constant integer   bj_TRANSMISSION_IND_ALPHA        = 255
+
 /**
 @patch 1.00
 */
     constant real      bj_TRANSMISSION_PORT_HANGTIME    = 1.50
 
     // Cinematic mode settings
+
 /**
 @patch 1.00
 */
     constant real      bj_CINEMODE_INTERFACEFADE        = 0.50
+
 /**
 @patch 1.00
 */
     constant gamespeed bj_CINEMODE_GAMESPEED            = MAP_SPEED_NORMAL
 
     // Cinematic mode volume levels
+
 /**
 @patch 1.00
 */
     constant real      bj_CINEMODE_VOLUME_UNITMOVEMENT  = 0.40
+
 /**
 @patch 1.00
 */
     constant real      bj_CINEMODE_VOLUME_UNITSOUNDS    = 0.00
+
 /**
 @patch 1.00
 */
     constant real      bj_CINEMODE_VOLUME_COMBAT        = 0.40
+
 /**
 @patch 1.00
 */
     constant real      bj_CINEMODE_VOLUME_SPELLS        = 0.40
+
 /**
 @patch 1.00
 */
     constant real      bj_CINEMODE_VOLUME_UI            = 0.00
+
 /**
 @patch 1.00
 */
     constant real      bj_CINEMODE_VOLUME_MUSIC         = 0.55
+
 /**
 @patch 1.00
 */
     constant real      bj_CINEMODE_VOLUME_AMBIENTSOUNDS = 1.00
+
 /**
 @patch 1.00
 */
     constant real      bj_CINEMODE_VOLUME_FIRE          = 0.60
 
     // Speech mode volume levels
+
 /**
 @patch 1.00
 */
     constant real      bj_SPEECH_VOLUME_UNITMOVEMENT    = 0.25
+
 /**
 @patch 1.00
 */
     constant real      bj_SPEECH_VOLUME_UNITSOUNDS      = 0.00
+
 /**
 @patch 1.00
 */
     constant real      bj_SPEECH_VOLUME_COMBAT          = 0.25
+
 /**
 @patch 1.00
 */
     constant real      bj_SPEECH_VOLUME_SPELLS          = 0.25
+
 /**
 @patch 1.00
 */
     constant real      bj_SPEECH_VOLUME_UI              = 0.00
+
 /**
 @patch 1.00
 */
     constant real      bj_SPEECH_VOLUME_MUSIC           = 0.55
+
 /**
 @patch 1.00
 */
     constant real      bj_SPEECH_VOLUME_AMBIENTSOUNDS   = 1.00
+
 /**
 @patch 1.00
 */
     constant real      bj_SPEECH_VOLUME_FIRE            = 0.60
 
     // Smart pan settings
+
 /**
 @patch 1.00
 */
     constant real      bj_SMARTPAN_TRESHOLD_PAN         = 500
+
 /**
 @patch 1.00
 */
     constant real      bj_SMARTPAN_TRESHOLD_SNAP        = 3500
 
     // QueuedTriggerExecute settings
+
 /**
 @patch 1.00
 */
     constant integer   bj_MAX_QUEUED_TRIGGERS           = 100
+
 /**
 @patch 1.00
 */
     constant real      bj_QUEUED_TRIGGER_TIMEOUT        = 180.00
 
     // Campaign indexing constants
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMPAIGN_INDEX_T        = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMPAIGN_INDEX_H        = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMPAIGN_INDEX_U        = 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMPAIGN_INDEX_O        = 3
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMPAIGN_INDEX_N        = 4
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_INDEX_XN       = 5
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_INDEX_XH       = 6
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_INDEX_XU       = 7
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_INDEX_XO       = 8
 
     // Campaign offset constants (for mission indexing)
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_OFFSET_T       = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_OFFSET_H       = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_OFFSET_U       = 2
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_OFFSET_O       = 3
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_OFFSET_N       = 4
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_OFFSET_XN      = 5
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_OFFSET_XH      = 6
+
 /**
 @patch 1.07
 */
     constant integer   bj_CAMPAIGN_OFFSET_XU      = 7
+
 /**
 @patch 1.07
 */
@@ -550,903 +669,1112 @@ Stores the maximum number of internal player slots regardless of map options.
 
     // Mission indexing constants
     // Tutorial
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_T00       = bj_CAMPAIGN_OFFSET_T * 1000 + 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_T01       = bj_CAMPAIGN_OFFSET_T * 1000 + 1
+
 /**
 @patch 1.32.0.13369
 */
     constant integer   bj_MISSION_INDEX_T02       = bj_CAMPAIGN_OFFSET_T * 1000 + 2
+
 /**
 @patch 1.32.0.13369
 */
     constant integer   bj_MISSION_INDEX_T03       = bj_CAMPAIGN_OFFSET_T * 1000 + 3
+
 /**
 @patch 1.32.0.13369
 */
     constant integer   bj_MISSION_INDEX_T04       = bj_CAMPAIGN_OFFSET_T * 1000 + 4
     // Human
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H00       = bj_CAMPAIGN_OFFSET_H * 1000 + 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H01       = bj_CAMPAIGN_OFFSET_H * 1000 + 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H02       = bj_CAMPAIGN_OFFSET_H * 1000 + 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H03       = bj_CAMPAIGN_OFFSET_H * 1000 + 3
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H04       = bj_CAMPAIGN_OFFSET_H * 1000 + 4
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H05       = bj_CAMPAIGN_OFFSET_H * 1000 + 5
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H06       = bj_CAMPAIGN_OFFSET_H * 1000 + 6
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H07       = bj_CAMPAIGN_OFFSET_H * 1000 + 7
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H08       = bj_CAMPAIGN_OFFSET_H * 1000 + 8
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H09       = bj_CAMPAIGN_OFFSET_H * 1000 + 9
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H10       = bj_CAMPAIGN_OFFSET_H * 1000 + 10
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_H11       = bj_CAMPAIGN_OFFSET_H * 1000 + 11
     // Undead
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U00       = bj_CAMPAIGN_OFFSET_U * 1000 + 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U01       = bj_CAMPAIGN_OFFSET_U * 1000 + 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U02       = bj_CAMPAIGN_OFFSET_U * 1000 + 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U03       = bj_CAMPAIGN_OFFSET_U * 1000 + 3
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U05       = bj_CAMPAIGN_OFFSET_U * 1000 + 4
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U07       = bj_CAMPAIGN_OFFSET_U * 1000 + 5
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U08       = bj_CAMPAIGN_OFFSET_U * 1000 + 6
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U09       = bj_CAMPAIGN_OFFSET_U * 1000 + 7
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U10       = bj_CAMPAIGN_OFFSET_U * 1000 + 8
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_U11       = bj_CAMPAIGN_OFFSET_U * 1000 + 9
     // Orc
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O00       = bj_CAMPAIGN_OFFSET_O * 1000 + 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O01       = bj_CAMPAIGN_OFFSET_O * 1000 + 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O02       = bj_CAMPAIGN_OFFSET_O * 1000 + 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O03       = bj_CAMPAIGN_OFFSET_O * 1000 + 3
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O04       = bj_CAMPAIGN_OFFSET_O * 1000 + 4
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O05       = bj_CAMPAIGN_OFFSET_O * 1000 + 5
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O06       = bj_CAMPAIGN_OFFSET_O * 1000 + 6
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O07       = bj_CAMPAIGN_OFFSET_O * 1000 + 7
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O08       = bj_CAMPAIGN_OFFSET_O * 1000 + 8
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O09       = bj_CAMPAIGN_OFFSET_O * 1000 + 9
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_O10       = bj_CAMPAIGN_OFFSET_O * 1000 + 10
     // Night Elf
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N00       = bj_CAMPAIGN_OFFSET_N * 1000 + 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N01       = bj_CAMPAIGN_OFFSET_N * 1000 + 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N02       = bj_CAMPAIGN_OFFSET_N * 1000 + 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N03       = bj_CAMPAIGN_OFFSET_N * 1000 + 3
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N04       = bj_CAMPAIGN_OFFSET_N * 1000 + 4
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N05       = bj_CAMPAIGN_OFFSET_N * 1000 + 5
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N06       = bj_CAMPAIGN_OFFSET_N * 1000 + 6
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N07       = bj_CAMPAIGN_OFFSET_N * 1000 + 7
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N08       = bj_CAMPAIGN_OFFSET_N * 1000 + 8
+
 /**
 @patch 1.00
 */
     constant integer   bj_MISSION_INDEX_N09       = bj_CAMPAIGN_OFFSET_N * 1000 + 9
     // Expansion Night Elf
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN00       = bj_CAMPAIGN_OFFSET_XN * 1000 + 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN01       = bj_CAMPAIGN_OFFSET_XN * 1000 + 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN02       = bj_CAMPAIGN_OFFSET_XN * 1000 + 2
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN03       = bj_CAMPAIGN_OFFSET_XN * 1000 + 3
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN04       = bj_CAMPAIGN_OFFSET_XN * 1000 + 4
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN05       = bj_CAMPAIGN_OFFSET_XN * 1000 + 5
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN06       = bj_CAMPAIGN_OFFSET_XN * 1000 + 6
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN07       = bj_CAMPAIGN_OFFSET_XN * 1000 + 7
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN08       = bj_CAMPAIGN_OFFSET_XN * 1000 + 8
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN09       = bj_CAMPAIGN_OFFSET_XN * 1000 + 9
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XN10       = bj_CAMPAIGN_OFFSET_XN * 1000 + 10
     // Expansion Human
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH00       = bj_CAMPAIGN_OFFSET_XH * 1000 + 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH01       = bj_CAMPAIGN_OFFSET_XH * 1000 + 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH02       = bj_CAMPAIGN_OFFSET_XH * 1000 + 2
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH03       = bj_CAMPAIGN_OFFSET_XH * 1000 + 3
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH04       = bj_CAMPAIGN_OFFSET_XH * 1000 + 4
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH05       = bj_CAMPAIGN_OFFSET_XH * 1000 + 5
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH06       = bj_CAMPAIGN_OFFSET_XH * 1000 + 6
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH07       = bj_CAMPAIGN_OFFSET_XH * 1000 + 7
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH08       = bj_CAMPAIGN_OFFSET_XH * 1000 + 8
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XH09       = bj_CAMPAIGN_OFFSET_XH * 1000 + 9
     // Expansion Undead
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU00       = bj_CAMPAIGN_OFFSET_XU * 1000 + 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU01       = bj_CAMPAIGN_OFFSET_XU * 1000 + 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU02       = bj_CAMPAIGN_OFFSET_XU * 1000 + 2
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU03       = bj_CAMPAIGN_OFFSET_XU * 1000 + 3
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU04       = bj_CAMPAIGN_OFFSET_XU * 1000 + 4
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU05       = bj_CAMPAIGN_OFFSET_XU * 1000 + 5
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU06       = bj_CAMPAIGN_OFFSET_XU * 1000 + 6
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU07       = bj_CAMPAIGN_OFFSET_XU * 1000 + 7
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU08       = bj_CAMPAIGN_OFFSET_XU * 1000 + 8
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU09       = bj_CAMPAIGN_OFFSET_XU * 1000 + 9
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU10       = bj_CAMPAIGN_OFFSET_XU * 1000 + 10
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU11       = bj_CAMPAIGN_OFFSET_XU * 1000 + 11
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU12       = bj_CAMPAIGN_OFFSET_XU * 1000 + 12
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XU13       = bj_CAMPAIGN_OFFSET_XU * 1000 + 13
 
     // Expansion Orc
+
 /**
 @patch 1.07
 */
     constant integer   bj_MISSION_INDEX_XO00       = bj_CAMPAIGN_OFFSET_XO * 1000 + 0
+
 /**
 @patch 1.30.0.9655
 */
     constant integer   bj_MISSION_INDEX_XO01       = bj_CAMPAIGN_OFFSET_XO * 1000 + 1
+
 /**
 @patch 1.30.0.9655
 */
     constant integer   bj_MISSION_INDEX_XO02       = bj_CAMPAIGN_OFFSET_XO * 1000 + 2
+
 /**
 @patch 1.30.0.9655
 */
     constant integer   bj_MISSION_INDEX_XO03       = bj_CAMPAIGN_OFFSET_XO * 1000 + 3
 
     // Cinematic indexing constants
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEMATICINDEX_TOP      = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEMATICINDEX_HOP      = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEMATICINDEX_HED      = 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEMATICINDEX_OOP      = 3
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEMATICINDEX_OED      = 4
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEMATICINDEX_UOP      = 5
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEMATICINDEX_UED      = 6
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEMATICINDEX_NOP      = 7
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEMATICINDEX_NED      = 8
+
 /**
 @patch 1.07
 */
     constant integer   bj_CINEMATICINDEX_XOP      = 9
+
 /**
 @patch 1.07
 */
     constant integer   bj_CINEMATICINDEX_XED      = 10
 
     // Alliance settings
+
 /**
 @patch 1.00
 */
     constant integer   bj_ALLIANCE_UNALLIED        = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_ALLIANCE_UNALLIED_VISION = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_ALLIANCE_ALLIED          = 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_ALLIANCE_ALLIED_VISION   = 3
+
 /**
 @patch 1.00
 */
     constant integer   bj_ALLIANCE_ALLIED_UNITS    = 4
+
 /**
 @patch 1.00
 */
     constant integer   bj_ALLIANCE_ALLIED_ADVUNITS = 5
+
 /**
 @patch 1.00
 */
     constant integer   bj_ALLIANCE_NEUTRAL         = 6
+
 /**
 @patch 1.07
 */
     constant integer   bj_ALLIANCE_NEUTRAL_VISION  = 7
 
     // Keyboard Event Types
+
 /**
 @patch 1.07
 */
     constant integer   bj_KEYEVENTTYPE_DEPRESS     = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_KEYEVENTTYPE_RELEASE     = 1
 
     // Keyboard Event Keys
+
 /**
 @patch 1.07
 */
     constant integer   bj_KEYEVENTKEY_LEFT         = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_KEYEVENTKEY_RIGHT        = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_KEYEVENTKEY_DOWN         = 2
+
 /**
 @patch 1.07
 */
     constant integer   bj_KEYEVENTKEY_UP           = 3
 
     // Mouse Event Types
+
 /**
 @patch 1.29.0.8803
 */
     constant integer   bj_MOUSEEVENTTYPE_DOWN     = 0
+
 /**
 @patch 1.29.0.8803
 */
     constant integer   bj_MOUSEEVENTTYPE_UP       = 1
+
 /**
 @patch 1.29.0.8803
 */
     constant integer   bj_MOUSEEVENTTYPE_MOVE     = 2
 
     // Transmission timing methods
+
 /**
 @patch 1.00
 */
     constant integer   bj_TIMETYPE_ADD             = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_TIMETYPE_SET             = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_TIMETYPE_SUB             = 2
 
     // Camera bounds adjustment methods
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMERABOUNDS_ADJUST_ADD  = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_CAMERABOUNDS_ADJUST_SUB  = 1
 
     // Quest creation states
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTTYPE_REQ_DISCOVERED   = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTTYPE_REQ_UNDISCOVERED = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTTYPE_OPT_DISCOVERED   = 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTTYPE_OPT_UNDISCOVERED = 3
 
     // Quest message types
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_DISCOVERED    = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_UPDATED       = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_COMPLETED     = 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_FAILED        = 3
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_REQUIREMENT   = 4
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_MISSIONFAILED = 5
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_ALWAYSHINT    = 6
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_HINT          = 7
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_SECRET        = 8
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_UNITACQUIRED  = 9
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_UNITAVAILABLE = 10
+
 /**
 @patch 1.00
 */
     constant integer   bj_QUESTMESSAGE_ITEMACQUIRED  = 11
+
 /**
 @patch 1.07
 */
     constant integer   bj_QUESTMESSAGE_WARNING       = 12
 
     // Leaderboard sorting methods
+
 /**
 @patch 1.00
 */
     constant integer   bj_SORTTYPE_SORTBYVALUE     = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_SORTTYPE_SORTBYPLAYER    = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_SORTTYPE_SORTBYLABEL     = 2
 
     // Cinematic fade filter methods
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEFADETYPE_FADEIN      = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEFADETYPE_FADEOUT     = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_CINEFADETYPE_FADEOUTIN   = 2
 
     // Buff removal methods
+
 /**
 @patch 1.00
 */
     constant integer   bj_REMOVEBUFFS_POSITIVE     = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_REMOVEBUFFS_NEGATIVE     = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_REMOVEBUFFS_ALL          = 2
+
 /**
 @patch 1.07
 */
     constant integer   bj_REMOVEBUFFS_NONTLIFE     = 3
 
     // Buff properties - polarity
+
 /**
 @patch 1.07
 */
     constant integer   bj_BUFF_POLARITY_POSITIVE   = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_BUFF_POLARITY_NEGATIVE   = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_BUFF_POLARITY_EITHER     = 2
 
     // Buff properties - resist type
+
 /**
 @patch 1.07
 */
     constant integer   bj_BUFF_RESIST_MAGIC        = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_BUFF_RESIST_PHYSICAL     = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_BUFF_RESIST_EITHER       = 2
+
 /**
 @patch 1.07
 */
     constant integer   bj_BUFF_RESIST_BOTH         = 3
 
     // Hero stats
+
 /**
 @patch 1.07
 */
     constant integer   bj_HEROSTAT_STR             = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_HEROSTAT_AGI             = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_HEROSTAT_INT             = 2
 
     // Hero skill point modification methods
+
 /**
 @patch 1.07
 */
     constant integer   bj_MODIFYMETHOD_ADD    = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_MODIFYMETHOD_SUB    = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_MODIFYMETHOD_SET    = 2
 
     // Unit state adjustment methods (for replaced units)
+
 /**
 @patch 1.00
 */
     constant integer   bj_UNIT_STATE_METHOD_ABSOLUTE = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_UNIT_STATE_METHOD_RELATIVE = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_UNIT_STATE_METHOD_DEFAULTS = 2
+
 /**
 @patch 1.00
 */
     constant integer   bj_UNIT_STATE_METHOD_MAXIMUM  = 3
 
     // Gate operations
+
 /**
 @patch 1.00
 */
     constant integer   bj_GATEOPERATION_CLOSE      = 0
+
 /**
 @patch 1.00
 */
     constant integer   bj_GATEOPERATION_OPEN       = 1
+
 /**
 @patch 1.00
 */
     constant integer   bj_GATEOPERATION_DESTROY    = 2
 
 	// Game cache value types
+
 /**
 @patch 1.07
 */
 	constant integer   bj_GAMECACHE_BOOLEAN                 = 0
+
 /**
 @patch 1.07
 */
 	constant integer   bj_GAMECACHE_INTEGER                 = 1
+
 /**
 @patch 1.07
 */
 	constant integer   bj_GAMECACHE_REAL                    = 2
+
 /**
 @patch 1.07
 */
 	constant integer   bj_GAMECACHE_UNIT                    = 3
+
 /**
 @patch 1.07
 */
 	constant integer   bj_GAMECACHE_STRING                  = 4
 	
 	// Hashtable value types
+
 /**
 @patch 1.24a
 */
 	constant integer   bj_HASHTABLE_BOOLEAN                 = 0
+
 /**
 @patch 1.24a
 */
 	constant integer   bj_HASHTABLE_INTEGER                 = 1
+
 /**
 @patch 1.24a
 */
 	constant integer   bj_HASHTABLE_REAL                    = 2
+
 /**
 @patch 1.24a
 */
 	constant integer   bj_HASHTABLE_STRING                  = 3
+
 /**
 @patch 1.24a
 */
 	constant integer   bj_HASHTABLE_HANDLE                  = 4
 
     // Item status types
+
 /**
 @patch 1.07
 */
     constant integer   bj_ITEM_STATUS_HIDDEN       = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_ITEM_STATUS_OWNED        = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_ITEM_STATUS_INVULNERABLE = 2
+
 /**
 @patch 1.07
 */
     constant integer   bj_ITEM_STATUS_POWERUP      = 3
+
 /**
 @patch 1.07
 */
     constant integer   bj_ITEM_STATUS_SELLABLE     = 4
+
 /**
 @patch 1.07
 */
     constant integer   bj_ITEM_STATUS_PAWNABLE     = 5
 
     // Itemcode status types
+
 /**
 @patch 1.07
 */
     constant integer   bj_ITEMCODE_STATUS_POWERUP  = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_ITEMCODE_STATUS_SELLABLE = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_ITEMCODE_STATUS_PAWNABLE = 2
 
     // Minimap ping styles
+
 /**
 @patch 1.07
 */
     constant integer   bj_MINIMAPPINGSTYLE_SIMPLE  = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_MINIMAPPINGSTYLE_FLASHY  = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_MINIMAPPINGSTYLE_ATTACK  = 2
-
+	
     // Campaign Minimap icon styles
+
 /**
 @patch 1.32.0.13369
 */
     constant integer   bj_CAMPPINGSTYLE_PRIMARY			= 0
+
 /**
 @patch 1.32.0.14411
 */
     constant integer   bj_CAMPPINGSTYLE_PRIMARY_GREEN   = 1
+
 /**
 @patch 1.32.0.14411
 */
     constant integer   bj_CAMPPINGSTYLE_PRIMARY_RED     = 2
+
 /**
 @patch 1.32.0.13369
 */
     constant integer   bj_CAMPPINGSTYLE_BONUS			= 3
+
 /**
 @patch 1.32.0.13369
 */
     constant integer   bj_CAMPPINGSTYLE_TURNIN			= 4
+
 /**
 @patch 1.32.0.13369
 */
 	constant integer   bj_CAMPPINGSTYLE_BOSS			= 5
+
 /**
 @patch 1.32.0.13369
 */
 	constant integer   bj_CAMPPINGSTYLE_CONTROL_ALLY	= 6
+
 /**
 @patch 1.32.0.13369
 */
 	constant integer   bj_CAMPPINGSTYLE_CONTROL_NEUTRAL	= 7
+
 /**
 @patch 1.32.0.13369
 */
 	constant integer   bj_CAMPPINGSTYLE_CONTROL_ENEMY	= 8
 
     // Corpse creation settings
+
 /**
 @patch 1.07
 */
     constant real      bj_CORPSE_MAX_DEATH_TIME    = 8.00
 
     // Corpse creation styles
+
 /**
 @patch 1.07
 */
     constant integer   bj_CORPSETYPE_FLESH         = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_CORPSETYPE_BONE          = 1
 
     // Elevator pathing-blocker destructable code
+
 /**
 @patch 1.07
 */
     constant integer   bj_ELEVATOR_BLOCKER_CODE    = 'DTep'
+
 /**
 @patch 1.07
 */
     constant integer   bj_ELEVATOR_CODE01          = 'DTrf'
+
 /**
 @patch 1.07
 */
     constant integer   bj_ELEVATOR_CODE02          = 'DTrx'
 
     // Elevator wall codes
+
 /**
 @patch 1.07
 */
     constant integer   bj_ELEVATOR_WALL_TYPE_ALL        = 0
+
 /**
 @patch 1.07
 */
     constant integer   bj_ELEVATOR_WALL_TYPE_EAST       = 1
+
 /**
 @patch 1.07
 */
     constant integer   bj_ELEVATOR_WALL_TYPE_NORTH      = 2
+
 /**
 @patch 1.07
 */
     constant integer   bj_ELEVATOR_WALL_TYPE_SOUTH      = 3
+
 /**
 @patch 1.07
 */
@@ -1457,14 +1785,17 @@ Stores the maximum number of internal player slots regardless of map options.
     //
 
     // Force predefs
+
 /**
 @patch 1.00
 */
     force              bj_FORCE_ALL_PLAYERS        = null
+
 /**
 @patch 1.00
 */
     force array        bj_FORCE_PLAYER
+
 
 /**
 @patch 1.07
@@ -1472,103 +1803,126 @@ Stores the maximum number of internal player slots regardless of map options.
     integer            bj_MELEE_MAX_TWINKED_HEROES = 0
 
     // Map area rects
+
 /**
 @patch 1.00
 */
     rect               bj_mapInitialPlayableArea   = null
+
 /**
 @patch 1.00
 */
     rect               bj_mapInitialCameraBounds   = null
 
     // Utility function vars
+
 /**
 @patch 1.00
 */
     integer            bj_forLoopAIndex            = 0
+
 /**
 @patch 1.00
 */
     integer            bj_forLoopBIndex            = 0
+
 /**
 @patch 1.00
 */
     integer            bj_forLoopAIndexEnd         = 0
+
 /**
 @patch 1.00
 */
     integer            bj_forLoopBIndexEnd         = 0
 
+
 /**
 @patch 1.00
 */
     boolean            bj_slotControlReady         = false
+
 /**
 @patch 1.00
 */
     boolean array      bj_slotControlUsed
+
 /**
 @patch 1.00
 */
     mapcontrol array   bj_slotControl
 
     // Game started detection vars
+
 /**
 @patch 1.00
 */
     timer              bj_gameStartedTimer         = null
+
 /**
 @patch 1.00
 */
     boolean            bj_gameStarted              = false
+
 /**
 @patch 1.00
 */
     timer              bj_volumeGroupsTimer        = CreateTimer()
 
     // Singleplayer check
+
 /**
 @patch 1.00
 */
     boolean            bj_isSinglePlayer           = false
 
     // Day/Night Cycle vars
+
 /**
 @patch 1.00
 */
     trigger            bj_dncSoundsDay             = null
+
 /**
 @patch 1.00
 */
     trigger            bj_dncSoundsNight           = null
+
 /**
 @patch 1.00
 */
     sound              bj_dayAmbientSound          = null
+
 /**
 @patch 1.00
 */
     sound              bj_nightAmbientSound        = null
+
 /**
 @patch 1.00
 */
     trigger            bj_dncSoundsDawn            = null
+
 /**
 @patch 1.00
 */
     trigger            bj_dncSoundsDusk            = null
+
 /**
 @patch 1.00
 */
     sound              bj_dawnSound                = null
+
 /**
 @patch 1.00
 */
     sound              bj_duskSound                = null
+
 /**
 @patch 1.00
 */
     boolean            bj_useDawnDuskSounds        = true
+
 /**
 @patch 1.00
 */
@@ -1576,604 +1930,748 @@ Stores the maximum number of internal player slots regardless of map options.
 
     // Triggered sounds
     //sound              bj_pingMinimapSound         = null
+
 /**
 @patch 1.00
 */
     sound              bj_rescueSound              = null
+
 /**
 @patch 1.00
 */
     sound              bj_questDiscoveredSound     = null
+
 /**
 @patch 1.00
 */
     sound              bj_questUpdatedSound        = null
+
 /**
 @patch 1.00
 */
     sound              bj_questCompletedSound      = null
+
 /**
 @patch 1.00
 */
     sound              bj_questFailedSound         = null
+
 /**
 @patch 1.00
 */
     sound              bj_questHintSound           = null
+
 /**
 @patch 1.00
 */
     sound              bj_questSecretSound         = null
+
 /**
 @patch 1.00
 */
     sound              bj_questItemAcquiredSound   = null
+
 /**
 @patch 1.07
 */
     sound              bj_questWarningSound        = null
+
 /**
 @patch 1.00
 */
     sound              bj_victoryDialogSound       = null
+
 /**
 @patch 1.00
 */
     sound              bj_defeatDialogSound        = null
 
     // Marketplace vars
+
 /**
 @patch 1.07
 */
     trigger            bj_stockItemPurchased       = null
+
 /**
 @patch 1.07
 */
     timer              bj_stockUpdateTimer         = null
+
 /**
 @patch 1.07
 */
     boolean array      bj_stockAllowedPermanent
+
 /**
 @patch 1.07
 */
     boolean array      bj_stockAllowedCharged
+
 /**
 @patch 1.07
 */
     boolean array      bj_stockAllowedArtifact
+
 /**
 @patch 1.07
 */
     integer            bj_stockPickedItemLevel     = 0
+
 /**
 @patch 1.07
 */
     itemtype           bj_stockPickedItemType
 
     // Melee vars
+
 /**
 @patch 1.00
 */
     trigger            bj_meleeVisibilityTrained   = null
+
 /**
 @patch 1.00
 */
     boolean            bj_meleeVisibilityIsDay     = true
+
 /**
 @patch 1.00
 */
     boolean            bj_meleeGrantHeroItems      = false
+
 /**
 @patch 1.00
 */
     location           bj_meleeNearestMineToLoc    = null
+
 /**
 @patch 1.00
 */
     unit               bj_meleeNearestMine         = null
+
 /**
 @patch 1.00
 */
     real               bj_meleeNearestMineDist     = 0.00
+
 /**
 @patch 1.00
 */
     boolean            bj_meleeGameOver            = false
+
 /**
 @patch 1.00
 */
     boolean array      bj_meleeDefeated
+
 /**
 @patch 1.00
 */
     boolean array      bj_meleeVictoried
+
 /**
 @patch 1.00
 */
     unit array         bj_ghoul
+
 /**
 @patch 1.07
 */
     timer array        bj_crippledTimer
+
 /**
 @patch 1.07
 */
     timerdialog array  bj_crippledTimerWindows
+
 /**
 @patch 1.07
 */
     boolean array      bj_playerIsCrippled
+
 /**
 @patch 1.07
 */
     boolean array      bj_playerIsExposed
+
 /**
 @patch 1.07
 */
     boolean            bj_finishSoonAllExposed     = false
+
 /**
 @patch 1.07
 */
     timerdialog        bj_finishSoonTimerDialog    = null
+
 /**
 @patch 1.07
 */
     integer array      bj_meleeTwinkedHeroes
 
     // Rescue behavior vars
+
 /**
 @patch 1.00
 */
     trigger            bj_rescueUnitBehavior       = null
+
 /**
 @patch 1.00
 */
     boolean            bj_rescueChangeColorUnit    = true
+
 /**
 @patch 1.00
 */
     boolean            bj_rescueChangeColorBldg    = true
 
     // Transmission vars
+
 /**
 @patch 1.00
 */
     timer              bj_cineSceneEndingTimer     = null
+
 /**
 @patch 1.00
 */
     sound              bj_cineSceneLastSound       = null
+
 /**
 @patch 1.00
 */
     trigger            bj_cineSceneBeingSkipped    = null
 
     // Cinematic mode vars
+
 /**
 @patch 1.00
 */
     gamespeed          bj_cineModePriorSpeed       = MAP_SPEED_NORMAL
+
 /**
 @patch 1.00
 */
     boolean            bj_cineModePriorFogSetting  = false
+
 /**
 @patch 1.00
 */
     boolean            bj_cineModePriorMaskSetting = false
+
 /**
 @patch 1.00
 */
     boolean            bj_cineModeAlreadyIn        = false
+
 /**
 @patch 1.07
 */
     boolean            bj_cineModePriorDawnDusk    = false
+
 /**
 @patch 1.07
 */
     integer            bj_cineModeSavedSeed        = 0
 
     // Cinematic fade vars
+
 /**
 @patch 1.00
 */
     timer              bj_cineFadeFinishTimer      = null
+
 /**
 @patch 1.00
 */
     timer              bj_cineFadeContinueTimer    = null
+
 /**
 @patch 1.00
 */
     real               bj_cineFadeContinueRed      = 0
+
 /**
 @patch 1.00
 */
     real               bj_cineFadeContinueGreen    = 0
+
 /**
 @patch 1.00
 */
     real               bj_cineFadeContinueBlue     = 0
+
 /**
 @patch 1.00
 */
     real               bj_cineFadeContinueTrans    = 0
+
 /**
 @patch 1.00
 */
     real               bj_cineFadeContinueDuration = 0
+
 /**
 @patch 1.00
 */
     string             bj_cineFadeContinueTex      = ""
 
     // QueuedTriggerExecute vars
+
 /**
 @patch 1.00
 */
     integer            bj_queuedExecTotal          = 0
+
 /**
 @patch 1.00
 */
     trigger array      bj_queuedExecTriggers
+
 /**
 @patch 1.00
 */
     boolean array      bj_queuedExecUseConds
+
 /**
 @patch 1.00
 */
     timer              bj_queuedExecTimeoutTimer   = CreateTimer()
+
 /**
 @patch 1.00
 */
     trigger            bj_queuedExecTimeout        = null
 
     // Helper vars (for Filter and Enum funcs)
+
 /**
 @patch 1.07
 */
     integer            bj_destInRegionDiesCount    = 0
+
 /**
 @patch 1.07
 */
     trigger            bj_destInRegionDiesTrig     = null
+
 /**
 @patch 1.00
 */
     integer            bj_groupCountUnits          = 0
+
 /**
 @patch 1.00
 */
     integer            bj_forceCountPlayers        = 0
+
 /**
 @patch 1.00
 */
     integer            bj_groupEnumTypeId          = 0
+
 /**
 @patch 1.00
 */
     player             bj_groupEnumOwningPlayer    = null
+
 /**
 @patch 1.00
 */
     group              bj_groupAddGroupDest        = null
+
 /**
 @patch 1.00
 */
     group              bj_groupRemoveGroupDest     = null
+
 /**
 @patch 1.00
 */
     integer            bj_groupRandomConsidered    = 0
+
 /**
 @patch 1.00
 */
     unit               bj_groupRandomCurrentPick   = null
+
 /**
 @patch 1.07
 */
     group              bj_groupLastCreatedDest     = null
+
 /**
 @patch 1.07
 */
     group              bj_randomSubGroupGroup      = null
+
 /**
 @patch 1.07
 */
     integer            bj_randomSubGroupWant       = 0
+
 /**
 @patch 1.07
 */
     integer            bj_randomSubGroupTotal      = 0
+
 /**
 @patch 1.07
 */
     real               bj_randomSubGroupChance     = 0
+
 /**
 @patch 1.00
 */
     integer            bj_destRandomConsidered     = 0
+
 /**
 @patch 1.00
 */
     destructable       bj_destRandomCurrentPick    = null
+
 /**
 @patch 1.07
 */
     destructable       bj_elevatorWallBlocker      = null
+
 /**
 @patch 1.07
 */
     destructable       bj_elevatorNeighbor         = null
+
 /**
 @patch 1.07
 */
     integer            bj_itemRandomConsidered     = 0
+
 /**
 @patch 1.07
 */
     item               bj_itemRandomCurrentPick    = null
+
 /**
 @patch 1.00
 */
     integer            bj_forceRandomConsidered    = 0
+
 /**
 @patch 1.00
 */
     player             bj_forceRandomCurrentPick   = null
+
 /**
 @patch 1.00
 */
     unit               bj_makeUnitRescuableUnit    = null
+
 /**
 @patch 1.00
 */
     boolean            bj_makeUnitRescuableFlag    = true
+
 /**
 @patch 1.00
 */
     boolean            bj_pauseAllUnitsFlag        = true
+
 /**
 @patch 1.00
 */
     location           bj_enumDestructableCenter   = null
+
 /**
 @patch 1.00
 */
     real               bj_enumDestructableRadius   = 0
+
 /**
 @patch 1.00
 */
     playercolor        bj_setPlayerTargetColor     = null
+
 /**
 @patch 1.00
 */
     boolean            bj_isUnitGroupDeadResult    = true
+
 /**
 @patch 1.00
 */
     boolean            bj_isUnitGroupEmptyResult   = true
+
 /**
 @patch 1.00
 */
     boolean            bj_isUnitGroupInRectResult  = true
+
 /**
 @patch 1.00
 */
     rect               bj_isUnitGroupInRectRect    = null
+
 /**
 @patch 1.00
 */
     boolean            bj_changeLevelShowScores    = false
+
 /**
 @patch 1.00
 */
     string             bj_changeLevelMapName       = null
+
 /**
 @patch 1.07
 */
     group              bj_suspendDecayFleshGroup   = CreateGroup()
+
 /**
 @patch 1.07
 */
     group              bj_suspendDecayBoneGroup    = CreateGroup()
+
 /**
 @patch 1.07
 */
     timer              bj_delayedSuspendDecayTimer = CreateTimer()
+
 /**
 @patch 1.07
 */
     trigger            bj_delayedSuspendDecayTrig  = null
+
 /**
 @patch 1.07
 */
     integer            bj_livingPlayerUnitsTypeId  = 0
+
 /**
 @patch 1.07
 */
     widget             bj_lastDyingWidget          = null
 
     // Random distribution vars
+
 /**
 @patch 1.00
 */
     integer            bj_randDistCount            = 0
+
 /**
 @patch 1.00
 */
     integer array      bj_randDistID
+
 /**
 @patch 1.00
 */
     integer array      bj_randDistChance
 
     // Last X'd vars
+
 /**
 @patch 1.00
 */
     unit               bj_lastCreatedUnit          = null
+
 /**
 @patch 1.00
 */
     item               bj_lastCreatedItem          = null
+
 /**
 @patch 1.00
 */
     item               bj_lastRemovedItem          = null
+
 /**
 @patch 1.00
 */
     unit               bj_lastHauntedGoldMine      = null
+
 /**
 @patch 1.00
 */
     destructable       bj_lastCreatedDestructable  = null
+
 /**
 @patch 1.00
 */
     group              bj_lastCreatedGroup         = CreateGroup()
+
 /**
 @patch 1.00
 */
     fogmodifier        bj_lastCreatedFogModifier   = null
+
 /**
 @patch 1.00
 */
     effect             bj_lastCreatedEffect        = null
+
 /**
 @patch 1.00
 */
     weathereffect      bj_lastCreatedWeatherEffect = null
+
 /**
 @patch 1.07
 */
     terraindeformation bj_lastCreatedTerrainDeformation = null
+
 /**
 @patch 1.00
 */
     quest              bj_lastCreatedQuest         = null
+
 /**
 @patch 1.00
 */
     questitem          bj_lastCreatedQuestItem     = null
+
 /**
 @patch 1.00
 */
     defeatcondition    bj_lastCreatedDefeatCondition = null
+
 /**
 @patch 1.00
 */
     timer              bj_lastStartedTimer         = CreateTimer()
+
 /**
 @patch 1.00
 */
     timerdialog        bj_lastCreatedTimerDialog   = null
+
 /**
 @patch 1.00
 */
     leaderboard        bj_lastCreatedLeaderboard   = null
+
 /**
 @patch 1.13
 */
     multiboard         bj_lastCreatedMultiboard    = null
+
 /**
 @patch 1.00
 */
     sound              bj_lastPlayedSound          = null
+
 /**
 @patch 1.00
 */
     string             bj_lastPlayedMusic          = ""
+
 /**
 @patch 1.00
 */
     real               bj_lastTransmissionDuration = 0
+
 /**
 @patch 1.00
 */
     gamecache          bj_lastCreatedGameCache     = null
+
 /**
 @patch 1.24a
 */
     hashtable          bj_lastCreatedHashtable     = null
+
 /**
 @patch 1.00
 */
     unit               bj_lastLoadedUnit           = null
+
 /**
 @patch 1.00
 */
     button             bj_lastCreatedButton        = null
+
 /**
 @patch 1.00
 */
     unit               bj_lastReplacedUnit         = null
+
 /**
 @patch 1.07
 */
     texttag            bj_lastCreatedTextTag       = null
+
 /**
 @patch 1.17a
 */
     lightning          bj_lastCreatedLightning     = null
+
 /**
 @patch 1.18a
 */
     image              bj_lastCreatedImage         = null
+
 /**
 @patch 1.18a
 */
     ubersplat          bj_lastCreatedUbersplat     = null
+
 /**
 @patch 1.32.0.13369
 */
     minimapicon        bj_lastCreatedMinimapIcon   = null
+
 /**
 @patch 1.32.0.13369
 */
 	commandbuttoneffect bj_lastCreatedCommandButtonEffect = null
 
     // Filter function vars
+
 /**
 @patch 1.00
 */
     boolexpr           filterIssueHauntOrderAtLocBJ      = null
+
 /**
 @patch 1.00
 */
     boolexpr           filterEnumDestructablesInCircleBJ = null
+
 /**
 @patch 1.00
 */
     boolexpr           filterGetUnitsInRectOfPlayer      = null
+
 /**
 @patch 1.00
 */
     boolexpr           filterGetUnitsOfTypeIdAll         = null
+
 /**
 @patch 1.00
 */
     boolexpr           filterGetUnitsOfPlayerAndTypeId   = null
+
 /**
 @patch 1.00
 */
     boolexpr           filterMeleeTrainedUnitIsHeroBJ    = null
+
 /**
 @patch 1.07
 */
     boolexpr           filterLivingPlayerUnitsOfTypeId   = null
 
     // Memory cleanup vars
+
 /**
 @patch 1.07
 */
     boolean            bj_wantDestroyGroup         = false
 
     // Instanced Operation Results
+
 /**
 @patch 1.31.0.11889
 */
@@ -2189,6 +2687,7 @@ endglobals
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2210,6 +2709,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2222,6 +2722,7 @@ function RMinBJ takes real a, real b returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2234,6 +2735,7 @@ function RMaxBJ takes real a, real b returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2246,6 +2748,7 @@ function RAbsBJ takes real a returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2258,6 +2761,7 @@ function RSignBJ takes real a returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2270,6 +2774,7 @@ function IMinBJ takes integer a, integer b returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2282,6 +2787,7 @@ function IMaxBJ takes integer a, integer b returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2294,6 +2800,7 @@ function IAbsBJ takes integer a returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2306,6 +2813,7 @@ function ISignBJ takes integer a returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2314,6 +2822,7 @@ function SinBJ takes real degrees returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2322,6 +2831,7 @@ function CosBJ takes real degrees returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2330,6 +2840,7 @@ function TanBJ takes real degrees returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2338,6 +2849,7 @@ function AsinBJ takes real degrees returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2346,6 +2858,7 @@ function AcosBJ takes real degrees returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2354,6 +2867,7 @@ function AtanBJ takes real degrees returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2362,6 +2876,7 @@ function Atan2BJ takes real y, real x returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2370,6 +2885,7 @@ function AngleBetweenPoints takes location locA, location locB returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2380,6 +2896,7 @@ function DistanceBetweenPoints takes location locA, location locB returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2390,6 +2907,7 @@ function PolarProjectionBJ takes location source, real dist, real angle returns 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2398,6 +2916,7 @@ function GetRandomDirectionDeg takes nothing returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2406,6 +2925,7 @@ function GetRandomPercentageBJ takes nothing returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2413,6 +2933,10 @@ function GetRandomLocInRect takes rect whichRect returns location
     return Location(GetRandomReal(GetRectMinX(whichRect), GetRectMaxX(whichRect)), GetRandomReal(GetRectMinY(whichRect), GetRectMaxY(whichRect)))
 endfunction
 
+//===========================================================================
+// Calculate the modulus/remainder of (dividend) divided by (divisor).
+// Examples:  18 mod 5 = 3.  15 mod 5 = 0.  -8 mod 5 = 2.
+//
 
 /**
 Calculate the modulus/remainder of (dividend) divided by (divisor) such that
@@ -2423,6 +2947,7 @@ Examples:  18 mod 5 = 3.  15 mod 5 = 0.  -8 mod 5 = 2.
 
 @bug The commented law doesn't hold. For example `ModuloInteger(-7, -3) == -4` while
 `-7 % -3 == -1`
+
 @patch 1.00
 */
 function ModuloInteger takes integer dividend, integer divisor returns integer
@@ -2442,6 +2967,7 @@ endfunction
 // Calculate the modulus/remainder of (dividend) divided by (divisor).
 // Examples:  13.000 mod 2.500 = 0.500.  -6.000 mod 2.500 = 1.500.
 //
+
 /**
 @patch 1.00
 */
@@ -2459,6 +2985,7 @@ function ModuloReal takes real dividend, real divisor returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2467,6 +2994,7 @@ function OffsetLocation takes location loc, real dx, real dy returns location
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2475,6 +3003,7 @@ function OffsetRectBJ takes rect r, real dx, real dy returns rect
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2485,6 +3014,7 @@ function RectFromCenterSizeBJ takes location center, real width, real height ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2493,6 +3023,7 @@ function RectContainsCoords takes rect r, real x, real y returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2501,6 +3032,7 @@ function RectContainsLoc takes rect r, location loc returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2509,6 +3041,7 @@ function RectContainsUnit takes rect r, unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -2535,6 +3068,7 @@ endfunction
 //===========================================================================
 // Runs the trigger's actions if the trigger's conditions evaluate to true.
 //
+
 /**
 @patch 1.00
 */
@@ -2547,6 +3081,7 @@ endfunction
 //===========================================================================
 // Runs the trigger's actions if the trigger's conditions evaluate to true.
 //
+
 /**
 @patch 1.00
 */
@@ -2565,14 +3100,15 @@ endfunction
 // trigger is not interrupted as is the case with a TriggerExecute call.
 // Since the trigger executes normally, its conditions are still evaluated.
 //
+
 /**
 Adds trigger to execution queue by setting it up with a zero-delay timer,
 so it is executed almost immediately. Unlike calling another trigger with
 `TriggerExecute`, this does not interrupt the currently running trigger.
 
 @param trig Target trigger to execute
-@param checkConditions
-If `true`, check if trigger conditions are met and only then queue the trigger.
+
+@param checkConditions If `true`, check if trigger conditions are met and only then queue the trigger.
 If `false`, ignores conditions and always queues the trigger.
 
 Returns:
@@ -2595,6 +3131,7 @@ endfunction
 //===========================================================================
 // Debug - Display the contents of the trigger queue (as either null or "x"
 // for each entry).
+
 /**
 @patch 1.00
 */
@@ -2621,6 +3158,7 @@ endfunction
 // Searches the queue for a given trigger, returning the index of the
 // trigger within the queue if it is found, or -1 if it is not found.
 //
+
 /**
 @patch 1.00
 */
@@ -2642,6 +3180,7 @@ endfunction
 // to fill the unused space.  If the currently running trigger is removed
 // in this manner, this function does NOT attempt to run the next trigger.
 //
+
 /**
 @patch 1.00
 */
@@ -2670,6 +3209,7 @@ endfunction
 // it and execute the next one.  Continue this cycle until a trigger runs,
 // or until the queue is empty.
 //
+
 /**
 @patch 1.00
 */
@@ -2692,6 +3232,7 @@ endfunction
 // Queues a trigger to be executed, assuring that such triggers are not
 // executed at the same time.
 //
+
 /**
 @patch 1.00
 */
@@ -2717,6 +3258,7 @@ endfunction
 // Denotes the end of a queued trigger. Be sure to call this only once per
 // queued trigger, or risk stepping on the toes of other queued triggers.
 //
+
 /**
 @patch 1.00
 */
@@ -2745,6 +3287,7 @@ endfunction
 // Denotes the end of a queued trigger. Be sure to call this only once per
 // queued trigger, lest you step on the toes of other queued triggers.
 //
+
 /**
 @patch 1.00
 */
@@ -2767,6 +3310,7 @@ endfunction
 //===========================================================================
 // Empty the trigger queue.
 //
+
 /**
 @patch 1.00
 */
@@ -2778,6 +3322,7 @@ endfunction
 //===========================================================================
 // Remove all but the currently executing trigger from the trigger queue.
 //
+
 /**
 @patch 1.00
 */
@@ -2786,6 +3331,7 @@ function QueuedTriggerClearInactiveBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2794,6 +3340,7 @@ function QueuedTriggerCountBJ takes nothing returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2802,6 +3349,7 @@ function IsTriggerQueueEmptyBJ takes nothing returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2810,6 +3358,7 @@ function IsTriggerQueuedBJ takes trigger trig returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2818,6 +3367,7 @@ function GetForLoopIndexA takes nothing returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2826,6 +3376,7 @@ function SetForLoopIndexA takes integer newIndex returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2834,6 +3385,7 @@ function GetForLoopIndexB takes nothing returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2844,8 +3396,10 @@ endfunction
 //===========================================================================
 // We can't do game-time waits, so this simulates one by starting a timer
 // and polling until the timer expires.
+
 /**
 @bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function PolledWait takes real duration returns nothing
@@ -2873,6 +3427,7 @@ function PolledWait takes real duration returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2894,6 +3449,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2905,6 +3461,7 @@ endfunction
 // CommentString triggers during script generation, but until such a time,
 // this function will serve as a stub.
 //
+
 /**
 @patch 1.00
 */
@@ -2914,6 +3471,7 @@ endfunction
 //===========================================================================
 // This function returns the input string, converting it from the localized text, if necessary
 //
+
 /**
 @patch 1.07
 */
@@ -2922,6 +3480,7 @@ function StringIdentity takes string theString returns string
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2930,6 +3489,7 @@ function GetBooleanAnd takes boolean valueA, boolean valueB returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2941,6 +3501,7 @@ endfunction
 // Converts a percentage (real, 0..100) into a scaled integer (0..max),
 // clipping the result to 0..max in case the input is invalid.
 //
+
 /**
 @patch 1.00
 */
@@ -2958,6 +3519,7 @@ function PercentToInt takes real percentage, integer max returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2966,6 +3528,7 @@ function PercentTo255 takes real percentage returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2974,6 +3537,7 @@ function GetTimeOfDay takes nothing returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2982,6 +3546,7 @@ function SetTimeOfDay takes real whatTime returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2990,6 +3555,7 @@ function SetTimeOfDayScalePercentBJ takes real scalePercent returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -2998,8 +3564,10 @@ function GetTimeOfDayScalePercentBJ takes nothing returns real
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `soundHandle`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function PlaySound takes string soundName returns nothing
@@ -3009,6 +3577,7 @@ function PlaySound takes string soundName returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3017,6 +3586,7 @@ function CompareLocationsBJ takes location A, location B returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3027,10 +3597,12 @@ endfunction
 //===========================================================================
 // Returns a square rect that exactly encompasses the specified circle.
 //
+
 /**
 Returns a new, centered rectangle with the dimensions to encompass the circle. 
 
 @note It does not touch the passed `center` location, you must remove it manually to avoid leaks.
+
 @patch 1.00
 */
 function GetRectFromCircleBJ takes location center, real radius returns rect
@@ -3048,8 +3620,10 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @bug Leaks handle `theCam`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function GetCurrentCameraSetup takes nothing returns camerasetup
@@ -3070,6 +3644,7 @@ function GetCurrentCameraSetup takes nothing returns camerasetup
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3081,6 +3656,7 @@ function CameraSetupApplyForPlayer takes boolean doPan, camerasetup whichSetup, 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -3092,8 +3668,10 @@ function CameraSetupApplyForPlayerSmooth takes boolean doPan, camerasetup whichS
 endfunction
 
 //===========================================================================
+
 /**
 Swapped arguments of `CameraSetupGetField` for WE usage.
+
 @patch 1.00
 */
 function CameraSetupGetFieldSwap takes camerafield whichField, camerasetup whichSetup returns real
@@ -3101,6 +3679,7 @@ function CameraSetupGetFieldSwap takes camerafield whichField, camerasetup which
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3112,6 +3691,7 @@ function SetCameraFieldForPlayer takes player whichPlayer, camerafield whichFiel
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3123,6 +3703,7 @@ function SetCameraTargetControllerNoZForPlayer takes player whichPlayer, unit wh
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3134,6 +3715,7 @@ function SetCameraPositionForPlayer takes player whichPlayer, real x, real y ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3145,6 +3727,7 @@ function SetCameraPositionLocForPlayer takes player whichPlayer, location loc re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3156,6 +3739,7 @@ function RotateCameraAroundLocBJ takes real degrees, location loc, player whichP
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3167,6 +3751,7 @@ function PanCameraToForPlayer takes player whichPlayer, real x, real y returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3178,6 +3763,7 @@ function PanCameraToLocForPlayer takes player whichPlayer, location loc returns 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3189,6 +3775,7 @@ function PanCameraToTimedForPlayer takes player whichPlayer, real x, real y, rea
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3200,6 +3787,7 @@ function PanCameraToTimedLocForPlayer takes player whichPlayer, location loc, re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3211,13 +3799,14 @@ function PanCameraToTimedLocWithZForPlayer takes player whichPlayer, location lo
 endfunction
 
 //===========================================================================
-/**
 
+/**
 @bug Fixed in 1.31: Caused a desync in multiplayer by creating a `location` inside
 the local block. It was known as "Camera - Pan Camera as necessary (timed)" in GUI.
 [Explanation](https://www.hiveworkshop.com/threads/fixing-smartcamerapanbj-desync.243334/)
 
 @bug Leaks handle `cameraLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function SmartCameraPanBJ takes player whichPlayer, location loc, real duration returns nothing
@@ -3241,6 +3830,7 @@ function SmartCameraPanBJ takes player whichPlayer, location loc, real duration 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3252,6 +3842,7 @@ function SetCinematicCameraForPlayer takes player whichPlayer, string cameraMode
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3263,6 +3854,7 @@ function ResetToGameCameraForPlayer takes player whichPlayer, real duration retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3274,6 +3866,7 @@ function CameraSetSourceNoiseForPlayer takes player whichPlayer, real magnitude,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3285,6 +3878,7 @@ function CameraSetTargetNoiseForPlayer takes player whichPlayer, real magnitude,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3304,6 +3898,7 @@ function CameraSetEQNoiseForPlayer takes player whichPlayer, real magnitude retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3318,6 +3913,7 @@ endfunction
 //===========================================================================
 // Query the current camera bounds.
 //
+
 /**
 @patch 1.00
 */
@@ -3328,6 +3924,7 @@ endfunction
 //===========================================================================
 // Query the initial camera bounds, as defined at map init.
 //
+
 /**
 @patch 1.00
 */
@@ -3338,6 +3935,7 @@ endfunction
 //===========================================================================
 // Query the playable map area, as defined at map init.
 //
+
 /**
 @patch 1.00
 */
@@ -3348,6 +3946,7 @@ endfunction
 //===========================================================================
 // Query the entire map area, as defined at map init.
 //
+
 /**
 @patch 1.00
 */
@@ -3356,6 +3955,7 @@ function GetEntireMapRect takes nothing returns rect
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3368,6 +3968,7 @@ function SetCameraBoundsToRect takes rect r returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3379,6 +3980,7 @@ function SetCameraBoundsToRectForPlayerBJ takes player whichPlayer, rect r retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3419,6 +4021,7 @@ function AdjustCameraBoundsBJ takes integer adjustMethod, real dxWest, real dxEa
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3430,6 +4033,7 @@ function AdjustCameraBoundsForPlayerBJ takes integer adjustMethod, player whichP
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3441,6 +4045,7 @@ function SetCameraQuickPositionForPlayer takes player whichPlayer, real x, real 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3452,6 +4057,7 @@ function SetCameraQuickPositionLocForPlayer takes player whichPlayer, location l
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3460,6 +4066,7 @@ function SetCameraQuickPositionLoc takes location loc returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3471,6 +4078,7 @@ function StopCameraForPlayerBJ takes player whichPlayer returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3482,6 +4090,7 @@ function SetCameraOrientControllerForPlayerBJ takes player whichPlayer, unit whi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3490,6 +4099,7 @@ function CameraSetSmoothingFactorBJ takes real factor returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3506,6 +4116,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3517,6 +4128,7 @@ function DisplayTextToForce takes force toForce, string message returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3528,12 +4140,14 @@ function DisplayTimedTextToForce takes force toForce, real duration, string mess
 endfunction
 
 //===========================================================================
+
 /**
 Clears text messages for all players in specified force.
 
+@param toForce Target players who are part of this force
+
 @note See `ClearTextMessages`.
 
-@param toForce Target players who are part of this force
 @patch 1.00
 */
 function ClearTextMessagesBJ takes force toForce returns nothing
@@ -3547,6 +4161,7 @@ endfunction
 // The parameters for the API Substring function are unintuitive, so this
 // merely performs a translation for the starting index.
 //
+
 /**
 @patch 1.00
 */
@@ -3554,16 +4169,20 @@ function SubStringBJ takes string source, integer start, integer end returns str
     return SubString(source, start-1, end)
 endfunction  
   
+
 /**
 Equivalent to `GetHandleId`.
+
 @patch 1.24a
 */
 function GetHandleIdBJ takes handle h returns integer
     return GetHandleId(h)
 endfunction
 
+
 /**
 Equivalent to `StringHash`.
+
 @patch 1.24a
 */
 function StringHashBJ takes string s returns integer
@@ -3579,6 +4198,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3587,6 +4207,7 @@ function TriggerRegisterTimerEventPeriodic takes trigger trig, real timeout retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3595,6 +4216,7 @@ function TriggerRegisterTimerEventSingle takes trigger trig, real timeout return
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3603,6 +4225,7 @@ function TriggerRegisterTimerExpireEventBJ takes trigger trig, timer t returns e
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3611,6 +4234,7 @@ function TriggerRegisterPlayerUnitEventSimple takes trigger trig, player whichPl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3627,6 +4251,7 @@ function TriggerRegisterAnyUnitEventBJ takes trigger trig, playerunitevent which
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3639,6 +4264,7 @@ function TriggerRegisterPlayerSelectionEventBJ takes trigger trig, player whichP
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3678,6 +4304,7 @@ function TriggerRegisterPlayerKeyEventBJ takes trigger trig, player whichPlayer,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.29.0.8803
 */
@@ -3698,6 +4325,7 @@ function TriggerRegisterPlayerMouseEventBJ takes trigger trig, player whichPlaye
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3706,6 +4334,7 @@ function TriggerRegisterPlayerEventVictory takes trigger trig, player whichPlaye
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3714,6 +4343,7 @@ function TriggerRegisterPlayerEventDefeat takes trigger trig, player whichPlayer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -3722,6 +4352,7 @@ function TriggerRegisterPlayerEventLeave takes trigger trig, player whichPlayer 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3730,6 +4361,7 @@ function TriggerRegisterPlayerEventAllianceChanged takes trigger trig, player wh
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3738,6 +4370,7 @@ function TriggerRegisterPlayerEventEndCinematic takes trigger trig, player which
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3746,6 +4379,7 @@ function TriggerRegisterGameStateEventTimeOfDay takes trigger trig, limitop opco
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3754,6 +4388,7 @@ function TriggerRegisterEnterRegionSimple takes trigger trig, region whichRegion
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3762,8 +4397,10 @@ function TriggerRegisterLeaveRegionSimple takes trigger trig, region whichRegion
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `rectRegion`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function TriggerRegisterEnterRectSimple takes trigger trig, rect r returns event
@@ -3773,8 +4410,10 @@ function TriggerRegisterEnterRectSimple takes trigger trig, rect r returns event
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `rectRegion`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function TriggerRegisterLeaveRectSimple takes trigger trig, rect r returns event
@@ -3784,6 +4423,7 @@ function TriggerRegisterLeaveRectSimple takes trigger trig, rect r returns event
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3792,6 +4432,7 @@ function TriggerRegisterDistanceBetweenUnits takes trigger trig, unit whichUnit,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3800,6 +4441,7 @@ function TriggerRegisterUnitInRangeSimple takes trigger trig, real range, unit w
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3808,6 +4450,7 @@ function TriggerRegisterUnitLifeEvent takes trigger trig, unit whichUnit, limito
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3816,6 +4459,7 @@ function TriggerRegisterUnitManaEvent takes trigger trig, unit whichUnit, limito
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3824,6 +4468,7 @@ function TriggerRegisterDialogEventBJ takes trigger trig, dialog whichDialog ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3832,6 +4477,7 @@ function TriggerRegisterShowSkillEventBJ takes trigger trig returns event
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3840,6 +4486,7 @@ function TriggerRegisterBuildSubmenuEventBJ takes trigger trig returns event
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -3853,6 +4500,7 @@ function TriggerRegisterBuildCommandEventBJ takes trigger trig, integer unitId r
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -3861,6 +4509,7 @@ function TriggerRegisterTrainCommandEventBJ takes trigger trig, integer unitId r
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -3869,6 +4518,7 @@ function TriggerRegisterUpgradeCommandEventBJ takes trigger trig, integer techId
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.14411
 */
@@ -3877,6 +4527,7 @@ function TriggerRegisterCommonCommandEventBJ takes trigger trig, string order re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3885,6 +4536,7 @@ function TriggerRegisterGameLoadedEventBJ takes trigger trig returns event
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3893,6 +4545,7 @@ function TriggerRegisterGameSavedEventBJ takes trigger trig returns event
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3904,6 +4557,7 @@ function RegisterDestDeathInRegionEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3922,6 +4576,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3931,6 +4586,7 @@ function AddWeatherEffectSaveLast takes rect where, integer effectID returns wea
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3939,6 +4595,7 @@ function GetLastCreatedWeatherEffect takes nothing returns weathereffect
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -3947,6 +4604,7 @@ function RemoveWeatherEffectBJ takes weathereffect whichWeatherEffect returns no
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3956,6 +4614,7 @@ function TerrainDeformationCraterBJ takes real duration, boolean permanent, loca
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -3977,6 +4636,7 @@ function TerrainDeformationRippleBJ takes real duration, boolean limitNeg, locat
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4000,6 +4660,7 @@ function TerrainDeformationWaveBJ takes real duration, location source, location
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4009,6 +4670,7 @@ function TerrainDeformationRandomBJ takes real duration, location where, real ra
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4017,6 +4679,7 @@ function TerrainDeformationStopBJ takes terraindeformation deformation, real dur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4025,6 +4688,7 @@ function GetLastCreatedTerrainDeformation takes nothing returns terraindeformati
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4034,6 +4698,7 @@ function AddLightningLoc takes string codeName, location where1, location where2
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4042,6 +4707,7 @@ function DestroyLightningBJ takes lightning whichBolt returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4050,6 +4716,7 @@ function MoveLightningLoc takes lightning whichBolt, location where1, location w
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4058,6 +4725,7 @@ function GetLightningColorABJ takes lightning whichBolt returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4066,6 +4734,7 @@ function GetLightningColorRBJ takes lightning whichBolt returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4074,6 +4743,7 @@ function GetLightningColorGBJ takes lightning whichBolt returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4082,6 +4752,7 @@ function GetLightningColorBBJ takes lightning whichBolt returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4090,6 +4761,7 @@ function SetLightningColorBJ takes lightning whichBolt, real r, real g, real b, 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4098,6 +4770,7 @@ function GetLastCreatedLightningBJ takes nothing returns lightning
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4106,6 +4779,7 @@ function GetAbilityEffectBJ takes integer abilcode, effecttype t, integer index 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -4115,6 +4789,7 @@ endfunction
 
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4123,6 +4798,7 @@ function GetTerrainCliffLevelBJ takes location where returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -4131,6 +4807,7 @@ function GetTerrainTypeBJ takes location where returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -4139,6 +4816,7 @@ function GetTerrainVarianceBJ takes location where returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -4147,6 +4825,7 @@ function SetTerrainTypeBJ takes location where, integer terrainType, integer var
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -4155,6 +4834,7 @@ function IsTerrainPathableBJ takes location where, pathingtype t returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -4163,6 +4843,7 @@ function SetTerrainPathableBJ takes location where, pathingtype t, boolean flag 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4171,6 +4852,7 @@ function SetWaterBaseColorBJ takes real red, real green, real blue, real transpa
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4180,6 +4862,7 @@ function CreateFogModifierRectSimple takes player whichPlayer, fogstate whichFog
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4193,6 +4876,7 @@ endfunction
 // gives the option of immediately enabling the modifier, so that triggers
 // can default to modifiers that are immediately enabled.
 //
+
 /**
 @patch 1.00
 */
@@ -4209,6 +4893,7 @@ endfunction
 // gives the option of immediately enabling the modifier, so that triggers
 // can default to modifiers that are immediately enabled.
 //
+
 /**
 @patch 1.00
 */
@@ -4221,6 +4906,7 @@ function CreateFogModifierRadiusLocBJ takes boolean enabled, player whichPlayer,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4229,6 +4915,7 @@ function GetLastCreatedFogModifier takes nothing returns fogmodifier
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4237,6 +4924,7 @@ function FogEnableOn takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4245,6 +4933,7 @@ function FogEnableOff takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4253,6 +4942,7 @@ function FogMaskEnableOn takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4261,6 +4951,7 @@ function FogMaskEnableOff takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4269,6 +4960,7 @@ function UseTimeOfDayBJ takes boolean flag returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4277,6 +4969,7 @@ function SetTerrainFogExBJ takes integer style, real zstart, real zend, real den
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4285,6 +4978,7 @@ function ResetTerrainFogBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4293,6 +4987,7 @@ function SetDoodadAnimationBJ takes string animName, integer doodadID, real radi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4301,6 +4996,7 @@ function SetDoodadAnimationRectBJ takes string animName, integer doodadID, rect 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4310,6 +5006,7 @@ endfunction
 
 
 //============================================================================
+
 /**
 @patch 1.18a
 */
@@ -4319,6 +5016,7 @@ function CreateImageBJ takes string file, real size, location where, real zOffse
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.18a
 */
@@ -4327,8 +5025,10 @@ function ShowImageBJ takes boolean flag, image whichImage returns nothing
 endfunction
 
 //============================================================================
+
 /**
 See: `SetImagePosition`. The only difference: takes a location instead of X, Y coordinates.
+
 @patch 1.18a
 */
 function SetImagePositionBJ takes image whichImage, location where, real zOffset returns nothing
@@ -4336,8 +5036,10 @@ function SetImagePositionBJ takes image whichImage, location where, real zOffset
 endfunction
 
 //============================================================================
+
 /**
 Similar to SetImageColor, however this takes 0-100 values as percent for colors. Alpha channel=(100-alpha)
+
 @patch 1.18a
 */
 function SetImageColorBJ takes image whichImage, real red, real green, real blue, real alpha returns nothing
@@ -4345,6 +5047,7 @@ function SetImageColorBJ takes image whichImage, real red, real green, real blue
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.18a
 */
@@ -4353,6 +5056,7 @@ function GetLastCreatedImage takes nothing returns image
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.18a
 */
@@ -4362,6 +5066,7 @@ function CreateUbersplatBJ takes location where, string name, real red, real gre
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.18a
 */
@@ -4370,6 +5075,7 @@ function ShowUbersplatBJ takes boolean flag, ubersplat whichSplat returns nothin
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.18a
 */
@@ -4378,6 +5084,7 @@ function GetLastCreatedUbersplat takes nothing returns ubersplat
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -4386,6 +5093,7 @@ function GetLastCreatedMinimapIcon takes nothing returns minimapicon
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -4395,6 +5103,7 @@ function CreateMinimapIconOnUnitBJ takes unit whichUnit, integer red, integer gr
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -4404,6 +5113,7 @@ function CreateMinimapIconAtLocBJ takes location where, integer red, integer gre
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -4413,6 +5123,7 @@ function CreateMinimapIconBJ takes real x, real y, integer red, integer green, i
 endfunction
 
 //============================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -4482,6 +5193,7 @@ endfunction
 
 
 //============================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -4556,6 +5268,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4567,6 +5280,7 @@ function PlaySoundBJ takes sound soundHandle returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4575,6 +5289,7 @@ function StopSoundBJ takes sound soundHandle, boolean fadeOut returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4583,6 +5298,7 @@ function SetSoundVolumeBJ takes sound soundHandle, real volumePercent returns no
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4591,6 +5307,7 @@ function SetSoundOffsetBJ takes real newOffset, sound soundHandle returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4599,6 +5316,7 @@ function SetSoundDistanceCutoffBJ takes sound soundHandle, real cutoff returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4607,6 +5325,7 @@ function SetSoundPitchBJ takes sound soundHandle, real pitch returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4615,6 +5334,7 @@ function SetSoundPositionLocBJ takes sound soundHandle, location loc, real z ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4623,6 +5343,7 @@ function AttachSoundToUnitBJ takes sound soundHandle, unit whichUnit returns not
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4631,6 +5352,7 @@ function SetSoundConeAnglesBJ takes sound soundHandle, real inside, real outside
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4639,6 +5361,7 @@ function KillSoundWhenDoneBJ takes sound soundHandle returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4649,6 +5372,7 @@ function PlaySoundAtPointBJ takes sound soundHandle, real volumePercent, locatio
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4659,6 +5383,7 @@ function PlaySoundOnUnitBJ takes sound soundHandle, real volumePercent, unit whi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4669,6 +5394,7 @@ function PlaySoundFromOffsetBJ takes sound soundHandle, real volumePercent, real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4678,6 +5404,7 @@ function PlayMusicBJ takes string musicFileName returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4687,6 +5414,7 @@ function PlayMusicExBJ takes string musicFileName, real startingOffset, real fad
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4695,6 +5423,7 @@ function SetMusicOffsetBJ takes real newOffset returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4703,6 +5432,7 @@ function PlayThematicMusicBJ takes string musicName returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4711,6 +5441,7 @@ function PlayThematicMusicExBJ takes string musicName, real startingOffset retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4719,6 +5450,7 @@ function SetThematicMusicOffsetBJ takes real newOffset returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4727,6 +5459,7 @@ function EndThematicMusicBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4735,6 +5468,7 @@ function StopMusicBJ takes boolean fadeOut returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4743,6 +5477,7 @@ function ResumeMusicBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4750,8 +5485,8 @@ function SetMusicVolumeBJ takes real volumePercent returns nothing
     call SetMusicVolume(PercentToInt(volumePercent, 127))
 endfunction
 
-
 //===========================================================================
+
 /**
 @patch 1.32.1.14604
 */
@@ -4760,6 +5495,7 @@ function SetThematicMusicVolumeBJ takes real volumePercent returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4772,6 +5508,7 @@ function GetSoundDurationBJ takes sound soundHandle returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4780,6 +5517,7 @@ function GetSoundFileDurationBJ takes string musicFileName returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4788,6 +5526,7 @@ function GetLastPlayedSound takes nothing returns sound
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4796,6 +5535,7 @@ function GetLastPlayedMusic takes nothing returns string
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4804,6 +5544,7 @@ function VolumeGroupSetVolumeBJ takes volumegroup vgroup, real percent returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4819,6 +5560,7 @@ function SetCineModeVolumeGroupsImmediateBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4832,6 +5574,7 @@ function SetCineModeVolumeGroupsBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4847,6 +5590,7 @@ function SetSpeechVolumeGroupsImmediateBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4860,6 +5604,7 @@ function SetSpeechVolumeGroupsBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4868,6 +5613,7 @@ function VolumeGroupResetImmediateBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4881,6 +5627,7 @@ function VolumeGroupResetBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4889,6 +5636,7 @@ function GetSoundIsPlayingBJ takes sound soundHandle returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4897,6 +5645,7 @@ function WaitForSoundBJ takes sound soundHandle, real offset returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4905,6 +5654,7 @@ function SetMapMusicIndexedBJ takes string musicName, integer index returns noth
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4913,6 +5663,7 @@ function SetMapMusicRandomBJ takes string musicName returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4921,6 +5672,7 @@ function ClearMapMusicBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4937,6 +5689,7 @@ function SetStackedSoundBJ takes boolean add, sound soundHandle, rect r returns 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4947,6 +5700,7 @@ function StartSoundForPlayerBJ takes player whichPlayer, sound soundHandle retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4957,6 +5711,7 @@ function VolumeGroupSetVolumeForPlayerBJ takes player whichPlayer, volumegroup v
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -4965,6 +5720,7 @@ function EnableDawnDusk takes boolean flag returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -4981,6 +5737,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5003,6 +5760,7 @@ function SetAmbientDaySound takes string inLabel returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5033,6 +5791,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5042,6 +5801,7 @@ function AddSpecialEffectLocBJ takes location where, string modelName returns ef
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5071,6 +5831,7 @@ endfunction
 //endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5079,6 +5840,7 @@ function DestroyEffectBJ takes effect whichEffect returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5095,6 +5857,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5104,6 +5867,7 @@ function CreateCommandButtonEffectBJ takes integer abilityId, string order retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5113,6 +5877,7 @@ function CreateTrainCommandButtonEffectBJ takes integer unitId returns commandbu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5122,6 +5887,7 @@ function CreateUpgradeCommandButtonEffectBJ takes integer techId returns command
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.14411
 */
@@ -5131,6 +5897,7 @@ function CreateCommonCommandButtonEffectBJ takes string order returns commandbut
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5140,6 +5907,7 @@ function CreateLearnCommandButtonEffectBJ takes integer abilityId returns comman
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5162,6 +5930,7 @@ function CreateBuildCommandButtonEffectBJ takes integer unitId returns commandbu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5177,6 +5946,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5185,6 +5955,7 @@ function GetItemLoc takes item whichItem returns location
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5193,6 +5964,7 @@ function GetItemLifeBJ takes widget whichWidget returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5201,6 +5973,7 @@ function SetItemLifeBJ takes widget whichWidget, real life returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5209,6 +5982,7 @@ function AddHeroXPSwapped takes integer xpToAdd, unit whichHero, boolean showEye
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5225,6 +5999,7 @@ function SetHeroLevelBJ takes unit whichHero, integer newLevel, boolean showEyeC
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -5233,6 +6008,7 @@ function DecUnitAbilityLevelSwapped takes integer abilcode, unit whichUnit retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -5241,6 +6017,7 @@ function IncUnitAbilityLevelSwapped takes integer abilcode, unit whichUnit retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -5249,6 +6026,7 @@ function SetUnitAbilityLevelSwapped takes integer abilcode, unit whichUnit, inte
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -5257,6 +6035,7 @@ function GetUnitAbilityLevelSwapped takes integer abilcode, unit whichUnit retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -5265,6 +6044,7 @@ function UnitHasBuffBJ takes unit whichUnit, integer buffcode returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -5273,6 +6053,7 @@ function UnitRemoveBuffBJ takes integer buffcode, unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5281,6 +6062,7 @@ function UnitAddItemSwapped takes item whichItem, unit whichHero returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5294,6 +6076,7 @@ function UnitAddItemByIdSwapped takes integer itemId, unit whichHero returns ite
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5305,6 +6088,7 @@ endfunction
 //===========================================================================
 // Translates 0-based slot indices to 1-based slot indices.
 //
+
 /**
 @patch 1.00
 */
@@ -5314,6 +6098,7 @@ function UnitRemoveItemFromSlotSwapped takes integer itemSlot, unit whichHero re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5323,6 +6108,7 @@ function CreateItemLoc takes integer itemId, location loc returns item
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5331,6 +6117,7 @@ function GetLastCreatedItem takes nothing returns item
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5339,6 +6126,7 @@ function GetLastRemovedItem takes nothing returns item
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5347,6 +6135,7 @@ function SetItemPositionLoc takes item whichItem, location loc returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5355,6 +6144,7 @@ function GetLearnedSkillBJ takes nothing returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5363,6 +6153,7 @@ function SuspendHeroXPBJ takes boolean flag, unit whichHero returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5371,6 +6162,7 @@ function SetPlayerHandicapDamageBJ takes player whichPlayer, real handicapPercen
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5379,6 +6171,7 @@ function GetPlayerHandicapDamageBJ takes player whichPlayer returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5387,6 +6180,7 @@ function SetPlayerHandicapReviveTimeBJ takes player whichPlayer, real handicapPe
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -5395,6 +6189,7 @@ function GetPlayerHandicapReviveTimeBJ takes player whichPlayer returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5403,6 +6198,7 @@ function SetPlayerHandicapXPBJ takes player whichPlayer, real handicapPercent re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5411,6 +6207,7 @@ function GetPlayerHandicapXPBJ takes player whichPlayer returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5419,6 +6216,7 @@ function SetPlayerHandicapBJ takes player whichPlayer, real handicapPercent retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5427,6 +6225,7 @@ function GetPlayerHandicapBJ takes player whichPlayer returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5444,6 +6243,7 @@ function GetHeroStatBJ takes integer whichStat, unit whichHero, boolean includeB
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5465,6 +6265,7 @@ function SetHeroStat takes unit whichHero, integer whichStat, integer value retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5481,6 +6282,7 @@ function ModifyHeroStat takes integer whichStat, unit whichHero, integer modifyM
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5498,6 +6300,7 @@ function ModifyHeroSkillPoints takes unit whichHero, integer modifyMethod, integ
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -5506,6 +6309,7 @@ function UnitDropItemPointBJ takes unit whichUnit, item whichItem, real x, real 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -5514,6 +6318,7 @@ function UnitDropItemPointLoc takes unit whichUnit, item whichItem, location loc
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -5522,6 +6327,7 @@ function UnitDropItemSlotBJ takes unit whichUnit, item whichItem, integer slot r
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -5533,6 +6339,7 @@ endfunction
 // Two distinct trigger actions can't share the same function name, so this
 // dummy function simply mimics the behavior of an existing call.
 //
+
 /**
 @patch 1.00
 */
@@ -5541,6 +6348,7 @@ function UnitUseItemDestructable takes unit whichUnit, item whichItem, widget ta
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5551,6 +6359,7 @@ endfunction
 //===========================================================================
 // Translates 0-based slot indices to 1-based slot indices.
 //
+
 /**
 @patch 1.00
 */
@@ -5561,8 +6370,10 @@ endfunction
 //===========================================================================
 // Translates 0-based slot indices to 1-based slot indices.
 //
+
 /**
 @bug Leaks handle `indexItem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function GetInventoryIndexOfItemTypeBJ takes unit whichUnit, integer itemId returns integer
@@ -5583,6 +6394,7 @@ function GetInventoryIndexOfItemTypeBJ takes unit whichUnit, integer itemId retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5597,6 +6409,7 @@ function GetItemOfTypeFromUnitBJ takes unit whichUnit, integer itemId returns it
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5605,6 +6418,7 @@ function UnitHasItemOfTypeBJ takes unit whichUnit, integer itemId returns boolea
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -5625,6 +6439,7 @@ function UnitInventoryCount takes unit whichUnit returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -5633,6 +6448,7 @@ function UnitInventorySizeBJ takes unit whichUnit returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5641,6 +6457,7 @@ function SetItemInvulnerableBJ takes item whichItem, boolean flag returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5649,6 +6466,7 @@ function SetItemDropOnDeathBJ takes item whichItem, boolean flag returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5657,6 +6475,7 @@ function SetItemDroppableBJ takes item whichItem, boolean flag returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5665,6 +6484,7 @@ function SetItemPlayerBJ takes item whichItem, player whichPlayer, boolean chang
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5673,6 +6493,7 @@ function SetItemVisibleBJ takes boolean show, item whichItem returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5681,6 +6502,7 @@ function IsItemHiddenBJ takes item whichItem returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5689,6 +6511,7 @@ function ChooseRandomItemBJ takes integer level returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5697,6 +6520,7 @@ function ChooseRandomItemExBJ takes integer level, itemtype whichType returns in
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5705,6 +6529,7 @@ function ChooseRandomNPBuildingBJ takes nothing returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5713,6 +6538,7 @@ function ChooseRandomCreepBJ takes integer level returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5723,6 +6549,7 @@ endfunction
 //===========================================================================
 // See GroupPickRandomUnitEnum for the details of this algorithm.
 //
+
 /**
 @patch 1.07
 */
@@ -5736,6 +6563,7 @@ endfunction
 //===========================================================================
 // Picks a random item from within a rect, matching a condition
 //
+
 /**
 @patch 1.07
 */
@@ -5750,6 +6578,7 @@ endfunction
 //===========================================================================
 // Picks a random item from within a rect
 //
+
 /**
 @patch 1.07
 */
@@ -5758,6 +6587,7 @@ function RandomItemInRectSimpleBJ takes rect r returns item
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5781,6 +6611,7 @@ function CheckItemStatus takes item whichItem, integer status returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5806,6 +6637,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5814,6 +6646,7 @@ function UnitId2OrderIdBJ takes integer unitId returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5822,6 +6655,7 @@ function String2UnitIdBJ takes string unitIdString returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5837,6 +6671,7 @@ function UnitId2StringBJ takes integer unitId returns string
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5860,6 +6695,7 @@ function String2OrderIdBJ takes string orderIdString returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5883,6 +6719,7 @@ function OrderId2StringBJ takes integer orderId returns string
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5891,6 +6728,7 @@ function GetIssuedOrderIdBJ takes nothing returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5899,6 +6737,7 @@ function GetKillingUnitBJ takes nothing returns unit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5913,6 +6752,7 @@ function CreateUnitAtLocSaveLast takes player id, integer unitid, location loc, 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5921,6 +6761,7 @@ function GetLastCreatedUnit takes nothing returns unit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5936,6 +6777,7 @@ function CreateNUnitsAtLoc takes integer count, integer unitId, player whichPlay
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5944,6 +6786,7 @@ function CreateNUnitsAtLocFacingLocBJ takes integer count, integer unitId, playe
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -5952,6 +6795,7 @@ function GetLastCreatedGroupEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5962,6 +6806,7 @@ function GetLastCreatedGroup takes nothing returns group
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5971,6 +6816,7 @@ function CreateCorpseLocBJ takes integer unitid, player whichPlayer, location lo
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -5979,8 +6825,10 @@ function UnitSuspendDecayBJ takes boolean suspend, unit whichUnit returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `enumUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function DelayedSuspendDecayStopAnimEnum takes nothing returns nothing
@@ -5992,8 +6840,10 @@ function DelayedSuspendDecayStopAnimEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `enumUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function DelayedSuspendDecayBoneEnum takes nothing returns nothing
@@ -6010,8 +6860,10 @@ endfunction
 // initial corpse fades away, so we reset it now.  It's best not to show
 // off corpses thus created until after this grace period has passed.
 //
+
 /**
 @bug Leaks handle `enumUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function DelayedSuspendDecayFleshEnum takes nothing returns nothing
@@ -6028,10 +6880,12 @@ endfunction
 // Waits a short period of time to ensure that the corpse is decaying, and
 // then suspend the animation and corpse decay.
 //
+
 /**
 @bug Leaks handle `boneGroup`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `fleshGroup`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function DelayedSuspendDecay takes nothing returns nothing
@@ -6061,6 +6915,7 @@ function DelayedSuspendDecay takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6071,6 +6926,7 @@ function DelayedSuspendDecayCreate takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6095,8 +6951,10 @@ function CreatePermanentCorpseLocBJ takes integer style, integer unitid, player 
 endfunction
 
 //===========================================================================
+
 /**
 The arguments are swapped for WorldEdit usage. Equivalent to `GetUnitState`.
+
 @patch 1.00
 */
 function GetUnitStateSwap takes unitstate whichState, unit whichUnit returns real
@@ -6104,6 +6962,7 @@ function GetUnitStateSwap takes unitstate whichState, unit whichUnit returns rea
 endfunction
 
 //===========================================================================
+
 /**
 Returns the current unit state in percent.
 Unit states representing current value and max value must be provided in that order.
@@ -6111,6 +6970,7 @@ Unit states representing current value and max value must be provided in that or
 In case of failure returns 0.
 
 **Example:** a unit with 30/60 HP will return 50.0, meaning the unit is at 50% HP.
+
 @patch 1.07
 */
 function GetUnitStatePercent takes unit whichUnit, unitstate whichState, unitstate whichMaxState returns real
@@ -6126,6 +6986,7 @@ function GetUnitStatePercent takes unit whichUnit, unitstate whichState, unitsta
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6134,6 +6995,7 @@ function GetUnitLifePercent takes unit whichUnit returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6142,6 +7004,7 @@ function GetUnitManaPercent takes unit whichUnit returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6151,6 +7014,7 @@ function SelectUnitSingle takes unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6159,6 +7023,7 @@ function SelectGroupBJEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6168,6 +7033,7 @@ function SelectGroupBJ takes group g returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6176,6 +7042,7 @@ function SelectUnitAdd takes unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6184,6 +7051,7 @@ function SelectUnitRemove takes unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6195,6 +7063,7 @@ function ClearSelectionForPlayer takes player whichPlayer returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6207,6 +7076,7 @@ function SelectUnitForPlayerSingle takes unit whichUnit, player whichPlayer retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6219,6 +7089,7 @@ function SelectGroupForPlayerBJ takes group g, player whichPlayer returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6230,6 +7101,7 @@ function SelectUnitAddForPlayer takes unit whichUnit, player whichPlayer returns
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6241,6 +7113,7 @@ function SelectUnitRemoveForPlayer takes unit whichUnit, player whichPlayer retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6249,6 +7122,7 @@ function SetUnitLifeBJ takes unit whichUnit, real newValue returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6257,6 +7131,7 @@ function SetUnitManaBJ takes unit whichUnit, real newValue returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6265,6 +7140,7 @@ function SetUnitLifePercentBJ takes unit whichUnit, real percent returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6273,6 +7149,7 @@ function SetUnitManaPercentBJ takes unit whichUnit, real percent returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6281,6 +7158,7 @@ function IsUnitDeadBJ takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6289,6 +7167,7 @@ function IsUnitAliveBJ takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6301,6 +7180,7 @@ endfunction
 //===========================================================================
 // Returns true if every unit of the group is dead.
 //
+
 /**
 @patch 1.00
 */
@@ -6321,6 +7201,7 @@ function IsUnitGroupDeadBJ takes group g returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6331,6 +7212,7 @@ endfunction
 //===========================================================================
 // Returns true if the group contains no units.
 //
+
 /**
 @patch 1.00
 */
@@ -6351,6 +7233,7 @@ function IsUnitGroupEmptyBJ takes group g returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6363,6 +7246,7 @@ endfunction
 //===========================================================================
 // Returns true if every unit of the group is within the given rect.
 //
+
 /**
 @patch 1.00
 */
@@ -6374,6 +7258,7 @@ function IsUnitGroupInRectBJ takes group g, rect r returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6382,12 +7267,14 @@ function IsUnitHiddenBJ takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 Hides unit.
 
 Equivalent to `ShowUnit(whichUnit, false)`
 
 @param whichUnit Target unit to hide
+
 @patch 1.00
 */
 function ShowUnitHide takes unit whichUnit returns nothing
@@ -6395,6 +7282,7 @@ function ShowUnitHide takes unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6408,6 +7296,7 @@ function ShowUnitShow takes unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6416,10 +7305,12 @@ function IssueHauntOrderAtLocBJFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `goldMine`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function IssueHauntOrderAtLocBJ takes unit whichPeon, location loc returns boolean
@@ -6442,6 +7333,7 @@ function IssueHauntOrderAtLocBJ takes unit whichPeon, location loc returns boole
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6454,6 +7346,7 @@ function IssueBuildOrderByIdLocBJ takes unit whichPeon, integer unitId, location
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6462,6 +7355,7 @@ function IssueTrainOrderByIdBJ takes unit whichUnit, integer unitId returns bool
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6470,6 +7364,7 @@ function GroupTrainOrderByIdBJ takes group g, integer unitId returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6478,6 +7373,7 @@ function IssueUpgradeOrderByIdBJ takes unit whichUnit, integer techId returns bo
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6486,6 +7382,7 @@ function GetAttackedUnitBJ takes nothing returns unit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6494,6 +7391,7 @@ function SetUnitFlyHeightBJ takes unit whichUnit, real newHeight, real rate retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6502,6 +7400,7 @@ function SetUnitTurnSpeedBJ takes unit whichUnit, real turnSpeed returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6518,6 +7417,7 @@ function SetUnitPropWindowBJ takes unit whichUnit, real propWindow returns nothi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6526,6 +7426,7 @@ function GetUnitPropWindowBJ takes unit whichUnit returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6534,6 +7435,7 @@ function GetUnitDefaultPropWindowBJ takes unit whichUnit returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6542,6 +7444,7 @@ function SetUnitBlendTimeBJ takes unit whichUnit, real blendTime returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6550,6 +7453,7 @@ function SetUnitAcquireRangeBJ takes unit whichUnit, real acquireRange returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6558,6 +7462,7 @@ function UnitSetCanSleepBJ takes unit whichUnit, boolean canSleep returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6566,6 +7471,7 @@ function UnitCanSleepBJ takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6574,6 +7480,7 @@ function UnitWakeUpBJ takes unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6582,6 +7489,7 @@ function UnitIsSleepingBJ takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6590,8 +7498,10 @@ function WakePlayerUnitsEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function WakePlayerUnits takes player whichPlayer returns nothing
@@ -6602,6 +7512,7 @@ function WakePlayerUnits takes player whichPlayer returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6615,6 +7526,7 @@ function EnableCreepSleepBJ takes boolean enable returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6623,6 +7535,7 @@ function UnitGenerateAlarms takes unit whichUnit, boolean generate returns boole
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6631,6 +7544,7 @@ function DoesUnitGenerateAlarms takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6640,8 +7554,10 @@ endfunction
 
 //===========================================================================
 // Pause all units 
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function PauseAllUnitsBJ takes boolean pause returns nothing
@@ -6672,6 +7588,7 @@ function PauseAllUnitsBJ takes boolean pause returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6680,6 +7597,7 @@ function PauseUnitBJ takes boolean pause, unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6688,6 +7606,7 @@ function IsUnitPausedBJ takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6696,6 +7615,7 @@ function UnitPauseTimedLifeBJ takes boolean flag, unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6704,6 +7624,7 @@ function UnitApplyTimedLifeBJ takes real duration, integer buffId, unit whichUni
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6712,6 +7633,7 @@ function UnitShareVisionBJ takes boolean share, unit whichUnit, player whichPlay
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6730,6 +7652,7 @@ function UnitRemoveBuffsBJ takes integer buffType, unit whichUnit returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6743,6 +7666,7 @@ function UnitRemoveBuffsExBJ takes integer polarity, integer resist, unit whichU
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6756,8 +7680,10 @@ function UnitCountBuffsExBJ takes integer polarity, integer resist, unit whichUn
 endfunction
 
 //===========================================================================
+
 /**
 Equivalent to `UnitRemoveAbility`, but arguments are swapped.
+
 @patch 1.00
 */
 function UnitRemoveAbilityBJ takes integer abilityId, unit whichUnit returns boolean
@@ -6765,8 +7691,10 @@ function UnitRemoveAbilityBJ takes integer abilityId, unit whichUnit returns boo
 endfunction
 
 //===========================================================================
+
 /**
 Equivalent to `UnitAddAbility`, but arguments are swapped.
+
 @patch 1.07
 */
 function UnitAddAbilityBJ takes integer abilityId, unit whichUnit returns boolean
@@ -6774,6 +7702,7 @@ function UnitAddAbilityBJ takes integer abilityId, unit whichUnit returns boolea
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.15
 */
@@ -6782,6 +7711,7 @@ function UnitRemoveTypeBJ takes unittype whichType, unit whichUnit returns boole
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.15
 */
@@ -6790,6 +7720,7 @@ function UnitAddTypeBJ takes unittype whichType, unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -6798,6 +7729,7 @@ function UnitMakeAbilityPermanentBJ takes boolean permanent, integer abilityId, 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6806,6 +7738,7 @@ function SetUnitExplodedBJ takes unit whichUnit, boolean exploded returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6815,6 +7748,7 @@ function ExplodeUnitBJ takes unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6823,6 +7757,7 @@ function GetTransportUnitBJ takes nothing returns unit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6831,6 +7766,7 @@ function GetLoadedUnitBJ takes nothing returns unit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6839,6 +7775,7 @@ function IsUnitInTransportBJ takes unit whichUnit, unit whichTransport returns b
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6847,6 +7784,7 @@ function IsUnitLoadedBJ takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6858,6 +7796,7 @@ endfunction
 // This attempts to replace a unit with a new unit type by creating a new
 // unit of the desired type using the old unit's location, facing, etc.
 //
+
 /**
 @bug Leaks handles:
 
@@ -6866,6 +7805,7 @@ endfunction
 1. `indexItem`
 
 In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function ReplaceUnitBJ takes unit whichUnit, integer newUnitId, integer unitStateMethod returns unit
@@ -6958,6 +7898,7 @@ function ReplaceUnitBJ takes unit whichUnit, integer newUnitId, integer unitStat
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6966,6 +7907,7 @@ function GetLastReplacedUnitBJ takes nothing returns unit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6975,6 +7917,7 @@ function SetUnitPositionLocFacingBJ takes unit whichUnit, location loc, real fac
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -6984,6 +7927,7 @@ function SetUnitPositionLocFacingLocBJ takes unit whichUnit, location loc, locat
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -6992,6 +7936,7 @@ function AddItemToStockBJ takes integer itemId, unit whichUnit, integer currentS
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -7000,6 +7945,7 @@ function AddUnitToStockBJ takes integer unitId, unit whichUnit, integer currentS
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -7008,6 +7954,7 @@ function RemoveItemFromStockBJ takes integer itemId, unit whichUnit returns noth
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -7016,6 +7963,7 @@ function RemoveUnitFromStockBJ takes integer unitId, unit whichUnit returns noth
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -7024,6 +7972,7 @@ function SetUnitUseFoodBJ takes boolean enable, unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -7032,6 +7981,7 @@ function UnitDamagePointLoc takes unit whichUnit, real delay, real radius, locat
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.17a
 */
@@ -7048,6 +7998,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7057,6 +8008,7 @@ function CreateDestructableLoc takes integer objectid, location loc, real facing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7066,6 +8018,7 @@ function CreateDeadDestructableLocBJ takes integer objectid, location loc, real 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7074,6 +8027,7 @@ function GetLastCreatedDestructable takes nothing returns destructable
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -7082,6 +8036,7 @@ function ShowDestructableBJ takes boolean flag, destructable d returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7090,6 +8045,7 @@ function SetDestructableInvulnerableBJ takes destructable d, boolean flag return
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7098,8 +8054,10 @@ function IsDestructableInvulnerableBJ takes destructable d returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 Returns a new location of destructable's position.
+
 @patch 1.00
 */
 function GetDestructableLoc takes destructable whichDestructable returns location
@@ -7107,6 +8065,7 @@ function GetDestructableLoc takes destructable whichDestructable returns locatio
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7115,8 +8074,10 @@ function EnumDestructablesInRectAll takes rect r, code actionFunc returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `destLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function EnumDestructablesInCircleBJFilter takes nothing returns boolean
@@ -7129,6 +8090,7 @@ function EnumDestructablesInCircleBJFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7137,6 +8099,7 @@ function IsDestructableDeadBJ takes destructable d returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7147,6 +8110,7 @@ endfunction
 //===========================================================================
 // See GroupPickRandomUnitEnum for the details of this algorithm.
 //
+
 /**
 @patch 1.00
 */
@@ -7160,8 +8124,10 @@ endfunction
 //===========================================================================
 // Picks a random destructable from within a rect, matching a condition
 //
+
 /**
 @note Destroys the `filter` `boolexpr` received as argument.
+
 @patch 1.00
 */
 function RandomDestructableInRectBJ takes rect r, boolexpr filter returns destructable
@@ -7175,6 +8141,7 @@ endfunction
 //===========================================================================
 // Picks a random destructable from within a rect
 //
+
 /**
 @patch 1.00
 */
@@ -7186,8 +8153,10 @@ endfunction
 // Enumerates within a rect, with a filter to narrow the enumeration down
 // objects within a circular area.
 //
+
 /**
 @bug Leaks handle `r`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function EnumDestructablesInCircleBJ takes real radius, location loc, code actionFunc returns nothing
@@ -7203,6 +8172,7 @@ function EnumDestructablesInCircleBJ takes real radius, location loc, code actio
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7211,6 +8181,7 @@ function SetDestructableLifePercentBJ takes destructable d, real percent returns
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7219,6 +8190,7 @@ function SetDestructableMaxLifeBJ takes destructable d, real max returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7246,6 +8218,7 @@ endfunction
 //===========================================================================
 // Determine the elevator's height from its occlusion height.
 //
+
 /**
 @patch 1.07
 */
@@ -7265,6 +8238,7 @@ endfunction
 // determines the elevator's current height from its occlusion height.
 // Arbitrarily changing an elevator's occlusion height is thus inadvisable.
 //
+
 /**
 @patch 1.07
 */
@@ -7323,8 +8297,10 @@ endfunction
 // Grab the unit and throw his own coords in his face, forcing him to push
 // and shove until he finds a spot where noone will bother him.
 //
+
 /**
 @bug Leaks handle `nudgee`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function NudgeUnitsInRectEnum takes nothing returns nothing
@@ -7334,8 +8310,10 @@ function NudgeUnitsInRectEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `nudgee`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function NudgeItemsInRectEnum takes nothing returns nothing
@@ -7349,8 +8327,10 @@ endfunction
 // encourage them to find locations where they can peacefully coexist with
 // pathing restrictions and live happy, fruitful lives.
 //
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function NudgeObjectsInRect takes rect nudgeArea returns nothing
@@ -7365,8 +8345,10 @@ function NudgeObjectsInRect takes rect nudgeArea returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function NearbyElevatorExistsEnum takes nothing returns nothing
@@ -7379,8 +8361,10 @@ function NearbyElevatorExistsEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `r`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function NearbyElevatorExists takes real x, real y returns boolean
@@ -7397,6 +8381,7 @@ function NearbyElevatorExists takes real x, real y returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -7409,10 +8394,12 @@ endfunction
 // or reviving a pathing blocker at the appropriate location (and creating
 // the pathing blocker in the first place, if it does not yet exist).
 //
+
 /**
 @bug Leaks handle `blocker`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `r`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function ChangeElevatorWallBlocker takes real x, real y, real facing, boolean open returns nothing
@@ -7466,6 +8453,7 @@ function ChangeElevatorWallBlocker takes real x, real y, real facing, boolean op
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -7509,6 +8497,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7517,6 +8506,7 @@ function WaygateActivateBJ takes boolean activate, unit waygate returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7525,8 +8515,10 @@ function WaygateIsActiveBJ takes unit waygate returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @note The caller must not forget to remove the passed `loc` location.
+
 @patch 1.00
 */
 function WaygateSetDestinationLocBJ takes unit waygate, location loc returns nothing
@@ -7534,8 +8526,10 @@ function WaygateSetDestinationLocBJ takes unit waygate, location loc returns not
 endfunction
 
 //===========================================================================
+
 /**
 @note Creates a new location object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function WaygateGetDestinationLocBJ takes unit waygate returns location
@@ -7543,6 +8537,7 @@ function WaygateGetDestinationLocBJ takes unit waygate returns location
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -7559,10 +8554,12 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 Only call `ForceUIKey` locally for whichPlayer. Since this emulates a player's actions, it cannot desync, like if player pressed a keyboard button.
 
 @note See: `ForceUICancel`, `ForceUICancelBJ`
+
 @patch 1.00
 */
 function ForceUIKeyBJ takes player whichPlayer, string key returns nothing
@@ -7573,10 +8570,12 @@ function ForceUIKeyBJ takes player whichPlayer, string key returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 Only call `ForceUICancel` locally for whichPlayer. Since this emulates a player's actions, it cannot desync, like if player pressed a keyboard button.
 
 @note See: `ForceUIKey`, `ForceUIKeyBJ`
+
 @patch 1.00
 */
 function ForceUICancelBJ takes player whichPlayer returns nothing
@@ -7595,8 +8594,10 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `whichGroup`.
+
 @patch 1.07
 */
 function ForGroupBJ takes group whichGroup, code callback returns nothing
@@ -7614,8 +8615,10 @@ function ForGroupBJ takes group whichGroup, code callback returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 See `GroupAddUnit` (native). Here only the argument order is swapped for WorldEdit trigger usage.
+
 @patch 1.00
 */
 function GroupAddUnitSimple takes unit whichUnit, group whichGroup returns nothing
@@ -7623,8 +8626,10 @@ function GroupAddUnitSimple takes unit whichUnit, group whichGroup returns nothi
 endfunction
 
 //===========================================================================
+
 /**
 See `GroupRemoveUnit` (native). Here only the argument order is swapped for WorldEdit trigger usage.
+
 @patch 1.00
 */
 function GroupRemoveUnitSimple takes unit whichUnit, group whichGroup returns nothing
@@ -7632,6 +8637,7 @@ function GroupRemoveUnitSimple takes unit whichUnit, group whichGroup returns no
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7640,8 +8646,10 @@ function GroupAddGroupEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `sourceGroup`.
+
 @patch 1.00
 */
 function GroupAddGroup takes group sourceGroup, group destGroup returns nothing
@@ -7660,6 +8668,7 @@ function GroupAddGroup takes group sourceGroup, group destGroup returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7668,8 +8677,10 @@ function GroupRemoveGroupEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `sourceGroup`.
+
 @patch 1.00
 */
 function GroupRemoveGroup takes group sourceGroup, group destGroup returns nothing
@@ -7688,6 +8699,7 @@ function GroupRemoveGroup takes group sourceGroup, group destGroup returns nothi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7696,6 +8708,7 @@ function ForceAddPlayerSimple takes player whichPlayer, force whichForce returns
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7710,6 +8723,7 @@ endfunction
 // The chance of picking a given unit over the "current pick" is 1/N, where N is
 // the number of units considered thusfar (including the current consideration).
 //
+
 /**
 @patch 1.00
 */
@@ -7723,8 +8737,10 @@ endfunction
 //===========================================================================
 // Picks a random unit from a group.
 //
+
 /**
 @note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `whichGroup`.
+
 @patch 1.00
 */
 function GroupPickRandomUnit takes group whichGroup returns unit
@@ -7747,6 +8763,7 @@ endfunction
 //===========================================================================
 // See GroupPickRandomUnitEnum for the details of this algorithm.
 //
+
 /**
 @patch 1.00
 */
@@ -7760,6 +8777,7 @@ endfunction
 //===========================================================================
 // Picks a random player from a force.
 //
+
 /**
 @patch 1.00
 */
@@ -7771,12 +8789,14 @@ function ForcePickRandomPlayer takes force whichForce returns player
 endfunction
 
 //===========================================================================
+
 /**
 For the target player choose all currently selected units that match the filter and run `enumAction` on them.
 
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Destroys the `enumFilter` `boolexpr` received as argument.
+
 @patch 1.00
 */
 function EnumUnitsSelected takes player whichPlayer, boolexpr enumFilter, code enumAction returns nothing
@@ -7789,12 +8809,14 @@ function EnumUnitsSelected takes player whichPlayer, boolexpr enumFilter, code e
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Destroys the `filter` `boolexpr` received as argument.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetUnitsInRectMatching takes rect r, boolexpr filter returns group
@@ -7805,8 +8827,10 @@ function GetUnitsInRectMatching takes rect r, boolexpr filter returns group
 endfunction
 
 //===========================================================================
+
 /**
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetUnitsInRectAll takes rect r returns group
@@ -7814,6 +8838,7 @@ function GetUnitsInRectAll takes rect r returns group
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7822,10 +8847,12 @@ function GetUnitsInRectOfPlayerFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetUnitsInRectOfPlayer takes rect r, player whichPlayer returns group
@@ -7836,10 +8863,12 @@ function GetUnitsInRectOfPlayer takes rect r, player whichPlayer returns group
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetUnitsInRangeOfLocMatching takes real radius, location whichLocation, boolexpr filter returns group
@@ -7850,8 +8879,10 @@ function GetUnitsInRangeOfLocMatching takes real radius, location whichLocation,
 endfunction
 
 //===========================================================================
+
 /**
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetUnitsInRangeOfLocAll takes real radius, location whichLocation returns group
@@ -7859,6 +8890,7 @@ function GetUnitsInRangeOfLocAll takes real radius, location whichLocation retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7867,12 +8899,14 @@ function GetUnitsOfTypeIdAllFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `result`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetUnitsOfTypeIdAll takes integer unitid returns group
@@ -7896,12 +8930,14 @@ function GetUnitsOfTypeIdAll takes integer unitid returns group
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Destroys the `filter` `boolexpr` received as argument.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetUnitsOfPlayerMatching takes player whichPlayer, boolexpr filter returns group
@@ -7912,6 +8948,7 @@ function GetUnitsOfPlayerMatching takes player whichPlayer, boolexpr filter retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7920,6 +8957,7 @@ function GetUnitsOfPlayerAll takes player whichPlayer returns group
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7928,10 +8966,12 @@ function GetUnitsOfPlayerAndTypeIdFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetUnitsOfPlayerAndTypeId takes player whichPlayer, integer unitid returns group
@@ -7942,10 +8982,12 @@ function GetUnitsOfPlayerAndTypeId takes player whichPlayer, integer unitid retu
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetUnitsSelectedAll takes player whichPlayer returns group
@@ -7956,12 +8998,14 @@ function GetUnitsSelectedAll takes player whichPlayer returns group
 endfunction
 
 //===========================================================================
+
 /**
 Creates a new force to include the target player.
 
 @bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new force object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetForceOfPlayer takes player whichPlayer returns force
@@ -7971,6 +9015,7 @@ function GetForceOfPlayer takes player whichPlayer returns force
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -7979,10 +9024,12 @@ function GetPlayersAll takes nothing returns force
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new force object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetPlayersByMapControl takes mapcontrol whichControl returns force
@@ -8005,10 +9052,12 @@ function GetPlayersByMapControl takes mapcontrol whichControl returns force
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new force object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetPlayersAllies takes player whichPlayer returns force
@@ -8018,10 +9067,12 @@ function GetPlayersAllies takes player whichPlayer returns force
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new force object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetPlayersEnemies takes player whichPlayer returns force
@@ -8031,12 +9082,14 @@ function GetPlayersEnemies takes player whichPlayer returns force
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `f`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Destroys the `filter` `boolexpr` received as argument.
 
 @note Creates a new force object and returns it. The caller must remove it on its own after use.
+
 @patch 1.00
 */
 function GetPlayersMatching takes boolexpr filter returns force
@@ -8047,6 +9100,7 @@ function GetPlayersMatching takes boolexpr filter returns force
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8055,8 +9109,10 @@ function CountUnitsInGroupEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @note If the global `bj_wantDestroyGroup` is set to `true` then destroys the passed group `g`.
+
 @patch 1.00
 */
 function CountUnitsInGroup takes group g returns integer
@@ -8076,6 +9132,7 @@ function CountUnitsInGroup takes group g returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8084,6 +9141,7 @@ function CountPlayersInForceEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8094,8 +9152,10 @@ function CountPlayersInForceBJ takes force f returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @bug Not an even distribution. See <http://www.hiveworkshop.com/forums/l-715/g-275344/>.
+
 @patch 1.07
 */
 function GetRandomSubGroupEnum takes nothing returns nothing
@@ -8110,12 +9170,14 @@ function GetRandomSubGroupEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Not an even distribution. See <http://www.hiveworkshop.com/forums/l-715/g-275344/>.
 
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @note Creates a new group object and returns it. The caller must remove it on its own after use.
+
 @patch 1.07
 */
 function GetRandomSubGroup takes integer count, group sourceGroup returns group
@@ -8135,8 +9197,10 @@ function GetRandomSubGroup takes integer count, group sourceGroup returns group
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `filterUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function LivingPlayerUnitsOfTypeIdFilter takes nothing returns boolean
@@ -8145,8 +9209,10 @@ function LivingPlayerUnitsOfTypeIdFilter takes nothing returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function CountLivingPlayerUnitsOfTypeId takes integer unitId, player whichPlayer returns integer
@@ -8171,6 +9237,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8179,6 +9246,7 @@ function ResetUnitAnimation takes unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8187,6 +9255,7 @@ function SetUnitTimeScalePercent takes unit whichUnit, real percentScale returns
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8199,14 +9268,20 @@ endfunction
 // is reversed so as to be displayed as transparency, and all four parameters
 // are treated as percentages rather than bytes.
 //
+
 /**
 Sets the unit's color to the color defined by (red,green,blue,alpha).
 
 @param whichUnit The unit which will be colored.
+
 @param red An integer from 0-100 determining the amount of red color.
+
 @param green An integer from 0-100 determining the amount of green color.
+
 @param blue An integer from 0-100 determining the amount of blue color.
+
 @param transparency An integer from 0-100 determining the transparency. A value of 100 is complete transparency while a value of 0 is complete opacity.
+
 @patch 1.00
 */
 function SetUnitVertexColorBJ takes unit whichUnit, real red, real green, real blue, real transparency returns nothing
@@ -8214,19 +9289,25 @@ function SetUnitVertexColorBJ takes unit whichUnit, real red, real green, real b
 endfunction
 
 //===========================================================================
+
 /**
 Adds a blinking circle around the unit with the color (red,green,blue,alpha).
 The circle blinks twice. This function is commonly used for cinematic modes
 and is seen in `TransmissionFromUnitWithNameBJ`.
 
+@param whichUnit The unit the indicator will be applied to.
+
+@param red An integer from 0-100 determining the amount of red color in the indicator.
+
+@param green An integer from 0-100 determining the amount of green color in the indicator.
+
+@param blue An integer from 0-100 determining the amount of blue color in the indicator.
+
+@param transparency An integer from 0-100 determining the transparency of the indicator. A value of 100 is complete transparency while a value of 0 is complete opacity.
+
 @note The size of the indicator depends on a unit's selection size. To modify
 this, you must edit the object editor field of the unit listed as "Art - Selection Size".
 
-@param whichUnit The unit the indicator will be applied to.
-@param red An integer from 0-100 determining the amount of red color in the indicator.
-@param green An integer from 0-100 determining the amount of green color in the indicator.
-@param blue An integer from 0-100 determining the amount of blue color in the indicator.
-@param transparency An integer from 0-100 determining the transparency of the indicator. A value of 100 is complete transparency while a value of 0 is complete opacity.
 @patch 1.00
 */
 function UnitAddIndicatorBJ takes unit whichUnit, real red, real green, real blue, real transparency returns nothing
@@ -8234,19 +9315,25 @@ function UnitAddIndicatorBJ takes unit whichUnit, real red, real green, real blu
 endfunction
 
 //===========================================================================
+
 /**
 Adds a blinking circle around the destructable with the color (red,green,blue,alpha).
 The circle blinks twice. This function is commonly used for cinematic modes
 and is seen in `TransmissionFromUnitWithNameBJ`.
 
+@param whichDestructable The destructable the indicator will be applied to.
+
+@param red An integer from 0-100 determining the amount of red color in the indicator.
+
+@param green An integer from 0-100 determining the amount of green color in the indicator.
+
+@param blue An integer from 0-100 determining the amount of blue color in the indicator.
+
+@param transparency An integer from 0-100 determining the transparency of the indicator. A value of 100 is complete transparency while a value of 0 is complete opacity.
+
 @note The size of the indicator depends on a destructable's selection size. To modify
 this, you must edit the object editor field of the destructable listed as "Art - Selection Size".
 
-@param whichDestructable The destructable the indicator will be applied to.
-@param red An integer from 0-100 determining the amount of red color in the indicator.
-@param green An integer from 0-100 determining the amount of green color in the indicator.
-@param blue An integer from 0-100 determining the amount of blue color in the indicator.
-@param transparency An integer from 0-100 determining the transparency of the indicator. A value of 100 is complete transparency while a value of 0 is complete opacity.
 @patch 1.00
 */
 function DestructableAddIndicatorBJ takes destructable whichDestructable, real red, real green, real blue, real transparency returns nothing
@@ -8254,19 +9341,25 @@ function DestructableAddIndicatorBJ takes destructable whichDestructable, real r
 endfunction
 
 //===========================================================================
+
 /**
 Adds a blinking circle around the item with the color (red,green,blue,alpha).
 The circle blinks twice. This function is commonly used for cinematic modes
 and is seen in `TransmissionFromUnitWithNameBJ`.
 
+@param whichItem The item the indicator will be applied to.
+
+@param red An integer from 0-100 determining the amount of red color in the indicator.
+
+@param green An integer from 0-100 determining the amount of green color in the indicator.
+
+@param blue An integer from 0-100 determining the amount of blue color in the indicator.
+
+@param transparency An integer from 0-100 determining the transparency of the indicator. A value of 100 is complete transparency while a value of 0 is complete opacity.
+
 @note The size of the indicator depends on a item's selection size. To modify
 this, you must edit the object editor field of the item listed as "Art - Selection Size".
 
-@param whichItem The item the indicator will be applied to.
-@param red An integer from 0-100 determining the amount of red color in the indicator.
-@param green An integer from 0-100 determining the amount of green color in the indicator.
-@param blue An integer from 0-100 determining the amount of blue color in the indicator.
-@param transparency An integer from 0-100 determining the transparency of the indicator. A value of 100 is complete transparency while a value of 0 is complete opacity.
 @patch 1.00
 */
 function ItemAddIndicatorBJ takes item whichItem, real red, real green, real blue, real transparency returns nothing
@@ -8276,8 +9369,10 @@ endfunction
 //===========================================================================
 // Sets a unit's facing to point directly at a location.
 //
+
 /**
 @bug Leaks handle `unitLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function SetUnitFacingToFaceLocTimed takes unit whichUnit, location target, real duration returns nothing
@@ -8290,8 +9385,10 @@ endfunction
 //===========================================================================
 // Sets a unit's facing to point directly at another unit.
 //
+
 /**
 @bug Leaks handle `unitLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function SetUnitFacingToFaceUnitTimed takes unit whichUnit, unit target, real duration returns nothing
@@ -8302,6 +9399,7 @@ function SetUnitFacingToFaceUnitTimed takes unit whichUnit, unit target, real du
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8310,6 +9408,7 @@ function QueueUnitAnimationBJ takes unit whichUnit, string whichAnimation return
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8318,6 +9417,7 @@ function SetDestructableAnimationBJ takes destructable d, string whichAnimation 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8326,6 +9426,7 @@ function QueueDestructableAnimationBJ takes destructable d, string whichAnimatio
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -8342,6 +9443,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8350,6 +9452,7 @@ function DialogDisplayBJ takes boolean flag, dialog whichDialog, player whichPla
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8358,6 +9461,7 @@ function DialogSetMessageBJ takes dialog whichDialog, string message returns not
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8367,6 +9471,7 @@ function DialogAddButtonBJ takes dialog whichDialog, string buttonText returns b
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8376,6 +9481,7 @@ function DialogAddButtonWithHotkeyBJ takes dialog whichDialog, string buttonText
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8384,6 +9490,7 @@ function DialogClearBJ takes dialog whichDialog returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8392,6 +9499,7 @@ function GetLastCreatedButtonBJ takes nothing returns button
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8400,6 +9508,7 @@ function GetClickedButtonBJ takes nothing returns button
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8416,6 +9525,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8431,6 +9541,7 @@ endfunction
 //===========================================================================
 // Set all flags used by the in-game "Ally" checkbox.
 //
+
 /**
 @patch 1.00
 */
@@ -8445,6 +9556,7 @@ endfunction
 //===========================================================================
 // Set all flags used by the in-game "Shared Vision" checkbox.
 //
+
 /**
 @patch 1.00
 */
@@ -8455,6 +9567,7 @@ endfunction
 //===========================================================================
 // Set all flags used by the in-game "Shared Units" checkbox.
 //
+
 /**
 @patch 1.00
 */
@@ -8466,6 +9579,7 @@ endfunction
 // Set all flags used by the in-game "Shared Units" checkbox with the Full
 // Shared Unit Control feature enabled.
 //
+
 /**
 @patch 1.00
 */
@@ -8474,6 +9588,7 @@ function SetPlayerAllianceStateFullControlBJ takes player sourcePlayer, player o
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8533,6 +9648,7 @@ endfunction
 //===========================================================================
 // Set the alliance states for an entire force towards another force.
 //
+
 /**
 @patch 1.07
 */
@@ -8563,6 +9679,7 @@ endfunction
 //===========================================================================
 // Test to see if two players are co-allied (allied with each other).
 //
+
 /**
 @patch 1.00
 */
@@ -8585,6 +9702,7 @@ endfunction
 // Force (whichPlayer) AI player to share vision and advanced unit control 
 // with all AI players of its allies.
 //
+
 /**
 @patch 1.00
 */
@@ -8611,6 +9729,7 @@ endfunction
 //===========================================================================
 // Force (whichPlayer) to share vision and advanced unit control with all of his/her allies.
 //
+
 /**
 @patch 1.00
 */
@@ -8637,6 +9756,7 @@ endfunction
 // Creates a 'Neutral Victim' player slot.  This slot is passive towards all
 // other players, but all other players are aggressive towards him/her.
 // 
+
 /**
 @patch 1.00
 */
@@ -8666,6 +9786,7 @@ function ConfigureNeutralVictim takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8676,6 +9797,7 @@ endfunction
 //===========================================================================
 // Change ownership for every unit of (whichPlayer)'s team to neutral passive.
 //
+
 /**
 @patch 1.00
 */
@@ -8690,6 +9812,7 @@ endfunction
 //===========================================================================
 // Change ownership for every unit of (whichPlayer)'s team to neutral passive.
 //
+
 /**
 @patch 1.00
 */
@@ -8712,6 +9835,7 @@ endfunction
 //===========================================================================
 // Determine whether or not victory/defeat is disabled via cheat codes.
 //
+
 /**
 @patch 1.00
 */
@@ -8729,6 +9853,7 @@ function AllowVictoryDefeat takes playergameresult gameResult returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8737,10 +9862,12 @@ function EndGameBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeVictoryDialogBJ takes player whichPlayer, boolean leftGame returns nothing
@@ -8768,10 +9895,12 @@ function MeleeVictoryDialogBJ takes player whichPlayer, boolean leftGame returns
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeDefeatDialogBJ takes player whichPlayer, boolean leftGame returns nothing
@@ -8803,10 +9932,12 @@ function MeleeDefeatDialogBJ takes player whichPlayer, boolean leftGame returns 
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function GameOverDialogBJ takes player whichPlayer, boolean leftGame returns nothing
@@ -8833,6 +9964,7 @@ function GameOverDialogBJ takes player whichPlayer, boolean leftGame returns not
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8854,6 +9986,7 @@ function RemovePlayerPreserveUnitsBJ takes player whichPlayer, playergameresult 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8872,6 +10005,7 @@ function CustomVictoryOkBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8886,10 +10020,12 @@ function CustomVictoryQuitBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function CustomVictoryDialogBJ takes player whichPlayer returns nothing
@@ -8920,6 +10056,7 @@ function CustomVictoryDialogBJ takes player whichPlayer returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8939,6 +10076,7 @@ function CustomVictorySkipBJ takes player whichPlayer returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8963,6 +10101,7 @@ function CustomVictoryBJ takes player whichPlayer, boolean showDialog, boolean s
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8972,6 +10111,7 @@ function CustomDefeatRestartBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -8995,6 +10135,7 @@ function CustomDefeatReduceDifficultyBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9004,6 +10145,7 @@ function CustomDefeatLoadBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9018,10 +10160,12 @@ function CustomDefeatQuitBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `t`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `d`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function CustomDefeatDialogBJ takes player whichPlayer, string message returns nothing
@@ -9064,6 +10208,7 @@ function CustomDefeatDialogBJ takes player whichPlayer, string message returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9083,6 +10228,7 @@ function CustomDefeatBJ takes player whichPlayer, string message returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9095,6 +10241,7 @@ function SetNextLevelBJ takes string nextLevel returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9111,6 +10258,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9129,6 +10277,7 @@ function CreateQuestBJ takes integer questType, string title, string description
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9137,6 +10286,7 @@ function DestroyQuestBJ takes quest whichQuest returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9145,6 +10295,7 @@ function QuestSetEnabledBJ takes boolean enabled, quest whichQuest returns nothi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9153,6 +10304,7 @@ function QuestSetTitleBJ takes quest whichQuest, string title returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9161,6 +10313,7 @@ function QuestSetDescriptionBJ takes quest whichQuest, string description return
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9169,6 +10322,7 @@ function QuestSetCompletedBJ takes quest whichQuest, boolean completed returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9177,6 +10331,7 @@ function QuestSetFailedBJ takes quest whichQuest, boolean failed returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9185,6 +10340,7 @@ function QuestSetDiscoveredBJ takes quest whichQuest, boolean discovered returns
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9193,6 +10349,7 @@ function GetLastCreatedQuestBJ takes nothing returns quest
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9204,6 +10361,7 @@ function CreateQuestItemBJ takes quest whichQuest, string description returns qu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9212,6 +10370,7 @@ function QuestItemSetDescriptionBJ takes questitem whichQuestItem, string descri
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9220,6 +10379,7 @@ function QuestItemSetCompletedBJ takes questitem whichQuestItem, boolean complet
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9228,6 +10388,7 @@ function GetLastCreatedQuestItemBJ takes nothing returns questitem
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9238,6 +10399,7 @@ function CreateDefeatConditionBJ takes string description returns defeatconditio
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9246,6 +10408,7 @@ function DestroyDefeatConditionBJ takes defeatcondition whichCondition returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9254,6 +10417,7 @@ function DefeatConditionSetDescriptionBJ takes defeatcondition whichCondition, s
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9262,6 +10426,7 @@ function GetLastCreatedDefeatConditionBJ takes nothing returns defeatcondition
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9270,6 +10435,7 @@ function FlashQuestDialogButtonBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9359,6 +10525,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9369,6 +10536,7 @@ function StartTimerBJ takes timer t, boolean periodic, real timeout returns time
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9379,6 +10547,7 @@ function CreateTimerBJ takes boolean periodic, real timeout returns timer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9387,6 +10556,7 @@ function DestroyTimerBJ takes timer whichTimer returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9399,6 +10569,7 @@ function PauseTimerBJ takes boolean pause, timer whichTimer returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9407,6 +10578,7 @@ function GetLastCreatedTimerBJ takes nothing returns timer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9418,6 +10590,7 @@ function CreateTimerDialogBJ takes timer t, string title returns timerdialog
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9426,6 +10599,7 @@ function DestroyTimerDialogBJ takes timerdialog td returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9434,6 +10608,7 @@ function TimerDialogSetTitleBJ takes timerdialog td, string title returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9442,6 +10617,7 @@ function TimerDialogSetTitleColorBJ takes timerdialog td, real red, real green, 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9450,6 +10626,7 @@ function TimerDialogSetTimeColorBJ takes timerdialog td, real red, real green, r
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9458,6 +10635,7 @@ function TimerDialogSetSpeedBJ takes timerdialog td, real speedMultFactor return
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -9469,6 +10647,7 @@ function TimerDialogDisplayForPlayerBJ takes boolean show, timerdialog td, playe
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9477,6 +10656,7 @@ function TimerDialogDisplayBJ takes boolean show, timerdialog td returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9493,6 +10673,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9506,6 +10687,7 @@ function LeaderboardResizeBJ takes leaderboard lb returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9514,6 +10696,7 @@ function LeaderboardSetPlayerItemValueBJ takes player whichPlayer, leaderboard l
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9522,6 +10705,7 @@ function LeaderboardSetPlayerItemLabelBJ takes player whichPlayer, leaderboard l
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9530,6 +10714,7 @@ function LeaderboardSetPlayerItemStyleBJ takes player whichPlayer, leaderboard l
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9538,6 +10723,7 @@ function LeaderboardSetPlayerItemLabelColorBJ takes player whichPlayer, leaderbo
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9546,6 +10732,7 @@ function LeaderboardSetPlayerItemValueColorBJ takes player whichPlayer, leaderbo
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9554,6 +10741,7 @@ function LeaderboardSetLabelColorBJ takes leaderboard lb, real red, real green, 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9562,6 +10750,7 @@ function LeaderboardSetValueColorBJ takes leaderboard lb, real red, real green, 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9571,6 +10760,7 @@ function LeaderboardSetLabelBJ takes leaderboard lb, string label returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9579,6 +10769,7 @@ function LeaderboardSetStyleBJ takes leaderboard lb, boolean showLabel, boolean 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9587,6 +10778,7 @@ function LeaderboardGetItemCountBJ takes leaderboard lb returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9595,6 +10787,7 @@ function LeaderboardHasPlayerItemBJ takes leaderboard lb, player whichPlayer ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9614,6 +10807,7 @@ function ForceSetLeaderboardBJ takes leaderboard lb, force toForce returns nothi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9626,6 +10820,7 @@ function CreateLeaderboardBJ takes force toForce, string label returns leaderboa
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9634,6 +10829,7 @@ function DestroyLeaderboardBJ takes leaderboard lb returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9642,6 +10838,7 @@ function LeaderboardDisplayBJ takes boolean show, leaderboard lb returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9655,6 +10852,7 @@ function LeaderboardAddItemBJ takes player whichPlayer, leaderboard lb, string l
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9664,6 +10862,7 @@ function LeaderboardRemovePlayerItemBJ takes player whichPlayer, leaderboard lb 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9680,6 +10879,7 @@ function LeaderboardSortItemsBJ takes leaderboard lb, integer sortType, boolean 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9688,6 +10888,7 @@ function LeaderboardSortItemsByPlayerBJ takes leaderboard lb, boolean ascending 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9696,6 +10897,7 @@ function LeaderboardSortItemsByLabelBJ takes leaderboard lb, boolean ascending r
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9707,6 +10909,7 @@ endfunction
 // Returns the player who is occupying a specified position in a leaderboard.
 // The position parameter is expected in the range of 1..16.
 //
+
 /**
 @patch 1.07
 */
@@ -9729,6 +10932,7 @@ function LeaderboardGetIndexedPlayerBJ takes integer position, leaderboard lb re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9737,6 +10941,7 @@ function PlayerGetLeaderboardBJ takes player whichPlayer returns leaderboard
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -9751,6 +10956,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -9764,6 +10970,7 @@ function CreateMultiboardBJ takes integer cols, integer rows, string title retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -9772,6 +10979,7 @@ function DestroyMultiboardBJ takes multiboard mb returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -9780,6 +10988,7 @@ function GetLastCreatedMultiboard takes nothing returns multiboard
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -9788,6 +10997,7 @@ function MultiboardDisplayBJ takes boolean show, multiboard mb returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -9796,6 +11006,7 @@ function MultiboardMinimizeBJ takes boolean minimize, multiboard mb returns noth
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -9804,6 +11015,7 @@ function MultiboardSetTitleTextColorBJ takes multiboard mb, real red, real green
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -9812,8 +11024,10 @@ function MultiboardAllowDisplayBJ takes boolean flag returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.13
 */
 function MultiboardSetItemStyleBJ takes multiboard mb, integer col, integer row, boolean showValue, boolean showIcon returns nothing
@@ -9848,8 +11062,10 @@ function MultiboardSetItemStyleBJ takes multiboard mb, integer col, integer row,
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.13
 */
 function MultiboardSetItemValueBJ takes multiboard mb, integer col, integer row, string val returns nothing
@@ -9884,8 +11100,10 @@ function MultiboardSetItemValueBJ takes multiboard mb, integer col, integer row,
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.13
 */
 function MultiboardSetItemColorBJ takes multiboard mb, integer col, integer row, real red, real green, real blue, real transparency returns nothing
@@ -9920,8 +11138,10 @@ function MultiboardSetItemColorBJ takes multiboard mb, integer col, integer row,
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.13
 */
 function MultiboardSetItemWidthBJ takes multiboard mb, integer col, integer row, real width returns nothing
@@ -9956,8 +11176,10 @@ function MultiboardSetItemWidthBJ takes multiboard mb, integer col, integer row,
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `mbitem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.13
 */
 function MultiboardSetItemIconBJ takes multiboard mb, integer col, integer row, string iconFileName returns nothing
@@ -10003,6 +11225,7 @@ endfunction
 // Scale the font size linearly such that size 10 equates to height 0.023.
 // Screen-relative font heights are harder to grasp and than font sizes.
 //
+
 /**
 @patch 1.07
 */
@@ -10014,6 +11237,7 @@ endfunction
 // Scale the speed linearly such that speed 128 equates to 0.071.
 // Screen-relative speeds are hard to grasp.
 //
+
 /**
 @patch 1.07
 */
@@ -10022,6 +11246,7 @@ function TextTagSpeed2Velocity takes real speed returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10030,6 +11255,7 @@ function SetTextTagColorBJ takes texttag tt, real red, real green, real blue, re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10042,6 +11268,7 @@ function SetTextTagVelocityBJ takes texttag tt, real speed, real angle returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -10052,6 +11279,7 @@ function SetTextTagTextBJ takes texttag tt, string s, real size returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -10060,6 +11288,7 @@ function SetTextTagPosBJ takes texttag tt, location loc, real zOffset returns no
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -10068,6 +11297,7 @@ function SetTextTagPosUnitBJ takes texttag tt, unit whichUnit, real zOffset retu
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -10076,6 +11306,7 @@ function SetTextTagSuspendedBJ takes texttag tt, boolean flag returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -10084,6 +11315,7 @@ function SetTextTagPermanentBJ takes texttag tt, boolean flag returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -10092,6 +11324,7 @@ function SetTextTagAgeBJ takes texttag tt, real age returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -10100,6 +11333,7 @@ function SetTextTagLifespanBJ takes texttag tt, real lifespan returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.18a
 */
@@ -10108,6 +11342,7 @@ function SetTextTagFadepointBJ takes texttag tt, real fadepoint returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10121,6 +11356,7 @@ function CreateTextTagLocBJ takes string s, location loc, real zOffset, real siz
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10134,6 +11370,7 @@ function CreateTextTagUnitBJ takes string s, unit whichUnit, real zOffset, real 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10142,6 +11379,7 @@ function DestroyTextTagBJ takes texttag tt returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10153,6 +11391,7 @@ function ShowTextTagForceBJ takes boolean show, texttag tt, force whichForce ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10169,6 +11408,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10177,6 +11417,7 @@ function PauseGameOn takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10185,6 +11426,7 @@ function PauseGameOff takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10196,6 +11438,7 @@ function SetUserControlForceOn takes force whichForce returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10207,6 +11450,7 @@ function SetUserControlForceOff takes force whichForce returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10218,6 +11462,7 @@ function ShowInterfaceForceOn takes force whichForce, real fadeDuration returns 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10229,6 +11474,7 @@ function ShowInterfaceForceOff takes force whichForce, real fadeDuration returns
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10241,6 +11487,7 @@ function PingMinimapForForce takes force whichForce, real x, real y, real durati
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10249,6 +11496,7 @@ function PingMinimapLocForForce takes force whichForce, location loc, real durat
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10261,6 +11509,7 @@ function PingMinimapForPlayer takes player whichPlayer, real x, real y, real dur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10269,6 +11518,7 @@ function PingMinimapLocForPlayer takes player whichPlayer, location loc, real du
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10300,6 +11550,7 @@ function PingMinimapForForceEx takes force whichForce, real x, real y, real dura
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10308,6 +11559,7 @@ function PingMinimapLocForForceEx takes force whichForce, location loc, real dur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10319,6 +11571,7 @@ function EnableWorldFogBoundaryBJ takes boolean enable, force f returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10340,6 +11593,7 @@ endfunction
 //===========================================================================
 // If cancelled, stop the sound and end the cinematic scene.
 //
+
 /**
 @patch 1.00
 */
@@ -10354,6 +11608,7 @@ endfunction
 // only be called once a cinematic scene has been started, so that maps
 // lacking such scenes do not bother to register for these events.
 //
+
 /**
 @patch 1.00
 */
@@ -10373,6 +11628,7 @@ function TryInitCinematicBehaviorBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10383,6 +11639,7 @@ function SetCinematicSceneBJ takes sound soundHandle, integer portraitUnitId, pl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10408,6 +11665,7 @@ function GetTransmissionDuration takes sound soundHandle, integer timeType, real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10437,6 +11695,7 @@ function WaitTransmissionDuration takes sound soundHandle, integer timeType, rea
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10459,6 +11718,7 @@ endfunction
 //   - Display a speech indicator for the unit
 //   - Ping the minimap
 //
+
 /**
 @patch 1.00
 */
@@ -10495,6 +11755,7 @@ function TransmissionFromUnitWithNameBJ takes force toForce, unit whichUnit, str
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -10529,6 +11790,7 @@ function PlayDialogueFromSpeakerEx takes force toForce, unit speaker, integer sp
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -10560,6 +11822,7 @@ endfunction
 // This operates like TransmissionFromUnitWithNameBJ, but for a unit type
 // rather than a unit instance.  As such, no speech indicator is employed.
 //
+
 /**
 @patch 1.00
 */
@@ -10586,6 +11849,7 @@ function TransmissionFromUnitTypeWithNameBJ takes force toForce, player fromPlay
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10594,6 +11858,7 @@ function GetLastTransmissionDurationBJ takes nothing returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -10627,6 +11892,7 @@ endfunction
 //   - Fix the random seed to a set value
 //   - Reset the camera smoothing factor
 //
+
 /**
 @patch 1.07
 */
@@ -10695,6 +11961,7 @@ function CinematicModeExBJ takes boolean cineMode, force forForce, real interfac
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10711,6 +11978,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10719,6 +11987,7 @@ function DisplayCineFilterBJ takes boolean flag returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10741,6 +12010,7 @@ function CinematicFadeCommonBJ takes real red, real green, real blue, real durat
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10752,6 +12022,7 @@ function FinishCinematicFadeBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10762,6 +12033,7 @@ function FinishCinematicFadeAfterBJ takes real duration returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10772,6 +12044,7 @@ function ContinueCinematicFadeBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10789,6 +12062,7 @@ function ContinueCinematicFadeAfterBJ takes real duration, real red, real green,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10803,6 +12077,7 @@ function AbortCinematicFadeBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10830,6 +12105,7 @@ function CinematicFadeBJ takes integer fadetype, real duration, string tex, real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10859,6 +12135,7 @@ endfunction
 // including a rescue sound, flashing selection circle, ownership change,
 // and optionally a unit color change.
 //
+
 /**
 @patch 1.00
 */
@@ -10874,8 +12151,10 @@ function RescueUnitBJ takes unit whichUnit, player rescuer, boolean changeColor 
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `theUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function TriggerActionUnitRescuedBJ takes nothing returns nothing
@@ -10893,6 +12172,7 @@ endfunction
 // reasons, this should only be attempted if a player is set to Rescuable,
 // or if a specific unit is thus flagged.
 //
+
 /**
 @patch 1.00
 */
@@ -10915,6 +12195,7 @@ endfunction
 // Determines whether or not rescued units automatically change color upon
 // being rescued.
 //
+
 /**
 @patch 1.00
 */
@@ -10926,6 +12207,7 @@ endfunction
 // Determines whether or not rescued buildings automatically change color
 // upon being rescued.
 //
+
 /**
 @patch 1.00
 */
@@ -10934,6 +12216,7 @@ function SetRescueBuildingColorChangeBJ takes boolean changeColor returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10943,6 +12226,7 @@ function MakeUnitRescuableToForceBJEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10954,6 +12238,7 @@ function MakeUnitRescuableToForceBJ takes unit whichUnit, boolean isRescuable, f
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10982,6 +12267,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10990,6 +12276,7 @@ function SetPlayerTechResearchedSwap takes integer techid, integer levels, playe
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -10998,6 +12285,7 @@ function SetPlayerTechMaxAllowedSwap takes integer techid, integer maximum, play
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -11006,6 +12294,7 @@ function SetPlayerMaxHeroesAllowed takes integer maximum, player whichPlayer ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11014,6 +12303,7 @@ function GetPlayerTechCountSimple takes integer techid, player whichPlayer retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11022,6 +12312,7 @@ function GetPlayerTechMaxAllowedSwap takes integer techid, player whichPlayer re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11036,6 +12327,7 @@ endfunction
 //*  Campaign Utility Functions
 //*
 //***************************************************************************
+
 
 /**
 @patch 1.00
@@ -11071,6 +12363,7 @@ endfunction
 // so that the trigger for this can use a single drop-down to list all of
 // the campaign missions.
 //
+
 /**
 @patch 1.00
 */
@@ -11082,6 +12375,7 @@ function SetMissionAvailableBJ takes boolean available, integer missionIndex ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11110,6 +12404,7 @@ function SetCampaignAvailableBJ takes boolean available, integer campaignNumber 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11153,6 +12448,7 @@ function SetCinematicAvailableBJ takes boolean available, integer cinematicIndex
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11162,6 +12458,7 @@ function InitGameCacheBJ takes string campaignFile returns gamecache
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11170,6 +12467,7 @@ function SaveGameCacheBJ takes gamecache cache returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11178,6 +12476,7 @@ function GetLastCreatedGameCacheBJ takes nothing returns gamecache
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11187,6 +12486,7 @@ function InitHashtableBJ takes nothing returns hashtable
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11195,6 +12495,7 @@ function GetLastCreatedHashtableBJ takes nothing returns hashtable
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11203,6 +12504,7 @@ function StoreRealBJ takes real value, string key, string missionKey, gamecache 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11211,6 +12513,7 @@ function StoreIntegerBJ takes integer value, string key, string missionKey, game
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11219,6 +12522,7 @@ function StoreBooleanBJ takes boolean value, string key, string missionKey, game
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -11227,6 +12531,7 @@ function StoreStringBJ takes string value, string key, string missionKey, gameca
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11235,6 +12540,7 @@ function StoreUnitBJ takes unit whichUnit, string key, string missionKey, gameca
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11243,6 +12549,7 @@ function SaveRealBJ takes real value, integer key, integer missionKey, hashtable
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11251,6 +12558,7 @@ function SaveIntegerBJ takes integer value, integer key, integer missionKey, has
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11259,6 +12567,7 @@ function SaveBooleanBJ takes boolean value, integer key, integer missionKey, has
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11267,6 +12576,7 @@ function SaveStringBJ takes string value, integer key, integer missionKey, hasht
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11275,6 +12585,7 @@ function SavePlayerHandleBJ takes player whichPlayer, integer key, integer missi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11283,6 +12594,7 @@ function SaveWidgetHandleBJ takes widget whichWidget, integer key, integer missi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11291,6 +12603,7 @@ function SaveDestructableHandleBJ takes destructable whichDestructable, integer 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11299,6 +12612,7 @@ function SaveItemHandleBJ takes item whichItem, integer key, integer missionKey,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11307,6 +12621,7 @@ function SaveUnitHandleBJ takes unit whichUnit, integer key, integer missionKey,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11315,6 +12630,7 @@ function SaveAbilityHandleBJ takes ability whichAbility, integer key, integer mi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11323,6 +12639,7 @@ function SaveTimerHandleBJ takes timer whichTimer, integer key, integer missionK
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11331,6 +12648,7 @@ function SaveTriggerHandleBJ takes trigger whichTrigger, integer key, integer mi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11339,6 +12657,7 @@ function SaveTriggerConditionHandleBJ takes triggercondition whichTriggerconditi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11347,6 +12666,7 @@ function SaveTriggerActionHandleBJ takes triggeraction whichTriggeraction, integ
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11355,6 +12675,7 @@ function SaveTriggerEventHandleBJ takes event whichEvent, integer key, integer m
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11363,6 +12684,7 @@ function SaveForceHandleBJ takes force whichForce, integer key, integer missionK
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11371,6 +12693,7 @@ function SaveGroupHandleBJ takes group whichGroup, integer key, integer missionK
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11379,6 +12702,7 @@ function SaveLocationHandleBJ takes location whichLocation, integer key, integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11387,6 +12711,7 @@ function SaveRectHandleBJ takes rect whichRect, integer key, integer missionKey,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11395,6 +12720,7 @@ function SaveBooleanExprHandleBJ takes boolexpr whichBoolexpr, integer key, inte
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11403,6 +12729,7 @@ function SaveSoundHandleBJ takes sound whichSound, integer key, integer missionK
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11411,6 +12738,7 @@ function SaveEffectHandleBJ takes effect whichEffect, integer key, integer missi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11419,6 +12747,7 @@ function SaveUnitPoolHandleBJ takes unitpool whichUnitpool, integer key, integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11427,6 +12756,7 @@ function SaveItemPoolHandleBJ takes itempool whichItempool, integer key, integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11435,6 +12765,7 @@ function SaveQuestHandleBJ takes quest whichQuest, integer key, integer missionK
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11443,6 +12774,7 @@ function SaveQuestItemHandleBJ takes questitem whichQuestitem, integer key, inte
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11451,6 +12783,7 @@ function SaveDefeatConditionHandleBJ takes defeatcondition whichDefeatcondition,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11459,6 +12792,7 @@ function SaveTimerDialogHandleBJ takes timerdialog whichTimerdialog, integer key
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11467,6 +12801,7 @@ function SaveLeaderboardHandleBJ takes leaderboard whichLeaderboard, integer key
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11475,6 +12810,7 @@ function SaveMultiboardHandleBJ takes multiboard whichMultiboard, integer key, i
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11483,6 +12819,7 @@ function SaveMultiboardItemHandleBJ takes multiboarditem whichMultiboarditem, in
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11491,6 +12828,7 @@ function SaveTrackableHandleBJ takes trackable whichTrackable, integer key, inte
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11499,6 +12837,7 @@ function SaveDialogHandleBJ takes dialog whichDialog, integer key, integer missi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11507,6 +12846,7 @@ function SaveButtonHandleBJ takes button whichButton, integer key, integer missi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11515,6 +12855,7 @@ function SaveTextTagHandleBJ takes texttag whichTexttag, integer key, integer mi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11523,6 +12864,7 @@ function SaveLightningHandleBJ takes lightning whichLightning, integer key, inte
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11531,6 +12873,7 @@ function SaveImageHandleBJ takes image whichImage, integer key, integer missionK
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11539,6 +12882,7 @@ function SaveUbersplatHandleBJ takes ubersplat whichUbersplat, integer key, inte
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11547,6 +12891,7 @@ function SaveRegionHandleBJ takes region whichRegion, integer key, integer missi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11555,6 +12900,7 @@ function SaveFogStateHandleBJ takes fogstate whichFogState, integer key, integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11563,6 +12909,7 @@ function SaveFogModifierHandleBJ takes fogmodifier whichFogModifier, integer key
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11571,6 +12918,7 @@ function SaveAgentHandleBJ takes agent whichAgent, integer key, integer missionK
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11579,6 +12927,7 @@ function SaveHashtableHandleBJ takes hashtable whichHashtable, integer key, inte
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11588,6 +12937,7 @@ function GetStoredRealBJ takes string key, string missionKey, gamecache cache re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11597,6 +12947,7 @@ function GetStoredIntegerBJ takes string key, string missionKey, gamecache cache
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11606,6 +12957,7 @@ function GetStoredBooleanBJ takes string key, string missionKey, gamecache cache
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -11622,6 +12974,7 @@ function GetStoredStringBJ takes string key, string missionKey, gamecache cache 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11631,6 +12984,7 @@ function LoadRealBJ takes integer key, integer missionKey, hashtable table retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11640,6 +12994,7 @@ function LoadIntegerBJ takes integer key, integer missionKey, hashtable table re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11649,6 +13004,7 @@ function LoadBooleanBJ takes integer key, integer missionKey, hashtable table re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11665,6 +13021,7 @@ function LoadStringBJ takes integer key, integer missionKey, hashtable table ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11673,6 +13030,7 @@ function LoadPlayerHandleBJ takes integer key, integer missionKey, hashtable tab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11681,6 +13039,7 @@ function LoadWidgetHandleBJ takes integer key, integer missionKey, hashtable tab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11689,6 +13048,7 @@ function LoadDestructableHandleBJ takes integer key, integer missionKey, hashtab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11697,6 +13057,7 @@ function LoadItemHandleBJ takes integer key, integer missionKey, hashtable table
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11705,6 +13066,7 @@ function LoadUnitHandleBJ takes integer key, integer missionKey, hashtable table
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11713,6 +13075,7 @@ function LoadAbilityHandleBJ takes integer key, integer missionKey, hashtable ta
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11721,6 +13084,7 @@ function LoadTimerHandleBJ takes integer key, integer missionKey, hashtable tabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11729,6 +13093,7 @@ function LoadTriggerHandleBJ takes integer key, integer missionKey, hashtable ta
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11737,6 +13102,7 @@ function LoadTriggerConditionHandleBJ takes integer key, integer missionKey, has
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11745,6 +13111,7 @@ function LoadTriggerActionHandleBJ takes integer key, integer missionKey, hashta
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11753,6 +13120,7 @@ function LoadTriggerEventHandleBJ takes integer key, integer missionKey, hashtab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11761,6 +13129,7 @@ function LoadForceHandleBJ takes integer key, integer missionKey, hashtable tabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11769,6 +13138,7 @@ function LoadGroupHandleBJ takes integer key, integer missionKey, hashtable tabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11777,6 +13147,7 @@ function LoadLocationHandleBJ takes integer key, integer missionKey, hashtable t
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11785,6 +13156,7 @@ function LoadRectHandleBJ takes integer key, integer missionKey, hashtable table
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11793,6 +13165,7 @@ function LoadBooleanExprHandleBJ takes integer key, integer missionKey, hashtabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11801,6 +13174,7 @@ function LoadSoundHandleBJ takes integer key, integer missionKey, hashtable tabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11809,6 +13183,7 @@ function LoadEffectHandleBJ takes integer key, integer missionKey, hashtable tab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11817,6 +13192,7 @@ function LoadUnitPoolHandleBJ takes integer key, integer missionKey, hashtable t
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11825,6 +13201,7 @@ function LoadItemPoolHandleBJ takes integer key, integer missionKey, hashtable t
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11833,6 +13210,7 @@ function LoadQuestHandleBJ takes integer key, integer missionKey, hashtable tabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11841,6 +13219,7 @@ function LoadQuestItemHandleBJ takes integer key, integer missionKey, hashtable 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11849,6 +13228,7 @@ function LoadDefeatConditionHandleBJ takes integer key, integer missionKey, hash
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11857,6 +13237,7 @@ function LoadTimerDialogHandleBJ takes integer key, integer missionKey, hashtabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11865,6 +13246,7 @@ function LoadLeaderboardHandleBJ takes integer key, integer missionKey, hashtabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11873,6 +13255,7 @@ function LoadMultiboardHandleBJ takes integer key, integer missionKey, hashtable
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11881,6 +13264,7 @@ function LoadMultiboardItemHandleBJ takes integer key, integer missionKey, hasht
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11889,6 +13273,7 @@ function LoadTrackableHandleBJ takes integer key, integer missionKey, hashtable 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11897,6 +13282,7 @@ function LoadDialogHandleBJ takes integer key, integer missionKey, hashtable tab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11905,6 +13291,7 @@ function LoadButtonHandleBJ takes integer key, integer missionKey, hashtable tab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11913,6 +13300,7 @@ function LoadTextTagHandleBJ takes integer key, integer missionKey, hashtable ta
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11921,6 +13309,7 @@ function LoadLightningHandleBJ takes integer key, integer missionKey, hashtable 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11929,6 +13318,7 @@ function LoadImageHandleBJ takes integer key, integer missionKey, hashtable tabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11937,6 +13327,7 @@ function LoadUbersplatHandleBJ takes integer key, integer missionKey, hashtable 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11945,6 +13336,7 @@ function LoadRegionHandleBJ takes integer key, integer missionKey, hashtable tab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11953,6 +13345,7 @@ function LoadFogStateHandleBJ takes integer key, integer missionKey, hashtable t
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11961,6 +13354,7 @@ function LoadFogModifierHandleBJ takes integer key, integer missionKey, hashtabl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -11969,6 +13363,7 @@ function LoadHashtableHandleBJ takes integer key, integer missionKey, hashtable 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11979,6 +13374,7 @@ function RestoreUnitLocFacingAngleBJ takes string key, string missionKey, gameca
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11988,6 +13384,7 @@ function RestoreUnitLocFacingPointBJ takes string key, string missionKey, gameca
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -11996,6 +13393,7 @@ function GetLastRestoredUnitBJ takes nothing returns unit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12004,6 +13402,7 @@ function FlushGameCacheBJ takes gamecache cache returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12012,6 +13411,7 @@ function FlushStoredMissionBJ takes string missionKey, gamecache cache returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -12020,6 +13420,7 @@ function FlushParentHashtableBJ takes hashtable table returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -12028,6 +13429,7 @@ function FlushChildHashtableBJ takes integer missionKey, hashtable table returns
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12049,6 +13451,7 @@ function HaveStoredValue takes string key, integer valueType, string missionKey,
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -12070,6 +13473,7 @@ function HaveSavedValue takes integer key, integer valueType, integer missionKey
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12078,6 +13482,7 @@ function ShowCustomCampaignButton takes boolean show, integer whichButton return
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12088,6 +13493,7 @@ endfunction
 //===========================================================================
 // Placeholder function for auto save feature
 //===========================================================================
+
 /**
 @patch 1.32.0.13369
 */
@@ -12096,6 +13502,7 @@ function SaveGameCheckPointBJ takes string mapSaveName, boolean doCheckpointHint
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12104,6 +13511,7 @@ function LoadGameBJ takes string loadFileName, boolean doScoreScreen returns not
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12113,6 +13521,7 @@ function SaveAndChangeLevelBJ takes string saveFileName, string newLevel, boolea
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12122,6 +13531,7 @@ function SaveAndLoadGameBJ takes string saveFileName, string loadFileName, boole
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12130,6 +13540,7 @@ function RenameSaveDirectoryBJ takes string sourceDirName, string destDirName re
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12138,6 +13549,7 @@ function RemoveSaveDirectoryBJ takes string sourceDirName returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12154,6 +13566,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12162,6 +13575,7 @@ function GetPlayerStartLocationX takes player whichPlayer returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12170,6 +13584,7 @@ function GetPlayerStartLocationY takes player whichPlayer returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12178,6 +13593,7 @@ function GetPlayerStartLocationLoc takes player whichPlayer returns location
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12186,6 +13602,7 @@ function GetRectCenter takes rect whichRect returns location
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12194,6 +13611,7 @@ function IsPlayerSlotState takes player whichPlayer, playerslotstate whichState 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12205,6 +13623,7 @@ function GetFadeFromSeconds takes real seconds returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.24a
 */
@@ -12216,6 +13635,7 @@ function GetFadeFromSecondsAsReal takes real seconds returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12224,6 +13644,7 @@ function AdjustPlayerStateSimpleBJ takes player whichPlayer, playerstate whichPl
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12242,6 +13663,7 @@ function AdjustPlayerStateBJ takes integer delta, player whichPlayer, playerstat
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12251,6 +13673,7 @@ function SetPlayerStateBJ takes player whichPlayer, playerstate whichPlayerState
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12259,6 +13682,7 @@ function SetPlayerFlagBJ takes playerstate whichPlayerFlag, boolean flag, player
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.15
 */
@@ -12267,6 +13691,7 @@ function SetPlayerTaxRateBJ takes integer rate, playerstate whichResource, playe
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.15
 */
@@ -12275,6 +13700,7 @@ function GetPlayerTaxRateBJ takes playerstate whichResource, player sourcePlayer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12283,6 +13709,7 @@ function IsPlayerFlagSetBJ takes playerstate whichPlayerFlag, player whichPlayer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12291,11 +13718,14 @@ function AddResourceAmountBJ takes integer delta, unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 returns WorldEdit-type player ID for player (these start with 1; e.g. player red is 1).
 
 @param whichPlayer Target player
+
 @note For zero-based IDs see: `GetPlayerId`, `Player`
+
 @patch 1.00
 */
 function GetConvertedPlayerId takes player whichPlayer returns integer
@@ -12303,6 +13733,7 @@ function GetConvertedPlayerId takes player whichPlayer returns integer
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12311,6 +13742,7 @@ function ConvertedPlayer takes integer convertedPlayerId returns player
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12319,6 +13751,7 @@ function GetRectWidthBJ takes rect r returns real
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12329,8 +13762,10 @@ endfunction
 //===========================================================================
 // Replaces a gold mine with a blighted gold mine for the given player.
 //
+
 /**
 @bug Leaks handle `newMine`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function BlightGoldMineForPlayerBJ takes unit goldMine, player whichPlayer returns unit
@@ -12357,6 +13792,7 @@ function BlightGoldMineForPlayerBJ takes unit goldMine, player whichPlayer retur
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12366,6 +13802,7 @@ function BlightGoldMineForPlayer takes unit goldMine, player whichPlayer returns
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12374,6 +13811,7 @@ function GetLastHauntedGoldMine takes nothing returns unit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -12382,6 +13820,7 @@ function IsPointBlightedBJ takes location where returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12390,8 +13829,10 @@ function SetPlayerColorBJEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function SetPlayerColorBJ takes player whichPlayer, playercolor color, boolean changeExisting returns nothing
@@ -12408,6 +13849,7 @@ function SetPlayerColorBJ takes player whichPlayer, playercolor color, boolean c
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12420,6 +13862,7 @@ function SetPlayerUnitAvailableBJ takes integer unitId, boolean allowed, player 
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12428,6 +13871,7 @@ function LockGameSpeedBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12436,6 +13880,7 @@ function UnlockGameSpeedBJ takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12444,6 +13889,7 @@ function IssueTargetOrderBJ takes unit whichUnit, string order, widget targetWid
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12455,12 +13901,14 @@ endfunction
 // Two distinct trigger actions can't share the same function name, so this
 // dummy function simply mimics the behavior of an existing call.
 //
+
 /**
 @patch 1.00
 */
 function IssueTargetDestructableOrder takes unit whichUnit, string order, widget targetWidget returns boolean
     return IssueTargetOrder( whichUnit, order, targetWidget )
 endfunction
+
 
 /**
 @patch 1.15
@@ -12470,6 +13918,7 @@ function IssueTargetItemOrder takes unit whichUnit, string order, widget targetW
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12478,6 +13927,7 @@ function IssueImmediateOrderBJ takes unit whichUnit, string order returns boolea
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12486,6 +13936,7 @@ function GroupTargetOrderBJ takes group whichGroup, string order, widget targetW
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12494,6 +13945,7 @@ function GroupPointOrderLocBJ takes group whichGroup, string order, location whi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12505,12 +13957,14 @@ endfunction
 // Two distinct trigger actions can't share the same function name, so this
 // dummy function simply mimics the behavior of an existing call.
 //
+
 /**
 @patch 1.00
 */
 function GroupTargetDestructableOrder takes group whichGroup, string order, widget targetWidget returns boolean
     return GroupTargetOrder( whichGroup, order, targetWidget )
 endfunction
+
 
 /**
 @patch 1.15
@@ -12520,6 +13974,7 @@ function GroupTargetItemOrder takes group whichGroup, string order, widget targe
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12530,6 +13985,7 @@ endfunction
 //===========================================================================
 // Rally point setting
 //
+
 /**
 @patch 1.13
 */
@@ -12538,6 +13994,7 @@ function SetUnitRallyPoint takes unit whichUnit, location targPos returns nothin
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -12546,6 +14003,7 @@ function SetUnitRallyUnit takes unit whichUnit, unit targUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -12558,6 +14016,7 @@ endfunction
 // This function is added as an action to all destructable drop triggers,
 // so that a widget drop may be differentiated from a unit drop.
 //
+
 /**
 @patch 1.07
 */
@@ -12566,6 +14025,7 @@ function SaveDyingWidget takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12574,6 +14034,7 @@ function SetBlightRectBJ takes boolean addBlight, player whichPlayer, rect r ret
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12582,6 +14043,7 @@ function SetBlightRadiusLocBJ takes boolean addBlight, player whichPlayer, locat
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.13
 */
@@ -12597,8 +14059,10 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @note It is called directly by the default "Melee Initialization" trigger.
+
 @patch 1.00
 */
 function MeleeStartingVisibility takes nothing returns nothing
@@ -12618,10 +14082,12 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @note It is called directly by the default "Melee Initialization" trigger.
 
 @bug Leaks handle `v`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeStartingResources takes nothing returns nothing
@@ -12663,6 +14129,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12676,8 +14143,10 @@ function ReducePlayerTechMaxAllowed takes player whichPlayer, integer techId, in
 endfunction
 
 //===========================================================================
+
 /**
 @note It is called directly by the default "Melee Initialization" trigger.
+
 @patch 1.00
 */
 function MeleeStartingHeroLimit takes nothing returns nothing
@@ -12732,6 +14201,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12744,6 +14214,7 @@ endfunction
 // standard set of items.  This is currently:
 //   - 1x Scroll of Town Portal
 //
+
 /**
 @patch 1.00
 */
@@ -12758,6 +14229,7 @@ function MeleeGrantItemsToHero takes unit whichUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12766,6 +14238,7 @@ function MeleeGrantItemsToTrainedHero takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -12774,8 +14247,10 @@ function MeleeGrantItemsToHiredHero takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @note It is called directly by the default "Melee Initialization" trigger.
+
 @patch 1.00
 */
 function MeleeGrantHeroItems takes nothing returns nothing
@@ -12823,10 +14298,12 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @note It is called directly by the default "Melee Initialization" trigger.
 
 @bug Leaks handle `theUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeClearExcessUnit takes nothing returns nothing
@@ -12845,8 +14322,10 @@ function MeleeClearExcessUnit takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `nearbyUnits`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeClearNearbyUnits takes real x, real y, real range returns nothing
@@ -12859,6 +14338,7 @@ function MeleeClearNearbyUnits takes real x, real y, real range returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -12894,10 +14374,12 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @bug Leaks handle `enumUnit`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `unitLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeEnumFindNearestMine takes nothing returns nothing
@@ -12919,8 +14401,10 @@ function MeleeEnumFindNearestMine takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `nearbyMines`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeFindNearestMine takes location src, real range returns unit
@@ -12939,13 +14423,14 @@ function MeleeFindNearestMine takes location src, real range returns unit
 endfunction
 
 //===========================================================================
-/**
 
+/**
 @note It does not touch the passed `loc` location, you must remove it manually to avoid leaks.
 
 @bug Leaks handle `hero`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `v`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeRandomHeroLoc takes player p, integer id1, integer id2, integer id3, integer id4, location loc returns unit
@@ -12987,9 +14472,11 @@ endfunction
 //===========================================================================
 // Returns a location which is (distance) away from (src) in the direction of (targ).
 //
+
 /**
 @note It returns a new location, does not remove or alter location passed as `src` or `targ`.
 It means you must call `RemoveLocation` yourself after calling this function.
+
 @patch 1.00
 */
 function MeleeGetProjectedLoc takes location src, location targ, real distance, real deltaAngle returns location
@@ -13000,10 +14487,12 @@ function MeleeGetProjectedLoc takes location src, location targ, real distance, 
 endfunction
 
 //===========================================================================
+
 /**
 It's the typical math.clamp. Returns `val` if it's within the bounds, else min/maxVal.
 
 `minVal` must be less than or equal <= `maxVal`
+
 @patch 1.00
 */
 function MeleeGetNearestValueWithin takes real val, real minVal, real maxVal returns real
@@ -13017,9 +14506,11 @@ function MeleeGetNearestValueWithin takes real val, real minVal, real maxVal ret
 endfunction
 
 //===========================================================================
+
 /**
 @note It returns a new location, does not remove or alter location passed as `src`.
 It means you must call `RemoveLocation` yourself after calling this function.
+
 @patch 1.00
 */
 function MeleeGetLocWithinRect takes location src, rect r returns location
@@ -13033,6 +14524,7 @@ endfunction
 //   - 1 Town Hall, placed at start location
 //   - 5 Peasants, placed between start location and nearest gold mine
 //
+
 /**
 @bug Leaks.
 
@@ -13128,6 +14620,7 @@ endfunction
 //   - 1 Great Hall, placed at start location
 //   - 5 Peons, placed between start location and nearest gold mine
 //
+
 /**
 @bug Leaks.
 
@@ -13219,6 +14712,7 @@ endfunction
 //   - 1 Ghoul, placed between start location and nearest gold mine
 //   - Blight, centered on nearest gold mine, spread across a "large area"
 //
+
 /**
 @bug Leaks.
 
@@ -13238,6 +14732,7 @@ Objects not removed (e.g. RemoveLocation):
 3. Loc, Loc `heroLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
 4. Loc, Loc `heroLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
 5. Loc `heroLoc = Location(peonX, peonY - 2.00 * unitSpacing)`
+
 @patch 1.00
 */
 function MeleeStartingUnitsUndead takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
@@ -13324,6 +14819,7 @@ endfunction
 //   - 1 Tree of Life, placed by nearest gold mine, already entangled
 //   - 5 Wisps, placed between Tree of Life and nearest gold mine
 //
+
 /**
 @bug Leaks.
 
@@ -13345,6 +14841,7 @@ Objects not removed (e.g. RemoveLocation):
 4. Loc, Rect, Loc `wispLoc = MeleeGetLocWithinRect(wispLoc, GetRectFromCircleBJ(GetUnitLoc(nearestMine`
 5. Loc, Loc `heroLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine)`
 6. Loc `heroLoc = Location(peonX, peonY - 2.00 * unitSpacing)`
+
 @patch 1.00
 */
 function MeleeStartingUnitsNightElf takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
@@ -13425,6 +14922,7 @@ endfunction
 // Starting Units for Players Whose Race is Unknown
 //   - 12 Sheep, placed randomly around the start location
 //
+
 /**
 @patch 1.00
 */
@@ -13454,10 +14952,12 @@ function MeleeStartingUnitsUnknownRace takes player whichPlayer, location startL
 endfunction
 
 //===========================================================================
+
 /**
 @note It is called directly by the default "Melee Initialization" trigger.
 
 @bug Leaks handle `indexStartLoc`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeStartingUnits takes nothing returns nothing
@@ -13496,6 +14996,7 @@ function MeleeStartingUnits takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -13523,6 +15024,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -13555,8 +15057,10 @@ function PickMeleeAI takes player num, string s1, string s2, string s3 returns n
 endfunction
 
 //===========================================================================
+
 /**
 @note It is called directly by the default "Melee Initialization" trigger.
+
 @patch 1.00
 */
 function MeleeStartingAI takes nothing returns nothing
@@ -13592,6 +15096,7 @@ function MeleeStartingAI takes nothing returns nothing
     endloop
 endfunction
 
+
 /**
 @patch 1.07
 */
@@ -13607,6 +15112,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -13646,6 +15152,7 @@ endfunction
 //===========================================================================
 // Count buildings currently owned by all allies, including the player themself.
 //
+
 /**
 @patch 1.00
 */
@@ -13676,6 +15183,7 @@ endfunction
 //===========================================================================
 // Count allies, excluding dead players and the player themself.
 //
+
 /**
 @patch 1.00
 */
@@ -13706,6 +15214,7 @@ endfunction
 //
 // Key structures: Town Hall, Great Hall, Tree of Life, Necropolis
 //
+
 /**
 @patch 1.07
 */
@@ -13733,6 +15242,7 @@ endfunction
 //===========================================================================
 // Enum: Draw out a specific player.
 //
+
 /**
 @patch 1.07
 */
@@ -13746,6 +15256,7 @@ endfunction
 //===========================================================================
 // Enum: Victory out a specific player.
 //
+
 /**
 @patch 1.00
 */
@@ -13763,6 +15274,7 @@ endfunction
 //===========================================================================
 // Defeat out a specific player.
 //
+
 /**
 @patch 1.00
 */
@@ -13774,6 +15286,7 @@ endfunction
 //===========================================================================
 // Enum: Defeat out a specific player.
 //
+
 /**
 @patch 1.00
 */
@@ -13789,6 +15302,7 @@ endfunction
 //===========================================================================
 // A specific player left the game.
 //
+
 /**
 @patch 1.00
 */
@@ -13804,6 +15318,7 @@ endfunction
 //===========================================================================
 // Remove all observers
 // 
+
 /**
 @patch 1.00
 */
@@ -13831,8 +15346,10 @@ endfunction
 // remaining players.  If even one player is not allied towards another,
 // everyone must be denied victory.
 //
+
 /**
 @bug Leaks handle `opponentlessPlayers`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeCheckForVictors takes nothing returns force
@@ -13876,10 +15393,12 @@ endfunction
 //===========================================================================
 // Test each player to determine if anyone has been defeated.
 //
+
 /**
 @bug Leaks handle `defeatedPlayers`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 @bug Leaks handle `victoriousPlayers`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function MeleeCheckForLosersAndVictors takes nothing returns nothing
@@ -13943,6 +15462,7 @@ endfunction
 //===========================================================================
 // Returns a race-specific "build X or be revealed" message.
 //
+
 /**
 @patch 1.07
 */
@@ -13966,6 +15486,7 @@ endfunction
 //===========================================================================
 // Returns a race-specific "build X" label for cripple timers.
 //
+
 /**
 @patch 1.07
 */
@@ -13989,6 +15510,7 @@ endfunction
 //===========================================================================
 // Returns a race-specific "build X" label for cripple timers.
 //
+
 /**
 @patch 1.07
 */
@@ -13997,8 +15519,10 @@ function MeleeGetCrippledRevealedMessage takes player whichPlayer returns string
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `toExposeTo`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function MeleeExposePlayer takes player whichPlayer, boolean expose returns nothing
@@ -14025,8 +15549,10 @@ function MeleeExposePlayer takes player whichPlayer, boolean expose returns noth
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `toExposeTo`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function MeleeExposeAllPlayers takes nothing returns nothing
@@ -14067,8 +15593,10 @@ function MeleeExposeAllPlayers takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `expiredTimer`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function MeleeCrippledPlayerTimeout takes nothing returns nothing
@@ -14106,6 +15634,7 @@ function MeleeCrippledPlayerTimeout takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -14120,10 +15649,12 @@ endfunction
 //===========================================================================
 // Test each player to determine if anyone has become crippled.
 //
+
 /**
 @bug Leaks handle `crippledPlayers`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
 
 The function was refactored, it no longer uses locals `indexRace` and `crippledPlayers`.
+
 @patch 1.07
 */
 function MeleeCheckForCrippledPlayers takes nothing returns nothing
@@ -14195,6 +15726,7 @@ endfunction
 //===========================================================================
 // Determine if the lost unit should result in any defeats or victories.
 //
+
 /**
 @patch 1.00
 */
@@ -14215,6 +15747,7 @@ endfunction
 // Determine if the gained unit should result in any defeats, victories,
 // or cripple-status changes.
 //
+
 /**
 @patch 1.07
 */
@@ -14228,6 +15761,7 @@ function MeleeCheckAddedUnit takes unit addedUnit returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14236,6 +15770,7 @@ function MeleeTriggerActionConstructCancel takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14246,6 +15781,7 @@ function MeleeTriggerActionUnitDeath takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -14254,6 +15790,7 @@ function MeleeTriggerActionUnitConstructionStart takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14280,6 +15817,7 @@ function MeleeTriggerActionPlayerDefeated takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14312,6 +15850,7 @@ function MeleeTriggerActionPlayerLeft takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14321,6 +15860,7 @@ function MeleeTriggerActionAllianceChange takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -14365,6 +15905,7 @@ endfunction
 
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -14381,6 +15922,7 @@ function MeleeWasUserPlayer takes player whichPlayer returns boolean
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -14511,6 +16053,7 @@ function MeleeTournamentFinishNowRuleA takes integer multiplier returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -14536,8 +16079,10 @@ function MeleeTriggerTournamentFinishNow takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @note It is called directly by the default "Melee Initialization" trigger.
+
 @patch 1.00
 */
 function MeleeInitVictoryDefeat takes nothing returns nothing
@@ -14637,11 +16182,13 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 This function will pre-initialize `bj_slotControlUsed` and `bj_slotControl` arrays, representing player slots, with default values of `false` and `MAP_CONTROL_USER`.
 
 @note It is safe to call this function repeatedly, it will only ever run the
 initialization once.
+
 @patch 1.00
 */
 function CheckInitPlayerSlotAvailability takes nothing returns nothing
@@ -14660,6 +16207,7 @@ function CheckInitPlayerSlotAvailability takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 This function is called in the scope of `config` to save map's slots settings in
 two arrays:
@@ -14669,7 +16217,9 @@ two arrays:
 user/computer-controlled player (defaults to `MAP_CONTROL_USER`).
 
 @param whichPlayer Initialize target player
+
 @param control Player's slot type
+
 @patch 1.00
 */
 function SetPlayerSlotAvailable takes player whichPlayer, mapcontrol control returns nothing
@@ -14689,6 +16239,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 Assign all players to a team (force) in a "pseudo-random" fashion.
 
@@ -14702,6 +16253,7 @@ This means if `teamCount == 2` with 4 players:
 - etc.
 
 @note This function is called in the scope of `config` by `InitGenericPlayerSlots` etc. to set up the map based on chosen *default game type*.
+
 @patch 1.00
 */
 function TeamInitPlayerSlots takes integer teamCount returns nothing
@@ -14730,8 +16282,10 @@ function TeamInitPlayerSlots takes integer teamCount returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 This function is called in the scope of `config` by `InitGenericPlayerSlots` to set up the map based on chosen game type `GAME_TYPE_MELEE`.
+
 @patch 1.00
 */
 function MeleeInitPlayerSlots takes nothing returns nothing
@@ -14739,8 +16293,10 @@ function MeleeInitPlayerSlots takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 This function is called in the scope of `config` by `InitGenericPlayerSlots` to set up the map based on chosen game type `GAME_TYPE_FFA`.
+
 @patch 1.00
 */
 function FFAInitPlayerSlots takes nothing returns nothing
@@ -14748,8 +16304,10 @@ function FFAInitPlayerSlots takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 This function is called in the scope of `config` by `InitGenericPlayerSlots` to set up the map based on chosen game type `GAME_TYPE_ONE_ON_ONE`.
+
 @patch 1.00
 */
 function OneOnOneInitPlayerSlots takes nothing returns nothing
@@ -14760,6 +16318,7 @@ function OneOnOneInitPlayerSlots takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 This function is called in the scope of `config` to set up the map based on
 game type. Specifically, this assigns players into teams, unless the
@@ -14767,6 +16326,7 @@ game type is `GAME_TYPE_USE_MAP_SETTINGS` (then map-specific code does this)
 or unknown (nothing is done in that case).
 
 @bug Leaks handle `gType`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function InitGenericPlayerSlots takes nothing returns nothing
@@ -14800,6 +16360,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14810,6 +16371,7 @@ function SetDNCSoundsDawn takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14820,6 +16382,7 @@ function SetDNCSoundsDusk takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14836,6 +16399,7 @@ function SetDNCSoundsDay takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14852,8 +16416,10 @@ function SetDNCSoundsNight takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 Initializes day-night cycle sounds, global "bj_" variables and triggers.
+
 @patch 1.00
 */
 function InitDNCSounds takes nothing returns nothing
@@ -14883,8 +16449,10 @@ function InitDNCSounds takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `v`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function InitBlizzardGlobals takes nothing returns nothing
@@ -14967,6 +16535,7 @@ function InitBlizzardGlobals takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14977,6 +16546,7 @@ function InitQueuedTriggers takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -14986,6 +16556,7 @@ function InitMapRects takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -15017,8 +16588,10 @@ endfunction
 //===========================================================================
 // Update the per-class stock limits.
 //
+
 /**
 @bug Leaks handle `iType`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function UpdateStockAvailability takes item whichItem returns nothing
@@ -15040,6 +16613,7 @@ endfunction
 //===========================================================================
 // Find a sellable item of the given type and level, and then add it.
 //
+
 /**
 @patch 1.07
 */
@@ -15062,8 +16636,10 @@ function UpdateEachStockBuildingEnum takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @bug Leaks handle `g`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function UpdateEachStockBuilding takes itemtype iType, integer iLevel returns nothing
@@ -15081,8 +16657,10 @@ endfunction
 //===========================================================================
 // Update stock inventory.
 //
+
 /**
 @bug Leaks handle `pickedItemType`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.07
 */
 function PerformStockUpdates takes nothing returns nothing
@@ -15132,6 +16710,7 @@ endfunction
 //===========================================================================
 // Perform the first update, and then arrange future updates.
 //
+
 /**
 @patch 1.07
 */
@@ -15141,6 +16720,7 @@ function StartStockUpdates takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -15149,6 +16729,7 @@ function RemovePurchasedItem takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -15180,6 +16761,7 @@ function InitNeutralBuildings takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -15189,6 +16771,7 @@ function MarkGameStarted takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -15198,6 +16781,7 @@ function DetectGameStarted takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -15239,6 +16823,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -15247,6 +16832,7 @@ function RandomDistReset takes nothing returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -15257,6 +16843,7 @@ function RandomDistAddItem takes integer inID, integer inChance returns nothing
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.00
 */
@@ -15320,8 +16907,11 @@ endfunction
 //*        item into the unpathable area where nobody can get it...
 //*
 //***************************************************************************
+
+
 /**
 @bug Leaks handle `droppedItem`: In Jass you must set local variables that hold agents (or any child type) to `null` at the end of functions to avoid reference counter leaks.
+
 @patch 1.00
 */
 function UnitDropItem takes unit inUnit, integer inItemID returns item
@@ -15351,6 +16941,7 @@ function UnitDropItem takes unit inUnit, integer inItemID returns item
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.07
 */
@@ -15384,6 +16975,7 @@ endfunction
 //***************************************************************************
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15393,6 +16985,7 @@ endfunction
 
 // Ability
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15401,6 +16994,7 @@ function BlzSetAbilityBooleanFieldBJ takes ability whichAbility, abilitybooleanf
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15409,6 +17003,7 @@ function BlzSetAbilityIntegerFieldBJ takes ability whichAbility, abilityintegerf
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15417,6 +17012,7 @@ function BlzSetAbilityRealFieldBJ takes ability whichAbility, abilityrealfield w
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15425,6 +17021,7 @@ function BlzSetAbilityStringFieldBJ takes ability whichAbility, abilitystringfie
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15433,6 +17030,7 @@ function BlzSetAbilityBooleanLevelFieldBJ takes ability whichAbility, abilityboo
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15441,6 +17039,7 @@ function BlzSetAbilityIntegerLevelFieldBJ takes ability whichAbility, abilityint
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15449,6 +17048,7 @@ function BlzSetAbilityRealLevelFieldBJ takes ability whichAbility, abilityrealle
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15457,6 +17057,7 @@ function BlzSetAbilityStringLevelFieldBJ takes ability whichAbility, abilitystri
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15465,6 +17066,7 @@ function BlzSetAbilityBooleanLevelArrayFieldBJ takes ability whichAbility, abili
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15473,6 +17075,7 @@ function BlzSetAbilityIntegerLevelArrayFieldBJ takes ability whichAbility, abili
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15481,6 +17084,7 @@ function BlzSetAbilityRealLevelArrayFieldBJ takes ability whichAbility, abilityr
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15489,6 +17093,7 @@ function BlzSetAbilityStringLevelArrayFieldBJ takes ability whichAbility, abilit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15497,6 +17102,7 @@ function BlzAddAbilityBooleanLevelArrayFieldBJ takes ability whichAbility, abili
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15505,6 +17111,7 @@ function BlzAddAbilityIntegerLevelArrayFieldBJ takes ability whichAbility, abili
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15513,6 +17120,7 @@ function BlzAddAbilityRealLevelArrayFieldBJ takes ability whichAbility, abilityr
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15521,6 +17129,7 @@ function BlzAddAbilityStringLevelArrayFieldBJ takes ability whichAbility, abilit
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15529,6 +17138,7 @@ function BlzRemoveAbilityBooleanLevelArrayFieldBJ takes ability whichAbility, ab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15537,6 +17147,7 @@ function BlzRemoveAbilityIntegerLevelArrayFieldBJ takes ability whichAbility, ab
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15545,6 +17156,7 @@ function BlzRemoveAbilityRealLevelArrayFieldBJ takes ability whichAbility, abili
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15554,6 +17166,7 @@ endfunction
 
 // Item 
 //=============================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15562,6 +17175,7 @@ function BlzItemAddAbilityBJ takes item whichItem, integer abilCode returns noth
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15570,6 +17184,7 @@ function BlzItemRemoveAbilityBJ takes item whichItem, integer abilCode returns n
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15578,6 +17193,7 @@ function BlzSetItemBooleanFieldBJ takes item whichItem, itembooleanfield whichFi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15586,6 +17202,7 @@ function BlzSetItemIntegerFieldBJ takes item whichItem, itemintegerfield whichFi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15594,6 +17211,7 @@ function BlzSetItemRealFieldBJ takes item whichItem, itemrealfield whichField, r
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15604,6 +17222,7 @@ endfunction
 
 // Unit 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15612,6 +17231,7 @@ function BlzSetUnitBooleanFieldBJ takes unit whichUnit, unitbooleanfield whichFi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15620,6 +17240,7 @@ function BlzSetUnitIntegerFieldBJ takes unit whichUnit, unitintegerfield whichFi
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15628,6 +17249,7 @@ function BlzSetUnitRealFieldBJ takes unit whichUnit, unitrealfield whichField, r
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15637,6 +17259,7 @@ endfunction
 
 // Unit Weapon
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15645,6 +17268,7 @@ function BlzSetUnitWeaponBooleanFieldBJ takes unit whichUnit, unitweaponbooleanf
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15653,6 +17277,7 @@ function BlzSetUnitWeaponIntegerFieldBJ takes unit whichUnit, unitweaponintegerf
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
@@ -15661,6 +17286,7 @@ function BlzSetUnitWeaponRealFieldBJ takes unit whichUnit, unitweaponrealfield w
 endfunction
 
 //===========================================================================
+
 /**
 @patch 1.31.0.11889
 */
