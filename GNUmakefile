@@ -16,7 +16,7 @@ jass.db: db.sql
 	sqlite3 $@ < $<
 
 check-missing: jass.db
-	./lint $(SRC)
+	perl lint $(SRC)
 
 check-params: jass.db
 	sqlite3 $< < check-wrong-params.sql
