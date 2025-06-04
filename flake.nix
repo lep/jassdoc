@@ -5,62 +5,48 @@
   };
 
   outputs = { self, nixpkgs, systems }:
-    let eachSystem = nixpkgs.lib.genAttrs (import systems);
+    let
+      eachSystem = nixpkgs.lib.genAttrs (import systems);
+      mkdocs = pkgs: pkgs.haskellPackages.callPackage ./jassdoc.nix { };
+      jass-db = pkgs:
+        pkgs.stdenv.mkDerivation {
+          src = self;
+          name = "jass.db";
+          buildInputs = [
+            pkgs.gnumake
+            pkgs.perl
+            pkgs.perlPackages.DBI
+            pkgs.perlPackages.DBDSQLite
+            pkgs.sqlite
+            (mkdocs pkgs)
+          ];
+          buildPhase = ''
+            MKDOCS=mkdocs make jass.db
+          '';
+
+          installPhase = ''
+            install -Dt $out jass.db
+          '';
+
+          checkPhase = "make check";
+          doCheck = true;
+        };
     in {
       packages = eachSystem (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-
-          ghc = pkgs.haskellPackages.ghcWithPackages (ps: [
-            ps.megaparsec
-            ps.optparse-applicative
-            ps.bytestring
-            ps.aeson
-          ]);
-
-          mkdocs = pkgs.stdenv.mkDerivation {
-            name = "mkdocs";
-            src = self;
-            buildPhase = ''
-              ${ghc}/bin/ghc mkdocs
-            '';
-
-            installPhase = ''
-              install -Dt $out/bin mkdocs
-            '';
-          };
-
-          jassdoc = pkgs.stdenv.mkDerivation {
-            name = "jassdoc";
-            src = self;
-            buildInputs = [
-              pkgs.gnumake
-              pkgs.perl
-              pkgs.perlPackages.DBI
-              pkgs.perlPackages.DBDSQLite
-              pkgs.sqlite
-              pkgs.cabal-install
-            ];
-
-            buildPhase = ''
-              MKDOCS=${mkdocs}/bin/mkdocs make jass.db
-            '';
-
-            installPhase = ''
-              install -Dt $out jass.db
-            '';
-
-	    checkPhase = ''
-		make check
-	    '';
-
-	    doCheck = true;
-          };
-
+        let pkgs = import nixpkgs { inherit system; };
         in {
-          default = jassdoc;
-          jassdoc = jassdoc;
-          mkdocs = mkdocs;
+          mkdocs = mkdocs pkgs;
+          jass-db = jass-db pkgs;
+          default = jass-db pkgs;
+        });
+
+      devShells = eachSystem (system:
+        let pkgs = import nixpkgs { inherit system; };
+        in {
+          default = pkgs.mkShell {
+            inputsFrom = [ (jass-db pkgs) ];
+            nativeBuildInputs = [ pkgs.cabal-install ];
+          };
         });
     };
 }
