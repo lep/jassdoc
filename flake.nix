@@ -9,8 +9,26 @@
       eachSystem = nixpkgs.lib.genAttrs (import systems);
       mkdocs = pkgs: pkgs.haskellPackages.callPackage ./jassdoc.nix { };
       jass-db = pkgs:
-        pkgs.stdenv.mkDerivation {
-          src = self;
+        let fs = pkgs.lib.fileset;
+        in pkgs.stdenv.mkDerivation {
+          src = fs.toSource {
+            root = ./.;
+            fileset = fs.unions [
+              ./GNUmakefile
+              # perl scripts
+              ./annotate
+              ./mksrc
+              ./mkmetadata
+              ./lint
+              # sql
+              ./check-wrong-params.sql
+              # jass files
+              ./common.j
+              ./common.ai
+              ./Blizzard.j
+              ./builtin-types.j
+            ];
+          };
           name = "jass.db";
           buildInputs = [
             pkgs.gnumake
