@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ViewPatterns #-}
 {-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 import Data.Bifunctor (bimap)
 
@@ -22,6 +23,7 @@ import Jass.Types
 import System.Environment (getArgs)
 import System.IO
 
+import Data.FileEmbed
 import Text.Megaparsec (parse, errorBundlePretty)
 
 import Options.Applicative
@@ -150,36 +152,8 @@ emptyLine = L8.null . L8.filter (not . isVerticalSpace)
     isVerticalSpace x = x `elem` [' ', '\t']
 
 
-schema = L8.unlines
-         [ " create table if not exists parameters (      "
-         , "      fnname text,                            "
-         , "      param text,                             "
-         , "      value text,                             "
-         , "      primary key (fnname, param)             "
-         , " );                                           "
-
-         , " create table if not exists annotations (     "
-         , "      fnname text,                            "
-         , "      anname text,                            "
-         , "      value text                              "
-         , " );                                           "
-
-         , " create table if not exists params_extra (    "
-         , "      fnname text,                            "
-         , "      param text,                             "
-         , "      anname text,                            "
-         , "      value,                                  "
-         , "      primary key (fnname, param, anname)     "
-         , " );                                           "
-
-         , " create index if not exists annotation_index  "
-         , " on annotations(fnname);                      "
-
-         , " create table if not exists metadata (        "
-         , "    key text primary key,                     "
-         , "    value text                                "
-         , ");                                            "
-         ]
+schema :: L8.ByteString
+schema = L8.fromStrict $ $(embedFile "src/schema.sql")
 
 data Args = Args FilePath [FilePath]
 

@@ -8,22 +8,21 @@ use strict;
 use warnings;
 
 use open ':std', ':utf8', ':encoding(UTF-8)';
+
 # no feature qw(indirect);
 use feature qw(signatures);
 no warnings qw(experimental::signatures);
-
 
 use Getopt::Long;
 use Pod::Usage;
 
 my $help = 0;
 
-GetOptions(
-  help => \$help
-) or die pod2usage(-verbose => 1);
+GetOptions( help => \$help )
+  or die pod2usage( -verbose => 1 );
 
-pod2usage(-verbose => 2) if $help;
-pod2usage(-verbose => 1) unless @ARGV;
+pod2usage( -verbose => 2 ) if $help;
+pod2usage( -verbose => 1 ) unless @ARGV;
 
 my @files = @ARGV;
 
@@ -33,33 +32,36 @@ sub escape {
     return $in;
 }
 
-foreach my $file (@files){
-    open(my $fh, "<", $file);
+foreach my $file (@files) {
+    open( my $fh, "<", $file );
 
     my $state = "nothing";
-    my $src = "";
-    my $fn = "";
+    my $src   = "";
+    my $fn    = "";
     my $start = 0;
-    my $end = 0;
+    my $end   = 0;
 
     my $prev_state;
 
     say "BEGIN TRANSACTION;";
 
-    while (my $line = <$fh>){
-        if( $state eq "nothing" && $line =~ /^(?:constant\s+)?function\s+(\w+)/){
+    while ( my $line = <$fh> ) {
+        if (   $state eq "nothing"
+            && $line =~ /^(?:constant\s+)?function\s+(\w+)/ )
+        {
             $start = $.;
             $state = "function";
-            $fn = $1;
-            $src = $line;
-        }elsif($state eq "function" && $line =~ /^endfunction/){
+            $fn    = $1;
+            $src   = $line;
+        }
+        elsif ( $state eq "function" && $line =~ /^endfunction/ ) {
             $end = $.;
             chomp $line;
             $state = "nothing";
             $src .= $line;
 
             $src = escape($src);
-            $fn = escape($fn);
+            $fn  = escape($fn);
             say <<SQL;
                 insert into annotations (fnname, anname, value) values (
                     '$fn',
@@ -85,17 +87,24 @@ foreach my $file (@files){
                     'function'
                 );
 SQL
-        }elsif( ( $state eq "nothing" || $state eq "globals") && $line =~ m[^/\*\*] ){
-	    $prev_state = $state;
-	    $state = "docstring";
-	}elsif( $state eq "docstring" && $prev_state && $line =~ m[^\*/] ){
-	    $state = $prev_state;
-	    $prev_state = undef;
-        }elsif( $state eq "nothing" && $line =~ /^(?:constant\s+)?native\s+(\w+)/ ){
+        }
+        elsif ( ( $state eq "nothing" || $state eq "globals" )
+            && $line =~ m[^/\*\*] )
+        {
+            $prev_state = $state;
+            $state      = "docstring";
+        }
+        elsif ( $state eq "docstring" && $prev_state && $line =~ m[^\*/] ) {
+            $state      = $prev_state;
+            $prev_state = undef;
+        }
+        elsif ($state eq "nothing"
+            && $line =~ /^(?:constant\s+)?native\s+(\w+)/ )
+        {
             chomp $line;
             $src = $line;
             $src = escape($src);
-            $fn = escape($1);
+            $fn  = escape($1);
             say <<SQL;
                 insert into annotations (fnname, anname, value) values (
                     '$fn',
@@ -122,21 +131,25 @@ SQL
                     'native'
                 );
 SQL
-        }elsif ( $state eq "function"){
+        }
+        elsif ( $state eq "function" ) {
             $src .= $line;
-        }elsif ( $state eq "nothing" && $line =~ m/^\s*globals/){
+        }
+        elsif ( $state eq "nothing" && $line =~ m/^\s*globals/ ) {
             $state = "globals";
-        }elsif( $state eq "globals" && $line =~ m/^\s*endglobals/){
+        }
+        elsif ( $state eq "globals" && $line =~ m/^\s*endglobals/ ) {
             $state = "nothing";
-        }elsif ( $state eq "globals" ){
-	    chomp $line;
+        }
+        elsif ( $state eq "globals" ) {
+            chomp $line;
             my $name;
-            given($line){
+            given ($line) {
                 $name = $1 when /^\s*constant\s+\w+\s+(\w+)\s*=.+$/;
                 $name = $1 when /^\s*\w+\s+array\s+(\w+)/;
                 $name = $1 when /^\s*\w+\s+(\w+)/;
             }
-            if($name){
+            if ($name) {
                 $name = escape($name);
                 $line = escape($line);
                 say <<SQL;
@@ -166,8 +179,11 @@ SQL
 SQL
 
             }
-        }elsif( $state eq "nothing" && $line =~m /^type\s+(\w+)\s+extends\s+.+/){
-	    chomp $line;
+        }
+        elsif ($state eq "nothing"
+            && $line =~ m /^type\s+(\w+)\s+extends\s+.+/ )
+        {
+            chomp $line;
             my $type = escape($1);
             my $line = escape($line);
             say <<SQL;
@@ -195,8 +211,7 @@ SQL
                     'type'
                 );
 SQL
-	}
-
+        }
 
     }
 

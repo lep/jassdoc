@@ -1,5 +1,5 @@
 { mkDerivation, aeson, base, bytestring, lib, megaparsec, mtl
-, optparse-applicative, parser-combinators, text }:
+, optparse-applicative, parser-combinators, text, file-embed }:
 let fs = lib.fileset;
 in mkDerivation {
   pname = "jassdoc";
@@ -19,6 +19,7 @@ in mkDerivation {
     optparse-applicative
     parser-combinators
     text
+    file-embed
   ];
   license = "unknown";
   mainProgram = "mkdocs";
