@@ -11102,7 +11102,7 @@ of leaking game objects. In other words, the number may be high without an actua
 native GetHandleId takes handle h returns integer
 
 /**
-Returns a new substring from the interval [start, end) - inclusive, exclusive.
+Returns a new substring from the interval `[start, end)` (inclusive, exclusive).
 Positions are zero-indexed.
 For empty or invalid out-of-bounds values returns an empty string "" (in Lua).
 
@@ -13467,7 +13467,7 @@ constant native GetAttacker takes nothing returns unit
 /**
 @event EVENT_PLAYER_UNIT_RESCUED
 
-@event EVENT_UNIT_RESCUEDED
+@event EVENT_UNIT_RESCUED
 
 @patch 1.00
 */
@@ -13577,7 +13577,7 @@ constant native GetResearched takes nothing returns integer
 
 @event EVENT_UNIT_TRAIN_START
 
-@event EVENT_UNIT_TRAIN_CANCELLED
+@event EVENT_UNIT_TRAIN_CANCEL
 
 @event EVENT_UNIT_TRAIN_FINISH
 
@@ -14482,7 +14482,7 @@ constant native GetEventTargetUnit takes nothing returns unit
 // EVENT_UNIT_ATTACKED
 // Use GetAttacker from the Player Unit Event API Below...
 
-// EVENT_UNIT_RESCUEDED
+// EVENT_UNIT_RESCUED
 // Use GetRescuer from the Player Unit Event API Below...
 
 // EVENT_UNIT_CONSTRUCT_CANCEL
@@ -14491,7 +14491,7 @@ constant native GetEventTargetUnit takes nothing returns unit
 // See the Player Unit Construction Event API above for event info funcs
 
 // EVENT_UNIT_TRAIN_START
-// EVENT_UNIT_TRAIN_CANCELLED
+// EVENT_UNIT_TRAIN_CANCEL
 // EVENT_UNIT_TRAIN_FINISH
 
 // See the Player Unit Training Event API above for event info funcs
