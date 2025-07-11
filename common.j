@@ -14482,7 +14482,7 @@ constant native GetEventTargetUnit takes nothing returns unit
 // EVENT_UNIT_ATTACKED
 // Use GetAttacker from the Player Unit Event API Below...
 
-// EVENT_UNIT_RESCUED
+// EVENT_UNIT_RESCUEDED
 // Use GetRescuer from the Player Unit Event API Below...
 
 // EVENT_UNIT_CONSTRUCT_CANCEL
@@ -14491,7 +14491,7 @@ constant native GetEventTargetUnit takes nothing returns unit
 // See the Player Unit Construction Event API above for event info funcs
 
 // EVENT_UNIT_TRAIN_START
-// EVENT_UNIT_TRAIN_CANCEL
+// EVENT_UNIT_TRAIN_CANCELLED
 // EVENT_UNIT_TRAIN_FINISH
 
 // See the Player Unit Training Event API above for event info funcs
