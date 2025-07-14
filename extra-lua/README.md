@@ -6,6 +6,12 @@ This folder contains additional files only relevant for the Lua API in Warcraft 
 
 ## How to extract
 
+### Automatically
+	
+1. Set file path: `export w3exe="$(cygpath 'D:\SteamLibrary\Warcraft III\_retail_\x86_64\Warcraft III.exe')"`
+2. Run extract-luahelper.lua from tools folder: `lua "extract-luahelper.lua" "/path/to/warcraft3.exe" --no-debug > output-luahelper.lua`
+    - needs any `lua` interpreter installed
+
 ### Manually
 
 0. Set file path: `export w3exe="$(cygpath 'D:\SteamLibrary\Warcraft III\_retail_\x86_64\Warcraft III.exe')"`
@@ -15,8 +21,3 @@ This folder contains additional files only relevant for the Lua API in Warcraft 
 2. Take the first offset +- and see what's there: `tail --bytes +12345 "$w3exe" | strings -n 1 | head -n 80`
 	- 2.0.2.22796: starts at decimal offset 38097696
 3. If that's what you want, output the text to a ` > file.txt` and edit it in Notepad++
-
-### Automatically
-	
-1. Set file path: `export w3exe="$(cygpath 'D:\SteamLibrary\Warcraft III\_retail_\x86_64\Warcraft III.exe')"`
-2. Run extract-luahelper.lua from tools folder: `lua "extract-luahelper.lua" "/path/to/warcraft3.exe" --no-debug > output-luahelper.lua`
