@@ -24273,7 +24273,7 @@ Sets the effect's absolute X map position (east-west).
 @bug In 1.29-?? it will set the X coordinate, but reset the Y and Z to where it was spawned in.
 
 @bug In 1.36.2 it will set the X coordinate,
-but reset Z to the height (relative to terrain and walkable elevating doodads) the effect was spawned at.
+but reset Z to the original spawn height of the effect (spawn height does account for terrain and walkable elevating doodads).
 
 @note See: `BlzSetSpecialEffectPosition`
 
@@ -24289,7 +24289,7 @@ Sets the effect's absolute Y map position (north/south).
 @bug In 1.29-?? it will set the Y coordinate, but reset the X and Z to where it was spawned in.
 
 @bug In 1.36.2 it will set the Y coordinate,
-but reset Z to the height (relative to terrain and walkable elevating doodads) the effect was spawned at.
+but reset Z to the original spawn height of the effect (spawn height does account for terrain and walkable elevating doodads).
 
 @note See: `BlzSetSpecialEffectPosition`
 
@@ -24326,7 +24326,7 @@ Sets the effect's absolute X and Y map position based on given location.
 @note Does not apply if the effect is attached to some model's attachment point (remains 0.0).
 
 @bug In 1.36.2 (and earlier?) it will set the X and Y coordinates,
-but reset Z to the height (relative to terrain and walkable elevating doodads) the effect was spawned at.
+but reset Z to the original spawn height of the effect (spawn height does account for terrain and walkable elevating doodads).
 
 @note See: `BlzSetSpecialEffectPosition`
 
@@ -24357,9 +24357,13 @@ If the effect is attached to something, returns 0.0.
 native BlzGetLocalSpecialEffectY                   takes effect whichEffect returns real
 
 /**
-Get the Z map coordinate (Cartesian System; height aka altitude) of the special effect.
+Get the absolute Z map coordinate (Cartesian System; height aka altitude) of the special effect.
 
 If the effect is attached to something, returns 0.0.
+
+@note An effect's height is not dynamically updated to account for terrain or elevated platform changes.
+
+@note See: `BlzSetSpecialEffectHeight`, `BlzSetSpecialEffectPosition`, `BlzSetSpecialEffectPositionLoc`
 
 @async 
 
