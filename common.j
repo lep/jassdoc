@@ -1504,16 +1504,16 @@ constant native ConvertUnitBooleanField                 takes integer i returns 
 
 /**
 @note Many fields don't work at all with `BlzGetUnitStringField` or `BlzSetUnitStringField`.
-- `UNIT_SF_NAME` aka 'unam' works
-- `UNIT_SF_PROPER_NAMES` aka 'upro' works
-- `uico` doesn't
-- `ussi` doesn't
-- `umdl` doesn't
-- `uspa` doesn't
-- `ua1m` doesn't
-- Awakening Tip `uawt` doesn't
-- Uber tooltip `utub` 
-- Revive tip `utpr`
+- Icon - Game Interface `uico` doesn't
+- Icon - Score Screen `ussi` doesn't
+- Art - Model File `umdl` doesn't
+- Art - Special `uspa` doesn't
+- Combat - Attack 1 - Projectile Art `ua1m` doesn't
+- Text - Name `UNIT_SF_NAME` aka 'unam' works
+- Text - Proper Names `UNIT_SF_PROPER_NAMES` aka 'upro' works
+- Tooltip Awaken `uawt` doesn't
+- Tooltip Extended `utub` doesn't
+- Tooltip Revive `utpr` doesn't
 
 **Test code (Lua, 2.0.2):**
 
@@ -10204,9 +10204,10 @@ h3 = CreateUnit(Player(0), FourCC("Hamg"), -30, 0, 90)
 print(BlzGetUnitStringField(h3, UNIT_SF_PROPER_NAMES))
 
 print(BlzSetUnitStringField(h3, UNIT_SF_PROPER_NAMES, "proper name abc"))
+print(GetHeroProperName(h3))
 ```
 
-@note Equivalent to: equivalent to `GetHeroProperName`/`BlzSetHeroProperName`.
+@note Equivalent to: `GetHeroProperName`/`BlzSetHeroProperName`.
 See also: `BlzSetUnitStringField`.
 
 @patch 1.31.0.11889
@@ -24078,7 +24079,7 @@ Change individual hero's proper name at runtime. Applies immediately.
 A "proper name" is one of the multiple names a hero can get at random.
 It's the big name displayed above the experience bar.
 
-@note See: `GetHeroProperName`, `BlzSetUnitName`, `GetUnitName`,v`GetDestructableName`, `GetItemName`, `GetObjectName`.
+@note See: `GetHeroProperName`, `BlzSetUnitName`, `GetUnitName`, `GetDestructableName`, `GetItemName`, `GetObjectName`.
 @patch 1.29.2.9231
 */
 native BlzSetHeroProperName                        takes unit whichUnit, string heroProperName returns nothing
