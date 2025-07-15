@@ -195,10 +195,11 @@ native DzAPI_Map_Stat_SetStat            takes player whichPlayer, string key, s
 Used for Platform statistics:
 "Generally used to count the number of times certain events are triggered in the game, which can be viewed in author's profile."
 
+Guessed return type as integer, please confirm.
+
 @param eventKey "embedding key". Guessed type as string, please confirm.
 @param subkey leave blank. Reserved for future use.
 @param times guessed type as integer, please confirm.
-@return guessed type as integer, please confirm.
 */
 native DzAPI_Map_Statistics              takes player whichPlayer, string eventKey, string subKey, integer times returns integer
 
