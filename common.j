@@ -26104,11 +26104,11 @@ native BlzGetUnitIntegerField                      takes unit whichUnit, unitint
 native BlzGetUnitRealField                         takes unit whichUnit, unitrealfield whichField returns real
 
 /**
+Returns string; or empty string if unit/field is invalid
+
 @note Many fields don't work at all. See `ConvertUnitStringField` for a list.
 
 @note See: `BlzSetUnitStringField`
-
-@return string; or empty string if unit/field is invalid
 
 @patch 1.31.0.11889
 */
@@ -26155,9 +26155,9 @@ native BlzSetUnitIntegerField                      takes unit whichUnit, unitint
 native BlzSetUnitRealField                         takes unit whichUnit, unitrealfield whichField, real value returns boolean
 
 /**
+Returns true if field is valid and new value was applied; false if invalid unit/field.
 
 @param value literal string or a "TRIGSTR_123"
-@return true if field is valid and new value was applied, false if invalid unit/field
 
 @note Many fields don't work at all. See `ConvertUnitStringField` for a list.
 
