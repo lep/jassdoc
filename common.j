@@ -11,7 +11,7 @@ type agent			    extends     handle  // all reference counted objects
 /**
 Currently useless, although triggers return an event reference when you register
 a new trigger-event, there are no useful functions.
-You cannot destroy an event object either (technically a leak).
+You can only destroy an event object by destroying the trigger it belong to.
 
 The only functions that take event are: `SaveTriggerEventHandle` and
 `SaveTriggerEventHandleBJ`.
@@ -100,7 +100,7 @@ type trigger            extends     agent
 type triggercondition   extends     agent
 
 /**
-@note wrong type, should be `extends agent` instead.
+@bug wrong type, should be `extends agent` instead.
 
 @patch 1.00
 */
@@ -147,14 +147,14 @@ type conditionfunc      extends     boolexpr
 type filterfunc         extends     boolexpr
 
 /**
-@note wrong type, should be `extends agent` instead.
+@bug wrong type, should be `extends agent` instead.
 
 @patch 1.00
 */
 type unitpool           extends     handle
 
 /**
-@note wrong type, should be `extends agent` instead.
+@bug wrong type, should be `extends agent` instead.
 
 @patch 1.00
 */
@@ -375,7 +375,7 @@ type volumegroup        extends     handle
 type camerafield        extends     handle
 
 /**
-@note wrong type, should be `extends agent` instead.
+@bug wrong type, should be `extends agent` instead.
 
 @patch 1.00
 */
@@ -644,7 +644,7 @@ type ubersplat          extends     handle
 type hashtable          extends     agent
 
 /**
-@note wrong type, should be `extends agent` instead.
+@bug wrong type, should be `extends agent` instead.
 
 @patch 1.31.0.11889
 */
@@ -840,7 +840,7 @@ type unitcategory                   extends handle
 type pathingflag                    extends handle
 
 /**
-@note wrong type, should be `extends agent` instead.
+@bug wrong type, should be `extends agent` instead.
 
 @patch 1.32.0.13369
 */
@@ -3732,7 +3732,7 @@ will return `""`. Use `TriggerRegisterPlayerChatEvent` instead.
 /**
 See description of `EVENT_UNIT_ISSUED_ORDER`.
 
-@bug leak 1 event data every time this event get dispatched (per order basis, when there is generic and specific unit event registered, will leak only 1)
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_ORDER             = ConvertPlayerUnitEvent(38)
@@ -3740,7 +3740,7 @@ See description of `EVENT_UNIT_ISSUED_ORDER`.
 /**
 See description of `EVENT_UNIT_ISSUED_POINT_ORDER`.
 
-@bug leak 1 event data every time this event get dispatched (per order basis, when there is generic and specific unit event registered, will leak only 1)
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER       = ConvertPlayerUnitEvent(39)
@@ -3748,7 +3748,7 @@ See description of `EVENT_UNIT_ISSUED_POINT_ORDER`.
 /**
 See description of `EVENT_UNIT_ISSUED_TARGET_ORDER`.
 
-@bug leak 1 event data every time this event get dispatched (per order basis, when there is generic and specific unit event registered, will leak only 1)
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER      = ConvertPlayerUnitEvent(40)
@@ -3756,7 +3756,7 @@ See description of `EVENT_UNIT_ISSUED_TARGET_ORDER`.
 /**
 @note A generic, "non-player" version of this does not exist.
 
-@bug leak 1 event data every time this event get dispatched (per order basis, when there is generic and specific unit event registered, will leak only 1)
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER        = ConvertPlayerUnitEvent(40)    // for compat
@@ -3983,7 +3983,7 @@ Examples:
 - Hold aka "holdposition", 851993
 - Stop current action aka "stop", 851972
 
-@bug leak 1 event data every time this event get dispatched (per order basis, when there is generic and specific unit event registered, will leak only 1)
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_ISSUED_ORDER                          = ConvertUnitEvent(75)
@@ -3997,7 +3997,7 @@ Examples:
 - Right click to move somewhre aka "smart", 851971
 - Patrol aka "patrol", 851990
 
-@bug leak 1 event data every time this event get dispatched (per order basis, when there is generic and specific unit event registered, will leak only 1)
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_ISSUED_POINT_ORDER                    = ConvertUnitEvent(76)
@@ -4011,7 +4011,7 @@ Examples:
 - Attack aka "attack", 851983
 - Patrol when clicked on another unit aka "patrol", 851990
 
-@bug leak 1 event data every time this event get dispatched (per order basis, when there is generic and specific unit event registered, will leak only 1)
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_ISSUED_TARGET_ORDER                   = ConvertUnitEvent(77)
