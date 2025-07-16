@@ -16039,6 +16039,7 @@ native          GetUnitAbilityLevel takes unit whichUnit, integer abilcode retur
 
 /**
 Decreases the level of a unit's ability by 1. The level will not go below 1.
+
 Returns the new ability level.
 
 @param whichUnit The unit with the ability.
@@ -16047,12 +16048,16 @@ Returns the new ability level.
 
 @note It's not possible to reduce the level of a building ability like 'AHbu'. See `GetUnitAbilityLevel`.
 
+@note See: `UnitRemoveAbility` to remove an ability from unit
+
 @patch 1.17a
 */
 native          DecUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
 /**
-Increases the level of a unit's ability by 1.
+Increases the level of a unit's existing ability by 1.
+
+If the ability is not yet learned, does nothing.
 
 Returns the new ability level.
 
@@ -16060,17 +16065,25 @@ Returns the new ability level.
 
 @param abilcode The four digit rawcode representation of the ability.
 
-@note `IncUnitAbilityLevel` can increase an abilities level to maxlevel+1.
-On maxlevel+1 all ability fields are 0.
+@bug `IncUnitAbilityLevel` can increase an abilities level to maxlevel+1.
+On maxlevel+1 all ability fields are 0. 
 See <http://www.wc3c.net/showthread.php?p=1029039#post1029039>
 and <http://www.hiveworkshop.com/forums/lab-715/silenceex-everything-you-dont-know-about-silence-274351/>.
+
+(v2.0.2) The tooltip at "maxlevel+1"  shows all stats as if the ability were at "maxlevel".
+`GetUnitAbilityLevel` "correctly" returns "maxlevel+1" and
+first call to `DecUnitAbilityLevel` will decrease from "maxlevel+1" to "maxlevel".
 
 @patch 1.17a
 */
 native          IncUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
 
 /**
-Sets the new level of unit's ability.
+Sets the new level of a unit's existing ability. Cannot be used to add/learn or remove/unlearn an ability.
+
+Does not spend or refund skill points.
+
+Returns new ability level; 0 if unlearned or on failure.
 
 @param whichUnit Target unit.
 
@@ -16856,10 +16869,12 @@ Returns:
 
 @param abilityId Abilities' raw code identifier.
 
-@bug Removing non-interrupt abilities like divine shile while they're being
+@bug Removing non-interrupt abilities like divine shield while they're being
 cast (at the EVENT_PLAYER_UNIT_SPELL_EFFECT point), and while the caster is
 moving, will cause the caster to become unresponsive to new commands until
 they reach their ordered move point. 
+
+@note See `UnitModifySkillPoints`/`ModifyHeroSkillPoints` to grant a hero skill points.
 
 @note All different building ability codes like 'AHbu', 'ANbu' are considered equivalent. For example, removing 'AHbu' on a unit with only 'ANbu' would remove 'ANbu' instead.
 See `GetUnitAbilityLevel`.
