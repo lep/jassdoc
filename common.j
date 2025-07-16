@@ -11,7 +11,7 @@ type agent			    extends     handle  // all reference counted objects
 /**
 Currently useless, although triggers return an event reference when you register
 a new trigger-event, there are no useful functions.
-You cannot destroy an event object either (technically a leak).
+You can only destroy an event object by destroying the trigger it belongs to.
 
 The only functions that take event are: `SaveTriggerEventHandle` and
 `SaveTriggerEventHandleBJ`.
@@ -100,6 +100,8 @@ type trigger            extends     agent
 type triggercondition   extends     agent
 
 /**
+@bug wrong type, should be `extends agent` instead.
+
 @patch 1.00
 */
 type triggeraction      extends     handle
@@ -145,11 +147,15 @@ type conditionfunc      extends     boolexpr
 type filterfunc         extends     boolexpr
 
 /**
+@bug wrong type, should be `extends agent` instead.
+
 @patch 1.00
 */
 type unitpool           extends     handle
 
 /**
+@bug wrong type, should be `extends agent` instead.
+
 @patch 1.00
 */
 type itempool           extends     handle
@@ -369,6 +375,8 @@ type volumegroup        extends     handle
 type camerafield        extends     handle
 
 /**
+@bug wrong type, should be `extends agent` instead.
+
 @patch 1.00
 */
 type camerasetup        extends     handle
@@ -636,6 +644,8 @@ type ubersplat          extends     handle
 type hashtable          extends     agent
 
 /**
+@bug wrong type, should be `extends agent` instead.
+
 @patch 1.31.0.11889
 */
 type framehandle        extends     handle
@@ -830,6 +840,8 @@ type unitcategory                   extends handle
 type pathingflag                    extends handle
 
 /**
+@bug wrong type, should be `extends agent` instead.
+
 @patch 1.32.0.13369
 */
 type commandbuttoneffect            extends handle
@@ -3753,6 +3765,7 @@ will return `""`. Use `TriggerRegisterPlayerChatEvent` instead.
 /**
 See description of `EVENT_UNIT_ISSUED_ORDER`.
 
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_ORDER             = ConvertPlayerUnitEvent(38)
@@ -3760,6 +3773,7 @@ See description of `EVENT_UNIT_ISSUED_ORDER`.
 /**
 See description of `EVENT_UNIT_ISSUED_POINT_ORDER`.
 
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER       = ConvertPlayerUnitEvent(39)
@@ -3767,6 +3781,7 @@ See description of `EVENT_UNIT_ISSUED_POINT_ORDER`.
 /**
 See description of `EVENT_UNIT_ISSUED_TARGET_ORDER`.
 
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER      = ConvertPlayerUnitEvent(40)
@@ -3774,6 +3789,7 @@ See description of `EVENT_UNIT_ISSUED_TARGET_ORDER`.
 /**
 @note A generic, "non-player" version of this does not exist.
 
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant playerunitevent EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER        = ConvertPlayerUnitEvent(40)    // for compat
@@ -4000,6 +4016,7 @@ Examples:
 - Hold aka "holdposition", 851993
 - Stop current action aka "stop", 851972
 
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_ISSUED_ORDER                          = ConvertUnitEvent(75)
@@ -4013,6 +4030,7 @@ Examples:
 - Right click to move somewhre aka "smart", 851971
 - Patrol aka "patrol", 851990
 
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_ISSUED_POINT_ORDER                    = ConvertUnitEvent(76)
@@ -4026,6 +4044,7 @@ Examples:
 - Attack aka "attack", 851983
 - Patrol when clicked on another unit aka "patrol", 851990
 
+@bug These events leak 1 internal object every time this event is dispatched (on a per order basis, i.e. when there are both generic and specific unit events registered, will only leak 1).
 @patch 1.00
 */
     constant unitevent EVENT_UNIT_ISSUED_TARGET_ORDER                   = ConvertUnitEvent(77)
@@ -20353,7 +20372,7 @@ Destroys a quest.
 
 @param whichQuest The quest to destroy.
 
-@bug Ids of quests and contained quest items are not recycled.
+@bug Destroys contained quest items, but does not destroy itself.
 
 @bug Destroying the last remaining enabled (see `QuestSetEnabled`) quest will not disable the quest menu and it will
 still display the last rendered quest description.
