@@ -1503,6 +1503,36 @@ constant native ConvertUnitRealField                    takes integer i returns 
 constant native ConvertUnitBooleanField                 takes integer i returns unitbooleanfield
 
 /**
+@note Many fields don't work at all with `BlzGetUnitStringField` or `BlzSetUnitStringField`.
+- Icon - Game Interface `uico` doesn't
+- Icon - Score Screen `ussi` doesn't
+- Art - Model File `umdl` doesn't
+- Art - Special `uspa` doesn't
+- Combat - Attack 1 - Projectile Art `ua1m` doesn't
+- Text - Name `UNIT_SF_NAME` aka 'unam' works
+- Text - Proper Names `UNIT_SF_PROPER_NAMES` aka 'upro' works
+- Tooltip Awaken `uawt` doesn't
+- Tooltip Extended `utub` doesn't
+- Tooltip Revive `utpr` doesn't
+
+**Test code (Lua, 2.0.2):**
+
+```{.lua}
+-- Create unit, try different string fields on it.
+-- Output format: rawcode,stringLength, setResult=boolean,string
+h5 = CreateUnit(Player(0), FourCC("Hamg"), -30, 0, 90)
+t = {"uico", "ussi", "umdl", "uspa", "ua1m", "unam", "upro", "uawt", "utip", "utub", "utpr"}
+for k,rawcode in pairs(t) do
+	local sf = ConvertUnitStringField(FourCC(rawcode))
+	local getPre = BlzGetUnitStringField(h5, sf)
+	local setText = "set-" .. rawcode
+	local setResult = BlzSetUnitStringField(h5, sf, setText)
+	local getPost = BlzGetUnitStringField(h5, sf)
+	local fmt = "\x25s=\x25d; setResult=\x25s,\x25s"
+	print(fmt:format(rawcode, #getPre, tostring(setResult), getPost))
+end
+```
+
 @pure 
 
 @patch 1.31.0.11889
@@ -1716,6 +1746,8 @@ constant native AbilityId2String            takes integer abilityId         retu
 /**
 Returns localized value for field "name" for the given object type ID (unit, item, ability).
 In WorldEdit this is "Text - Name".
+
+If the object ID is invalid, returns literal `Default string` in any locale.
 
 **Example (Lua):** `GetObjectName( FourCC("hfoo") ) --> "Footman"`{.lua}
 
@@ -10161,6 +10193,23 @@ See `fogstate` for an explanation.
     constant unitstringfield UNIT_SF_NAME                   = ConvertUnitStringField('unam')
 
 /**
+Although this field holds multiple entries in World Editor ('upro'/"Propernames"),
+in game only the currently set proper name is returned/modified. Therefore it's impossible
+to retrieve the entire list via API.
+
+**Example (Lua, 2.0.2):**
+
+```{.lua}
+h3 = CreateUnit(Player(0), FourCC("Hamg"), -30, 0, 90)
+print(BlzGetUnitStringField(h3, UNIT_SF_PROPER_NAMES))
+
+print(BlzSetUnitStringField(h3, UNIT_SF_PROPER_NAMES, "proper name abc"))
+print(GetHeroProperName(h3))
+```
+
+@note Equivalent to: `GetHeroProperName`/`BlzSetHeroProperName`.
+See also: `BlzSetUnitStringField`.
+
 @patch 1.31.0.11889
 */
     constant unitstringfield UNIT_SF_PROPER_NAMES           = ConvertUnitStringField('upro')
@@ -15923,9 +15972,23 @@ constant native GetHeroLevel        takes unit whichHero returns integer
 constant native GetUnitLevel        takes unit whichUnit returns integer
 
 /**
-Returns the hero's "Proper Name", which is the name displayed above the level bar.
+Returns the hero's "Proper Name".
+
+A "proper name" is one of the multiple names a hero can get at random.
+It's the big name displayed above the experience bar.
+
+**Example (Lua, 2.0.2):**
+
+```{.lua}
+h1 = CreateUnit(Player(0), FourCC("Hamg"), -30, 0, 90)
+print(GetUnitName(h1) .." (unit name) aka (proper name) ".. GetHeroProperName(h1))
+
+-- equivalent to:
+print(BlzGetUnitStringField(h1, UNIT_SF_PROPER_NAMES))
+```
 
 @note Will return `null` on non-hero units or `null`.
+@note See: `BlzSetUnitName`, `BlzGetUnitStringField`, `GetDestructableName`, `GetItemName`, `GetObjectName`.
 
 @patch 1.15
 */
@@ -16548,7 +16611,7 @@ constant native GetUnitTypeId       takes unit whichUnit returns integer
 constant native GetUnitRace         takes unit whichUnit returns race
 
 /**
-Returns localized name for unit.
+Returns unit's name. By default, it's the localized name for unit.
 
 **Example (Lua)**:
 
@@ -16561,7 +16624,7 @@ print(GetUnitName(u)) --> "Footman"
 
 @async 
 
-@note See: `GetHeroProperName`, `GetDestructableName`, `GetItemName`, `GetObjectName`.
+@note See: `BlzSetUnitName`, `GetHeroProperName`, `GetDestructableName`, `GetItemName`, `GetObjectName`.
 
 @patch 1.00
 */
@@ -23991,15 +24054,32 @@ Get the item icon path.
 native BlzGetItemIconPath                          takes item whichItem returns string
 
 /**
-Change(set) the unit name at runtime.
+Change individual unit's name at runtime. Applies immediately.
+
+**Example (Lua, 2.0.2):**
+
+```{.lua}
+u1 = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
+BlzSetUnitName(u1, "Unit One")
+
+-- restore localized name based on unit type:
+u1rawcode = GetUnitTypeId(u1)
+BlzSetUnitName(u1, GetObjectName( u1rawcode ))
+```
+
+@note See: `GetUnitName`, `GetHeroProperName`, `GetDestructableName`, `GetItemName`, `GetObjectName`.
 
 @patch 1.29.2.9231
 */
 native BlzSetUnitName                              takes unit whichUnit, string name returns nothing
 
 /**
-Change(set) the hero proper name at runtime. A "proper name" is the multiple names a hero can get at random, in this case it forces a specific proper name.
+Change individual hero's proper name at runtime. Applies immediately.
 
+A "proper name" is one of the multiple names a hero can get at random.
+It's the big name displayed above the experience bar.
+
+@note See: `GetHeroProperName`, `BlzSetUnitName`, `GetUnitName`, `GetDestructableName`, `GetItemName`, `GetObjectName`.
 @patch 1.29.2.9231
 */
 native BlzSetHeroProperName                        takes unit whichUnit, string heroProperName returns nothing
@@ -26024,7 +26104,11 @@ native BlzGetUnitIntegerField                      takes unit whichUnit, unitint
 native BlzGetUnitRealField                         takes unit whichUnit, unitrealfield whichField returns real
 
 /**
-@note Many fields don't work at all.
+Returns string; or empty string if unit/field is invalid
+
+@note Many fields don't work at all. See `ConvertUnitStringField` for a list.
+
+@note See: `BlzSetUnitStringField`
 
 @patch 1.31.0.11889
 */
@@ -26071,7 +26155,13 @@ native BlzSetUnitIntegerField                      takes unit whichUnit, unitint
 native BlzSetUnitRealField                         takes unit whichUnit, unitrealfield whichField, real value returns boolean
 
 /**
-@note Many fields don't work at all.
+Returns true if field is valid and new value was applied; false if invalid unit/field.
+
+@param value literal string or a "TRIGSTR_123"
+
+@note Many fields don't work at all. See `ConvertUnitStringField` for a list.
+
+@note See: `BlzGetUnitStringField`, `GetUnitName`, `GetHeroProperName`
 
 @patch 1.31.0.11889
 */
