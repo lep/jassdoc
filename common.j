@@ -1504,6 +1504,7 @@ constant native ConvertUnitBooleanField                 takes integer i returns 
 
 /**
 @note Many fields don't work at all with `BlzGetUnitStringField` or `BlzSetUnitStringField`.
+
 - Icon - Game Interface `uico` doesn't
 - Icon - Score Screen `ussi` doesn't
 - Art - Model File `umdl` doesn't
