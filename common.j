@@ -11,7 +11,7 @@ type agent			    extends     handle  // all reference counted objects
 /**
 Currently useless, although triggers return an event reference when you register
 a new trigger-event, there are no useful functions.
-You can only destroy an event object by destroying the trigger it belong to.
+You can only destroy an event object by destroying the trigger it belongs to.
 
 The only functions that take event are: `SaveTriggerEventHandle` and
 `SaveTriggerEventHandleBJ`.
