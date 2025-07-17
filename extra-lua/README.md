@@ -9,7 +9,7 @@ This folder contains additional files only relevant for the Lua API in Warcraft 
 ### Automatically
 	
 1. Set file path: `export w3exe="$(cygpath 'D:\SteamLibrary\Warcraft III\_retail_\x86_64\Warcraft III.exe')"`
-2. Run extract-luahelper.lua from tools folder: `lua "extract-luahelper.lua" "/path/to/warcraft3.exe" --no-debug > output-luahelper.lua`
+2. Run extract-luahelper.lua from tools folder: `lua "extract-luahelper.lua" --luahelper "$w3exe" --no-debug > output-luahelper.lua`
     - needs any `lua` interpreter installed
 
 ### Manually
