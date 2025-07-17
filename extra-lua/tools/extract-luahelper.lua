@@ -1,21 +1,72 @@
 #!/usr/bin/env lua
 
---[[
+USAGE = [[
 Extracts luahelper.lua from Wacraft3.exe and prints it to STDOUT.
 
 USAGE:
-	lua "extract-luahelper.lua" <wc3 path> [replace debug]
+	lua "extract-luahelper.lua" <which file option> <wc3/memory dump path> [replace debug]
 
 EXAMPLE:
-	lua "extract-luahelper.lua" "/path/to/warcraft3.exe" --no-debug > output-luahelper.lua
+	lua "extract-luahelper.lua" --luahelper "/path/to/warcraft3.exe" --no-debug > output-luahelper.lua
+	lua "extract-luahelper.lua" --commonj "/path/to/warcraft3-memory.dump" > output-luahelper.lua
 
 OPTIONS:
+	Which file:
+	--luahelper to extract luahelper.lua from EXE
+	--commonj   to extract common.j.lua from memory dump
+	--blizzardj   to extract blizzard.j.lua from memory dump
+	--commonai   to extract common.ai.lua from memory dump
+
+	Replace debug in luahelper:
 	--yes-debug to replace debug placeholder with true
 	--no-debug  ... with false (Recommended)
+	            default: do not replace anything
+
+COMMENT:
+	initcheats.j and cheats.j don't exist, because I couldn't get them to load
+	or find in the memory dump.
+	
+AUTHOR:
+	Luashine
 ]]
 
+
 PATTERN_NONPRINTABLE = "([^\t\r\n\v -~])"
-TEXT_ANCHOR = "-- Jass2 array"
+MODE = nil -- alias object for the selected MODES Subtable
+MODES = {
+	LUAHELPER = {
+		SOURCE_PRETTY_NAME = "EXE file",
+		TEXT_ANCHOR = "-- Jass2 array",
+		OUTPUT_NAME = "luahelper.lua"
+	},
+	COMMONJ = {
+		SOURCE_PRETTY_NAME = "Memory dump",
+		TEXT_ANCHOR = "TypeDefine('agent', 'handle')",
+		OUTPUT_NAME = "common.j.lua"
+	},
+	BLIZZARDJ = {
+		SOURCE_PRETTY_NAME = "Memory dump",
+		TEXT_ANCHOR = "bj_PI = 3.14159",
+		OUTPUT_NAME = "blizzard.j.lua"
+	},
+	COMMONAI = {
+		SOURCE_PRETTY_NAME = "Memory dump",
+		TEXT_ANCHOR = [[UPG_SORCERY = FourCC("Rhst")]],
+		OUTPUT_NAME = "common.ai.lua"
+	},
+}
+
+function getSourcePrettyName()
+	return MODE.SOURCE_PRETTY_NAME
+end
+
+function getTextAnchor()
+	return MODE.TEXT_ANCHOR
+end
+
+function getOutputName()
+	return MODE.OUTPUT_NAME
+end
 
 function findAnchor(file, text)
 	local offset = 0
@@ -46,19 +97,21 @@ function findStartOffset(file, anchorOffset)
 	file:seek("set", anchorOffset - bufferSize)
 	local buffer = file:read(bufferSize)
 	
-	local from, to = buffer:reverse():find("A")
+	local from, to = buffer:reverse():find(PATTERN_NONPRINTABLE)
 	
-	assert(to, "Could not find a non-printable character searching backwards. Aborting.")
+	assert(to, "Could not find a non-printable character searching backwards within ".. tostring(bufferSize) .." bytes. Aborting.")
 	
 	local offsetStart = anchorOffset - to + 1
 	return offsetStart
 end
 
 function findEndOffset(file, anchorOffset)
+	local lineLimit = 30 * 1000
+
 	local offsetEnd = anchorOffset
 	
 	file:seek("set", anchorOffset)
-	for i = 1, 1000 do
+	for i = 1, lineLimit do
 		local line = file:read("*l")
 		local from, to, match = line:find(PATTERN_NONPRINTABLE)
 		if to then
@@ -71,7 +124,7 @@ function findEndOffset(file, anchorOffset)
 		end
 	end
 	
-	error("Could not find end of text searching for the end. Aborting")
+	error("Could not find end of text searching for the end. Line limit=".. tostring(lineLimit) ..". Aborting")
 end
 
 function readContents(file, offset, length)
@@ -80,16 +133,40 @@ function readContents(file, offset, length)
 end
 
 function main()
-	local exePath = arg[1]
-	assert(exePath, "First argument must be a path to a Lua-capable 'Warcraft III.exe'!")
+	if #arg == 0 or arg[1] == "-h" or arg[1] == "--help" then
+		print(USAGE)
+		os.exit(0)
+	end
+	
+	local targetMode = arg[1]
+	assert(targetMode:sub(1,2) == "--", "First argument must specify which file to extract!")
+	targetMode = targetMode:sub(3):upper()
+	if MODES[targetMode] then
+		MODE = MODES[targetMode]
+	else
+		local availableModes = {}
+		local modesText
+		for name, tbl in pairs(MODES) do
+			table.insert(availableModes, "--".. name)
+		end
+		modesText = table.concat(availableModes, "\n")
+		io.stderr:write([[
+The first argument '%s' is not a valid mode. See --help.
+It must be one of:
+%s
+]],		targetMode, modesText)
+	end
+
+	local sourcePath = arg[2]
+	assert(sourcePath, "Second argument must be a path to a Lua-capable 'Warcraft III.exe' or a memory dump!")
 	
 	local doReplaceDebug = false
 	local replaceDebugText = "false"
-	if arg[2] then
-		if arg[2] == "--yes-debug" then
+	if arg[3] then
+		if arg[3] == "--yes-debug" then
 			doReplaceDebug = true
 			replaceDebugText = "true"
-		elseif arg[2] == "--no-debug" then
+		elseif arg[3] == "--no-debug" then
 			doReplaceDebug = true
 			replaceDebugText = "false"
 		else
@@ -98,11 +175,11 @@ function main()
 	end
 			
 
-	local exe = assert(io.open(exePath, "rb"))
-	io.stderr:write(string.format("exePath: %s\n", exePath))
+	local exe = assert(io.open(sourcePath, "rb"))
+	io.stderr:write(string.format("%s Path: '%s'\n", getSourcePrettyName(), sourcePath))
 
-	io.stderr:write(string.format("Searching for text anchor: '%s'\n", TEXT_ANCHOR))
-	local anchorOffset = findAnchor(exe, TEXT_ANCHOR)
+	io.stderr:write(string.format("Searching for text anchor: '%s'\n", getTextAnchor()))
+	local anchorOffset = findAnchor(exe, getTextAnchor())
 	io.stderr:write(string.format("anchorOffset: %d\n", anchorOffset))
 
 	local offsetStart = findStartOffset(exe, anchorOffset)
@@ -110,14 +187,14 @@ function main()
 	local offsetEnd = findEndOffset(exe, anchorOffset)
 	io.stderr:write(string.format("offsetEnd: %d\n", offsetEnd))
 	local fileSize = offsetEnd - offsetStart
-	io.stderr:write(string.format("luahelper.lua file size: %d\n", fileSize))
+	io.stderr:write(string.format("%s file size: %d\n", getOutputName(), fileSize))
 	
-	local luahelperText = readContents(exe, offsetStart, fileSize)
+	local outputText = readContents(exe, offsetStart, fileSize)
 	if doReplaceDebug then
-		luahelperText = luahelperText:gsub("%$debug%$", replaceDebugText)
+		outputText = outputText:gsub("%$debug%$", replaceDebugText)
 	end
 	
-	io.stdout:write(luahelperText)
+	io.stdout:write(outputText)
 	exe:close()
 	io.stderr:write("bye-bye!\n")
 end
