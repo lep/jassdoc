@@ -203,8 +203,17 @@ Used for Platform statistics:
 
 Alias of `RequestExtraXXXXXData(34, whichPlayer, category, label, false, 0, 0, 0)`
 
-@param category "embedding key". Guessed type as string, please confirm.
-@param label leave blank. Reserved for future use.
+@param category aka "eventKey" aka "embedding key"
+@param label aka "subKey" leave blank. Reserved for future use.
+
+@note This native is apparently not used by NetEase, KK (v2.0.1) platforms.
+Instead the map code uses a regular function available via World Editor scripts:
+
+```{.j}
+function DzAPI_Map_Statistics takes player whichPlayer, string eventKey, string eventType, integer value returns nothing
+    call RequestExtraBooleanData(34, whichPlayer, eventKey, eventType, false, value, 0, 0)
+endfunction
+```
 */
 native DzAPI_Map_Statistics              takes player whichPlayer, string category, string label returns nothing
 
