@@ -6,7 +6,9 @@
 /**
 Removes an ability like `UnitRemoveAbility`: level is set to 0 and skill points are not refunded.
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
+
 `native BlzDeleteHeroAbility takes unit unitHandle, integer abilID returns nothing`
 
 @note **Example (Lua, 2.0.2):**
@@ -46,9 +48,12 @@ native BlzDeleteHeroAbility takes unit unitHandle, integer abilID returns nothin
 /**
 Returns the current skin ID (the rawcode of the object by default).
 
-Jass: Exists internally, but not registered as a Jass function. It cannot be defined using `native`.
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
-Lua: Exported as an API function.
+`native BlzGetDestructableSkin takes destructable destHandle returns integer`
+
+@note Lua: Exported as an API function.
 
 **Example (Lua, v2.0.2):**
 
@@ -74,7 +79,8 @@ Returns index representing hero's attribute:
 
 Note, in-game UI has a different order: 1. str, 2. agi 3. int
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native BlzGetHeroPrimaryStat takes unit whichHero returns integer`
 
@@ -99,9 +105,11 @@ native BlzGetHeroPrimaryStat takes unit whichHero returns integer
 
 
 /**
-Lua, 2.0.2: always returns zero. Maybe we're missing a parameter here?
+Lua, 2.0.2: always returns zero. Apparently, "whichHero" parameter was supposed to be
+a "unitTypeId" (a rawcode) but is wrongly defined in the game API as `unit`.
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native BlzGetHeroPrimaryStatById takes unit whichHero returns integer`
 */
@@ -114,7 +122,8 @@ Returns hero's attribute value, otherwise returns 0 (unit is null or not a hero,
 Equivalent to `GetHeroStr`/`GetHeroAgi`/`GetHeroInt`.
 Item bonuses and 'Aamk' Attribute Bonus ability count correctly.
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native BlzGetHeroStat takes unit whichHero, integer whichStat, boolean includeBonuses returns integer`
 
@@ -176,7 +185,8 @@ Returns an index from 0 to 5:
 - 4 aka `ARMOR_TYPE_ETHREAL`
 - 5 aka `ARMOR_TYPE_STONE`
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native BlzGetUnitArmorType takes unit whichUnit returns integer`
 
@@ -228,7 +238,8 @@ Returns number corresponding to the enabled type:
 - 32 aka `MOVE_TYPE_AMPHIBIOUS`
 - 64 aka `MOVE_TYPE_UNBUILDABLE`
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native BlzGetUnitMovementType takes unit whichUnit returns integer`
 
@@ -262,7 +273,8 @@ native BlzGetUnitMovementType takes unit whichUnit returns integer
 /**
 Unknown (v2.0.2)
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native BlzSetCameraGuardBand takes real minx, real maxx, real miny, real maxy returns boolean`
 */
@@ -270,7 +282,10 @@ native BlzSetCameraGuardBand takes real minx, real maxx, real miny, real maxy re
 
 
 /**
-Jass: Exists internally, but not registered as a Jass function. It cannot be defined using `native`.
+Broken.
+
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 Lua: Exported as an API function. (v2.0.2.22796): I couldn't get it to work with the test code below
 
@@ -297,7 +312,8 @@ Sets a hero's main attribute (strength, agility or intelligence).
 
 Does nothing on a regular unit/null.
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native BlzSetHeroPrimaryStat takes unit whichHero, integer whichStat returns nothing`
 
@@ -346,7 +362,8 @@ Sets hero's attribute value by attribute index.
 
 @note See: `SetHeroStr`, `SetHeroAgi`, `SetHeroInt`, `ModifyHeroStat`, `SetHeroStat`.
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native BlzSetHeroStatEx takes unit whichHero, integer whichStat, integer statValue, boolean permanent returns nothing`
 
@@ -386,7 +403,8 @@ Equivalent to `BlzSetUnitIntegerField(targetUnit, UNIT_IF_MOVE_TYPE, movementTyp
 
 @bug v2.0.2.22796: Changes the field value, but it has no effect.
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native BlzSetUnitMovementType takes unit whichUnit, integer movementType returns nothing`
 
@@ -405,7 +423,8 @@ native BlzSetUnitMovementType takes unit whichUnit, integer movementType returns
 /**
 Unknown
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native ClearStackedSound takes string soundLabel, real x, real y returns nothing`
 */
@@ -415,7 +434,8 @@ native ClearStackedSound takes string soundLabel, real x, real y returns nothing
 /**
 Unknown
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native ClearStackedSoundRect takes string soundLabel, rect hRect returns nothing`
 */
@@ -425,7 +445,8 @@ native ClearStackedSoundRect takes string soundLabel, rect hRect returns nothing
 /**
 Does nothing in release builds.
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
 
 `native DebugBreak takes integer unused returns nothing`
 */
@@ -435,7 +456,9 @@ native DebugBreak takes integer unused returns nothing // "(I)V");
 /**
 Unknown
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
+
 `native DialogSetAsync takes dialog dialogHandle returns nothing`
 */
 native DialogSetAsync takes dialog dialogHandle returns nothing // "(Hdialog;)V");
@@ -446,12 +469,14 @@ Returns X map coordinate for player's starting location.
 
 This native is equivalent to the regular Jass function `GetPlayerStartLocationX` in "Blizzard.j".
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
+
 `native GetPlayerStartLocationX takes player whichPlayer returns real`
 
-However, it will probably conflict due to declaration in Blizzard.j.
+However, it will conflict due to the first declaration in Blizzard.j.
 
-Lua (v2.0.2.22796): Must override Blizzard.j first: either remove the declaration there
+@note Lua (v2.0.2.22796): Must override Blizzard.j first: either remove the declaration there
 or replace it with the Jass' `native` declaration (it works, because the file is transpiled
 to Lua on the fly).
 
@@ -500,8 +525,12 @@ Returns Y map coordinate for player's starting location.
 
 This native is equivalent to the regular Jass function `GetPlayerStartLocationY` in "Blizzard.j".
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
+
 `native GetPlayerStartLocationY takes player whichPlayer returns real`
+
+However, it will conflict due to the first declaration in Blizzard.j.
 
 Lua: Declaration in Blizzard.j must be removed.
 
@@ -513,7 +542,9 @@ native GetPlayerStartLocationY takes player whichPlayer returns real
 /**
 Unknown, probably be related to Reforged dialogue scenes.
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
+
 `native SetCinematicSceneWithSkinId takes integer skinId, playercolor playerColor, string speaker, string dialogue, real sceneDuration, real dialogueDuration returns nothing`
 */
 native SetCinematicSceneWithSkinId takes integer skinId, playercolor playerColor, string speaker, string dialogue, real sceneDuration, real dialogueDuration returns nothing // "(IHplayercolor;SSRR)V");
@@ -522,7 +553,9 @@ native SetCinematicSceneWithSkinId takes integer skinId, playercolor playerColor
 /**
 Unknown, must be related to Reforged FaceFX animations. Maybe some of the campaign maps use this?
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
+
 `native SetSoundFacialAnimationPlaybackMode takes sound soundHandle, integer facialAnimationPlaybackMode returns boolean`
 */
 native SetSoundFacialAnimationPlaybackMode takes sound soundHandle, integer facialAnimationPlaybackMode returns boolean // "(Hsound;I)B");
@@ -531,7 +564,9 @@ native SetSoundFacialAnimationPlaybackMode takes sound soundHandle, integer faci
 /**
 Unknown
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
+
 `native SetStackedSound takes string soundLabel, real x, real y returns nothing`
 */
 native SetStackedSound takes string soundLabel, real x, real y returns nothing // "(SRR)V");
@@ -540,7 +575,9 @@ native SetStackedSound takes string soundLabel, real x, real y returns nothing /
 /**
 Unknown
 
-@note To be used in Jass, this hidden API native must be defined first:
+@note Jass: (v2.0.2) This hidden API native must be defined first.
+The native definition must come before any other function definitions:
+
 `native SetStackedSoundRect takes string soundLabel, rect hRect returns nothing`
 */
 native SetStackedSoundRect takes string soundLabel, rect hRect returns nothing // "(SHrect;)V");
