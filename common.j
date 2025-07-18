@@ -10021,6 +10021,11 @@ See `fogstate` for an explanation.
     constant unitrealfield UNIT_RF_FLY_HEIGHT                               = ConvertUnitRealField('ufyh')
 
 /**
+@patch 2.0.3.22904
+*/
+    constant unitrealfield UNIT_RF_FLY_MAX_HEIGHT                           = ConvertUnitRealField('ufmh')
+
+/**
 @patch 1.31.0.11889
 */
     constant unitrealfield UNIT_RF_TURN_RATE                                = ConvertUnitRealField('umvr')
