@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rev=$(sqlite3 "$1" 'select value from metadata where key = "git-commit"')
+
+if ! [[ $rev =~ ^[a-f0-9]{40}$ ]]; then
+  echo "git-commit metadata '$rev' does not look like a git commit"
+  exit 1
+fi

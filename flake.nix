@@ -55,6 +55,7 @@
               ./mksrc
               ./mkmetadata
               ./lint
+              ./check-revision
               # sql
               ./check-wrong-params.sql
               # jass files
@@ -74,7 +75,7 @@
             (mkdocs pkgs)
           ];
           buildPhase = ''
-            MKDOCS=mkdocs make jass.db
+            GITREV=${if (self ? rev) then self.rev else "nix-dirty"} MKDOCS=mkdocs make jass.db
           '';
 
           installPhase = ''

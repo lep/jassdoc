@@ -1,2 +1,7 @@
 #!/bin/sh
-echo "insert or replace into metadata (key, value) values ('git-commit', '$(git rev-parse HEAD 2>/dev/null || echo nix)')"
+
+rev=$(git rev-parse HEAD 2>/dev/null)
+[[ -z "$rev" ]] && rev=$GITREV
+[[ -z "$rev" ]] && rev="untracked"
+
+echo "insert or replace into metadata (key, value) values ('git-commit', '$rev')"
