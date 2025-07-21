@@ -360,7 +360,9 @@ native BlzSetHeroPrimaryStat takes unit whichHero, integer whichStat returns not
 /**
 Sets hero's attribute value by attribute index.
 
-@note See: `SetHeroStr`, `SetHeroAgi`, `SetHeroInt`, `ModifyHeroStat`, `SetHeroStat`.
+@note The hero can only die if the max HP drops below 1.0. Mana values <=0 do not show up under portrait.
+
+@note See: `SetHeroStr`, `SetHeroAgi`, `SetHeroInt`, `ModifyHeroStat`, `SetHeroStat`, `GetHeroStatBJ`, `GetUnitState`, `SetUnitState`, `UNIT_STATE_LIFE`, `UNIT_STATE_MANA`.
 
 @note Jass: (v2.0.2) This hidden API native must be defined first.
 The native definition must come before any other function definitions:
@@ -391,7 +393,29 @@ end
 @param whichHero target hero unit
 @param whichStat attribute index: 1 = strength, 2 = intelligence, 3 = agility (note different order in game)
 @param statValue new value
-@param permanent unknown
+@param permanent scale current life/mana by absolute bonus value difference? Otherwise relative to % of max amount lost.
+Only relevant for strength and intelligence. See notes for an example.
+
+- true: Add/subtract entire bonus value
+- false: Add/subtract relative bonus value, depending on how much percent% max life/mana was added or lost
+
+@note Examples and calculations for permanent parameter true/false:
+- 36 -> 16 transition, permanent = true: Subtracts the entire bonus value granted by 20 strength points (20*25 = 500) from current HP.
+    - 500/1000 hp -> 1.0/500 HP
+    - 750/1000 hp -> 250/500 HP
+- 36 -> 16 transition, permanent = false: Current HP is reduced by the relative amount of Max HP lost.
+oldMaxHp = 1000; newMaxHp = 500; factor = oldMaxHp / newMaxHp = 0.5x; newCurrentHp = oldCurrentHp * factor = 750 * 0.5 = 375.
+    - 500/1000 hp -> 500/500 HP
+    - 750/1000 hp -> 375/500 HP
+
+- 16 -> 36 transition, permanent = true: Adds the entire bonus value granted by strength point to current HP.
+    - 250/500 hp -> 750/1000 hp
+    - 500/500 hp -> 1000/1000 hp
+- 16 -> 36 transition, permanent = false: Current HP is increased by the relative amount of Max HP gained.
+oldMaxHp = 500; newMaxHp = 1000; factor = 500 / 1000 = 2.0x; newCurrentHp = 100 * 2 = 200.
+    - 100/500 hp -> 200/1000 hp
+    - 250/500 hp -> 500/1000 hp
+    - 500/500 hp -> 1000/1000 hp
 */
 native BlzSetHeroStatEx takes unit whichHero, integer whichStat, integer statValue, boolean permanent returns nothing
 
