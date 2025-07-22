@@ -6071,31 +6071,85 @@ See `fogstate` for an explanation.
     // Ability
 
 /**
+Horizontal position aka "Art - Button Position - Normal (X)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note Use special position 0,-11 to hide the button icon only (v1.28.0).
+The huge value used previously (-2147483648, -2147483648) is technically unsafe and may lead to crashes in older versions.
+
+Discussion: <https://www.hiveworkshop.com/threads/hiding-any-button-new-method-please-help-me-test-it.266571/>
+
+@bug v2.0.2.22796: The value is set, but has no effect. In 2.0.3.22978 the position is updated correctly,
+but maybe this is only because the value is applied to the base ability, affecting all instances.
+
+See: `BlzSetAbilityIntegerField` and <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`, `ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`, ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
+
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_NORMAL_X        = ConvertAbilityIntegerField('abpx')
 
 /**
+Vertical position aka "Art - Button Position - Normal (Y)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note Use special position 0,-11 to hide the button icon only (v1.28.0).
+The huge value used previously (-2147483648, -2147483648) is technically unsafe and may lead to crashes in older versions.
+
+Discussion: <https://www.hiveworkshop.com/threads/hiding-any-button-new-method-please-help-me-test-it.266571/>
+
+@bug v2.0.2.22796: The value is set, but has no effect. In 2.0.3.22978 the position is updated correctly,
+but maybe this is only because the value is applied to the base ability, affecting all instances.
+
+See: `BlzSetAbilityIntegerField` and <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`, `ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`, ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_NORMAL_Y        = ConvertAbilityIntegerField('abpy')
 
 /**
+Horizontal position aka "Art - Button Position - Turn Off (X)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`, ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
+
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_ACTIVATED_X     = ConvertAbilityIntegerField('aubx')
 
 /**
+Vertical position aka "Art - Button Position - Turn Off (Y)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`, ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
+
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y     = ConvertAbilityIntegerField('auby')
 
 /**
+Horizontal position aka "Art - Button Position - Research (X)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`, `ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_RESEARCH_X      = ConvertAbilityIntegerField('arpx')
 
 /**
+Vertical position aka "Art - Button Position - Research (Y)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`, `ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`
+
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_RESEARCH_Y      = ConvertAbilityIntegerField('arpy')
