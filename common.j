@@ -6071,31 +6071,85 @@ See `fogstate` for an explanation.
     // Ability
 
 /**
+Horizontal position aka "Art - Button Position - Normal (X)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note Use special position 0,-11 to hide the button icon only (v1.28.0).
+The huge value used previously (-2147483648, -2147483648) is technically unsafe and may lead to crashes in older versions.
+
+Discussion: <https://www.hiveworkshop.com/threads/hiding-any-button-new-method-please-help-me-test-it.266571/>
+
+@bug v2.0.2.22796: The value is set, but has no effect. In 2.0.3.22978 the position is updated correctly,
+but maybe this is only because the value is applied to the base ability, affecting all instances.
+
+See: `BlzSetAbilityIntegerField` and <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`, `ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`, ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
+
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_NORMAL_X        = ConvertAbilityIntegerField('abpx')
 
 /**
+Vertical position aka "Art - Button Position - Normal (Y)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note Use special position 0,-11 to hide the button icon only (v1.28.0).
+The huge value used previously (-2147483648, -2147483648) is technically unsafe and may lead to crashes in older versions.
+
+Discussion: <https://www.hiveworkshop.com/threads/hiding-any-button-new-method-please-help-me-test-it.266571/>
+
+@bug v2.0.2.22796: The value is set, but has no effect. In 2.0.3.22978 the position is updated correctly,
+but maybe this is only because the value is applied to the base ability, affecting all instances.
+
+See: `BlzSetAbilityIntegerField` and <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`, `ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`, ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_NORMAL_Y        = ConvertAbilityIntegerField('abpy')
 
 /**
+Horizontal position aka "Art - Button Position - Turn Off (X)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`, ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
+
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_ACTIVATED_X     = ConvertAbilityIntegerField('aubx')
 
 /**
+Vertical position aka "Art - Button Position - Turn Off (Y)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`, ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
+
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y     = ConvertAbilityIntegerField('auby')
 
 /**
+Horizontal position aka "Art - Button Position - Research (X)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`, `ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+ABILITY_IF_BUTTON_POSITION_RESEARCH_Y`
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_RESEARCH_X      = ConvertAbilityIntegerField('arpx')
 
 /**
+Vertical position aka "Art - Button Position - Research (Y)". Point of origin: top-left, 0;0 in a 4x3 ability grid.
+
+@note See: `BlzSetAbilityIntegerField`, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`, `ABILITY_IF_BUTTON_POSITION_NORMAL_Y`;
+`ABILITY_IF_BUTTON_POSITION_ACTIVATED_X`, `ABILITY_IF_BUTTON_POSITION_ACTIVATED_Y`;
+`ABILITY_IF_BUTTON_POSITION_RESEARCH_X`
+
 @patch 1.31.0.11889
 */
     constant abilityintegerfield ABILITY_IF_BUTTON_POSITION_RESEARCH_Y      = ConvertAbilityIntegerField('arpy')
@@ -25916,65 +25970,112 @@ native BlzGetAbilityStringField                    takes ability whichAbility, a
 @patch 1.31.0.11889
 
 @bug Should not be used (crash): Use `BlzGetAbilityIntegerLevelField`.
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
 */
 native BlzGetAbilityBooleanLevelField              takes ability whichAbility, abilitybooleanlevelfield whichField, integer level returns boolean
 
 /**
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzGetAbilityIntegerLevelField              takes ability whichAbility, abilityintegerlevelfield whichField, integer level returns integer
 
 /**
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzGetAbilityRealLevelField                 takes ability whichAbility, abilityreallevelfield whichField, integer level returns real
 
 /**
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
 @patch 1.31.0.11889
 */
 native BlzGetAbilityStringLevelField               takes ability whichAbility, abilitystringlevelfield whichField, integer level returns string
 
 /**
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzGetAbilityBooleanLevelArrayField         takes ability whichAbility, abilitybooleanlevelarrayfield whichField, integer level, integer index returns boolean
 
 /**
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzGetAbilityIntegerLevelArrayField         takes ability whichAbility, abilityintegerlevelarrayfield whichField, integer level, integer index returns integer
 
 /**
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzGetAbilityRealLevelArrayField            takes ability whichAbility, abilityreallevelarrayfield whichField, integer level, integer index returns real
 
 /**
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzGetAbilityStringLevelArrayField          takes ability whichAbility, abilitystringlevelarrayfield whichField, integer level, integer index returns string
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityBooleanField                   takes ability whichAbility, abilitybooleanfield whichField, boolean value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+For example, `ABILITY_IF_BUTTON_POSITION_NORMAL_X`.
+
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityIntegerField                   takes ability whichAbility, abilityintegerfield whichField, integer value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityRealField                      takes ability whichAbility, abilityrealfield whichField, real value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+For example, `ABILITY_SF_ICON_RESEARCH`.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityStringField                    takes ability whichAbility, abilitystringfield whichField, string value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 
 @bug Should not be used (crash): Use `BlzSetAbilityIntegerLevelField`.
@@ -25982,76 +26083,231 @@ native BlzSetAbilityStringField                    takes ability whichAbility, a
 native BlzSetAbilityBooleanLevelField              takes ability whichAbility, abilitybooleanlevelfield whichField, integer level, boolean value returns boolean
 
 /**
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityIntegerLevelField              takes ability whichAbility, abilityintegerlevelfield whichField, integer level, integer value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityRealLevelField                 takes ability whichAbility, abilityreallevelfield whichField, integer level, real value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+**Test code (Lua):**
+
+```{.lua}
+heroA = CreateUnit(Player(0), FourCC("Otch"), -100, 0, 90)
+heroB = CreateUnit(Player(0), FourCC("Otch"), 100, 0, 90)
+
+abilCode = FourCC"AOmi"
+
+print(UnitAddAbility(heroA, abilCode))
+print(UnitAddAbility(heroB, abilCode))
+
+abilityA = BlzGetUnitAbility(heroA, abilCode)
+abilityB = BlzGetUnitAbility(heroB, abilCode)
+
+print("ability pointers:", tostring(abilityA), tostring(abilityB))
+
+BlzSetAbilityStringLevelField(abilityB, ABILITY_SLF_TOOLTIP_NORMAL, 0, "this is ability B tooltip")
+BlzSetAbilityStringLevelField(abilityB, ABILITY_SLF_TOOLTIP_NORMAL_EXTENDED, 0, "this is ability B tooltip extended")
+
+heroC = CreateUnit(Player(0), FourCC("Otch"), 200, 0, 90)
+print(UnitAddAbility(heroC, abilCode))
+abilityC = BlzGetUnitAbility(heroC, abilCode)
+
+-- String Level Field, wrongly applies to all in 2.0.3
+print("Expected: default / changed / default")
+print(BlzGetAbilityStringLevelField(abilityA, ABILITY_SLF_TOOLTIP_NORMAL, 0))
+print(BlzGetAbilityStringLevelField(abilityB, ABILITY_SLF_TOOLTIP_NORMAL, 0))
+print(BlzGetAbilityStringLevelField(abilityC, ABILITY_SLF_TOOLTIP_NORMAL, 0))
+
+-- Integer Level Field test, works in 2.0.3
+print("expected: changed (77), unchanged (125)")
+print(BlzGetAbilityIntegerLevelField(abilityA, ABILITY_ILF_MANA_COST, 0))
+print(BlzSetAbilityIntegerLevelField(abilityA, ABILITY_ILF_MANA_COST, 0, 77))
+print(BlzGetAbilityIntegerLevelField(abilityA, ABILITY_ILF_MANA_COST, 0))
+print(BlzGetAbilityIntegerLevelField(abilityB, ABILITY_ILF_MANA_COST, 0))
+
+-- Integer Field test, wrongly applies to all in 2.0.3
+-- v2.0.2: sets value, but has no effect
+print(BlzGetAbilityIntegerField(abilityA, ABILITY_IF_BUTTON_POSITION_NORMAL_X))
+print(BlzSetAbilityIntegerField(abilityA, ABILITY_IF_BUTTON_POSITION_NORMAL_X, 2))
+print(BlzGetAbilityIntegerField(abilityA, ABILITY_IF_BUTTON_POSITION_NORMAL_X))
+print(BlzGetAbilityIntegerField(abilityB, ABILITY_IF_BUTTON_POSITION_NORMAL_X))
+
+print(BlzGetAbilityIntegerField(abilityA, ABILITY_IF_BUTTON_POSITION_NORMAL_Y))
+print(BlzSetAbilityIntegerField(abilityA, ABILITY_IF_BUTTON_POSITION_NORMAL_Y, 1))
+print(BlzGetAbilityIntegerField(abilityA, ABILITY_IF_BUTTON_POSITION_NORMAL_Y))
+print(BlzGetAbilityIntegerField(abilityB, ABILITY_IF_BUTTON_POSITION_NORMAL_Y))
+
+-- String Field test, wrongly applies to all in 2.0.3
+print(BlzGetAbilityStringField(abilityA, ABILITY_SF_ICON_RESEARCH))
+print(BlzSetAbilityStringField(abilityA, ABILITY_SF_ICON_RESEARCH, [[ReplaceableTextures\CommandButtons\BTNAttack.blp]]))
+print(BlzGetAbilityStringField(abilityA, ABILITY_SF_ICON_RESEARCH))
+print(BlzGetAbilityStringField(abilityB, ABILITY_SF_ICON_RESEARCH))
+```
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityStringLevelField               takes ability whichAbility, abilitystringlevelfield whichField, integer level, string value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityBooleanLevelArrayField         takes ability whichAbility, abilitybooleanlevelarrayfield whichField, integer level, integer index, boolean value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityIntegerLevelArrayField         takes ability whichAbility, abilityintegerlevelarrayfield whichField, integer level, integer index, integer value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityRealLevelArrayField            takes ability whichAbility, abilityreallevelarrayfield whichField, integer level, integer index, real value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzSetAbilityStringLevelArrayField          takes ability whichAbility, abilitystringlevelarrayfield whichField, integer level, integer index, string value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzAddAbilityBooleanLevelArrayField         takes ability whichAbility, abilitybooleanlevelarrayfield whichField, integer level, boolean value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzAddAbilityIntegerLevelArrayField         takes ability whichAbility, abilityintegerlevelarrayfield whichField, integer level, integer value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzAddAbilityRealLevelArrayField            takes ability whichAbility, abilityreallevelarrayfield whichField, integer level, real value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzAddAbilityStringLevelArrayField          takes ability whichAbility, abilitystringlevelarrayfield whichField, integer level, string value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzRemoveAbilityBooleanLevelArrayField      takes ability whichAbility, abilitybooleanlevelarrayfield whichField, integer level, boolean value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzRemoveAbilityIntegerLevelArrayField      takes ability whichAbility, abilityintegerlevelarrayfield whichField, integer level, integer value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzRemoveAbilityRealLevelArrayField         takes ability whichAbility, abilityreallevelarrayfield whichField, integer level, real value returns boolean
 
 /**
+@bug v2.0.3.22904, v2.0.3: per-ability instance fields sometimes wrongly apply to all ability instances of the base type.
+See `BlzSetAbilityStringLevelField` for test code.
+
+Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
+
+@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
+
 @patch 1.31.0.11889
 */
 native BlzRemoveAbilityStringLevelArrayField       takes ability whichAbility, abilitystringlevelarrayfield whichField, integer level, string value returns boolean
