@@ -26029,8 +26029,6 @@ See `BlzSetAbilityStringLevelField` for test code.
 
 Bug report: <https://us.forums.blizzard.com/en/warcraft3/t/ability-specific-tooltip-natives-broken-in-v20322978/36601>
 
-@param level 0-indexed level (since 1.31.1). Index=0 means level=1 in game and so on.
-
 @patch 1.31.0.11889
 */
 native BlzSetAbilityBooleanField                   takes ability whichAbility, abilitybooleanfield whichField, boolean value returns boolean
