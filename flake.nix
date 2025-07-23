@@ -56,8 +56,7 @@
               ./mkmetadata
               ./lint
               ./check-revision
-              # sql
-              ./check-wrong-params.sql
+              ./check-wrong-params
               # jass files
               ./common.j
               ./common.ai

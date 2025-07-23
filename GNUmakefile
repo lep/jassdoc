@@ -19,7 +19,7 @@ check-missing: jass.db
 	perl lint $(SRC)
 
 check-params: jass.db
-	sqlite3 $< < check-wrong-params.sql
+	perl check-wrong-params --db=$<
 
 check-git-revision: jass.db
 	sh check-revision $<

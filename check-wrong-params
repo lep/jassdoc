@@ -1,0 +1,62 @@
+#!/usr/bin/env perl
+
+use 5.30.0;
+
+use strict;
+use warnings;
+
+use open ':std', ':utf8', ':encoding(UTF-8)';
+
+# no feature qw(indirect);
+use feature qw(signatures);
+no warnings qw(experimental::signatures);
+
+use Getopt::Long;
+use Pod::Usage;
+use DBI;
+
+my $dbPath = "jass.db";
+my $help   = 0;
+
+GetOptions(
+    "db=s" => \$dbPath,
+    help   => \$help
+) or die pod2usage( -verbose => 1 );
+
+pod2usage( -verbose => 2 ) if $help;
+pod2usage( -verbose => 1 ) if @ARGV;
+
+my $dbh = DBI->connect("DBI:SQLite:$dbPath");
+
+my $stmt = $dbh->prepare(<<'SQL');
+	SELECT fnname, param
+	FROM parameters
+	WHERE param NOT IN (
+	    SELECT param
+	    FROM params_extra
+	    WHERE params_extra.fnname = parameters.fnname
+	);
+SQL
+
+$stmt->execute();
+my $cnt = 0;
+while (my $row = $stmt->fetchrow_hashref() ) {
+	say STDERR $row->{fnname}, ' has wrong @param annotation ', $row->{param};
+	$cnt++;
+}
+
+exit 1 if $cnt;
+
+__END__
+
+=head1 NAME
+
+check-wrong-params - checks if there are any mismatched @param annotations
+
+=head1 SYNOPSIS
+
+check-wrong-params [options]
+
+ Options:
+  --db    Path to jass.db. Default: jass.db
+  --help  Prints this help message
