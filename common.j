@@ -14868,6 +14868,8 @@ constant native GetTriggerWidget takes nothing returns widget
 /**
 Creates a destructable on the ground at the coordinates ( x, y ).
 
+Returns null on failure.
+
 **Example:**
 ```
 call CreateDestructable('LTbr', 96, 0, 180, 1, 0) // Jass
@@ -15060,21 +15062,77 @@ Any value below 0.5 will give the destructable 0.5 hit points.
 native          DestructableRestoreLife     takes destructable d, real life, boolean birth returns nothing
 
 /**
+Start new animation after the currently active animation finishes.
+
+Allows for a smooth transition (where possible) unlike `SetDestructableAnimation`.
+
+The start/end behavior (like forced restart or transition to a different animation at the end) depends on the animation itself.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+volcano = CreateDestructable(FourCC("Volc"), 0, 400, 0.0, 1.0, 0)
+SetDestructableAnimation(volcano, "birth")
+QueueDestructableAnimation(volcano, "death")
+```
+
+@param d target destructable
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          QueueDestructableAnimation  takes destructable d, string whichAnimation returns nothing
 
 /**
+Immediately start playing new animation.
+
+If the animation requires a change, cancel current animation and start new animation. There is no smooth transition.
+
+The start/end behavior (like forced restart or transition to a different animation at the end) depends on the animation itself.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+volcano = CreateDestructable(FourCC("Volc"), 0, 400, 0.0, 1.0, 0)
+SetDestructableAnimation(volcano, "birth")
+QueueDestructableAnimation(volcano, "death")
+```
+
+@param d target destructable
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          SetDestructableAnimation    takes destructable d, string whichAnimation returns nothing
 
 /**
+Sets destructable's animation speed multiplier.
+
+@param d target destructable
+@param speedFactor default: `1.0`, for example `2.0` doubles animation speed
+
 @patch 1.07
 */
 native          SetDestructableAnimationSpeed takes destructable d, real speedFactor returns nothing
 
 /**
+Completely hides the destructable, disabling the effects it had (like height elevation).
+
+Unlike hiding special effects, this can affect gameplay and will desync if used asynchronously.
+
+@note Example (Lua, 2.0.3):
+
+```{.lua}
+volcano = CreateDestructable(FourCC("Volc"), 0, 0, 0.0, 1.0, 0)
+gryph = CreateUnit(Player(0), FourCC("hgry"), 0, 0, 0.0)
+
+-- Hippogryph is elevated by volcano while it is shown
+ShowDestructable(volcano, true)
+
+-- Hippogryph flies lower above actual terrain without a volcano underneath
+ShowDestructable(volcano, false)
+```
+
 @patch 1.07
 */
 native          ShowDestructable            takes destructable d, boolean flag returns nothing
@@ -15760,26 +15818,75 @@ native          SetUnitVertexColor  takes unit whichUnit, integer red, integer g
 
 
 /**
+Start new animation after the currently active animation finishes.
+
+Allows for a smooth transition (where possible) unlike `SetUnitAnimation`.
+
+The start/end behavior (like forced restart or transition to a different animation at the end) depends on the animation itself.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+-- Play goblin merchant's forgotten slide animation once
+-- then return to regular "Stand" (idle) animation
+u_ngme = CreateUnit(Player(0), FourCC("ngme"), 0, 0, -80)
+QueueUnitAnimation(u_ngme, "Stand Work")
+QueueUnitAnimation(u_ngme, "Stand")
+```
+
+@note See: `SetUnitAnimation`, `SetUnitAnimationByIndex`, `SetUnitAnimationWithRarity`, `AddUnitAnimationProperties`
+
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          QueueUnitAnimation          takes unit whichUnit, string whichAnimation returns nothing
 
 /**
+Immediately start playing new animation.
+
+If the animation requires a change, cancel current animation and start new animation. There is no smooth transition.
+
+The start/end behavior (like forced restart or transition to a different animation at the end) depends on the animation itself.
+
+**Example (Lua, 2.0.3):**
+
+```{.lua}
+-- Start goblin merchant's forgotten slide animation
+u_ngme = CreateUnit(Player(0), FourCC("ngme"), 0, 0, -80)
+SetUnitAnimation(u_ngme, "Stand Work")
+```
+
+@note See: `QueueUnitAnimation`, ``SetUnitAnimationByIndex`, `SetUnitAnimationWithRarity`, `AddUnitAnimationProperties`
+
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          SetUnitAnimation            takes unit whichUnit, string whichAnimation returns nothing
 
 /**
+
+@note See: `QueueUnitAnimation`, `SetUnitAnimation`, `SetUnitAnimationWithRarity`, `AddUnitAnimationProperties`
+
 @patch 1.00
 */
 native          SetUnitAnimationByIndex     takes unit whichUnit, integer whichAnimation returns nothing
 
 /**
+@note See: `QueueUnitAnimation`, `SetUnitAnimation`, `SetUnitAnimationByIndex`, `AddUnitAnimationProperties`
+
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          SetUnitAnimationWithRarity  takes unit whichUnit, string whichAnimation, raritycontrol rarity returns nothing
 
 /**
+@note See: `QueueUnitAnimation`, `SetUnitAnimation`, `SetUnitAnimationByIndex`, `SetUnitAnimationWithRarity`
+
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          AddUnitAnimationProperties  takes unit whichUnit, string animProperties, boolean add returns nothing
@@ -23483,7 +23590,9 @@ Makes doodads within a rect play an animation.
 
 @param r The rect wherein doodads should play an animation.
 
-@note Only doodads whose origin is in the rect are considered targets.
+@param doodadID Only select doodads of the given type ID (rawcode).
+
+@note Only doodads whose *origin* is in the rect are considered targets.
 
 @note The animation won't play for an observer until they have sight visibility of the doodad, at which point it will play.
 
