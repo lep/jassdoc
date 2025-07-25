@@ -15200,11 +15200,30 @@ ShowDestructable(volcano, false)
 native          ShowDestructable            takes destructable d, boolean flag returns nothing
 
 /**
+Returns value of field 'boch' (occH) aka "Art - Occlusion Height".
+
+Returns 0 on failure, some objects have a real value of 0 too.
+
+@note See: `SetDestructableOccluderHeight`
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+winterTree = CreateDestructable(FourCC("WTst"), 0, 0, 180, 1.0, 0)
+print("default: ".. GetDestructableOccluderHeight(winterTree))
+SetDestructableOccluderHeight(occGround, 266)
+print("changed: ".. GetDestructableOccluderHeight(occGround))
+```
+
 @patch 1.07
 */
 native          GetDestructableOccluderHeight takes destructable d returns real
 
 /**
+Sets the value of field 'boch' (occH) aka "Art - Occlusion Height".
+
+@note See `GetDestructableOccluderHeight` for a code example.
+
 @patch 1.07
 */
 native          SetDestructableOccluderHeight takes destructable d, real height returns nothing
