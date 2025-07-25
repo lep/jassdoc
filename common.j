@@ -14889,6 +14889,8 @@ call CreateDestructable('LTbr', 96, 0, 180, 1, 0) // Jass
 myDestr = CreateDestructable(FourCC("LTbr"), 96, 0, 180, 1, 0) -- Lua
 ```
 
+@note Map position of destructables with pathing texture is grid-aligned by 32.
+
 @param objectid The rawcode of the destructable to be created.
 
 @param x The map x-coordinate of the destructable.
@@ -14918,6 +14920,8 @@ Returns handle to created destructable, or null on failure.
 
 @note When no longer needed, use `RemoveDestructable` to remove it from the game and avoid leaks
 (remember to null local variables in Jass).
+
+@note Map position of destructables with pathing texture is grid-aligned by 32.
 
 @param objectid The rawcode of the destructable to be created.
 
@@ -15048,7 +15052,7 @@ native          EnumDestructablesInRect     takes rect r, boolexpr filter, code 
 native          GetDestructableTypeId       takes destructable d returns integer
 
 /**
-Returns X map coordinate (aligned by 32).
+Returns X map coordinate.
 
 @note While you can create a destructable at a height using "Z" functions, there's no way to directly get its Z height.
 
@@ -15057,7 +15061,7 @@ Returns X map coordinate (aligned by 32).
 native          GetDestructableX            takes destructable d returns real
 
 /**
-Returns Y map coordinate (aligned by 32).
+Returns Y map coordinate.
 
 @note While you can create a destructable at a height using "Z" functions, there's no way to directly get its Z height.
 
@@ -26749,6 +26753,8 @@ native BlzCreateUnitWithSkin                       takes player id, integer unit
 /**
 See: `CreateDestructable`
 
+@note Map position of destructables with pathing texture is grid-aligned by 32.
+
 @param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
 
 For example: skin and hover name, but not portrait. Shows no model if invalid.
@@ -26759,6 +26765,8 @@ native BlzCreateDestructableWithSkin               takes integer objectid, real 
 
 /**
 See: `CreateDestructableZ`
+
+@note Map position of destructables with pathing texture is grid-aligned by 32.
 
 @param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
 
