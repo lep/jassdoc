@@ -12934,11 +12934,15 @@ constant native GetEnumUnit         takes nothing returns unit
 
 
 /**
+Returns handle, or null on failure.
+
 @patch 1.00
 */
 constant native GetFilterDestructable   takes nothing returns destructable
 
 /**
+Returns handle, or null on failure.
+
 @patch 1.00
 */
 constant native GetEnumDestructable     takes nothing returns destructable
@@ -14108,6 +14112,8 @@ constant native GetOrderTarget              takes nothing returns widget
 /**
 Returns the targetted destructable, if the order target is a destructable.
 
+Returns null on failure.
+
 @note See: `GetOrderTarget`, `GetOrderTargetItem`, `GetOrderTargetUnit`.
 
 @event EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
@@ -14308,6 +14314,8 @@ constant native GetSpellTargetX				takes nothing returns real
 constant native GetSpellTargetY				takes nothing returns real
 
 /**
+Returns handle, or null on failure.
+
 @event EVENT_UNIT_SPELL_CHANNEL
 
 @event EVENT_UNIT_SPELL_CAST
@@ -14868,9 +14876,12 @@ constant native GetTriggerWidget takes nothing returns widget
 /**
 Creates a destructable on the ground at the coordinates ( x, y ).
 
-Returns null on failure.
+Returns handle to created destructable, or null on failure.
 
-**Example:**
+@note When no longer needed, use `RemoveDestructable` to remove it from the game and avoid leaks
+(remember to null local variables in Jass).
+
+@note **Example:**
 ```
 call CreateDestructable('LTbr', 96, 0, 180, 1, 0) // Jass
 ```
@@ -14903,6 +14914,11 @@ native          CreateDestructable          takes integer objectid, real x, real
 /**
 Creates an elevated destructable at the coordinates ( x, y, z ).
 
+Returns handle to created destructable, or null on failure.
+
+@note When no longer needed, use `RemoveDestructable` to remove it from the game and avoid leaks
+(remember to null local variables in Jass).
+
 @param objectid The rawcode of the destructable to be created.
 
 @param x The map x-coordinate of the destructable.
@@ -14919,7 +14935,7 @@ Creates an elevated destructable at the coordinates ( x, y, z ).
 * 270 = South
 * -90 = South (wraps around)
 
-@param scale The X-Y-Z scaling value of the destructable.
+@param scale The X-Y-Z scaling multiplier of the destructable. Default: `1.0`
 
 @param variation The integer representing the variation of the destructable to be created.
 
@@ -14929,7 +14945,13 @@ native          CreateDestructableZ         takes integer objectid, real x, real
 
 /**
 Creates the dead version of a destructable at the coordinates ( x , y ).
-If the destructable has no animations, it will show the destructable's default
+
+Returns handle to created destructable, or null on failure.
+
+@note When no longer needed, use `RemoveDestructable` to remove it from the game and avoid leaks
+(remember to null local variables in Jass).
+
+@note If the destructable has no animations, it will show the destructable's default
 form. If it has a death animation, but no decay animation, then the object will
 be created in memory but will not visibly appear.
 
@@ -14957,7 +14979,13 @@ native          CreateDeadDestructable      takes integer objectid, real x, real
 
 /**
 Creates the dead version of a destructable elevating at the coordinates ( x , y , z ).
-If the destructable has no animations, it will show the destructable's default
+
+Returns handle to created destructable, or null on failure.
+
+@note When no longer needed, use `RemoveDestructable` to remove it from the game and avoid leaks
+(remember to null local variables in Jass).
+
+@note If the destructable has no animations, it will show the destructable's default
 form. If it has a death animation, but no decay animation, then the object will
 be created in memory but will not visibly appear.
 
@@ -14986,11 +15014,15 @@ be created in memory but will not visibly appear.
 native          CreateDeadDestructableZ     takes integer objectid, real x, real y, real z, real face, real scale, integer variation returns destructable
 
 /**
+Completely removes specified destructable from the game.
+
 @patch 1.00
 */
 native          RemoveDestructable          takes destructable d returns nothing
 
 /**
+Kills the destructable, playing the death animation (if it has one). It can still be revived.
+
 @patch 1.00
 */
 native          KillDestructable            takes destructable d returns nothing
@@ -15016,31 +15048,57 @@ native          EnumDestructablesInRect     takes rect r, boolexpr filter, code 
 native          GetDestructableTypeId       takes destructable d returns integer
 
 /**
+Returns X map coordinate (aligned by 32).
+
+@note While you can create a destructable at a height using "Z" functions, there's no way to directly get its Z height.
+
 @patch 1.00
 */
 native          GetDestructableX            takes destructable d returns real
 
 /**
+Returns Y map coordinate (aligned by 32).
+
+@note While you can create a destructable at a height using "Z" functions, there's no way to directly get its Z height.
+
 @patch 1.00
 */
 native          GetDestructableY            takes destructable d returns real
 
 /**
+Sets hitpoints to specified value. Cannot exceed maximum HP.
+
+@bug (v2.0.3.22988 SD) Does revive a dead destructable, but its skin doesn't show up.
+Despite this it can be selected, attacked, killed and walked through (no pathing blocker).
+Attack it to force death animation when it will finally show the skin.
+
 @patch 1.00
 */
 native          SetDestructableLife         takes destructable d, real life returns nothing
 
 /**
+Returns hitpoint value. Returns 0 if dead or invalid.
+
 @patch 1.00
 */
 native          GetDestructableLife         takes destructable d returns real
 
 /**
+Sets new maximum hitpoints.
+
+Current hitpoints are always scaled by relative factor of currentHp*differenceMaxHp (see "permanent" parameter of `SetHeroStr`).
+
+@note A value of (+- n.5) is always rounded towards +infinity. Otherwise normal rounding.
+
 @patch 1.00
 */
 native          SetDestructableMaxLife      takes destructable d, real max returns nothing
 
 /**
+Returns maximum life.
+
+@note Despite the `real` parameter, the game insists on operating only with integer values. See `SetDestructableMaxLife`.
+
 @patch 1.00
 */
 native          GetDestructableMaxLife      takes destructable d returns real
@@ -26689,26 +26747,72 @@ SoundSet from the unit referenced by the skinId is applied to whichUnit.
 native BlzCreateUnitWithSkin                       takes player id, integer unitid, real x, real y, real face, integer skinId returns unit
 
 /**
+See: `CreateDestructable`
+
+@param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
+
+For example: skin and hover name, but not portrait. Shows no model if invalid.
+
 @patch 1.32.0.13369
 */
 native BlzCreateDestructableWithSkin               takes integer objectid, real x, real y, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
+See: `CreateDestructableZ`
+
+@param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
+
+For example: skin and hover name, but not portrait. Shows no model if invalid.
+
 @patch 1.32.0.13369
 */
 native BlzCreateDestructableZWithSkin              takes integer objectid, real x, real y, real z, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
+See: `CreateDeadDestructable`
+
+@param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
+
+For example: skin and hover name, but not portrait. Shows no model if invalid.
+
 @patch 1.32.0.13369
 */
 native BlzCreateDeadDestructableWithSkin           takes integer objectid, real x, real y, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
+See: `CreateDeadDestructableZ`
+
+@param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
+
+For example: skin and hover name, but not portrait. Shows no model if invalid.
+
 @patch 1.32.0.13369
 */
 native BlzCreateDeadDestructableZWithSkin          takes integer objectid, real x, real y, real z, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
+Count player's town hall buildings of any race (probably using 'utyp' = "TownHall" for classification).
+
+Each level 1 town hall is counted as 1; level 2 for 2 etc. Includes duplicate buildings: two level 1s count as 1+1=2.
+
+Returns total counted number.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+-- 3 Town hall IDs per each race (levels 1, 2, 3): humans, orcs, undead
+local townHalls = {"htow", "hkee", "hcas", "ogre", "ostr", "ofrt", "unpl", "unp1", "unp2"}
+
+print("Before spawning any town halls: ", BlzGetPlayerTownHallCount(Player(0)))
+
+for i, code in pairs(townHalls) do
+	local u = CreateUnit(Player(0), FourCC(code), -2048 + i*384, 512, 90)
+	print("Spawned town hall #".. i ..". Total count by API: ".. BlzGetPlayerTownHallCount(Player(0)))
+end
+```
+
+Prints: 0; 1, 3, 6; 7, 9, 12; 13, 15, 18
+
 @patch 1.32.0.13369
 */
 native BlzGetPlayerTownHallCount                   takes player whichPlayer returns integer
