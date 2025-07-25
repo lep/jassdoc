@@ -15086,7 +15086,7 @@ native          GetDestructableLife         takes destructable d returns real
 /**
 Sets new maximum hitpoints.
 
-Current hitpoints are always scaled by relative factor of currentHp*differenceMaxHp (see "permanent" parameter of `SetHeroStr`).
+Current hitpoints are always scaled by relative factor of currentHp*ratioMaxHp (see "permanent" parameter of `SetHeroStr`).
 
 @note A value of (+- n.5) is always rounded towards +infinity. Otherwise normal rounding.
 
