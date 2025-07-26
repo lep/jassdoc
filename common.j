@@ -12934,11 +12934,15 @@ constant native GetEnumUnit         takes nothing returns unit
 
 
 /**
+Returns handle, or null on failure.
+
 @patch 1.00
 */
 constant native GetFilterDestructable   takes nothing returns destructable
 
 /**
+Returns handle, or null on failure.
+
 @patch 1.00
 */
 constant native GetEnumDestructable     takes nothing returns destructable
@@ -14108,6 +14112,8 @@ constant native GetOrderTarget              takes nothing returns widget
 /**
 Returns the targetted destructable, if the order target is a destructable.
 
+Returns null on failure.
+
 @note See: `GetOrderTarget`, `GetOrderTargetItem`, `GetOrderTargetUnit`.
 
 @event EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER
@@ -14308,6 +14314,8 @@ constant native GetSpellTargetX				takes nothing returns real
 constant native GetSpellTargetY				takes nothing returns real
 
 /**
+Returns handle, or null on failure.
+
 @event EVENT_UNIT_SPELL_CHANNEL
 
 @event EVENT_UNIT_SPELL_CAST
@@ -14868,13 +14876,20 @@ constant native GetTriggerWidget takes nothing returns widget
 /**
 Creates a destructable on the ground at the coordinates ( x, y ).
 
-**Example:**
+Returns handle to created destructable, or null on failure.
+
+@note When no longer needed, use `RemoveDestructable` to remove it from the game and avoid leaks
+(remember to null local variables in Jass).
+
+@note **Example:**
 ```
 call CreateDestructable('LTbr', 96, 0, 180, 1, 0) // Jass
 ```
 ```{.lua}
 myDestr = CreateDestructable(FourCC("LTbr"), 96, 0, 180, 1, 0) -- Lua
 ```
+
+@note Map position of destructables with pathing texture is grid-aligned by 32.
 
 @param objectid The rawcode of the destructable to be created.
 
@@ -14901,6 +14916,13 @@ native          CreateDestructable          takes integer objectid, real x, real
 /**
 Creates an elevated destructable at the coordinates ( x, y, z ).
 
+Returns handle to created destructable, or null on failure.
+
+@note When no longer needed, use `RemoveDestructable` to remove it from the game and avoid leaks
+(remember to null local variables in Jass).
+
+@note Map position of destructables with pathing texture is grid-aligned by 32.
+
 @param objectid The rawcode of the destructable to be created.
 
 @param x The map x-coordinate of the destructable.
@@ -14917,7 +14939,7 @@ Creates an elevated destructable at the coordinates ( x, y, z ).
 * 270 = South
 * -90 = South (wraps around)
 
-@param scale The X-Y-Z scaling value of the destructable.
+@param scale The X-Y-Z scaling multiplier of the destructable. Default: `1.0`
 
 @param variation The integer representing the variation of the destructable to be created.
 
@@ -14927,7 +14949,13 @@ native          CreateDestructableZ         takes integer objectid, real x, real
 
 /**
 Creates the dead version of a destructable at the coordinates ( x , y ).
-If the destructable has no animations, it will show the destructable's default
+
+Returns handle to created destructable, or null on failure.
+
+@note When no longer needed, use `RemoveDestructable` to remove it from the game and avoid leaks
+(remember to null local variables in Jass).
+
+@note If the destructable has no animations, it will show the destructable's default
 form. If it has a death animation, but no decay animation, then the object will
 be created in memory but will not visibly appear.
 
@@ -14955,7 +14983,13 @@ native          CreateDeadDestructable      takes integer objectid, real x, real
 
 /**
 Creates the dead version of a destructable elevating at the coordinates ( x , y , z ).
-If the destructable has no animations, it will show the destructable's default
+
+Returns handle to created destructable, or null on failure.
+
+@note When no longer needed, use `RemoveDestructable` to remove it from the game and avoid leaks
+(remember to null local variables in Jass).
+
+@note If the destructable has no animations, it will show the destructable's default
 form. If it has a death animation, but no decay animation, then the object will
 be created in memory but will not visibly appear.
 
@@ -14984,11 +15018,15 @@ be created in memory but will not visibly appear.
 native          CreateDeadDestructableZ     takes integer objectid, real x, real y, real z, real face, real scale, integer variation returns destructable
 
 /**
+Completely removes specified destructable from the game.
+
 @patch 1.00
 */
 native          RemoveDestructable          takes destructable d returns nothing
 
 /**
+Kills the destructable, playing the death animation (if it has one). It can still be revived.
+
 @patch 1.00
 */
 native          KillDestructable            takes destructable d returns nothing
@@ -15014,31 +15052,57 @@ native          EnumDestructablesInRect     takes rect r, boolexpr filter, code 
 native          GetDestructableTypeId       takes destructable d returns integer
 
 /**
+Returns X map coordinate.
+
+@note While you can create a destructable at a height using "Z" functions, there's no way to directly get its Z height.
+
 @patch 1.00
 */
 native          GetDestructableX            takes destructable d returns real
 
 /**
+Returns Y map coordinate.
+
+@note While you can create a destructable at a height using "Z" functions, there's no way to directly get its Z height.
+
 @patch 1.00
 */
 native          GetDestructableY            takes destructable d returns real
 
 /**
+Sets hitpoints to specified value. Cannot exceed maximum HP.
+
+@bug (v2.0.3.22988 SD) Does revive a dead destructable, but its skin doesn't show up.
+Despite this it can be selected, attacked, killed and walked through (no pathing blocker).
+Attack it to force death animation when it will finally show the skin.
+
 @patch 1.00
 */
 native          SetDestructableLife         takes destructable d, real life returns nothing
 
 /**
+Returns hitpoint value. Returns 0 if dead or invalid.
+
 @patch 1.00
 */
 native          GetDestructableLife         takes destructable d returns real
 
 /**
+Sets new maximum hitpoints.
+
+Current hitpoints are always scaled by relative factor of currentHp*ratioMaxHp (see "permanent" parameter of `SetHeroStr`).
+
+@note A value of (+- n.5) is always rounded towards +infinity. Otherwise normal rounding.
+
 @patch 1.00
 */
 native          SetDestructableMaxLife      takes destructable d, real max returns nothing
 
 /**
+Returns maximum life.
+
+@note Despite the `real` parameter, the game insists on operating only with integer values. See `SetDestructableMaxLife`.
+
 @patch 1.00
 */
 native          GetDestructableMaxLife      takes destructable d returns real
@@ -15060,31 +15124,106 @@ Any value below 0.5 will give the destructable 0.5 hit points.
 native          DestructableRestoreLife     takes destructable d, real life, boolean birth returns nothing
 
 /**
+Start new animation after the currently active animation finishes.
+
+Allows for a smooth transition (where possible) unlike `SetDestructableAnimation`.
+
+The start/end behavior (like forced restart or transition to a different animation at the end) depends on the animation itself.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+volcano = CreateDestructable(FourCC("Volc"), 0, 400, 0.0, 1.0, 0)
+SetDestructableAnimation(volcano, "birth")
+QueueDestructableAnimation(volcano, "death")
+```
+
+@param d target destructable
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          QueueDestructableAnimation  takes destructable d, string whichAnimation returns nothing
 
 /**
+Immediately start playing new animation.
+
+If the animation requires a change, cancel current animation and start new animation. There is no smooth transition.
+
+The start/end behavior (like forced restart or transition to a different animation at the end) depends on the animation itself.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+volcano = CreateDestructable(FourCC("Volc"), 0, 400, 0.0, 1.0, 0)
+SetDestructableAnimation(volcano, "birth")
+QueueDestructableAnimation(volcano, "death")
+```
+
+@param d target destructable
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          SetDestructableAnimation    takes destructable d, string whichAnimation returns nothing
 
 /**
+Sets destructable's animation speed multiplier.
+
+@param d target destructable
+@param speedFactor default: `1.0`, for example `2.0` doubles animation speed
+
 @patch 1.07
 */
 native          SetDestructableAnimationSpeed takes destructable d, real speedFactor returns nothing
 
 /**
+Completely hides the destructable, disabling the effects it had (like height elevation).
+
+Unlike hiding special effects, this can affect gameplay and will desync if used asynchronously.
+
+@note Example (Lua, 2.0.3):
+
+```{.lua}
+volcano = CreateDestructable(FourCC("Volc"), 0, 0, 0.0, 1.0, 0)
+gryph = CreateUnit(Player(0), FourCC("hgry"), 0, 0, 0.0)
+
+-- Hippogryph is elevated by volcano while it is shown
+ShowDestructable(volcano, true)
+
+-- Hippogryph flies lower above actual terrain without a volcano underneath
+ShowDestructable(volcano, false)
+```
+
 @patch 1.07
 */
 native          ShowDestructable            takes destructable d, boolean flag returns nothing
 
 /**
+Returns value of field 'boch' (occH) aka "Art - Occlusion Height".
+
+Returns 0 on failure, some objects have a real value of 0 too.
+
+@note See: `SetDestructableOccluderHeight`
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+winterTree = CreateDestructable(FourCC("WTst"), 0, 0, 180, 1.0, 0)
+print("default: ".. GetDestructableOccluderHeight(winterTree))
+SetDestructableOccluderHeight(occGround, 266)
+print("changed: ".. GetDestructableOccluderHeight(occGround))
+```
+
 @patch 1.07
 */
 native          GetDestructableOccluderHeight takes destructable d returns real
 
 /**
+Sets the value of field 'boch' (occH) aka "Art - Occlusion Height".
+
+@note See `GetDestructableOccluderHeight` for a code example.
+
 @patch 1.07
 */
 native          SetDestructableOccluderHeight takes destructable d, real height returns nothing
@@ -15760,26 +15899,73 @@ native          SetUnitVertexColor  takes unit whichUnit, integer red, integer g
 
 
 /**
+Start new animation after the currently active animation finishes.
+
+Allows for a smooth transition (where possible) unlike `SetUnitAnimation`.
+
+The start/end behavior (like forced restart or transition to a different animation at the end) depends on the animation itself.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+-- Play goblin merchant's forgotten slide animation once
+-- then return to regular "Stand" (idle) animation
+u_ngme = CreateUnit(Player(0), FourCC("ngme"), 0, 0, -80)
+QueueUnitAnimation(u_ngme, "Stand Work")
+QueueUnitAnimation(u_ngme, "Stand")
+```
+
+@note See: `SetUnitAnimation`, `SetUnitAnimationByIndex`, `SetUnitAnimationWithRarity`, `AddUnitAnimationProperties`
+
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          QueueUnitAnimation          takes unit whichUnit, string whichAnimation returns nothing
 
 /**
+Immediately start playing new animation.
+
+If the animation requires a change, cancel current animation and start new animation. There is no smooth transition.
+
+The start/end behavior (like forced restart or transition to a different animation at the end) depends on the animation itself.
+
+**Example (Lua, 2.0.3):**
+
+```{.lua}
+-- Start goblin merchant's forgotten slide animation
+u_ngme = CreateUnit(Player(0), FourCC("ngme"), 0, 0, -80)
+SetUnitAnimation(u_ngme, "Stand Work")
+```
+
+@note See: `QueueUnitAnimation`, ``SetUnitAnimationByIndex`, `SetUnitAnimationWithRarity`, `AddUnitAnimationProperties`
+
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          SetUnitAnimation            takes unit whichUnit, string whichAnimation returns nothing
 
 /**
+
+@note See: `QueueUnitAnimation`, `SetUnitAnimation`, `SetUnitAnimationWithRarity`, `AddUnitAnimationProperties`
+
 @patch 1.00
 */
 native          SetUnitAnimationByIndex     takes unit whichUnit, integer whichAnimation returns nothing
 
 /**
+@note See: `QueueUnitAnimation`, `SetUnitAnimation`, `SetUnitAnimationByIndex`, `AddUnitAnimationProperties`
+
+@param whichAnimation animation name, case-insensitive
+
 @patch 1.00
 */
 native          SetUnitAnimationWithRarity  takes unit whichUnit, string whichAnimation, raritycontrol rarity returns nothing
 
 /**
+@note See: `QueueUnitAnimation`, `SetUnitAnimation`, `SetUnitAnimationByIndex`, `SetUnitAnimationWithRarity`
+
 @patch 1.00
 */
 native          AddUnitAnimationProperties  takes unit whichUnit, string animProperties, boolean add returns nothing
@@ -23483,7 +23669,9 @@ Makes doodads within a rect play an animation.
 
 @param r The rect wherein doodads should play an animation.
 
-@note Only doodads whose origin is in the rect are considered targets.
+@param doodadID Only select doodads of the given type ID (rawcode).
+
+@note Only doodads whose *origin* is in the rect are considered targets.
 
 @note The animation won't play for an observer until they have sight visibility of the doodad, at which point it will play.
 
@@ -26580,26 +26768,76 @@ SoundSet from the unit referenced by the skinId is applied to whichUnit.
 native BlzCreateUnitWithSkin                       takes player id, integer unitid, real x, real y, real face, integer skinId returns unit
 
 /**
+See: `CreateDestructable`
+
+@note Map position of destructables with pathing texture is grid-aligned by 32.
+
+@param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
+
+For example: skin and hover name, but not portrait. Shows no model if invalid.
+
 @patch 1.32.0.13369
 */
 native BlzCreateDestructableWithSkin               takes integer objectid, real x, real y, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
+See: `CreateDestructableZ`
+
+@note Map position of destructables with pathing texture is grid-aligned by 32.
+
+@param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
+
+For example: skin and hover name, but not portrait. Shows no model if invalid.
+
 @patch 1.32.0.13369
 */
 native BlzCreateDestructableZWithSkin              takes integer objectid, real x, real y, real z, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
+See: `CreateDeadDestructable`
+
+@param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
+
+For example: skin and hover name, but not portrait. Shows no model if invalid.
+
 @patch 1.32.0.13369
 */
 native BlzCreateDeadDestructableWithSkin           takes integer objectid, real x, real y, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
+See: `CreateDeadDestructableZ`
+
+@param skinId rawcode of another destructable. Applies some visual aspects based on the other destructable.
+
+For example: skin and hover name, but not portrait. Shows no model if invalid.
+
 @patch 1.32.0.13369
 */
 native BlzCreateDeadDestructableZWithSkin          takes integer objectid, real x, real y, real z, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
+Count player's town hall buildings of any race (probably using 'utyp' = "TownHall" for classification).
+
+Each level 1 town hall is counted as 1; level 2 for 2 etc. Includes duplicate buildings: two level 1s count as 1+1=2.
+
+Returns total counted number.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+-- 3 Town hall IDs per each race (levels 1, 2, 3): humans, orcs, undead
+local townHalls = {"htow", "hkee", "hcas", "ogre", "ostr", "ofrt", "unpl", "unp1", "unp2"}
+
+print("Before spawning any town halls: ", BlzGetPlayerTownHallCount(Player(0)))
+
+for i, code in pairs(townHalls) do
+	local u = CreateUnit(Player(0), FourCC(code), -2048 + i*384, 512, 90)
+	print("Spawned town hall #".. i ..". Total count by API: ".. BlzGetPlayerTownHallCount(Player(0)))
+end
+```
+
+Prints: 0; 1, 3, 6; 7, 9, 12; 13, 15, 18
+
 @patch 1.32.0.13369
 */
 native BlzGetPlayerTownHallCount                   takes player whichPlayer returns integer
