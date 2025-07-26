@@ -15966,8 +15966,6 @@ native          SetUnitAnimationWithRarity  takes unit whichUnit, string whichAn
 /**
 @note See: `QueueUnitAnimation`, `SetUnitAnimation`, `SetUnitAnimationByIndex`, `SetUnitAnimationWithRarity`
 
-@param whichAnimation animation name, case-insensitive
-
 @patch 1.00
 */
 native          AddUnitAnimationProperties  takes unit whichUnit, string animProperties, boolean add returns nothing
