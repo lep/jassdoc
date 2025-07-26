@@ -6,10 +6,9 @@
 /**
 Removes an ability like `UnitRemoveAbility`: level is set to 0 and skill points are not refunded.
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzDeleteHeroAbility takes unit unitHandle, integer abilID returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 @note **Example (Lua, 2.0.2):**
 
@@ -48,10 +47,9 @@ native BlzDeleteHeroAbility takes unit unitHandle, integer abilID returns nothin
 /**
 Returns the current skin ID (the rawcode of the object by default).
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzGetDestructableSkin takes destructable destHandle returns integer`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 @note Lua: Exported as an API function.
 
@@ -79,10 +77,9 @@ Returns index representing hero's attribute:
 
 Note, in-game UI has a different order: 1. str, 2. agi 3. int
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzGetHeroPrimaryStat takes unit whichHero returns integer`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 @note **Test code (Lua, 2.0.2):**
 
@@ -108,10 +105,9 @@ native BlzGetHeroPrimaryStat takes unit whichHero returns integer
 Lua, 2.0.2: always returns zero. Apparently, "whichHero" parameter was supposed to be
 a "unitTypeId" (a rawcode) but is wrongly defined in the game API as `unit`.
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzGetHeroPrimaryStatById takes unit whichHero returns integer`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native BlzGetHeroPrimaryStatById takes unit whichHero returns integer
 
@@ -122,10 +118,9 @@ Returns hero's attribute value, otherwise returns 0 (unit is null or not a hero,
 Equivalent to `GetHeroStr`/`GetHeroAgi`/`GetHeroInt`.
 Item bonuses and 'Aamk' Attribute Bonus ability count correctly.
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzGetHeroStat takes unit whichHero, integer whichStat, boolean includeBonuses returns integer`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 @note **Test code (Lua, 2.0.2):**
 
@@ -185,10 +180,9 @@ Returns an index from 0 to 5:
 - 4 aka `ARMOR_TYPE_ETHREAL`
 - 5 aka `ARMOR_TYPE_STONE`
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzGetUnitArmorType takes unit whichUnit returns integer`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 @note **Test code (Lua, 2.0.2):**
 
@@ -238,10 +232,9 @@ Returns number corresponding to the enabled type:
 - 32 aka `MOVE_TYPE_AMPHIBIOUS`
 - 64 aka `MOVE_TYPE_UNBUILDABLE`
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzGetUnitMovementType takes unit whichUnit returns integer`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 @note **Test code (Lua, 2.0.2):**
 
@@ -273,10 +266,9 @@ native BlzGetUnitMovementType takes unit whichUnit returns integer
 /**
 Unknown (v2.0.2)
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzSetCameraGuardBand takes real minx, real maxx, real miny, real maxy returns boolean`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native BlzSetCameraGuardBand takes real minx, real maxx, real miny, real maxy returns boolean // "(RRRR)B");
 
@@ -284,8 +276,9 @@ native BlzSetCameraGuardBand takes real minx, real maxx, real miny, real maxy re
 /**
 Broken.
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 Lua: Exported as an API function. (v2.0.2.22796): I couldn't get it to work with the test code below
 
@@ -312,10 +305,9 @@ Sets a hero's main attribute (strength, agility or intelligence).
 
 Does nothing on a regular unit/null.
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzSetHeroPrimaryStat takes unit whichHero, integer whichStat returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 @note Example (Lua, v2.0.2):**
 
@@ -364,10 +356,9 @@ Sets hero's attribute value by attribute index.
 
 @note See: `SetHeroStr`, `SetHeroAgi`, `SetHeroInt`, `ModifyHeroStat`, `SetHeroStat`, `GetHeroStatBJ`, `GetUnitState`, `SetUnitState`, `UNIT_STATE_LIFE`, `UNIT_STATE_MANA`.
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzSetHeroStatEx takes unit whichHero, integer whichStat, integer statValue, boolean permanent returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 @note **Example (Lua, v2.0.2):**
 
@@ -427,10 +418,9 @@ Equivalent to `BlzSetUnitIntegerField(targetUnit, UNIT_IF_MOVE_TYPE, movementTyp
 
 @bug v2.0.2.22796: Changes the field value, but it has no effect.
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native BlzSetUnitMovementType takes unit whichUnit, integer movementType returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 
 @note **Example (Lua, v2.0.2):**
 
@@ -447,10 +437,9 @@ native BlzSetUnitMovementType takes unit whichUnit, integer movementType returns
 /**
 Unknown
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native ClearStackedSound takes string soundLabel, real x, real y returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native ClearStackedSound takes string soundLabel, real x, real y returns nothing // "(SRR)V");
 
@@ -458,10 +447,9 @@ native ClearStackedSound takes string soundLabel, real x, real y returns nothing
 /**
 Unknown
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native ClearStackedSoundRect takes string soundLabel, rect hRect returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native ClearStackedSoundRect takes string soundLabel, rect hRect returns nothing // "(SHrect;)V");
 
@@ -469,10 +457,9 @@ native ClearStackedSoundRect takes string soundLabel, rect hRect returns nothing
 /**
 Does nothing in release builds.
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native DebugBreak takes integer unused returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native DebugBreak takes integer unused returns nothing // "(I)V");
 
@@ -480,10 +467,9 @@ native DebugBreak takes integer unused returns nothing // "(I)V");
 /**
 Unknown
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native DialogSetAsync takes dialog dialogHandle returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native DialogSetAsync takes dialog dialogHandle returns nothing // "(Hdialog;)V");
 
@@ -493,16 +479,14 @@ Returns X map coordinate for player's starting location.
 
 This native is equivalent to the regular Jass function `GetPlayerStartLocationX` in "Blizzard.j".
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native GetPlayerStartLocationX takes player whichPlayer returns real`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
 
 However, it will conflict due to the first declaration in Blizzard.j.
 
-@note Lua (v2.0.2.22796): Must override Blizzard.j first: either remove the declaration there
-or replace it with the Jass' `native` declaration (it works, because the file is transpiled
-to Lua on the fly).
+@note Explanation for Jass and Lua (v2.0.2.22796): Must override Blizzard.j first.
+Either remove the declaration there or replace it with the Jass' `native` declaration
+(it works in Lua too, because the file is transpiled to Lua on the fly).
 
 This is due to the loading order:
 1. common.j
@@ -549,10 +533,8 @@ Returns Y map coordinate for player's starting location.
 
 This native is equivalent to the regular Jass function `GetPlayerStartLocationY` in "Blizzard.j".
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native GetPlayerStartLocationY takes player whichPlayer returns real`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
 
 However, it will conflict due to the first declaration in Blizzard.j.
 
@@ -566,10 +548,9 @@ native GetPlayerStartLocationY takes player whichPlayer returns real
 /**
 Unknown, probably be related to Reforged dialogue scenes.
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native SetCinematicSceneWithSkinId takes integer skinId, playercolor playerColor, string speaker, string dialogue, real sceneDuration, real dialogueDuration returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native SetCinematicSceneWithSkinId takes integer skinId, playercolor playerColor, string speaker, string dialogue, real sceneDuration, real dialogueDuration returns nothing // "(IHplayercolor;SSRR)V");
 
@@ -577,10 +558,9 @@ native SetCinematicSceneWithSkinId takes integer skinId, playercolor playerColor
 /**
 Unknown, must be related to Reforged FaceFX animations. Maybe some of the campaign maps use this?
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native SetSoundFacialAnimationPlaybackMode takes sound soundHandle, integer facialAnimationPlaybackMode returns boolean`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native SetSoundFacialAnimationPlaybackMode takes sound soundHandle, integer facialAnimationPlaybackMode returns boolean // "(Hsound;I)B");
 
@@ -588,10 +568,9 @@ native SetSoundFacialAnimationPlaybackMode takes sound soundHandle, integer faci
 /**
 Unknown
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native SetStackedSound takes string soundLabel, real x, real y returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native SetStackedSound takes string soundLabel, real x, real y returns nothing // "(SRR)V");
 
@@ -599,9 +578,8 @@ native SetStackedSound takes string soundLabel, real x, real y returns nothing /
 /**
 Unknown
 
-@note Jass: (v2.0.2) This hidden API native must be defined first.
-The native definition must come before any other function definitions:
-
-`native SetStackedSoundRect takes string soundLabel, rect hRect returns nothing`
+@note Jass: (v2.0.2) This hidden API native must be defined as shown before use.
+The native definition must come before any other function definitions in your map script.
+Your map will crash, if it is ever removed from the game or added to "common.j".
 */
 native SetStackedSoundRect takes string soundLabel, rect hRect returns nothing // "(SHrect;)V");
