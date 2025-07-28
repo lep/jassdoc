@@ -15388,6 +15388,7 @@ native          IsItemIdSellable takes integer itemId returns boolean
 native          IsItemIdPawnable takes integer itemId returns boolean
 
 /**
+@note Includes hidden items on the Ground.
 @patch 1.07
 */
 native          EnumItemsInRect     takes rect r, boolexpr filter, code actionFunc returns nothing
