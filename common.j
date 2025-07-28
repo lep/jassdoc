@@ -4237,6 +4237,37 @@ a specific widget (unit/item/destructable).
     constant playerevent        EVENT_PLAYER_MOUSE_UP                   = ConvertPlayerEvent(306)
 
 /**
+Event is triggered when player moves mouse cursor within the game window.
+
+The event and cursor position is synchronized between all players.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+-- Creates a unit and makes it follow your cursor position on map
+followMouse_player = Player(0) -- red
+followMouse_unit = nil
+
+if followMouse_t then -- clean up if run multiple times
+	DestroyTrigger(followMouse_t)
+	followMouse_t = nil
+end
+followMouse_func = function()
+	if not followMouse_unit then
+		followMouse_unit = CreateUnit(followMouse_player, FourCC("Otch"), -100, 0, 90)
+	end
+	
+	local unit = followMouse_unit
+	local mx,my = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
+	SetUnitX(unit, mx); SetUnitY(unit, my)
+	print("Mouse Pos: ".. mx ..",".. my)
+end
+followMouse_t = CreateTrigger()
+followMouse_e = TriggerRegisterPlayerEvent(followMouse_t, followMouse_player, EVENT_PLAYER_MOUSE_MOVE)
+followMouse_a = TriggerAddAction(followMouse_t, followMouse_func)
+```
+
+@note See: `BlzGetTriggerPlayerMouseX`, `BlzGetTriggerPlayerMouseY`, `BlzGetTriggerPlayerMousePosition`
 @patch 1.29.0.8803
 */
     constant playerevent        EVENT_PLAYER_MOUSE_MOVE                 = ConvertPlayerEvent(307)
@@ -24078,27 +24109,45 @@ native AutomationTestingFinished                takes nothing returns nothing
 // JAPI Functions
 
 /**
-It is used inside a mouse event trigger’s action/condition it will return only the X coordinate (Cartesian System) of the current location of the mouse (ground) at the moment of the event trigger.
+When used inside a mouse event trigger’s action/condition, it will return the X coordinate (Cartesian System) of the ground location on the map,
+where the cursor points at.
+
+Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
+However minimap and the entire bottom UI still show the correct coordinates.
 
 @event EVENT_PLAYER_MOUSE_MOVE
+
+@note See: `EVENT_PLAYER_MOUSE_MOVE` (includes an example), `BlzGetTriggerPlayerMouseY`, `BlzGetTriggerPlayerMousePosition`
 
 @patch 1.29.2.9231
 */
 native BlzGetTriggerPlayerMouseX                   takes nothing returns real
 
 /**
-It is used inside a mouse event trigger’s action/condition it will return only the Y coordinate (Cartesian System) of the current location of the mouse (ground) at the moment of the event trigger.
+When used inside a mouse event trigger’s action/condition, it will return the Y coordinate (Cartesian System) of the ground location on the map,
+where the cursor points at.
+
+Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
+However minimap and the entire bottom UI still show the correct coordinates.
 
 @event EVENT_PLAYER_MOUSE_MOVE
+
+@note See: `EVENT_PLAYER_MOUSE_MOVE` (includes an example), `BlzGetTriggerPlayerMouseY`, `BlzGetTriggerPlayerMousePosition`
 
 @patch 1.29.2.9231
 */
 native BlzGetTriggerPlayerMouseY                   takes nothing returns real
 
 /**
-It is used inside a mouse event trigger’s action/condition it will return a location (type, based on the ground not screen) of the mouse at the moment of the event trigger.
+When used inside a mouse event trigger’s action/condition, it will return the ground location on the map,
+where the cursor points at.
+
+Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
+However minimap and the entire bottom UI still show the correct coordinates.
 
 @event EVENT_PLAYER_MOUSE_MOVE
+
+@note See: `EVENT_PLAYER_MOUSE_MOVE` (includes an example), `BlzGetTriggerPlayerMouseX`, `BlzGetTriggerPlayerMouseY`
 
 @patch 1.29.2.9231
 */
