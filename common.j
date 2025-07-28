@@ -15042,6 +15042,7 @@ native          SetDestructableInvulnerable takes destructable d, boolean flag r
 native          IsDestructableInvulnerable  takes destructable d returns boolean
 
 /**
+@note Includes hidden destructables. `ShowDestructable`
 @patch 1.00
 */
 native          EnumDestructablesInRect     takes rect r, boolexpr filter, code actionFunc returns nothing
@@ -15388,6 +15389,7 @@ native          IsItemIdSellable takes integer itemId returns boolean
 native          IsItemIdPawnable takes integer itemId returns boolean
 
 /**
+@note Includes hidden items on the Ground. `IsItemVisible` & `SetItemVisible`
 @patch 1.07
 */
 native          EnumItemsInRect     takes rect r, boolexpr filter, code actionFunc returns nothing
