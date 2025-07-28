@@ -15042,6 +15042,7 @@ native          SetDestructableInvulnerable takes destructable d, boolean flag r
 native          IsDestructableInvulnerable  takes destructable d returns boolean
 
 /**
+@note Includes hidden destructables.
 @patch 1.00
 */
 native          EnumDestructablesInRect     takes rect r, boolexpr filter, code actionFunc returns nothing
