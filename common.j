@@ -15600,34 +15600,99 @@ Set unit's unit state to a new absolute value.
 native          SetUnitState        takes unit whichUnit, unitstate whichUnitState, real newVal returns nothing
 
 /**
+Sets unit's X map coordinate.
+
+This is a low level call and ignores all pathing (until unit moves again).
+
 @note If the unit has movementspeed of zero the unit will be moved but the model
 of the unit will not move.
 
 @note This does not cancel orders of the unit. `SetUnitPosition` does cancel orders.
 
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+-- Creates two units and makes them rotate
+-- The unit on the left uses "SetUnitX/Y" functions
+-- The unit on thr right uses "SetUnitPosition" function
+-- Must be run inside map init, because it creates units below
+if not followWave_unit1 then
+	followWave_unit1 = CreateUnit(Player(0), FourCC("Otch"), -100, 0, -90)
+end
+if not followWave_unit2 then
+	followWave_unit2 = CreateUnit(Player(0), FourCC("Otch"), -100, 0, -90)
+	SetUnitColor(followWave_unit2, PLAYER_COLOR_BLUE)
+end
+if followWave_t then
+	DisableTrigger(followWave_t)
+	ResetTrigger(followWave_t)
+	DestroyTrigger(followWave_t)
+	followWave_t = nil
+end
+followWave_t = CreateTrigger()
+followWave_e = TriggerRegisterTimerEvent(followWave_t, 1/60, true)
+followWave_speed = 0.5
+do
+	local function setXY(unit, x, y)
+		SetUnitX(unit, x); SetUnitY(unit, y)
+	end
+	local function setPos(unit, x, y)
+		SetUnitPosition(unit, x, y)
+	end
+	local generateClosure = function(whichUnit, mapX, mapY, setPosFunc)
+		local counter = 0
+		return function()
+			local speed = followWave_speed
+			local amplitudeX, amplitudeY = 128, 128
+			
+			local ux,uy = mapX+math.sin(counter)*amplitudeX, mapY+math.cos(counter)*amplitudeY
+			setPosFunc(whichUnit, ux, uy)
+			
+			counter = counter + math.pi/60 * speed
+			if counter > math.pi*2 then
+				counter = counter - math.pi*2
+			end
+		end
+	end
+	followWave_a1 = TriggerAddAction(followWave_t, generateClosure(followWave_unit1, 100, -300, setXY))
+	followWave_a2 = TriggerAddAction(followWave_t, generateClosure(followWave_unit2, 300, -300, setPos))
+end
+```
+
+@note See: `SetUnitY`, `SetUnitPositionLoc`
 @patch 1.00
 */
 native          SetUnitX            takes unit whichUnit, real newX returns nothing
 
 /**
+Sets unit's Y map coordinate.
+
+This is a low level call and ignores all pathing (until unit moves again).
+
 @note If the unit has movementspeed of zero the unit will be moved but the model
 of the unit will not move.
 
 @note This does not cancel orders of the unit. `SetUnitPosition` does cancel orders.
 
+@note See: `SetUnitX` (with example code), `SetUnitPositionLoc`
 @patch 1.00
 */
 native          SetUnitY            takes unit whichUnit, real newY returns nothing
 
 /**
-@note This cancels the orders of the unit. If you want to move a unit without
+Sets new unit location, respecting pathing rules like terrain.
+
+@note This cancels the orders of the unit by issuing order "stop" (851972). If you want to move a unit without
 canceling its orders use `SetUnitX`/`SetUnitY`.
 
+@note See: `SetUnitX` (with example code), `SetUnitPositionLoc`
 @patch 1.00
 */
 native          SetUnitPosition     takes unit whichUnit, real newX, real newY returns nothing
 
 /**
+@note See: `SetUnitX` (with example code), `SetUnitY`, and `SetUnitPosition` is the same function, but uses X, Y map coordinates.
+@param whichLocation map location to teleport to
 @patch 1.00
 */
 native          SetUnitPositionLoc  takes unit whichUnit, location whichLocation returns nothing
