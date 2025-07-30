@@ -11236,19 +11236,21 @@ native S2R  takes string s returns real
 /**
 Returns the internal index of the given handle; returns 0 if `h` is `null`.
 
-**Example:** `GetHandleId(Player(0)) -> 1048584`
+For text tags, returns the text tag ID, which count from 0 to 99 (inclusive).
 
-@param h Handle
+**Example:** `GetHandleId(Player(0)) --> 1048584`
+
+@param h handle of a game object
 
 @note Removing a game object does not automatically invalidate an allocated handle:
 
 ```{.lua}
 uf = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
-GetHandleId(uf) --> 1049016
+print(GetHandleId(uf)) --> 1049016
 RemoveUnit(uf)
-GetHandleId(uf) --> 1049016
+print(GetHandleId(uf)) --> 1049016
 uf = nil
-GetHandleId(uf) --> 0
+print(GetHandleId(uf)) --> 0
 ```
 
 @note Sometimes the handle ID may be different between clients.
@@ -20254,12 +20256,12 @@ Creates a text tag.
 
 @note You can have a maximum amount of 100 text tags at a time.
 
-@note The ids (see `GetHandleId`) of the text tags range from 99 to 0.
+@note The IDs of text tags range from 99 to 0 as returned by `GetHandleId`.
 
-@note When there are already 100 text tags, this function will return the text tag with the id 0 without resetting any of its properties.
+@note When there are already 100 text tags, this function will return the text tag with the ID 0 without resetting any of its properties.
 
-@note When a text tag is destroyed, its id is pushed to a stack. Creating a text tag, when there are still ids available, will pop from the stack, i.e., the last
-destroyed id will be re-used first. You can also envision that 100 ids counting up from 0 to 99 are pushed to the stack at the beginning of the game and id 99 will
+@note When a text tag is destroyed, its ID is pushed to a stack. Creating a text tag, when there are still IDs available, will pop from the stack, i.e., the last
+destroyed ID will be re-used first. You can also envision that 100 IDs counting up from 0 to 99 are pushed to the stack at the beginning of the game and ID 99 will
 be popped first.
 
 @patch 1.07
@@ -20271,7 +20273,7 @@ Destroys a text tag.
 
 @param t The text tag to destroy.
 
-@note When a text tag is destroyed, its id is pushed to a stack for recycling (see `CreateTextTag`).
+@note When a text tag is destroyed, its ID is pushed to a stack for recycling (see `CreateTextTag`).
 
 @patch 1.07
 */
@@ -20465,7 +20467,7 @@ be set to 255, if its age is set to fadepoint + (lifespan - fadepoint) * 0.5 or 
 
 @note Jumping out of a fading process by changing age or fadepoint does not reset the alpha value.
 
-@note When a text tag is destroyed, its id is pushed to a stack for recycling (see `CreateTextTag`).
+@note When a text tag is destroyed, its ID is pushed to a stack for recycling (see `CreateTextTag`).
 
 @patch 1.18a
 */
