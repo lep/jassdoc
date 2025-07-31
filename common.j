@@ -20284,7 +20284,9 @@ Sets the text of a text tag.
 
 @param t The text tag to modify.
 
-@param s The new text.
+@param s New text. Does not support color codes "|c" or "|n" for new line, these symbols are hidden.
+
+To make a new line, you can use the literal "\n" new line character (0x0a LF; and "\r\n" counts as one line break).
 
 @param height The new font size.
 
@@ -20293,6 +20295,25 @@ Sets the text of a text tag.
 @note Reasonable values for `height` are `0.02` to `0.1`, but there is a limited space the text can be rendered into. The text will be wrapped (character-wise) and
 begin a new line, respectively be cut off when the vertical limit is exceeded as well or the character is wider than the whole width of the available area. Thus, with a
 large enough value for `height`, the text tag won't be visible at all.
+
+"0.25" appears to be a common denominator for text size. See table below.
+
+For example, with height=0.25/32: 32 lines of text can fit onto a single text tag and exactly 50 characters on a single line (repeating pattern: "1234567890", v2.0.3).
+For height=0.25/16 that's 16 lines of text and 41 digit characters wide.
+
+Characters per line depend upon individual character with, the "@" character can only fit 23 times per line at height=0.25/16.
+
+height | chars per line | max lines
+-------|----------------|----------
+0.25/1 | 2              | 1
+0.25/2 | 5              | 2
+0.25/4 | 10             | 4
+0.25/8 | 21             | 8
+0.25/16| 41             | 16
+0.25/32| 50             | 32
+
+
+@note Text tags are not rendered when the game is paused (e.g. Single player and F10 menu is open).
 
 @patch 1.07
 */
@@ -20485,7 +20506,7 @@ Returns the currently chosen player color display mode.
 This is called "ally color mode" by the game (hotkey: Alt+A).
 
 - `0` aka "Mode 1" (default):
-    - Minimap: Player colors, youself are white
+    - Minimap: Player colors, yourself are white
 	- World: Unit colors same as player color
 - `1` aka "Mode 2":
     - Minimap: Allies are teal, enemies are red, yourself are white
@@ -20496,7 +20517,7 @@ This is called "ally color mode" by the game (hotkey: Alt+A).
 
 @note See: `SetAllyColorFilterState`
 
-@note This setting affects how a unit's "Art - Team Color" (WE name) is displayed.
+@note This setting affects how a unit's "Art - Team Color" (WE name, aka 'utco' aka "teamColor") is displayed.
 If the models you use rely on this color to match player color,
 you can choose to force state=0 with `SetAllyColorFilterState`.
 
