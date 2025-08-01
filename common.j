@@ -4237,6 +4237,37 @@ a specific widget (unit/item/destructable).
     constant playerevent        EVENT_PLAYER_MOUSE_UP                   = ConvertPlayerEvent(306)
 
 /**
+Event is triggered when player moves mouse cursor within the game window.
+
+The event and cursor position is synchronized between all players.
+
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+-- Creates a unit and makes it follow your cursor position on map
+followMouse_player = Player(0) -- red
+followMouse_unit = nil
+
+if followMouse_t then -- clean up if run multiple times
+	DestroyTrigger(followMouse_t)
+	followMouse_t = nil
+end
+followMouse_func = function()
+	if not followMouse_unit then
+		followMouse_unit = CreateUnit(followMouse_player, FourCC("Otch"), -100, 0, 90)
+	end
+	
+	local unit = followMouse_unit
+	local mx,my = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
+	SetUnitX(unit, mx); SetUnitY(unit, my)
+	print("Mouse Pos: ".. mx ..",".. my)
+end
+followMouse_t = CreateTrigger()
+followMouse_e = TriggerRegisterPlayerEvent(followMouse_t, followMouse_player, EVENT_PLAYER_MOUSE_MOVE)
+followMouse_a = TriggerAddAction(followMouse_t, followMouse_func)
+```
+
+@note See: `BlzGetTriggerPlayerMouseX`, `BlzGetTriggerPlayerMouseY`, `BlzGetTriggerPlayerMousePosition`
 @patch 1.29.0.8803
 */
     constant playerevent        EVENT_PLAYER_MOUSE_MOVE                 = ConvertPlayerEvent(307)
@@ -11205,19 +11236,21 @@ native S2R  takes string s returns real
 /**
 Returns the internal index of the given handle; returns 0 if `h` is `null`.
 
-**Example:** `GetHandleId(Player(0)) -> 1048584`
+For text tags, returns the text tag ID, which count from 0 to 99 (inclusive).
 
-@param h Handle
+**Example:** `GetHandleId(Player(0)) --> 1048584`
+
+@param h handle of a game object
 
 @note Removing a game object does not automatically invalidate an allocated handle:
 
 ```{.lua}
 uf = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
-GetHandleId(uf) --> 1049016
+print(GetHandleId(uf)) --> 1049016
 RemoveUnit(uf)
-GetHandleId(uf) --> 1049016
+print(GetHandleId(uf)) --> 1049016
 uf = nil
-GetHandleId(uf) --> 0
+print(GetHandleId(uf)) --> 0
 ```
 
 @note Sometimes the handle ID may be different between clients.
@@ -15600,34 +15633,101 @@ Set unit's unit state to a new absolute value.
 native          SetUnitState        takes unit whichUnit, unitstate whichUnitState, real newVal returns nothing
 
 /**
+Sets unit's X map coordinate.
+
+This is a low level call and ignores all pathing (until unit moves again or is issued a movement order).
+
 @note If the unit has movementspeed of zero the unit will be moved but the model
 of the unit will not move.
 
 @note This does not cancel orders of the unit. `SetUnitPosition` does cancel orders.
 
+@note **Example (Lua, 2.0.3):**
+
+```{.lua}
+-- Creates two units and makes them rotate
+-- The unit on the left uses "SetUnitX/Y" functions
+-- The unit on thr right uses "SetUnitPosition" function
+-- Must be run inside map init, because it creates units below
+if not followWave_unit1 then
+	followWave_unit1 = CreateUnit(Player(0), FourCC("Otch"), -100, 0, -90)
+end
+if not followWave_unit2 then
+	followWave_unit2 = CreateUnit(Player(0), FourCC("Otch"), -100, 0, -90)
+	SetUnitColor(followWave_unit2, PLAYER_COLOR_BLUE)
+end
+if followWave_t then
+	DisableTrigger(followWave_t)
+	ResetTrigger(followWave_t)
+	DestroyTrigger(followWave_t)
+	followWave_t = nil
+end
+followWave_t = CreateTrigger()
+followWave_e = TriggerRegisterTimerEvent(followWave_t, 1/60, true)
+followWave_speed = 0.5
+do
+	local function setXY(unit, x, y)
+		SetUnitX(unit, x); SetUnitY(unit, y)
+	end
+	local function setPos(unit, x, y)
+		SetUnitPosition(unit, x, y)
+	end
+	local generateClosure = function(whichUnit, mapX, mapY, setPosFunc)
+		local counter = 0
+		return function()
+			local speed = followWave_speed
+			local amplitudeX, amplitudeY = 128, 128
+			
+			local ux,uy = mapX+math.sin(counter)*amplitudeX, mapY+math.cos(counter)*amplitudeY
+			setPosFunc(whichUnit, ux, uy)
+			
+			counter = counter + math.pi/60 * speed
+			if counter > math.pi*2 then
+				counter = counter - math.pi*2
+			end
+		end
+	end
+	followWave_a1 = TriggerAddAction(followWave_t, generateClosure(followWave_unit1, 100, -300, setXY))
+	followWave_a2 = TriggerAddAction(followWave_t, generateClosure(followWave_unit2, 300, -300, setPos))
+end
+```
+
+@note See: `SetUnitY`, `SetUnitPositionLoc`
 @patch 1.00
 */
 native          SetUnitX            takes unit whichUnit, real newX returns nothing
 
 /**
+Sets unit's Y map coordinate.
+
+This is a low level call and ignores all pathing (until unit moves again or is issued a movement order).
+
 @note If the unit has movementspeed of zero the unit will be moved but the model
 of the unit will not move.
 
 @note This does not cancel orders of the unit. `SetUnitPosition` does cancel orders.
 
+@note See: `SetUnitX` (with example code), `SetUnitPositionLoc`
 @patch 1.00
 */
 native          SetUnitY            takes unit whichUnit, real newY returns nothing
 
 /**
-@note This cancels the orders of the unit. If you want to move a unit without
-canceling its orders use `SetUnitX`/`SetUnitY`.
+Sets new unit location, respecting pathing rules like terrain.
 
+@note This cancels the orders of the unit by issuing order "stop" (851972). This is done to force-teleport the unit to a valid pathing position.
+If you want to move a unit without canceling its orders use `SetUnitX`/`SetUnitY`.
+
+@note See: `SetUnitX` (with example code), `SetUnitPositionLoc`
 @patch 1.00
 */
 native          SetUnitPosition     takes unit whichUnit, real newX, real newY returns nothing
 
 /**
+Same as `SetUnitPosition`, but uses X, Y map coordinates.
+
+@note See: `SetUnitX` (with example code), `SetUnitY`.
+@param whichLocation map location to teleport to
 @patch 1.00
 */
 native          SetUnitPositionLoc  takes unit whichUnit, location whichLocation returns nothing
@@ -18107,7 +18207,7 @@ buildings will be removed as if the territory had been discovered.
 @param flag If true, the buildings will be revealed. If false, the buildings
 will not be revealed. Note that if you set it to false, it will not hide the buildings with a black mask.
 
-@note his function will not check whether the player has a town hall before revealing.
+@note This function will not check whether the player has a town hall before revealing.
 
 @patch 1.07
 */
@@ -20158,12 +20258,12 @@ Creates a text tag.
 
 @note You can have a maximum amount of 100 text tags at a time.
 
-@note The ids (see `GetHandleId`) of the text tags range from 99 to 0.
+@note The IDs of text tags range from 99 to 0 as returned by `GetHandleId`.
 
-@note When there are already 100 text tags, this function will return the text tag with the id 0 without resetting any of its properties.
+@note When there are already 100 text tags, this function will return the text tag with the ID 0 without resetting any of its properties.
 
-@note When a text tag is destroyed, its id is pushed to a stack. Creating a text tag, when there are still ids available, will pop from the stack, i.e., the last
-destroyed id will be re-used first. You can also envision that 100 ids counting up from 0 to 99 are pushed to the stack at the beginning of the game and id 99 will
+@note When a text tag is destroyed, its ID is pushed to a stack. Creating a text tag, when there are still IDs available, will pop from the stack, i.e., the last
+destroyed ID will be re-used first. You can also envision that 100 IDs counting up from 0 to 99 are pushed to the stack at the beginning of the game and ID 99 will
 be popped first.
 
 @patch 1.07
@@ -20175,7 +20275,7 @@ Destroys a text tag.
 
 @param t The text tag to destroy.
 
-@note When a text tag is destroyed, its id is pushed to a stack for recycling (see `CreateTextTag`).
+@note When a text tag is destroyed, its ID is pushed to a stack for recycling (see `CreateTextTag`).
 
 @patch 1.07
 */
@@ -20186,7 +20286,9 @@ Sets the text of a text tag.
 
 @param t The text tag to modify.
 
-@param s The new text.
+@param s New text. Does not support color codes "|c" or "|n" for new line, these symbols are hidden.
+
+To make a new line, you can use the literal "\n" new line character (0x0a LF; and "\r\n" counts as one line break).
 
 @param height The new font size.
 
@@ -20195,6 +20297,25 @@ Sets the text of a text tag.
 @note Reasonable values for `height` are `0.02` to `0.1`, but there is a limited space the text can be rendered into. The text will be wrapped (character-wise) and
 begin a new line, respectively be cut off when the vertical limit is exceeded as well or the character is wider than the whole width of the available area. Thus, with a
 large enough value for `height`, the text tag won't be visible at all.
+
+"0.25" appears to be a common denominator for text size. See table below.
+
+For example, with height=0.25/32: 32 lines of text can fit onto a single text tag and exactly 50 characters on a single line (repeating pattern: "1234567890", v2.0.3).
+For height=0.25/16 that's 16 lines of text and 41 digit characters wide.
+
+Characters per line depend upon individual character with, the "@" character can only fit 23 times per line at height=0.25/16.
+
+height | chars per line | max lines
+-------|----------------|----------
+0.25/1 | 2              | 1
+0.25/2 | 5              | 2
+0.25/4 | 10             | 4
+0.25/8 | 21             | 8
+0.25/16| 41             | 16
+0.25/32| 50             | 32
+
+
+@note Text tags are not rendered when the game is paused (e.g. Single player and F10 menu is open).
 
 @patch 1.07
 */
@@ -20369,7 +20490,7 @@ be set to 255, if its age is set to fadepoint + (lifespan - fadepoint) * 0.5 or 
 
 @note Jumping out of a fading process by changing age or fadepoint does not reset the alpha value.
 
-@note When a text tag is destroyed, its id is pushed to a stack for recycling (see `CreateTextTag`).
+@note When a text tag is destroyed, its ID is pushed to a stack for recycling (see `CreateTextTag`).
 
 @patch 1.18a
 */
@@ -20387,7 +20508,7 @@ Returns the currently chosen player color display mode.
 This is called "ally color mode" by the game (hotkey: Alt+A).
 
 - `0` aka "Mode 1" (default):
-    - Minimap: Player colors, youself are white
+    - Minimap: Player colors, yourself are white
 	- World: Unit colors same as player color
 - `1` aka "Mode 2":
     - Minimap: Allies are teal, enemies are red, yourself are white
@@ -20398,7 +20519,7 @@ This is called "ally color mode" by the game (hotkey: Alt+A).
 
 @note See: `SetAllyColorFilterState`
 
-@note This setting affects how a unit's "Art - Team Color" (WE name) is displayed.
+@note This setting affects how a unit's "Art - Team Color" (WE name, aka 'utco' aka "teamColor") is displayed.
 If the models you use rely on this color to match player color,
 you can choose to force state=0 with `SetAllyColorFilterState`.
 
@@ -24013,27 +24134,45 @@ native AutomationTestingFinished                takes nothing returns nothing
 // JAPI Functions
 
 /**
-It is used inside a mouse event trigger’s action/condition it will return only the X coordinate (Cartesian System) of the current location of the mouse (ground) at the moment of the event trigger.
+When used inside a mouse event trigger’s action/condition, it will return the X coordinate (Cartesian System) of the ground location on the map,
+where the cursor points at.
+
+Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
+However minimap and the entire bottom UI still show the correct coordinates.
 
 @event EVENT_PLAYER_MOUSE_MOVE
+
+@note See: `EVENT_PLAYER_MOUSE_MOVE` (includes an example), `BlzGetTriggerPlayerMouseY`, `BlzGetTriggerPlayerMousePosition`
 
 @patch 1.29.2.9231
 */
 native BlzGetTriggerPlayerMouseX                   takes nothing returns real
 
 /**
-It is used inside a mouse event trigger’s action/condition it will return only the Y coordinate (Cartesian System) of the current location of the mouse (ground) at the moment of the event trigger.
+When used inside a mouse event trigger’s action/condition, it will return the Y coordinate (Cartesian System) of the ground location on the map,
+where the cursor points at.
+
+Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
+However minimap and the entire bottom UI still show the correct coordinates.
 
 @event EVENT_PLAYER_MOUSE_MOVE
+
+@note See: `EVENT_PLAYER_MOUSE_MOVE` (includes an example), `BlzGetTriggerPlayerMouseY`, `BlzGetTriggerPlayerMousePosition`
 
 @patch 1.29.2.9231
 */
 native BlzGetTriggerPlayerMouseY                   takes nothing returns real
 
 /**
-It is used inside a mouse event trigger’s action/condition it will return a location (type, based on the ground not screen) of the mouse at the moment of the event trigger.
+When used inside a mouse event trigger’s action/condition, it will return the ground location on the map,
+where the cursor points at.
+
+Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
+However minimap and the entire bottom UI still show the correct coordinates.
 
 @event EVENT_PLAYER_MOUSE_MOVE
+
+@note See: `EVENT_PLAYER_MOUSE_MOVE` (includes an example), `BlzGetTriggerPlayerMouseX`, `BlzGetTriggerPlayerMouseY`
 
 @patch 1.29.2.9231
 */
