@@ -1,15 +1,16 @@
 
 # Jass Doc
 
+There's [Jassbot - a JASS API search engine](https://lep.nrw/jassbot/) you can use to browse Warcraft 3 Jass documentation.
+It's backed by jassdoc as a database.
+
 The Jass Doc is an encyclopedia-like source for information about Jass natives.
 The intended use is as a reference for understanding both the intended behavior
 and the bugs present for wc3 natives and blizzard.j functions.
 
 This goal of this project is not to document *every* function and native but
-to add helpful comments for unclear functions, give notes about buggy functions
-and inform about other misc information.
-
-Currently there's [Jassbot - a JASS API search engine](https://lep.duckdns.org/jassbot/) running that uses this as a database.
+to add helpful comments for unclear functions, provide notes about buggy functions
+and other misc information.
 
 # How to add documentation
 
@@ -34,7 +35,7 @@ For example a description of `CripplePlayer`:
 Reveals a player's remaining buildings to a force. The black mask over the
 buildings will be removed as if the territory had been discovered
 
-@note his function will not check whether the player has a town hall before revealing.
+@note This function will not check whether the player has a town hall before revealing.
 
 @param whichPlayer The player to reveal.
 
