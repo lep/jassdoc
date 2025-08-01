@@ -15635,7 +15635,7 @@ native          SetUnitState        takes unit whichUnit, unitstate whichUnitSta
 /**
 Sets unit's X map coordinate.
 
-This is a low level call and ignores all pathing (until unit moves again).
+This is a low level call and ignores all pathing (until unit moves again or is issued a movement order).
 
 @note If the unit has movementspeed of zero the unit will be moved but the model
 of the unit will not move.
@@ -15700,7 +15700,7 @@ native          SetUnitX            takes unit whichUnit, real newX returns noth
 /**
 Sets unit's Y map coordinate.
 
-This is a low level call and ignores all pathing (until unit moves again).
+This is a low level call and ignores all pathing (until unit moves again or is issued a movement order).
 
 @note If the unit has movementspeed of zero the unit will be moved but the model
 of the unit will not move.
@@ -15715,8 +15715,8 @@ native          SetUnitY            takes unit whichUnit, real newY returns noth
 /**
 Sets new unit location, respecting pathing rules like terrain.
 
-@note This cancels the orders of the unit by issuing order "stop" (851972). If you want to move a unit without
-canceling its orders use `SetUnitX`/`SetUnitY`.
+@note This cancels the orders of the unit by issuing order "stop" (851972). This is done to force-teleport the unit to a valid pathing position.
+If you want to move a unit without canceling its orders use `SetUnitX`/`SetUnitY`.
 
 @note See: `SetUnitX` (with example code), `SetUnitPositionLoc`
 @patch 1.00
@@ -15724,7 +15724,9 @@ canceling its orders use `SetUnitX`/`SetUnitY`.
 native          SetUnitPosition     takes unit whichUnit, real newX, real newY returns nothing
 
 /**
-@note See: `SetUnitX` (with example code), `SetUnitY`, and `SetUnitPosition` is the same function, but uses X, Y map coordinates.
+Same as `SetUnitPosition`, but uses X, Y map coordinates.
+
+@note See: `SetUnitX` (with example code), `SetUnitY`.
 @param whichLocation map location to teleport to
 @patch 1.00
 */
