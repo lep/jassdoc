@@ -18207,7 +18207,7 @@ buildings will be removed as if the territory had been discovered.
 @param flag If true, the buildings will be revealed. If false, the buildings
 will not be revealed. Note that if you set it to false, it will not hide the buildings with a black mask.
 
-@note his function will not check whether the player has a town hall before revealing.
+@note This function will not check whether the player has a town hall before revealing.
 
 @patch 1.07
 */
