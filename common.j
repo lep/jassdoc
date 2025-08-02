@@ -48,6 +48,9 @@ SaveWidgetHandle(hasht, 1, 1, widgetHandle) -- put as widget
 itemHandle = LoadItemHandle(hasht, 1, 1) -- retrieve as item
 ```
 
+Note: It doesn't work if the widget-typed object is actually a different object type.
+In other words, you cannot put an item into a widget hashtable and retrieve it as a unit type. The load handle function will return null. (tested v2.0.3 Lua)
+
 See `TriggerRegisterDeathEvent` for a full practical example.
 
 @patch 1.00
@@ -10186,6 +10189,30 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
     constant unitrealfield UNIT_RF_DEFENSE                                  = ConvertUnitRealField('udfc')
 
 /**
+@note This is a different field 'usir' than in the object editor: 'usid' for day sight and 'usin' for night.
+
+@note The sight radius increases in discrete steps up to a maximum value ~1800. The unit is blind at level 0.
+
+| Level | Minimum | Maximum |
+|-------|---------|---------|
+| 0     | 0       | 63      |
+| 1     | 64      | 191     |
+| 2     | 192     | 319     |
+| 3     | 320     | 447     |
+| 4     | 448     | 575     |
+| 5     | 576     | 703     |
+| 6     | 704     | 831     |
+| 7     | 832     | 959     |
+| 8     | 960     | 1087    |
+| 9     | 1088    | 1215    |
+| 10    | 1216    | 1343    |
+| 11    | 1344    | 1471    |
+| 12    | 1472    | 1599    |
+| 13    | 1600    | 1727    |
+| 14    | 1728    | 1855    |
+
+Source: <https://d1stats.ru/blogs-vision/?lang=en>
+
 @patch 1.31.0.11889
 */
     constant unitrealfield UNIT_RF_SIGHT_RADIUS                             = ConvertUnitRealField('usir')
