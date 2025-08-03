@@ -10189,7 +10189,24 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
     constant unitrealfield UNIT_RF_DEFENSE                                  = ConvertUnitRealField('udfc')
 
 /**
+This field represents a unit's current sight radius. The setter might have special logic, read notes below.
+
 @note This is a different field 'usir' than in the object editor: 'usid' for day sight and 'usin' for night.
+
+@note If you read a unit's sight radius via `BlzGetUnitRealField(u, UNIT_RF_SIGHT_RADIUS)`,
+it'll return the unit's *current* sight radius in-game (affected by any bonuses/upgrades they have).
+So for example, if you have a footman with `day sight = 500, night sight = 1000` and it is morning, it'll return `500`.
+If it is night time, it'll return `1000`.
+If it is night time and they have a bonus like goblin night scope, it'll return `1500`.
+Just be wary that this will also return intermediary values when it is transitioning from day-to-night and night-to-day.
+For example, if it is transitioning to night and you read that footman's sight, it would gradually return values from `500` to `1000` while the sight is slowly adjusted (e.g. `500, 625.45, 776.32, ... 1000`).
+
+Similarly, when you modify a unit's sight radius with `BlzSetUnitField(u, UNIT_RF_SIGHT_RADIUS, value)`, it sets the unit's current sight radius.
+It *does* affect both their day and night sight radius, though.
+It kinda acts as an additive bonus to the sight radius depending on the difference between their current sight radius and `value`.
+For example, if the unit's sight radius is currently `500` (day time) and you run `BlzSetUnitField(u, UNIT_RF_SIGHT_RADIUS, 750)`,
+it'll effectively be like adding a `+250 sight radius` buff to the unit.
+So when it becomes night time, they'll have `1250` sight radius instead of `1000`.
 
 @note The sight radius increases in discrete steps up to a maximum value ~1800. The unit is blind at level 0.
 
