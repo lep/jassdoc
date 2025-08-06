@@ -23935,6 +23935,9 @@ Preloading exists to remove the stutter when you use a file/model/whatever for t
 
 @param filename Text string, supposed to be a file path to be preloaded. Max length: 259 characters (see Windows MAX_PATH).
 
+NULL characters terminate the string and are stripped from output. Backslashes `\` (0x5c) are always escaped as `\\` so they read correctly when interpreted as a Jass string.
+All other characters are output as is. Be careful with double quotes (0x22) and line feed (0x0a), carriage return (0x0d).
+
 @note The game only reads to cache these files, does not load them. The reading is done in a separate thread and does not freeze the game. One file is not read twice, no matter how often you call Preload().
 
 @note Trick: It does not escape double-quotes " on purpose (approved not a bug, it's a feature).
