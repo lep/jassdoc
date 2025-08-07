@@ -48,6 +48,9 @@ SaveWidgetHandle(hasht, 1, 1, widgetHandle) -- put as widget
 itemHandle = LoadItemHandle(hasht, 1, 1) -- retrieve as item
 ```
 
+Note: It doesn't work if the widget-typed object is actually a different object type.
+In other words, you cannot put an item into a widget hashtable and retrieve it as a unit type. The load handle function will return null. (tested v2.0.3 Lua)
+
 See `TriggerRegisterDeathEvent` for a full practical example.
 
 @patch 1.00
@@ -10186,6 +10189,47 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
     constant unitrealfield UNIT_RF_DEFENSE                                  = ConvertUnitRealField('udfc')
 
 /**
+This field represents a unit's current sight radius. The setter might have special logic, read notes below.
+
+@note This is a different field 'usir' than in the object editor: 'usid' for day sight and 'usin' for night.
+
+@note If you read a unit's sight radius via `BlzGetUnitRealField(u, UNIT_RF_SIGHT_RADIUS)`,
+it'll return the unit's *current* sight radius in-game (affected by any bonuses/upgrades they have).
+So for example, if you have a footman with `day sight = 500, night sight = 1000` and it is morning, it'll return `500`.
+If it is night time, it'll return `1000`.
+If it is night time and they have a bonus like goblin night scope, it'll return `1500`.
+Just be wary that this will also return intermediary values when it is transitioning from day-to-night and night-to-day.
+For example, if it is transitioning to night and you read that footman's sight, it would gradually return values from `500` to `1000` while the sight is slowly adjusted (e.g. `500, 625.45, 776.32, ... 1000`).
+
+Similarly, when you modify a unit's sight radius with `BlzSetUnitField(u, UNIT_RF_SIGHT_RADIUS, value)`, it sets the unit's current sight radius.
+It *does* affect both their day and night sight radius, though.
+It kinda acts as an additive bonus to the sight radius depending on the difference between their current sight radius and `value`.
+For example, if the unit's sight radius is currently `500` (day time) and you run `BlzSetUnitField(u, UNIT_RF_SIGHT_RADIUS, 750)`,
+it'll effectively be like adding a `+250 sight radius` buff to the unit.
+So when it becomes night time, they'll have `1250` sight radius instead of `1000`.
+
+@note The sight radius increases in discrete steps up to a maximum value ~1800. The unit is blind at level 0.
+
+| Level | Minimum | Maximum |
+|-------|---------|---------|
+| 0     | 0       | 63      |
+| 1     | 64      | 191     |
+| 2     | 192     | 319     |
+| 3     | 320     | 447     |
+| 4     | 448     | 575     |
+| 5     | 576     | 703     |
+| 6     | 704     | 831     |
+| 7     | 832     | 959     |
+| 8     | 960     | 1087    |
+| 9     | 1088    | 1215    |
+| 10    | 1216    | 1343    |
+| 11    | 1344    | 1471    |
+| 12    | 1472    | 1599    |
+| 13    | 1600    | 1727    |
+| 14    | 1728    | 1855    |
+
+Source: <https://d1stats.ru/blogs-vision/?lang=en>
+
 @patch 1.31.0.11889
 */
     constant unitrealfield UNIT_RF_SIGHT_RADIUS                             = ConvertUnitRealField('usir')
@@ -23883,12 +23927,18 @@ native IsNoDefeatCheat  takes nothing returns boolean
 /**
 It does two things:
 
-1. Try to read the file, if "Allow Local Files" is enabled then also searches in the game folder
+1. Try to read the file, and if "Allow Local Files" is enabled then also searches in the game folder
+    - The order of priority is roughly this: local files, map MPQ, and finally game files as fallback
 2. Append filename to preload buffer
+
+Preloading exists to remove the stutter when you use a file/model/whatever for the first time.
 
 @param filename Text string, supposed to be a file path to be preloaded. Max length: 259 characters (see Windows MAX_PATH).
 
-@note The game only reads these files, does not load them. The reading is done in a separate thread and does not freeze the game. One file is not read twice, no matter how often you call Preload().
+NULL characters terminate the string and are stripped from output. Backslashes `\` (0x5c) are always escaped as `\\` so they read correctly when interpreted as a Jass string.
+All other characters are output as is. Be careful with double quotes (0x22) and line feed (0x0a), carriage return (0x0d).
+
+@note The game only reads to cache these files, does not load them. The reading is done in a separate thread and does not freeze the game. One file is not read twice, no matter how often you call Preload().
 
 @note Trick: It does not escape double-quotes " on purpose (approved not a bug, it's a feature).
 It is possible to inject custom code in Preload files this way (Lua):
@@ -23913,8 +23963,8 @@ Results in the following preload file code (Jass):
     endfunction
 
 @note **Game folder:**
-Reforged: `Warcraft III\_retail_\somefile.txt`, instead of `_retail_` there's also a `_ptr_` game version currently.
-Classic: ?
+- Reforged: `Warcraft III\_retail_\somefile.txt`, instead of `_retail_` there's also a `_ptr_` game version currently.
+- Classic: ?
 
 @note **Mini tutorial:**
 
@@ -23943,6 +23993,7 @@ Preloader("MyPreloadFile.txt")
 **Lua code in preload files?**
 
 It is possible although in a very hacky way, [described here](https://www.hiveworkshop.com/threads/blizzards-hidden-jass2lua-transpiler.337281/).
+
 You need to use "//! beginusercode" to start a section containing Lua code and end it using "//! endusercode".
 It works because the code is compiled on the fly with Jass2Lua.
 
@@ -23955,7 +24006,8 @@ It works because the code is compiled on the fly with Jass2Lua.
 native Preload          takes string filename returns nothing
 
 /**
-Unknown. It's always generated at the end of a preload file, timeout represents the time between calls to `PreloadStart` and `PreloadGenEnd`.
+Unknown. It's always generated at the end of a preload file as `call PreloadEnd( 123.456 )`,
+where timeout represents the time between calls to `PreloadStart` and `PreloadGenEnd` at the time the file was written.
 
 @note See: `Preload`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`.
 
@@ -23966,6 +24018,8 @@ native PreloadEnd       takes real timeout returns nothing
 
 /**
 Clears the preload buffer and starts the timer. (Anything else?)
+
+`call PreloadStart()` is automatically generated at the top of a preload file saved by `PreloadGenEnd`.
 
 @note See: `Preload`, `PreloadEnd`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`, `Preloader`.
 
@@ -24050,7 +24104,11 @@ Classic: ?
 native PreloadGenEnd    takes string filename returns nothing
 
 /**
-Runs the filename as a preload script, only if the filename has an extension. For Jass, the capabilities are very restricted.
+Runs the filename as a preload script, only if the filename has an extension.
+
+If the preload file needs to be read from disk, this happens only once per map load/restart. Subsequent calls will execute old data (tested v2.0.3.22988).
+
+Any syntax errors - whether in Jass or (for Lua mode) Jass/converted Lua code - will crash the game.
 
 **Example (from blizzard.j)**:
 
@@ -24058,18 +24116,26 @@ Runs the filename as a preload script, only if the filename has an extension. Fo
             call Preloader( "scripts\\HumanMelee.pld" )
     endif
 
-@param filename The file to execute.
+@param filename The file to execute. For custom paths outside of game files, see `PreloadGenEnd`.
 
-@note There're no restrictions for Lua code if you add it to Preload files (which are supposed to be in Jass), that's only possible with [dirty hacks or manual editing](https://www.hiveworkshop.com/threads/blizzards-hidden-jass2lua-transpiler.337281/). If the map runs in Lua mode, the Jass code is compiled using Jass2Lua before execution.
+@note The capabilities within the *context* of a preload file are very restricted.
+You do not have access to your *map context* (global variables etc.) and "Blizzard.j" is not loaded at all.
+Only "common.j" functions are available and these can be used to transfer data via modifications of the game state.
+
+@note It is possible to add Lua code to Preload files (which are supposed to be in Jass) using
+[dirty hacks or manual editing](https://www.hiveworkshop.com/threads/blizzards-hidden-jass2lua-transpiler.337281/).
+When the map runs in Lua mode, the Jass code is compiled using Jass2Lua before execution.
 
 @note On pre-Reforged (version?) this only works if you have enabled the usage of local files in your registry.
-The registry key is `HKEY_CURRENT_USER\Software\Blizzard Entertainment\Warcraft III\Allow Local Files\`
+The registry key is `HKEY_CURRENT_USER\Software\Blizzard Entertainment\Warcraft III\` (DWORD) `Allow Local Files` = `1` to allow. 
 
 @note Here are some ways to get the data out of the preload file into your map:
 To store multiple integers you can use `SetPlayerTechMaxAllowed` to have a good
 2d-array. Read via `GetPlayerTechMaxAllowed`.
 
 For strings `SetPlayerName` is suited. To read use `GetPlayerName`.
+
+Further reading: <https://www.hiveworkshop.com/threads/exploring-file-i-o-tricks-and-techniques.307710/> by Lizreu
 
 Inside the preload script you can also use `ExecuteFunc` to call your map-defined
 functions and interleave the preload script with your functions.
@@ -24081,8 +24147,11 @@ even have local files enabled), so treat them as async values.
 @note Also see the documentation of `Preload` to see how to properly get the data
 into the preload script.
 
-@bug 1.33.0 and above: Due to aggressive file caching by the game, the preload file is only loaded and read once.
-This means, updates to the saved preload file cannot be reloaded and old contents will be executed.
+@bug 1.33.0 and above: Due to aggressive file caching by the game, the preload file is only loaded and read once from disk.
+This means, updates to the saved preload file cannot be reloaded and old contents will be executed until you restart Warcraft III.
+
+This was fixed either in January 2023 or 2024 (1.35.0 - 1.36.1). Since then any map reload or restart clears the preload caches.
+<https://us.forums.blizzard.com/en/warcraft3/t/bug-preload-files-are-being-cache%E2%80%99d/29413/35>
 
 @note See: `Preload`, `PreloadEnd`, `PreloadStart`, `PreloadRefresh`, `PreloadEndEx`, `PreloadGenClear`, `PreloadGenStart`, `PreloadGenEnd`.
 
