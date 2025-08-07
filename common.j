@@ -10201,10 +10201,10 @@ If it is night time and they have a bonus like goblin night scope, it'll return 
 Just be wary that this will also return intermediary values when it is transitioning from day-to-night and night-to-day.
 For example, if it is transitioning to night and you read that footman's sight, it would gradually return values from `500` to `1000` while the sight is slowly adjusted (e.g. `500, 625.45, 776.32, ... 1000`).
 
-Similarly, when you modify a unit's sight radius with `BlzSetUnitField(u, UNIT_RF_SIGHT_RADIUS, value)`, it sets the unit's current sight radius.
+Similarly, when you modify a unit's sight radius with `BlzSetUnitRealField(u, UNIT_RF_SIGHT_RADIUS, value)`, it sets the unit's current sight radius.
 It *does* affect both their day and night sight radius, though.
 It kinda acts as an additive bonus to the sight radius depending on the difference between their current sight radius and `value`.
-For example, if the unit's sight radius is currently `500` (day time) and you run `BlzSetUnitField(u, UNIT_RF_SIGHT_RADIUS, 750)`,
+For example, if the unit's sight radius is currently `500` (day time) and you run `BlzSetUnitRealField(u, UNIT_RF_SIGHT_RADIUS, 750)`,
 it'll effectively be like adding a `+250 sight radius` buff to the unit.
 So when it becomes night time, they'll have `1250` sight radius instead of `1000`.
 
