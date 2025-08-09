@@ -16444,6 +16444,8 @@ Returns the level of the ability for the unit.
 If the unit has one of them, it has all of them (and vice-versa). Therefore a wisp with 'ANbu'==1 also has 'AHbu'==1.
 See: <https://github.com/lep/jassdoc/issues/152>
 
+@note 'ABnP' can be used to detect building in construction and 'AUnP' for upgrading building 
+
 @patch 1.13
 */
 native          GetUnitAbilityLevel takes unit whichUnit, integer abilcode returns integer
