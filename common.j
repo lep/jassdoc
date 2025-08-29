@@ -20239,7 +20239,7 @@ native PlayModelCinematic           takes string modelName returns nothing
 native PlayCinematic                takes string movieName returns nothing
 
 /**
-Emulates a key press within the game. Only accepts single Latin letters (`A`—`Z`, case-insensitive) and digits (`0`—`9`) as the key. Other characters are ignored.
+Emulates a key press within the game. Only the first character of the string is taken and interpreted as the key. Accepts ASCII digits (0–9) and Latin letters (A–Z, case-insensitive), other characters are ignored.
 
 @note If you register both key down and key up events with `BlzTriggerRegisterPlayerKeyEvent`, only the key down event will fire for keys simulated with `ForceUIKey`.
 
