@@ -14626,6 +14626,7 @@ constant native GetTriggerUnit takes nothing returns unit
 
 
 /**
+@bug These events leak 1 internal object every time this event is dispatched.
 @patch 1.00
 */
 native TriggerRegisterUnitStateEvent takes trigger whichTrigger, unit whichUnit, unitstate whichState, limitop opcode, real limitval returns event
