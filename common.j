@@ -5119,11 +5119,19 @@ See `fogstate` for an explanation.
     constant frameeventtype         FRAMEEVENT_POPUPMENU_ITEM_CHANGED    = ConvertFrameEventType(10)
 
 /**
+Not functional. 
+
+@note This constant is exposed in the API but has no corresponding implementation in the internal event map.
+
 @patch 1.31.0.11889
 */
     constant frameeventtype         FRAMEEVENT_MOUSE_DOUBLECLICK         = ConvertFrameEventType(11)
 
 /**
+Not functional. 
+
+@note This constant is exposed in the API but has no corresponding implementation in the internal event map.
+
 @patch 1.31.0.11889
 */
     constant frameeventtype         FRAMEEVENT_SPRITE_ANIM_UPDATE        = ConvertFrameEventType(12)
