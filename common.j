@@ -25665,6 +25665,9 @@ native BlzFrameGetName                             takes framehandle frame retur
 /**
 Ignores visibility. Triggers `FRAMEEVENT_CONTROL_CLICK`.
 
+Should work with the following frame types: 
+BUTTON, TEXTBUTTON, CHECKBOX, EDITBOX, SLIDER, RADIOGROUP, MODEL, CHATDISPLAY, SIMPLEBUTTON, SIMPLECHECKBOX.
+
 @patch 1.31.0.11889
 */
 native BlzFrameClick                               takes framehandle frame returns nothing
@@ -25675,12 +25678,22 @@ Supports Warcraft 3 formatting codes:
 * Colors (`|cffffcc00`)
 * Multiple lines (`|n`, `\n`)
 
+Should work with the following frame types: 
+TEXT, TEXTBUTTON, EDITBOX, TEXTAREA, SIMPLEBUTTON, SIMPLEFONTSTRING.
+
+@bug Applying this native to `ORIGIN_FRAME_PORTRAIT_HP_TEXT` or `ORIGIN_FRAME_PORTRAIT_MANA_TEXT` (likely a SIMPLEFONTSTRING) crashes the game.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetText                             takes framehandle frame, string text returns nothing
 
 /**
 Returns(Get) the text of that frame. For user input frames this text probably differs between them. For some frames the child contains the Text.
+
+Should work with the following frame types: 
+TEXT, TEXTBUTTON, EDITBOX, TEXTAREA, SIMPLEBUTTON, SIMPLEFONTSTRING.
+
+@bug Applying this native to `ORIGIN_FRAME_PORTRAIT_HP_TEXT` or `ORIGIN_FRAME_PORTRAIT_MANA_TEXT` (likely a SIMPLEFONTSTRING) crashes the game.
 
 @async 
 
@@ -25689,24 +25702,32 @@ Returns(Get) the text of that frame. For user input frames this text probably di
 native BlzFrameGetText                             takes framehandle frame returns string
 
 /**
-Start a NewLine and add text (TEXTAREA).
+Start a NewLine and add text. Works only with TEXTAREA frames.
 
 @patch 1.31.1.12173
 */
 native BlzFrameAddText                             takes framehandle frame, string text returns nothing
 
 /**
+Sets the maximum number of characters that can be entered into an EDITBOX frame.
+Overrides the FDF property **EditMaxChars**.
+
+@note The limit counts bytes, not characters. Multi-byte symbols (e.g. Cyrillic, Asian) count as two or more towards the limit.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetTextSizeLimit                    takes framehandle frame, integer size returns nothing
 
 /**
+Returns the maximum text length (in bytes) allowed for the specified EDITBOX frame.
+This value corresponds to the limit set by `BlzFrameSetTextSizeLimit` or the FDF property **EditMaxChars**.
+
 @patch 1.31.0.11889
 */
 native BlzFrameGetTextSizeLimit                    takes framehandle frame returns integer
 
 /**
-Changes text color of the frame. SimpleFrames only.
+Changes text color of the frame. Supported frame types: TEXT, EDITBOX, SIMPLEBUTTON, SIMPLEFONTSTRING.
 
 @param color Four byte integer of the form 0xaarrggbb. You can also use
 `BlzConvertColor` to create such an integer.
@@ -25716,11 +25737,21 @@ Changes text color of the frame. SimpleFrames only.
 native BlzFrameSetTextColor                        takes framehandle frame, integer color returns nothing
 
 /**
+Sets keyboard focus, similar to the FDF property **EditSetFocus**. All keyboard input will go to this edit box while focused.
+Only works with EDITBOX frames.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetFocus                            takes framehandle frame, boolean flag returns nothing
 
 /**
+Sets a 3D model for the specified frame.
+Supported frame types: SPRITE, MODEL, STATUSBAR.
+
+@note If the cameraIndex argument is invalid (non-existent camera ID), the model is drawn in screen space with world sizes. 
+X/Y correspond to screen position, Z controls depth (draw order).
+The model will appear rotated by -90° around Z, then -90° around Y.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetModel                            takes framehandle frame, string modelFile, integer cameraIndex returns nothing
@@ -25759,12 +25790,36 @@ native BlzFrameSetAlpha                            takes framehandle frame, inte
 native BlzFrameGetAlpha                            takes framehandle frame returns integer
 
 /**
+Controls a sprite’s animation queue. Supported frame types: SPRITE, STATUSBAR.
+
+PrimaryProp values:
+* 0 = Birth
+* 1 = Death
+* 2 = Stand
+* ...
+* 25 = MainCancelPanel
+
+Flags include:
+* 0 = Set animation immediately
+* 2 = Queue animation
+* 8 = Pick first matching animation
+* 16 = Pick least rare
+* 32 = Pick rarest
+
+See the full list of animation tokens and flag explanations at [Hiveworkshop](https://www.hiveworkshop.com/pastebin/b13e7da43793ff34065ff0cc91836f51.36568)
+
+@param frame Frame handle.
+
+@param primaryProp Animation token (not the animation ID), mapped from 0 to 25.
+
+@param flags Bitmask controlling queue/selection behavior.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetSpriteAnimate                    takes framehandle frame, integer primaryProp, integer flags returns nothing
 
 /**
-Overwrittes some fdf setup.
+Overwrittes some fdf setup. Supported frame types: BACKDROP, SIMPLESTATUSBAR, SIMPLETEXTURE (**Texure** FDF property).
 
 @param flag texture fill setting: 0 to stretch, 1 to tile (BACKDROP).
 
@@ -25776,6 +25831,8 @@ native BlzFrameSetTexture                          takes framehandle frame, stri
 
 /**
 Affects child-Frames, when they don't have an own Scale.
+
+@note Setting a negative scale value may result in the frame being mirrored on both axes.
 
 @patch 1.31.0.11889
 */
@@ -25801,6 +25858,8 @@ native BlzFrameSetTooltip                          takes framehandle frame, fram
 /**
 The mouse cursor is forced into the frame and can not leave it. New cages (true) will overwrite old ones. Some frames can not be used to imprison the mouse.
 
+@bug When the minimap is accessible, any click on it will break the mouse cage and allow the cursor to move freely.
+
 @param enable Enable mouse cage.
 
 @patch 1.31.0.11889
@@ -25825,6 +25884,9 @@ Gets the current Frame Value.
 native BlzFrameGetValue                            takes framehandle frame returns real
 
 /**
+Only for FrameType that use this feature:
+SLIDER, SIMPLESTATUSBAR, STATUSBAR.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetMinMaxValue                      takes framehandle frame, real minValue, real maxValue returns nothing
@@ -25837,12 +25899,17 @@ SLIDER accuracy for User.
 native BlzFrameSetStepSize                         takes framehandle frame, real stepSize returns nothing
 
 /**
+Sets the frame’s width and height in Blizzard’s screen coordinates. 
+
+@note For sprite-based frames, this function may not behave as expected. 
+It is generally recommended to use a value close to zero (e.g., 0.001) for sprite frame sizes.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetSize                             takes framehandle frame, real width, real height returns nothing
 
 /**
-SimpleFrames only.
+SIMPLESTATUSBAR and SIMPLETEXTURE (FDF **Texture** property) only. 
 
 @param color Four byte integer of the form 0xaarrggbb. You can also use `BlzConvertColor` to create such an integer.
 
@@ -25886,13 +25953,32 @@ native BlzFrameGetHeight                           takes framehandle frame retur
 native BlzFrameGetWidth                            takes framehandle frame returns real
 
 /**
-Only works for String (SimpleFrames).
+Sets the font file and font height for the frame, using Blizzard’s UI screen coordinates for height.
+Overrides the FDF property **FrameFont**.
+
+Should work with the following frame types: 
+EDITBOX, SIMPLEMESSAGEFRAME, SIMPLEFONTSTRING, String (SimpleFrame).
+
+@bug Applying this native to the following frames will crash the game: 
+ORIGIN_FRAME_TOP_MSG, ORIGIN_FRAME_UNIT_MSG, ORIGIN_FRAME_CHAT_MSG (likely SIMPLEMESSAGEFRAME), 
+ORIGIN_FRAME_PORTRAIT_HP_TEXT, ORIGIN_FRAME_PORTRAIT_MANA_TEXT (likely SIMPLEFONTSTRING).
 
 @patch 1.31.0.11889
 */
 native BlzFrameSetFont                             takes framehandle frame, string fileName, real height, integer flags returns nothing
 
 /**
+Sets the vertical and horizontal text alignment for the frame.
+
+Accepts the following constants for each axis:
+- Vertical: `TEXT_JUSTIFY_TOP`, `TEXT_JUSTIFY_MIDDLE`, `TEXT_JUSTIFY_BOTTOM`
+- Horizontal: `TEXT_JUSTIFY_LEFT`, `TEXT_JUSTIFY_CENTER`, `TEXT_JUSTIFY_RIGHT`
+
+Overwrites the corresponding FDF properties (like **Justifytop**, etc.).
+
+Should work with the following frame types: 
+EDITBOX, SIMPLEMESSAGEFRAME, SIMPLEFONTSTRING.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetTextAlignment                    takes framehandle frame, textaligntype vert, textaligntype horz returns nothing
