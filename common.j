@@ -25745,8 +25745,8 @@ Changes text color of the frame. Supported frame types: `TEXT`, `EDITBOX`, `SIMP
 native BlzFrameSetTextColor                        takes framehandle frame, integer color returns nothing
 
 /**
-Sets keyboard focus, similar to the FDF property `EditSetFocus`. All keyboard input will go to this edit box while focused.
 Only works with `EDITBOX` frames.
+Sets keyboard focus, similar to the FDF property `EditSetFocus`. All keyboard input will go to this edit box while focused.
 
 @patch 1.31.0.11889
 */
@@ -25964,7 +25964,7 @@ Sets the frame’s width and height in Blizzard’s screen coordinates.
 
 @note For sprite-based frames, this function may not behave as expected.
 In most cases, changing the size does not affect the model’s actual display size.
-Unless you set a special `LayerStyle` property in the FDF (such as `3DWINDOW` or `SETSVIEWPORT`), it is recommended to set the frame’s size to a very small value (e.g., `0.001`).
+Unless you set a special `LayerStyle` property in the FDF (such as `3DWINDOW` or `SETSVIEWPORT`), it is recommended to set the frame’s size to a very small non-zero value (e.g., `0.001`).
 If you want to control the model’s size, use `BlzFrameSetScale` instead.
 
 @patch 1.31.0.11889
