@@ -25866,8 +25866,7 @@ For example: token 2 (`Stand`) matches `Stand - 1`, `Stand - 2`, etc.
 | 2          | Adds animation to the end of the queue |
 | 3          | Seems like same as 2. If none of 1–3 is set, queue gets wiped |
 | 4          | Unknown (seems to do nothing) |
-| 8          | Selects the first matching animation from the model (the one with the lowest internal `ID`).
-By default, if multiple animations share the same token (e.g. `Stand - 1`, `Stand - 2`, etc.), one of them is picked at random |
+| 8          | Selects the first matching animation from the model (the one with the lowest internal `ID`). By default, if multiple animations share the same token (e.g. `Stand - 1`, `Stand - 2`, etc.), one of them is picked at random |
 | 16         | Selects the least rare animation (lowest `Rarity`) |
 | 32         | Selects the rarest animation (highest `Rarity`) |
 | 48         | Same as 16 |
