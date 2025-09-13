@@ -25560,7 +25560,7 @@ native BlzCreateSimpleFrame                        takes string name, framehandl
 Create & Define a new (Simple)Frame.
 Can use a root-(Simple)Frame-BluePrint with inherits, when that is done it needs to be a loaded BluePrint.
 
-@bug Using the `"CONTROL"` and `"SIMPLEMESSAGEFRAME"` as type name causes a game crash.
+@bug Using the `"CONTROL"` or `"SIMPLEMESSAGEFRAME"` as type name causes a game crash.
 
 @param typeName A string reference to the internal frame type. 
 List of known valid type names that return a new frame:
