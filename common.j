@@ -25560,6 +25560,42 @@ native BlzCreateSimpleFrame                        takes string name, framehandl
 Create & Define a new (Simple)Frame.
 Can use a root-(Simple)Frame-BluePrint with inherits, when that is done it needs to be a loaded BluePrint.
 
+@bug Using the `"CONTROL"` or `"SIMPLEMESSAGEFRAME"` as type name causes a game crash.
+
+@param typeName A string reference to the internal frame type. 
+List of known valid type names that return a new frame:
+
+* `"FRAME"`
+* `"BUTTON"`
+* `"SPRITE"`
+* `"MESSAGE"`
+* `"TEXT"`
+* `"BACKDROP"`
+* `"TEXTBUTTON"`
+* `"CHECKBOX"`
+* `"EDITBOX"`
+* `"SLIDER"`
+* `"SCROLL"`
+* `"SCROLLBAR"`
+* `"RADIOGROUP"`
+* `"LISTBOXITEM"`
+* `"LISTBOX"`
+* `"STATUSBAR"`
+* `"HIGHLIGHT"`
+* `"MODEL"`
+* `"DIALOG"`
+* `"MENU"`
+* `"POPUPMENU"`
+* `"CHATDISPLAY"`
+* `"TEXTAREA"`
+* `"LISTBUTTON"`
+* `"SIMPLETOP"`
+* `"SIMPLEFRAME"`
+* `"SIMPLEGRID"`
+* `"SIMPLEBUTTON"`
+* `"SIMPLECHECKBOX"`
+* `"SIMPLESTATUSBAR"`
+
 @patch 1.31.0.11889
 */
 native BlzCreateFrameByType                        takes string typeName, string name, framehandle owner, string inherits, integer createContext returns framehandle
@@ -25935,7 +25971,8 @@ Sets the current Frame Value. Only for FrameType that use this feature:
 native BlzFrameSetValue                            takes framehandle frame, real value returns nothing
 
 /**
-Gets the current Frame Value.
+Gets the current Frame Value. Works only for FrameTypes that support values:
+`POPUPMENU`, `SLIDER`, `SIMPLESTATUSBAR`, `STATUSBAR`. Otherwise returns `0.0`.
 
 @async 
 
@@ -26041,7 +26078,7 @@ Accepts the following constants for each axis:
 Overwrites the corresponding FDF properties (like `Justifytop`, etc.).
 
 Should work with the following frame types: 
-`EDITBOX`, `SIMPLEMESSAGEFRAME`, `SIMPLEFONTSTRING`.
+`TEXT`, `SIMPLEMESSAGEFRAME`, `SIMPLEFONTSTRING`.
 
 @patch 1.31.0.11889
 */
