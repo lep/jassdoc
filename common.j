@@ -19931,7 +19931,7 @@ An example is shown at
 @note The text lines are bottom-left aligned: text continues to the right and new lines
 continue upwards.
 
-@note This is equivalent to `DisplayTimedTextToPlayer` with `duration` of `StringLenth(message) * 0.1 + 3.0`.
+@note This is equivalent to `DisplayTimedTextToPlayer` with `duration` of `StringLength(message) * 0.1 + 3.0`.
 
 @note See: `DisplayTimedTextToPlayer`, `DisplayTimedTextFromPlayer`, `BlzDisplayChatMessage`.
 
