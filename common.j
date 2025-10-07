@@ -23834,7 +23834,7 @@ Makes doodads in the vicinity of a point play an animation.
 
 @note There are the special values "hide" and "show" for animName, which will hide respectively show the doodad. When a doodad is hidden this way, its animation will pause at the current time frame. Re-showing the doodad resumes the animation.
 
-@note The animName parameter also accepts "soundon" and "soundoff" to enable or disable the doodad’s sound, respectively, without affecting the animation.
+@note The animName parameter also accepts "soundon" and "soundoff" to enable or disable the doodad’s sound, respectively, without affecting the animation. Using "soundon" after "soundoff" will restart the sound from the beginning.
 
 @note If a target does not have an animation identified by animName (and it's not one of the special animation names either), it will play its first declared animation instead.
 
