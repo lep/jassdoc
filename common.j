@@ -24980,6 +24980,12 @@ Clears all subanimations (tags) of the special effect. It does not affect normal
     looping | wounded | fast | turn | left | right | fire | one | two | three | four | five | fill |
     puke | drain | flail | hit | off | complete
 
+@note The constant for the animation name `"cinematic"` isn't defined in common.j, but it's accessible from the API via its integer key `0x800000`.
+
+```{.lua}
+ANIM_TYPE_CINEMATIC = ConvertAnimType(8388608)
+```
+
 @patch 1.30.0.9655
 */
 native BlzSpecialEffectClearSubAnimations          takes effect whichEffect returns nothing
