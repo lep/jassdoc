@@ -15787,6 +15787,7 @@ native          SetUnitPositionLoc  takes unit whichUnit, location whichLocation
 
 /**
 Makes the unit slowly turn around on the spot to look at new direction.
+
 To make the unit turn immediately, use BlzSetUnitFacingEx
 
 @param whichUnit Target unit.
