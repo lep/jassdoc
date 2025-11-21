@@ -15788,6 +15788,8 @@ native          SetUnitPositionLoc  takes unit whichUnit, location whichLocation
 /**
 Makes the unit slowly turn around on the spot to look at new direction.
 
+To make the unit turn immediately, use BlzSetUnitFacingEx
+
 @param whichUnit Target unit.
 
 @param facingAngle Unit facing in degrees.
@@ -15798,7 +15800,9 @@ Makes the unit slowly turn around on the spot to look at new direction.
 * 270 = South
 * -90 = South (wraps around)
 
-@note While the unit is moving, calling this function will have no effect.
+@note While the unit is moving, calling this function will have no effect. 
+This also means that if called in a fast loop, some of the SetUnitFacing commands will be ignored
+and the turning won't look as you expect.
 
 @patch 1.00
 */
@@ -26475,6 +26479,8 @@ native BlzPauseUnitEx                              takes unit whichUnit, boolean
 // native BlzS2FourCC                                 takes string value returns integer
 
 /**
+Same as `SetUnitFacing`, but turns the unit around immediately.
+
 @patch 1.32.0.14481
 */
 native BlzSetUnitFacingEx                          takes unit whichUnit, real facingAngle returns nothing
