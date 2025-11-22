@@ -15249,6 +15249,7 @@ QueueDestructableAnimation(volcano, "death")
 
 @param d target destructable
 @param whichAnimation animation name, case-insensitive
+
 See `SetUnitAnimation` for the list of available tokens and the rules used to look up an `whichAnimation`.
 
 @patch 1.00
@@ -16101,6 +16102,7 @@ SetUnitAnimation(u_ngme, "Stand Work")
 @note See: `QueueUnitAnimation`, ``SetUnitAnimationByIndex`, `SetUnitAnimationWithRarity`, `AddUnitAnimationProperties`
 
 @param whichAnimation String of tokens separated by spaces (case-insensitive).
+
 See the list below. Any substring not matching a token is treated as "stand" (except for the special case of using the `"cinematic"` token).
 Animation selection rules are described in the note below.
 
@@ -16172,14 +16174,14 @@ Animation selection rules are described in the note below.
 @note Animation (sequence) selection logic:
 
 1. Each animation in the model has a prop array built by splitting its name by spaces and keeping only recognized tokens
-(unrecognized substrings are ignored). To example: `"Spell Slam Alternate - 1"` -> `["spell", "slam", "alternate"]`.
+(unrecognized substrings are ignored). For example: `"Spell Slam Alternate - 1"` -> `["spell", "slam", "alternate"]`.
 2. The `whichAnimation` argument is tokenized the same way, but unrecognized substrings are replaced by `"stand"`.
 3. For each animation, the number of matching tokens (order doesn't matter) is counted against `whichAnimation` tokens.
 The best match is the animation with the most matching tokens.
 Ties are broken by choosing the animation with the fewest non-matching tokens.
-If multiple suitable animations are found, all of them are assigned to the target, and one is played at random, using the Rarity value as a weight.
+If multiple suitable animations are found, all of them are assigned to the target, and one is played at random, using the `Rarity` value (defined per animation in the model) as a weight.
 4. There is an additional check for cinematic animations.
-If the argument contains two or more tokens and the first token is `"cinematic"` (for example, `"Cinematic Angry One"`),
+If the argument contains two or more recognized tokens and the first token is `"cinematic"` (for example, `"Cinematic Angry One"`),
 the internal function attempts to find an animation in the model by matching the entire string exactly, bypassing the tokenizer.
 This may not work in pre-Reforged patches.
 
@@ -16247,13 +16249,13 @@ Bone selection rules are described in the note below.
 @note Bone selection logic:
 
 1. Each bone in the model has a prop array built by splitting its name by spaces and keeping only recognized tokens
-(unrecognized substrings are ignored). To example: `"bone_hand left"` -> `["bone_hand", "left"]`, `"bone_hand_left"` -> `[]`
+(unrecognized substrings are ignored). For example: `"bone_hand left"` -> `["bone_hand", "left"]`, `"bone_hand_left"` -> `[]`
 2. The `whichBone` argument is tokenized the same way, but unrecognized substrings are replaced by `"bone_head"`.
 Example: `"bone_hand alternate one"` -> `["bone_hand", "alternate", "bone_head"]`
 3. For each bone, the number of matching tokens (order doesn't matter) is counted against `whichBone` tokens.
 The best match is the bone with the most matching tokens.
 Ties are broken by choosing the bone with the fewest non-matching tokens.
-If still tied, the first found is used.
+If still tied, the first one found is used.
 If no bone matches, the internal bone ID is set to -1 (nothing is set).
 
 @note SetUnitLookAt is affected by animation speed and blend time.
@@ -23301,6 +23303,7 @@ a directory, rather than single backslashes. See AddSpecialEffect for an example
 
 @param attachPointName String of tokens separated by spaces (case-sensitive, lowercase is required).
 See the list below. 
+
 Only the first 4 characters of the substring are checked for token matches. If no known tokens are found, the substring is ignored.
 Full attachment point selection rules are described in the note below.
 
@@ -23342,7 +23345,7 @@ You can use only the first 4 characters, like "over" instead of "overhead", etc.
 3.For each attachment point, the number of matching tokens (order doesn't matter) is counted against `attachPointName` tokens.
 The best match is the attachment point with the most matching tokens.
 Ties are broken by choosing the attachment point with the fewest non-matching tokens.
-If still tied, the first found is used.
+If still tied, the first one found is used.
 If no attachment point matches, the special effect will not created.
 
 @note Strings such as "Large" and "Medium" affect effects' sizes on the widget
@@ -23979,13 +23982,14 @@ Makes doodads in the vicinity of a point play an animation.
 @param nearestOnly If true, only the single doodad (of the given type) closest to the point will be affected, otherwise all in the vicinity (of the given type).
 
 @param animName String identifier of the animation that should be played.
+
 See `SetUnitAnimation` for the list of available tokens and the rules used to look up an `whichAnimation`.
 The behavior is similar, except this function supports a set of hardcoded magic strings (see notes below) instead of token combinations.
 
-Also, substrings that are not recognized as tokens are ignored, rather than being replaced with `"Stand"`.
+Also, substrings that are not recognized as tokens are ignored, rather than being replaced with `"stand"`.
 Because of the internal match/mismatch logic, if the argument contains no valid tokens, the function may select an animation with an arbitrary name (also containing no recognized tokens) as the best match, even over animations that do have valid tokens.
 
-For example, if the model has two animations named "Stand" and "Something", and you use "Something" as animName, the "Something" animation will be set.
+For example, if the model has two animations named `"Stand"` (name contains one recognizable token, see list above) and `"Something"` (an arbitrary name that does not contain recognizable tokens), and you use "Something" as animName, the "Something" animation will be set.
 However, this does not mean the function can match arbitrary words, it’s just a side effect of matching algorithm.
 
 @param animRandom If true, the animation to be played will be picked from an extended set including different variations of the animName, e.g., if animName is "walk", it can also be "walk defend".
