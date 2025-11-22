@@ -15250,6 +15250,8 @@ QueueDestructableAnimation(volcano, "death")
 @param d target destructable
 @param whichAnimation animation name, case-insensitive
 
+See `SetUnitAnimation` for the list of available tokens and the rules used to look up an `whichAnimation`.
+
 @patch 1.00
 */
 native          SetDestructableAnimation    takes destructable d, string whichAnimation returns nothing
@@ -16099,7 +16101,89 @@ SetUnitAnimation(u_ngme, "Stand Work")
 
 @note See: `QueueUnitAnimation`, ``SetUnitAnimationByIndex`, `SetUnitAnimationWithRarity`, `AddUnitAnimationProperties`
 
-@param whichAnimation animation name, case-insensitive
+@param whichAnimation String of tokens separated by spaces (case-insensitive).
+
+See the list below. Any substring not matching a token is treated as "stand" (except for the special case of using the `"cinematic"` token).
+Animation selection rules are described in the note below.
+
+* `"alternate"`
+* `"alternateex"`
+* `"attack"`
+* `"berserk"`
+* `"birth"`
+* `"chain"`
+* `"channel"`
+* `"cinematic"`
+* `"complete"`
+* `"critical"`
+* `"death"`
+* `"decay"`
+* `"defend"`
+* `"dissipate"`
+* `"drain"`
+* `"eattree"`
+* `"entangle"`
+* `"fast"`
+* `"fifth"`
+* `"fill"`
+* `"fire"`
+* `"first"`
+* `"five"`
+* `"flail"`
+* `"flesh"`
+* `"four"`
+* `"fourth"`
+* `"gold"`
+* `"hit"`
+* `"large"`
+* `"left"`
+* `"light"`
+* `"looping"`
+* `"lumber"`
+* `"medium"`
+* `"moderate"`
+* `"morph"`
+* `"off"`
+* `"one"`
+* `"portrait"`
+* `"puke"`
+* `"ready"`
+* `"right"`
+* `"second"`
+* `"severe"`
+* `"sleep"`
+* `"slam"`
+* `"small"`
+* `"spiked"`
+* `"spell"`
+* `"spin"`
+* `"stand"`
+* `"swim"`
+* `"talk"`
+* `"third"`
+* `"three"`
+* `"throw"`
+* `"two"`
+* `"turn"`
+* `"upgrade"`
+* `"victory"`
+* `"walk"`
+* `"work"`
+* `"wounded"`
+
+@note Animation (sequence) selection logic:
+
+1. Each animation in the model has a prop array built by splitting its name by spaces and keeping only recognized tokens
+(unrecognized substrings are ignored). For example: `"Spell Slam Alternate - 1"` -> `["spell", "slam", "alternate"]`.
+2. The `whichAnimation` argument is tokenized the same way, but unrecognized substrings are replaced by `"stand"`.
+3. For each animation, the number of matching tokens (order doesn't matter) is counted against `whichAnimation` tokens.
+The best match is the animation with the most matching tokens.
+Ties are broken by choosing the animation with the fewest non-matching tokens.
+If multiple suitable animations are found, all of them are assigned to the target, and one is played at random, using the `Rarity` value (defined per animation in the model) as a weight.
+4. There is an additional check for cinematic animations.
+If the argument contains two or more recognized tokens and the first token is `"cinematic"` (for example, `"Cinematic Angry One"`),
+the internal function attempts to find an animation in the model by matching the entire string exactly, bypassing the tokenizer.
+This may not work in pre-Reforged patches.
 
 @patch 1.00
 */
@@ -16134,16 +16218,25 @@ native          AddUnitAnimationProperties  takes unit whichUnit, string animPro
 Locks a unit's bone to face the target until ResetUnitLookAt is called.
 
 The offset coordinates ( X, Y, Z ) are taken from the target's origin.
-The bones will lock to the lookAtTarget, offset by those coordinates. You can't
-have both the head and the chest locked to the target at the same time.
+The bones will lock to the lookAtTarget, offset by those coordinates.
+You can have only one bone locked to the target at the same time.
 
 @param whichUnit The unit that will have its bone locked to face the target.
 
-@param whichBone The bone to lock onto the target. The engine only supports
-locking the head and the chest. To lock the head, you can put in any input
-except a null string. To lock the chest, the string must start with `"bone_chest"`.
-All leading spaces are ignored, it is case insensitive, and anything after the
-first non-leading space will be ignored.
+@param whichBone String of tokens separated by spaces (case-insensitive).
+See the list below. Any substring not matching a token is treated as "bone_head".
+Bone selection rules are described in the note below.
+
+* `"alternate"`
+* `"bone_chest"`
+* `"bone_foot"`
+* `"bone_hand"`
+* `"bone_head"`
+* `"bone_turret"`
+* `"left"`
+* `"mount"`
+* `"right"`
+* `"smart"`
 
 @param lookAtTarget The bone will be locked to face this unit.
 
@@ -16153,14 +16246,23 @@ first non-leading space will be ignored.
 
 @param offsetZ The z-offset from lookAtTarget's origin point (this already factors in the terrain Z).
 
-@note The parameter `whichBone` can only move the head bones and the chest bones.
-All other input will default to the head bone. However, the function only looks
-for the helper named `"Bone_Head"` (or `"Bone_Chest"`) in the MDL, so you can just
-rename a helper so that it will move that set of bones instead.
+@note Bone selection logic:
+
+1. Each bone in the model has a prop array built by splitting its name by spaces and keeping only recognized tokens
+(unrecognized substrings are ignored). For example: `"bone_hand left"` -> `["bone_hand", "left"]`, `"bone_hand_left"` -> `[]`
+2. The `whichBone` argument is tokenized the same way, but unrecognized substrings are replaced by `"bone_head"`.
+Example: `"bone_hand alternate one"` -> `["bone_hand", "alternate", "bone_head"]`
+3. For each bone, the number of matching tokens (order doesn't matter) is counted against `whichBone` tokens.
+The best match is the bone with the most matching tokens.
+Ties are broken by choosing the bone with the fewest non-matching tokens.
+If still tied, the first one found is used.
+If no bone matches, the internal bone ID is set to -1 (nothing is set).
 
 @note SetUnitLookAt is affected by animation speed and blend time.
 
-@note [How to instantly set a unit's facing](http://www.wc3c.net/showthread.php?t=105830).
+@note [How to instantly set a unit's facing](https://web.archive.org/web/20200930044643/http://www.wc3c.net/showthread.php?t=105830).
+
+@bug The dropdown in the GUI only has `"bone_head"` and `"bone_chest"` as possible options for the `whichBone` argument.
 
 @patch 1.00
 */
@@ -23186,8 +23288,11 @@ In 1.29.2.9231 and newer use `BlzSetSpecialEffectPosition` or `BlzSetSpecialEffe
 native AddSpecialEffectLoc          takes string modelName, location where returns effect
 
 /**
-Attaches the special effect to the attachment point attachPointName of the
-target widget, using the model file with a path modelName.
+Attaches the special effect to the attachment point referred in `attachPointName` argument of the
+target widget, using the model file with a path `modelName`. 
+
+Attachment points are points in a model that can be referenced to as
+areas for effects to be attached, whether it be from a spell or this function.
 
 Upon creation, the effect will play its "birth" animation followed by its "stand" animation (once the birth animation has finished). If the model does not have animations, it will show up the way it appears by default. The effect will last indefinitely unless it is destroyed, even if the model seems to disappear. To destroy an effect, see DestroyEffect.
 
@@ -23196,11 +23301,52 @@ a directory, rather than single backslashes. See AddSpecialEffect for an example
 
 @param targetWidget The widget to attach the effect to.
 
-@param attachPointName The attachment point of the widget where the effect will
-be placed. Attachment points are points in a model that can be referenced to as
-areas for effects to be attached, whether it be from a spell or this function.
-A list of common attachment points in in-game Warcraft 3 models can be seen below.
-If the attachment point does not exist, it will attach the effect to the model's origin.
+@param attachPointName String of tokens separated by spaces (case-sensitive, lowercase is required).
+See the list below. 
+
+Only the first 4 characters of the substring are checked for token matches. If no known tokens are found, the substring is ignored.
+Full attachment point selection rules are described in the note below.
+
+* `"alternate"`
+* `"chest"`
+* `"eattree"`
+* `"feet"`
+* `"fifth"`
+* `"first"`
+* `"foot"`
+* `"fourth"`
+* `"gold"`
+* `"hand"`
+* `"head"`
+* `"large"`
+* `"left"`
+* `"medium"`
+* `"mount"`
+* `"origin"`
+* `"overhead"`
+* `"rallypoint"`
+* `"rear"`
+* `"right"`
+* `"second"`
+* `"sixth"`
+* `"small"`
+* `"smart"`
+* `"sprite"`
+* `"third"`
+* `"weapon"`
+
+@note Attachment point selection logic:
+
+1. Each attachment point in the model has a prop array built by splitting its name by spaces and storing the first 4 characters (as 32-bit number) of recognized tokens
+(unrecognized substrings are ignored).  Example: `"Foot Right Ref"` -> `["foot", "right"]` -> `["foot", "righ"]`.
+2 The `attachPointName` argument is tokenized the same way. 
+The token is not searched literally by the string, but by a 32-bit number made up of the first four characters, so the argument is case-sensitive and requires the use of lowercase letters.
+You can use only the first 4 characters, like "over" instead of "overhead", etc.
+3.For each attachment point, the number of matching tokens (order doesn't matter) is counted against `attachPointName` tokens.
+The best match is the attachment point with the most matching tokens.
+Ties are broken by choosing the attachment point with the fewest non-matching tokens.
+If still tied, the first one found is used.
+If no attachment point matches, the special effect will not created.
 
 @note Strings such as "Large" and "Medium" affect effects' sizes on the widget
 it is attached to. You can add or remove these by going to the object editor and
@@ -23286,6 +23432,9 @@ In 1.29.2.9231 and newer use `BlzSetSpecialEffectPosition` or `BlzSetSpecialEffe
 native AddSpellEffectByIdLoc        takes integer abilityId, effecttype t,location where returns effect
 
 /**
+
+@note See `AddSpecialEffectTarget` for the list of available tokens and the rules used to look up an `attachPoint`.
+
 @patch 1.00
 */
 native AddSpellEffectTarget         takes string modelName, effecttype t, widget targetWidget, string attachPoint returns effect
@@ -23308,6 +23457,8 @@ bloodmage = CreateUnit(Player(0), FourCC("Hblm"), 0,0, 0)
 birdEffect = AddSpellEffectTargetById(FourCC("hsor"), EFFECT_TYPE_MISSILE, bloodmage, "head")
 BlzSetSpecialEffectScale(birdEffect, 3)
 ```
+
+@note See `AddSpecialEffectTarget` for the list of available tokens and the rules used to look up an `attachPoint`.
 
 @patch 1.00
 */
@@ -23831,6 +23982,15 @@ Makes doodads in the vicinity of a point play an animation.
 @param nearestOnly If true, only the single doodad (of the given type) closest to the point will be affected, otherwise all in the vicinity (of the given type).
 
 @param animName String identifier of the animation that should be played.
+
+See `SetUnitAnimation` for the list of available tokens and the rules used to look up an `whichAnimation`.
+The behavior is similar, except this function supports a set of hardcoded magic strings (see notes below) instead of token combinations.
+
+Also, substrings that are not recognized as tokens are ignored, rather than being replaced with `"stand"`.
+Because of the internal match/mismatch logic, if the argument contains no valid tokens, the function may select an animation with an arbitrary name (also containing no recognized tokens) as the best match, even over animations that do have valid tokens.
+
+For example, if the model has two animations named `"Stand"` (name contains one recognizable token, see list above) and `"Something"` (an arbitrary name that does not contain recognizable tokens), and you use "Something" as animName, the "Something" animation will be set.
+However, this does not mean the function can match arbitrary words, it’s just a side effect of matching algorithm.
 
 @param animRandom If true, the animation to be played will be picked from an extended set including different variations of the animName, e.g., if animName is "walk", it can also be "walk defend".
 
