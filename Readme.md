@@ -1,4 +1,3 @@
-
 # Jass Doc
 
 There's [Jassbot - a JASS API search engine](https://lep.nrw/jassbot/) you can use to browse Warcraft 3 Jass documentation.
@@ -11,6 +10,12 @@ and the bugs present for wc3 natives and blizzard.j functions.
 This goal of this project is not to document *every* function and native but
 to add helpful comments for unclear functions, provide notes about buggy functions
 and other misc information.
+
+## Other projects expanding on Jass Doc
+
+- VSCode extension [WC3 Lua Natives](https://github.com/Tomotz/wc3-lua-natives) by Tomotz lets you quickly jump to a jassdoc entry in a Jass file.
+- VSCode extension [Jass API Search](https://github.com/toeneeoh/jass-api-search) by Toeneeoh displays doc entries in a popup when you select function names.
+- Leyki's [j2nppac](https://github.com/Leyki/j2nppac) converts jassdoc annotations to Notepad++'s auto-completion descriptions. 
 
 # How to add documentation
 
