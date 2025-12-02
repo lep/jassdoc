@@ -1250,16 +1250,22 @@ Stores the maximum number of internal player slots regardless of map options.
     // Mouse Event Types
 
 /**
+@bug (confirmed v2.0.3.23175) Mouse events crash when registered and used during map initialization.
+
 @patch 1.29.0.8803
 */
     constant integer   bj_MOUSEEVENTTYPE_DOWN     = 0
 
 /**
+@bug (confirmed v2.0.3.23175) Mouse events crash when registered and used during map initialization.
+
 @patch 1.29.0.8803
 */
     constant integer   bj_MOUSEEVENTTYPE_UP       = 1
 
 /**
+@bug (confirmed v2.0.3.23175) Mouse events crash when registered and used during map initialization.
+
 @patch 1.29.0.8803
 */
     constant integer   bj_MOUSEEVENTTYPE_MOVE     = 2
@@ -4306,6 +4312,11 @@ endfunction
 //===========================================================================
 
 /**
+@bug (confirmed v2.0.3.23175) Mouse events crash when registered and used during map initialization.
+The crash is highly irregular, happens after loading screen finishes and takes
+many attempts to reproduce with 8 people in a lobby.
+*Recommendation:* Delay all mouse event registration until after the game starts.
+
 @patch 1.29.0.8803
 */
 function TriggerRegisterPlayerMouseEventBJ takes trigger trig, player whichPlayer, integer meType returns event
