@@ -4244,6 +4244,11 @@ Event is triggered when player moves mouse cursor within the game window.
 
 The event and cursor position is synchronized between all players.
 
+@bug (confirmed v2.0.3.23175) Mouse events crash when registered and used during map initialization.
+The crash is highly irregular, happens after loading screen finishes and takes
+many attempts to reproduce with 8 people in a lobby.
+*Recommendation:* Delay all mouse event registration until after the game starts.
+
 @note **Example (Lua, 2.0.3):**
 
 ```{.lua}
@@ -24390,6 +24395,8 @@ However minimap and the entire bottom UI still show the correct coordinates.
 
 @event EVENT_PLAYER_MOUSE_MOVE
 
+@bug (confirmed v2.0.3.23175) Mouse events crash when registered and used during map initialization.
+
 @note See: `EVENT_PLAYER_MOUSE_MOVE` (includes an example), `BlzGetTriggerPlayerMouseY`, `BlzGetTriggerPlayerMousePosition`
 
 @patch 1.29.2.9231
@@ -24404,6 +24411,8 @@ Returns 0 when pointing at certain UI elements like the top status bar with cloc
 However minimap and the entire bottom UI still show the correct coordinates.
 
 @event EVENT_PLAYER_MOUSE_MOVE
+
+@bug (confirmed v2.0.3.23175) Mouse events crash when registered and used during map initialization.
 
 @note See: `EVENT_PLAYER_MOUSE_MOVE` (includes an example), `BlzGetTriggerPlayerMouseY`, `BlzGetTriggerPlayerMousePosition`
 
