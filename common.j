@@ -15578,6 +15578,8 @@ Returns handle to unit.
 
 @note See: `bj_UNIT_FACING` constant for default facing direction of units in BJ scripts and GUI.
 
+@note If unitid is not a valid unit id, nothing happens and nil is returned.
+
 @note 
 If you want to create a unit with a specific shadow you can use something along
 these lines. [See also](https://www.hiveworkshop.com/threads/how-to-remove-building-shadow.246701/#post-2469975).
