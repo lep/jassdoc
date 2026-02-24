@@ -22286,7 +22286,8 @@ Applies the camerasetup, altering the current camera's fields to match those of 
 camera setup's target coordinates. If false, the camera will not move
 coordinates, but will still apply the other fields.
 
-@param panTimed If set to true, then it will change the camera's properties over the times specified in CameraSetupSetField.
+@param panTimed If set to false, applies immediately.
+If true, then it will change the camera's properties slowly over time as specified in `CameraSetupSetField`.
 
 @patch 1.00
 */
