@@ -4249,6 +4249,20 @@ The crash is highly irregular, happens after loading screen finishes and takes
 many attempts to reproduce with 8 people in a lobby.
 *Recommendation:* Delay all mouse event registration until after the game starts.
 
+@bug (tested v2.0.4.23546) Mouse move event is also triggered when any of the 5 mouse buttons is
+released (button up) even when not moved:
+
+```{.lua}
+mouseMove_t = CreateTrigger()
+mouseMove_p = GetLocalPlayer() -- for testing only otherwise desync!
+mouseMove_e = TriggerRegisterPlayerEvent(mouseMove_t, mouseMove_p, EVENT_PLAYER_MOUSE_MOVE)
+mouseMove_func = function()
+    local mx,my = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
+    print("MOUSE_MOVE Pos: ".. mx ..",".. my ..", ".. (os.date and os.date("%H:%M:%S") or "n/a"))
+end
+mouseMove_a = TriggerAddAction(mouseMove_t, mouseMove_func)
+```
+
 @note **Example (Lua, 2.0.3):**
 
 ```{.lua}
@@ -24393,6 +24407,9 @@ where the cursor points at.
 Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
 However minimap and the entire bottom UI still show the correct coordinates.
 
+@note The world coordinate will be a result of ray tracing based on current camera setup.
+Changing the camera setup does not affect the result until a new frame has been rendered locally.
+
 @event EVENT_PLAYER_MOUSE_MOVE
 
 @bug (confirmed v2.0.3.23175) Mouse events crash when registered and used during map initialization.
@@ -24409,6 +24426,9 @@ where the cursor points at.
 
 Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
 However minimap and the entire bottom UI still show the correct coordinates.
+
+@note The world coordinate will be a result of ray tracing based on current camera setup.
+Changing the camera setup does not affect the result until a new frame has been rendered locally.
 
 @event EVENT_PLAYER_MOUSE_MOVE
 
