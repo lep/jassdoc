@@ -14067,9 +14067,11 @@ The code below creates a unit and registers all issued order events for debuggin
 ```{.lua}
 function printOrderInfo()
 	local orderId = GetIssuedOrderId()
-	local unitName = GetUnitName(GetTriggerUnit())
+	local unit = GetTriggerUnit()
+	local unitName = GetUnitName(unit)
 	assert(GetOrderedUnit() == GetTriggerUnit(), "GetOrderedUnit() expected to equal GetTriggerUnit()")
-	print("For: ".. unitName ..", Order: ".. orderId ..", oName:".. OrderId2String(orderId))
+	print(string.format("-> For: \x25s, Order: \x25d, oName:\x25s, owned by: \x25s",
+		unitName, orderId, OrderId2String(orderId), GetPlayerName(GetOwningPlayer(unit))))
 end
 function printIssuedOrder()
 	print("Next is an Issued Order:")
@@ -14081,26 +14083,30 @@ function printIssuedTargetOrder()
 	local item = GetOrderTargetItem()
 	local unit = GetOrderTargetUnit()
 
-	local targetIsText = "Target is a '"
+	local targetIsText = "-> Target is a '"
 	if widget then targetIsText = targetIsText .. "widget," end
-	if destr then targetIsText = targetIsText .. "destructable" end
-	if item then targetIsText = targetIsText .. "item" end
-	if unit then targetIsText = targetIsText .. "unit" end
+	if destr then targetIsText = targetIsText .. "destructable=" .. GetDestructableName(destr) end
+	if item then targetIsText = targetIsText .. "item=" .. GetItemName(item) end
+	if unit then targetIsText = targetIsText .. "unit=" .. GetUnitName(unit) end
 	targetIsText = targetIsText .."'"
+	
+	if unit then targetIsText = targetIsText .." owned by: ".. GetPlayerName(GetOwningPlayer(unit)) end
 
 	print("Next is an Issued Target Order:")
-	print(targetIsText)
 	printOrderInfo()
+	print(targetIsText)
 end
 function printIssuedPointOrder()
 	local loc = GetOrderPointLoc()
 	local x,y,z = GetLocationX(loc),GetLocationY(loc),GetLocationZ(loc)
 	-- GetOrderPointX(),GetOrderPointY() is identical to location...
 	-- if you only wanted (x,y)
-	print("Next is an Issued Point Order at:", x,y,z)
+	print(string.format("Next is an Issued Point Order at: \x25.1f    \x25.1f    \x25.1f", x,y,z))
 	printOrderInfo()
 end
 
+-- Note: in Lua root you cannot create units before the game starts (Map Initialization). 
+-- You may use a timer to delay.
 footman = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
 peasant = CreateUnit(Player(0), FourCC("hpea"), 30, 0, 90)
 item = CreateItem(FourCC("war2"), 64, 128)
@@ -14110,6 +14116,8 @@ whichIssuedOrderTrig = CreateTrigger()
 whichIssuedTargetOrderTrig = CreateTrigger()
 whichIssuedPointOrderTrig = CreateTrigger()
 
+-- Only register one unit for order events:
+--[==[ -- disabled via multiline comment
 whichOrderTrigEvent = 
 	TriggerRegisterUnitEvent(whichIssuedOrderTrig,       footman, EVENT_UNIT_ISSUED_ORDER)
 
@@ -14118,11 +14126,30 @@ whichIssuedTargetOrderTrigEvent =
 
 whichIssuedPointOrderTrigEvent =
 	TriggerRegisterUnitEvent(whichIssuedPointOrderTrig,  footman, EVENT_UNIT_ISSUED_POINT_ORDER)
+]==]
 
+-- Register as many players for order events as you want
+whichOrderTrigEvents = {}
+whichIssuedTargetOrderTrigEvents = {}
+whichIssuedPointOrderTrigEvents = {}
+for _, playerPair in ipairs({ {0, "red"}, {1, "blue"}, {3, "purple"} }) do
+	local id, colorName = table.unpack(playerPair)
+	
+	local orderEv = 
+		TriggerRegisterPlayerUnitEvent(whichIssuedOrderTrig,       Player(id), EVENT_PLAYER_UNIT_ISSUED_ORDER, nil)
+	local targetOrderEv = 
+		TriggerRegisterPlayerUnitEvent(whichIssuedTargetOrderTrig, Player(id), EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER, nil)
+	local pointOrderEv = 
+		TriggerRegisterPlayerUnitEvent(whichIssuedPointOrderTrig,  Player(id), EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER, nil)
+	
+	table.insert(whichOrderTrigEvents,             {id, colorName, orderEv})
+	table.insert(whichIssuedTargetOrderTrigEvents, {id, colorName, targetOrderEv})
+	table.insert(whichIssuedPointOrderTrigEvents,  {id, colorName, pointOrderEv})
+end
 
-whichIssuedOrderTrigAct = TriggerAddAction(      whichIssuedOrderTrig,       printIssuedOrder)
+whichIssuedOrderTrigAct =       TriggerAddAction(whichIssuedOrderTrig,       printIssuedOrder)
 whichIssuedTargetOrderTrigAct = TriggerAddAction(whichIssuedTargetOrderTrig, printIssuedTargetOrder)
-whichIssuedPointOrderTrigAct = TriggerAddAction( whichIssuedPointOrderTrig,  printIssuedPointOrder)
+whichIssuedPointOrderTrigAct =  TriggerAddAction(whichIssuedPointOrderTrig,  printIssuedPointOrder)
 ```
 
 @event EVENT_PLAYER_UNIT_ISSUED_ORDER
