@@ -15,7 +15,8 @@ and other misc information.
 
 - VSCode extension [WC3 Lua Natives](https://github.com/Tomotz/wc3-lua-natives) by Tomotz lets you quickly jump to a jassdoc entry in a Jass file.
 - VSCode extension [Jass API Search](https://github.com/toeneeoh/jass-api-search) by Toeneeoh displays doc entries in a popup when you select function names.
-- Leyki's [j2nppac](https://github.com/Leyki/j2nppac) converts jassdoc annotations to Notepad++'s auto-completion descriptions. 
+- Leyki's [j2nppac](https://github.com/Leyki/j2nppac) converts jassdoc annotations to Notepad++'s auto-completion descriptions.
+- The [WurstScript](https://github.com/wurstscript/WurstScript) project shows available jassdoc entries for natives & wrappers inside `.wurst` and `.j` files.
 
 # How to add documentation
 
@@ -131,6 +132,12 @@ GENERAL_DESCRIPTION
 To build this project you need a somewhat recent GHC, cabal, gnu make and the
 sqlite3 cli binary. To build jass.db all you have to do is to clone the
 repository and run `make` inside it.
+
+## Prebuilt artifacts
+
+If you do not want to build the database yourself, the WurstScript project provides prebuilt `jass.db` artifacts:
+
+[https://github.com/wurstscript/wurst-jassdoc-build/releases](https://github.com/wurstscript/wurst-jassdoc-build/releases)
 
 ## Docker Windows
 
