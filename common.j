@@ -26252,11 +26252,15 @@ For SimpleFrames Level sets them higher/lower to all other SimpleFrames.
 
 @param level bigger number gives a higher position.
 
+@bug In some cases, changing the level after setting alpha value with native `BlzFrameSetAlpha` can reset the alpha to 255 (fully opaque).
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetLevel                            takes framehandle frame, integer level returns nothing
 
 /**
+@bug In some cases, changing the parent after setting MDX model with `BlzFrameSetModel` can speed up the animations of the model.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetParent                           takes framehandle frame, framehandle parent returns nothing
