@@ -25703,7 +25703,12 @@ The one with indices above 0 are:
 	// Item inventory buttons
     ORIGIN_FRAME_ITEM_BUTTON <0 to 5>
 	// The buttons altering the minimap
-    ORIGIN_FRAME_MINIMAP_BUTTON
+    // 0 = Signal
+    // 1 = Terrain
+    // 2 = Ally filter
+    // 3 = Creep filter
+    // 4 = Formation
+    ORIGIN_FRAME_MINIMAP_BUTTON <0 to 4>
 	// Indices:
 	// 0 = Menu
 	// 1 = Allies
