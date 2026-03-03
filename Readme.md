@@ -132,6 +132,31 @@ To build this project you need a somewhat recent GHC, cabal, gnu make and the
 sqlite3 cli binary. To build jass.db all you have to do is to clone the
 repository and run `make` inside it.
 
+## Docker Windows
+
+Make sure docker is running and then execute this in powershell:
+
+```powershell
+$OUT="$PWD\jassdoc-out"
+New-Item -ItemType Directory -Force -Path $OUT | Out-Null
+
+docker run --rm `
+  -v "${OUT}:/out" `
+  ubuntu:24.04 bash -lc "
+    apt-get update &&
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates git make sqlite3 ghc cabal-install &&
+    ghc --version &&
+    cabal --version &&
+    git clone --depth 1 https://github.com/lep/jassdoc /tmp/jassdoc &&
+    cd /tmp/jassdoc &&
+    cabal update &&
+    make &&
+    cp jass.db /out/
+  "
+```
+
+After sucessful make the `jass.db` file will be copied from the container into `$OUT` on the host system which defaults to `./jassdoc-out`.
+
 
 ## nix
 
