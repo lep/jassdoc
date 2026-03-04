@@ -25703,7 +25703,12 @@ The one with indices above 0 are:
 	// Item inventory buttons
     ORIGIN_FRAME_ITEM_BUTTON <0 to 5>
 	// The buttons altering the minimap
-    ORIGIN_FRAME_MINIMAP_BUTTON
+    // 0 = Signal
+    // 1 = Terrain
+    // 2 = Ally filter
+    // 3 = Creep filter
+    // 4 = Formation
+    ORIGIN_FRAME_MINIMAP_BUTTON <0 to 4>
 	// Indices:
 	// 0 = Menu
 	// 1 = Allies
@@ -26252,11 +26257,15 @@ For SimpleFrames Level sets them higher/lower to all other SimpleFrames.
 
 @param level bigger number gives a higher position.
 
+@bug In some cases, changing the level after setting alpha value with native `BlzFrameSetAlpha` can reset the alpha to 255 (fully opaque).
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetLevel                            takes framehandle frame, integer level returns nothing
 
 /**
+@bug In some cases, changing the parent after setting MDX model with `BlzFrameSetModel` can speed up the animations of the model.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetParent                           takes framehandle frame, framehandle parent returns nothing
