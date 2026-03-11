@@ -24795,6 +24795,13 @@ u1rawcode = GetUnitTypeId(u1)
 BlzSetUnitName(u1, GetObjectName( u1rawcode ))
 ```
 
+@bug (tested v2.0.4.23556): Setting to an empty string will crash the game:
+
+```{.lua}
+u = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
+BlzSetUnitName(u, "")
+```
+
 @note See: `GetUnitName`, `GetHeroProperName`, `GetDestructableName`, `GetItemName`, `GetObjectName`.
 
 @patch 1.29.2.9231
