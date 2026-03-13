@@ -11307,6 +11307,8 @@ native S2R  takes string s returns real
 /**
 Returns the internal index of the given handle; returns 0 if `h` is `null`.
 
+Typical handles of game objects are offset by positive `0x100000`.
+
 For text tags, returns the text tag ID, which count from 0 to 99 (inclusive).
 
 **Example:** `GetHandleId(Player(0)) --> 1048584`
