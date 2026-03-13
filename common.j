@@ -25615,7 +25615,7 @@ native BlzGetEventIsAttack                         takes nothing returns boolean
 // Add this function to follow the style of GetUnitX and GetUnitY, it has the same result as BlzGetLocalUnitZ
 
 /**
-@note Returns the same result as `BlzGetLocalUnitZ`.
+@note Literally the same as `BlzGetLocalUnitZ`.
 
 @note Since unit extends from widget, you can use widget-related functions too.
 See: `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`.
