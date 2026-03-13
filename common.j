@@ -15648,6 +15648,19 @@ call SetImageRenderAlways(i, true)
 call SetImageColor(i, 255, 0, 0, 255)
 ```
 
+@bug (tested 1.21, 2.0.4.23556):
+When this is used in global scope, such as globals block in Jass,
+it will do nothing on first map launch, but crash the game on map restart.
+
+```{.j}
+globals
+	unit u = CreateUnit(Player(0), 'hfoo', -30, 0, 90)
+endglobals
+```
+
+[Blizzard bug report](https://us.forums.blizzard.com/en/warcraft3/t/204crash-on-map-restart-with-createunit-in-globals-block/37929)
+and [test map](https://github.com/Luashine/wc3-test-maps/tree/master/crash-CreateUnit-in-globals)
+
 @patch 1.00
 */
 native          CreateUnit              takes player id, integer unitid, real x, real y, real face returns unit
