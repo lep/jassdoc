@@ -17734,6 +17734,26 @@ native UnitDamageTarget             takes unit whichUnit, widget target, real am
 native IssueImmediateOrder          takes unit whichUnit, string order returns boolean
 
 /**
+Returns:
+
+- true if basic requirements were met and the order was issued
+- false if order was not issued
+
+@note **Example (Lua, 2.0.4):** Order barracks to train a footman.
+
+```{.lua}
+myPlayer = Player(0)
+barracks = CreateUnit(myPlayer, FourCC("hbar"), 0, -768, 270.0)
+farm1 = CreateUnit(myPlayer, FourCC("hhou"), 256, -768, 270.0)
+farm2 = CreateUnit(myPlayer, FourCC("hhou"), 384, -768, 270.0)
+farm3 = CreateUnit(myPlayer, FourCC("hhou"), 512, -768, 270.0)
+
+SetPlayerState(myPlayer, PLAYER_STATE_RESOURCE_GOLD, 10000)
+SetPlayerState(myPlayer, PLAYER_STATE_RESOURCE_LUMBER, 10000)
+
+isIssued = IssueImmediateOrderById(barracks, FourCC("hfoo"))
+```
+
 @patch 1.00
 */
 native IssueImmediateOrderById      takes unit whichUnit, integer order returns boolean
