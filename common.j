@@ -18332,11 +18332,18 @@ constant native SetPlayerHandicapDamage takes player whichPlayer, real handicap 
 
 
 /**
+@note See: `GetPlayerTechMaxAllowed` for a description.
 @patch 1.00
 */
 constant native SetPlayerTechMaxAllowed takes player whichPlayer, integer techid, integer maximum returns nothing
 
 /**
+@note This can be used to limit player's maximum amount of units. INT_MAX by default.
+
+Upon reaching this limit, the player will not be able to queue this unit for training
+any longer and the icon will be hidden. When units die, training will be allowed again.
+
+@note See: `SetPlayerTechMaxAllowed`
 @patch 1.00
 */
 constant native GetPlayerTechMaxAllowed takes player whichPlayer, integer techid returns integer
@@ -18362,36 +18369,41 @@ constant native AddPlayerTechResearched takes player whichPlayer, integer techid
 constant native SetPlayerTechResearched takes player whichPlayer, integer techid, integer setToLevel returns nothing
 
 /**
+@note For explanation of `specificonly` see `GetPlayerTechCount`.
 @patch 1.00
 */
 constant native GetPlayerTechResearched takes player whichPlayer, integer techid, boolean specificonly returns boolean
 
 /**
-Gets the level of a tech of a player. This could be an upgrade, a unit type or an equivalent as selected in tech requirement fields.
-In case of an upgrade, this would be the level of the upgrade the given player has and 0 if the player has not researched the upgrade at all.
-In case of a unit type or an equivalent, it would be the amount of units of that type or which fulfill the equivalent condition for the given player.
+Returns level of player's tech. This can be an upgrade, a unit type or an equivalent as selected in tech requirement fields.
+
+- For an upgrade: returns player's upgrade level, or 0 if the player has not researched the upgrade at all.
+- For unit type: returns amount of units of this type (or their type equivalents) under player's control.
 
 @param whichPlayer The player whose tech level to query.
 
-@param techid The id of the tech item. Either an upgrade like Iron Plating `'Rhar'`, a unit type like Footman `'hfoo'` or one of the following special equivalent ids:
+@param techid Rawcode ID of the tech. Either an upgrade like Iron Plating `'Rhar'`, a unit type like Footman `'hfoo'` or one of the following special equivalency IDs:
 
 - `'HERO'` - any hero
 - `'TALT'` - any altar
 - `'TWN1'` - town hall tier 1
 - `'TWN2'` - town hall tier 2
-- `'TWN3'` - town hall tier 3
-- `'TWN4'` - town hall tier 4
-- `'TWN5'` - town hall tier 5
-- `'TWN6'` - town hall tier 6
-- `'TWN7'` - town hall tier 7
-- `'TWN8'` - town hall tier 8
-- `'TWN9'` - town hall tier 9
+- etc.
+- `'TWN9'` - town hall tier 9, see `BlzGetPlayerTownHallCount`
 
-@param specificonly When this is false, it will consider some additional dependencies between the techs:
-When specificonly is false, the Human Guard Tower 'hgtw' will also be considered when querying for the Scout Tower `'hwtw'` (even if the Guard Tower is preplaced, i.e. not doing the upgrade on runtime, so this checks the Teechtree - Upgrades To `'uupt'` field?).
-Higher tier townhalls will be considered when querying for lower tier hownhalls, i.e. querying for Great Hall `'ogre'` will also consider Stronghold `'ostr'` and Fortress `'ofrt'` when specificonly is false.
-Ability morph does not seem to be considered when specificonly is false, tested with Berserker Upgrade of Headhunter.
-Techtree - Dependency Equivalents `'udep'` seems to be considered even if specificonly is true, i.e. when you set Scout Tower as an equivalent for Farm `'hhou'`, querying for `'hhou'` will also consider Scout Towers.
+@param specificonly
+
+- true: only exact matches are considered
+- false: also counts dependency equivalents:
+	- the Human Guard Tower 'hgtw' will also be counted when querying for the Scout Tower `'hwtw'` (even if the Guard Tower is preplaced, i.e. not doing the upgrade on runtime, so this checks the Techtree - Upgrades To `'uupt'` field?).
+	- Higher tier townhalls will be considered when querying for lower tier thownhalls, i.e. querying for tier 1 Great Hall `'ogre'` will also consider tier 2 Stronghold `'ostr'` and tier 3 Fortress `'ofrt'`.
+	- Ability morph does not seem to be considered when specificonly is false, tested with Berserker Upgrade of Headhunter.
+- always: "Techtree - Dependency Equivalents" `'udep'` seems to be considered even if specificonly is true, i.e. when you set Scout Tower as an equivalent for Farm `'hhou'`, querying for `'hhou'` will also consider Scout Towers.
+
+@note Internally, specificonly=true only sets flag 16, while false sets flags 8 and 16 for lookups.
+
+@note See:
+For unit type equivalents "Techtree - Dependency Equivalents" aka `'udep'` aka "DependencyOr".
 
 @patch 1.00
 */
@@ -27465,16 +27477,16 @@ For example: skin and hover name, but not portrait. Shows no model if invalid.
 native BlzCreateDeadDestructableZWithSkin          takes integer objectid, real x, real y, real z, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
-Count player's town hall buildings of any race (probably using 'utyp' = "TownHall" for classification).
+Returns total count of player's town hall buildings of any race
+by counting town hall tech tree dependency equivalents `'TWN1'` through `'TWN9'`
+(which probably uses 'utyp' = "TownHall" for initial classification).
 
-Each level 1 town hall is counted as 1; level 2 for 2 etc. Includes duplicate buildings: two level 1s count as 1+1=2.
-
-Returns total counted number.
+Each tier 1 town hall is counted as 1; tier 2 for 2 etc. Includes duplicate buildings: two tier 1s count as (2 \* 1)=2.
 
 @note **Example (Lua, 2.0.3):**
 
 ```{.lua}
--- 3 Town hall IDs per each race (levels 1, 2, 3): humans, orcs, undead
+-- 3 Town hall IDs per each race (tier 1, 2, 3): humans, orcs, undead
 local townHalls = {"htow", "hkee", "hcas", "ogre", "ostr", "ofrt", "unpl", "unp1", "unp2"}
 
 print("Before spawning any town halls: ", BlzGetPlayerTownHallCount(Player(0)))
@@ -27487,6 +27499,7 @@ end
 
 Prints: 0; 1, 3, 6; 7, 9, 12; 13, 15, 18
 
+@note See: `GetPlayerTechCount` for equivalency class explanation.
 @patch 1.32.0.13369
 */
 native BlzGetPlayerTownHallCount                   takes player whichPlayer returns integer
