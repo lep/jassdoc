@@ -26535,6 +26535,10 @@ native BlzGetTriggerPlayerIsKeyDown                takes nothing returns boolean
 /**
 Sets cursor visibility.
 
+It does not affect the cursor controls in any way.
+The cursor visibility will be enabled again, when you hover over any UI element
+like the toolbar at the top or a multiboard.
+
 @param enable true to show, false to hide cursor.
 
 @patch 1.31.0.11889
