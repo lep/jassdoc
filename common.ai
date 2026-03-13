@@ -802,7 +802,10 @@ native StartThread          takes code func                             returns 
 native Sleep                takes real seconds                          returns nothing
 
 /**
-Checks if a unit is alive.
+Returns true if a unit is alive.
+Returns false if dead or handle is null.
+
+@note Internally, this checks unit's isDead flag (256 or 0x100) instead of health.
 
 @commonai 
 
