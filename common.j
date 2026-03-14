@@ -11307,6 +11307,8 @@ native S2R  takes string s returns real
 /**
 Returns the internal index of the given handle; returns 0 if `h` is `null`.
 
+Typical handles of game objects are offset by positive `0x100000`.
+
 For text tags, returns the text tag ID, which count from 0 to 99 (inclusive).
 
 **Example:** `GetHandleId(Player(0)) --> 1048584`
@@ -12082,13 +12084,22 @@ If unit is null, does nothing and returns false regardless if there're null valu
 native GroupRemoveUnit                      takes group whichGroup, unit whichUnit returns boolean
 
 /**
-Adds a target addGroup to the desired whichGroup immediately.
+Iterates units of `whichGroup` and adds them to `addGroup`.
+
+Returns amount of successfully added units or 0 on error.
+
+@note See: `BlzGroupRemoveGroupFast`
 
 @patch 1.31.0.11889
 */
 native BlzGroupAddGroupFast                 takes group whichGroup, group addGroup returns integer
 
 /**
+Iterates units of `whichGroup` and removes them from `removeGroup`.
+
+Returns amount of successfully removed units or 0 on error.
+
+@note See: `BlzGroupAddGroupFast`
 @patch 1.31.0.11889
 */
 native BlzGroupRemoveGroupFast              takes group whichGroup, group removeGroup returns integer
@@ -12102,7 +12113,10 @@ native GroupClear                           takes group whichGroup returns nothi
 
 /**
 Returns the size (length) of group.
-The size refers to game's internal representation of group data (array), group's last index is `size - 1`.
+
+Returns 0 if `whichGroup` is null.
+
+@note The size refers to game's internal representation of group data (linked list), group's last index is `size - 1`.
 
 @note See: `BlzGroupUnitAt`.
 
@@ -12115,12 +12129,16 @@ Returns unit at the given index in group. Groups start at index 0.
 
 If the unit was removed from the game or index is out of bounds, returns null.
 
+@note Although this native is fast, it is not an O(1) lookup.
+
 @patch 1.31.0.11889
 */
 native BlzGroupUnitAt                       takes group whichGroup, integer index returns unit
 
 /**
 Clears a group and then adds units of matching internal name to it.
+
+Does nothing if `whichGroup` is null or the resulting unit type ID is invalid (`-1`).
 
 @param whichGroup The group to be modified.
 
@@ -12150,6 +12168,8 @@ native GroupEnumUnitsOfType                 takes group whichGroup, string unitn
 /**
 Clears a group and then adds units of matching player to it.
 
+Does nothing if `whichGroup` or `whichPlayer` is null.
+
 @param whichGroup The group to be modified.
 
 @param whichPlayer The player whose units to consider for adding units.
@@ -12175,6 +12195,8 @@ native GroupEnumUnitsOfPlayer               takes group whichGroup, player which
 /**
 Clears a group and then adds units of matching internal name to it.
 
+Does nothing if `whichGroup` is null or the resulting unit type ID is invalid (`-1`).
+
 @param whichGroup The group to be modified.
 
 @param unitname The internal name of the unit definition to consider for adding units. For original unit definitions, this equals the `name` property in `units/unitui.slk`, for custom unit definitions, it equals "custom_" + fourcc (e.g., "custom_h000").
@@ -12195,6 +12217,8 @@ native GroupEnumUnitsOfTypeCounted          takes group whichGroup, string unitn
 
 /**
 Clears a group and then adds units located within given rect to it.
+
+Does nothing if `whichGroup` or rect `r` is null.
 
 @param whichGroup The group to be modified.
 
@@ -12233,6 +12257,8 @@ native GroupEnumUnitsInRect                 takes group whichGroup, rect r, bool
 /**
 Clears a group and then adds units located within given rect to it.
 
+Does nothing if `whichGroup` or rect `r` is null.
+
 @param whichGroup The group to be modified.
 
 @param r The rect in which units are considered.
@@ -12251,6 +12277,8 @@ native GroupEnumUnitsInRectCounted          takes group whichGroup, rect r, bool
 
 /**
 Clears a group and then adds units within given radius of map coordinates to it.
+
+Does nothing if `whichGroup` is null.
 
 @param whichGroup The group to be modified.
 
@@ -12293,6 +12321,10 @@ native GroupEnumUnitsInRange                takes group whichGroup, real x, real
 /**
 Clears a group and then adds units within given radius of location to it.
 
+Does nothing if `whichLocation` is null.
+
+Alias for: `GroupEnumUnitsInRange(whichGroup, GetLocationX(whichLocation), GetLocationY(whichLocation), radius, filter)`
+
 @param whichGroup The group to be modified.
 
 @param whichLocation Center location of the circle within which units should be considered.
@@ -12311,6 +12343,8 @@ native GroupEnumUnitsInRangeOfLoc           takes group whichGroup, location whi
 
 /**
 Clears a group and then adds units within given radius of map coordinates to it.
+
+Does nothing if `whichGroup` is null.
 
 @param whichGroup The group to be modified.
 
@@ -12334,6 +12368,10 @@ native GroupEnumUnitsInRangeCounted         takes group whichGroup, real x, real
 
 /**
 Clears a group and then adds units within given radius of location to it.
+
+Does nothing if `whichLocation` is null.
+
+Alias for: `GroupEnumUnitsInRangeCounted(whichGroup, GetLocationX(whichLocation), GetLocationY(whichLocation), radius, filter, countLimit)`
 
 @param whichGroup The group to be modified.
 
@@ -12466,6 +12504,8 @@ native ForceAddPlayer           takes force whichForce, player whichPlayer retur
 native ForceRemovePlayer        takes force whichForce, player whichPlayer returns nothing
 
 /**
+@note Refer to `IsPlayerInForce`, which this is functionally identical to.
+
 @patch 1.31.0.11889
 */
 native BlzForceHasPlayer        takes force whichForce, player whichPlayer returns boolean
@@ -15646,6 +15686,19 @@ call SetImageRenderAlways(i, true)
 call SetImageColor(i, 255, 0, 0, 255)
 ```
 
+@bug (tested 1.21, 2.0.4.23556):
+When this is used in global scope, such as globals block in Jass,
+it will do nothing on first map launch, but crash the game on map restart.
+
+```{.j}
+globals
+	unit u = CreateUnit(Player(0), 'hfoo', -30, 0, 90)
+endglobals
+```
+
+[Blizzard bug report](https://us.forums.blizzard.com/en/warcraft3/t/204crash-on-map-restart-with-createunit-in-globals-block/37929)
+and [test map](https://github.com/Luashine/wc3-test-maps/tree/master/crash-CreateUnit-in-globals)
+
 @patch 1.00
 */
 native          CreateUnit              takes player id, integer unitid, real x, real y, real face returns unit
@@ -17734,6 +17787,26 @@ native UnitDamageTarget             takes unit whichUnit, widget target, real am
 native IssueImmediateOrder          takes unit whichUnit, string order returns boolean
 
 /**
+Returns:
+
+- true if basic requirements were met and the order was issued
+- false if order was not issued
+
+@note **Example (Lua, 2.0.4):** Order barracks to train a footman.
+
+```{.lua}
+myPlayer = Player(0)
+barracks = CreateUnit(myPlayer, FourCC("hbar"), 0, -768, 270.0)
+farm1 = CreateUnit(myPlayer, FourCC("hhou"), 256, -768, 270.0)
+farm2 = CreateUnit(myPlayer, FourCC("hhou"), 384, -768, 270.0)
+farm3 = CreateUnit(myPlayer, FourCC("hhou"), 512, -768, 270.0)
+
+SetPlayerState(myPlayer, PLAYER_STATE_RESOURCE_GOLD, 10000)
+SetPlayerState(myPlayer, PLAYER_STATE_RESOURCE_LUMBER, 10000)
+
+isIssued = IssueImmediateOrderById(barracks, FourCC("hfoo"))
+```
+
 @patch 1.00
 */
 native IssueImmediateOrderById      takes unit whichUnit, integer order returns boolean
@@ -18199,6 +18272,7 @@ constant native IsPlayerAlly        takes player whichPlayer, player otherPlayer
 constant native IsPlayerEnemy       takes player whichPlayer, player otherPlayer returns boolean
 
 /**
+@note Internals: Functionally identical to `BlzForceHasPlayer`, both do direct bitmask lookups to determine force membership.
 @patch 1.00
 */
 constant native IsPlayerInForce     takes player whichPlayer, force whichForce returns boolean
@@ -18332,11 +18406,18 @@ constant native SetPlayerHandicapDamage takes player whichPlayer, real handicap 
 
 
 /**
+@note See: `GetPlayerTechMaxAllowed` for a description.
 @patch 1.00
 */
 constant native SetPlayerTechMaxAllowed takes player whichPlayer, integer techid, integer maximum returns nothing
 
 /**
+@note This can be used to limit player's maximum amount of units. INT_MAX by default.
+
+Upon reaching this limit, the player will not be able to queue this unit for training
+any longer and the icon will be hidden. When units die, training will be allowed again.
+
+@note See: `SetPlayerTechMaxAllowed`
 @patch 1.00
 */
 constant native GetPlayerTechMaxAllowed takes player whichPlayer, integer techid returns integer
@@ -18362,36 +18443,41 @@ constant native AddPlayerTechResearched takes player whichPlayer, integer techid
 constant native SetPlayerTechResearched takes player whichPlayer, integer techid, integer setToLevel returns nothing
 
 /**
+@note For explanation of `specificonly` see `GetPlayerTechCount`.
 @patch 1.00
 */
 constant native GetPlayerTechResearched takes player whichPlayer, integer techid, boolean specificonly returns boolean
 
 /**
-Gets the level of a tech of a player. This could be an upgrade, a unit type or an equivalent as selected in tech requirement fields.
-In case of an upgrade, this would be the level of the upgrade the given player has and 0 if the player has not researched the upgrade at all.
-In case of a unit type or an equivalent, it would be the amount of units of that type or which fulfill the equivalent condition for the given player.
+Returns level of player's tech. This can be an upgrade, a unit type or an equivalent as selected in tech requirement fields.
+
+- For an upgrade: returns player's upgrade level, or 0 if the player has not researched the upgrade at all.
+- For unit type: returns amount of units of this type (or their type equivalents) under player's control.
 
 @param whichPlayer The player whose tech level to query.
 
-@param techid The id of the tech item. Either an upgrade like Iron Plating `'Rhar'`, a unit type like Footman `'hfoo'` or one of the following special equivalent ids:
+@param techid Rawcode ID of the tech. Either an upgrade like Iron Plating `'Rhar'`, a unit type like Footman `'hfoo'` or one of the following special equivalency IDs:
 
 - `'HERO'` - any hero
 - `'TALT'` - any altar
 - `'TWN1'` - town hall tier 1
 - `'TWN2'` - town hall tier 2
-- `'TWN3'` - town hall tier 3
-- `'TWN4'` - town hall tier 4
-- `'TWN5'` - town hall tier 5
-- `'TWN6'` - town hall tier 6
-- `'TWN7'` - town hall tier 7
-- `'TWN8'` - town hall tier 8
-- `'TWN9'` - town hall tier 9
+- etc.
+- `'TWN9'` - town hall tier 9, see `BlzGetPlayerTownHallCount`
 
-@param specificonly When this is false, it will consider some additional dependencies between the techs:
-When specificonly is false, the Human Guard Tower 'hgtw' will also be considered when querying for the Scout Tower `'hwtw'` (even if the Guard Tower is preplaced, i.e. not doing the upgrade on runtime, so this checks the Teechtree - Upgrades To `'uupt'` field?).
-Higher tier townhalls will be considered when querying for lower tier hownhalls, i.e. querying for Great Hall `'ogre'` will also consider Stronghold `'ostr'` and Fortress `'ofrt'` when specificonly is false.
-Ability morph does not seem to be considered when specificonly is false, tested with Berserker Upgrade of Headhunter.
-Techtree - Dependency Equivalents `'udep'` seems to be considered even if specificonly is true, i.e. when you set Scout Tower as an equivalent for Farm `'hhou'`, querying for `'hhou'` will also consider Scout Towers.
+@param specificonly
+
+- true: only exact matches are considered
+- false: also counts dependency equivalents:
+	- the Human Guard Tower 'hgtw' will also be counted when querying for the Scout Tower `'hwtw'` (even if the Guard Tower is preplaced, i.e. not doing the upgrade on runtime, so this checks the Techtree - Upgrades To `'uupt'` field?).
+	- Higher tier townhalls will be considered when querying for lower tier thownhalls, i.e. querying for tier 1 Great Hall `'ogre'` will also consider tier 2 Stronghold `'ostr'` and tier 3 Fortress `'ofrt'`.
+	- Ability morph does not seem to be considered when specificonly is false, tested with Berserker Upgrade of Headhunter.
+- always: "Techtree - Dependency Equivalents" `'udep'` seems to be considered even if specificonly is true, i.e. when you set Scout Tower as an equivalent for Farm `'hhou'`, querying for `'hhou'` will also consider Scout Towers.
+
+@note Internally, specificonly=true only sets flag 16, while false sets flags 8 and 16 for lookups.
+
+@note See:
+For unit type equivalents "Techtree - Dependency Equivalents" aka `'udep'` aka "DependencyOr".
 
 @patch 1.00
 */
@@ -24795,6 +24881,13 @@ u1rawcode = GetUnitTypeId(u1)
 BlzSetUnitName(u1, GetObjectName( u1rawcode ))
 ```
 
+@bug (tested v2.0.4.23556): Setting to an empty string will crash the game:
+
+```{.lua}
+u = CreateUnit(Player(0), FourCC("hfoo"), -30, 0, 90)
+BlzSetUnitName(u, "")
+```
+
 @note See: `GetUnitName`, `GetHeroProperName`, `GetDestructableName`, `GetItemName`, `GetObjectName`.
 
 @patch 1.29.2.9231
@@ -25574,7 +25667,7 @@ native BlzGetEventIsAttack                         takes nothing returns boolean
 // Add this function to follow the style of GetUnitX and GetUnitY, it has the same result as BlzGetLocalUnitZ
 
 /**
-@note Returns the same result as `BlzGetLocalUnitZ`.
+@note Literally the same as `BlzGetLocalUnitZ`.
 
 @note Since unit extends from widget, you can use widget-related functions too.
 See: `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`.
@@ -26493,6 +26586,10 @@ native BlzGetTriggerPlayerIsKeyDown                takes nothing returns boolean
 
 /**
 Sets cursor visibility.
+
+It does not affect the cursor controls in any way.
+The cursor visibility will be enabled again, when you hover over any UI element
+like the toolbar at the top or a multiboard.
 
 @param enable true to show, false to hide cursor.
 
@@ -27458,16 +27555,16 @@ For example: skin and hover name, but not portrait. Shows no model if invalid.
 native BlzCreateDeadDestructableZWithSkin          takes integer objectid, real x, real y, real z, real face, real scale, integer variation, integer skinId returns destructable
 
 /**
-Count player's town hall buildings of any race (probably using 'utyp' = "TownHall" for classification).
+Returns total count of player's town hall buildings of any race
+by counting town hall tech tree dependency equivalents `'TWN1'` through `'TWN9'`
+(which probably uses 'utyp' = "TownHall" for initial classification).
 
-Each level 1 town hall is counted as 1; level 2 for 2 etc. Includes duplicate buildings: two level 1s count as 1+1=2.
-
-Returns total counted number.
+Each tier 1 town hall is counted as 1; tier 2 for 2 etc. Includes duplicate buildings: two tier 1s count as (2 \* 1)=2.
 
 @note **Example (Lua, 2.0.3):**
 
 ```{.lua}
--- 3 Town hall IDs per each race (levels 1, 2, 3): humans, orcs, undead
+-- 3 Town hall IDs per each race (tier 1, 2, 3): humans, orcs, undead
 local townHalls = {"htow", "hkee", "hcas", "ogre", "ostr", "ofrt", "unpl", "unp1", "unp2"}
 
 print("Before spawning any town halls: ", BlzGetPlayerTownHallCount(Player(0)))
@@ -27480,6 +27577,7 @@ end
 
 Prints: 0; 1, 3, 6; 7, 9, 12; 13, 15, 18
 
+@note See: `GetPlayerTechCount` for equivalency class explanation.
 @patch 1.32.0.13369
 */
 native BlzGetPlayerTownHallCount                   takes player whichPlayer returns integer

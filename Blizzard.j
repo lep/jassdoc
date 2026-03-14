@@ -4242,6 +4242,9 @@ endfunction
 //===========================================================================
 
 /**
+Registers per-player unit events for every single player slot, including neutrals;
+therefore it will fire events for every unit on map.
+
 @patch 1.07
 */
 function TriggerRegisterAnyUnitEventBJ takes trigger trig, playerunitevent whichEvent returns nothing
