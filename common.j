@@ -12084,13 +12084,22 @@ If unit is null, does nothing and returns false regardless if there're null valu
 native GroupRemoveUnit                      takes group whichGroup, unit whichUnit returns boolean
 
 /**
-Adds a target addGroup to the desired whichGroup immediately.
+Iterates units of `whichGroup` and adds them to `addGroup`.
+
+Returns amount of successfully added units or 0 on error.
+
+@note See: `BlzGroupRemoveGroupFast`
 
 @patch 1.31.0.11889
 */
 native BlzGroupAddGroupFast                 takes group whichGroup, group addGroup returns integer
 
 /**
+Iterates units of `whichGroup` and removes them from `removeGroup`.
+
+Returns amount of successfully removed units or 0 on error.
+
+@note See: `BlzGroupAddGroupFast`
 @patch 1.31.0.11889
 */
 native BlzGroupRemoveGroupFast              takes group whichGroup, group removeGroup returns integer
@@ -12104,7 +12113,10 @@ native GroupClear                           takes group whichGroup returns nothi
 
 /**
 Returns the size (length) of group.
-The size refers to game's internal representation of group data (array), group's last index is `size - 1`.
+
+Returns 0 if `whichGroup` is null.
+
+@note The size refers to game's internal representation of group data (linked list), group's last index is `size - 1`.
 
 @note See: `BlzGroupUnitAt`.
 
@@ -12117,12 +12129,16 @@ Returns unit at the given index in group. Groups start at index 0.
 
 If the unit was removed from the game or index is out of bounds, returns null.
 
+@note Although this native is fast, it is not an O(1) lookup.
+
 @patch 1.31.0.11889
 */
 native BlzGroupUnitAt                       takes group whichGroup, integer index returns unit
 
 /**
 Clears a group and then adds units of matching internal name to it.
+
+Does nothing if `whichGroup` is null or the resulting unit type ID is invalid (`-1`).
 
 @param whichGroup The group to be modified.
 
@@ -12152,6 +12168,8 @@ native GroupEnumUnitsOfType                 takes group whichGroup, string unitn
 /**
 Clears a group and then adds units of matching player to it.
 
+Does nothing if `whichGroup` or `whichPlayer` is null.
+
 @param whichGroup The group to be modified.
 
 @param whichPlayer The player whose units to consider for adding units.
@@ -12177,6 +12195,8 @@ native GroupEnumUnitsOfPlayer               takes group whichGroup, player which
 /**
 Clears a group and then adds units of matching internal name to it.
 
+Does nothing if `whichGroup` is null or the resulting unit type ID is invalid (`-1`).
+
 @param whichGroup The group to be modified.
 
 @param unitname The internal name of the unit definition to consider for adding units. For original unit definitions, this equals the `name` property in `units/unitui.slk`, for custom unit definitions, it equals "custom_" + fourcc (e.g., "custom_h000").
@@ -12197,6 +12217,8 @@ native GroupEnumUnitsOfTypeCounted          takes group whichGroup, string unitn
 
 /**
 Clears a group and then adds units located within given rect to it.
+
+Does nothing if `whichGroup` or rect `r` is null.
 
 @param whichGroup The group to be modified.
 
@@ -12235,6 +12257,8 @@ native GroupEnumUnitsInRect                 takes group whichGroup, rect r, bool
 /**
 Clears a group and then adds units located within given rect to it.
 
+Does nothing if `whichGroup` or rect `r` is null.
+
 @param whichGroup The group to be modified.
 
 @param r The rect in which units are considered.
@@ -12253,6 +12277,8 @@ native GroupEnumUnitsInRectCounted          takes group whichGroup, rect r, bool
 
 /**
 Clears a group and then adds units within given radius of map coordinates to it.
+
+Does nothing if `whichGroup` is null.
 
 @param whichGroup The group to be modified.
 
@@ -12295,6 +12321,10 @@ native GroupEnumUnitsInRange                takes group whichGroup, real x, real
 /**
 Clears a group and then adds units within given radius of location to it.
 
+Does nothing if `whichLocation` is null.
+
+Alias for: `GroupEnumUnitsInRange(whichGroup, GetLocationX(whichLocation), GetLocationY(whichLocation), radius, filter)`
+
 @param whichGroup The group to be modified.
 
 @param whichLocation Center location of the circle within which units should be considered.
@@ -12313,6 +12343,8 @@ native GroupEnumUnitsInRangeOfLoc           takes group whichGroup, location whi
 
 /**
 Clears a group and then adds units within given radius of map coordinates to it.
+
+Does nothing if `whichGroup` is null.
 
 @param whichGroup The group to be modified.
 
@@ -12336,6 +12368,10 @@ native GroupEnumUnitsInRangeCounted         takes group whichGroup, real x, real
 
 /**
 Clears a group and then adds units within given radius of location to it.
+
+Does nothing if `whichLocation` is null.
+
+Alias for: `GroupEnumUnitsInRangeCounted(whichGroup, GetLocationX(whichLocation), GetLocationY(whichLocation), radius, filter, countLimit)`
 
 @param whichGroup The group to be modified.
 
