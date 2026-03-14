@@ -12504,6 +12504,8 @@ native ForceAddPlayer           takes force whichForce, player whichPlayer retur
 native ForceRemovePlayer        takes force whichForce, player whichPlayer returns nothing
 
 /**
+@note Refer to `IsPlayerInForce`, which this is functionally identical to.
+
 @patch 1.31.0.11889
 */
 native BlzForceHasPlayer        takes force whichForce, player whichPlayer returns boolean
@@ -18270,6 +18272,7 @@ constant native IsPlayerAlly        takes player whichPlayer, player otherPlayer
 constant native IsPlayerEnemy       takes player whichPlayer, player otherPlayer returns boolean
 
 /**
+@note Internals: Functionally identical to `BlzForceHasPlayer`, both do direct bitmask lookups to determine force membership.
 @patch 1.00
 */
 constant native IsPlayerInForce     takes player whichPlayer, force whichForce returns boolean
