@@ -22791,12 +22791,10 @@ The known settings available in Warcraft III are:
 |`"DoodadsEAX"`      | doodads                |
 |`"DefaultEAXON"`    | default                |
 
-@note You can only play the same sound handle once.
+@note You can play the same sound handle multiple times.
 
-@note You can only play the same sound filepath four times.
-
-@note Sounds of the same filepath (on different sound handles) must have a delay
-of at least 0.1 seconds inbetween them to be played.
+@note Sounds of the same filepath must have a delay of at least 0.1 seconds inbetween them to be played.
+Otherwise the second sound will stop the first sound, and no sound will be played
 You can overcome this by starting one earlier and then using `SetSoundPosition`.
 
 @note You can only play 16 sounds in general.
@@ -22833,12 +22831,10 @@ the faster the sound fades out. Maximum number is 127.
 @param SLKEntryName the label out of one of the SLK-files, whose settings should be
 used, e.g. values like volume, pitch, pitch variance, priority, channel, min distance, max distance, distance cutoff or eax.
 
-@note You can only play the same sound handle once.
+@note You can play the same sound handle multiple times.
 
-@note You can only play the same sound filepath four times.
-
-@note Sounds of the same filepath (on different sound handles) must have a delay
-of at least 0.1 seconds inbetween them to be played.
+@note Sounds of the same filepath must have a delay of at least 0.1 seconds inbetween them to be played.
+Otherwise the second sound will stop the first sound, and no sound will be played
 You can overcome this by starting one earlier and then using `SetSoundPosition`.
 
 @note You can only play 16 sounds in general.
@@ -22976,12 +22972,12 @@ native AttachSoundToUnit            takes sound soundHandle, unit whichUnit retu
 /**
 Starts the sound.
 
-@note You can only play the same sound handle once.
+@note You can play the same sound handle multiple times.
 
 @note You can only play 16 sounds in general.
 
-@note Sounds of the same filepath (on different sound handles) must have a delay
-of at least 0.1 seconds inbetween them to be played.
+@note Sounds of the same filepath must have a delay of at least 0.1 seconds inbetween them to be played.
+Otherwise the second sound will stop the first sound, and no sound will be played.
 You can overcome this by starting one earlier and then using `SetSoundPosition`.
 
 @patch 1.00
