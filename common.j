@@ -22794,7 +22794,7 @@ The known settings available in Warcraft III are:
 @note You can play the same sound handle multiple times.
 
 @note Sounds of the same filepath must have a delay of at least 0.1 seconds inbetween them to be played.
-Otherwise the second sound will stop the first sound, and no sound will be played
+Otherwise the second sound will stop the first sound, and no sound will be played.
 You can overcome this by starting one earlier and then using `SetSoundPosition`.
 
 @note You can only play 16 sounds in general.
@@ -22834,7 +22834,7 @@ used, e.g. values like volume, pitch, pitch variance, priority, channel, min dis
 @note You can play the same sound handle multiple times.
 
 @note Sounds of the same filepath must have a delay of at least 0.1 seconds inbetween them to be played.
-Otherwise the second sound will stop the first sound, and no sound will be played
+Otherwise the second sound will stop the first sound, and no sound will be played.
 You can overcome this by starting one earlier and then using `SetSoundPosition`.
 
 @note You can only play 16 sounds in general.
