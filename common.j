@@ -12924,6 +12924,8 @@ Other reasons could be the rendering state of destructables and visibility diffe
 
 @note Returns 0 if `whichLocation` is null.
 
+@note See: `BlzGetUnitZ`.
+
 @async 
 
 @patch 1.18a
@@ -17170,7 +17172,7 @@ of the zeppelin but the last position of the unit before it was loaded into
 the zeppelin.
 
 @note Since unit extends from `widget`, you can use widget-related functions too.
-See: `GetUnitY`, `BlzGetLocalUnitZ`, `BlzGetUnitZ`, `GetWidgetX`, `GetWidgetY`.
+See: `GetUnitY`, `BlzGetUnitZ`, `GetWidgetX`, `GetWidgetY`.
 
 @patch 1.00
 */
@@ -17184,7 +17186,7 @@ of the zeppelin but the last position of the unit before it was loaded into
 the zeppelin.
 
 @note Since unit extends from `widget`, you can use widget-related functions too.
-See: `GetUnitX`, `BlzGetLocalUnitZ`, `BlzGetUnitZ`, GetWidgetX`, `GetWidgetY`.
+See: `GetUnitX`, `BlzGetUnitZ`, GetWidgetX`, `GetWidgetY`.
 
 @patch 1.00
 */
@@ -25552,16 +25554,13 @@ Crash likely related to `BlzSetUnitAbilityCooldown`.
 native BlzSetUnitAbilityManaCost                   takes unit whichUnit, integer abilId, integer level, integer manaCost returns nothing
 
 /**
-Return unit's (altitude) Z map coordinate ([Cartesian System](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)). Unit may be alive or dead.
+Alias for `BlzGetUnitZ`.
 
-Returns 0.0 if unit was removed or is null.
-
-Retrieving Z is desync prone, this version might cause desyncs, but (unconfirmed) should be faster than `BlzGetUnitZ`, hence why both exist. In case that you are doing a single player map (campaign), you might decide to use this one instead of `BlzGetUnitZ`.
-
-@note Terrain height is not synced between clients in multiplayer.
+@note It is likely the intent was to provide different values between the two,
+but currently this calls `BlzGetUnitZ`.
 
 @note Since unit extends from widget, you can use widget-related functions too.
-See: `BlzGetUnitZ`, `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`.
+See: `BlzGetUnitZ`, `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`, `GetLocationZ`.
 
 @async 
 
@@ -25687,10 +25686,20 @@ native BlzGetEventIsAttack                         takes nothing returns boolean
 // Add this function to follow the style of GetUnitX and GetUnitY, it has the same result as BlzGetLocalUnitZ
 
 /**
-@note Literally the same as `BlzGetLocalUnitZ`.
+Returns the surface elevation at unit's current location, including water surface and walkable destructables (Z-axis in [Cartesian System](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)). 
+
+Returns 0.0 if unit was removed or is null.
+
+@param whichUnit Target unit, may be alive or dead.
+
+@note Terrain height is not synced between clients in multiplayer,
+because it relies on ray intersection of the to-be-rendered visuals (sprites).
+Operating on Z values will lead to desyncs if something beyond visuals is affected.
+
+@note Same as `BlzGetLocalUnitZ` and practically `GetLocationZ`.
 
 @note Since unit extends from widget, you can use widget-related functions too.
-See: `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`.
+See: `GetUnitX`, `GetUnitY`, `GetWidgetX`, `GetWidgetY`, `GetLocationZ`.
 
 @async 
 
