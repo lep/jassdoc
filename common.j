@@ -25686,11 +25686,14 @@ native BlzGetEventIsAttack                         takes nothing returns boolean
 // Add this function to follow the style of GetUnitX and GetUnitY, it has the same result as BlzGetLocalUnitZ
 
 /**
-Returns the surface elevation at unit's current location, including water surface and walkable destructables (Z-axis in [Cartesian System](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)). 
+Returns the surface elevation at unit's current location, including water surface and walkable destructables (Z-axis in [Cartesian System](https://en.wikipedia.org/wiki/Cartesian_coordinate_system))
+plus the unit's occluder height. 
 
 Returns 0.0 if unit was removed or is null.
 
 @param whichUnit Target unit, may be alive or dead.
+
+@note The occluder height is added even if negative, lowering the sum in that case.
 
 @note Terrain height is not synced between clients in multiplayer,
 because it relies on ray intersection of the to-be-rendered visuals (sprites).
