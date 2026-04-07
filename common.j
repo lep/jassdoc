@@ -25686,8 +25686,8 @@ native BlzGetEventIsAttack                         takes nothing returns boolean
 // Add this function to follow the style of GetUnitX and GetUnitY, it has the same result as BlzGetLocalUnitZ
 
 /**
-Returns the surface elevation at unit's current location, including water surface and walkable destructables (Z-axis in [Cartesian System](https://en.wikipedia.org/wiki/Cartesian_coordinate_system))
-plus the unit's occluder height. 
+Returns the surface elevation at unit's current location, including water surface and walkable destructables, plus the unit's occluder height
+(Z-axis in [Cartesian System](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)). 
 
 Returns 0.0 if unit was removed or is null.
 
