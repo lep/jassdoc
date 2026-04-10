@@ -9903,6 +9903,7 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
 
 /**
 @patch 1.31.0.11889
+Bug - See ITEM_BF_ACTIVELY_USED for details
 */
     constant itembooleanfield ITEM_BF_PERISHABLE                        = ConvertItemBooleanField('iper')
 
@@ -9923,6 +9924,7 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
 
 /**
 @patch 1.31.0.11889
+Bug - Using BlzSetItemBooleanField to set ITEM_BF_ACTIVELY_USED to false and then to true, will also set ITEM_BF_PERISHABLE to true.
 */
     constant itembooleanfield ITEM_BF_ACTIVELY_USED                     = ConvertItemBooleanField('iusa')
 
