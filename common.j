@@ -15610,6 +15610,7 @@ native          GetItemCharges  takes item whichItem returns integer
 
 /**
 @patch 1.13
+Bug - If you set the charges to 0 the item can be used an infinite number of times.
 */
 native          SetItemCharges  takes item whichItem, integer charges returns nothing
 
