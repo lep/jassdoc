@@ -15610,6 +15610,8 @@ native          GetItemCharges  takes item whichItem returns integer
 
 /**
 @patch 1.13
+@bug (tested 2.0.4.23556) 
+If you set the charges to 0, the item can be used an infinite number of times.
 */
 native          SetItemCharges  takes item whichItem, integer charges returns nothing
 
@@ -27318,6 +27320,11 @@ native BlzGetItemStringField                       takes item whichItem, itemstr
 
 /**
 @patch 1.31.0.11889
+@bug (tested 2.0.4.23556) 
+Using `BlzSetItemBooleanField` on one field also sets/clears other boolean fields.
+It seems that there is a hierarchy. For example `BlzSetItemBooleanField(it, ITEM_BF_ACTIVELY_USED, true)` will also set `ITEM_BF_CAN_BE_DROPPED` to true.
+Only checked 5 of the boolean fields, and it seems the hierarchy is
+`ITEM_BF_ACTIVELY_USED` > `ITEM_BF_CAN_BE_DROPPED` > `ITEM_BF_DROPPED_WHEN_CARRIER_DIES` > `ITEM_BF_PERISHABLE` > `ITEM_BF_USE_AUTOMATICALLY_WHEN_ACQUIRED`
 */
 native BlzSetItemBooleanField                      takes item whichItem, itembooleanfield whichField, boolean value returns boolean
 
