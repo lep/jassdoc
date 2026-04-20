@@ -12125,9 +12125,9 @@ Returns 0 if `whichGroup` is null.
 native BlzGroupGetSize                      takes group whichGroup returns integer
 
 /**
-Returns unit at the given index in group. Groups start at index 0.
+Returns unit at the given index in group. Groups start at index 0 and count up to `BlzGroupGetSize(whichGroup) - 1`.
 
-If the unit was removed from the game or index is out of bounds, returns null.
+If the index is out of bounds, returns null.
 
 @note Although this native is fast, it is not an O(1) lookup.
 
