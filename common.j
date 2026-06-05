@@ -18364,6 +18364,9 @@ constant native GetPlayerState          takes player whichPlayer, playerstate wh
 constant native GetPlayerScore          takes player whichPlayer, playerscore whichPlayerScore returns integer
 
 /**
+@bug (v2.0.4.23745) Passing nil as otherPlayer crashes the game (might happen if you try getting the owning player of a unit that doesn't exist).
+Passing nil as sourcePlayer works.
+
 @patch 1.00
 */
 constant native GetPlayerAlliance       takes player sourcePlayer, player otherPlayer, alliancetype whichAllianceSetting returns boolean
