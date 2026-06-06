@@ -17724,6 +17724,8 @@ will show up in the unit's UI. Timed life can also stem from summoning abilities
 
 @note Removing any timed-life buff from the unit will kill the unit.
 
+@note See: `UnitPauseTimedLife`, `BlzUnitCancelTimedLife`
+
 @patch 1.00
 */
 native UnitApplyTimedLife           takes unit whichUnit, integer buffId, real duration returns nothing
@@ -17754,6 +17756,8 @@ native UnitSetConstructionProgress  takes unit whichUnit, integer constructionPe
 native UnitSetUpgradeProgress       takes unit whichUnit, integer upgradePercentage returns nothing
 
 /**
+@note See: `UnitApplyTimedLife`, `BlzUnitCancelTimedLife`
+
 @patch 1.07
 */
 native UnitPauseTimedLife           takes unit whichUnit, boolean flag returns nothing
@@ -25460,7 +25464,26 @@ See `GetUnitAbilityLevel`.
 native BlzUnitDisableAbility                       takes unit whichUnit, integer abilId, boolean flag, boolean hideUI returns nothing
 
 /**
-Makes a specific summoned unit permanent.
+Removes a unit's timed life, therefore killing it.
+
+Does nothing when used on a regular unit.
+
+@note Internally the code is similar to `UnitRemoveAbility`.
+
+@note **Example (Lua):**
+
+```{.lua}
+-- creates a permanent water elemental, without timed life
+waterElem = CreateUnit(Player(0), FourCC("hwat"), -30, 0, 90)
+
+-- applies 30 second timed life
+UnitApplyTimedLife(waterElem, FourCC("BHwe"), 30)
+
+-- removes and kills the elemental
+BlzUnitCancelTimedLife(waterElem)
+```
+
+@note See: `UnitApplyTimedLife`, `UnitPauseTimedLife`
 
 @patch 1.29.2.9231
 */
