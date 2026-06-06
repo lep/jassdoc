@@ -24618,7 +24618,8 @@ Returns {maxX, maxY, surfaceZ} when pointing outside of map bounds on any side.
 native BlzGetTriggerPlayerMousePosition            takes nothing returns location
 
 /**
-It is used inside a mouse event trigger’s action/condition it will return the mousebuttontype (type) used at the moment of the event trigger.
+Returns which mouse button aka `mousebuttontype` was used at the moment of the event trigger.
+Only valid within mouse event trigger’s action/condition context.
 
 @event EVENT_PLAYER_MOUSE_UP
 
