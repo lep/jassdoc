@@ -4278,11 +4278,18 @@ followMouse_func = function()
 	if not followMouse_unit then
 		followMouse_unit = CreateUnit(followMouse_player, FourCC("Otch"), -100, 0, 90)
 	end
-	
+
 	local unit = followMouse_unit
 	local mx,my = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
+	local loc = BlzGetTriggerPlayerMousePosition()
+	local locx, locy, locz = GetLocationX(loc), GetLocationY(loc), GetLocationZ(loc)
+	
 	SetUnitX(unit, mx); SetUnitY(unit, my)
-	print("Mouse Pos: ".. mx ..",".. my)
+	print(string.format(
+		"MousePos: \x25.2f,\x25.2f; loc=\x25.2f,\x25.2f,\x25.2f;\x25s",
+		mx, my, locx, locy, locz, tostring(loc)
+	))
+	RemoveLocation(loc)
 end
 followMouse_t = CreateTrigger()
 followMouse_e = TriggerRegisterPlayerEvent(followMouse_t, followMouse_player, EVENT_PLAYER_MOUSE_MOVE)
@@ -24542,11 +24549,14 @@ native AutomationTestingFinished                takes nothing returns nothing
 // JAPI Functions
 
 /**
-When used inside a mouse event trigger’s action/condition, it will return the X coordinate (Cartesian System) of the ground location on the map,
-where the cursor points at.
+Returns the map X coordinate (Cartesian System) of the ground location,
+where the cursor points at. Only valid inside a mouse event trigger’s action/condition.
 
-Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
-However minimap and the entire bottom UI still show the correct coordinates.
+Returns 0 when pointing at certain "opaque" UI elements like the top status bar with resources.
+However minimap, the bottom half of the clock, and the entire bottom UI are transparent to the cursor
+and show the correct coordinates.
+
+Returns the max valid X map coordinate when pointing outside of map bounds on any side.
 
 @note The world coordinate will be a result of ray tracing based on current camera setup.
 Changing the camera setup does not affect the result until a new frame has been rendered locally.
@@ -24562,11 +24572,15 @@ Changing the camera setup does not affect the result until a new frame has been 
 native BlzGetTriggerPlayerMouseX                   takes nothing returns real
 
 /**
-When used inside a mouse event trigger’s action/condition, it will return the Y coordinate (Cartesian System) of the ground location on the map,
-where the cursor points at.
+Returns the Y coordinate (Cartesian System) of the ground location,
+where the cursor points at. Only valid inside a mouse event trigger’s action/condition.
 
-Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
-However minimap and the entire bottom UI still show the correct coordinates.
+Returns {0, 0, surfaceZ} when pointing at certain "opaque" UI elements
+like the top status bar with resources.
+However minimap, the bottom half of the clock, and the entire bottom UI are transparent to the cursor
+and show the correct coordinates.
+
+Returns the max valid Y map coordinate when pointing outside of map bounds on any side.
 
 @note The world coordinate will be a result of ray tracing based on current camera setup.
 Changing the camera setup does not affect the result until a new frame has been rendered locally.
@@ -24582,11 +24596,18 @@ Changing the camera setup does not affect the result until a new frame has been 
 native BlzGetTriggerPlayerMouseY                   takes nothing returns real
 
 /**
-When used inside a mouse event trigger’s action/condition, it will return the ground location on the map,
-where the cursor points at.
+Returns the ground location on the map, where the cursor points at.
+Only valid inside a mouse event trigger’s action/condition.
 
-Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
-However minimap and the entire bottom UI still show the correct coordinates.
+Returns {0, 0, surfaceZ} when pointing at certain "opaque" UI elements
+like the top status bar with resources.
+However minimap, the bottom half of the clock, and the entire bottom UI are transparent to the cursor
+and show the correct map coordinates.
+
+Returns {maxX, maxY, surfaceZ} when pointing outside of map bounds on any side.
+
+`maxX` and `maxY` is highest valid map coordinate and
+`surfaceZ` is the terrain surface elevation at the given point.
 
 @event EVENT_PLAYER_MOUSE_MOVE
 
