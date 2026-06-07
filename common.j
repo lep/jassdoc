@@ -4278,11 +4278,18 @@ followMouse_func = function()
 	if not followMouse_unit then
 		followMouse_unit = CreateUnit(followMouse_player, FourCC("Otch"), -100, 0, 90)
 	end
-	
+
 	local unit = followMouse_unit
 	local mx,my = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
+	local loc = BlzGetTriggerPlayerMousePosition()
+	local locx, locy, locz = GetLocationX(loc), GetLocationY(loc), GetLocationZ(loc)
+	
 	SetUnitX(unit, mx); SetUnitY(unit, my)
-	print("Mouse Pos: ".. mx ..",".. my)
+	print(string.format(
+		"MousePos: \x25.2f,\x25.2f; loc=\x25.2f,\x25.2f,\x25.2f;\x25s",
+		mx, my, locx, locy, locz, tostring(loc)
+	))
+	RemoveLocation(loc)
 end
 followMouse_t = CreateTrigger()
 followMouse_e = TriggerRegisterPlayerEvent(followMouse_t, followMouse_player, EVENT_PLAYER_MOUSE_MOVE)
@@ -17717,6 +17724,8 @@ will show up in the unit's UI. Timed life can also stem from summoning abilities
 
 @note Removing any timed-life buff from the unit will kill the unit.
 
+@note See: `UnitPauseTimedLife`, `BlzUnitCancelTimedLife`
+
 @patch 1.00
 */
 native UnitApplyTimedLife           takes unit whichUnit, integer buffId, real duration returns nothing
@@ -17747,6 +17756,8 @@ native UnitSetConstructionProgress  takes unit whichUnit, integer constructionPe
 native UnitSetUpgradeProgress       takes unit whichUnit, integer upgradePercentage returns nothing
 
 /**
+@note See: `UnitApplyTimedLife`, `BlzUnitCancelTimedLife`
+
 @patch 1.07
 */
 native UnitPauseTimedLife           takes unit whichUnit, boolean flag returns nothing
@@ -24542,11 +24553,14 @@ native AutomationTestingFinished                takes nothing returns nothing
 // JAPI Functions
 
 /**
-When used inside a mouse event trigger’s action/condition, it will return the X coordinate (Cartesian System) of the ground location on the map,
-where the cursor points at.
+Returns the map X coordinate (Cartesian System) of the ground location,
+where the cursor points at. Only valid inside a mouse event trigger’s action/condition.
 
-Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
-However minimap and the entire bottom UI still show the correct coordinates.
+Returns 0 when pointing at certain "opaque" UI elements like the top status bar with resources.
+However minimap, the bottom half of the clock, and the entire bottom UI are transparent to the cursor
+and show the correct coordinates.
+
+Returns the max valid X map coordinate when pointing outside of map bounds on any side.
 
 @note The world coordinate will be a result of ray tracing based on current camera setup.
 Changing the camera setup does not affect the result until a new frame has been rendered locally.
@@ -24562,11 +24576,15 @@ Changing the camera setup does not affect the result until a new frame has been 
 native BlzGetTriggerPlayerMouseX                   takes nothing returns real
 
 /**
-When used inside a mouse event trigger’s action/condition, it will return the Y coordinate (Cartesian System) of the ground location on the map,
-where the cursor points at.
+Returns the Y coordinate (Cartesian System) of the ground location,
+where the cursor points at. Only valid inside a mouse event trigger’s action/condition.
 
-Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
-However minimap and the entire bottom UI still show the correct coordinates.
+Returns {0, 0, surfaceZ} when pointing at certain "opaque" UI elements
+like the top status bar with resources.
+However minimap, the bottom half of the clock, and the entire bottom UI are transparent to the cursor
+and show the correct coordinates.
+
+Returns the max valid Y map coordinate when pointing outside of map bounds on any side.
 
 @note The world coordinate will be a result of ray tracing based on current camera setup.
 Changing the camera setup does not affect the result until a new frame has been rendered locally.
@@ -24582,11 +24600,18 @@ Changing the camera setup does not affect the result until a new frame has been 
 native BlzGetTriggerPlayerMouseY                   takes nothing returns real
 
 /**
-When used inside a mouse event trigger’s action/condition, it will return the ground location on the map,
-where the cursor points at.
+Returns the ground location on the map, where the cursor points at.
+Only valid inside a mouse event trigger’s action/condition.
 
-Returns 0 when pointing at certain UI elements like the top status bar with clock and resources.
-However minimap and the entire bottom UI still show the correct coordinates.
+Returns {0, 0, surfaceZ} when pointing at certain "opaque" UI elements
+like the top status bar with resources.
+However minimap, the bottom half of the clock, and the entire bottom UI are transparent to the cursor
+and show the correct map coordinates.
+
+Returns {maxX, maxY, surfaceZ} when pointing outside of map bounds on any side.
+
+`maxX` and `maxY` is highest valid map coordinate and
+`surfaceZ` is the terrain surface elevation at the given point.
 
 @event EVENT_PLAYER_MOUSE_MOVE
 
@@ -24597,7 +24622,8 @@ However minimap and the entire bottom UI still show the correct coordinates.
 native BlzGetTriggerPlayerMousePosition            takes nothing returns location
 
 /**
-It is used inside a mouse event trigger’s action/condition it will return the mousebuttontype (type) used at the moment of the event trigger.
+Returns which mouse button aka `mousebuttontype` was used at the moment of the event trigger.
+Only valid within mouse event trigger’s action/condition context.
 
 @event EVENT_PLAYER_MOUSE_UP
 
@@ -25438,7 +25464,26 @@ See `GetUnitAbilityLevel`.
 native BlzUnitDisableAbility                       takes unit whichUnit, integer abilId, boolean flag, boolean hideUI returns nothing
 
 /**
-Makes a specific summoned unit permanent.
+Removes a unit's timed life, therefore killing it.
+
+Does nothing when used on a regular unit.
+
+@note Internally the code is similar to `UnitRemoveAbility`.
+
+@note **Example (Lua):**
+
+```{.lua}
+-- creates a permanent water elemental, without timed life
+waterElem = CreateUnit(Player(0), FourCC("hwat"), -30, 0, 90)
+
+-- applies 30 second timed life
+UnitApplyTimedLife(waterElem, FourCC("BHwe"), 30)
+
+-- removes and kills the elemental
+BlzUnitCancelTimedLife(waterElem)
+```
+
+@note See: `UnitApplyTimedLife`, `UnitPauseTimedLife`
 
 @patch 1.29.2.9231
 */
