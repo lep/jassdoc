@@ -26434,6 +26434,8 @@ For SimpleFrames Level sets them higher/lower to all other SimpleFrames.
 
 @bug In some cases, changing the level after setting alpha value with native `BlzFrameSetAlpha` can reset the alpha to 255 (fully opaque).
 
+@bug Level values ​​above `9` for visible SimpleFrames crash the game.
+
 @patch 1.31.0.11889
 */
 native BlzFrameSetLevel                            takes framehandle frame, integer level returns nothing
