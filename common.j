@@ -11652,7 +11652,7 @@ Returns the internal index of the given handle; returns 0 if `h` is `null`.
 
 Typical handles of game objects are offset by positive `0x100000`.
 
-For text tags, returns the text tag ID, which count from 0 to 99 (inclusive).
+For text tags, returns the text tag ID, which count from 0 to MAX_TAG_COUNT (inclusive).
 
 **Example:** `GetHandleId(Player(0)) --> 1048584`
 
@@ -12230,6 +12230,18 @@ native SetPlayerRacePreference  takes player whichPlayer, racepreference whichRa
 
 
 /**
+Set player's HUD skin.
+
+Specialty: allows usage of `RACE_PREF_FORSAKEN` which is not a race, but only a HUD skin.
+
+@param whichRacePreference Only the following preferences are valid according to WE:
+`RACE_PREF_HUMAN`, `RACE_PREF_ORC`, `RACE_PREF_NIGHTELF`, `RACE_PREF_UNDEAD`,
+`RACE_PREF_USER_SELECTABLE`, `RACE_PREF_FORSAKEN`
+
+@note A getter does not exist.
+
+@note This function is used within the scope of function `config` in war3map.j.
+
 @patch 3.0.0.24268
 */
 native SetPlayerRaceSkin        takes player whichPlayer, racepreference whichRacePreference returns nothing
@@ -12687,13 +12699,18 @@ Does nothing if `whichGroup` is null.
 
 @param filter A filter function that is run for each considered unit.
 
-@note Does not consider locust units. Locust units cannot be spatially enumerated.
+If it is `null` (`nil` in Lua), all considered units will be added to the group.
+
+@note Includes dead units (e.g. corpses, not yet removed from map).
+
+Does not include:
+
+- Hidden units
+- locust units, they cannot be spatially enumerated.
 
 @note Within the filter function, the considered unit can be accessed with `GetFilterUnit`.
 
 @note The filter function must return true (a truthy value in Lua) in order to add the unit to the group.
-
-@note If the filter function is `null` (`nil` in Lua), all considered units will be added to the group.
 
 @note The units are added consecutively to the group between filter runs, not in bulk after all filter runs were processed.
 
@@ -12706,8 +12723,6 @@ were added to the sector.
 
 @note The origin of the unit must be within the area of the circle to be considered. The collision size of the unit
 does not matter.
-
-@note Hidden units are not enumerated with this function.
 
 @note See: `GroupEnumUnitsInRect`, `GroupEnumUnitsInRangeOfLoc`.
 
@@ -21222,14 +21237,17 @@ Creates a text tag.
 
 @note The text tag initially has the absolute world coordinates (0, 0, 0).
 
-@note You can have a maximum amount of 100 text tags at a time.
+@note The maximum amount of existing text tags is limited (MAX_TAG_COUNT):
 
-@note The IDs of text tags range from 99 to 0 as returned by `GetHandleId`.
+- v3.0.0: 10000 tags
+- older patches: 100 text tags
 
-@note When there are already 100 text tags, this function will return the text tag with the ID 0 without resetting any of its properties.
+@note The IDs of text tags range from (MAX_TAG_COUNT-1) to 0 as returned by `GetHandleId`.
+
+@note When there are already MAX_TAG_COUNT text tags, this function will return the text tag with the ID 0 without resetting any of its properties.
 
 @note When a text tag is destroyed, its ID is pushed to a stack. Creating a text tag, when there are still IDs available, will pop from the stack, i.e., the last
-destroyed ID will be re-used first. You can also envision that 100 IDs counting up from 0 to 99 are pushed to the stack at the beginning of the game and ID 99 will
+destroyed ID will be re-used first. You can also envision that MAX_TAG_COUNT IDs counting up from 0 to (MAX_TAG_COUNT-1) are pushed to the stack at the beginning of the game and ID (MAX_TAG_COUNT-1) will
 be popped first.
 
 @patch 1.07
@@ -24120,6 +24138,9 @@ In 1.29.2.9231 and newer use `BlzSetSpecialEffectPosition` or `BlzSetSpecialEffe
 
 @note An effect is only visible if its center is within draw distance and is not hidden by fog of war.
 
+@note If effect emits light: There is a limit to how many lights can be rendered in an area at once.
+HD mode is unlimited since v3.0.0; before HD had a lower limit than SD.
+
 @patch 1.00
 */
 native AddSpecialEffect             takes string modelName, real x, real y returns effect
@@ -24553,6 +24574,10 @@ native SetWaterBaseColor            takes integer red, integer green, integer bl
 native SetHDWaterParams             	takes integer red, integer green, integer blue, boolean useColor, integer vertexDisplacement, integer minOpacity, integer maxOpacity, integer reflectivity, integer emissivity, integer edgeSoftness, integer waveStrength returns nothing
 
 /**
+
+@note This function is used within the scope of function `main` in war3map.j.
+It is generated based on set map water settings.
+
 @patch 3.0.0.24268
 */
 native SetHDWaterParamsEx           	takes integer red, integer green, integer blue, boolean override, integer vertexDisplacement, integer minOpacity, integer maxOpacity, integer reflectivity, integer emissivity, integer edgeSoftness, integer waveStrength, integer envMapStrength returns nothing

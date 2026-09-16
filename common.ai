@@ -5572,7 +5572,7 @@ endfunction
 //============================================================================
 
 /**
-@bug Leaks handle `bldg`: In Jass you must set local variables that hold handles (or any child type) to `null` at the end of functions to avoid leaks.
+@note handle `bldg` is not leaked by ref count, because the exit condition is `bldg == null`
 
 @patch 1.00
 */
