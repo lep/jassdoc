@@ -11940,11 +11940,14 @@ native SetPlayers           takes integer playercount returns nothing
 
 
 /**
-Defines a player's start location at the specified coordinates. The start
+Set a start location to the specified coordinates.
+
+The start
 location determines where the camera is initially positioned. For melee maps,
 it will also determine where the player's first town hall structure will be placed.
 
-@param whichStartLoc The ID of the player for the starting location. See `GetPlayerStartLocation`.
+@param whichStartLoc ID of the starting location.
+Cannot be higher than `GetBJMaxPlayers`. Typically is the same as player ID.
 
 @param x The x-coordinate of the start location.
 
@@ -11957,25 +11960,17 @@ Using it elsewhere will affect the returned values of `GetStartLocationX` and
 `GetStartLocationY`, but will have no effect on the camera's initial position and
 the melee starting positions.
 
+@bug v1.21a Setting `whichStartLoc` to a value of 18 or above crashes the game
+with a memory error upon loading the map.
+
+@note See `GetPlayerStartLocation`.
+
 @patch 1.00
 */
 native DefineStartLocation          takes integer whichStartLoc, real x, real y returns nothing
 
 /**
-Defines a player's start location at the specified location. The start
-location determines where the camera is initially positioned. For melee maps,
-it will also determine where the player's first town hall structure will be placed.
-
-@param whichStartLoc The ID of the player for the starting location. See `GetPlayerStartLocation`.
-
-@param whichLocation The location of the start location.
-
-@note This function shall only be used within the scope of function `config`
-in war3map.j, it is executed by the game when you load the lobby/selected
-the map for preview.
-Using it elsewhere will affect the returned values of `GetStartLocationX` and
-`GetStartLocationY`, but will have no effect on the camera's initial position and
-the melee starting positions.
+Refer to `DefineStartLocation`
 
 @patch 1.00
 */
@@ -12031,9 +12026,13 @@ native SetGameTypeSupported takes gametype whichGameType, boolean value returns 
 native SetMapFlag           takes mapflag whichMapFlag, boolean value returns nothing
 
 /**
+Sets the mode how players are assigned spawn locations.
+
 @note This function shall only be used within the scope of function `config`
 in war3map.j, it is executed by the game when you load the lobby/selected
 the map for preview.
+
+@note See `DefineStartLocation`
 
 @patch 1.00
 */
@@ -12124,11 +12123,19 @@ constant native GetResourceDensity   takes nothing returns mapdensity
 constant native GetCreatureDensity   takes nothing returns mapdensity
 
 /**
+Returns X map coordinate for given start location ID.
+
+Returns 0.0 if the ID is invalid.
+
 @patch 1.00
 */
 constant native GetStartLocationX    takes integer whichStartLocation returns real
 
 /**
+Returns Y map coordinate for given start location ID.
+
+Returns 0.0 if the ID is invalid.
+
 @patch 1.00
 */
 constant native GetStartLocationY    takes integer whichStartLocation returns real
@@ -12146,6 +12153,22 @@ constant native GetStartLocationLoc  takes integer whichStartLocation returns lo
 native SetPlayerTeam            takes player whichPlayer, integer whichTeam returns nothing
 
 /**
+Sets player's starting location by ID.
+
+Depending on spawn placement rules, players may be spawned at a different ID.
+The ID will be correctly reassigned to player in this case.
+
+@param startLocIndex start location ID.
+It depends on `DefineStartLocation`, but any value is accepted
+
+@note See: `ForcePlayerStartLocation`, `GetStartLocationX`, `GetStartLocationY`, `GetStartLocationLoc`
+
+@note Technically, the game allows you to assign a start location more than once
+across all players.
+
+@note Although the starting location can be set for all player slots,
+World Editor only generates setters up to `GetBJMaxPlayers`.
+
 @note This function shall only be used within the scope of function `config`
 in war3map.j, it is executed by the game when you load the lobby/selected
 the map for preview.
@@ -12282,11 +12305,16 @@ native SetPlayerOnScoreScreen   takes player whichPlayer, boolean flag returns n
 native GetPlayerTeam            takes player whichPlayer returns integer
 
 /**
-Returns an integer representation of a player's start location. If the player
-has a start location on the map (regardless of whether that player slot is filled),
-it will return the player's ID (e.g. Player 1 (red) will return 0, Player 2 (blue)
-will return 1, and so forth). If the player does not have a start location
-on the map, it will return -1.
+Returns an integer ID of a player's currently set start location.
+
+If the player slot is active, the player was initialized by the game;
+their start location was updated and set. As a result of `SetGamePlacement`
+settings, the start ID may be different from player slot ID.
+
+Returns -1, if the player did not have a start location set.
+
+Unpopulated slots retain their original spawn IDs (typically player slot ID) 
+as set in `InitCustomPlayerSlots` during map initialization: `main()`.
 
 @param whichPlayer The player of which to return the starting location.
 
