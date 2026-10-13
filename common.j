@@ -9622,6 +9622,94 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
 @patch 1.31.0.11889
 */
     constant abilityreallevelfield ABILITY_RLF_INTERVAL_BETWEEN_PULSES                           = ConvertAbilityRealLevelField('Tau5')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_HEALING_PER_SECOND                           = ConvertAbilityRealLevelField('hcr1')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_DAMAGE_PER_SECOND                           = ConvertAbilityRealLevelField('hcr2')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_HEALING_REDUCTION_PERCENT                   = ConvertAbilityRealLevelField('hcr3')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_HEALING_BASE                                 = ConvertAbilityRealLevelField('hcl1')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_HEALING_PER_DEBUFF_REMOVED                        = ConvertAbilityRealLevelField('hcl2')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_BUFF_DURATION                                = ConvertAbilityRealLevelField('hcl3')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_DAMAGE_BONUS_PERCENT_BASE                    = ConvertAbilityRealLevelField('hcl4')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_DAMAGE_BONUS_PERCENT_PER_DEBUFF_REMOVED      = ConvertAbilityRealLevelField('hcl5')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_STUN_DURATION                               = ConvertAbilityRealLevelField('hcl6')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_TO_SUMMONS                                 = ConvertAbilityRealLevelField('hcl7')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_PERCENT_MAGIC_RESIST_INCREASE                = ConvertAbilityRealLevelField('hsa1')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_PERCENT_HEALING_INCREASE                     = ConvertAbilityRealLevelField('hsa2')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_PERCENT_COOLDOWN_DECREASE                    = ConvertAbilityRealLevelField('hsa3')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_PERCENT_MAGIC_RESIST_DECREASE               = ConvertAbilityRealLevelField('hsa4')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_PERCENT_HEALING_DECREASE                    = ConvertAbilityRealLevelField('hsa5')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_PERCENT_COOLDOWN_INCREASE                   = ConvertAbilityRealLevelField('hsa6')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_FLAT_MANA_REGEN                              = ConvertAbilityRealLevelField('hsa7')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_DASH_SPEED                                        = ConvertAbilityRealLevelField('chr1')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_DASH_DAMAGE                                       = ConvertAbilityRealLevelField('chr2')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_CRITICAL_STRIKE                             = ConvertAbilityRealLevelField('chr3')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_NORMAL_BONUS_CRITICAL_STRIKE_DURATION             = ConvertAbilityRealLevelField('chr4')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_HERO_BONUS_CRITICAL_STRIKE_DURATION               = ConvertAbilityRealLevelField('chr5')
 
 
 /**
@@ -9943,6 +10031,10 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
 @patch 1.31.0.11889
 */
     constant abilitybooleanlevelfield ABILITY_BLF_ALLOW_BOUNTY                  = ConvertAbilityBooleanLevelField('Ntm4')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilitybooleanlevelfield ABILITY_BLF_REMOVE_BUFFS_ON_ABILITY_START = ConvertAbilityBooleanLevelField('chr6')
 
 
 /**
@@ -14432,16 +14524,30 @@ constant native GetManipulatedItem  takes nothing returns item
 // EVENT_PLAYER_UNIT_EQUIP_ITEM
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 constant native GetEquippedItem     takes nothing returns item
+/**
+@patch 3.0.0.24306
+*/
+constant native BlzGetEquippedItem     takes nothing returns item
 
 // EVENT_PLAYER_UNIT_UNEQUIP_ITEM
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 constant native GetUnequippedItem   takes nothing returns item
+/**
+@patch 3.0.0.24306
+*/
+constant native BlzGetUnequippedItem   takes nothing returns item
 
 // For EVENT_PLAYER_UNIT_PICKUP_ITEM, returns the item absorbing the picked up item in case it is stacking.
 // Returns null if the item was a powerup and not a stacking item.
@@ -15928,9 +16034,16 @@ native          GetItemY        takes item i returns real
 native          SetItemPosition takes item i, real x, real y returns nothing
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          SetItemColor takes item whichItem, playercolor whichColor returns nothing
+/**
+@patch 3.0.0.24306
+*/
+native          BlzSetItemColor takes item whichItem, playercolor whichColor returns nothing
 
 /**
 @patch 1.00
@@ -15963,14 +16076,30 @@ native          SetItemInvulnerable takes item whichItem, boolean flag returns n
 native          IsItemInvulnerable  takes item whichItem returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          IsItemEquipped  takes item whichItem returns boolean
 
 /**
+@patch 3.0.0.24306
+*/
+native          BlzIsItemEquipped  takes item whichItem returns boolean
+
+/**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          IsItemInBag     takes item whichItem returns boolean
+
+/**
+@patch 3.0.0.24306
+*/
+native          BlzIsItemInBag     takes item whichItem returns boolean
 
 /**
 @note 
@@ -16082,14 +16211,28 @@ native          GetItemUserData takes item whichItem returns integer
 native          SetItemUserData takes item whichItem, integer data returns nothing
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          GetItemEquipmentType takes item whichItem returns equipmentType
+/**
+@patch 3.0.0.24306
+*/
+native          BlzGetItemEquipmentType takes item whichItem returns equipmentType
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          GetItemTag           takes item whichItem returns itemTag
+/**
+@patch 3.0.0.24306
+*/
+native          BlzGetItemTag           takes item whichItem returns itemTag
 
 //============================================================================
 // Unit API
@@ -17363,9 +17506,17 @@ native          UnitAddItem             takes unit whichUnit, item whichItem ret
 
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitEquipItem           takes unit whichUnit, item whichItem returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitEquipItem           takes unit whichUnit, item whichItem returns boolean
+
 
 /**
 Creates a new item of type `itemId` and puts it in unit's inventory.
@@ -17455,14 +17606,28 @@ native          UnitRemoveItemFromSlot  takes unit whichUnit, integer itemSlot r
 
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitUnequipItem         takes unit whichUnit, item whichItem returns nothing
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitUnequipItem         takes unit whichUnit, item whichItem returns nothing
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitUnequipItemFromSlot takes unit whichUnit, loadoutslot slot returns item
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitUnequipItemFromSlot takes unit whichUnit, loadoutslot slot returns item
 
 /**
 Returns true if unit has this specific instance of item somewhere in inventory.
@@ -17478,9 +17643,16 @@ native          UnitHasItem             takes unit whichUnit, item whichItem ret
 
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasItemBagged       takes unit whichUnit, item whichItem returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasItemBagged       takes unit whichUnit, item whichItem returns boolean
 
 /**
 Returns a handle to item in slot number `itemSlot` of the specified unit.
@@ -17507,45 +17679,101 @@ Returns zero if unit is invalid or has no inventory.
 native          UnitInventorySize       takes unit whichUnit returns integer
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitExtendedInventorySize takes unit whichUnit returns integer
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitExtendedInventorySize takes unit whichUnit returns integer
 
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitItemInBagSlot               takes unit whichUnit, integer itemSlot returns item
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitItemInBagSlot               takes unit whichUnit, integer itemSlot returns item
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitItemInEquipmentSlot         takes unit whichUnit, loadoutslot itemSlot returns item
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitItemInEquipmentSlot         takes unit whichUnit, loadoutslot itemSlot returns item
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasItemEquipped             takes unit whichUnit, item whichItem returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasItemEquipped             takes unit whichUnit, item whichItem returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasLoadoutSlotEmpty         takes unit whichUnit, loadoutslot itemSlot returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasLoadoutSlotEmpty         takes unit whichUnit, loadoutslot itemSlot returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasAnyItemEquiped           takes unit whichUnit returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasAnyItemEquipped           takes unit whichUnit returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasItemEquipmentOfType      takes unit whichUnit, equipmentType equipmentId returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasItemEquipmentOfType      takes unit whichUnit, equipmentType equipmentId returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitCanEquipItemOfEquipmentType takes unit whichUnit, equipmentType equipmentId returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitCanEquipItemOfEquipmentType takes unit whichUnit, equipmentType equipmentId returns boolean
 
 /**
 Issues an immediate order for the unit to go to point (x,y) and drop the item there.
@@ -18344,6 +18572,11 @@ types see [this post](http://www.wc3c.net/showpost.php?p=1030046&postcount=19).
 */
 native UnitDamageTarget             takes unit whichUnit, widget target, real amount, boolean attack, boolean ranged, attacktype attackType, damagetype damageType, weapontype weaponType returns boolean
 
+/**
+@patch 3.0.0.24288, then temporarily removed and reintroduced in 3.0.1.24309
+*/
+native BlzUnitHeal                  takes unit whichUnit, unit source, real life, boolean isItem, boolean applyStatBonuses returns real
+
 
 /**
 @patch 1.00
@@ -18747,6 +18980,11 @@ integer id to a unit, which can serve as an index in other data structures.
 @patch 1.07
 */
 native SetUnitUserData              takes unit whichUnit, integer data returns nothing
+
+/**
+@patch 3.0.1.24309
+*/
+native BlzResetUnitTalents          takes unit whichUnit returns nothing
 
 //============================================================================
 // Player API
@@ -20685,6 +20923,11 @@ native ChooseRandomItemEx       takes itemtype whichType, integer level returns 
 @patch 3.0.0.24268
 */
 native ChooseRandomItemExWithFilter takes itemtype whichType, integer level, equipmentType whichEquipmentType, itemTag whichTag returns integer
+/**
+@patch 3.0.0.24306
+*/
+native ChooseRandomItemExWithFilterAndIncludes takes itemtype whichType, integer level, equipmentType whichEquipmentType, itemTag whichTag, boolean includeInvalidMorphs, boolean includeNonPickRandom returns integer
+
 
 /**
 Sets the internal [PRNG's](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) seed.
@@ -23000,6 +23243,15 @@ native SetCameraOrientController    takes unit whichUnit, real xoffset, real yof
 
 
 /**
+@patch 3.0.0.24295
+*/
+native BlzGetCameraAllowsHotkeyTargetLock takes nothing returns boolean
+/**
+@patch 3.0.0.24295
+*/
+native BlzSetCameraAllowsHotkeyTargetLock takes boolean allows returns nothing
+
+/**
 @patch 3.0.0.24268
 */
 native BlzCameraSetCameraType       takes integer cameraType returns nothing
@@ -23889,6 +24141,13 @@ native SetMusicPlayPosition         takes integer millisecs returns nothing
 */
 native SetThematicMusicVolume       takes integer volume returns nothing
 
+
+/**
+@patch 3.0.0.24288
+*/
+native BlzSetThematicMusicAbsoluteVolume takes integer volume returns nothing
+
+
 /**
 @patch 1.07
 */
@@ -24248,6 +24507,11 @@ without a texture (apparently the texture path isn't set inside the model).
 @patch 1.00
 */
 native DestroyEffect                takes effect whichEffect returns nothing
+
+/**
+@patch 3.0.0.24288, then temporarily removed and reintroduced in 3.0.1.24309
+*/
+native BlzRemoveEffect              takes effect whichEffect returns nothing
 
 
 /**
