@@ -6408,7 +6408,7 @@ endfunction
 //===========================================================================
 
 /**
-@patch 3.0.0.24288, then temporarily removed and reintroduced in 3.0.1.24309
+@patch 3.0.0.24288 then temporarily removed and reintroduced in 3.0.1.24309
 */
 function RemoveEffectBJ takes effect whichEffect returns nothing
     call BlzRemoveEffect(whichEffect)
@@ -6454,7 +6454,7 @@ endfunction
 
 //===========================================================================
 /**
-@patch 3.0.0.24288, then temporarily removed and reintroduced in 3.0.1.24309
+@patch 3.0.0.24288 then temporarily removed and reintroduced in 3.0.1.24309
 */
 // Note: this function should be used in conjunction with the one below, which is the only one that is really exposed in GUI
 function RemoveEffectAsyncBJ takes nothing returns nothing
@@ -6466,7 +6466,7 @@ function RemoveEffectAsyncBJ takes nothing returns nothing
 endfunction
 
 /**
-@patch 3.0.0.24288, then temporarily removed and reintroduced in 3.0.1.24309
+@patch 3.0.0.24288 then temporarily removed and reintroduced in 3.0.1.24309
 */
 function RemoveEffectAfterTimeBJ takes effect whichEffect, real time returns nothing
 	// Save arguments to globals
@@ -9003,7 +9003,7 @@ endfunction
 
 //===========================================================================
 /**
-@patch 3.0.0.24288, then temporarily removed and reintroduced in 3.0.1.24309
+@patch 3.0.0.24288 then temporarily removed and reintroduced in 3.0.1.24309
 */
 function UnitHealBJ takes unit whichUnit, real life returns real
     return BlzUnitHeal(whichUnit, whichUnit, life, false, true)
@@ -9011,7 +9011,7 @@ endfunction
 
 //===========================================================================
 /**
-@patch 3.0.0.24288, then temporarily removed and reintroduced in 3.0.1.24309
+@patch 3.0.0.24288 then temporarily removed and reintroduced in 3.0.1.24309
 */
 function UnitHealFromOtherBJ takes unit whichUnit, unit source, real life returns real
     return BlzUnitHeal(whichUnit, source, life, false, true)

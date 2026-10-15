@@ -19017,7 +19017,7 @@ types see [this post](http://www.wc3c.net/showpost.php?p=1030046&postcount=19).
 native UnitDamageTarget             takes unit whichUnit, widget target, real amount, boolean attack, boolean ranged, attacktype attackType, damagetype damageType, weapontype weaponType returns boolean
 
 /**
-@patch 3.0.0.24288, then temporarily removed and reintroduced in 3.0.1.24309
+@patch 3.0.0.24288 then temporarily removed and reintroduced in 3.0.1.24309
 */
 native BlzUnitHeal                  takes unit whichUnit, unit source, real life, boolean isItem, boolean applyStatBonuses returns real
 
@@ -24957,7 +24957,7 @@ without a texture (apparently the texture path isn't set inside the model).
 native DestroyEffect                takes effect whichEffect returns nothing
 
 /**
-@patch 3.0.0.24288, then temporarily removed and reintroduced in 3.0.1.24309
+@patch 3.0.0.24288 then temporarily removed and reintroduced in 3.0.1.24309
 */
 native BlzRemoveEffect              takes effect whichEffect returns nothing
 
