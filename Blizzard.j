@@ -8125,7 +8125,22 @@ function IsUnitAliveBJ takes unit whichUnit returns boolean
 endfunction
 
 //===========================================================================
+/**
+@patch 3.0.1.24360
+*/
+function UnitIsDeadBJ takes unit whichUnit returns boolean
+    return not BlzUnitIsAlive(whichUnit)
+endfunction
 
+//===========================================================================
+/**
+@patch 3.0.1.24360
+*/
+function UnitIsAliveBJ takes unit whichUnit returns boolean
+    return BlzUnitIsAlive(whichUnit)
+endfunction
+
+//===========================================================================
 /**
 @patch 1.00
 */
