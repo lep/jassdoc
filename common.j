@@ -22344,6 +22344,18 @@ native EnableSelect                 takes boolean state, boolean ui returns noth
 @patch 3.0.1.24360
 */
 native BlzGetHUDScale               takes nothing returns real
+/**
+@patch 3.0.1.24365
+*/
+native BlzSetHUDScale               takes integer percentage returns nothing
+/**
+@patch 3.0.1.24365
+*/
+native BlzLockHUDScale              takes nothing returns nothing
+/**
+@patch 3.0.1.24365
+*/
+native BlzUnlockHUDScale            takes nothing returns nothing
 
 //============================================================================
 // Trackable API
