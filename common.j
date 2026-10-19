@@ -7551,6 +7551,78 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
 @patch 1.31.0.11889
 */
     constant abilityintegerlevelfield ABILITY_ILF_UPGRADE_TYPE                      = ConvertAbilityIntegerLevelField('Iglu')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_MIND_CONTROLLED_UNIT_LIMIT        = ConvertAbilityIntegerLevelField('hmc3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_DAMAGE_STRENGTH_MODIFIER_PERCENT  = ConvertAbilityIntegerLevelField('swp5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_MAX_TARGETS_HIT                   = ConvertAbilityIntegerLevelField('swp7')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_ATTACK_SPEED_REDUCTION_PERCENT_SWP9 = ConvertAbilityIntegerLevelField('swp9')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_ALLY_PASSIVE_STAT_AMPLIFY_PERCENT = ConvertAbilityIntegerLevelField('sol6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_ATTACK_SPEED_GAIN_PERCENT         = ConvertAbilityIntegerLevelField('sol7')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_MOVEMENT_SPEED_GAIN_PERCENT       = ConvertAbilityIntegerLevelField('sol8')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_HEALTH_COST_PERCENT               = ConvertAbilityIntegerLevelField('uvg1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_BONUS_STRENGTH_UVG2               = ConvertAbilityIntegerLevelField('uvg2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_BONUS_RESOLVE_PERCENT             = ConvertAbilityIntegerLevelField('uvg3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_BONUS_LIFE_STEAL_PERCENT          = ConvertAbilityIntegerLevelField('uvg4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_BONUS_SPELL_VAMP_PERCENT          = ConvertAbilityIntegerLevelField('uvg5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_DOUBLE_BONUS_BELOW_HEALTH_PERCENT = ConvertAbilityIntegerLevelField('uvg6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_MAX_CHARGES_UBR3                  = ConvertAbilityIntegerLevelField('ubr3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_STACKS_REQUIRED                   = ConvertAbilityIntegerLevelField('udb3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_MAX_ATTACK_SPEED_STACKS           = ConvertAbilityIntegerLevelField('udb5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_MAX_CHARGES_UWF1                  = ConvertAbilityIntegerLevelField('uwf1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityintegerlevelfield ABILITY_ILF_TARGET_ARMOR_REDUCTION            = ConvertAbilityIntegerLevelField('uwf4')
 
 
 /**
@@ -9622,6 +9694,434 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
 @patch 1.31.0.11889
 */
     constant abilityreallevelfield ABILITY_RLF_INTERVAL_BETWEEN_PULSES                           = ConvertAbilityRealLevelField('Tau5')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_HEALING_PER_SECOND                           = ConvertAbilityRealLevelField('hcr1')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_DAMAGE_PER_SECOND                           = ConvertAbilityRealLevelField('hcr2')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_HEALING_REDUCTION_PERCENT                   = ConvertAbilityRealLevelField('hcr3')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_HEALING_BASE                                 = ConvertAbilityRealLevelField('hcl1')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_HEALING_PER_DEBUFF_REMOVED                        = ConvertAbilityRealLevelField('hcl2')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_BUFF_DURATION                                = ConvertAbilityRealLevelField('hcl3')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_DAMAGE_BONUS_PERCENT_BASE                    = ConvertAbilityRealLevelField('hcl4')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_DAMAGE_BONUS_PERCENT_PER_DEBUFF_REMOVED      = ConvertAbilityRealLevelField('hcl5')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_STUN_DURATION                               = ConvertAbilityRealLevelField('hcl6')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_TO_SUMMONS                                 = ConvertAbilityRealLevelField('hcl7')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_PERCENT_MAGIC_RESIST_INCREASE                = ConvertAbilityRealLevelField('hsa1')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_PERCENT_HEALING_INCREASE                     = ConvertAbilityRealLevelField('hsa2')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_PERCENT_COOLDOWN_DECREASE                    = ConvertAbilityRealLevelField('hsa3')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_PERCENT_MAGIC_RESIST_DECREASE               = ConvertAbilityRealLevelField('hsa4')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_PERCENT_HEALING_DECREASE                    = ConvertAbilityRealLevelField('hsa5')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_PERCENT_COOLDOWN_INCREASE                   = ConvertAbilityRealLevelField('hsa6')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_FLAT_MANA_REGEN                              = ConvertAbilityRealLevelField('hsa7')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_DASH_SPEED                                        = ConvertAbilityRealLevelField('chr1')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_DASH_DAMAGE                                       = ConvertAbilityRealLevelField('chr2')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_CRITICAL_STRIKE                             = ConvertAbilityRealLevelField('chr3')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_NORMAL_BONUS_CRITICAL_STRIKE_DURATION             = ConvertAbilityRealLevelField('chr4')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilityreallevelfield ABILITY_RLF_HERO_BONUS_CRITICAL_STRIKE_DURATION               = ConvertAbilityRealLevelField('chr5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_STUN_DURATION_ENS4                                = ConvertAbilityRealLevelField('Ens4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ATTACK_SPEED_REDUCTION_PERCENT_ENS5               = ConvertAbilityRealLevelField('Ens5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_DAMAGE_TAKEN_PERCENT_ENS6                   = ConvertAbilityRealLevelField('Ens6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_SWP1                                       = ConvertAbilityRealLevelField('swp1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ATTACK_DISTANCE_SWP2                              = ConvertAbilityRealLevelField('swp2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ATTACK_ANGLE_SWP3                                 = ConvertAbilityRealLevelField('swp3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_DELAY_SWP4                                 = ConvertAbilityRealLevelField('swp4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_HSL1                                       = ConvertAbilityRealLevelField('hsl1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_DAMAGE_PERCENT_AGAINST_DEBUFFED             = ConvertAbilityRealLevelField('hsl2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_HEAL_PERCENT_ON_DAMAGE_DEALT                      = ConvertAbilityRealLevelField('hsl4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_TARGET_INTERSECT_RADIUS                           = ConvertAbilityRealLevelField('chra')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BURN_DAMAGE                                       = ConvertAbilityRealLevelField('hsf1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BURN_DAMAGE_PULSE_FREQUENCY                       = ConvertAbilityRealLevelField('hsf2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_DAMAGE_TO_SUMMONS                           = ConvertAbilityRealLevelField('hsf3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_HEAL_AMOUNT_TO_ALLY_UNITS                         = ConvertAbilityRealLevelField('hsf4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DEFENSE_HIC1                                      = ConvertAbilityRealLevelField('hic1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_SPELL_DAMAGE_RESISTANCE                           = ConvertAbilityRealLevelField('hic2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_HEALING_HIC4                                      = ConvertAbilityRealLevelField('hic4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_EXPLOSION_DAMAGE                                  = ConvertAbilityRealLevelField('hmc2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_HEALING_PER_TARGET_HIT                            = ConvertAbilityRealLevelField('swp6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ARMOR_REDUCTION_SWP8                              = ConvertAbilityRealLevelField('swp8')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_PERCENT_OF_TARGET_MAX_HEALTH               = ConvertAbilityRealLevelField('swpa')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_COOLDOWN_REDUCTION_ON_HIT                         = ConvertAbilityRealLevelField('swpb')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_BONUS_HHR1                                 = ConvertAbilityRealLevelField('hhr1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_STUN_DURATION_NORMAL                              = ConvertAbilityRealLevelField('hhr2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_STUN_DURATION_HERO                                = ConvertAbilityRealLevelField('hhr3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_DAMAGE_DEBUFF_DURATION_NORMAL               = ConvertAbilityRealLevelField('hhr4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_DAMAGE_DEBUFF_DURATION_HERO                 = ConvertAbilityRealLevelField('hhr5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DEBUFF_BONUS_DAMAGE_RECEIVED_PERCENT              = ConvertAbilityRealLevelField('hhr6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DEFENSE_INCREASE                                  = ConvertAbilityRealLevelField('hgr1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DEFENSE_CAP                                       = ConvertAbilityRealLevelField('hgr2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_MAGIC_RESISTANCE_AT_CAP                           = ConvertAbilityRealLevelField('hgr3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_ATTACK_DAMAGE_PERCENT_AT_CAP                = ConvertAbilityRealLevelField('hgr4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ARMOR_REDUCTION_DURATION_NORMAL                   = ConvertAbilityRealLevelField('swpc')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ARMOR_REDUCTION_DURATION_HERO                     = ConvertAbilityRealLevelField('swpd')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_INSTANT_HEAL                                 = ConvertAbilityRealLevelField('sol1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_HEAL_PER_SECOND                              = ConvertAbilityRealLevelField('sol2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_MANA_RESTORE                                 = ConvertAbilityRealLevelField('sol3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_PASSIVE_COOLDOWN                             = ConvertAbilityRealLevelField('sol4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_PASSIVE_DURATION                             = ConvertAbilityRealLevelField('sol5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_PASSIVE_RADIUS                                    = ConvertAbilityRealLevelField('slrd')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_MIND_CONTROL_DURATION_NORMAL                      = ConvertAbilityRealLevelField('mcdr')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_EXPLOSION_RADIUS_MCRD                             = ConvertAbilityRealLevelField('mcrd')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_EXPLOSION_RADIUS_SFRD                             = ConvertAbilityRealLevelField('sfrd')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_REDUCTION_PERCENT_BLD1                     = ConvertAbilityRealLevelField('bld1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_MOVEMENT_SPEED_REDUCTION_PERCENT_BLD2             = ConvertAbilityRealLevelField('bld2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ATTACK_SPEED_INCREASE_PERCENT_BLD3                = ConvertAbilityRealLevelField('bld3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ON_DAMAGE_TAKEN_BONUS_DURATION                    = ConvertAbilityRealLevelField('bld4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_SWEEP_COOLDOWN_REDUCTION_ON_HIT                   = ConvertAbilityRealLevelField('bld5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_REFLECTION_PERCENT                         = ConvertAbilityRealLevelField('bld6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_FLAT_DAMAGE_REFLECTION                            = ConvertAbilityRealLevelField('bld7')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ABILITY_SPEED_INCREASE_PERCENT                    = ConvertAbilityRealLevelField('bld8')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_SHIELD_HEALTH                                     = ConvertAbilityRealLevelField('hhc1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_SHIELD_REFLECT_PERCENT                            = ConvertAbilityRealLevelField('hhc2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_SHIELD_DURATION                                   = ConvertAbilityRealLevelField('hhc3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_TAUNTED_DEFENSE_REDUCTION                         = ConvertAbilityRealLevelField('hhc4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_ATTACK_SPEED_PERCENT_HGH1                   = ConvertAbilityRealLevelField('hgh1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_MOVE_SPEED_PERCENT_HGH2                     = ConvertAbilityRealLevelField('hgh2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_CRITICAL_HIT_PERCENT                        = ConvertAbilityRealLevelField('hgh3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_CRITICAL_DAMAGE_PERCENT                     = ConvertAbilityRealLevelField('hgh4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_MANA_PER_SECOND_HGH6                              = ConvertAbilityRealLevelField('hgh6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_COOLDOWN_REDUCTION_PERCENT                  = ConvertAbilityRealLevelField('hgh7')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_DAMAGE_UBR1                                 = ConvertAbilityRealLevelField('ubr1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_DAMAGE_DURATION_UBR2                        = ConvertAbilityRealLevelField('ubr2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_CHARGE_REGEN_TIME_UBR4                            = ConvertAbilityRealLevelField('ubr4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_MANA_PER_SECOND                              = ConvertAbilityRealLevelField('ula1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_HEALING_PER_SECOND_ULA2                      = ConvertAbilityRealLevelField('ula2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_SPELL_RESIST_PERCENT                         = ConvertAbilityRealLevelField('ula3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_SPELL_AMP_PERCENT                            = ConvertAbilityRealLevelField('ula4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_SPELL_CRIT_HIT_PERCENT                       = ConvertAbilityRealLevelField('ula5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ALLY_MOVEMENT_SPEED_PERCENT                       = ConvertAbilityRealLevelField('ula6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_MANA_PER_SECOND                             = ConvertAbilityRealLevelField('ula7')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ENEMY_DAMAGE_PER_SECOND_ULA8                      = ConvertAbilityRealLevelField('ula8')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_FLAT_MANA_GAIN                                    = ConvertAbilityRealLevelField('bns6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_HEALING_RADIUS                                    = ConvertAbilityRealLevelField('bns7')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_FLAT_DAMAGE_UDB1                                  = ConvertAbilityRealLevelField('udb1')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_PERCENT_DAMAGE_UDB2                               = ConvertAbilityRealLevelField('udb2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_BONUS_ATTACK_SPEED_PER_ATTACK                     = ConvertAbilityRealLevelField('udb4')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_CHARGE_REGEN_TIME_UWF2                            = ConvertAbilityRealLevelField('uwf2')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_UWF3                                       = ConvertAbilityRealLevelField('uwf3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_COOLDOWN_REDUCTION_ON_AUTO_ATTACK                 = ConvertAbilityRealLevelField('uwf5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ATTACK_SPEED_REDUCTION_DURATION_NORMAL            = ConvertAbilityRealLevelField('swpe')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_ATTACK_SPEED_REDUCTION_DURATION_HERO              = ConvertAbilityRealLevelField('swpf')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_BY_TARGET_MAX_HEALTH_DURATION_NORMAL       = ConvertAbilityRealLevelField('swpg')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilityreallevelfield ABILITY_RLF_DAMAGE_BY_TARGET_MAX_HEALTH_DURATION_HERO         = ConvertAbilityRealLevelField('swph')
 
 
 /**
@@ -9943,6 +10443,38 @@ Vertical position aka "Art - Button Position - Research (Y)". Point of origin: t
 @patch 1.31.0.11889
 */
     constant abilitybooleanlevelfield ABILITY_BLF_ALLOW_BOUNTY                  = ConvertAbilityBooleanLevelField('Ntm4')
+/**
+@patch 3.0.0.24306
+*/
+    constant abilitybooleanlevelfield ABILITY_BLF_REMOVE_BUFFS_ON_ABILITY_START = ConvertAbilityBooleanLevelField('chr6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilitybooleanlevelfield ABILITY_BLF_SILENCES_WHEN_ENSNARED        = ConvertAbilityBooleanLevelField('Ens7')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilitybooleanlevelfield ABILITY_BLF_REFRESH_COOLDOWN_ON_KILL_HSL3 = ConvertAbilityBooleanLevelField('hsl3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilitybooleanlevelfield ABILITY_BLF_ENABLE_CHAIN_EXPLOSION        = ConvertAbilityBooleanLevelField('hsf5')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilitybooleanlevelfield ABILITY_BLF_DISPEL_MAGIC_BONUS_DAMAGE_TO_SUMMONS = ConvertAbilityBooleanLevelField('hsf6')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilitybooleanlevelfield ABILITY_BLF_REMOVES_NEGATIVE_DEBUFFS      = ConvertAbilityBooleanLevelField('hic3')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilitybooleanlevelfield ABILITY_BLF_REFRESH_COOLDOWN_ON_KILL_HHR7 = ConvertAbilityBooleanLevelField('hhr7')
+/**
+@patch 3.0.1.24360
+*/
+    constant abilitybooleanlevelfield ABILITY_BLF_MAKES_UNITS_UNDYING           = ConvertAbilityBooleanLevelField('hgh5')
 
 
 /**
@@ -14432,16 +14964,30 @@ constant native GetManipulatedItem  takes nothing returns item
 // EVENT_PLAYER_UNIT_EQUIP_ITEM
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 constant native GetEquippedItem     takes nothing returns item
+/**
+@patch 3.0.0.24306
+*/
+constant native BlzGetEquippedItem     takes nothing returns item
 
 // EVENT_PLAYER_UNIT_UNEQUIP_ITEM
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 constant native GetUnequippedItem   takes nothing returns item
+/**
+@patch 3.0.0.24306
+*/
+constant native BlzGetUnequippedItem   takes nothing returns item
 
 // For EVENT_PLAYER_UNIT_PICKUP_ITEM, returns the item absorbing the picked up item in case it is stacking.
 // Returns null if the item was a powerup and not a stacking item.
@@ -15928,9 +16474,16 @@ native          GetItemY        takes item i returns real
 native          SetItemPosition takes item i, real x, real y returns nothing
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          SetItemColor takes item whichItem, playercolor whichColor returns nothing
+/**
+@patch 3.0.0.24306
+*/
+native          BlzSetItemColor takes item whichItem, playercolor whichColor returns nothing
 
 /**
 @patch 1.00
@@ -15963,14 +16516,30 @@ native          SetItemInvulnerable takes item whichItem, boolean flag returns n
 native          IsItemInvulnerable  takes item whichItem returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          IsItemEquipped  takes item whichItem returns boolean
 
 /**
+@patch 3.0.0.24306
+*/
+native          BlzIsItemEquipped  takes item whichItem returns boolean
+
+/**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          IsItemInBag     takes item whichItem returns boolean
+
+/**
+@patch 3.0.0.24306
+*/
+native          BlzIsItemInBag     takes item whichItem returns boolean
 
 /**
 @note 
@@ -16082,14 +16651,28 @@ native          GetItemUserData takes item whichItem returns integer
 native          SetItemUserData takes item whichItem, integer data returns nothing
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          GetItemEquipmentType takes item whichItem returns equipmentType
+/**
+@patch 3.0.0.24306
+*/
+native          BlzGetItemEquipmentType takes item whichItem returns equipmentType
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          GetItemTag           takes item whichItem returns itemTag
+/**
+@patch 3.0.0.24306
+*/
+native          BlzGetItemTag           takes item whichItem returns itemTag
 
 //============================================================================
 // Unit API
@@ -17363,9 +17946,17 @@ native          UnitAddItem             takes unit whichUnit, item whichItem ret
 
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitEquipItem           takes unit whichUnit, item whichItem returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitEquipItem           takes unit whichUnit, item whichItem returns boolean
+
 
 /**
 Creates a new item of type `itemId` and puts it in unit's inventory.
@@ -17455,14 +18046,28 @@ native          UnitRemoveItemFromSlot  takes unit whichUnit, integer itemSlot r
 
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitUnequipItem         takes unit whichUnit, item whichItem returns nothing
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitUnequipItem         takes unit whichUnit, item whichItem returns nothing
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitUnequipItemFromSlot takes unit whichUnit, loadoutslot slot returns item
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitUnequipItemFromSlot takes unit whichUnit, loadoutslot slot returns item
 
 /**
 Returns true if unit has this specific instance of item somewhere in inventory.
@@ -17478,9 +18083,16 @@ native          UnitHasItem             takes unit whichUnit, item whichItem ret
 
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasItemBagged       takes unit whichUnit, item whichItem returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasItemBagged       takes unit whichUnit, item whichItem returns boolean
 
 /**
 Returns a handle to item in slot number `itemSlot` of the specified unit.
@@ -17507,45 +18119,101 @@ Returns zero if unit is invalid or has no inventory.
 native          UnitInventorySize       takes unit whichUnit returns integer
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitExtendedInventorySize takes unit whichUnit returns integer
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitExtendedInventorySize takes unit whichUnit returns integer
 
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitItemInBagSlot               takes unit whichUnit, integer itemSlot returns item
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitItemInBagSlot               takes unit whichUnit, integer itemSlot returns item
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitItemInEquipmentSlot         takes unit whichUnit, loadoutslot itemSlot returns item
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitItemInEquipmentSlot         takes unit whichUnit, loadoutslot itemSlot returns item
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasItemEquipped             takes unit whichUnit, item whichItem returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasItemEquipped             takes unit whichUnit, item whichItem returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasLoadoutSlotEmpty         takes unit whichUnit, loadoutslot itemSlot returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasLoadoutSlotEmpty         takes unit whichUnit, loadoutslot itemSlot returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasAnyItemEquiped           takes unit whichUnit returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasAnyItemEquipped           takes unit whichUnit returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitHasItemEquipmentOfType      takes unit whichUnit, equipmentType equipmentId returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitHasItemEquipmentOfType      takes unit whichUnit, equipmentType equipmentId returns boolean
 
 /**
+Deprecated in v3.0.1. Use the Blz- prefixed native instead.
+Natives introduced in v3.0.0 without the Blz- prefix will be removed later.
+
 @patch 3.0.0.24268
 */
 native          UnitCanEquipItemOfEquipmentType takes unit whichUnit, equipmentType equipmentId returns boolean
+/**
+@patch 3.0.0.24306
+*/
+native          BlzUnitCanEquipItemOfEquipmentType takes unit whichUnit, equipmentType equipmentId returns boolean
 
 /**
 Issues an immediate order for the unit to go to point (x,y) and drop the item there.
@@ -18243,6 +18911,10 @@ native UnitCanSleepPerm             takes unit whichUnit returns boolean
 @patch 1.00
 */
 native UnitIsSleeping               takes unit whichUnit returns boolean
+/**
+@patch 3.0.1.24360
+*/
+native BlzUnitIsAlive               takes unit whichUnit returns boolean
 
 /**
 @patch 1.00
@@ -18343,6 +19015,11 @@ types see [this post](http://www.wc3c.net/showpost.php?p=1030046&postcount=19).
 @patch 1.17a
 */
 native UnitDamageTarget             takes unit whichUnit, widget target, real amount, boolean attack, boolean ranged, attacktype attackType, damagetype damageType, weapontype weaponType returns boolean
+
+/**
+@patch 3.0.0.24288 then temporarily removed and reintroduced in 3.0.1.24309
+*/
+native BlzUnitHeal                  takes unit whichUnit, unit source, real life, boolean isItem, boolean applyStatBonuses returns real
 
 
 /**
@@ -18747,6 +19424,11 @@ integer id to a unit, which can serve as an index in other data structures.
 @patch 1.07
 */
 native SetUnitUserData              takes unit whichUnit, integer data returns nothing
+
+/**
+@patch 3.0.1.24309
+*/
+native BlzResetUnitTalents          takes unit whichUnit returns nothing
 
 //============================================================================
 // Player API
@@ -20685,6 +21367,11 @@ native ChooseRandomItemEx       takes itemtype whichType, integer level returns 
 @patch 3.0.0.24268
 */
 native ChooseRandomItemExWithFilter takes itemtype whichType, integer level, equipmentType whichEquipmentType, itemTag whichTag returns integer
+/**
+@patch 3.0.0.24306
+*/
+native ChooseRandomItemExWithFilterAndIncludes takes itemtype whichType, integer level, equipmentType whichEquipmentType, itemTag whichTag, boolean includeInvalidMorphs, boolean includeNonPickRandom returns integer
+
 
 /**
 Sets the internal [PRNG's](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) seed.
@@ -21653,6 +22340,22 @@ The player cannot manually deselect any units they have control over (after `Sel
 @patch 1.18a
 */
 native EnableSelect                 takes boolean state, boolean ui returns nothing
+/**
+@patch 3.0.1.24360
+*/
+native BlzGetHUDScale               takes nothing returns real
+/**
+@patch 3.0.1.24365
+*/
+native BlzSetHUDScale               takes integer percentage returns nothing
+/**
+@patch 3.0.1.24365
+*/
+native BlzLockHUDScale              takes nothing returns nothing
+/**
+@patch 3.0.1.24365
+*/
+native BlzUnlockHUDScale            takes nothing returns nothing
 
 //============================================================================
 // Trackable API
@@ -23000,6 +23703,15 @@ native SetCameraOrientController    takes unit whichUnit, real xoffset, real yof
 
 
 /**
+@patch 3.0.0.24295
+*/
+native BlzGetCameraAllowsHotkeyTargetLock takes nothing returns boolean
+/**
+@patch 3.0.0.24295
+*/
+native BlzSetCameraAllowsHotkeyTargetLock takes boolean allows returns nothing
+
+/**
 @patch 3.0.0.24268
 */
 native BlzCameraSetCameraType       takes integer cameraType returns nothing
@@ -23889,6 +24601,13 @@ native SetMusicPlayPosition         takes integer millisecs returns nothing
 */
 native SetThematicMusicVolume       takes integer volume returns nothing
 
+
+/**
+@patch 3.0.0.24288
+*/
+native BlzSetThematicMusicAbsoluteVolume takes integer volume returns nothing
+
+
 /**
 @patch 1.07
 */
@@ -24248,6 +24967,11 @@ without a texture (apparently the texture path isn't set inside the model).
 @patch 1.00
 */
 native DestroyEffect                takes effect whichEffect returns nothing
+
+/**
+@patch 3.0.0.24288 then temporarily removed and reintroduced in 3.0.1.24309
+*/
+native BlzRemoveEffect              takes effect whichEffect returns nothing
 
 
 /**
