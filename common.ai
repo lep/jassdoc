@@ -4946,6 +4946,8 @@ endfunction
 //--------------------------------------------------------------------------------------------------
 
 /**
+Sends the AssaultGroup on attackmove towards player p's main building (ex. Town Hall).
+The wave is sent first after waiting easy/med/hard seconds depending on difficulty.
 @patch 1.00
 */
 function SuicideOnPlayerEx takes integer easy, integer med, integer hard, player p returns nothing
