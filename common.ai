@@ -558,11 +558,9 @@ native SetStagePoint        takes real x, real y                        returns 
 native AttackMoveKill       takes unit target                           returns nothing
 
 /**
-Pings a location on the mini-map where 'unit' intends to attack-move this unit.
+Pings a location on the mini-map and if there is a unit there (at x,y), sends the AssaultGroup on attack-move towards the target.
 
-If `AddAssault` is not called before this one, then the units (**if any**) will remain at their position and will not attack-move the signaled unit. Once the units go to the unit they will return to the base when the unit is killed.
-
-If they didn't find any enemy on their route or it if is destroyed and at least one unit survived in the group.
+If `AddAssault` is not called before this one, then the units (**if any**) will remain at their position and will not attack-move the signaled target. The units will return to their base when the target is killed.
 
 @note Important: in order to use this native, the native `CreateCaptains` must be called first or the game will crash. It is already added in the function CampaignAI found at `common.ai`
 
